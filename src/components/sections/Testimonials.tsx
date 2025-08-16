@@ -57,7 +57,7 @@ const Testimonials = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 flex flex-col"
             >
-              <p className="text-lg italic text-gray-300 mb-6">\"{testimonial.quote}\"</p>
+              <p className="text-lg italic text-gray-300 mb-6">&quot;{testimonial.quote}&quot;</p>
               <div className="flex items-center mt-auto">
                 <Image
                   src={testimonial.avatar}

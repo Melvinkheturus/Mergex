@@ -246,7 +246,7 @@ const HomeHero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-purple-300 mx-auto mt-6 max-w-2xl text-center text-lg"
           >
-            We craft websites, AI tools, and digital strategies that don't just look good, they perform.
+            We craft websites, AI tools, and digital strategies that don&apos;t just look good, they perform.
             From concept to launch, we build with precision, creativity, and speed.
           </motion.p>
 

@@ -184,7 +184,7 @@ const Footer = () => {
             {/* Partner With Us */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold mb-2">Partner With Us</h3>
-              <p className="text-gray-300 text-sm">Let's collaborate on products, freelancing, or agency tie-ups.</p>
+              <p className="text-gray-300 text-sm">Let&apos;s collaborate.</p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
