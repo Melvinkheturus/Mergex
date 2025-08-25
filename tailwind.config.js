@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  // Important: This ensures Tailwind's styles are properly layered
+  // and don't conflict with external component styles
+  important: true,
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
@@ -29,7 +33,28 @@ module.exports = {
           "2xl": "1400px",
         },
       },
+      animation: {
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "orbit": "orbit var(--duration) linear infinite",
+      },
+      keyframes: {
+        orbit: {
+          "0%": { transform: "rotate(0deg) translateX(var(--radius)px) rotate(0deg)" },
+          "100%": { transform: "rotate(360deg) translateX(var(--radius)px) rotate(-360deg)" },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
+  
+  // Safelist ensures these classes are always included, even when not detected in the codebase
+  // This is useful for dynamically generated classes or classes added by external components
+  safelist: [
+    // Core layout classes that should never be purged
+    'grid', 'flex', 'hidden', 'block', 'inline-block', 'absolute', 'relative', 'fixed', 'sticky',
+    // Important utility classes
+    'w-full', 'h-full', 'p-0', 'm-0', 'overflow-hidden', 'overflow-auto',
+    // Animation classes
+    'animate-fadeIn', 'animate-progress', 'animate-pulse', 'animate-pulse-slow', 'animate-orbit',
+  ],
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedBatchText } from "@/components/ui/AnimatedBatch";
 
 interface SectionHeaderProps {
   title: string;
@@ -17,18 +18,22 @@ const SectionHeader = ({ title, subtitle, badge, className }: SectionHeaderProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mx-auto mb-4 inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1 text-sm backdrop-blur-sm"
+          className="mx-auto mb-6 inline-flex items-center rounded-full border border-border bg-background/80 px-3 py-1 text-sm backdrop-blur-sm"
         >
-          <span className="text-purple-300">{badge}</span>
+          <AnimatedBatchText speed={1} colorFrom="#ffaa40" colorTo="#9c40ff">
+            {badge}
+          </AnimatedBatchText>
         </motion.div>
       )}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: badge ? 0.1 : 0 }}
-        className="from-primary/10 via-foreground/85 to-foreground/50 bg-gradient-to-tl bg-clip-text text-center text-3xl font-bold tracking-tighter text-transparent sm:text-4xl md:text-5xl lg:text-6xl"
+        className="from-primary/10 via-foreground/85 to-foreground/50 bg-linear-to-tl bg-clip-text text-center text-2xl font-bold tracking-tighter text-transparent sm:text-3xl md:text-4xl lg:text-5xl"
       >
+        <span className="bg-gradient-to-t from-primary/10 via-foreground/85 to-foreground/50 bg-clip-text text-transparent leading-[1.5]">
         {title}
+        </span>
       </motion.h2>
       {subtitle && (
         <motion.p

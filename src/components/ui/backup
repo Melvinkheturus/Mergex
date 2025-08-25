@@ -1,0 +1,145 @@
+/* CSS Layers Architecture
+ * This file uses CSS cascade layers to create a robust styling system that:
+ * 1. Isolates core styles from component-specific styles
+ * 2. Ensures stability when installing UI components via CLI
+ * 3. Prevents external component styles from breaking existing styles
+ */
+
+/* Define the cascade layers in order of priority */
+@layer reset, base, theme, components, utilities;
+
+/* Import Tailwind CSS in the utilities layer to ensure it has highest priority */
+@import "tailwindcss" layer(utilities);
+
+/* Base layer for root variables and fundamental styles */
+@layer base {
+  :root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #a855f7;
+  --primary-foreground: #ffffff;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.2);
+  --ring: #a855f7;
+}
+
+}
+
+/* Theme layer for design tokens and theme variables */
+@layer theme {
+  @theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+  }
+}
+
+@layer base {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+      --primary: #a855f7;
+      --primary-foreground: #ffffff;
+      --muted: #1f2937;
+      --muted-foreground: #9ca3af;
+      --border: rgba(255, 255, 255, 0.1);
+      --input: rgba(255, 255, 255, 0.2);
+      --ring: #a855f7;
+    }
+  }
+}
+
+/* Base body styles */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  }
+}
+
+/* Components layer for animations and component-specific styles */
+@layer components {
+  @keyframes progress {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-progress {
+    animation: progress 2s infinite alternate;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@theme inline {
+  --animate-gradient: gradient 8s linear infinite;
+ 
+  @keyframes gradient {
+    to {
+      background-position: var(--bg-size, 300%) 0;
+    }
+  }
+}
+
+
+/* Reset layer to prevent external component styles from affecting core styles */
+@layer reset {
+  /* This selector targets all components installed via CLI */
+  [data-external-component] * {
+    all: revert;
+    box-sizing: border-box;
+  }
+  
+  /* Ensure external components don't break the layout */
+  [data-external-component] {
+    isolation: isolate;
+  }
+}
+

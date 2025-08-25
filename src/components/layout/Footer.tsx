@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
-import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaPhone, FaEnvelope } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaInstagram, FaPhone, FaEnvelope } from "react-icons/fa";
+import Marquee from "@/components/Animation/Marquee";
 
 const Footer = () => {
   const { ref, inView } = useInView({
@@ -18,10 +19,12 @@ const Footer = () => {
   };
 
   return (
-    <footer 
-      className="relative pt-16 pb-8 text-white overflow-hidden"
+    <>
+      <Marquee text="Set. Ship. Ready. Set" />
+      <footer 
+        className="relative pt-16 pb-8 text-white overflow-hidden"
       style={{
-        background: "linear-gradient(to bottom, #0A0A0A, #2A0E40)"
+        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 100%)"
       }}
     >
       <div className="container mx-auto px-4">
@@ -40,7 +43,7 @@ const Footer = () => {
             <div className="flex items-center gap-2">
               <div className="relative h-10 w-10">
                 <Image
-                  src="/Mergex.png"
+                  src="/Logo/Mergex.png"
                   alt="Mergex logo"
                   fill
                   sizes="40px"
@@ -49,7 +52,7 @@ const Footer = () => {
                 />
               </div>
               <span className="font-bold tracking-tight text-2xl">
-                MERGE<span className="bg-gradient-to-tl from-purple-400 to-purple-600 bg-clip-text text-transparent">X</span>
+                MERGE<span className="bg-linear-to-tl from-purple-400 to-purple-600 bg-clip-text text-transparent">X</span>
               </span>
             </div>
             <p className="text-gray-300 mt-2">Where Ideas Merge with Innovation.</p>
@@ -81,7 +84,7 @@ const Footer = () => {
                 { href: "https://linkedin.com", icon: FaLinkedin, label: "LinkedIn" },
                 { href: "https://twitter.com", icon: FaTwitter, label: "Twitter" },
                 { href: "https://instagram.com", icon: FaInstagram, label: "Instagram" },
-                { href: "https://github.com", icon: FaGithub, label: "GitHub" },
+          
               ].map(({ href, icon: Icon, label }) => (
                 <Link
                   key={label}
@@ -105,7 +108,7 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col space-y-4"
           >
-            <h3 className="text-lg font-semibold mb-2">Navigation</h3>
+            <h3 className="text-lg font-bold mb-2 text-white">Navigation</h3>
             <div className="flex flex-col space-y-2">
               {[
                 { href: "/", label: "Home" },
@@ -117,7 +120,7 @@ const Footer = () => {
                 <Link
                   key={label}
                   href={href}
-                  className="text-gray-300 hover:text-purple-400 transition-colors duration-300"
+                  className="text-gray-300 font-normal hover:text-purple-400 transition-colors duration-300"
                 >
                   {label}
                 </Link>
@@ -133,13 +136,13 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col space-y-4"
           >
-            <h3 className="text-lg font-semibold mb-2">Resources</h3>
+            <h3 className="text-lg font-bold mb-2 text-white">Resources</h3>
             <div className="flex flex-col space-y-2">
               {[
-                { href: "/blog", label: "Blog / Insights" },
+                { href: "/Blog", label: "Blog / Insights" },
                 { href: "/case-studies", label: "Case Studies" },
                 { href: "/faqs", label: "FAQs" },
-                { href: "/templates", label: "Templates" },
+                { href: "/merge-ui", label: "Mergex UI (Coming Soon)" },
                 { href: "/help", label: "Help Center" },
               ].map(({ href, label }) => (
                 <Link
@@ -163,7 +166,7 @@ const Footer = () => {
           >
             {/* Legal */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold mb-2">Legal</h3>
+              <h3 className="text-lg font-bold mb-2 text-white">Legal</h3>
               <div className="flex flex-col space-y-2">
                 {[
                   { href: "/privacy", label: "Privacy Policy" },
@@ -173,7 +176,7 @@ const Footer = () => {
                   <Link
                     key={label}
                     href={href}
-                    className="text-gray-300 hover:text-white hover:underline decoration-purple-400 decoration-2 underline-offset-4 transition-all duration-300"
+                    className="text-gray-300 hover:text-purple-400 transition-colors duration-300"
                   >
                     {label}
                   </Link>
@@ -183,17 +186,19 @@ const Footer = () => {
 
             {/* Partner With Us */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold mb-2">Partner With Us</h3>
+              <h3 className="text-lg font-bold mb-2 text-white">Partner With Us</h3>
               <p className="text-gray-300 text-sm">Let&apos;s collaborate.</p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-purple-600 text-white hover:bg-purple-700 h-10 px-6 py-2 relative overflow-hidden group"
-              >
-                <span className="relative z-10">Join Now</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="absolute inset-0 animate-pulse bg-gradient-to-r from-purple-400/30 to-purple-600/30 opacity-50"></span>
-              </motion.button>
+              <Link href="/Partner">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-purple-600 text-white hover:bg-purple-700 h-10 px-6 py-2 relative overflow-hidden group"
+                >
+                  <span className="relative z-10">Join Now</span>
+                  <span className="absolute inset-0 bg-linear-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 animate-pulse bg-linear-to-r from-purple-400/30 to-purple-600/30 opacity-50"></span>
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -207,6 +212,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
