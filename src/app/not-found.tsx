@@ -2,68 +2,82 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 export default function NotFound() {
-    return (
-        <div className="not-found-container">
-            {/* Desktop Background */}
-            <div className="desktop-bg">
-                <Image
-                    src="/404/404.png"
-                    alt="404 Background"
-                    fill
-                    priority
-                    quality={100}
-                    className="background-image"
-                />
+  useEffect(() => {
+    // Hide navbar and footer when 404 page mounts
+    document.body.style.overflow = 'hidden';
+    const nav = document.querySelector('nav');
+    const footer = document.querySelector('footer');
+    if (nav) nav.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+
+    // Restore on unmount
+    return () => {
+      document.body.style.overflow = '';
+      if (nav) nav.style.display = '';
+      if (footer) footer.style.display = '';
+    };
+  }, []);
+
+  return (
+    <>
+      <div className="not-found-container">
+        {/* Desktop Background */}
+        <div className="desktop-bg">
+          <Image
+            src="/404/404.png"
+            alt="404 Background"
+            fill
+            priority
+            quality={100}
+            className="background-image"
+          />
+        </div>
+
+        {/* Mobile Background */}
+        <div className="mobile-bg">
+          <Image
+            src="/404/404_mobile.png"
+            alt="404 Background Mobile"
+            fill
+            priority
+            quality={100}
+            className="background-image"
+          />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="content-overlay">
+          {/* Message and Buttons at Bottom */}
+          <div className="bottom-content">
+            <p className="error-message">
+              We're sorry. We seem to be lost beyond the known internet.
+            </p>
+
+            <div className="action-buttons">
+              <Link href="/" className="btn btn-primary">
+                Return Home
+              </Link>
+              <Link href="/explore" className="btn btn-secondary">
+                Explore Mergex
+              </Link>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Mobile Background */}
-            <div className="mobile-bg">
-                <Image
-                    src="/404/404-mobile.png"
-                    alt="404 Background Mobile"
-                    fill
-                    priority
-                    quality={100}
-                    className="background-image"
-                />
-            </div>
-
-            {/* Content Overlay */}
-            <div className="content-overlay">
-                <div className="content-wrapper">
-                    {/* 404 Text */}
-                    <h1 className="error-code">
-                        <span className="digit">4</span>
-                        <span className="digit glow">0</span>
-                        <span className="digit">4</span>
-                    </h1>
-
-                    {/* Message */}
-                    <p className="error-message">
-                        We're sorry. We seem to be lost beyond the known internet.
-                    </p>
-
-                    {/* Action Buttons */}
-                    <div className="action-buttons">
-                        <Link href="/" className="btn btn-primary">
-                            Return Home
-                        </Link>
-                        <Link href="/explore" className="btn btn-secondary">
-                            Explore Mergex
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         .not-found-container {
-          position: relative;
+          position: fixed;
+          top: 0;
+          left: 0;
           width: 100vw;
           height: 100vh;
           overflow: hidden;
           background: #0a0014;
+          z-index: 99999;
         }
 
         .desktop-bg,
@@ -77,6 +91,8 @@ export default function NotFound() {
           display: none;
         }
 
+
+
         .background-image {
           object-fit: cover;
           object-position: center;
@@ -88,53 +104,22 @@ export default function NotFound() {
           width: 100%;
           height: 100%;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: center;
-          padding: 2rem;
+          justify-content: flex-end;
+          padding: 3rem 2rem 2rem 2rem;
         }
 
-        .content-wrapper {
+        .bottom-content {
           text-align: center;
           max-width: 800px;
-          animation: fadeIn 1s ease-out;
-        }
-
-        .error-code {
-          font-size: clamp(6rem, 15vw, 12rem);
-          font-weight: 900;
-          margin: 0 0 1.5rem 0;
-          letter-spacing: 0.1em;
-          display: flex;
-          justify-content: center;
-          gap: 0.2em;
-          font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        .digit {
-          background: linear-gradient(180deg, #ffffff 0%, #e0d4ff 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-shadow: 0 0 40px rgba(168, 85, 247, 0.5),
-                       0 0 80px rgba(168, 85, 247, 0.3);
-          animation: pulse 3s ease-in-out infinite;
-        }
-
-        .digit.glow {
-          background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-shadow: 0 0 60px rgba(168, 85, 247, 0.8),
-                       0 0 100px rgba(168, 85, 247, 0.5),
-                       0 0 140px rgba(168, 85, 247, 0.3);
-          animation: glowPulse 2s ease-in-out infinite;
+          width: 100%;
         }
 
         .error-message {
           font-size: clamp(1.1rem, 2.5vw, 1.5rem);
           color: rgba(255, 255, 255, 0.9);
-          margin: 0 0 3rem 0;
+          margin: 0 0 2rem 0;
           line-height: 1.6;
           font-weight: 400;
           letter-spacing: 0.02em;
@@ -148,6 +133,7 @@ export default function NotFound() {
           justify-content: center;
           flex-wrap: wrap;
           animation: fadeInUp 1s ease-out 0.6s backwards;
+          margin-bottom: 1rem;
         }
 
         .btn {
@@ -234,29 +220,7 @@ export default function NotFound() {
           }
         }
 
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-            filter: brightness(1);
-          }
-          50% {
-            opacity: 0.95;
-            filter: brightness(1.1);
-          }
-        }
 
-        @keyframes glowPulse {
-          0%, 100% {
-            text-shadow: 0 0 60px rgba(168, 85, 247, 0.8),
-                         0 0 100px rgba(168, 85, 247, 0.5),
-                         0 0 140px rgba(168, 85, 247, 0.3);
-          }
-          50% {
-            text-shadow: 0 0 80px rgba(168, 85, 247, 1),
-                         0 0 120px rgba(168, 85, 247, 0.7),
-                         0 0 160px rgba(168, 85, 247, 0.5);
-          }
-        }
 
         /* Mobile Styles */
         @media (max-width: 768px) {
@@ -269,40 +233,37 @@ export default function NotFound() {
           }
 
           .content-overlay {
-            padding: 1.5rem;
-          }
-
-          .error-code {
-            font-size: clamp(4rem, 20vw, 8rem);
-            margin: 0 0 1rem 0;
+            padding: 2rem 1.5rem 4rem 1.5rem;
+            justify-content: flex-end;
           }
 
           .error-message {
             font-size: clamp(1rem, 4vw, 1.25rem);
-            margin: 0 0 2rem 0;
+            margin: 0 0 1.5rem 0;
             padding: 0 1rem;
           }
 
           .action-buttons {
-            flex-direction: column;
+            flex-direction: row;
             gap: 1rem;
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
             margin: 0 auto;
+            align-items: center;
+            justify-content: center;
           }
 
           .btn {
-            width: 100%;
-            padding: 0.875rem 2rem;
+            width: auto;
+            flex: 1;
+            padding: 0.875rem 1rem;
+            white-space: nowrap;
+            font-size: 0.9rem;
           }
         }
 
         /* Tablet Styles */
         @media (min-width: 769px) and (max-width: 1024px) {
-          .error-code {
-            font-size: clamp(7rem, 12vw, 10rem);
-          }
-
           .error-message {
             font-size: 1.25rem;
             padding: 0 2rem;
@@ -311,8 +272,6 @@ export default function NotFound() {
 
         /* Accessibility */
         @media (prefers-reduced-motion: reduce) {
-          .digit,
-          .digit.glow,
           .content-wrapper,
           .error-message,
           .action-buttons {
@@ -326,21 +285,11 @@ export default function NotFound() {
 
         /* High contrast mode support */
         @media (prefers-contrast: high) {
-          .error-code {
-            text-shadow: none;
-          }
-
-          .digit,
-          .digit.glow {
-            -webkit-text-fill-color: white;
-            color: white;
-          }
-
           .btn-primary {
             border: 2px solid white;
           }
         }
       `}</style>
-        </div>
-    );
+    </>
+  );
 }
