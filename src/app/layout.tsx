@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout";
+import Footer from "@/components/Footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +15,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Mergex - AI-Powered Tech Solutions",
-  description: "Software development, AI automation, and SaaS products from Mergex. Building scalable solutions for modern businesses.",
+  title: "Mergex - Architecting the Future of Tech",
+  description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality with AI-driven development and strategic innovation.",
+  keywords: ["software development", "AI automation", "SaaS", "tech ecosystem", "digital transformation"],
+  authors: [{ name: "Mergex Ecosystems Inc." }],
+  openGraph: {
+    title: "Mergex - Architecting the Future of Tech",
+    description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -25,12 +46,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Favicon */}
+        <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+
+        {/* Material Icons */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} antialiased bg-background text-foreground`}
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
 }
+

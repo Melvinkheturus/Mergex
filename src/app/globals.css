@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #0f0f0f;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-dark: #4338ca;
+  --background: #f7f6f8;
+  --background-dark: #191022;
+  --foreground: #141118;
+  --primary: #7f13ec;
+  --primary-hover: #6a10c9;
   --accent: #8b5cf6;
-  --border: #e5e7eb;
+  --border: #f2f0f4;
   --muted: #f9fafb;
 }
 
@@ -16,26 +17,46 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
-  --color-primary-dark: var(--primary-dark);
   --color-accent: var(--accent);
   --color-border: var(--border);
   --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  --font-body: var(--font-noto-sans), var(--font-geist-sans), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #191022;
     --foreground: #ededed;
-    --primary: #818cf8;
-    --primary-hover: #6366f1;
-    --primary-dark: #4f46e5;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-noto-sans), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Custom gradient utilities for Mergex homepage */
+.orb-gradient {
+  background: radial-gradient(circle at 50% 50%,
+      rgba(127, 19, 236, 0.15) 0%,
+      rgba(127, 19, 236, 0.05) 40%,
+      transparent 70%);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #141118 0%, #7f13ec 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
