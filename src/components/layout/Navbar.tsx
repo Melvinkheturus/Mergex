@@ -173,7 +173,10 @@ export function Navbar() {
                             {isMobileMenuOpen ? (
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                <>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 8h16" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16h16" />
+                                </>
                             )}
                         </svg>
                     </button>
@@ -182,36 +185,38 @@ export function Navbar() {
 
             <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-            {/* Mobile Fixed Bottom CTA */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40"
-            >
-                <Link
-                    href="/contact"
-                    className="
-                        group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
-                        bg-gradient-to-b from-violet-400 to-violet-900
-                        text-white font-medium text-base
-                        shadow-xl shadow-violet-900/40
-                        transition-all duration-200 ease-out
-                        hover:brightness-110 hover:-translate-y-0.5
-                        active:scale-95
-                        whitespace-nowrap
-                    "
+            {/* Mobile Fixed Bottom CTA - Hidden when menu is open */}
+            {!isMobileMenuOpen && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                    className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40"
                 >
-                    <lord-icon
-                        src="https://cdn.lordicon.com/fpvaxfly.json"
-                        trigger="loop-on-hover"
-                        state="morph-phone-ring"
-                        colors="primary:#ffffff"
-                        style={{ width: '24px', height: '24px' }}
-                    />
-                    <span>Book a Call</span>
-                </Link>
-            </motion.div>
+                    <Link
+                        href="/contact"
+                        className="
+                            group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
+                            bg-gradient-to-b from-violet-400 to-violet-900
+                            text-white font-medium text-base
+                            shadow-xl shadow-violet-900/40
+                            transition-all duration-200 ease-out
+                            hover:brightness-110 hover:-translate-y-0.5
+                            active:scale-95
+                            whitespace-nowrap
+                        "
+                    >
+                        <lord-icon
+                            src="https://cdn.lordicon.com/fpvaxfly.json"
+                            trigger="loop-on-hover"
+                            state="morph-phone-ring"
+                            colors="primary:#ffffff"
+                            style={{ width: '24px', height: '24px' }}
+                        />
+                        <span>Book a Call</span>
+                    </Link>
+                </motion.div>
+            )}
         </>
     );
 }
