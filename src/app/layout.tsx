@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
@@ -27,6 +27,18 @@ const notoSans = Noto_Sans({
   weight: ["400", "500", "700"],
 });
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata: Metadata = {
   title: "Mergex - Architecting the Future of Tech",
   description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality with AI-driven development and strategic innovation.",
@@ -38,6 +50,9 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+import { LenisProvider } from "@/lib/lenis-provider";
+import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
 
 export default function RootLayout({
   children,
@@ -61,11 +76,23 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <LenisProvider>
+          <Navbar />
+          <ScrollProgressIndicator
+            sections={[
+              { id: "hero", label: "Hero" },
+              { id: "ecosystem", label: "Ecosystem" },
+              { id: "what-we-build", label: "What We Build" },
+              { id: "trust", label: "Trust" },
+              { id: "cta", label: "Get Started" }
+            ]}
+          />
+          <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
+          {children}
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );

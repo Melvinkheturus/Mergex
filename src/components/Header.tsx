@@ -2,73 +2,91 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const NAVIGATION_LINKS = [
-    { label: 'Solutions', href: '#' },
-    { label: 'Products', href: '#' },
-    { label: 'Academy', href: '#' },
-    { label: 'About', href: '#' },
+    { label: 'Divisions', href: '#divisions' },
+    { label: 'Work', href: '/work' },
+    { label: 'Resources', href: '#resources' },
+    { label: 'Partners', href: '/partners' },
 ];
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
-            <div className="px-4 md:px-10 py-3 max-w-7xl mx-auto flex items-center justify-between">
-                <div className="flex items-center gap-3 text-gray-900">
-                    <Image
-                        src="/logo/typo-mergex.png"
-                        alt="Mergex"
-                        width={120}
-                        height={40}
-                        className="h-8 w-auto"
-                        priority
-                    />
-                </div>
+        <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-6">
+            <div className="max-w-7xl mx-auto">
+                {/* Glassmorphism Navbar */}
+                <div className="relative backdrop-blur-xl bg-white/60 border border-white/40 rounded-2xl shadow-2xl shadow-purple-500/10 px-6 md:px-8 py-4">
+                    <div className="flex items-center justify-between">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center">
+                            <Image
+                                src="/logo/typo-mergex.png"
+                                alt="Mergex"
+                                width={140}
+                                height={48}
+                                className="h-9 w-auto"
+                                priority
+                            />
+                        </Link>
 
-                <nav className="hidden md:flex items-center gap-9">
-                    {NAVIGATION_LINKS.map((link) => (
-                        <a
-                            key={link.label}
-                            className="text-gray-900 text-sm font-medium hover:text-primary transition-colors"
-                            href={link.href}
-                        >
-                            {link.label}
-                        </a>
-                    ))}
-                </nav>
+                        {/* Desktop Navigation */}
+                        <nav className="hidden md:flex items-center gap-8">
+                            {NAVIGATION_LINKS.map((link) => (
+                                <a
+                                    key={link.label}
+                                    className="text-foreground/80 text-sm font-medium hover:text-primary transition-colors relative group"
+                                    href={link.href}
+                                >
+                                    {link.label}
+                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                                </a>
+                            ))}
+                        </nav>
 
-                <div className="flex items-center gap-4">
-                    <button className="hidden sm:flex h-10 px-5 items-center justify-center rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
-                        Book Strategy Call
-                    </button>
-                    <button
-                        className="sm:hidden p-2 text-gray-900"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                </div>
-            </div>
+                        {/* CTA */}
+                        <div className="flex items-center gap-4">
+                            <button className="hidden sm:flex h-11 px-6 items-center justify-center rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/40">
+                                Start Building
+                            </button>
 
-            {/* Mobile menu - can be enhanced later */}
-            {mobileMenuOpen && (
-                <div className="md:hidden border-t border-gray-100 bg-white py-4 px-4">
-                    <nav className="flex flex-col gap-4">
-                        {NAVIGATION_LINKS.map((link) => (
-                            <a
-                                key={link.label}
-                                className="text-gray-900 text-sm font-medium hover:text-primary transition-colors"
-                                href={link.href}
+                            {/* Mobile Menu Toggle */}
+                            <button
+                                className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label="Toggle menu"
                             >
-                                {link.label}
-                            </a>
-                        ))}
-                    </nav>
+                                <span className="material-symbols-outlined">
+                                    {mobileMenuOpen ? 'close' : 'menu'}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            )}
+
+                {/* Mobile Menu */}
+                {mobileMenuOpen && (
+                    <div className="md:hidden mt-3 backdrop-blur-xl bg-white/60 border border-white/40 rounded-2xl shadow-2xl p-6 animate-fade-in-up">
+                        <nav className="flex flex-col gap-4">
+                            {NAVIGATION_LINKS.map((link) => (
+                                <a
+                                    key={link.label}
+                                    className="text-foreground/80 text-base font-medium hover:text-primary transition-colors py-2"
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                            <button className="mt-2 h-11 px-6 flex items-center justify-center rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-all">
+                                Start Building
+                            </button>
+                        </nav>
+                    </div>
+                )}
+            </div>
         </header>
     );
 }

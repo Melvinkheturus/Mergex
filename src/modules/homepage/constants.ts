@@ -3,7 +3,7 @@ import type { EcosystemCard, WorkItem, CaseStudyMetric, TrustedCompany, ProblemI
 export const NAVIGATION_LINKS = [
     { label: 'Solutions', href: '#' },
     { label: 'Products', href: '#' },
-    { label: 'Academy', href: '#' },
+
     { label: 'About', href: '#' },
 ] as const;
 
@@ -17,12 +17,12 @@ export const TRUSTED_COMPANIES: TrustedCompany[] = [
 
 export const ECOSYSTEM_CARDS: EcosystemCard[] = [
     {
-        id: 'software-core',
+        id: 'mergex-studio',
         icon: 'terminal',
         iconBgColor: 'bg-blue-50',
         iconTextColor: 'text-blue-600',
-        title: 'Software Core',
-        description: 'Custom enterprise development and scalable cloud architectures tailored for high-growth.',
+        title: 'Mergex Studio',
+        description: 'We build the websites, apps, and systems that bring your vision to life—designed to scale as you grow.',
     },
     {
         id: 'mergex-labs',
@@ -30,36 +30,29 @@ export const ECOSYSTEM_CARDS: EcosystemCard[] = [
         iconBgColor: 'bg-purple-50',
         iconTextColor: 'text-primary',
         title: 'Mergex Labs',
-        description: 'Experimental R&D division focusing on AI, Machine Learning, and predictive analytics.',
+        description: 'Turn ideas into stunning visuals, ads, and content with AI—instantly. Perfect for founders who need a creative team without the budget.',
     },
     {
-        id: 'saas-ventures',
+        id: 'mergex-products',
         icon: 'rocket_launch',
         iconBgColor: 'bg-green-50',
         iconTextColor: 'text-green-600',
-        title: 'SaaS Ventures',
-        description: 'Incubating and launching internal SaaS products to solve specific market gaps.',
+        title: 'Mergex Products',
+        description: 'We don\'t just build for clients—we build our own tools. Unisynk and other products born from solving real founder problems.',
     },
-    {
-        id: 'tech-academy',
-        icon: 'school',
-        iconBgColor: 'bg-orange-50',
-        iconTextColor: 'text-orange-600',
-        title: 'Tech Academy',
-        description: 'Upskilling the next generation of engineers with our proprietary curriculum.',
-    },
+
 ];
 
 export const PROBLEMS: ProblemItem[] = [
-    { id: '1', text: 'Fragmented development teams' },
-    { id: '2', text: 'Opaque pricing & timelines' },
-    { id: '3', text: 'Tech debt from day one' },
+    { id: '1', text: 'Waiting months for an agency to understand your vision' },
+    { id: '2', text: 'Burning budget on developers who can\'t deliver' },
+    { id: '3', text: 'Choosing between quality and speed—never getting both' },
 ];
 
 export const SOLUTIONS: SolutionItem[] = [
-    { id: '1', text: 'Unified ecosystem approach' },
-    { id: '2', text: 'Clear milestones & scalable architecture' },
-    { id: '3', text: 'Future-proof code standards' },
+    { id: '1', text: 'AI-powered content and development that moves at the speed of your ideas' },
+    { id: '2', text: 'Fixed-cost solutions with transparent milestones—no surprises' },
+    { id: '3', text: 'Launch-ready code built for scale from day one' },
 ];
 
 export const FEATURED_WORK: WorkItem[] = [

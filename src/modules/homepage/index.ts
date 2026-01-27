@@ -1,13 +1,25 @@
-// Public API for homepage module
-export { default as HeroSection } from './components/HeroSection';
-export { default as TrustStrip } from './components/TrustStrip';
-export { default as ClaritySection } from './components/ClaritySection';
-export { default as EcosystemSnapshot } from './components/EcosystemSnapshot';
-export { default as SolutionsComparison } from './components/SolutionsComparison';
-export { default as FeaturedWork } from './components/FeaturedWork';
-export { default as CaseStudySection } from './components/CaseStudySection';
-export { default as ProductSpotlight } from './components/ProductSpotlight';
-export { default as FinalCTA } from './components/FinalCTA';
+import { HeroSection } from './components/HeroSection';
+import { ProductPortalGallery } from './components/ProductPortalGallery';
+import { WhatWeBuildSection } from './components/WhatWeBuildSection';
+import TrustStrip from './components/TrustStrip';
+import ClaritySection from './components/ClaritySection';
+import ProductSpotlight from './components/ProductSpotlight';
+import SolutionsComparison from './components/SolutionsComparison';
+import EcosystemSnapshot from './components/EcosystemSnapshot';
+import VideoPortalCard from './components/VideoPortalCard';
+import CaseStudySection from './components/CaseStudySection';
+import FinalCTA from './components/FinalCTA';
 
-export * from './types';
-export * from './constants';
+export {
+    HeroSection,
+    ProductPortalGallery,
+    WhatWeBuildSection,
+    TrustStrip,
+    ClaritySection,
+    ProductSpotlight,
+    SolutionsComparison,
+    EcosystemSnapshot,
+    VideoPortalCard,
+    CaseStudySection,
+    FinalCTA,
+};

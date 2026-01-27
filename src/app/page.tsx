@@ -1,27 +1,29 @@
 import {
   HeroSection,
-  TrustStrip,
-  ClaritySection,
   EcosystemSnapshot,
-  SolutionsComparison,
-  FeaturedWork,
-  CaseStudySection,
-  ProductSpotlight,
+  WhatWeBuildSection,
+  TrustStrip,
   FinalCTA,
 } from '@/modules/homepage';
 
 export default function Home() {
   return (
-    <main className="pt-16">
-      <HeroSection />
-      <TrustStrip />
-      <ClaritySection />
-      <ProductSpotlight />
-      <SolutionsComparison />
-      <EcosystemSnapshot />
-      <FeaturedWork />
-      <CaseStudySection />
-      <FinalCTA />
+    <main className="">
+      <div id="hero">
+        <HeroSection />
+      </div>
+      <div id="ecosystem">
+        <EcosystemSnapshot />
+      </div>
+      <div id="what-we-build">
+        <WhatWeBuildSection />
+      </div>
+      <div id="trust">
+        <TrustStrip />
+      </div>
+      <div id="cta">
+        <FinalCTA />
+      </div>
     </main>
   );
 }

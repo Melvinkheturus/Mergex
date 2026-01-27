@@ -1,16 +1,18 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const FOOTER_LINKS = {
     products: [
         { label: 'Unisynk', href: '#' },
-        { label: 'Coming Soon', href: '#' },
-        { label: 'Labs Tools', href: '#' },
+        { label: 'Kuthakai', href: '#' },
+        { label: 'CHR', href: '#' },
+        { label: 'Retail Connect', href: '#' },
     ],
     services: [
-        { label: 'Mergex Software', href: '#' },
+        { label: 'Mergex Systems', href: '#' },
         { label: 'Mergex Labs', href: '#' },
-        { label: 'Media', href: '#' },
-        { label: 'Academy', href: '#' },
     ],
     company: [
         { label: 'About Mergex', href: '#', isPrimary: true },
@@ -21,10 +23,46 @@ const FOOTER_LINKS = {
 };
 
 const SOCIAL_LINKS = [
-    { icon: 'linkedin', href: '#', label: 'LinkedIn' },
-    { icon: 'twitter', href: '#', label: 'Twitter/X' },
-    { icon: 'instagram', href: '#', label: 'Instagram' },
+    { icon: 'linkedin', href: 'https://linkedin.com/mergex.co', label: 'LinkedIn' },
+    { icon: 'x', href: 'https://x.com/mergexco', label: 'X' },
+    { icon: 'instagram', href: 'https://www.instagram.com/mergexco', label: 'Instagram' },
+    { icon: 'threads', href: 'https://threads.com/mergex.co', label: 'Threads' },
+    { icon: 'whatsapp', href: 'https://wa.me/919042172025', label: 'WhatsApp' },
+    { icon: 'dribbble', href: 'https://dribbble.com/mergex', label: 'Dribbble' },
+    { icon: 'behance', href: 'https://behance.net/mergex', label: 'Behance' },
 ];
+
+const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+} as const;
+
+const menuItemFadeUp = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+} as const;
+
+const menuStaggerContainer = {
+    hidden: { opacity: 1 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.08,
+            delayChildren: 0.3
+        }
+    }
+};
+
+const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2
+        }
+    }
+};
 
 export default function Footer() {
     return (
@@ -33,160 +71,243 @@ export default function Footer() {
             <section className="py-20 bg-white text-center border-t border-gray-100">
                 <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                        Have a problem worth solving?
+                        Ready to Build Something Great?
                     </h2>
                     <p className="text-lg text-gray-600 mb-8">
-                        Software. AI. Products. Delivered with accountability.
+                        From idea to launch—Mergex gives you the creative power and technical infrastructure to compete with anyone.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <button className="h-12 px-8 rounded-full bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/30">
-                            Post Your Problem
+                            Start Your Project
                         </button>
                         <button className="h-12 px-8 rounded-full bg-white border-2 border-gray-200 text-gray-900 text-base font-medium hover:border-primary hover:text-primary transition-all">
-                            Book a Strategy Call
+                            Talk to Our Team
                         </button>
                     </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-white border-t border-gray-100 py-12 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 md:px-10 relative z-10">
+            <footer className="bg-white border-t border-gray-100 pt-12 lg:pt-16 xl:pt-20 pb-8 lg:pb-10 relative overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/asserts/footer.png"
+                        alt=""
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    {/* Dark Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
+                </div>
+                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-10">
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-12 lg:mb-16 xl:mb-20">
                         {/* Brand Column */}
-                        <div className="md:col-span-4">
-                            <div className="mb-4">
+                        <motion.div
+                            className="md:col-span-4 lg:col-span-5 xl:col-span-4"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={staggerContainer}
+                        >
+                            <motion.div className="mb-4" variants={fadeInUp}>
                                 <Image
-                                    src="/logo/typo-mergex.png"
+                                    src="/logo/flat_logo.png"
                                     alt="Mergex"
                                     width={160}
                                     height={54}
                                     className="h-12 w-auto"
                                 />
-                            </div>
-                            <p className="text-sm text-gray-600 font-body leading-relaxed mb-6 max-w-sm">
-                                A technology ecosystem for building software, AI systems, and digital products.
-                            </p>
+                            </motion.div>
+                            <motion.p variants={fadeInUp} className="text-xl text-gray-300 font-body leading-relaxed mb-6 max-w-sm">
+                                Where ideas merge with innovation
+                            </motion.p>
 
                             {/* Social Icons */}
-                            <div className="flex gap-4">
-                                <a
-                                    href="#"
-                                    className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-primary hover:text-white transition-all flex items-center justify-center text-gray-700"
-                                    aria-label="LinkedIn"
-                                >
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                    </svg>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-primary hover:text-white transition-all flex items-center justify-center text-gray-700"
-                                    aria-label="Twitter/X"
-                                >
-                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                    </svg>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-primary hover:text-white transition-all flex items-center justify-center text-gray-700"
-                                    aria-label="Instagram"
-                                >
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Products Column */}
-                        <div className="md:col-span-2 md:col-start-6">
-                            <h4 className="font-bold mb-4 text-gray-900 text-sm">Products</h4>
-                            <ul className="space-y-3 text-sm text-gray-600 font-body">
-                                {FOOTER_LINKS.products.map((link) => (
-                                    <li key={link.label}>
-                                        <a className="hover:text-primary transition-colors" href={link.href}>
-                                            {link.label}
-                                        </a>
-                                    </li>
+                            <motion.div
+                                variants={staggerContainer}
+                                className="flex gap-4 overflow-x-auto hide-scrollbar"
+                                style={{ WebkitOverflowScrolling: 'touch' }}
+                            >
+                                {SOCIAL_LINKS.map((link) => (
+                                    <motion.a
+                                        variants={fadeInUp}
+                                        key={link.icon}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white"
+                                        aria-label={link.label}
+                                    >
+                                        {link.icon === 'linkedin' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'x' && (
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'instagram' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'threads' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 640 640">
+                                                <path d="M427.5 299.7C429.7 300.6 431.7 301.6 433.8 302.5C463 316.6 484.4 337.7 495.6 363.9C511.3 400.4 512.8 459.7 465.3 507.1C429.1 543.3 385 559.6 322.7 560.1L322.4 560.1C252.2 559.6 198.3 536 162 489.9C129.7 448.9 113.1 391.8 112.5 320.3L112.5 319.8C113 248.3 129.6 191.2 161.9 150.2C198.2 104.1 252.2 80.5 322.4 80L322.7 80C393 80.5 447.6 104 485 149.9C503.4 172.6 517 199.9 525.6 231.6L485.2 242.4C478.1 216.6 467.4 194.6 453 177C423.8 141.2 380 122.8 322.5 122.4C265.5 122.9 222.4 141.2 194.3 176.8C168.1 210.1 154.5 258.3 154 320C154.5 381.7 168.1 429.9 194.3 463.3C222.3 498.9 265.5 517.2 322.5 517.7C373.9 517.3 407.9 505.1 436.2 476.8C468.5 444.6 467.9 405 457.6 380.9C451.5 366.7 440.5 354.9 425.7 346C422 372.9 413.9 394.3 401 410.8C383.9 432.6 359.6 444.4 328.3 446.1C304.7 447.4 282 441.7 264.4 430.1C243.6 416.3 231.4 395.3 230.1 370.8C227.6 322.5 265.8 287.8 325.3 284.4C346.4 283.2 366.2 284.1 384.5 287.2C382.1 272.4 377.2 260.6 369.9 252C359.9 240.3 344.3 234.3 323.7 234.2L323 234.2C306.4 234.2 284 238.8 269.7 260.5L235.3 236.9C254.5 207.8 285.6 191.8 323.1 191.8L323.9 191.8C386.5 192.2 423.8 231.3 427.6 299.5L427.4 299.7L427.5 299.7zM271.5 368.5C272.8 393.6 299.9 405.3 326.1 403.8C351.7 402.4 380.7 392.4 385.6 330.6C372.4 327.7 357.8 326.2 342.2 326.2C337.4 326.2 332.6 326.3 327.8 326.6C284.9 329 270.6 349.8 271.6 368.4L271.5 368.5z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'whatsapp' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'dribbble' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 640 640">
+                                                <path d="M320 72C183 72 72 183 72 320C72 457 183 568 320 568C457 568 568 457 568 320C568 183 457 72 320 72zM484 186.4C513.5 222.4 531.4 268.4 531.8 318.4C524.8 316.9 454.8 302.7 384.3 311.6C378.5 297.6 373.1 285.2 365.7 270C444 238 479.5 192.5 484 186.5zM460.4 161.9C456.6 167.3 424.7 210.2 349.4 238.4C314.7 174.6 276.2 122.2 270.4 114.4C337.6 98.2 408.4 115.7 460.5 161.9zM229.9 128.6C235.5 136.3 273.3 188.7 308.4 251.1C209.3 277.4 122 277 112.6 276.9C126.3 211.2 170.6 156.5 229.9 128.6zM108.2 320.3C108.2 318.1 108.2 316 108.3 313.8C117.6 314 220.2 315.3 326 283.7C332.1 295.6 337.9 307.6 343.2 319.6C266.6 341.2 197 403.1 162.7 461.9C128.9 424.3 108.2 374.7 108.2 320.3zM190 487.4C212.1 442.2 272.2 383.8 357.6 354.6C387.3 431.9 399.6 496.7 402.8 515.2C334.7 544.2 252.8 536.3 190 487.3zM438.4 495.9C436.2 483 425 421 397.2 344.9C463.6 334.3 521.9 351.7 529.1 354C519.7 412.9 485.8 463.8 438.3 496z" />
+                                            </svg>
+                                        )}
+                                        {link.icon === 'behance' && (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 640 640">
+                                                <path d="M264 301.2C295.8 286 312.4 263 312.4 227.2C312.4 156.6 259.8 139.4 199.1 139.4L32 139.4L32 493.8L203.8 493.8C268.2 493.8 328.7 462.9 328.7 390.9C328.7 346.4 307.6 313.5 264 301.2zM109.9 199.9L183 199.9C211.1 199.9 236.4 207.8 236.4 240.4C236.4 270.5 216.7 282.6 188.9 282.6L109.9 282.6L109.9 199.9zM193.2 433.6L109.9 433.6L109.9 336L194.8 336C229.1 336 250.8 350.3 250.8 386.6C250.8 422.4 224.9 433.6 193.2 433.6zM551.7 192.9L408 192.9L408 158L551.7 158L551.7 192.9zM608 369.2C608 293.3 563.6 230 483.1 230C404.9 230 351.8 288.8 351.8 365.8C351.8 445.7 402.1 500.5 483.1 500.5C544.4 500.5 584.1 472.9 603.2 414.2L541 414.2C534.3 436.1 506.7 447.7 485.3 447.7C444 447.7 422.3 423.5 422.3 382.4L607.4 382.4C607.7 378.2 608 373.7 608 369.2zM422.4 338C424.7 304.3 447.1 283.2 480.9 283.2C516.3 283.2 534.1 304 537.1 338L422.4 338z" />
+                                            </svg>
+                                        )}
+                                    </motion.a>
                                 ))}
-                            </ul>
-                        </div>
+                            </motion.div>
+                        </motion.div>
 
-                        {/* Services Column */}
-                        <div className="md:col-span-2">
-                            <h4 className="font-bold mb-4 text-gray-900 text-sm">Services</h4>
-                            <ul className="space-y-3 text-sm text-gray-600 font-body">
-                                {FOOTER_LINKS.services.map((link) => (
-                                    <li key={link.label}>
-                                        <a className="hover:text-primary transition-colors" href={link.href}>
-                                            {link.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {/* Menu Group - Right Aligned */}
+                        <motion.div
+                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 flex flex-col md:flex-row justify-end gap-8 md:gap-12 lg:gap-16 xl:gap-20 md:pr-12 lg:pr-16 xl:pr-20"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={staggerContainer}
+                        >
+                            {/* Products Column */}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={menuStaggerContainer}
+                            >
+                                <h4 className="font-bold mb-4 text-white text-sm">Products</h4>
+                                <ul className="space-y-3 text-sm text-gray-300 font-body">
+                                    {FOOTER_LINKS.products.map((link) => (
+                                        <motion.li key={link.label} variants={menuItemFadeUp}>
+                                            <a className="hover:text-primary transition-colors" href={link.href}>
+                                                {link.label}
+                                            </a>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
 
-                        {/* Company Column */}
-                        <div className="md:col-span-2">
-                            <h4 className="font-bold mb-4 text-gray-900 text-sm">Company</h4>
-                            <ul className="space-y-3 text-sm font-body">
-                                {FOOTER_LINKS.company.map((link) => (
-                                    <li key={link.label}>
-                                        <a
-                                            className={`transition-colors ${link.isPrimary
-                                                ? 'text-primary hover:text-primary/80 font-medium'
-                                                : 'text-gray-600 hover:text-primary'
-                                                }`}
-                                            href={link.href}
-                                        >
-                                            {link.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            {/* Services Column */}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={menuStaggerContainer}
+                            >
+                                <h4 className="font-bold mb-4 text-white text-sm">Services</h4>
+                                <ul className="space-y-3 text-sm text-gray-300 font-body">
+                                    {FOOTER_LINKS.services.map((link) => (
+                                        <motion.li key={link.label} variants={menuItemFadeUp}>
+                                            <a className="hover:text-primary transition-colors" href={link.href}>
+                                                {link.label}
+                                            </a>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            {/* Company Column */}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={menuStaggerContainer}
+                            >
+                                <h4 className="font-bold mb-4 text-white text-sm">Company</h4>
+                                <ul className="space-y-3 text-sm font-body">
+                                    {FOOTER_LINKS.company.map((link) => (
+                                        <motion.li key={link.label} variants={menuItemFadeUp}>
+                                            <a
+                                                className={`transition-colors ${link.isPrimary
+                                                    ? 'text-white hover:text-white/80 font-medium'
+                                                    : 'text-gray-300 hover:text-white'
+                                                    }`}
+                                                href={link.href}
+                                            >
+                                                {link.label}
+                                            </a>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        </motion.div>
                     </div>
 
-                    {/* Bottom Section */}
-                    <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 font-body">
-                        <p>© 2026 Mergex. All rights reserved.</p>
+                    {/* Big Text Name */}
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end mt-20 lg:mt-24 xl:mt-32 mb-0 relative z-10 w-full px-4 gap-8 lg:gap-12 xl:gap-16">
+                        <motion.h1
+                            initial={{ filter: "blur(20px)", opacity: 0 }}
+                            whileInView={{ filter: "blur(0px)", opacity: 1 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="text-[15vw] leading-none font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-tight select-none font-[family-name:var(--font-playfair)] text-center md:text-left w-full md:w-auto pb-8 pr-6"
+                        >
+                            Mergex
+                        </motion.h1>
+                        <motion.div
+                            className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={staggerContainer}
+                        >
+                            <motion.p variants={fadeInUp} className="text-gray-400 text-sm lg:text-base leading-relaxed font-body line-clamp-3">
+                                Mergex is a technology organization building software systems, AI solutions, and SaaS products through Labs, Services, and Platforms.
+                            </motion.p>
+                            <motion.a
+                                variants={fadeInUp}
+                                href="/partners"
+                                className="px-8 lg:px-10 py-3 lg:py-3.5 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] text-white font-medium text-sm lg:text-base transition-all duration-300"
+                            >
+                                <span className="relative z-10">Partner With Us</span>
+                            </motion.a>
+                            <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm pt-4">We believe good systems outlast trends.</motion.p>
+                        </motion.div>
+                    </div>
+
+                    <motion.div
+                        className="pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                    >
+                        <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                            <p>© 2026 Mergex. All rights reserved.</p>
+                            <span className="hidden md:block text-gray-500">|</span>
+                            <p className="hidden md:block opacity-100 font-medium text-gray-300 text-center md:text-left">We believe good systems outlast trends.</p>
+                        </div>
                         <div className="flex gap-6">
-                            <a className="hover:text-gray-700 transition-colors" href="#">
+                            <a className="hover:text-white transition-colors" href="#">
                                 Privacy Policy
                             </a>
-                            <a className="hover:text-gray-700 transition-colors" href="#">
+                            <a className="hover:text-white transition-colors" href="#">
                                 Terms & Conditions
                             </a>
                         </div>
-                    </div>
-
-                    {/* Attribution */}
-                    <div className="text-center mt-6">
-                        <p className="text-xs text-gray-400">Built by Mergex Labs.</p>
-                    </div>
-                </div>
-
-                {/* Large Background Logo */}
-                <div className="absolute bottom-0 left-0 right-0 pointer-events-none overflow-hidden" style={{ height: '400px' }}>
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center items-end">
-                        <div className="relative" style={{ width: '100%', maxWidth: '1600px', height: '400px' }}>
-                            <Image
-                                src="/logo/typo-mergex.png"
-                                alt=""
-                                fill
-                                className="object-contain object-bottom opacity-[0.05]"
-                                style={{
-                                    filter: 'brightness(0) saturate(100%) invert(29%) sepia(85%) saturate(4844%) hue-rotate(262deg) brightness(91%) contrast(98%)',
-                                }}
-                            />
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
             </footer>
         </>
     );
 }
-
