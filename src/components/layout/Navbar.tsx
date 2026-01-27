@@ -8,7 +8,7 @@ import { MobileNav } from '@/components/layout/MobileNav';
 import { MegaMenuContainer, MegaMenuColumn, ProductCard, DivisionCard } from '@/components/layout/megaMenu';
 
 
-type MegaMenuKey = 'products' | 'services' | 'explore' | 'resources' | null;
+type MegaMenuKey = 'services' | 'labs' | 'explore' | 'pricing' | null;
 
 export function Navbar() {
     const [activeMenu, setActiveMenu] = useState<MegaMenuKey>(null);
@@ -80,10 +80,10 @@ export function Navbar() {
 
                     {/* Center Menu */}
                     <div className="flex items-center gap-8 h-full">
-                        <NavButton label="Products" active={activeMenu === 'products'} onEnter={() => setActiveMenu('products')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Services" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} />
+                        <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} />
-                        <NavButton label="Resources" active={activeMenu === 'resources'} onEnter={() => setActiveMenu('resources')} onLeave={() => setActiveMenu(null)} />
+                        <NavButton label="Pricing" active={activeMenu === 'pricing'} onEnter={() => setActiveMenu('pricing')} onLeave={() => setActiveMenu(null)} />
                     </div>
 
                     {/* Right CTA */}
@@ -123,10 +123,10 @@ export function Navbar() {
                             onMouseLeave={() => setActiveMenu(null)}
                             className="w-full mt-2 bg-white/95 backdrop-blur-xl border border-gray-200/50 shadow-2xl rounded-2xl overflow-hidden p-8"
                         >
-                            {activeMenu === 'products' && <ProductsMenu />}
                             {activeMenu === 'services' && <ServicesMenu />}
+                            {activeMenu === 'labs' && <LabsMenu />}
                             {activeMenu === 'explore' && <ExploreMenu />}
-                            {activeMenu === 'resources' && <ResourcesMenu />}
+                            {activeMenu === 'pricing' && <PricingMenu />}
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -137,12 +137,12 @@ export function Navbar() {
                 initial={{ y: 0 }}
                 animate={{ y: visible ? 0 : -100 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50"
+                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-4"
             >
                 <nav className={`
-                    transition-all duration-300 ease-in-out
-                    ${scrolled ? 'bg-white/95 shadow-md' : 'bg-transparent'}
-                    backdrop-blur-md pl-2 pr-6 h-16 flex items-center justify-between
+                    w-full transition-all duration-300 ease-in-out
+                    ${scrolled ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
+                    backdrop-blur-xl rounded-2xl px-5 h-16 flex items-center justify-between border
                 `}>
                     {/* Logo and Divider Group */}
                     <div className="flex items-center">
@@ -150,23 +150,23 @@ export function Navbar() {
                             <Image
                                 src="/logo/mergex-logo.png"
                                 alt="Mergex Logo"
-                                width={50}
-                                height={50}
+                                width={42}
+                                height={42}
                                 className="object-contain"
                             />
                             <Image
                                 src="/logo/typo-mergex-black.png"
                                 alt="Mergex"
-                                width={125}
-                                height={31}
-                                className="object-contain -ml-4"
+                                width={110}
+                                height={28}
+                                className="object-contain -ml-3"
                             />
                         </Link>
-                        <div className={`h-16 w-[3px] bg-gray-200 ml-4 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`} />
+                        <div className={`h-8 w-[2px] bg-gray-200 ml-4 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`} />
                     </div>
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 -mr-2 text-foreground/80"
+                        className="p-2 -mr-2 text-foreground/80 focus:outline-none"
                         aria-label="Toggle menu"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,6 +181,37 @@ export function Navbar() {
             </motion.div>
 
             <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+
+            {/* Mobile Fixed Bottom CTA */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40"
+            >
+                <Link
+                    href="/contact"
+                    className="
+                        group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
+                        bg-gradient-to-b from-violet-400 to-violet-900
+                        text-white font-medium text-base
+                        shadow-xl shadow-violet-900/40
+                        transition-all duration-200 ease-out
+                        hover:brightness-110 hover:-translate-y-0.5
+                        active:scale-95
+                        whitespace-nowrap
+                    "
+                >
+                    <lord-icon
+                        src="https://cdn.lordicon.com/fpvaxfly.json"
+                        trigger="loop-on-hover"
+                        state="morph-phone-ring"
+                        colors="primary:#ffffff"
+                        style={{ width: '24px', height: '24px' }}
+                    />
+                    <span>Book a Call</span>
+                </Link>
+            </motion.div>
         </>
     );
 }
@@ -207,65 +238,6 @@ function NavButton({ label, active, onEnter, onLeave }: { label: string; active:
     );
 }
 
-function ProductsMenu() {
-    return (
-        <MegaMenuContainer>
-            {/* Left Column - Context */}
-            <MegaMenuColumn
-                type="context"
-                heading="Products"
-                subheading="SaaS products built from real operational problems."
-            />
-
-            {/* Center Column - Product Cards */}
-            <MegaMenuColumn type="content">
-                <div className="space-y-3">
-                    <ProductCard
-                        name="Unisynk"
-                        description="Event & operations platform"
-                        status="Live"
-                        href="/products/unisynk"
-                    />
-                    <ProductCard
-                        name="Kuthakai"
-                        description="Rental management SaaS"
-                        status="Beta"
-                        href="/products/kuthakai"
-                    />
-                    <ProductCard
-                        name="CHR"
-                        description="HR & compliance system"
-                        status="Coming Soon"
-                    />
-                    <ProductCard
-                        name="Retail Connect"
-                        description="Retail operations platform"
-                        status="Coming Soon"
-                    />
-                </div>
-            </MegaMenuColumn>
-
-            {/* Right Column - Actions */}
-            <MegaMenuColumn type="action">
-                <div className="space-y-3">
-                    <Link
-                        href="/products"
-                        className="block text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-                    >
-                        View all products →
-                    </Link>
-                    <Link
-                        href="/products/waitlist"
-                        className="block text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-                    >
-                        Join product waitlist →
-                    </Link>
-                </div>
-            </MegaMenuColumn>
-        </MegaMenuContainer>
-    );
-}
-
 function ServicesMenu() {
     return (
         <MegaMenuContainer>
@@ -273,63 +245,170 @@ function ServicesMenu() {
             <MegaMenuColumn
                 type="context"
                 heading="Services"
-                subheading="We design, build, and automate systems for growing teams."
+                subheading="Designing, building, and automating production-ready systems."
             />
 
-            {/* Center Column - Division Cards */}
+            {/* Center Column - Service Divisions */}
             <MegaMenuColumn type="content">
                 <div className="space-y-4">
                     <DivisionCard
                         name="Mergex Systems"
                         tagline="Build & Automate"
                         features={[
-                            'Software development',
-                            'AI automation',
-                            'Cloud & architecture'
+                            'Software Development',
+                            'UI/UX & Design',
+                            'AI Automation',
+                            'Cloud & Architecture'
                         ]}
-                        ctaText="Enter Systems"
+                        ctaText="Explore Systems"
                         ctaHref="/services/systems"
                         accentColor="blue"
                     />
                     <DivisionCard
-                        name="Mergex Labs"
-                        tagline="Explore Innovation"
+                        name="Digital Marketing"
+                        tagline="Grow & Scale"
                         features={[
-                            'AI content studio',
-                            'Experiments & R&D',
-                            'Process optimization'
+                            'Content Strategy',
+                            'SEO & Growth Marketing',
+                            'Brand Development'
                         ]}
-                        ctaText="Enter Labs"
-                        ctaHref="/services/labs"
+                        ctaText="Explore Marketing"
+                        ctaHref="/services/marketing"
                         accentColor="purple"
                     />
                 </div>
             </MegaMenuColumn>
 
-            {/* Right Column - Qualifier */}
+            {/* Right Column - CTA */}
             <MegaMenuColumn type="action">
-                <div className="space-y-2.5">
-                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                        Best suited for
+                <div className="space-y-3">
+                    <p className="text-sm text-gray-600 mb-4">
+                        Ready to build something?
+                    </p>
+                    <Link
+                        href="/contact"
+                        className="inline-block px-5 py-2.5 rounded-lg bg-primary text-white font-medium text-sm hover:bg-primary-hover transition-colors"
+                    >
+                        Book a Strategy Call
+                    </Link>
+                </div>
+            </MegaMenuColumn>
+        </MegaMenuContainer>
+    );
+}
+
+function LabsMenu() {
+    return (
+        <MegaMenuContainer>
+            {/* Left Column - Context */}
+            <MegaMenuColumn
+                type="context"
+                heading="Labs"
+                subheading="Our AI-native content and experimentation division."
+            />
+
+            {/* Center Column - Labs Services */}
+            <MegaMenuColumn type="content">
+                <div className="space-y-6">
+                    {/* AI Content Studio */}
+                    <div>
+                        <h4 className="text-sm font-semibold text-foreground mb-3">AI Content Studio</h4>
+                        <div className="space-y-2">
+                            <Link href="/labs/ai-content" className="block text-sm text-gray-700 hover:text-primary transition-colors">
+                                Generative AI
+                            </Link>
+                            <Link href="/labs/visual-content" className="block text-sm text-gray-700 hover:text-primary transition-colors">
+                                Visual Content Creation
+                            </Link>
+                            <Link href="/labs/automation" className="block text-sm text-gray-700 hover:text-primary transition-colors">
+                                Process Optimization
+                            </Link>
+                        </div>
                     </div>
-                    <div className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm text-gray-700">Startups</span>
+
+                    {/* Experiments */}
+                    <div>
+                        <h4 className="text-sm font-semibold text-foreground mb-3">Experiments & R&D</h4>
+                        <div className="space-y-2">
+                            <Link href="/labs/experiments" className="block text-sm text-gray-700 hover:text-primary transition-colors">
+                                Latest Experiments
+                            </Link>
+                            <Link href="/labs/reels" className="block text-sm text-gray-700 hover:text-primary transition-colors">
+                                Work & Reels
+                            </Link>
+                        </div>
                     </div>
-                    <div className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm text-gray-700">Scale-ups</span>
+                </div>
+            </MegaMenuColumn>
+
+            {/* Right Column - CTA */}
+            <MegaMenuColumn type="action">
+                <div className="p-4 rounded-lg bg-purple-50 border border-purple-200">
+                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                        Innovation
                     </div>
-                    <div className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm text-gray-700">Enterprises</span>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                        Explore What's Possible
+                    </h4>
+                    <p className="text-xs text-gray-600 mb-3">
+                        See how AI is transforming content creation
+                    </p>
+                    <Link
+                        href="/labs"
+                        className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+                    >
+                        Enter Labs →
+                    </Link>
+                </div>
+            </MegaMenuColumn>
+        </MegaMenuContainer>
+    );
+}
+
+function PricingMenu() {
+    return (
+        <MegaMenuContainer>
+            {/* Left Column - Context */}
+            <MegaMenuColumn
+                type="context"
+                heading="Pricing"
+                subheading="Transparent pricing for projects and partnerships."
+            />
+
+            {/* Center Column - Engagement Models */}
+            <MegaMenuColumn type="content">
+                <div className="space-y-6">
+                    {/* Models */}
+                    <div>
+                        <h4 className="text-sm font-semibold text-foreground mb-3">Engagement Models</h4>
+                        <div className="space-y-2">
+                            <div className="text-sm text-gray-700">
+                                <span className="font-medium">Project-Based</span> — Fixed scope, clear timeline
+                            </div>
+                            <div className="text-sm text-gray-700">
+                                <span className="font-medium">Monthly Retainer</span> — Ongoing support & development
+                            </div>
+                            <div className="text-sm text-gray-700">
+                                <span className="font-medium">Build-Operate-Transfer</span> — We build, you own
+                            </div>
+                        </div>
                     </div>
+
+                </div>
+            </MegaMenuColumn>
+
+            {/* Right Column - CTA */}
+            <MegaMenuColumn type="action">
+                <div>
+                    <p className="text-sm text-gray-600 mb-4">
+                        Every project is unique. Let's discuss your needs.
+                    </p>
+                    <Link
+                        href="/contact"
+                        className="inline-block px-5 py-2.5 rounded-lg bg-primary text-white font-medium text-sm hover:bg-primary-hover transition-colors"
+                    >
+                        Get a Quote
+                    </Link>
                 </div>
             </MegaMenuColumn>
         </MegaMenuContainer>
@@ -390,6 +469,16 @@ function ExploreMenu() {
                             </Link>
                         </div>
                     </div>
+
+                    {/* Group 4 - Products (Subtle) */}
+                    <div>
+                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Future</h4>
+                        <div className="space-y-2">
+                            <Link href="/products" className="block text-sm text-gray-500 hover:text-primary transition-colors">
+                                Products (Coming Soon)
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </MegaMenuColumn>
 
@@ -417,70 +506,4 @@ function ExploreMenu() {
     );
 }
 
-function ResourcesMenu() {
-    return (
-        <MegaMenuContainer>
-            {/* Left Column - Context */}
-            <MegaMenuColumn
-                type="context"
-                heading="Resources"
-                subheading="Templates, guides, and tools to accelerate your growth."
-            />
 
-            {/* Center Column - Resource Categories */}
-            <MegaMenuColumn type="content">
-                <div className="space-y-6">
-                    {/* Templates */}
-                    <div>
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Templates</h4>
-                        <div className="space-y-2">
-                            <Link href="/resources/templates/website" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                                Website Templates
-                            </Link>
-                            <Link href="/resources/templates/ui" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                                UI / UX Kits
-                            </Link>
-                            <Link href="/resources/templates/landing" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                                Landing Pages
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Free Resources */}
-                    <div>
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Free Resources</h4>
-                        <div className="space-y-2">
-                            <Link href="/resources/guides" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                                Guides & Playbooks
-                            </Link>
-                            <Link href="/resources/checklists" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                                Checklists
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </MegaMenuColumn>
-
-            {/* Right Column - For Builders */}
-            <MegaMenuColumn type="action">
-                <div>
-                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">For Builders</h4>
-                    <div className="space-y-2 mb-4">
-                        <Link href="/resources/open-source" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                            Open-source Tools
-                        </Link>
-                        <Link href="/resources/experiments" className="block text-sm text-gray-700 hover:text-primary transition-colors">
-                            Experiments
-                        </Link>
-                    </div>
-                    <Link
-                        href="/resources"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-                    >
-                        Browse All Resources →
-                    </Link>
-                </div>
-            </MegaMenuColumn>
-        </MegaMenuContainer>
-    );
-}

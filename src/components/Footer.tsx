@@ -4,21 +4,21 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const FOOTER_LINKS = {
-    products: [
-        { label: 'Unisynk', href: '#' },
-        { label: 'Kuthakai', href: '#' },
-        { label: 'CHR', href: '#' },
-        { label: 'Retail Connect', href: '#' },
-    ],
     services: [
-        { label: 'Mergex Systems', href: '#' },
-        { label: 'Mergex Labs', href: '#' },
+        { label: 'Mergex Systems', href: '/services/systems' },
+        { label: 'Digital Marketing', href: '/services/marketing' },
+        { label: 'Mergex Labs', href: '/labs' },
+    ],
+    explore: [
+        { label: 'Case Studies', href: '/explore/case-studies' },
+        { label: 'Blog', href: '/explore/blog' },
+        { label: 'Resources', href: '/resources' },
+        { label: 'Products (Coming Soon)', href: '/products', isSubtle: true },
     ],
     company: [
-        { label: 'About Mergex', href: '#', isPrimary: true },
-        { label: 'Partner With Us', href: '#', isPrimary: true },
-        { label: 'Careers', href: '#', isPrimary: true },
-        { label: 'Contact', href: '#' },
+        { label: 'About Mergex', href: '/about', isPrimary: true },
+        { label: 'Careers', href: '/careers', isPrimary: true },
+        { label: 'Contact', href: '/contact' },
     ],
 };
 
@@ -187,26 +187,7 @@ export default function Footer() {
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            {/* Products Column */}
-                            <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={menuStaggerContainer}
-                            >
-                                <h4 className="font-bold mb-4 text-white text-sm">Products</h4>
-                                <ul className="space-y-3 text-sm text-gray-300 font-body">
-                                    {FOOTER_LINKS.products.map((link) => (
-                                        <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <a className="hover:text-primary transition-colors" href={link.href}>
-                                                {link.label}
-                                            </a>
-                                        </motion.li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-
-                            {/* Services Column */}
+                            {/* Services Column (Primary) */}
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
@@ -218,6 +199,33 @@ export default function Footer() {
                                     {FOOTER_LINKS.services.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
                                             <a className="hover:text-primary transition-colors" href={link.href}>
+                                                {link.label}
+                                            </a>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            {/* Explore Column */}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={menuStaggerContainer}
+                            >
+                                <h4 className="font-bold mb-4 text-white text-sm">Explore</h4>
+                                <ul className="space-y-3 text-sm text-gray-300 font-body">
+                                    {FOOTER_LINKS.explore.map((link) => (
+                                        <motion.li key={link.label} variants={menuItemFadeUp}>
+                                            <a
+                                                className={`transition-colors ${
+                                                    // @ts-ignore
+                                                    link.isSubtle
+                                                        ? 'text-gray-500 hover:text-gray-300'
+                                                        : 'hover:text-primary'
+                                                    }`}
+                                                href={link.href}
+                                            >
                                                 {link.label}
                                             </a>
                                         </motion.li>
