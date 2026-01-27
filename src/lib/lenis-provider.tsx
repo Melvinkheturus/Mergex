@@ -21,6 +21,8 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
             infinite: false,
         });
 
+        (window as any).lenis = lenis;
+
         // Request animation frame loop
         function raf(time: number) {
             lenis.raf(time);
@@ -32,6 +34,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         // Cleanup on unmount
         return () => {
             lenis.destroy();
+            (window as any).lenis = null;
         };
     }, []);
 

@@ -133,11 +133,12 @@ export function Navbar() {
             </div>
 
             {/* Mobile Navbar */}
-            < div className={`
-                lg:hidden fixed top-0 left-0 right-0 z-50
-                transition-transform duration-300 ease-in-out
-                ${visible ? 'translate-y-0' : '-translate-y-full'}
-            `} >
+            <motion.div
+                initial={{ y: 0 }}
+                animate={{ y: visible ? 0 : -100 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="lg:hidden fixed top-0 left-0 right-0 z-50"
+            >
                 <nav className={`
                     transition-all duration-300 ease-in-out
                     ${scrolled ? 'bg-white/95 shadow-md' : 'bg-transparent'}
@@ -177,7 +178,7 @@ export function Navbar() {
                         </svg>
                     </button>
                 </nav>
-            </div >
+            </motion.div>
 
             <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
         </>

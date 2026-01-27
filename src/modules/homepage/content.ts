@@ -24,6 +24,8 @@ export const PORTAL_CARDS = {
         videoSrc: '/assets/ecosystem/videos/labs-portal.mp4',
         videoPoster: '/assets/ecosystem/labs-portal-still.png',
         colorTone: 'purple' as const,
+        color: '#8B5CF6',
+        features: ['AI visual generation', 'Content automation', 'Creative workflows'],
         href: '/labs',
     },
     systems: {
@@ -33,6 +35,8 @@ export const PORTAL_CARDS = {
         videoSrc: '/assets/ecosystem/videos/systems-portal.mp4',
         videoPoster: '/assets/ecosystem/systems-portal-still.png',
         colorTone: 'blue' as const,
+        color: '#3B82F6',
+        features: ['Custom software', 'Cloud architecture', 'Process automation'],
         href: '/systems',
     },
     platform: {
@@ -42,6 +46,8 @@ export const PORTAL_CARDS = {
         videoSrc: '/assets/ecosystem/videos/platform-portal.mp4',
         videoPoster: '/assets/ecosystem/platform-portal-still.png',
         colorTone: 'green' as const,
+        color: '#10B981',
+        features: ['Scalable SaaS', 'Unified tools', 'Enterprise ready'],
         href: '/platform',
     },
 } as const;

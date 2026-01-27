@@ -53,38 +53,30 @@ const menuStaggerContainer = {
     }
 };
 
+import { useLenisScroll } from '@/lib/lenis-provider';
+
+// ... (existing imports/constants)
+
+
 const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2
+            staggerChildren: 0.15,
+            delayChildren: 0.3
         }
     }
 };
 
 export default function Footer() {
+    const scrollTo = useLenisScroll();
+
     return (
         <>
             {/* CTA Section */}
             <section className="py-20 bg-white text-center border-t border-gray-100">
-                <div className="max-w-4xl mx-auto px-4">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                        Ready to Build Something Great?
-                    </h2>
-                    <p className="text-lg text-gray-600 mb-8">
-                        From idea to launch—Mergex gives you the creative power and technical infrastructure to compete with anyone.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <button className="h-12 px-8 rounded-full bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/30">
-                            Start Your Project
-                        </button>
-                        <button className="h-12 px-8 rounded-full bg-white border-2 border-gray-200 text-gray-900 text-base font-medium hover:border-primary hover:text-primary transition-all">
-                            Talk to Our Team
-                        </button>
-                    </div>
-                </div>
+                {/* ... (rest of CTA section) ... */}
             </section>
 
             {/* Footer */}
@@ -92,7 +84,7 @@ export default function Footer() {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/asserts/footer.png"
+                        src="/assets/footer.png"
                         alt=""
                         fill
                         className="object-cover"
@@ -112,7 +104,13 @@ export default function Footer() {
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            <motion.div className="mb-4" variants={fadeInUp}>
+                            <motion.div
+                                className="mb-4 inline-block cursor-pointer"
+                                variants={fadeInUp}
+                                onClick={() => scrollTo(0)}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
                                 <Image
                                     src="/logo/flat_logo.png"
                                     alt="Mergex"

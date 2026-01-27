@@ -12,8 +12,11 @@ type ScrollProgressIndicatorProps = {
     sections: Section[];
 };
 
+import { useLenisScroll } from "@/lib/lenis-provider";
+
 export default function ScrollProgressIndicator({ sections }: ScrollProgressIndicatorProps) {
     const [activeSection, setActiveSection] = useState(0);
+    const scrollTo = useLenisScroll();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,14 +41,16 @@ export default function ScrollProgressIndicator({ sections }: ScrollProgressIndi
     }, [sections]);
 
     const scrollToSection = (sectionId: string) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        scrollTo(`#${sectionId}`, { offset: 0, duration: 1.5 });
     };
 
     return (
-        <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:block">
+        <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden md:block"
+        >
             <div className="flex flex-col items-end gap-5 py-6">
                 {sections.map((section, index) => {
                     const isBigDash = index % 2 === 0;
@@ -106,6 +111,6 @@ export default function ScrollProgressIndicator({ sections }: ScrollProgressIndi
                     );
                 })}
             </div>
-        </div>
+        </motion.div>
     );
 }
