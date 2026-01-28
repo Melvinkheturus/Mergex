@@ -2,8 +2,7 @@ import {
   HeroSection,
   EcosystemSnapshot,
   WhatWeBuildSection,
-  TrustStrip,
-  FinalCTA,
+  FAQSection,
 } from '@/modules/homepage';
 
 export default function Home() {
@@ -18,11 +17,8 @@ export default function Home() {
       <div id="what-we-build">
         <WhatWeBuildSection />
       </div>
-      <div id="trust">
-        <TrustStrip />
-      </div>
-      <div id="cta">
-        <FinalCTA />
+      <div id="faq">
+        <FAQSection />
       </div>
     </main>
   );

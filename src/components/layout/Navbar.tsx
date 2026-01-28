@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [visible, setVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollY = useRef(0);
 
     // Handle scroll effect for transparency and hide/show
     useEffect(() => {
@@ -26,7 +26,7 @@ export function Navbar() {
             setScrolled(currentScrollY > 50);
 
             // Show navbar when scrolling up, hide when scrolling down
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
                 // Scrolling down & past threshold
                 setVisible(false);
             } else {
@@ -34,21 +34,25 @@ export function Navbar() {
                 setVisible(true);
             }
 
-            setLastScrollY(currentScrollY);
+            lastScrollY.current = currentScrollY;
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    }, []);
 
     return (
         <>
             {/* Desktop Navbar */}
-            <div className={`
-                hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-6
-                transition-transform duration-300 ease-in-out
-                ${visible ? 'translate-y-0' : '-translate-y-full'}
-            `}>
+            <motion.div
+                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-6"
+                initial={{ y: -100, opacity: 0 }}
+                animate={{
+                    y: visible ? 0 : "-100%",
+                    opacity: 1
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
                 <nav
                     className={`
                         w-full transition-all duration-300 ease-in-out
@@ -130,7 +134,7 @@ export function Navbar() {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>
+            </motion.div>
 
             {/* Mobile Navbar */}
             <motion.div

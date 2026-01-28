@@ -2,9 +2,16 @@
 
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 /**
- * LenisProvider - Global smooth scroll provider
+ * LenisProvider - Global smooth scroll provider with GSAP integration
  * Wraps the application to enable buttery smooth scrolling experience
  */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
@@ -23,6 +30,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
         (window as any).lenis = lenis;
 
+        // Sync Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
         // Request animation frame loop
         function raf(time: number) {
             lenis.raf(time);
@@ -30,6 +40,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         }
 
         requestAnimationFrame(raf);
+
+        // Refresh ScrollTrigger after init
+        ScrollTrigger.refresh();
 
         // Cleanup on unmount
         return () => {

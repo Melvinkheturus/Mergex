@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 const FOOTER_LINKS = {
     services: [
@@ -13,7 +14,7 @@ const FOOTER_LINKS = {
         { label: 'Case Studies', href: '/explore/case-studies' },
         { label: 'Blog', href: '/explore/blog' },
         { label: 'Resources', href: '/resources' },
-        { label: 'Products (Coming Soon)', href: '/products', isSubtle: true },
+        { label: 'Products', href: '/products', isSubtle: true },
     ],
     company: [
         { label: 'About Mergex', href: '/about', isPrimary: true },
@@ -58,6 +59,9 @@ import { useLenisScroll } from '@/lib/lenis-provider';
 // ... (existing imports/constants)
 
 
+// ... (existing imports/constants)
+
+
 const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -74,13 +78,8 @@ export default function Footer() {
 
     return (
         <>
-            {/* CTA Section */}
-            <section className="py-20 bg-white text-center border-t border-gray-100">
-                {/* ... (rest of CTA section) ... */}
-            </section>
-
             {/* Footer */}
-            <footer className="bg-white border-t border-gray-100 pt-12 lg:pt-16 xl:pt-20 pb-8 lg:pb-10 relative overflow-hidden">
+            <footer className="bg-transparent dark:bg-[#070b18] pt-16 lg:pt-20 pb-8 lg:pb-10 relative overflow-hidden">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -90,10 +89,15 @@ export default function Footer() {
                         className="object-cover"
                         priority
                     />
-                    {/* Dark Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
                 </div>
-                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-10">
+
+                {/* Extended Smoke Blend Overlay - extends into FAQ section for seamless transition */}
+                <div className="absolute -top-[400px] left-0 right-0 h-[800px] bg-gradient-to-b from-white via-[#070b18]/50 to-transparent z-[5] pointer-events-none" />
+
+                {/* Additional Top Black Overlay for depth */}
+                <div className="absolute top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-black/80 to-transparent z-[6] pointer-events-none" />
+
+                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                     {/* Top Section */}
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-12 lg:mb-16 xl:mb-20">
                         {/* Brand Column */}
@@ -116,10 +120,10 @@ export default function Footer() {
                                     alt="Mergex"
                                     width={160}
                                     height={54}
-                                    className="h-12 w-auto"
+                                    className="h-10 w-auto"
                                 />
                             </motion.div>
-                            <motion.p variants={fadeInUp} className="text-xl text-gray-300 font-body leading-relaxed mb-6 max-w-sm">
+                            <motion.p variants={fadeInUp} className="text-lg text-gray-300 font-body leading-relaxed mb-4 max-w-sm">
                                 Where ideas merge with innovation
                             </motion.p>
 
@@ -181,7 +185,7 @@ export default function Footer() {
 
                         {/* Menu Group - Right Aligned */}
                         <motion.div
-                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 flex flex-col md:flex-row justify-end gap-8 md:gap-12 lg:gap-16 xl:gap-20 md:pr-12 lg:pr-16 xl:pr-20"
+                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 flex flex-col md:flex-row justify-end gap-6 md:gap-8 lg:gap-12 xl:gap-16 md:pr-8 lg:pr-12 xl:pr-16"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -194,11 +198,11 @@ export default function Footer() {
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-bold mb-4 text-white text-sm">Services</h4>
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Services</h4>
                                 <ul className="space-y-3 text-sm text-gray-300 font-body">
                                     {FOOTER_LINKS.services.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <a className="hover:text-primary transition-colors" href={link.href}>
+                                            <a className="hover:text-primary transition-colors tracking-wide" href={link.href}>
                                                 {link.label}
                                             </a>
                                         </motion.li>
@@ -213,12 +217,12 @@ export default function Footer() {
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-bold mb-4 text-white text-sm">Explore</h4>
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Explore</h4>
                                 <ul className="space-y-3 text-sm text-gray-300 font-body">
                                     {FOOTER_LINKS.explore.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
                                             <a
-                                                className={`transition-colors ${
+                                                className={`transition-colors tracking-wide ${
                                                     // @ts-ignore
                                                     link.isSubtle
                                                         ? 'text-gray-500 hover:text-gray-300'
@@ -240,12 +244,12 @@ export default function Footer() {
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-bold mb-4 text-white text-sm">Company</h4>
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Company</h4>
                                 <ul className="space-y-3 text-sm font-body">
                                     {FOOTER_LINKS.company.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
                                             <a
-                                                className={`transition-colors ${link.isPrimary
+                                                className={`transition-colors tracking-wide ${link.isPrimary
                                                     ? 'text-white hover:text-white/80 font-medium'
                                                     : 'text-gray-300 hover:text-white'
                                                     }`}
@@ -271,21 +275,31 @@ export default function Footer() {
                             Mergex
                         </motion.h1>
                         <motion.div
-                            className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-6"
+                            className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            <motion.p variants={fadeInUp} className="text-gray-400 text-sm lg:text-base leading-relaxed font-body line-clamp-3">
+                            <style jsx global>{`
+                                @keyframes gradient-x {
+                                    0% { background-position: 0% 50%; }
+                                    100% { background-position: 200% 50%; }
+                                }
+                                .animate-gradient-x {
+                                    animation: gradient-x 3s linear infinite;
+                                }
+                            `}</style>
+                            <motion.p variants={fadeInUp} className="text-gray-400 text-sm lg:text-base leading-relaxed font-body line-clamp-3 mb-1">
                                 Mergex is a technology organization building software systems, AI solutions, and SaaS products through Labs, Services, and Platforms.
                             </motion.p>
                             <motion.a
                                 variants={fadeInUp}
                                 href="/partners"
-                                className="px-8 lg:px-10 py-3 lg:py-3.5 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] text-white font-medium text-sm lg:text-base transition-all duration-300"
+                                className="inline-flex items-center gap-2 group transition-all duration-300 transform -translate-y-1"
                             >
-                                <span className="relative z-10">Partner With Us</span>
+                                <span className="text-lg font-medium bg-[linear-gradient(90deg,#C4B5FD,#9333EA,#C4B5FD)] bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">Partner With Us</span>
+                                <ArrowUpRight className="w-5 h-5 text-purple-500 group-hover:text-purple-300 transition-colors" />
                             </motion.a>
                             <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm pt-4">We believe good systems outlast trends.</motion.p>
                         </motion.div>
