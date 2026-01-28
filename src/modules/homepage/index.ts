@@ -8,6 +8,10 @@ import EcosystemSnapshot from './components/EcosystemSnapshot';
 import VideoPortalCard from './components/VideoPortalCard';
 import CaseStudySection from './components/CaseStudySection';
 import { FAQSection } from './components/FAQSection';
+import { ProblemContext } from './components/ProblemContext';
+import { HowWeWorkSection } from './components/HowWeWorkSection';
+import { ProofSection } from './components/ProofSection';
+import { ProductsGlimpseSection } from './components/ProductsGlimpseSection';
 
 export {
     HeroSection,
@@ -20,4 +24,8 @@ export {
     VideoPortalCard,
     CaseStudySection,
     FAQSection,
+    ProblemContext,
+    HowWeWorkSection,
+    ProofSection,
+    ProductsGlimpseSection,
 };
