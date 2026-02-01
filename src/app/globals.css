@@ -179,6 +179,10 @@ html * {
   font-family: var(--font-noto-sans), var(--font-geist-sans), system-ui, sans-serif;
 }
 
+.font-pinyon {
+  font-family: var(--font-pinyon);
+}
+
 /* Background Utilities */
 .bg-soft {
   background-color: var(--background-soft);

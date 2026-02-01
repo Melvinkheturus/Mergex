@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
@@ -40,6 +40,12 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const pinyon = Pinyon_Script({
+  variable: "--font-pinyon",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "Mergex - Architecting the Future of Tech",
   description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality with AI-driven development and strategic innovation.",
@@ -77,11 +83,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${playfair.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${playfair.variable} ${pinyon.variable} antialiased bg-background text-foreground`}
       >
         <LayoutContent>{children}</LayoutContent>
       </body>
     </html>
   );
 }
-

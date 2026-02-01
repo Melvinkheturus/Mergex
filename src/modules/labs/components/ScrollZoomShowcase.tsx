@@ -133,23 +133,20 @@ export function ScrollZoomShowcase() {
                         }}
                     />
 
-                    {/* Complex Gradient Overlay - Radial + Linear for Asymmetry */}
+                    {/* Complex Gradient Overlay - Targeted Darkening */}
                     <div
                         ref={overlayRef}
                         className="absolute inset-0"
                         style={{ opacity: 0 }}
                     >
-                        {/* Base darkening */}
-                        <div className="absolute inset-0 bg-black/10" />
+                        {/* Heavy Top-Left Radial Gradient for Headline */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.8)_20%,rgba(0,0,0,0.4)_40%,transparent_70%)]" />
 
-                        {/* Headline Zone Darkening (Top Left) */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-transparent opacity-90" />
+                        {/* Heavy Bottom-Right Radial Gradient for Meta/CTA */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.8)_20%,rgba(0,0,0,0.4)_40%,transparent_70%)]" />
 
-                        {/* Vignette at bottom */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-
-                        {/* Radial to keep face clear */}
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,transparent_0%,rgba(0,0,0,0.4)_50%,rgba(0,0,0,0.9)_100%)] opacity-60" />
+                        {/* Subtle overall vignette to connect them gently without covering face */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_30%,rgba(0,0,0,0.3)_100%)] opacity-60" />
                     </div>
 
                     {/* Content Overlay - Fades in during scroll */}
@@ -161,28 +158,28 @@ export function ScrollZoomShowcase() {
                         <div className="relative w-full h-full max-w-[1600px] mx-auto flex flex-col md:block">
 
                             {/* ZONE 1: PRIMARY STATEMENT (Top Left) */}
-                            <div className="md:absolute md:top-[12%] md:left-0 max-w-[460px] z-10">
+                            <div className="md:absolute md:top-[6%] md:left-0 max-w-[460px] z-10">
                                 <p className="text-[12px] md:text-[13px] uppercase tracking-[0.12em] mb-4 opacity-70 font-medium text-white/80">
                                     FEATURED EXPLORATION
                                 </p>
                                 {/* Gradient Text Headline */}
                                 <h2 className="text-5xl md:text-[clamp(52px,6vw,76px)] font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2">
-                                    Meet Kyra.
+                                    Meet <span className="font-pinyon font-normal text-[1.1em] relative top-1">Kyra.</span>
                                 </h2>
                             </div>
 
-                            {/* ZONE 2: CONTEXT & MEANING (Mid-Lower Right) */}
-                            <div className="md:absolute md:top-[38%] md:right-[5%] lg:right-[10%] max-w-[420px] md:text-right mt-12 md:mt-0 z-10">
+                            {/* ZONE 2: CONTEXT & MEANING (Mid-Left) */}
+                            <div className="md:absolute md:top-[38%] md:left-0 max-w-[420px] mt-12 md:mt-0 z-10">
                                 <h3 className="text-xl md:text-[24px] font-normal leading-[1.3] text-white/90 mb-6">
                                     An AI-native creative exploration by Mergex Labs.
                                 </h3>
                                 <p className="text-base md:text-[17px] leading-[1.6] text-white/75">
-                                    Kyra represents how we experiment with generative AI — blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
+                                    Kyra represents how we experiment with generative AI  blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
                                 </p>
                             </div>
 
-                            {/* ZONE 3: META + ACTION (Bottom Center-Right) */}
-                            <div className="md:absolute md:bottom-[10%] md:right-[15%] lg:right-[20%] flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10">
+                            {/* ZONE 3: META + ACTION (Bottom Right) */}
+                            <div className="md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10">
                                 {/* Meta Row */}
                                 <div className="flex flex-row gap-8 md:gap-12 border-t border-white/20 pt-6 md:border-none md:pt-0">
                                     <div className="text-center md:text-right">
