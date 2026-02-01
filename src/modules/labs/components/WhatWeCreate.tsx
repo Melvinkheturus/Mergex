@@ -2,79 +2,78 @@
 
 import { motion } from 'framer-motion';
 import { WHAT_WE_CREATE } from '../content/labs';
-import { Image, Video, Megaphone, Palette, Sparkles } from 'lucide-react';
 
 /**
- * WhatWeCreate - Capabilities showcase
+ * WhatWeCreate - Capabilities showcase with numbered services layout
  */
 export function WhatWeCreate() {
-    const iconMap = {
-        image: Image,
-        video: Video,
-        megaphone: Megaphone,
-        palette: Palette,
-        sparkles: Sparkles,
-    };
-
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-purple-50/30">
-            <div className="container mx-auto px-6 md:px-12">
+        <section className="py-20 md:py-32 bg-white">
+            <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
-                        {WHAT_WE_CREATE.headline}
+                    <p className="text-sm uppercase tracking-wider text-gray-500 mb-4">
+                        WHAT WE DO
+                    </p>
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+                        SERVICES
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl">
                         {WHAT_WE_CREATE.subheadline}
                     </p>
                 </motion.div>
 
-                {/* Capabilities Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {WHAT_WE_CREATE.categories.map((category, index) => {
-                        const Icon = iconMap[category.icon as keyof typeof iconMap];
+                {/* Services List */}
+                <div className="space-y-16 md:space-y-20">
+                    {WHAT_WE_CREATE.categories.map((category, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            className="grid grid-cols-12 gap-6 md:gap-12 items-start border-b border-gray-200 pb-16 md:pb-20"
+                        >
+                            {/* Number */}
+                            <div className="col-span-2 md:col-span-1">
+                                <span className="text-2xl md:text-3xl font-light text-gray-400">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                            </div>
 
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-2xl hover:border-purple-200 transition-all duration-300"
-                            >
-                                {/* Icon */}
-                                <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                                    <Icon size={28} className="text-purple-600" />
+                            {/* Content */}
+                            <div className="col-span-10 md:col-span-11 grid md:grid-cols-2 gap-8">
+                                {/* Left: Title & Description */}
+                                <div>
+                                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                                        {category.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-lg leading-relaxed">
+                                        {category.description}
+                                    </p>
                                 </div>
 
-                                {/* Title */}
-                                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-purple-600 transition-colors">
-                                    {category.title}
-                                </h3>
-
-                                {/* Description */}
-                                <p className="text-foreground-muted mb-5 leading-relaxed">
-                                    {category.description}
-                                </p>
-
-                                {/* Capabilities List */}
-                                <ul className="space-y-2">
-                                    {category.capabilities.map((capability, idx) => (
-                                        <li key={idx} className="flex items-start text-sm text-foreground-muted">
-                                            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
-                                            {capability}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        );
-                    })}
+                                {/* Right: Capabilities */}
+                                <div className="flex items-center">
+                                    <ul className="space-y-3">
+                                        {category.capabilities.map((capability, idx) => (
+                                            <li
+                                                key={idx}
+                                                className="text-gray-700 leading-relaxed"
+                                            >
+                                                {capability}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>

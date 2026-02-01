@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display 
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
+import Cursor from "@/components/Cursor";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -50,9 +51,9 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
 import { LenisProvider } from "@/lib/lenis-provider";
 import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
+import LayoutContent from "@/components/LayoutContent";
 
 export default function RootLayout({
   children,
@@ -78,21 +79,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
-        <LenisProvider>
-          <Navbar />
-          <ScrollProgressIndicator
-            sections={[
-              { id: "hero", label: "Hero" },
-              { id: "ecosystem", label: "Ecosystem" },
-              { id: "what-we-build", label: "What We Build" },
-              { id: "trust", label: "Trust" },
-              { id: "cta", label: "Get Started" }
-            ]}
-          />
-          <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
-          {children}
-          <Footer />
-        </LenisProvider>
+        <LayoutContent>{children}</LayoutContent>
       </body>
     </html>
   );

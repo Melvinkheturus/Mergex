@@ -3,6 +3,7 @@ import {
     LabsHero,
     WhatIsLabs,
     WhatWeCreate,
+    ScrollZoomShowcase,
     WorkGallery,
     HowLabsWorks,
     WhyLabsExists,
@@ -42,6 +43,11 @@ export default function LabsPage() {
             {/* 3. What We Create - Capabilities Showcase */}
             <div id="capabilities">
                 <WhatWeCreate />
+            </div>
+
+            {/* 3.5 Featured Work - Scroll Zoom Showcase */}
+            <div id="featured-work">
+                <ScrollZoomShowcase />
             </div>
 
             {/* 4. Work Gallery - CRITICAL Visual Proof */}

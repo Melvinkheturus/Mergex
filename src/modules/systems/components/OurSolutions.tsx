@@ -16,7 +16,7 @@ export function OurSolutions() {
     };
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-blue-50/30">
+        <section className="py-20 md:py-32 bg-white">
             <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <motion.div

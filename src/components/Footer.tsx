@@ -295,7 +295,7 @@ export default function Footer() {
                             </motion.p>
                             <motion.a
                                 variants={fadeInUp}
-                                href="/partners"
+                                href="/partner"
                                 className="inline-flex items-center gap-2 group transition-all duration-300 transform -translate-y-1"
                             >
                                 <span className="text-lg font-medium bg-[linear-gradient(90deg,#C4B5FD,#9333EA,#C4B5FD)] bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">Partner With Us</span>

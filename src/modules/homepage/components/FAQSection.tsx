@@ -32,21 +32,19 @@ export function FAQSection() {
         if (!section || !overlay || !reveal || !content) return;
 
         const ctx = gsap.context(() => {
-            // Create a single timeline for perfect synchronization
-            // Create a single timeline for perfect synchronization
+            // Create timeline with instant transition (no scrub)
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
-                    start: 'top center',
-                    end: 'top top',
-                    scrub: 0.1, // Almost instant response
+                    start: 'center center', // Trigger when FAQ center reaches screen center
+                    toggleActions: 'play reverse play reverse', // Enable bidirectional transition
                 }
             });
 
-            // Add all animations to the timeline at position 0 to run simultaneously
-            tl.to(overlay, { opacity: 1, ease: 'power1.inOut', duration: 0.2 }, 0)
-                .to(reveal, { opacity: 1, ease: 'power1.inOut', duration: 0.2 }, 0)
-                .to(content, { color: '#ffffff', ease: 'power1.inOut', duration: 0.2 }, 0);
+            // Set duration to 0 for instant transition
+            tl.to(overlay, { opacity: 1, ease: 'none', duration: 0 }, 0)
+                .to(reveal, { opacity: 1, ease: 'none', duration: 0 }, 0)
+                .to(content, { color: '#ffffff', ease: 'none', duration: 0 }, 0);
         }, section);
 
         return () => ctx.revert();

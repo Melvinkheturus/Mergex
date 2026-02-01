@@ -17,7 +17,7 @@ export function HowWeWorkSystems() {
     };
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50/30 to-white">
+        <section className="py-20 md:py-32 bg-white">
             <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <motion.div
