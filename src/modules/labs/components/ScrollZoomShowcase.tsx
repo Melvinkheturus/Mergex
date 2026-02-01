@@ -164,7 +164,7 @@ export function ScrollZoomShowcase() {
                                 </p>
                                 {/* Gradient Text Headline */}
                                 <h2 className="text-5xl md:text-[clamp(52px,6vw,76px)] font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2">
-                                    Meet <span className="font-pinyon font-normal text-[1.1em] relative top-1">Kyra.</span>
+                                    Meet <span className="font-pinyon font-normal text-[1.1em] relative top-2 text-white">Kyra.</span>
                                 </h2>
                             </div>
 
