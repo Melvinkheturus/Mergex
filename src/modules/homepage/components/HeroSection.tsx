@@ -1,126 +1,171 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { HERO_CONTENT } from '../content';
-import { ArrowRight, Zap, Shield, Cpu } from 'lucide-react';
+import { useRef, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { HeroScene } from './HeroScene';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Playfair_Display } from 'next/font/google';
+
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    style: ['italic'],
+    weight: ['400', '500', '600']
+});
+
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 /**
- * HeroSection - Redesigned to match "USD Bloom" reference
- * Features: Purple/blue gradient, organic shapes, centered layout, feature cards
+ * HeroSection - Scroll-Driven Typography Transformation
+ * 
+ * Scroll Sequence:
+ * 1. Start: Large editorial typography (light background)
+ * 2. Mid: Text fades out sequentially
+ * 3. Transition: Black layer rises from bottom
+ * 4. End: 3D scene appears on dark background
+ * 
+ * Inspired by Urbix Studio typography + Coda scroll progression
  */
 export function HeroSection() {
-    return (
-        <section className="relative min-h-screen flex flex-col pt-32 pb-20 overflow-hidden bg-[#f8f7ff]">
-            {/* Background Gradients & Shapes */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                {/* Top Center Glow */}
-                <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-purple-200/30 rounded-full blur-[120px] mix-blend-multiply" />
+    const heroRef = useRef<HTMLDivElement>(null);
 
-                {/* Abstract Organic Shapes (CSS Blobs) */}
-                <div className="absolute top-[10%] left-[10%] w-64 h-64 bg-blue-300/20 rounded-full blur-3xl animate-float" />
-                <div className="absolute top-[20%] right-[15%] w-80 h-80 bg-purple-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-                <div className="absolute bottom-[20%] left-[20%] w-96 h-96 bg-indigo-200/20 rounded-full blur-[100px]" />
+    const headlineRef = useRef<HTMLDivElement>(null);
+    const supportingRef = useRef<HTMLParagraphElement>(null);
+    const authorityRef = useRef<HTMLParagraphElement>(null);
+    const ctaRef = useRef<HTMLDivElement>(null);
+    const blackLayerRef = useRef<HTMLDivElement>(null);
+    const sceneWrapperRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!heroRef.current) return;
+
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroRef.current,
+                    start: 'top top',
+                    end: '+=300%',
+                    pin: true,
+                    scrub: 1,
+                    // markers: true, // Enable for debugging
+                }
+            });
+
+            // Sequential text fade out
+            tl.to(supportingRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.35)
+                .to(authorityRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.45)
+                .to(ctaRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.55)
+
+                // Black layer rising from bottom
+                .to(blackLayerRef.current, {
+                    clipPath: 'inset(0 0 0% 0)',
+                    duration: 0.5,
+                }, 0.5)
+
+                // Headline fades last
+                .to(headlineRef.current, { opacity: 0, y: -100, duration: 0.4 }, 0.6)
+
+                // 3D scene reveal
+                .to(sceneWrapperRef.current, { opacity: 1, duration: 0.4 }, 0.75);
+        }, heroRef);
+
+        return () => {
+            ctx.revert();
+        };
+    }, []);
+
+    return (
+        <section
+            ref={heroRef}
+            className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
+        >
+            {/* Black Overlay Layer - Rises from bottom */}
+            <div
+                ref={blackLayerRef}
+                className="absolute inset-0 bg-[#0a0a0a] z-[2]"
+                style={{ clipPath: 'inset(100% 0 0 0)' }}
+            />
+
+            {/* 3D Scene - Hidden initially, appears on black */}
+            <div
+                ref={sceneWrapperRef}
+                className="absolute inset-0 z-[3] opacity-0"
+            >
+                <HeroScene />
             </div>
 
-            {/* Main Content */}
-            <div className="relative z-10 container mx-auto px-6 md:px-12 flex-1 flex flex-col items-center justify-center text-center">
+            {/* Typography Content Layer */}
+            <div className="relative z-[4] min-h-screen flex items-center pt-16 md:pt-24">
+                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
 
-                {/* Top Badge/Icon */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-8"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/50 backdrop-blur-md border border-purple-100 rounded-full shadow-sm">
-                        <span className="flex h-2 w-2 rounded-full bg-purple-600 animate-pulse"></span>
-                        <span className="text-xs font-medium text-purple-900 tracking-wide uppercase">AI Integration Partner</span>
-                    </div>
-                </motion.div>
-
-                {/* Headline */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold font-sans tracking-tight text-gray-900 mb-6 max-w-5xl mx-auto leading-tight"
-                >
-                    Where Innovation <br className="hidden md:block" />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
-                        Scales & Grows
-                    </span>
-                </motion.h1>
-
-                {/* Subheadline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
-                >
-                    A programmable, utility-driven ecosystem designed for native value accrual and seamless integration into your business.
-                </motion.p>
-
-                {/* CTA Button */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="mb-20"
-                >
-                    <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a1a2e] text-white rounded-full text-lg font-medium transition-all hover:scale-105 hover:shadow-xl shadow-lg shadow-purple-900/20">
-                        Start Building
-                        <ArrowRight size={18} />
-                    </Link>
-                </motion.div>
-
-                {/* Feature Cards Grid (Reference Style) */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto text-left"
-                >
-                    {/* Card 1 */}
-                    <div className="bg-gradient-to-br from-[#e0e7ff] to-[#f3e8ff] p-8 rounded-3xl border border-white/50 shadow-xl shadow-purple-900/5 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-                        <div className="relative z-10">
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">Capital that grows</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                                Earn passive income through our AI-driven optimization strategies.
-                            </p>
+                    {/* Editorial Headline - Mixed Typography */}
+                    <h1
+                        ref={headlineRef}
+                        className="mb-12 md:mb-16 leading-[0.95] tracking-tight"
+                    >
+                        {/* Line 1: Where ideas merge */}
+                        <div className="mb-2 md:mb-4">
+                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
+                                Where ideas{' '}
+                            </span>
+                            <span className={`${playfair.className} text-[clamp(2.25rem,7.5vw,5.5rem)] text-gray-900`}>
+                                merge
+                            </span>
                         </div>
-                        <div className="absolute right-[-20px] bottom-[-20px] opacity-20 group-hover:opacity-30 transition-opacity">
-                            <Zap size={100} className="text-purple-600" />
+
+                        {/* Line 2: with intelligence */}
+                        <div className="mb-2 md:mb-4">
+                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
+                                with{' '}
+                            </span>
+                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">
+                                intelligence.
+                            </span>
                         </div>
+                    </h1>
+
+                    {/* Supporting Text */}
+                    <p
+                        ref={supportingRef}
+                        className="text-base md:text-xl text-gray-700 max-w-2xl mb-6 leading-relaxed"
+                    >
+                        We design and build scalable digital products that support complex workflows and business-critical systems.
+                    </p>
+
+                    {/* Authority Reinforcer */}
+                    <p
+                        ref={authorityRef}
+                        className="text-sm md:text-base text-gray-500 max-w-xl mb-10 leading-relaxed"
+                    >
+                        From early ideas to production-ready systems — we help you move fast without breaking things.
+                    </p>
+
+                    {/* CTAs */}
+                    <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 mb-4">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a1a2e] text-white rounded-full text-base md:text-lg font-medium transition-all hover:scale-105 hover:shadow-xl shadow-lg"
+                        >
+                            Let's talk
+                            <ArrowRight size={18} />
+                        </Link>
+
+                        <Link
+                            href="#what-we-build"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 border border-gray-300 rounded-full text-base md:text-lg font-medium transition-all hover:bg-white hover:shadow-md"
+                        >
+                            Explore the ecosystem
+                        </Link>
                     </div>
 
-                    {/* Card 2 (Dark Style from Ref) */}
-                    <div className="bg-[#1e1b4b] p-8 rounded-3xl shadow-xl shadow-purple-900/10 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-                        <div className="relative z-10">
-                            <h3 className="text-xl font-bold text-white mb-2">Always liquid, always stable</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                                Fully dollar-pegged with instant access to your funds—no lockups or delays.
-                            </p>
-                        </div>
-                        <div className="absolute right-[-20px] bottom-[-20px] opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Shield size={100} className="text-white" />
-                        </div>
-                    </div>
-
-                    {/* Card 3 (Dark Style from Ref) */}
-                    <div className="bg-[#1e1b4b] p-8 rounded-3xl shadow-xl shadow-purple-900/10 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-                        <div className="relative z-10">
-                            <h3 className="text-xl font-bold text-white mb-2">100% Hands-Free</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                                We manage strategies manually and with AI. You just watch it grow.
-                            </p>
-                        </div>
-                        <div className="absolute right-[-20px] bottom-[-20px] opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Cpu size={100} className="text-white" />
-                        </div>
-                    </div>
-                </motion.div>
+                    {/* Microcopy */}
+                    <p className="text-xs md:text-sm text-gray-400">
+                        No commitment. Just clarity.
+                    </p>
+                </div>
             </div>
         </section>
     );
