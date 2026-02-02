@@ -4,19 +4,21 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MobileNav } from '@/components/layout/MobileNav';
-import { MegaMenuContainer, MegaMenuColumn } from '@/components/layout/megaMenu'; // Removed DivisionCard, ProductCard as likely unused in new layout or standard import
-import { Layout, Palette, Rocket, Code2, ArrowUpRight, Check, Sparkles, FileText, Download } from 'lucide-react';
+import { MobileNav } from '@/components/layout/MobileNav'; // Restored
+import { MegaMenuContainer, MegaMenuColumn } from '@/components/layout/megaMenu';
+import { Layout, Palette, Rocket, Code2, ArrowUpRight, Check, Sparkles, FileText, Download, DollarSign } from 'lucide-react';
 
 
 type MegaMenuKey = 'services' | 'labs' | 'explore' | 'pricing' | null;
 
 export function Navbar() {
     const [activeMenu, setActiveMenu] = useState<MegaMenuKey>(null);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Restored
     const [scrolled, setScrolled] = useState(false);
     const [visible, setVisible] = useState(true);
+    const [showMobileCallButton, setShowMobileCallButton] = useState(false);
     const lastScrollY = useRef(0);
+    const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
     // Handle scroll effect for transparency and hide/show
     useEffect(() => {
@@ -25,6 +27,17 @@ export function Navbar() {
 
             // Set scrolled state for transparency
             setScrolled(currentScrollY > 50);
+
+            // Show mobile call button on scroll
+            if (window.innerWidth < 1024) {
+                setShowMobileCallButton(true);
+                if (scrollTimeout.current) {
+                    clearTimeout(scrollTimeout.current);
+                }
+                scrollTimeout.current = setTimeout(() => {
+                    setShowMobileCallButton(false);
+                }, 2000);
+            }
 
             // Show navbar when scrolling up, hide when scrolling down
             if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
@@ -39,7 +52,10 @@ export function Navbar() {
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+        };
     }, []);
 
     return (
@@ -137,38 +153,37 @@ export function Navbar() {
                 </AnimatePresence>
             </motion.div>
 
-            {/* Mobile Navbar */}
+            {/* Mobile Navbar Header - Minimal */}
             <motion.div
                 initial={{ y: 0 }}
                 animate={{ y: visible ? 0 : -100 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2"
+                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >
-                <nav className={`
-                    w-full transition-all duration-300 ease-in-out
+                <div className={`
+                    w-full transition-all duration-300 ease-in-out pointer-events-auto
                     ${scrolled ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
                     backdrop-blur-xl rounded-2xl px-5 h-16 flex items-center justify-between border
                 `}>
-                    {/* Logo and Divider Group */}
-                    <div className="flex items-center">
-                        <Link href="/" className="flex items-center gap-0">
-                            <Image
-                                src="/logo/mergex-logo.png"
-                                alt="Mergex Logo"
-                                width={42}
-                                height={42}
-                                className="object-contain"
-                            />
-                            <Image
-                                src="/logo/typo-mergex-black.png"
-                                alt="Mergex"
-                                width={110}
-                                height={28}
-                                className="object-contain -ml-3"
-                            />
-                        </Link>
-                        <div className={`h-8 w-[2px] bg-gray-200 ml-4 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`} />
-                    </div>
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-0">
+                        <Image
+                            src="/logo/mergex-logo.png"
+                            alt="Mergex Logo"
+                            width={42}
+                            height={42}
+                            className="object-contain"
+                        />
+                        <Image
+                            src="/logo/typo-mergex-black.png"
+                            alt="Mergex"
+                            width={110}
+                            height={28}
+                            className="object-contain -ml-3"
+                        />
+                    </Link>
+
+                    {/* Restored Hamburger Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="p-2 -mr-2 text-foreground/80 focus:outline-none"
@@ -185,43 +200,45 @@ export function Navbar() {
                             )}
                         </svg>
                     </button>
-                </nav>
+                </div>
             </motion.div>
 
             <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-            {/* Mobile Fixed Bottom CTA - Hidden when menu is open */}
-            {!isMobileMenuOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.5 }}
-                    className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40"
-                >
-                    <Link
-                        href="/contact"
-                        className="
-                            group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
-                            bg-gradient-to-b from-violet-400 to-violet-900
-                            text-white font-medium text-base
-                            shadow-xl shadow-violet-900/40
-                            transition-all duration-200 ease-out
-                            hover:brightness-110 hover:-translate-y-0.5
-                            active:scale-95
-                            whitespace-nowrap
-                        "
+            {/* Mobile Floating Book Call Button - Centered Bottom */}
+            <AnimatePresence>
+                {showMobileCallButton && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
+                        className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-auto"
                     >
-                        <lord-icon
-                            src="https://cdn.lordicon.com/fpvaxfly.json"
-                            trigger="loop-on-hover"
-                            state="morph-phone-ring"
-                            colors="primary:#ffffff"
-                            style={{ width: '24px', height: '24px' }}
-                        />
-                        <span>Book a Call</span>
-                    </Link>
-                </motion.div>
-            )}
+                        <Link
+                            href="/contact"
+                            className="
+                                group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
+                                bg-gradient-to-b from-violet-400 to-violet-900
+                                text-white font-medium text-base
+                                shadow-xl shadow-violet-900/40
+                                transition-all duration-200 ease-out
+                                active:scale-95
+                                whitespace-nowrap
+                            "
+                        >
+                            <lord-icon
+                                src="https://cdn.lordicon.com/fpvaxfly.json"
+                                trigger="loop-on-hover"
+                                state="morph-phone-ring"
+                                colors="primary:#ffffff"
+                                style={{ width: '24px', height: '24px' }}
+                            />
+                            <span>Book a Call</span>
+                        </Link>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

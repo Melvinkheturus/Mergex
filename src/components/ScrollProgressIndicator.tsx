@@ -1,28 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-
-type Section = {
-    id: string;
-    label: string;
-};
-
-type ScrollProgressIndicatorProps = {
-    sections: Section[];
-};
-
 import { useLenisScroll } from "@/lib/lenis-provider";
 
-export default function ScrollProgressIndicator({ sections }: ScrollProgressIndicatorProps) {
+import { useScrollSections } from "@/context/scroll-section-context";
+
+// Removed props as we now use context
+
+export default function ScrollProgressIndicator() {
+    const { sections } = useScrollSections();
     const [activeSection, setActiveSection] = useState(0);
+    const [hoveredSection, setHoveredSection] = useState<number | null>(null);
     const scrollTo = useLenisScroll();
 
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-            // Find which section is currently in view
             sections.forEach((section, index) => {
                 const element = document.getElementById(section.id);
                 if (element) {
@@ -35,7 +30,7 @@ export default function ScrollProgressIndicator({ sections }: ScrollProgressIndi
         };
 
         window.addEventListener("scroll", handleScroll);
-        handleScroll(); // Initial check
+        handleScroll();
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [sections]);
@@ -44,33 +39,75 @@ export default function ScrollProgressIndicator({ sections }: ScrollProgressIndi
         scrollTo(`#${sectionId}`, { offset: 0, duration: 1.5 });
     };
 
+    // Hide on hero section
+    if (sections.length === 0 || activeSection === 0) return null;
+
     return (
         <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden md:block"
+            className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:block" // Increased z-index
         >
-            <div className="flex flex-col items-end gap-5 py-6">
+            <div className="flex flex-col items-end gap-6 py-6">
                 {sections.map((section, index) => {
                     const isBigDash = index % 2 === 0;
                     const isCurrent = index === activeSection;
+                    const isHovered = index === hoveredSection;
                     const isFilled = index <= activeSection;
 
                     return (
-                        <div key={section.id} className="flex items-center gap-4 group cursor-pointer">
-                            {/* Hover Label */}
-                            <motion.span
-                                className="opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 pointer-events-none"
-                            >
-                                <span className="px-3 py-1.5 rounded-lg bg-white/80 backdrop-blur-md border border-gray-200 shadow-sm text-xs font-semibold text-gray-700 whitespace-nowrap uppercase tracking-wider">
-                                    {section.label}
-                                </span>
-                            </motion.span>
+                        <div
+                            key={section.id}
+                            className="relative flex items-center justify-end group" // Use relative here
+                            onMouseEnter={() => setHoveredSection(index)}
+                            onMouseLeave={() => setHoveredSection(null)}
+                        >
+                            {/* POP-OUT CARD PREVIEW */}
+                            <AnimatePresence>
+                                {(isHovered) && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8, x: 10, rotateY: 15 }}
+                                        animate={{ opacity: 1, scale: 1, x: -20, rotateY: 0 }}
+                                        exit={{ opacity: 0, scale: 0.8, x: 10 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                        className="absolute right-full mr-2 pointer-events-none" // Absolute position relative to the dot
+                                        style={{ perspective: "1000px" }}
+                                    >
+                                        <div className="relative w-[300px] h-[168px] rounded-xl overflow-hidden" style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1)' }}>
+                                            {/* LIVE COMPONENT PREVIEW */}
+                                            {section.component ? (
+                                                <div className="absolute inset-0 w-[1920px] h-[1080px] origin-top-left scale-[0.156]">
+                                                    <div className="w-full h-full pointer-events-none select-none">
+                                                        {section.component}
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                /* Fallback: Show gradient if no component */
+                                                <>
+                                                    <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${section.gradient}`} />
+                                                    <div className="relative z-10 p-5 flex flex-col justify-center h-full">
+                                                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1 font-semibold">
+                                                            Section {String(index + 1).padStart(2, '0')}
+                                                        </p>
+                                                        <h4 className="text-xl font-bold text-white mb-1.5 leading-tight font-display">
+                                                            {section.label}
+                                                        </h4>
+                                                        <p className="text-xs text-gray-300 font-light leading-relaxed">
+                                                            {section.description}
+                                                        </p>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
 
+                            {/* NAVIGATION DOT/BUTTON */}
                             <motion.button
                                 onClick={() => scrollToSection(section.id)}
-                                className="relative flex items-center justify-start h-4 w-6 focus:outline-none"
+                                className="relative flex items-center justify-start h-4 w-6 focus:outline-none" // Aligned to start to match original
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                                 aria-label={`Go to ${section.label}`}
@@ -96,10 +133,10 @@ export default function ScrollProgressIndicator({ sections }: ScrollProgressIndi
                                     )}
 
                                     {isCurrent ? (
-                                        // Current position: refined dot with gradient
+                                        // Current position: refined dot with gradient (Original Style)
                                         <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-violet-400 to-violet-900 shadow-lg shadow-violet-900/30 border-2 border-white transition-all duration-300 relative z-10" />
                                     ) : (
-                                        // Bolder dashes with gradient for filled
+                                        // Bolder dashes with gradient for filled (Original Style)
                                         <div
                                             className={`${isBigDash ? 'w-4' : 'w-2.5'} h-1 rounded-full transition-all duration-300 ${isFilled ? 'bg-gradient-to-b from-violet-400 to-violet-900 shadow-sm shadow-violet-900/20' : 'bg-gray-300 group-hover:bg-gray-400'
                                                 }`}

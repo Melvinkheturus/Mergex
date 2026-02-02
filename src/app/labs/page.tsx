@@ -27,9 +27,13 @@ export const metadata: Metadata = {
     },
 };
 
+import LabsScrollRegistrar from "@/modules/labs/components/LabsScrollRegistrar";
+
 export default function LabsPage() {
     return (
         <main className="">
+            <LabsScrollRegistrar />
+
             {/* 1. Cinematic Hero - Let it breathe */}
             <div id="labs-hero">
                 <LabsHero />

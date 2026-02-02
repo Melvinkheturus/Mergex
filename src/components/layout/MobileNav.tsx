@@ -63,8 +63,8 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         className="fixed top-20 bottom-0 left-0 right-0 z-40 flex flex-col pointer-events-none"
                     >
 
-                        {/* Center Content Area */}
-                        <div className="flex-1 overflow-y-auto pointer-events-auto px-6 pb-40 pt-6">
+                        {/* Center Content Area - Mega Menu Content */}
+                        <div className="flex-1 overflow-y-auto pointer-events-auto px-6 pb-48 pt-6">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeMenu}
@@ -72,49 +72,132 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.3 }}
-                                    className="space-y-4"
+                                    className="space-y-6"
                                 >
-                                    {activeMenu === 'services' && <ServicesMenuContent onClose={onClose} />}
-                                    {activeMenu === 'labs' && <LabsMenuContent onClose={onClose} />}
-                                    {activeMenu === 'explore' && <ExploreMenuContent onClose={onClose} />}
-                                    {activeMenu === 'pricing' && <PricingMenuContent onClose={onClose} />}
+                                    {/* Tagline */}
+                                    <div className="text-center">
+                                        <p className="text-2xl font-serif font-medium text-gray-900 leading-tight">
+                                            {activeMenu === 'services' && 'Building production-ready systems.'}
+                                            {activeMenu === 'labs' && 'AI-native content & experimentation.'}
+                                            {activeMenu === 'explore' && 'See how we think & build.'}
+                                            {activeMenu === 'pricing' && 'Transparent pricing for projects.'}
+                                        </p>
+                                    </div>
+
+                                    {/* Menu Items */}
+                                    <div className="space-y-2">
+                                        {activeMenu === 'services' && (
+                                            <>
+                                                <MobileMenuItem href="/services/design" label="UI/UX Design" onClose={onClose} />
+                                                <MobileMenuItem href="/services/branding" label="Branding" onClose={onClose} />
+                                                <MobileMenuItem href="/services/mvp" label="MVP Development" onClose={onClose} />
+                                                <MobileMenuItem href="/services/development" label="Full Stack Development" onClose={onClose} />
+                                            </>
+                                        )}
+                                        {activeMenu === 'labs' && (
+                                            <>
+                                                <MobileMenuItem href="/labs/ai-content" label="Generative AI" onClose={onClose} />
+                                                <MobileMenuItem href="/labs/visual-content" label="Visual Content" onClose={onClose} />
+                                                <MobileMenuItem href="/labs/experiments" label="Experiments" onClose={onClose} />
+                                            </>
+                                        )}
+                                        {activeMenu === 'explore' && (
+                                            <>
+                                                <MobileMenuItem href="/explore/case-studies" label="Case Studies" onClose={onClose} />
+                                                <MobileMenuItem href="/explore/portfolio" label="Portfolio" onClose={onClose} />
+                                                <MobileMenuItem href="/explore/blog" label="Blog" onClose={onClose} />
+                                                <MobileMenuItem href="/resources" label="Resources" onClose={onClose} />
+                                                <MobileMenuItem href="/about" label="About Us" onClose={onClose} />
+                                                <MobileMenuItem href="/careers" label="Careers" onClose={onClose} />
+                                            </>
+                                        )}
+                                        {activeMenu === 'pricing' && (
+                                            <>
+                                                <MobileMenuItem href="/pricing/startups" label="Founders & Early Teams" onClose={onClose} />
+                                                <MobileMenuItem href="/contact" label="Scale-ups & Enterprise" onClose={onClose} />
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* CTA Button */}
+                                    <Link
+                                        href={
+                                            activeMenu === 'services' ? '/services' :
+                                                activeMenu === 'labs' ? '/labs' :
+                                                    activeMenu === 'explore' ? '/explore' :
+                                                        '/contact'
+                                        }
+                                        onClick={onClose}
+                                        className="block w-full py-3.5 bg-gradient-to-b from-violet-400 to-violet-900 text-white text-center rounded-xl font-medium transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-violet-900/30"
+                                    >
+                                        {activeMenu === 'services' && 'View All Services'}
+                                        {activeMenu === 'labs' && 'Enter Labs'}
+                                        {activeMenu === 'explore' && 'Explore More'}
+                                        {activeMenu === 'pricing' && 'Book a Discovery Call'}
+                                    </Link>
+
+                                    {/* Image Showcase Section */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.2 }}
+                                        className="rounded-2xl overflow-hidden bg-gradient-to-br from-orange-100 via-rose-100 to-pink-100 p-6 relative"
+                                    >
+                                        <Link href="/labs" onClick={onClose} className="block group">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="text-lg font-semibold text-gray-900">Work Showcase</h3>
+                                                <motion.div
+                                                    className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center"
+                                                    whileHover={{ scale: 1.1 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                    </svg>
+                                                </motion.div>
+                                            </div>
+                                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-orange-200 to-rose-200">
+                                                {/* Device Mockup */}
+                                                <div className="absolute inset-x-8 bottom-[-20px] top-12 bg-gray-900 rounded-t-2xl shadow-2xl overflow-hidden">
+                                                    <div className="w-full h-full bg-gradient-to-br from-orange-500 to-rose-500 opacity-50"></div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
                                 </motion.div>
                             </AnimatePresence>
                         </div>
 
-                        {/* Floating Bottom Navigation Bar */}
+                        {/* Glassmorphic Segmented Control Navigation */}
                         <motion.div
-                            initial={{ y: 100 }}
-                            animate={{ y: 0 }}
-                            exit={{ y: 100 }}
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 100, opacity: 0 }}
                             transition={{ duration: 0.3, delay: 0.15 }}
-                            className="pointer-events-auto p-4 pb-safe"
+                            className="pointer-events-auto fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
                         >
-                            <div className="bg-white rounded-2xl shadow-2xl shadow-black/20 border border-gray-200 px-4 py-4">
-                                <div className="flex items-center justify-around max-w-md mx-auto">
-                                    {menuItems.map((item) => {
-                                        const Icon = item.icon;
-                                        const isActive = activeMenu === item.key;
-                                        return (
-                                            <button
-                                                key={item.key}
-                                                onClick={() => setActiveMenu(item.key)}
-                                                className="flex flex-col items-center gap-1.5 min-w-[70px] py-2 px-3 transition-all"
-                                            >
-                                                <div className={`p-2.5 rounded-xl transition-all ${isActive
-                                                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/30'
-                                                    : 'bg-gray-100 text-gray-600'
-                                                    }`}>
-                                                    <Icon className="w-5 h-5" strokeWidth={2.5} />
-                                                </div>
-                                                <span className={`text-xs font-medium transition-colors ${isActive ? 'text-violet-600' : 'text-gray-600'
-                                                    }`}>
-                                                    {item.label}
-                                                </span>
-                                            </button>
-                                        );
-                                    })}
-                                </div>
+                            <div className="flex items-center gap-1 bg-gray-200/40 backdrop-blur-xl border border-white/40 p-1.5 rounded-full shadow-2xl shadow-black/10">
+                                {menuItems.map((item) => {
+                                    const isActive = activeMenu === item.key;
+                                    return (
+                                        <button
+                                            key={item.key}
+                                            onClick={() => setActiveMenu(item.key)}
+                                            className="relative px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out z-10"
+                                        >
+                                            {isActive && (
+                                                <motion.div
+                                                    layoutId="active-mobile-nav"
+                                                    className="absolute inset-0 bg-white rounded-full shadow-sm"
+                                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                                />
+                                            )}
+                                            <span className={`relative z-10 transition-colors ${isActive ? 'text-black' : 'text-gray-600 hover:text-black/80'}`}>
+                                                {item.label}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </motion.div>
                     </motion.div>
@@ -124,154 +207,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
     );
 }
 
-// Menu Content Components
-function ServicesMenuContent({ onClose }: { onClose: () => void }) {
-    return (
-        <div className="space-y-6">
-            <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Our Services</h2>
-                <p className="text-gray-600 text-sm">What we build for you</p>
-            </div>
-
-            <div className="space-y-4">
-                <MenuSection title="Mergex Systems">
-                    <MenuItem href="/services/software-development" label="Software Development" onClose={onClose} />
-                    <MenuItem href="/services/ui-ux-design" label="UI/UX & Design" onClose={onClose} />
-                    <MenuItem href="/services/ai-automation" label="AI Automation" onClose={onClose} />
-                    <MenuItem href="/services/cloud-architecture" label="Cloud & Architecture" onClose={onClose} />
-                </MenuSection>
-
-                <MenuSection title="Digital Marketing">
-                    <MenuItem href="/services/content-strategy" label="Content Strategy" onClose={onClose} />
-                    <MenuItem href="/services/seo-growth" label="SEO & Growth Marketing" onClose={onClose} />
-                    <MenuItem href="/services/brand-development" label="Brand Development" onClose={onClose} />
-                </MenuSection>
-
-                <Link
-                    href="/services"
-                    onClick={onClose}
-                    className="block w-full py-3 mt-6 bg-violet-600 hover:bg-violet-700 text-white text-center rounded-xl font-medium transition-colors"
-                >
-                    View All Services
-                </Link>
-            </div>
-        </div>
-    );
-}
-
-function LabsMenuContent({ onClose }: { onClose: () => void }) {
-    return (
-        <div className="space-y-6">
-            <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Mergex Labs</h2>
-                <p className="text-gray-600 text-sm">Innovation & R&D</p>
-            </div>
-
-            <div className="space-y-4">
-                <MenuSection title="AI Content Studio">
-                    <MenuItem href="/labs/generative-ai" label="Generative AI" onClose={onClose} />
-                    <MenuItem href="/labs/visual-content" label="Visual Content Creation" onClose={onClose} />
-                    <MenuItem href="/labs/process-optimization" label="Process Optimization" onClose={onClose} />
-                </MenuSection>
-
-                <MenuSection title="Experiments & R&D">
-                    <MenuItem href="/labs/experiments" label="Latest Experiments" onClose={onClose} />
-                    <MenuItem href="/labs/work" label="Work & Reels" onClose={onClose} />
-                </MenuSection>
-
-                <Link
-                    href="/labs"
-                    onClick={onClose}
-                    className="block w-full py-3 mt-6 bg-violet-600 hover:bg-violet-700 text-white text-center rounded-xl font-medium transition-colors"
-                >
-                    Enter Labs
-                </Link>
-            </div>
-        </div>
-    );
-}
-
-function ExploreMenuContent({ onClose }: { onClose: () => void }) {
-    return (
-        <div className="space-y-6">
-            <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Explore</h2>
-                <p className="text-gray-600 text-sm">Discover our work & insights</p>
-            </div>
-
-            <div className="space-y-4">
-                <MenuSection title="Proof">
-                    <MenuItem href="/explore/case-studies" label="Case Studies" onClose={onClose} />
-                    <MenuItem href="/explore/portfolio" label="Selected Work" onClose={onClose} />
-                </MenuSection>
-
-                <MenuSection title="Knowledge">
-                    <MenuItem href="/explore/blog" label="Blog" onClose={onClose} />
-                    <MenuItem href="/resources" label="Resources" onClose={onClose} />
-                </MenuSection>
-
-                <MenuSection title="Organization">
-                    <MenuItem href="/about" label="About Mergex" onClose={onClose} />
-                    <MenuItem href="/academy" label="Academy" onClose={onClose} />
-                    <MenuItem href="/careers" label="Careers" onClose={onClose} />
-                </MenuSection>
-
-                <MenuSection title="Future">
-                    <MenuItem href="/products" label="Products (Coming Soon)" onClose={onClose} subtle />
-                </MenuSection>
-            </div>
-        </div>
-    );
-}
-
-function PricingMenuContent({ onClose }: { onClose: () => void }) {
-    return (
-        <div className="space-y-6">
-            <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Pricing</h2>
-                <p className="text-gray-600 text-sm">Flexible engagement models</p>
-            </div>
-
-            <div className="space-y-4">
-                <MenuSection title="Engagement Models">
-                    <MenuItem href="/pricing/project-based" label="Project-Based" onClose={onClose} />
-                    <MenuItem href="/pricing/monthly-retainer" label="Monthly Retainer" onClose={onClose} />
-                    <MenuItem href="/pricing/bot" label="Build-Operate-Transfer" onClose={onClose} />
-                </MenuSection>
-
-                <Link
-                    href="/contact"
-                    onClick={onClose}
-                    className="block w-full py-3 mt-6 bg-violet-600 hover:bg-violet-700 text-white text-center rounded-xl font-medium transition-colors"
-                >
-                    Get a Quote
-                </Link>
-            </div>
-        </div>
-    );
-}
-
-// Helper Components
-function MenuSection({ title, children }: { title: string; children: React.ReactNode }) {
-    return (
-        <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">{title}</h3>
-            <div className="space-y-2.5">
-                {children}
-            </div>
-        </div>
-    );
-}
-
-function MenuItem({ href, label, onClose, subtle }: { href: string; label: string; onClose: () => void; subtle?: boolean }) {
+// Helper Component
+function MobileMenuItem({ href, label, onClose }: { href: string; label: string; onClose: () => void }) {
     return (
         <Link
             href={href}
             onClick={onClose}
-            className={`block py-2.5 px-3 rounded-lg transition-all ${subtle
-                ? 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
-                : 'text-gray-700 hover:bg-gray-100'
-                }`}
+            className="block py-3.5 px-4 text-base text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-all font-medium"
         >
             {label}
         </Link>
