@@ -8,8 +8,10 @@ import {
     ProofSystems,
     EngagementModel,
     SystemsCTA,
+    SystemsFAQ,
 } from '@/modules/systems';
 import { SystemsCasePreviews } from '@/modules/caseStudies';
+import { PageTransition } from '@/components/transitions/PageTransition';
 
 export const metadata: Metadata = {
     title: 'Mergex Systems - Solution Partner | Custom Software & AI Automation',
@@ -29,51 +31,58 @@ export const metadata: Metadata = {
 
 export default function SystemsPage() {
     return (
-        <main className="">
-            {/* 1. Hero - Professional Positioning */}
-            <div id="systems-hero">
-                <SystemsHero />
-            </div>
+        <PageTransition>
+            <main className="">
+                {/* 1. Hero - Professional Positioning */}
+                <div id="systems-hero">
+                    <SystemsHero />
+                </div>
 
-            {/* 2. What We Solve - Pain Point Matching */}
-            <div id="pain-points">
-                <WhatWeSolve />
-            </div>
+                {/* 2. What We Solve - Pain Point Matching */}
+                <div id="pain-points">
+                    <WhatWeSolve />
+                </div>
 
-            {/* 3. Our Solutions - Service Pillars */}
-            <div id="solutions">
-                <OurSolutions />
-            </div>
+                {/* 3. Our Solutions - Service Pillars */}
+                <div id="solutions">
+                    <OurSolutions />
+                </div>
 
-            {/* 4. Speed Advantage - Key Differentiator */}
-            <div id="speed">
-                <SpeedAdvantage />
-            </div>
+                {/* 4. Speed Advantage - Key Differentiator */}
+                <div id="speed">
+                    <SpeedAdvantage />
+                </div>
 
-            {/* 5. How We Work - Process Confidence */}
-            <div id="process">
-                <HowWeWorkSystems />
-            </div>
+                {/* 5. How We Work - Process Confidence */}
+                <div id="process">
+                    <HowWeWorkSystems />
+                </div>
 
-            {/* 6. Proof - Tech Stack */}
-            <div id="proof">
-                <ProofSystems />
-            </div>
+                {/* 6. Proof - Tech Stack */}
+                <div id="proof">
+                    <ProofSystems />
+                </div>
 
-            {/* 7. Case Studies - Conversion Proof */}
-            <div id="case-studies">
-                <SystemsCasePreviews />
-            </div>
+                {/* 7. Case Studies - Conversion Proof */}
+                <div id="case-studies">
+                    <SystemsCasePreviews />
+                </div>
 
-            {/* 8. Engagement & Pricing */}
-            <div id="engagement">
-                <EngagementModel />
-            </div>
+                {/* 8. FAQ Section */}
+                <div id="faq">
+                    <SystemsFAQ />
+                </div>
 
-            {/* 9. CTA - Final Conversion */}
-            <div id="cta">
-                <SystemsCTA />
-            </div>
-        </main>
+                {/* 9. Engagement & Pricing */}
+                <div id="engagement">
+                    <EngagementModel />
+                </div>
+
+                {/* 10. CTA - Final Conversion */}
+                <div id="cta">
+                    <SystemsCTA />
+                </div>
+            </main>
+        </PageTransition>
     );
 }

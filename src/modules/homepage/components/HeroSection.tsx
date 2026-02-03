@@ -3,7 +3,6 @@
 import { useRef, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { HeroScene } from './HeroScene';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Playfair_Display } from 'next/font/google';
@@ -36,7 +35,6 @@ export function HeroSection() {
     const supportingRef = useRef<HTMLParagraphElement>(null);
     const authorityRef = useRef<HTMLParagraphElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
-    const sceneWrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!heroRef.current) return;
@@ -72,14 +70,8 @@ export function HeroSection() {
             ref={heroRef}
             className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
         >
-           
-            {/* 3D Scene - Visible from start, behind content */}
-            <div
-                ref={sceneWrapperRef}
-                className="absolute inset-0 z-[1]"
-            >
-                <HeroScene />
-            </div>
+
+
 
             {/* Typography Content Layer */}
             <div className="relative z-[4] min-h-screen flex items-center pt-16 md:pt-24">

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display,
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
 import Script from "next/script";
 
 const geistSans = Geist({

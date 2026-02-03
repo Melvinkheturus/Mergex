@@ -329,10 +329,7 @@ html * {
   /* Chrome, Safari and Opera */
 }
 
-/* Hide Default Cursor - Only on main site, not on studio */
-body:not([data-studio-route]) * {
-  cursor: none !important;
-}
+/* Cursor styles removed */
 
 .dark {
   --background: oklch(0.145 0 0);

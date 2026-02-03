@@ -7,7 +7,6 @@ import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
 import { ScrollSectionProvider } from "@/context/scroll-section-context";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
 import Script from "next/script";
 
 interface LayoutContentProps {
@@ -55,7 +54,6 @@ export default function LayoutContent({ children }: LayoutContentProps) {
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
                 {children}
                 <Footer />
-                <Cursor />
             </ScrollSectionProvider>
         </LenisProvider>
     );

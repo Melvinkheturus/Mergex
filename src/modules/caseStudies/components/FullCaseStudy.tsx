@@ -3,12 +3,18 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import type { CaseStudy } from '../content/caseStudies';
+import { DetailedCaseStudy } from './DetailedCaseStudy';
 
 interface FullCaseStudyProps {
     caseStudy: CaseStudy;
 }
 
 export function FullCaseStudy({ caseStudy }: FullCaseStudyProps) {
+    // If detailedCase exists, render the comprehensive DetailedCaseStudy component
+    if (caseStudy.detailedCase) {
+        return <DetailedCaseStudy caseStudy={caseStudy} />;
+    }
+
     if (!caseStudy.fullCase) {
         return <div>Case study content not available</div>;
     }

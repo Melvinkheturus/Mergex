@@ -3,19 +3,20 @@ import { notFound } from 'next/navigation';
 import { FullCaseStudy, CASE_STUDIES } from '@/modules/caseStudies';
 
 interface CaseStudyPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export async function generateStaticParams() {
-    return CASE_STUDIES.filter((cs) => cs.fullCase).map((cs) => ({
+    return CASE_STUDIES.filter((cs) => cs.fullCase || cs.detailedCase).map((cs) => ({
         slug: cs.slug,
     }));
 }
 
 export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
-    const caseStudy = CASE_STUDIES.find((cs) => cs.slug === params.slug);
+    const { slug } = await params;
+    const caseStudy = CASE_STUDIES.find((cs) => cs.slug === slug);
 
     if (!caseStudy) {
         return {
@@ -34,10 +35,12 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
     };
 }
 
-export default function CaseStudyPage({ params }: CaseStudyPageProps) {
-    const caseStudy = CASE_STUDIES.find((cs) => cs.slug === params.slug);
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+    const { slug } = await params;
+    const caseStudy = CASE_STUDIES.find((cs) => cs.slug === slug);
 
-    if (!caseStudy || !caseStudy.fullCase) {
+    // Check for either fullCase or detailedCase content
+    if (!caseStudy || (!caseStudy.fullCase && !caseStudy.detailedCase)) {
         notFound();
     }
 

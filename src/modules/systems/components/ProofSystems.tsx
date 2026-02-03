@@ -2,14 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { PROOF_SYSTEMS } from '../content/systems';
+import { GridBackground } from '@/components/backgrounds/GridBackground';
 
 /**
  * ProofSystems - Tech stack credibility
+ * Minimal white design with purple accents
  */
 export function ProofSystems() {
     return (
-        <section className="py-20 md:py-28 bg-white">
-            <div className="container mx-auto px-6 md:px-12">
+        <GridBackground className="py-20 md:py-28 bg-white">
+            <section className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -17,33 +19,37 @@ export function ProofSystems() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#1A1A1A]"
+                        style={{ fontFamily: 'var(--font-geist-sans)' }}
+                    >
                         {PROOF_SYSTEMS.headline}
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-[#666666] max-w-2xl mx-auto">
                         {PROOF_SYSTEMS.subheadline}
                     </p>
                 </motion.div>
 
-                {/* Tech Stack Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-                    {PROOF_SYSTEMS.techStack.map((tech, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.05 }}
-                            className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-300 text-center"
-                        >
-                            <div className="font-bold text-foreground mb-1 text-lg group-hover:text-blue-600 transition-colors">
-                                {tech.name}
-                            </div>
-                            <div className="text-xs text-foreground-muted uppercase tracking-wider">
-                                {tech.category}
-                            </div>
-                        </motion.div>
-                    ))}
+                {/* Tech Stack - Partner Logo Style */}
+                <div className="max-w-5xl mx-auto mb-12">
+                    <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                        {PROOF_SYSTEMS.techStack.map((tech, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
+                                className="group flex flex-col items-center"
+                            >
+                                <div className="font-bold text-[#1A1A1A] text-lg group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+                                    {tech.name}
+                                </div>
+                                <div className="text-xs text-[#999999] uppercase tracking-wider mt-1">
+                                    {tech.category}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Trust Statement */}
@@ -54,11 +60,12 @@ export function ProofSystems() {
                     transition={{ delay: 0.4 }}
                     className="text-center max-w-3xl mx-auto"
                 >
-                    <p className="text-lg text-foreground-muted italic">
+                    <p className="text-lg text-[#666666] italic">
                         {PROOF_SYSTEMS.trustStatement}
                     </p>
                 </motion.div>
-            </div>
-        </section>
+            </section>
+        </GridBackground>
     );
 }
+

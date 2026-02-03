@@ -116,7 +116,7 @@ export function Navbar() {
 
                     {/* Center Menu */}
                     <div className="flex items-center gap-8 h-full">
-                        <NavButton label="Services" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} />
+                        <NavButton label="Systems" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Pricing" active={activeMenu === 'pricing'} onEnter={() => setActiveMenu('pricing')} onLeave={() => setActiveMenu(null)} />
@@ -157,7 +157,7 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                             onMouseEnter={() => setActiveMenu(activeMenu)}
                             onMouseLeave={() => setActiveMenu(null)}
-                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-2xl overflow-hidden p-8 -mt-px"
+                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-2xl overflow-hidden p-5 -mt-px"
                         >
                             {activeMenu === 'services' && <ServicesMenu />}
                             {activeMenu === 'labs' && <LabsMenu />}
@@ -314,77 +314,139 @@ function NavArrowIcon({ className }: { className?: string }) {
 
 function ServicesMenu() {
     return (
-        <div className="grid grid-cols-12 gap-8">
-            {/* Left Column - Context (Col-Span-3) */}
-            <div className="col-span-3 space-y-4">
-                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">
-                    Services
+        <motion.div
+            className="grid grid-cols-12 gap-6"
+            initial="hidden"
+            animate="visible"
+            variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+                }
+            }}
+        >
+            {/* Left Column - Positioning (Col-Span-3) */}
+            <motion.div
+                className="col-span-3 flex flex-col"
+                variants={{
+                    hidden: { opacity: 0, x: -20 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                }}
+            >
+                <h3 className="uppercase tracking-wider font-bold text-xs bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-2">
+                    SYSTEMS
                 </h3>
-                <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">
-                    Designing, building, and automating production-ready systems.
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    Build systems that actually scale.
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed mt-8 pt-4">
+                    Production-ready software without managing multiple vendors or timelines.
                 </p>
-            </div>
 
-            {/* Center Column - Service Divisions (Col-Span-6) */}
-            <div className="col-span-6 grid grid-cols-2 gap-4">
-                <ServiceCard
-                    icon={<Layout className="w-6 h-6" />}
-                    title="UI/UX Design"
-                    description="Creating User friendly Digital Experiences"
-                    tags={['UI/UX Consulting', 'Design System']}
-                    href="/services/design"
-                />
-                <ServiceCard
-                    icon={<Palette className="w-6 h-6" />}
-                    title="Branding"
-                    description="Shaping Brands People Trust and Remember"
-                    tags={['Brand Identity', 'Strategy']}
-                    href="/services/branding"
-                />
-                <ServiceCard
-                    icon={<Rocket className="w-6 h-6" />}
-                    title="MVP"
-                    description="Turning Ideas into Market-Ready Products"
-                    tags={['MVP for Startup', 'SaaS Design']}
-                    href="/services/mvp"
-                />
-                <ServiceCard
-                    icon={<Code2 className="w-6 h-6" />}
-                    title="Full Stack"
-                    description="From Frontend to Backend, Built to Scale"
-                    tags={['Custom App', 'Webflow']}
-                    href="/services/development"
-                />
-            </div>
+                <div className="mt-8">
+                    <Link
+                        href="/systems"
+                        className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group"
+                    >
+                        Explore Systems <ArrowUpRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                </div>
+
+                {/* Tagline moved to bottom */}
+                <p className="text-[11px] italic text-gray-500 mt-auto">
+                    From MVPs to full-scale platforms. Built fast. Built right.
+                </p>
+            </motion.div>
+
+            {/* Center Column - Service Cards (Col-Span-6) */}
+            <motion.div
+                className="col-span-6 grid grid-cols-2 gap-4"
+                variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: 0.1 } }
+                }}
+            >
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
+                    <ServiceCard
+                        icon={<Palette className="w-6 h-6" />}
+                        title="Design & Brand Systems"
+                        description="Design people trust and remember"
+                        tags={['UI/UX design', 'Brand identity']}
+                        href="/services/design"
+                    />
+                </motion.div>
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
+                    <ServiceCard
+                        icon={<Layout className="w-6 h-6" />}
+                        title="Web & Digital Experiences"
+                        description="Websites that do more than exist"
+                        tags={['Business websites', 'Web platforms']}
+                        href="/services/web"
+                    />
+                </motion.div>
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
+                    <ServiceCard
+                        icon={<Rocket className="w-6 h-6" />}
+                        title="Product & Platform Building"
+                        description="Turn ideas into real products"
+                        tags={['MVP development', 'SaaS & Mobile']}
+                        href="/services/mvp"
+                    />
+                </motion.div>
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
+                    <ServiceCard
+                        icon={<Sparkles className="w-6 h-6" />}
+                        title="Growth, Automation & Marketing"
+                        description="Systems that support growth"
+                        tags={['AI automation', 'Digital marketing']}
+                        href="/services/growth"
+                    />
+                </motion.div>
+            </motion.div>
 
             {/* Right Column - CTA (Col-Span-3) */}
-            <div className="col-span-3 bg-gray-50 rounded-2xl p-6 flex flex-col h-full">
-                <h3 className="font-serif text-2xl font-medium mb-6">Scale-ups & enterprise</h3>
-                <ul className="space-y-3 mb-8 flex-1">
-                    {['Pod-based engagement', 'Design system rollout', 'WCAG 2.2 AA Compliance'].map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-black flex-shrink-0" />
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-                <Link href="/contact" className="w-full flex items-center justify-between px-6 py-4 bg-black text-white rounded-full hover:bg-gray-800 transition-colors group">
-                    <span className="font-medium">Book a Call</span>
-                    <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center transform group-hover:translate-x-1 transition-transform">
-                        <ArrowUpRight size={16} />
-                    </div>
-                </Link>
-                <div className="mt-6 relative h-24 w-full rounded-xl overflow-hidden bg-gradient-to-br from-orange-100 to-rose-100 border border-orange-200/50">
-                    <div className="absolute inset-x-8 bottom-[-20px] h-full bg-black rounded-t-xl opacity-80 shadow-2xl" />
+            <motion.div
+                className="col-span-3 bg-gradient-to-b from-white via-orange-50 to-orange-200/90 rounded-2xl p-6 flex flex-col h-full border border-gray-100 relative overflow-hidden text-center md:text-left group"
+                variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+                <div className="relative z-10">
+                    <h3 className="font-serif text-2xl font-medium mb-3 text-gray-900">
+                        Not sure where to start?
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-8 leading-relaxed">
+                        Tell us what you’re trying to build.<br />
+                        We’ll help you find the right system — fast.
+                    </p>
+
+                    <Link href="/contact" className="w-full inline-flex items-center justify-between px-5 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-all shadow-md group/btn ring-1 ring-white/10">
+                        <span className="font-bold text-sm">Book a Discovery Call</span>
+                        <ArrowUpRight size={16} className="transform group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
                 </div>
-            </div>
-        </div>
+
+                {/* Image at bottom */}
+                <div className="absolute bottom-[-5%] right-[-10%] w-[120%] h-[120%] translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none opacity-50 md:opacity-100">
+                    <Image
+                        src="/assets/mockups/cedarwbg.png"
+                        alt="Cedar Project Mockup"
+                        fill
+                        className="object-contain object-bottom"
+                        sizes="(max-width: 768px) 100vw, 400px"
+                    />
+                </div>
+            </motion.div>
+        </motion.div>
     );
 }
 
 function ServiceCard({ icon, title, description, tags, href }: { icon: React.ReactNode, title: string, description: string, tags: string[], href: string }) {
     return (
-        <Link href={href} className="group block h-full bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-all duration-300 relative">
+        <Link href={href} className="group block h-full bg-gray-100 rounded-2xl p-6 hover:bg-gray-200 transition-all duration-300 relative">
             <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ArrowUpRight className="w-5 h-5 text-gray-400" />
             </div>
@@ -406,52 +468,108 @@ function ServiceCard({ icon, title, description, tags, href }: { icon: React.Rea
 
 function LabsMenu() {
     return (
-        <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-3 space-y-4">
-                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">Labs</h3>
-                <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">
-                    Our AI-native content and experimentation division.
-                </p>
-                <Link href="/labs" className="inline-flex items-center gap-2 text-sm font-medium mt-4 group">
-                    View All Labs <ArrowUpRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
+        <div className="grid grid-cols-12 gap-8 md:gap-12 p-2">
+            {/* Left Side - Positioning & Invitation */}
+            <div className="col-span-12 md:col-span-4 flex flex-col justify-between">
+                <div>
+                    <h3 className="uppercase tracking-wider font-bold text-xs bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-3">
+                        MERGEX LABS
+                    </h3>
+                    <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-tight mb-4">
+                        Where creativity meets <span className="bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">intelligence</span>.
+                    </h2>
+                    <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
+                        An AI-native content studio exploring visuals, motion, and storytelling with intent.
+                    </p>
+                </div>
+
+                <div className="mt-8 md:mt-0">
+
+                    <div className="flex flex-col items-start gap-3">
+                        <Link
+                            href="/labs"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group"
+                        >
+                            Explore Labs <ArrowUpRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                    </div>
+                </div>
             </div>
 
-            <div className="col-span-9 grid grid-cols-3 gap-6">
+            {/* Right Side - 3 Focused Exploration Cards */}
+            <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <LabsCard
                     title="Generative AI"
-                    description="AI-driven content production at scale."
-                    color="bg-purple-100"
+                    hook="Human-directed AI workflows for creative generation."
                     href="/labs/ai-content"
+                    color="bg-purple-50/50"
+                    image="/assets/mockups/genai.jpg.jpeg"
                 />
                 <LabsCard
-                    title="Visual Content"
-                    description="High-end motion and static visuals."
-                    color="bg-blue-100"
+                    title="Commercial Visuals & Ads"
+                    hook="Creating high-end brand narratives and advertising assets that scale across media."
                     href="/labs/visual-content"
+                    color="bg-blue-50/50"
+                    video="/assets/mockups/ad.mp4"
                 />
                 <LabsCard
-                    title="Experiments"
-                    description="R&D in agents and automation."
-                    color="bg-emerald-100"
+                    title="Experiments & Explorations"
+                    hook="Testing ideas, agents, and creative systems before they scale."
                     href="/labs/experiments"
+                    color="bg-emerald-50/50"
                 />
             </div>
         </div>
     );
 }
 
-function LabsCard({ title, description, color, href }: { title: string, description: string, color: string, href: string }) {
+function LabsCard({ title, hook, href, color, image, video }: { title: string, hook: string, href: string, color: string, image?: string, video?: string }) {
+    const hasMedia = image || video;
+
     return (
-        <Link href={href} className="group bg-gray-50 rounded-2xl p-6 flex flex-col h-full hover:bg-gray-100 transition-colors relative overflow-hidden">
-            <h4 className="font-serif text-2xl font-bold mb-2">{title}</h4>
-            <p className="text-sm text-gray-600 mb-8">{description}</p>
-            <div className={`mt-auto w-full aspect-[4/5] rounded-xl ${color} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500`}>
-                {/* Placeholder for "Phone" or "Visual" */}
-                <div className="absolute inset-x-8 bottom-[-40px] top-12 bg-white rounded-t-2xl shadow-xl opacity-90" />
-            </div>
-            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowUpRight className="w-5 h-5 text-gray-400" />
+        <Link href={href} className={`group ${color} rounded-2xl p-6 flex flex-col min-h-[400px] hover:bg-opacity-100 transition-all duration-300 border border-transparent hover:border-gray-100 relative overflow-hidden`}>
+
+            {/* Background Media - Full Card */}
+            {hasMedia && (
+                <>
+                    <div className="absolute inset-0 z-0">
+                        {video ? (
+                            <video
+                                src={video}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                        ) : (
+                            <Image
+                                src={image!}
+                                alt={title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                        )}
+                    </div>
+                    {/* Gradient Overlay for text readability - Bottom Up */}
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                </>
+            )}
+
+            <div className="relative z-20 h-full flex flex-col justify-between">
+                <div className={`w-8 h-8 rounded-full ${hasMedia ? 'bg-white/20 text-white backdrop-blur-md' : 'bg-white/80 text-gray-900 backdrop-blur-sm'} mb-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-sm`}>
+                    <ArrowUpRight size={14} />
+                </div>
+
+                <div className="mt-auto">
+                    <h4 className={`font-serif text-xl font-bold mb-2 leading-tight ${hasMedia ? 'text-white' : 'text-gray-900'}`}>
+                        {title}
+                    </h4>
+
+                    <p className={`text-xs leading-relaxed font-medium mt-2 ${hasMedia ? 'text-gray-200' : 'text-gray-600'}`}>
+                        {hook}
+                    </p>
+                </div>
             </div>
         </Link>
     );
@@ -459,7 +577,7 @@ function LabsCard({ title, description, color, href }: { title: string, descript
 
 function PricingMenu() {
     return (
-        <div className="grid grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-6">
             <div className="col-span-3 space-y-4">
                 <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">Pricing</h3>
                 <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">
@@ -513,7 +631,7 @@ function PricingCard({ title, price, features, href, dark }: { title: string, pr
 
 function ExploreMenu() {
     return (
-        <div className="grid grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-6">
             <div className="col-span-3 space-y-4">
                 <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">Explore</h3>
                 <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">

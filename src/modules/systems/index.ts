@@ -8,6 +8,7 @@ import { HowWeWorkSystems } from './components/HowWeWorkSystems';
 import { ProofSystems } from './components/ProofSystems';
 import { EngagementModel } from './components/EngagementModel';
 import { SystemsCTA } from './components/SystemsCTA';
+import { SystemsFAQ } from './components/SystemsFAQ';
 
 export {
     SystemsHero,
@@ -18,4 +19,5 @@ export {
     ProofSystems,
     EngagementModel,
     SystemsCTA,
+    SystemsFAQ,
 };

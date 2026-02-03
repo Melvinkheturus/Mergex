@@ -5,6 +5,104 @@ export type CaseStudyType = 'systems' | 'labs-experiment';
 export type BusinessType = 'startup' | 'ecommerce' | 'enterprise' | 'agency';
 export type ProblemType = 'mvp-launch' | 'automation' | 'scaling' | 'content-creation' | 'system-integration';
 
+// Tech stack item structure
+export interface TechItem {
+    name: string;
+    version?: string;
+    description?: string;
+}
+
+// Feature structure
+export interface FeatureItem {
+    title: string;
+    description: string;
+    subFeatures?: string[];
+}
+
+// Metric structure
+export interface MetricItem {
+    label: string;
+    before?: string;
+    after: string;
+    improvement?: string;
+}
+
+// Detailed case study structure for comprehensive case studies
+export interface DetailedCaseContent {
+    // Hero & Overview
+    heroImage: string;
+    projectStatus: 'production' | 'development' | 'completed';
+    version?: string;
+
+    // Executive Summary
+    executiveSummary: {
+        projectAtGlance: {
+            industry: string;
+            projectType: string;
+            timeline: string;
+            deployment: string;
+            scale: string;
+        };
+        keyAchievements: string[];
+    };
+
+    // Business Challenge
+    businessChallenge: {
+        problems: string[];
+        objectives: string[];
+    };
+
+    // Solution Overview
+    solutionOverview: {
+        strategicApproach: string;
+        coreComponents: {
+            title: string;
+            items: string[];
+        }[];
+    };
+
+    // Technical Architecture
+    techStack: {
+        frontend: TechItem[];
+        backend: TechItem[];
+        devTools: TechItem[];
+    };
+
+    // Key Features
+    features: FeatureItem[];
+
+    // Security Implementation
+    security?: {
+        authMethod: string;
+        securityMeasures: string[];
+    };
+
+    // Performance Metrics
+    performance?: {
+        coreWebVitals: MetricItem[];
+        optimizations: string[];
+    };
+
+    // Results & Impact
+    results: {
+        quantitative: MetricItem[];
+        qualitative: string[];
+        technicalAchievements: string[];
+    };
+
+    // Lessons Learned
+    lessonsLearned: {
+        whatWorkedWell: string[];
+        challengesOvercome: string[];
+    };
+
+    // Future Roadmap
+    futureRoadmap?: {
+        phase2Features: string[];
+        technicalImprovements: string[];
+    };
+}
+
 export interface CaseStudy {
     id: string;
     type: CaseStudyType;
@@ -72,6 +170,9 @@ export interface CaseStudy {
             ctaText: string;
         };
     };
+
+    // Detailed Case Study (extensive documentation)
+    detailedCase?: DetailedCaseContent;
 
     // Labs Experiment (different format)
     experiment?: {
@@ -144,6 +245,240 @@ export const CASE_STUDIES: CaseStudy[] = [
             cta: {
                 headline: 'Working on Inventory or Order Management?',
                 ctaText: 'Let\'s Talk About Your System',
+            },
+        },
+        thumbnailImage: '/assets/mockups/cedarwbg.png',
+        detailedCase: {
+            heroImage: '/assets/mockups/cedarwbg.png',
+            projectStatus: 'production',
+            version: '2.0.0',
+            executiveSummary: {
+                projectAtGlance: {
+                    industry: 'Industrial Equipment & Elevator Parts',
+                    projectType: 'Full-Stack E-Commerce Platform',
+                    timeline: '6 Months (Phase 1 Complete)',
+                    deployment: 'Production Live',
+                    scale: '70+ Routes, 150+ Components, 18 Database Tables',
+                },
+                keyAchievements: [
+                    '100% Feature Complete - All Phase 1 deliverables successfully implemented',
+                    'Production Deployed - Live platform serving real customers',
+                    'Mobile-First Design - Fully responsive across all device types',
+                    'Enterprise Security - Industry-standard authentication and authorization',
+                    'CMS Integration - Self-service content management for dynamic pages',
+                ],
+            },
+            businessChallenge: {
+                problems: [
+                    'Manual Operations - Phone and email-based ordering led to inefficiencies and errors',
+                    'Limited Reach - Geographic constraints limited customer acquisition',
+                    'Quote Management - Time-consuming manual quote generation and tracking',
+                    'Business Verification - No systematic approach to verify B2B customers',
+                    'Inventory Visibility - Customers lacked real-time product availability information',
+                    "Scalability Issues - Manual processes couldn't scale with business growth",
+                ],
+                objectives: [
+                    'Digitize Sales Process - Enable online ordering with real-time inventory',
+                    'Streamline Operations - Automate quote generation and order management',
+                    'Verify B2B Customers - Systematic business verification workflow',
+                    'Enhance Customer Experience - Self-service portal for order tracking',
+                    'Enable Content Management - Non-technical team members to update policies',
+                    'Scale Operations - Support business growth without proportional team expansion',
+                ],
+            },
+            solutionOverview: {
+                strategicApproach: 'Developed a comprehensive e-commerce platform addressing both B2C (individual customers) and B2B (business customers) requirements while maintaining operational efficiency through automation and intelligent workflows.',
+                coreComponents: [
+                    {
+                        title: 'Multi-Tier User System',
+                        items: [
+                            'Guest Users - Browse catalog, request quotes, track orders',
+                            'Individual Customers - Full e-commerce functionality, order history',
+                            'Business Customers - Enhanced features, bulk ordering capabilities',
+                            'Verified Businesses - Premium pricing, credit terms, dedicated support',
+                            'Admin Team - Complete platform management and analytics',
+                        ],
+                    },
+                    {
+                        title: 'Intelligent Quote Management',
+                        items: [
+                            'Professional quote request interface with product selection',
+                            'Bulk quote upload via CSV for large procurements',
+                            'Automated quote-to-order conversion workflow',
+                            'PDF generation for quotes and invoices',
+                            'Real-time quote status tracking',
+                        ],
+                    },
+                    {
+                        title: 'Business Verification System',
+                        items: [
+                            'Multi-document upload capability (GST, PAN, Business License)',
+                            'Admin verification dashboard with document review',
+                            'Automated verification status tracking',
+                            'Verification workflow with approval/rejection handling',
+                        ],
+                    },
+                    {
+                        title: 'Content Management System',
+                        items: [
+                            '7 managed content pages (About, Warranty, Policies, etc.)',
+                            'Rich text editor with tables, lists, and formatting',
+                            'Media management and embedding',
+                            'SEO metadata management',
+                        ],
+                    },
+                ],
+            },
+            techStack: {
+                frontend: [
+                    { name: 'Next.js', version: '16.1.1', description: 'App Router, React Server Components' },
+                    { name: 'React', version: '19.2.3', description: 'Concurrent features, Automatic batching' },
+                    { name: 'TypeScript', version: '5.9.3', description: 'Strict mode, Comprehensive type safety' },
+                    { name: 'Tailwind CSS', version: '4.1.18', description: 'Utility-first, Custom design system' },
+                    { name: 'TanStack Query', version: '5.90.12', description: 'Server state management' },
+                    { name: 'React Hook Form', version: '7.69.0', description: 'Zero re-renders form handling' },
+                ],
+                backend: [
+                    { name: 'Supabase', description: 'PostgreSQL 15, Row Level Security, Real-time subscriptions' },
+                    { name: 'Clerk', version: '6.36.5', description: 'Authentication, OAuth, Session management' },
+                    { name: 'Cloudinary', description: 'Image optimization, CDN delivery' },
+                    { name: 'Razorpay', description: 'UPI, Cards, Net Banking, Wallets' },
+                    { name: 'Resend', description: 'Transactional emails' },
+                    { name: 'Upstash Redis', description: 'Session storage, Rate limiting, Cart persistence' },
+                ],
+                devTools: [
+                    { name: 'pnpm', description: 'Fast, disk-efficient package manager' },
+                    { name: 'Turbopack', description: 'Ultra-fast development builds' },
+                    { name: 'ESLint 9', description: 'Code quality' },
+                    { name: 'Vercel', description: 'Edge network, Automatic deployments' },
+                ],
+            },
+            features: [
+                {
+                    title: 'Advanced Product Catalog',
+                    description: 'Multi-level filtering system with three-tier product organization',
+                    subFeatures: [
+                        'Real-time Search with instant suggestions',
+                        'Advanced Filters - Application, Category, Price range, Availability',
+                        'Grid/List Views - User-selectable display modes',
+                        'Product Cards with images, pricing, stock status',
+                        'Quick View modal product previews',
+                    ],
+                },
+                {
+                    title: 'Professional Quote Management',
+                    description: 'Complete quote lifecycle from request to order conversion',
+                    subFeatures: [
+                        'Product Selection from catalog',
+                        'Bulk Upload via CSV for large quote requests',
+                        'Professional PDF generation with company branding',
+                        'Quote History with complete audit trail',
+                        'One-click Quote-to-Order conversion',
+                    ],
+                },
+                {
+                    title: 'Comprehensive Admin Panel',
+                    description: '17 management modules for complete platform control',
+                    subFeatures: [
+                        'Dashboard with revenue metrics and analytics',
+                        'Product Management with bulk CSV import',
+                        'Order Management with tracking',
+                        'Customer Management and verification',
+                        'CMS Pages with rich text editor',
+                        'Banner Management',
+                        'Inventory tracking with low stock alerts',
+                    ],
+                },
+                {
+                    title: 'Secure Checkout Process',
+                    description: 'Multi-step checkout with Razorpay integration',
+                    subFeatures: [
+                        'Cart Review with quantity adjustments',
+                        'Saved addresses dropdown',
+                        'Multiple payment options (UPI, Cards, Net Banking, Wallets)',
+                        'Order confirmation with invoice download',
+                    ],
+                },
+            ],
+            security: {
+                authMethod: 'Clerk Authentication with Role-based Access Control',
+                securityMeasures: [
+                    'Row Level Security (RLS) - Automatic data isolation per user',
+                    'Input Validation with Zod schema validation',
+                    'Redis-based Rate Limiting - Max 100 requests per minute',
+                    'JWT Token Validation middleware',
+                    'CSRF Protection with SameSite cookies',
+                    'XSS Prevention with Content Security Policy',
+                    'SQL Injection Prevention with parameterized queries',
+                ],
+            },
+            performance: {
+                coreWebVitals: [
+                    { label: 'First Contentful Paint (FCP)', after: '1.2s', improvement: '20% better than target' },
+                    { label: 'Largest Contentful Paint (LCP)', after: '2.1s', improvement: '16% better than target' },
+                    { label: 'Time to Interactive (TTI)', after: '3.0s', improvement: '14% better than target' },
+                    { label: 'Cumulative Layout Shift (CLS)', after: '0.05', improvement: '50% better than target' },
+                    { label: 'Total Blocking Time (TBT)', after: '150ms', improvement: '25% better than target' },
+                ],
+                optimizations: [
+                    'Next.js Image component with Cloudinary optimization',
+                    'Dynamic imports for code splitting',
+                    'React Server Components - 40% reduced JS bundle',
+                    'Database indexes on frequently accessed columns',
+                    'Redis caching for frequently accessed data',
+                ],
+            },
+            results: {
+                quantitative: [
+                    { label: 'Order Processing Time', before: '24-48 hours', after: '5-10 minutes', improvement: '98% faster' },
+                    { label: 'Quote Generation', before: 'Manual (2-3 hours)', after: 'Automated (<5 min)', improvement: '97% faster' },
+                    { label: 'Customer Reach', before: 'Local only', after: 'National', improvement: '10x expansion' },
+                    { label: 'Order Accuracy', before: '85%', after: '99%', improvement: '16% improvement' },
+                    { label: 'Operational Efficiency', before: 'Manual tracking', after: 'Automated', improvement: '80% time saved' },
+                ],
+                qualitative: [
+                    'Self-service portal for 24/7 access',
+                    'Real-time order tracking',
+                    'Instant quote requests',
+                    'Mobile-friendly shopping experience',
+                    'Can handle 10x current volume without additional staff',
+                ],
+                technicalAchievements: [
+                    'Page load times under 2 seconds',
+                    '100/100 Lighthouse performance score',
+                    'Zero downtime deployment',
+                    'Horizontal scaling ready',
+                    'Database optimized for millions of records',
+                ],
+            },
+            lessonsLearned: {
+                whatWorkedWell: [
+                    'Modular Architecture - Strict module boundaries prevented technical debt',
+                    'TypeScript Everywhere - Type safety caught bugs during development',
+                    'Server Components - Reduced JavaScript bundle sizes by 40%',
+                    'Supabase + Clerk - Enterprise-grade auth and database without infrastructure management',
+                ],
+                challengesOvercome: [
+                    'Complex Business Logic - Implemented RBAC with TypeScript discriminated unions',
+                    'Multi-Tier Categorization - Recursive PostgreSQL queries with cached category tree',
+                    'Real-Time Inventory - Database-level stock reservation with pessimistic locking',
+                    'Mobile Performance - Cloudinary optimization with lazy loading and blur-up technique',
+                ],
+            },
+            futureRoadmap: {
+                phase2Features: [
+                    'Advanced Analytics - Customer lifetime value, recommendation engine',
+                    'Mobile Applications - Native iOS and Android apps',
+                    'Enhanced B2B Features - Credit management, purchase orders',
+                    'Marketing Automation - Email campaigns, abandoned cart recovery',
+                    'Loyalty Program - Points system, referral rewards',
+                ],
+                technicalImprovements: [
+                    'GraphQL API for reduced over-fetching',
+                    'Microservices Architecture',
+                    'Advanced Edge Caching',
+                    'Internationalization - Multi-language, multi-currency',
+                ],
             },
         },
     },
