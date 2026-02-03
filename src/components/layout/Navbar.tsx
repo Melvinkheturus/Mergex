@@ -60,6 +60,20 @@ export function Navbar() {
 
     return (
         <>
+            {/* Backdrop Blur Overlay */}
+            <AnimatePresence>
+                {activeMenu && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 bg-white/40 backdrop-blur-md z-40"
+                        onClick={() => setActiveMenu(null)}
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Desktop Navbar */}
             <motion.div
                 className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-2"
@@ -74,8 +88,9 @@ export function Navbar() {
                     className={`
                         w-full transition-all duration-300 ease-in-out
                         ${scrolled || activeMenu ? 'bg-white/95 shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
-                        backdrop-blur-md rounded-2xl pl-4 pr-8 h-20 flex items-center justify-between
+                        backdrop-blur-md pl-4 pr-8 h-20 flex items-center justify-between
                         border
+                        ${activeMenu ? 'rounded-t-2xl' : 'rounded-2xl'}
                     `}
                 >
                     {/* Logo and Divider Group */}
@@ -132,7 +147,7 @@ export function Navbar() {
                     </Link>
                 </nav>
 
-                {/* Mega Menus Container */}
+                {/* Mega Menus Container - Merged with Navbar */}
                 <AnimatePresence>
                     {activeMenu && (
                         <motion.div
@@ -142,7 +157,7 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                             onMouseEnter={() => setActiveMenu(activeMenu)}
                             onMouseLeave={() => setActiveMenu(null)}
-                            className="w-full mt-2 bg-white/95 backdrop-blur-xl border border-gray-200/50 shadow-2xl rounded-2xl overflow-hidden p-8"
+                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-2xl overflow-hidden p-8 -mt-px"
                         >
                             {activeMenu === 'services' && <ServicesMenu />}
                             {activeMenu === 'labs' && <LabsMenu />}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 const showcaseData = [
@@ -50,411 +50,172 @@ const showcaseData = [
 
 export function WorkGallery() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const orderRef = useRef([0, 1, 2, 3, 4, 5]);
-    const detailsEvenRef = useRef(true);
-    const loopIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        const { innerHeight: height, innerWidth: width } = window;
-        const offsetTop = height - 430;
-        const offsetLeft = width - 830;
-        const cardWidth = 200;
-        const cardHeight = 300;
-        const gap = 40;
-        const numberSize = 50;
-        const ease = 'sine.inOut';
+        if (!containerRef.current) return;
 
-        const getCard = (index: number) => `#card-${index}`;
-        const getCardContent = (index: number) => `#card-content-${index}`;
-        const getSliderItem = (index: number) => `#slide-item-${index}`;
+        const currentItem = showcaseData[currentIndex];
+        const nextIndex = (currentIndex + 1) % showcaseData.length;
 
-        // INIT FUNCTION
-        const init = () => {
-            const [active, ...rest] = orderRef.current;
-            const detailsActive = detailsEvenRef.current ? '#details-even' : '#details-odd';
-            const detailsInactive = detailsEvenRef.current ? '#details-odd' : '#details-even';
+        const ctx = gsap.context(() => {
+            // Fade in background image
+            gsap.fromTo(
+                '.bg-image',
+                { opacity: 0 },
+                { opacity: 1, duration: 1, ease: 'power2.inOut' }
+            );
 
-            gsap.set('#pagination', {
-                top: offsetTop + 330,
-                left: offsetLeft,
-                y: 0,
-                opacity: 1,
-                zIndex: 60,
+            // Animate text in
+            gsap.fromTo(
+                '.content-text',
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' }
+            );
+
+            // Animate progress bar
+            gsap.fromTo(
+                '.progress-bar',
+                { scaleX: 0 },
+                { scaleX: 1, duration: 4, ease: 'none' }
+            );
+        }, containerRef);
+
+        // Auto-advance to next slide
+        intervalRef.current = setTimeout(() => {
+            // Fade out current content
+            gsap.to('.content-text', {
+                opacity: 0,
+                y: -20,
+                duration: 0.5,
+                ease: 'power2.in',
+                onComplete: () => {
+                    setCurrentIndex(nextIndex);
+                },
             });
 
-            gsap.set(getCard(active), {
-                x: 0,
-                y: 0,
-                width: width,
-                height: height,
-                zIndex: 20,
+            gsap.to('.bg-image', {
+                opacity: 0,
+                duration: 0.5,
+                ease: 'power2.in',
             });
-            gsap.set(getCardContent(active), { x: 0, y: 0, opacity: 0 });
-            gsap.set(detailsActive, { opacity: 1, zIndex: 22, x: 0 });
-            gsap.set(detailsInactive, { opacity: 0, zIndex: 12 });
-            gsap.set(`${detailsInactive} .text`, { y: 100 });
-            gsap.set(`${detailsInactive} .title-1`, { y: 100 });
-            gsap.set(`${detailsInactive} .title-2`, { y: 100 });
-            gsap.set(`${detailsInactive} .desc`, { y: 50 });
-            gsap.set(`${detailsInactive} .cta`, { y: 60 });
+        }, 4000);
 
-            gsap.set('.progress-sub-foreground', {
-                width: 500 * (1 / orderRef.current.length) * (active + 1),
-            });
-
-            rest.forEach((i, index) => {
-                gsap.set(getCard(i), {
-                    x: offsetLeft + index * (cardWidth + gap),
-                    y: offsetTop,
-                    width: cardWidth,
-                    height: cardHeight,
-                    zIndex: 30,
-                    borderRadius: '10px',
-                });
-                gsap.set(getCardContent(i), {
-                    x: offsetLeft + index * (cardWidth + gap),
-                    zIndex: 40,
-                    y: offsetTop + cardHeight - 100,
-                });
-                gsap.set(getSliderItem(i), { x: (index + 1) * numberSize });
-            });
-
-            gsap.set('.indicator', { x: -width });
-        };
-
-        // STEP FUNCTION - THE KEY ANIMATION SEQUENCE
-        const step = (): Promise<void> => {
-            return new Promise((resolve) => {
-                // Rotate order array
-                orderRef.current.push(orderRef.current.shift()!);
-                detailsEvenRef.current = !detailsEvenRef.current;
-
-                const order = orderRef.current;
-                const detailsActive = detailsEvenRef.current ? '#details-even' : '#details-odd';
-                const detailsInactive = detailsEvenRef.current ? '#details-odd' : '#details-even';
-
-                // Update text content for active details
-                const activeData = showcaseData[order[0]];
-                const detailsActiveEl = document.querySelector(detailsActive);
-                if (detailsActiveEl) {
-                    const placeText = detailsActiveEl.querySelector('.place-box .text');
-                    const title1 = detailsActiveEl.querySelector('.title-1');
-                    const title2 = detailsActiveEl.querySelector('.title-2');
-                    const desc = detailsActiveEl.querySelector('.desc');
-                    if (placeText) placeText.textContent = activeData.place;
-                    if (title1) title1.textContent = activeData.title;
-                    if (title2) title2.textContent = activeData.title2;
-                    if (desc) desc.textContent = activeData.description;
-                }
-
-                // Animate active details in
-                gsap.set(detailsActive, { zIndex: 22 });
-                gsap.to(detailsActive, { opacity: 1, delay: 0.4, ease });
-                gsap.to(`${detailsActive} .text`, {
-                    y: 0,
-                    delay: 0.1,
-                    duration: 0.7,
-                    ease,
-                });
-                gsap.to(`${detailsActive} .title-1`, {
-                    y: 0,
-                    delay: 0.15,
-                    duration: 0.7,
-                    ease,
-                });
-                gsap.to(`${detailsActive} .title-2`, {
-                    y: 0,
-                    delay: 0.15,
-                    duration: 0.7,
-                    ease,
-                });
-                gsap.to(`${detailsActive} .desc`, {
-                    y: 0,
-                    delay: 0.3,
-                    duration: 0.4,
-                    ease,
-                });
-                gsap.to(`${detailsActive} .cta`, {
-                    y: 0,
-                    delay: 0.35,
-                    duration: 0.4,
-                    onComplete: resolve,
-                    ease,
-                });
-                gsap.set(detailsInactive, { zIndex: 12 });
-
-                const [active, ...rest] = order;
-                const prv = rest[rest.length - 1];
-
-                // Z-index and scale for previous card
-                gsap.set(getCard(prv), { zIndex: 10 });
-                gsap.set(getCard(active), { zIndex: 20 });
-                gsap.to(getCard(prv), { scale: 1.5, ease }); // IMPORTANT: Scale up previous card
-
-                // Hide active card content
-                gsap.to(getCardContent(active), {
-                    y: offsetTop + cardHeight - 10,
-                    opacity: 0,
-                    duration: 0.3,
-                    ease,
-                });
-
-                // Slider numbers animation
-                gsap.to(getSliderItem(active), { x: 0, ease });
-                gsap.to(getSliderItem(prv), { x: -numberSize, ease });
-                gsap.to('.progress-sub-foreground', {
-                    width: 500 * (1 / order.length) * (active + 1),
-                    ease,
-                });
-
-                // MAIN ANIMATION: Expand active card to full screen
-                gsap.to(getCard(active), {
-                    x: 0,
-                    y: 0,
-                    ease,
-                    width: width,
-                    height: height,
-                    borderRadius: 0,
-                    onComplete: () => {
-                        // After expansion, reposition previous card to end of stack
-                        const xNew = offsetLeft + (rest.length - 1) * (cardWidth + gap);
-                        gsap.set(getCard(prv), {
-                            x: xNew,
-                            y: offsetTop,
-                            width: cardWidth,
-                            height: cardHeight,
-                            zIndex: 30,
-                            borderRadius: '10px',
-                            scale: 1,
-                        });
-
-                        gsap.set(getCardContent(prv), {
-                            x: xNew,
-                            y: offsetTop + cardHeight - 100,
-                            opacity: 1,
-                            zIndex: 40,
-                        });
-                        gsap.set(getSliderItem(prv), { x: rest.length * numberSize });
-
-                        // Reset inactive details
-                        gsap.set(detailsInactive, { opacity: 0 });
-                        gsap.set(`${detailsInactive} .text`, { y: 100 });
-                        gsap.set(`${detailsInactive} .title-1`, { y: 100 });
-                        gsap.set(`${detailsInactive} .title-2`, { y: 100 });
-                        gsap.set(`${detailsInactive} .desc`, { y: 50 });
-                        gsap.set(`${detailsInactive} .cta`, { y: 60 });
-                    },
-                });
-
-                // Animate remaining cards
-                rest.forEach((i, index) => {
-                    if (i !== prv) {
-                        const xNew = offsetLeft + index * (cardWidth + gap);
-                        gsap.set(getCard(i), { zIndex: 30 });
-                        gsap.to(getCard(i), {
-                            x: xNew,
-                            y: offsetTop,
-                            width: cardWidth,
-                            height: cardHeight,
-                            ease,
-                            delay: 0.1 * (index + 1),
-                        });
-
-                        gsap.to(getCardContent(i), {
-                            x: xNew,
-                            y: offsetTop + cardHeight - 100,
-                            opacity: 1,
-                            zIndex: 40,
-                            ease,
-                            delay: 0.1 * (index + 1),
-                        });
-                        gsap.to(getSliderItem(i), { x: (index + 1) * numberSize, ease });
-                    }
-                });
-            });
-        };
-
-        // LOOP FUNCTION
-        const loop = async () => {
-            await gsap.to('.indicator', { x: 0, duration: 2, ease });
-            await gsap.to('.indicator', {
-                x: width,
-                duration: 0.8,
-                delay: 0.3,
-                ease,
-            });
-            gsap.set('.indicator', { x: -width });
-            await step();
-            loop();
-        };
-
-        // Initialize and start loop
-        init();
-        setTimeout(() => {
-            loop();
-        }, 500);
-
-        // Cleanup
         return () => {
-            if (loopIntervalRef.current) {
-                clearTimeout(loopIntervalRef.current);
-            }
-            gsap.killTweensOf('*');
+            ctx.revert();
+            if (intervalRef.current) clearTimeout(intervalRef.current);
         };
-    }, []);
+    }, [currentIndex]);
+
+    const currentItem = showcaseData[currentIndex];
 
     return (
-        <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-gray-900">
-            {/* Progress Indicator */}
-            <div className="indicator fixed left-0 right-0 top-0 z-50 h-1 bg-purple-500" />
+        <section ref={containerRef} className="relative min-h-screen bg-white overflow-hidden">
+            {/* Section Heading */}
+            <div className="relative z-20 container mx-auto px-6 md:px-12 pt-20 pb-12">
+                <div className="max-w-3xl">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+                        Our Work in Action
+                    </h2>
+                    <p className="text-lg md:text-xl text-gray-600">
+                        Real projects, real results. See how we leverage AI to deliver exceptional creative content at unprecedented speed.
+                    </p>
+                </div>
+            </div>
 
-            {/* Cards */}
-            {showcaseData.map((item, index) => (
+            {/* Main Content Area */}
+            <div className="relative h-[600px] md:h-[700px]">
+                {/* Background Image */}
                 <div
-                    key={index}
-                    id={`card-${index}`}
-                    className="absolute left-0 top-0 bg-cover bg-center shadow-2xl"
+                    className="bg-image absolute inset-0 bg-cover bg-center"
                     style={{
-                        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(${item.image})`,
+                        backgroundImage: `url(${currentItem.image})`,
                     }}
                 />
-            ))}
 
-            {/* Card Content Overlays (small labels on thumbnails) */}
-            {showcaseData.map((item, index) => (
-                <div
-                    key={`content-${index}`}
-                    id={`card-content-${index}`}
-                    className="absolute left-0 top-0 pl-4 text-white"
-                >
-                    <div className="mb-1.5 h-1 w-8 rounded-full bg-white/90" />
-                    <div className="text-sm font-medium">{item.place}</div>
-                    <div className="font-['Oswald',sans-serif] text-xl font-semibold">{item.title}</div>
-                    <div className="font-['Oswald',sans-serif] text-xl font-semibold">{item.title2}</div>
-                </div>
-            ))}
+                {/* Dark Overlay for Text Contrast */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
 
-            {/* Details Even */}
-            <div id="details-even" className="absolute left-[60px] top-[240px] z-20 text-white">
-                <div className="place-box mb-6 h-[46px] overflow-hidden">
-                    <div className="text relative pt-4 text-xl font-medium before:absolute before:left-0 before:top-0 before:h-1 before:w-8 before:rounded-full before:bg-white">
-                        {showcaseData[0].place}
-                    </div>
-                </div>
-                <div className="title-box-1 mb-1 h-[100px] overflow-hidden">
-                    <div className="title-1 font-['Oswald',sans-serif] text-7xl font-semibold leading-none">
-                        {showcaseData[0].title}
-                    </div>
-                </div>
-                <div className="title-box-2 mb-4 h-[100px] overflow-hidden">
-                    <div className="title-2 font-['Oswald',sans-serif] text-7xl font-semibold leading-none">
-                        {showcaseData[0].title2}
-                    </div>
-                </div>
-                <div className="desc mb-6 w-[500px] leading-relaxed text-white/90">
-                    {showcaseData[0].description}
-                </div>
-                <div className="cta flex w-[500px] items-center gap-4">
-                    <button className="grid h-9 w-9 place-items-center rounded-full bg-purple-500 transition-transform hover:scale-110">
-                        <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </button>
-                    <button className="rounded-full border border-white bg-transparent px-6 py-2 text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-white hover:text-gray-900">
-                        View Project
-                    </button>
-                </div>
-            </div>
+                {/* Content - Left Aligned */}
+                <div className="relative z-10 h-full flex items-center">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="max-w-2xl">
+                            {/* Category Label */}
+                            <div className="content-text mb-4">
+                                <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white uppercase tracking-wider">
+                                    {currentItem.place}
+                                </span>
+                            </div>
 
-            {/* Details Odd */}
-            <div id="details-odd" className="absolute left-[60px] top-[240px] z-10 text-white opacity-0">
-                <div className="place-box mb-6 h-[46px] overflow-hidden">
-                    <div className="text relative pt-4 text-xl font-medium before:absolute before:left-0 before:top-0 before:h-1 before:w-8 before:rounded-full before:bg-white">
-                        {showcaseData[1].place}
-                    </div>
-                </div>
-                <div className="title-box-1 mb-1 h-[100px] overflow-hidden">
-                    <div className="title-1 font-['Oswald',sans-serif] text-7xl font-semibold leading-none">
-                        {showcaseData[1].title}
-                    </div>
-                </div>
-                <div className="title-box-2 mb-4 h-[100px] overflow-hidden">
-                    <div className="title-2 font-['Oswald',sans-serif] text-7xl font-semibold leading-none">
-                        {showcaseData[1].title2}
-                    </div>
-                </div>
-                <div className="desc mb-6 w-[500px] leading-relaxed text-white/90">
-                    {showcaseData[1].description}
-                </div>
-                <div className="cta flex w-[500px] items-center gap-4">
-                    <button className="grid h-9 w-9 place-items-center rounded-full bg-purple-500 transition-transform hover:scale-110">
-                        <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </button>
-                    <button className="rounded-full border border-white bg-transparent px-6 py-2 text-xs font-medium uppercase tracking-wider text-white transition-all hover:bg-white hover:text-gray-900">
-                        View Project
-                    </button>
-                </div>
-            </div>
+                            {/* Main Title */}
+                            <div className="content-text mb-3">
+                                <h3 className="font-['Oswald',sans-serif] text-5xl md:text-7xl lg:text-8xl font-bold text-black leading-none">
+                                    {currentItem.title}
+                                </h3>
+                            </div>
 
-            {/* Pagination Controls */}
-            <div id="pagination" className="absolute flex items-center gap-5">
-                <button className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/30 transition-all hover:border-white/60 hover:bg-white/10">
-                    <svg
-                        className="h-6 w-6 text-white/60"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <button className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/30 transition-all hover:border-white/60 hover:bg-white/10">
-                    <svg
-                        className="h-6 w-6 text-white/60"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
-                <div className="progress-sub-container ml-6 flex h-12 w-[500px] items-center">
-                    <div className="progress-sub-background h-[3px] w-full rounded-full bg-white/20">
-                        <div className="progress-sub-foreground h-[3px] rounded-full bg-purple-500" />
-                    </div>
-                </div>
-                <div className="slide-numbers relative h-12 w-12 overflow-hidden">
-                    {showcaseData.map((_, index) => (
-                        <div
-                            key={index}
-                            id={`slide-item-${index}`}
-                            className="item absolute left-0 top-0 grid h-12 w-12 place-items-center text-3xl font-bold text-white"
-                        >
-                            {index + 1}
+                            {/* Secondary Title */}
+                            <div className="content-text mb-8">
+                                <h3 className="font-['Oswald',sans-serif] text-5xl md:text-7xl lg:text-8xl font-bold text-black leading-none">
+                                    {currentItem.title2}
+                                </h3>
+                            </div>
+
+                            {/* Description */}
+                            <div className="content-text mb-8">
+                                <p className="text-base md:text-lg lg:text-xl text-black leading-relaxed max-w-xl font-medium">
+                                    {currentItem.description}
+                                </p>
+                            </div>
+
+                            {/* View Project Button */}
+                            <div className="content-text">
+                                <button className="group px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-900 transition-all duration-300 flex items-center gap-2">
+                                    <span>View Project</span>
+                                    <svg
+                                        className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                    ))}
+                    </div>
+                </div>
+
+                {/* Progress Indicator */}
+                <div className="absolute bottom-8 left-6 md:left-12 right-6 md:right-auto md:w-96 z-20">
+                    <div className="flex items-center gap-4 mb-3">
+                        <span className="text-sm font-medium text-white">
+                            {String(currentIndex + 1).padStart(2, '0')}
+                        </span>
+                        <div className="h-px bg-white/30 flex-1 relative overflow-hidden rounded-full">
+                            <div className="progress-bar absolute inset-0 bg-white origin-left" />
+                        </div>
+                        <span className="text-sm font-medium text-white/60">
+                            {String(showcaseData.length).padStart(2, '0')}
+                        </span>
+                    </div>
+
+                    {/* Navigation Dots */}
+                    <div className="flex gap-2">
+                        {showcaseData.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentIndex(index)}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex
+                                        ? 'w-8 bg-white'
+                                        : 'w-1.5 bg-white/30 hover:bg-white/50'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

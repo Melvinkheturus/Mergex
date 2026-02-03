@@ -49,19 +49,19 @@ export default function LabsPage() {
                 <WhatWeCreate />
             </div>
 
-            {/* 3.5 Featured Work - Scroll Zoom Showcase */}
+            {/* 3.5 Featured Work - Scroll Zoom Showcase (Kyra) */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
             </div>
 
-            {/* 4. Work Gallery - CRITICAL Visual Proof */}
-            <div id="work">
-                <WorkGallery />
-            </div>
-
-            {/* 5. How Labs Works - Process Demystification */}
+            {/* 4. How Labs Works - Process Demystification */}
             <div id="process">
                 <HowLabsWorks />
+            </div>
+
+            {/* 5. Work Gallery - CRITICAL Visual Proof */}
+            <div id="work">
+                <WorkGallery />
             </div>
 
             {/* 6. Why Labs Exists - Philosophy */}

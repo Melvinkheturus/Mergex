@@ -114,7 +114,7 @@ export function ScrollZoomShowcase() {
     return (
         <section
             ref={containerRef}
-            className="relative h-[300vh] bg-white"
+            className="relative h-[150vh] bg-white"
         >
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
                 {/* Image Container */}

@@ -16,7 +16,7 @@ export function HowLabsWorks() {
     };
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden">
+        <section className="pt-0 pb-20 md:pb-32 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-[0.02]">
                 <div

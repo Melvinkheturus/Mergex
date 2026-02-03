@@ -36,7 +36,6 @@ export function HeroSection() {
     const supportingRef = useRef<HTMLParagraphElement>(null);
     const authorityRef = useRef<HTMLParagraphElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
-    const blackLayerRef = useRef<HTMLDivElement>(null);
     const sceneWrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -59,17 +58,8 @@ export function HeroSection() {
                 .to(authorityRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.45)
                 .to(ctaRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.55)
 
-                // Black layer rising from bottom
-                .to(blackLayerRef.current, {
-                    clipPath: 'inset(0 0 0% 0)',
-                    duration: 0.5,
-                }, 0.5)
-
                 // Headline fades last
-                .to(headlineRef.current, { opacity: 0, y: -100, duration: 0.4 }, 0.6)
-
-                // 3D scene reveal
-                .to(sceneWrapperRef.current, { opacity: 1, duration: 0.4 }, 0.75);
+                .to(headlineRef.current, { opacity: 0, y: -100, duration: 0.4 }, 0.6);
         }, heroRef);
 
         return () => {
@@ -82,17 +72,11 @@ export function HeroSection() {
             ref={heroRef}
             className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
         >
-            {/* Black Overlay Layer - Rises from bottom */}
-            <div
-                ref={blackLayerRef}
-                className="absolute inset-0 bg-[#0a0a0a] z-[2]"
-                style={{ clipPath: 'inset(100% 0 0 0)' }}
-            />
-
-            {/* 3D Scene - Hidden initially, appears on black */}
+           
+            {/* 3D Scene - Visible from start, behind content */}
             <div
                 ref={sceneWrapperRef}
-                className="absolute inset-0 z-[3] opacity-0"
+                className="absolute inset-0 z-[1]"
             >
                 <HeroScene />
             </div>

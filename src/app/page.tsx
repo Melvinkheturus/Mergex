@@ -10,6 +10,7 @@ import {
   FAQSection,
 } from '@/modules/homepage';
 import { FeaturedCasePreview, CASE_STUDIES } from '@/modules/caseStudies';
+import { TestimonialsSection } from '@/modules/shared';
 
 export const metadata: Metadata = {
   title: 'Mergex - Your All-in-One Solution Partner for AI, Automation & Growth',
@@ -70,7 +71,12 @@ export default function Home() {
         <ProductsGlimpseSection />
       </div>
 
-      {/* 9. FAQ - Final CTA (DO NOT MODIFY) */}
+      {/* 9. Testimonials - Trust Building */}
+      <div id="testimonials">
+        <TestimonialsSection />
+      </div>
+
+      {/* 10. FAQ - Final CTA (DO NOT MODIFY) */}
       <div id="faq">
         <FAQSection />
       </div>
