@@ -111,21 +111,18 @@ export function SystemsHero() {
                         className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center -mt-12 lg:-mt-20"
                     >
                         <div className="relative w-full h-full">
-                            <BlurVignette
-                                radius="20%"
-                                inset="5%"
-                                transitionLength="30%"
-                                blur="40px"
-                                className="w-full h-full"
-                            >
-                                <Image
-                                    src="/assets/background/convayer-hero.png"
-                                    alt="Systems Visualization"
-                                    fill
-                                    className="object-contain"
-                                    priority
-                                />
-                            </BlurVignette>
+                            <Image
+                                src="/assets/background/convayer-hero.png"
+                                alt="Systems Visualization"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                            {/* White Gradient Overlays for Seamless Blending */}
+                            <div className="absolute top-0 left-0 right-0 h-[50%] bg-gradient-to-b from-white via-white/90 to-transparent z-10" />
+                            <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-gradient-to-t from-white via-white/90 to-transparent z-10" />
+                            <div className="absolute top-0 left-0 bottom-0 w-[20%] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
+                            <div className="absolute top-0 right-0 bottom-0 w-[20%] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
                         </div>
                     </motion.div>
                 </div>
