@@ -26,35 +26,84 @@ export function LabsHero() {
 
             {/* Content Container */}
             <div className="relative z-10 container mx-auto px-6 md:px-12 py-32 md:py-40">
-                <div className="max-w-5xl mx-auto text-center">
-                    {/* Main Headline - Poetic */}
+                <div className="max-w-4xl mx-auto text-center">
+                    {/* Eyebrow */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-sm md:text-base text-gray-600 tracking-wide mb-6"
+                    >
+                        {LABS_HERO.eyebrow}
+                    </motion.p>
+
+                    {/* Main Headline */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3 }}
-                        className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-display mb-8 leading-tight"
+                        className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-gray-900"
+                        style={{ fontFamily: 'var(--font-manrope)' }}
                     >
-                        {LABS_HERO.headline.split('\n').map((line, index) => (
-                            <span key={index} className="block">
-                                {index === 0 ? (
-                                    <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
-                                        {line}
-                                    </span>
-                                ) : (
-                                    <span className="text-foreground">{line}</span>
-                                )}
-                            </span>
-                        ))}
+                        Where{' '}
+                        <span
+                            className="font-serif italic font-normal relative z-10"
+                            style={{ fontFamily: 'var(--font-playfair)' }}
+                        >
+                            creativity
+                        </span>{' '}
+                        meets intelligence.
                     </motion.h1>
 
-                    {/* Subheadline - Grounded */}
+                    {/* Supporting Line */}
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.6 }}
-                        className="text-xl md:text-2xl text-foreground-muted max-w-3xl mx-auto leading-relaxed"
+                        transition={{ duration: 1, delay: 0.5 }}
+                        className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6"
                     >
-                        {LABS_HERO.subheadline}
+                        {LABS_HERO.supportingLine}
+                    </motion.p>
+
+                    {/* Reinforcement Line */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.7 }}
+                        className="text-base md:text-lg text-gray-600 italic max-w-2xl mx-auto mb-10"
+                    >
+                        {LABS_HERO.reinforcementLine}
+                    </motion.p>
+
+                    {/* CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.9 }}
+                        className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+                    >
+                        <a
+                            href={LABS_HERO.primaryCTA.href}
+                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                        >
+                            {LABS_HERO.primaryCTA.text}
+                        </a>
+                        <a
+                            href={LABS_HERO.secondaryCTA.href}
+                            className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300"
+                        >
+                            {LABS_HERO.secondaryCTA.text}
+                        </a>
+                    </motion.div>
+
+                    {/* Micro-copy */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 1.1 }}
+                        className="text-sm text-gray-500 italic"
+                    >
+                        {LABS_HERO.microcopy}
                     </motion.p>
                 </div>
             </div>

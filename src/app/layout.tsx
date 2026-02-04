@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display, Pinyon_Script } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display, Pinyon_Script, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
@@ -31,6 +31,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const playfair = Playfair_Display({
@@ -82,7 +88,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${playfair.variable} ${pinyon.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${manrope.variable} ${playfair.variable} ${pinyon.variable} antialiased bg-background text-foreground`}
       >
         <LayoutContent>{children}</LayoutContent>
       </body>

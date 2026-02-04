@@ -49,7 +49,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
     return (
         <LenisProvider>
             <ScrollSectionProvider>
-                {!isSystemsRoute && <Navbar />}
+                <Navbar />
                 <ScrollProgressIndicator />
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
                 {children}

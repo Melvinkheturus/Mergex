@@ -2,9 +2,19 @@
 // AI Content Studio positioning and content
 
 export const LABS_HERO = {
-    headline: 'Where Creativity Meets\\nIntelligent Systems',
-    subheadline: 'AI-powered content creation for brands that refuse to wait.',
-    // Video will breathe for 2-3 seconds before showing content
+    eyebrow: 'Mergex Labs · AI Content Studio',
+    headline: 'Where creativity meets intelligence.',
+    supportingLine: 'We explore how generative AI, motion, and visual storytelling can be shaped with intent — turning emerging tools into thoughtful creative systems.',
+    reinforcementLine: 'Designed by humans. Directed by intelligence. Refined through experimentation.',
+    primaryCTA: {
+        text: 'Explore the experiments',
+        href: '#experiments'
+    },
+    secondaryCTA: {
+        text: 'See featured explorations',
+        href: '#explorations'
+    },
+    microcopy: 'No pitches. Just process, visuals, and exploration.'
 } as const;
 
 export const WHAT_IS_LABS = {

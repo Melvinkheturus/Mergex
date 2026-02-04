@@ -72,8 +72,8 @@
   --color-accent-light: var(--accent-light);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
-  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
-  --font-body: var(--font-noto-sans), var(--font-geist-sans), sans-serif;
+  --font-display: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  --font-body: var(--font-manrope), var(--font-geist-sans), sans-serif;
   --font-serif: var(--font-playfair), serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -117,7 +117,7 @@ html {
 body {
   /* Base background provided by html or transparent to show gradients */
   background-color: transparent;
-  font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-manrope), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
@@ -172,11 +172,11 @@ html * {
 }
 
 .font-display {
-  font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-manrope), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .font-body {
-  font-family: var(--font-noto-sans), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-manrope), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .font-pinyon {

@@ -104,10 +104,10 @@ export function FAQSection() {
                             transition={{ duration: 0.6 }}
                             className="-ml-4 md:-ml-8"
                         >
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-poppins)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.headline}
                             </h2>
-                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-poppins)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.subheadline}{' '}
                                 <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
                                     {FAQ_DATA.subheadlineItalic}
@@ -189,7 +189,7 @@ export function FAQSection() {
                                         onClick={() => toggleQuestion(index)}
                                         className="w-full flex items-center justify-between gap-6 py-8 text-left group transition-all"
                                     >
-                                        <span className="text-xl font-[family-name:var(--font-poppins)] font-medium transition-all pr-8 leading-snug group-hover:bg-gradient-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:!text-transparent" style={{ color: 'inherit' }}>
+                                        <span className="text-xl font-[family-name:var(--font-manrope)] font-medium transition-all pr-8 leading-snug group-hover:bg-gradient-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:!text-transparent" style={{ color: 'inherit' }}>
                                             {faq.question}
                                         </span>
                                         <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center transition-colors" style={{ color: 'inherit' }}>
@@ -229,7 +229,7 @@ export function FAQSection() {
                                                 className="overflow-hidden"
                                             >
                                                 <div className="pr-12">
-                                                    <p className="text-lg leading-relaxed font-light font-[family-name:var(--font-poppins)] opacity-80" style={{ color: 'inherit' }}>
+                                                    <p className="text-lg leading-relaxed font-light font-[family-name:var(--font-manrope)] opacity-80" style={{ color: 'inherit' }}>
                                                         {faq.answer}
                                                     </p>
                                                 </div>

@@ -69,6 +69,7 @@ export function HeroSection() {
         <section
             ref={heroRef}
             className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
+            style={{ fontFamily: 'var(--font-manrope)' }}
         >
 
 
@@ -78,27 +79,28 @@ export function HeroSection() {
                 <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
 
                     {/* Editorial Headline - Mixed Typography */}
+                    {/* Editorial Headline - Mixed Typography */}
                     <h1
                         ref={headlineRef}
-                        className="mb-12 md:mb-16 leading-[0.95] tracking-tight"
+                        className="mb-12 md:mb-16 mt-8 leading-[0.95] tracking-tight"
                     >
-                        {/* Line 1: Where ideas merge */}
+                        {/* Line 1: Where Ideas Merge */}
                         <div className="mb-2 md:mb-4">
-                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
-                                Where ideas{' '}
+                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
+                                Where Ideas{' '}
                             </span>
-                            <span className={`${playfair.className} text-[clamp(2.25rem,7.5vw,5.5rem)] text-gray-900`}>
-                                merge
+                            <span className={`${playfair.className} font-normal text-[clamp(2.5rem,8vw,6rem)] text-gray-900 italic`}>
+                                Merge
                             </span>
                         </div>
 
-                        {/* Line 2: with intelligence */}
+                        {/* Line 2: With Intelligence */}
                         <div className="mb-2 md:mb-4">
-                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
-                                with{' '}
+                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
+                                With{' '}
                             </span>
-                            <span className="font-sans font-semibold text-[clamp(2.5rem,8vw,6rem)] bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">
-                                intelligence.
+                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">
+                                Intelligence.
                             </span>
                         </div>
                     </h1>
