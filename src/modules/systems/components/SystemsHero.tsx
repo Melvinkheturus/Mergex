@@ -1,89 +1,133 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { BlurVignette } from '@/components/ui/BlurVignette';
 
 /**
- * SystemsHero - Minimal hero with kinetic line animation
+ * SystemsHero - Conversion-focused hero with white background
+ * Two-column layout with compelling copy and image
  */
 export function SystemsHero() {
-    const lineRef = useRef<HTMLDivElement | null>(null);
-    const headingRef = useRef<HTMLHeadingElement | null>(null);
-    const copyRef = useRef<HTMLParagraphElement | null>(null);
-    const ctaRef = useRef<HTMLButtonElement | null>(null);
-
-    useEffect(() => {
-        const tl = gsap.timeline();
-        if (headingRef.current && copyRef.current && ctaRef.current) {
-            tl.fromTo(
-                headingRef.current,
-                { autoAlpha: 0, y: 24 },
-                { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' }
-            )
-                .fromTo(
-                    copyRef.current,
-                    { autoAlpha: 0, y: 20 },
-                    { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out' },
-                    '-=0.6'
-                )
-                .fromTo(
-                    ctaRef.current,
-                    { autoAlpha: 0, y: 16 },
-                    { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-                    '-=0.5'
-                );
-        }
-
-        if (lineRef.current) {
-            gsap.fromTo(
-                lineRef.current,
-                { scaleX: 0, transformOrigin: 'left center' },
-                { scaleX: 1, duration: 1.6, ease: 'power3.inOut', delay: 0.2 }
-            );
-        }
-    }, []);
-
-    const handleExplore = () => {
-        const lenis = (window as any).lenis;
-        if (lenis) {
-            lenis.scrollTo('#pain-points', { offset: -40, duration: 1.2 });
-        } else {
-            document.querySelector('#pain-points')?.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_55%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),_transparent_60%)]" />
-            </div>
-
-            <div className="relative z-10 flex flex-col items-center text-center px-6 md:px-12 max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-500 mb-6">Mergex Systems</p>
-                <h1
-                    ref={headingRef}
-                    className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white"
-                >
-                    Minimal systems that move fast.
-                </h1>
-                <div
-                    ref={lineRef}
-                    className="mt-6 h-px w-24 bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400"
-                />
-                <p ref={copyRef} className="mt-6 text-base md:text-lg text-gray-400 leading-relaxed">
-                    We strip away noise and build precise software, automation, and AI workflows that scale with your
-                    business.
-                </p>
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                    <button
-                        ref={ctaRef}
-                        onClick={handleExplore}
-                        className="rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.2em] text-white transition hover:border-white/60"
+        <section className="relative min-h-screen flex items-center bg-white text-gray-900 overflow-hidden">
+            <div className="w-full max-w-[95%] mx-auto px-4 md:px-8 py-20 md:py-32">
+                <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 lg:gap-16 items-center">
+                    {/* Left Column - Text Content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="space-y-6 md:space-y-8"
+                        style={{ fontFamily: 'var(--font-manrope)' }}
                     >
-                        Explore the system
-                    </button>
-                    <span className="text-xs uppercase tracking-[0.3em] text-gray-600">Weeks to launch</span>
+                        {/* Eyebrow */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-sm md:text-base text-gray-600 font-medium tracking-wide"
+                        >
+                            Mergex Systems · Software, Automation & Digital Infrastructure
+                        </motion.p>
+
+                        {/* Primary Headline */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                        >
+                            Build{' '}
+                            <span
+                                className="font-serif italic font-normal bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent"
+                                style={{ fontFamily: 'var(--font-playfair)' }}
+                            >
+                                Systems
+                            </span>{' '}
+                            That Actually Scale Without Managing Five Vendors.
+                        </motion.h1>
+
+                        {/* Supporting Copy */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="text-lg md:text-xl text-gray-700 leading-relaxed"
+                        >
+                            We design, build, and automate production-ready digital systems from MVPs to full platforms so businesses can move fast without breaking foundations.
+                        </motion.p>
+
+                        {/* Value Proposition */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="text-base md:text-lg text-gray-600 italic"
+                        >
+                            One partner. One accountable system. Built to evolve as you grow.
+                        </motion.p>
+
+                        {/* CTAs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="flex flex-col sm:flex-row gap-4 pt-4"
+                        >
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-b from-violet-500 to-violet-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                            >
+                                Book a Discovery Call
+                                <ArrowRight size={18} />
+                            </Link>
+                            <Link
+                                href="#how-we-work"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300"
+                            >
+                                See how we build systems
+                            </Link>
+                        </motion.div>
+
+                        {/* Micro-copy */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="text-sm text-gray-500 italic"
+                        >
+                            No sales pitch. No tech jargon. Just clarity on what to build next.
+                        </motion.p>
+                    </motion.div>
+
+                    {/* Right Column - Image */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center -mt-12 lg:-mt-20"
+                    >
+                        <div className="relative w-full h-full">
+                            <BlurVignette
+                                radius="20%"
+                                inset="5%"
+                                transitionLength="30%"
+                                blur="40px"
+                                className="w-full h-full"
+                            >
+                                <Image
+                                    src="/assets/background/convayer-hero.png"
+                                    alt="Systems Visualization"
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            </BlurVignette>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
