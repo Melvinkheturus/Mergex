@@ -42,7 +42,7 @@ export function SystemsPageShell({ children }: SystemsPageShellProps) {
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-black text-white">
+        <div ref={containerRef} className="bg-white text-gray-900">
             {children}
         </div>
     );

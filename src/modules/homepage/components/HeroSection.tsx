@@ -44,7 +44,7 @@ export function HeroSection() {
                 scrollTrigger: {
                     trigger: heroRef.current,
                     start: 'top top',
-                    end: '+=300%',
+                    end: '+=200%',
                     pin: true,
                     scrub: 1,
                     // markers: true, // Enable for debugging
@@ -78,7 +78,6 @@ export function HeroSection() {
             <div className="relative z-[4] min-h-screen flex items-center pt-16 md:pt-24">
                 <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
 
-                    {/* Editorial Headline - Mixed Typography */}
                     {/* Editorial Headline - Mixed Typography */}
                     <h1
                         ref={headlineRef}

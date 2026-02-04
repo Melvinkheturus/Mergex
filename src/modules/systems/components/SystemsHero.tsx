@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { BlurVignette } from '@/components/ui/BlurVignette';
+import PixelBlast from '@/components/PixelBlast';
 
 /**
  * SystemsHero - Conversion-focused hero with white background
@@ -13,7 +14,26 @@ import { BlurVignette } from '@/components/ui/BlurVignette';
 export function SystemsHero() {
     return (
         <section className="relative min-h-screen flex items-center bg-white text-gray-900 overflow-hidden">
-            <div className="w-full max-w-[95%] mx-auto px-4 md:px-8 py-20 md:py-32">
+            {/* PixelBlast Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <PixelBlast
+                    variant="square"
+                    pixelSize={5}
+                    color="#B19EEF"
+                    patternScale={2}
+                    patternDensity={1}
+                    enableRipples
+                    rippleSpeed={0.3}
+                    rippleThickness={0.1}
+                    rippleIntensityScale={1}
+                    speed={0.5}
+                    transparent
+                    edgeFade={0.55}
+                />
+            </div>
+
+            {/* Content */}
+            <div className="w-full max-w-[95%] mx-auto px-4 md:px-8 py-20 md:py-32 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 lg:gap-16 items-center">
                     {/* Left Column - Text Content */}
                     <motion.div

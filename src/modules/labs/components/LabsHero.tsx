@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ImageTrail from '../../../components/ImageTrail';
 import { LABS_HERO } from '../content/labs';
 
 /**
@@ -10,6 +11,19 @@ import { LABS_HERO } from '../content/labs';
 export function LabsHero() {
     return (
         <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-white selection:bg-purple-100">
+            {/* Image Trail - Interactive Layer */}
+            <div className="absolute inset-0 z-[50] opacity-60">
+                <ImageTrail
+                    variant={4}
+                    items={[
+                        '/assets/mockups/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
+                        '/assets/mockups/Gemini_Generated_Image_p2gmifp2gmifp2gm.png',
+                        '/assets/mockups/WhatsApp Image 2026-02-05 at 12.11.55 AM.jpeg',
+                        '/assets/mockups/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg'
+                    ]}
+                />
+            </div>
+
             {/* Creative Background */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 {/* Gradient Mesh - More vibrant for Labs */}
@@ -25,7 +39,7 @@ export function LabsHero() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 container mx-auto px-6 md:px-12 py-32 md:py-40">
+            <div className="relative z-10 container mx-auto px-6 md:px-12 py-32 md:py-40 pointer-events-none">
                 <div className="max-w-4xl mx-auto text-center">
                     {/* Eyebrow */}
                     <motion.p
@@ -84,13 +98,13 @@ export function LabsHero() {
                     >
                         <a
                             href={LABS_HERO.primaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.primaryCTA.text}
                         </a>
                         <a
                             href={LABS_HERO.secondaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300"
+                            className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.secondaryCTA.text}
                         </a>
@@ -107,22 +121,6 @@ export function LabsHero() {
                     </motion.p>
                 </div>
             </div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-            >
-                <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="w-6 h-10 border-2 border-purple-300 rounded-full flex items-start justify-center p-2"
-                >
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full" />
-                </motion.div>
-            </motion.div>
         </section>
     );
 }
