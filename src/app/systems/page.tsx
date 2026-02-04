@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import {
     SystemsHero,
+    SystemsPageShell,
     WhatWeSolve,
     OurSolutions,
     SpeedAdvantage,
@@ -32,57 +33,59 @@ export const metadata: Metadata = {
 export default function SystemsPage() {
     return (
         <PageTransition>
-            <main className="">
-                {/* 1. Hero - Professional Positioning */}
-                <div id="systems-hero">
-                    <SystemsHero />
-                </div>
+            <SystemsPageShell>
+                <main className="bg-black text-white">
+                    {/* 1. Hero - Minimal positioning */}
+                    <div id="systems-hero" className="systems-section">
+                        <SystemsHero />
+                    </div>
 
-                {/* 2. What We Solve - Pain Point Matching */}
-                <div id="pain-points">
-                    <WhatWeSolve />
-                </div>
+                    {/* 2. What We Solve - Pain Point Matching */}
+                    <div id="pain-points" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <WhatWeSolve />
+                    </div>
 
-                {/* 3. Our Solutions - Service Pillars */}
-                <div id="solutions">
-                    <OurSolutions />
-                </div>
+                    {/* 3. Our Solutions - Service Pillars */}
+                    <div id="solutions" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <OurSolutions />
+                    </div>
 
-                {/* 4. Speed Advantage - Key Differentiator */}
-                <div id="speed">
-                    <SpeedAdvantage />
-                </div>
+                    {/* 4. Speed Advantage - Key Differentiator */}
+                    <div id="speed" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <SpeedAdvantage />
+                    </div>
 
-                {/* 5. How We Work - Process Confidence */}
-                <div id="process">
-                    <HowWeWorkSystems />
-                </div>
+                    {/* 5. How We Work - Process Confidence */}
+                    <div id="process" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <HowWeWorkSystems />
+                    </div>
 
-                {/* 6. Proof - Tech Stack */}
-                <div id="proof">
-                    <ProofSystems />
-                </div>
+                    {/* 6. Proof - Tech Stack */}
+                    <div id="proof" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <ProofSystems />
+                    </div>
 
-                {/* 7. Case Studies - Conversion Proof */}
-                <div id="case-studies">
-                    <SystemsCasePreviews />
-                </div>
+                    {/* 7. Case Studies - Conversion Proof */}
+                    <div id="case-studies" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <SystemsCasePreviews />
+                    </div>
 
-                {/* 8. FAQ Section */}
-                <div id="faq">
-                    <SystemsFAQ />
-                </div>
+                    {/* 8. FAQ Section */}
+                    <div id="faq" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <SystemsFAQ />
+                    </div>
 
-                {/* 9. Engagement & Pricing */}
-                <div id="engagement">
-                    <EngagementModel />
-                </div>
+                    {/* 9. Engagement & Pricing */}
+                    <div id="engagement" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <EngagementModel />
+                    </div>
 
-                {/* 10. CTA - Final Conversion */}
-                <div id="cta">
-                    <SystemsCTA />
-                </div>
-            </main>
+                    {/* 10. CTA - Final Conversion */}
+                    <div id="cta" className="systems-section border-t border-white/5 py-20 md:py-28">
+                        <SystemsCTA />
+                    </div>
+                </main>
+            </SystemsPageShell>
         </PageTransition>
     );
 }

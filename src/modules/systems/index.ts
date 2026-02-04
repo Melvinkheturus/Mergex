@@ -1,6 +1,7 @@
 // Mergex Systems Module Exports
 
 import { SystemsHero } from './components/SystemsHero';
+import { SystemsPageShell } from './components/SystemsPageShell';
 import { WhatWeSolve } from './components/WhatWeSolve';
 import { OurSolutions } from './components/OurSolutions';
 import { SpeedAdvantage } from './components/SpeedAdvantage';
@@ -12,6 +13,7 @@ import { SystemsFAQ } from './components/SystemsFAQ';
 
 export {
     SystemsHero,
+    SystemsPageShell,
     WhatWeSolve,
     OurSolutions,
     SpeedAdvantage,
