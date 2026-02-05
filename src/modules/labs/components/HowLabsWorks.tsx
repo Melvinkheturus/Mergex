@@ -16,13 +16,13 @@ export function HowLabsWorks() {
     };
 
     return (
-        <section className="pt-0 pb-20 md:pb-32 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden">
+        <section className="pt-20 pb-20 md:pb-32 bg-white relative overflow-hidden">
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-[0.02]">
+            <div className="absolute inset-0 opacity-[0.03]">
                 <div
                     className="absolute top-0 left-0 w-full h-full"
                     style={{
-                        backgroundImage: 'radial-gradient(circle, #a855f7 1px, transparent 1px)',
+                        backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
                         backgroundSize: '40px 40px',
                     }}
                 />
@@ -36,10 +36,10 @@ export function HowLabsWorks() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-gray-900">
                         {HOW_LABS_WORKS.headline}
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                         {HOW_LABS_WORKS.subheadline}
                     </p>
                 </motion.div>
@@ -60,26 +60,26 @@ export function HowLabsWorks() {
                             >
                                 {/* Connector Line (desktop only) */}
                                 {index < HOW_LABS_WORKS.steps.length - 1 && (
-                                    <div className="hidden lg:block absolute top-12 left-[calc(50%+40px)] w-[calc(100%-40px)] h-0.5 bg-gradient-to-r from-purple-400/40 to-transparent" />
+                                    <div className="hidden lg:block absolute top-12 left-[calc(50%+40px)] w-[calc(100%-40px)] h-0.5 bg-gradient-to-r from-purple-200 to-transparent" />
                                 )}
 
                                 {/* Step Card */}
-                                <div className="relative bg-white border border-purple-100 rounded-2xl p-6 hover:shadow-lg hover:border-purple-300 transition-all duration-300">
+                                <div className="relative bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:border-purple-200 transition-all duration-300">
                                     {/* Step Number */}
-                                    <div className="text-5xl font-bold text-purple-100 mb-2">
+                                    <div className="text-5xl font-bold text-gray-100 mb-2">
                                         {step.number}
                                     </div>
 
                                     {/* Icon */}
-                                    <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center mb-4">
+                                    <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-4 border border-purple-100">
                                         <Icon size={24} className="text-purple-600" />
                                     </div>
 
                                     {/* Content */}
-                                    <h3 className="text-xl font-bold mb-3 text-foreground">
+                                    <h3 className="text-xl font-bold mb-3 text-gray-900">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm text-foreground-muted leading-relaxed">
+                                    <p className="text-sm text-gray-600 leading-relaxed">
                                         {step.description}
                                     </p>
                                 </div>
@@ -99,7 +99,7 @@ export function HowLabsWorks() {
                     {HOW_LABS_WORKS.keyMessages.map((message, index) => (
                         <div
                             key={index}
-                            className="px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-full text-purple-700 font-medium"
+                            className="px-6 py-3 bg-purple-50 border border-purple-100 rounded-full text-purple-700 font-medium"
                         >
                             ✓ {message}
                         </div>
