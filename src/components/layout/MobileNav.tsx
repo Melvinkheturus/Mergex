@@ -45,76 +45,108 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Light Blur Overlay - Starts below navbar */}
+                    {/* Backdrop Overlay */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed top-20 bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg z-40"
+                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
                         onClick={onClose}
                     />
 
-                    {/* Menu Content Container */}
+                    {/* Card Container */}
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                        className="fixed top-20 bottom-0 left-0 right-0 z-40 flex flex-col pointer-events-none"
+                        initial={{ clipPath: "inset(0 0 100% 0)" }}
+                        animate={{ clipPath: "inset(0 0 0% 0)" }}
+                        exit={{ clipPath: "inset(0 0 100% 0)" }}
+                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        className="fixed inset-0 z-[61] p-2 flex flex-col pointer-events-none"
                     >
+                        <div className="w-full h-full bg-white rounded-xl overflow-hidden flex flex-col pointer-events-auto shadow-2xl relative">
 
-                        {/* Center Content Area - Mega Menu Content */}
-                        <div className="flex-1 overflow-y-auto pointer-events-auto px-4 pb-32 pt-6 hide-scrollbar">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={activeMenu}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="space-y-6"
+                            {/* Unified Header Row */}
+                            <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 flex-shrink-0">
+                                {/* Left: Logo Icon */}
+                                <Link href="/" onClick={onClose} className="flex-shrink-0">
+                                    <Image
+                                        src="/logo/mergex-logo.png"
+                                        alt="Mergex Logo"
+                                        width={42}
+                                        height={42}
+                                        className="object-contain"
+                                    />
+                                </Link>
+
+                                {/* Center: MERGEX Typo Logo */}
+                                <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+                                    <Image
+                                        src="/logo/typo-mergex-black.png"
+                                        alt="Mergex"
+                                        width={110}
+                                        height={28}
+                                        className="object-contain"
+                                    />
+                                </div>
+
+                                {/* Right: Close Button */}
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 -mr-2 text-gray-800 hover:text-black transition-colors"
+                                    aria-label="Close menu"
                                 >
-                                    {activeMenu === 'services' && <MobileServicesContent onClose={onClose} />}
-                                    {activeMenu === 'labs' && <MobileLabsContent onClose={onClose} />}
-                                    {activeMenu === 'explore' && <MobileExploreContent onClose={onClose} />}
-                                    {activeMenu === 'pricing' && <MobilePricingContent onClose={onClose} />}
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-
-                        {/* Glassmorphic Segmented Control Navigation */}
-                        <motion.div
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: 100, opacity: 0 }}
-                            transition={{ duration: 0.3, delay: 0.15 }}
-                            className="pointer-events-auto fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
-                        >
-                            <div className="flex items-center gap-1 bg-gray-200/40 backdrop-blur-xl border border-white/40 p-1.5 rounded-full shadow-2xl shadow-black/10">
-                                {menuItems.map((item) => {
-                                    const isActive = activeMenu === item.key;
-                                    return (
-                                        <button
-                                            key={item.key}
-                                            onClick={() => setActiveMenu(item.key)}
-                                            className="relative px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out z-10"
-                                        >
-                                            {isActive && (
-                                                <motion.div
-                                                    layoutId="active-mobile-nav"
-                                                    className="absolute inset-0 bg-white rounded-full shadow-sm"
-                                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                                />
-                                            )}
-                                            <span className={`relative z-10 transition-colors ${isActive ? 'text-black' : 'text-gray-600 hover:text-black/80'}`}>
-                                                {item.label}
-                                            </span>
-                                        </button>
-                                    );
-                                })}
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
                             </div>
-                        </motion.div>
+
+                            {/* Menu Content Area */}
+                            <div className="flex-1 overflow-y-auto px-4 pb-32 pt-6 hide-scrollbar">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeMenu}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="space-y-6"
+                                    >
+                                        {activeMenu === 'services' && <MobileServicesContent onClose={onClose} />}
+                                        {activeMenu === 'labs' && <MobileLabsContent onClose={onClose} />}
+                                        {activeMenu === 'explore' && <MobileExploreContent onClose={onClose} />}
+                                        {activeMenu === 'pricing' && <MobilePricingContent onClose={onClose} />}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Bottom Navigation */}
+                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-auto">
+                                <div className="flex items-center gap-1 bg-gray-100/80 backdrop-blur-xl border border-white/50 p-1.5 rounded-full shadow-lg">
+                                    {menuItems.map((item) => {
+                                        const isActive = activeMenu === item.key;
+                                        return (
+                                            <button
+                                                key={item.key}
+                                                onClick={() => setActiveMenu(item.key)}
+                                                className="relative px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out z-10"
+                                            >
+                                                {isActive && (
+                                                    <motion.div
+                                                        layoutId="active-mobile-nav"
+                                                        className="absolute inset-0 bg-white rounded-full shadow-sm"
+                                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                                    />
+                                                )}
+                                                <span className={`relative z-10 transition-colors ${isActive ? 'text-black' : 'text-gray-500 hover:text-black/70'}`}>
+                                                    {item.label}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
                 </>
             )}

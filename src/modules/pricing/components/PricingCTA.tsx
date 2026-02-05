@@ -45,6 +45,11 @@ export function PricingCTA() {
                     <p className="text-sm text-purple-100">
                         {PRICING_CTA.reassurance}
                     </p>
+
+                    {/* Final Reassurance */}
+                    <p className="text-xs text-purple-200 italic mt-3">
+                        {PRICING_CTA.finalReassurance}
+                    </p>
                 </motion.div>
             </div>
         </section>

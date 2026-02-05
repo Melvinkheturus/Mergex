@@ -17,7 +17,7 @@ export const ENGAGEMENT_TIERS = {
             includes: [
                 'MVP development (2-4 week delivery)',
                 'Core automation setup',
-                'Essential design & branding',
+                'Core design systems & brand foundations',
                 'Fast turnaround with weekly demos',
                 'Launch-ready product',
             ],
@@ -84,6 +84,7 @@ export const PRICING_FACTORS = {
         },
     ],
     closingStatement: 'We\'ll always recommend the most efficient approach—not the most expensive one.',
+    labsClarification: 'Labs engagements (AI content, visuals, experiments) are scoped separately based on creative depth and exploration goals.',
 } as const;
 
 export const WHAT_YOU_DONT_PAY_FOR = {
@@ -141,4 +142,5 @@ export const PRICING_CTA = {
     primaryCTA: 'Book a Strategy Call',
     secondaryCTA: 'Email Us',
     reassurance: 'No sales pitch. Just an honest conversation about what you\'re building and how we can help.',
+    finalReassurance: 'We\'ll always recommend the simplest, most effective approach — even if that means building less.',
 } as const;

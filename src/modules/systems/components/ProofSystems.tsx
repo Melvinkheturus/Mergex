@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { PROOF_SYSTEMS } from '../content/systems';
-import { GridBackground } from '@/components/backgrounds/GridBackground';
+
 
 /**
  * ProofSystems - Tech stack credibility
@@ -10,8 +10,8 @@ import { GridBackground } from '@/components/backgrounds/GridBackground';
  */
 export function ProofSystems() {
     return (
-        <GridBackground className="py-20 md:py-28 bg-white">
-            <section className="container mx-auto px-6 md:px-12">
+        <section className="py-16 md:py-24 bg-white w-full">
+            <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -64,8 +64,8 @@ export function ProofSystems() {
                         {PROOF_SYSTEMS.trustStatement}
                     </p>
                 </motion.div>
-            </section>
-        </GridBackground>
+            </div>
+        </section>
     );
 }
 

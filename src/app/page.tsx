@@ -11,6 +11,7 @@ import {
 } from '@/modules/homepage';
 import { FeaturedCasePreview, CASE_STUDIES } from '@/modules/caseStudies';
 import { TestimonialsSection } from '@/modules/shared';
+import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
 export const metadata: Metadata = {
   title: 'Mergex - Your All-in-One Solution Partner for AI, Automation & Growth',
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="">
+      <HomeScrollRegistrar />
       {/* 1. Hero - Solution Partner Positioning */}
       <div id="hero">
         <HeroSection />

@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { WHAT_WE_SOLVE } from '../content/systems';
 import { Users, Zap, Clock, Link } from 'lucide-react';
-import { GridBackground } from '@/components/backgrounds/GridBackground';
 import Image from 'next/image';
 
 /**
@@ -19,8 +18,8 @@ export function WhatWeSolve() {
     };
 
     return (
-        <GridBackground className="py-20 md:py-28 bg-white">
-            <section className="container mx-auto px-6 md:px-12">
+        <section className="py-16 md:py-24 bg-white w-full">
+            <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -78,8 +77,8 @@ export function WhatWeSolve() {
                         );
                     })}
                 </div>
-            </section>
-        </GridBackground>
+            </div>
+        </section>
     );
 }
 

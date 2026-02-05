@@ -159,10 +159,10 @@ export function Navbar() {
                             onMouseLeave={() => setActiveMenu(null)}
                             className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-2xl overflow-hidden p-5 -mt-px"
                         >
-                            {activeMenu === 'services' && <ServicesMenu />}
-                            {activeMenu === 'labs' && <LabsMenu />}
-                            {activeMenu === 'explore' && <ExploreMenu />}
-                            {activeMenu === 'pricing' && <PricingMenu />}
+                            {activeMenu === 'services' && <ServicesMenu closeMenu={() => setActiveMenu(null)} />}
+                            {activeMenu === 'labs' && <LabsMenu closeMenu={() => setActiveMenu(null)} />}
+                            {activeMenu === 'explore' && <ExploreMenu closeMenu={() => setActiveMenu(null)} />}
+                            {activeMenu === 'pricing' && <PricingMenu closeMenu={() => setActiveMenu(null)} />}
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -171,17 +171,17 @@ export function Navbar() {
             {/* Mobile Navbar Header - Minimal */}
             <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: visible ? 0 : -100 }}
+                animate={{ y: visible && !isMobileMenuOpen ? 0 : -100 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >
                 <div className={`
                     w-full transition-all duration-300 ease-in-out pointer-events-auto
                     ${scrolled ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
-                    backdrop-blur-xl rounded-2xl px-5 h-16 flex items-center justify-between border
+                    backdrop-blur-xl rounded-2xl px-5 h-16 flex items-center justify-between border relative
                 `}>
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-0">
+                    {/* Left: Logo Icon */}
+                    <Link href="/" className="flex-shrink-0 z-10">
                         <Image
                             src="/logo/mergex-logo.png"
                             alt="Mergex Logo"
@@ -189,19 +189,23 @@ export function Navbar() {
                             height={42}
                             className="object-contain"
                         />
+                    </Link>
+
+                    {/* Center: MERGEX Typo Logo */}
+                    <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
                         <Image
                             src="/logo/typo-mergex-black.png"
                             alt="Mergex"
                             width={110}
                             height={28}
-                            className="object-contain -ml-3"
+                            className="object-contain"
                         />
-                    </Link>
+                    </div>
 
-                    {/* Restored Hamburger Button */}
+                    {/* Right: Hamburger Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 -mr-2 text-foreground/80 focus:outline-none"
+                        className="p-2 -mr-2 text-foreground/80 focus:outline-none z-10"
                         aria-label="Toggle menu"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,7 +226,7 @@ export function Navbar() {
 
             {/* Mobile Floating Book Call Button - Centered Bottom */}
             <AnimatePresence>
-                {showMobileCallButton && (
+                {showMobileCallButton && !isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0, y: 20, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -312,7 +316,7 @@ function NavArrowIcon({ className }: { className?: string }) {
 
 // ... (NavButton and Navbar logic remains same)
 
-function ServicesMenu() {
+function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
     return (
         <motion.div
             className="grid grid-cols-12 gap-6"
@@ -347,6 +351,7 @@ function ServicesMenu() {
                 <div className="mt-8">
                     <Link
                         href="/systems"
+                        onClick={closeMenu}
                         className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group"
                     >
                         Explore Systems <ArrowUpRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
@@ -374,6 +379,7 @@ function ServicesMenu() {
                         description="Design people trust and remember"
                         tags={['UI/UX design', 'Brand identity']}
                         href="/services/design"
+                        closeMenu={closeMenu}
                     />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
@@ -383,6 +389,7 @@ function ServicesMenu() {
                         description="Websites that do more than exist"
                         tags={['Business websites', 'Web platforms']}
                         href="/services/web"
+                        closeMenu={closeMenu}
                     />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
@@ -392,6 +399,7 @@ function ServicesMenu() {
                         description="Turn ideas into real products"
                         tags={['MVP development', 'SaaS & Mobile']}
                         href="/services/mvp"
+                        closeMenu={closeMenu}
                     />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
@@ -401,6 +409,7 @@ function ServicesMenu() {
                         description="Systems that support growth"
                         tags={['AI automation', 'Digital marketing']}
                         href="/services/growth"
+                        closeMenu={closeMenu}
                     />
                 </motion.div>
             </motion.div>
@@ -423,7 +432,7 @@ function ServicesMenu() {
                         We’ll help you find the right system — fast.
                     </p>
 
-                    <Link href="/contact" className="w-full inline-flex items-center justify-between px-5 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-all shadow-md group/btn ring-1 ring-white/10">
+                    <Link href="/contact" onClick={closeMenu} className="w-full inline-flex items-center justify-between px-5 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-all shadow-md group/btn ring-1 ring-white/10">
                         <span className="font-bold text-sm">Book a Discovery Call</span>
                         <ArrowUpRight size={16} className="transform group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
@@ -444,9 +453,9 @@ function ServicesMenu() {
     );
 }
 
-function ServiceCard({ icon, title, description, tags, href }: { icon: React.ReactNode, title: string, description: string, tags: string[], href: string }) {
+function ServiceCard({ icon, title, description, tags, href, closeMenu }: { icon: React.ReactNode, title: string, description: string, tags: string[], href: string, closeMenu: () => void }) {
     return (
-        <Link href={href} className="group block h-full bg-gray-100 rounded-2xl p-6 hover:bg-gray-200 transition-all duration-300 relative">
+        <Link href={href} onClick={closeMenu} className="group block h-full bg-gray-100 rounded-2xl p-6 hover:bg-gray-200 transition-all duration-300 relative">
             <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ArrowUpRight className="w-5 h-5 text-gray-400" />
             </div>
@@ -466,7 +475,7 @@ function ServiceCard({ icon, title, description, tags, href }: { icon: React.Rea
     );
 }
 
-function LabsMenu() {
+function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
     return (
         <div className="grid grid-cols-12 gap-8 md:gap-12 p-2">
             {/* Left Side - Positioning & Invitation */}
@@ -488,6 +497,7 @@ function LabsMenu() {
                     <div className="flex flex-col items-start gap-3">
                         <Link
                             href="/labs"
+                            onClick={closeMenu}
                             className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group"
                         >
                             Explore Labs <ArrowUpRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
@@ -504,6 +514,7 @@ function LabsMenu() {
                     href="/labs/ai-content"
                     color="bg-purple-50/50"
                     image="/assets/mockups/genai.jpg.jpeg"
+                    closeMenu={closeMenu}
                 />
                 <LabsCard
                     title="Commercial Visuals & Ads"
@@ -511,23 +522,25 @@ function LabsMenu() {
                     href="/labs/visual-content"
                     color="bg-blue-50/50"
                     video="/assets/mockups/ad.mp4"
+                    closeMenu={closeMenu}
                 />
                 <LabsCard
                     title="Experiments & Explorations"
                     hook="Testing ideas, agents, and creative systems before they scale."
                     href="/labs/experiments"
                     color="bg-emerald-50/50"
+                    closeMenu={closeMenu}
                 />
             </div>
         </div>
     );
 }
 
-function LabsCard({ title, hook, href, color, image, video }: { title: string, hook: string, href: string, color: string, image?: string, video?: string }) {
+function LabsCard({ title, hook, href, color, image, video, closeMenu }: { title: string, hook: string, href: string, color: string, image?: string, video?: string, closeMenu: () => void }) {
     const hasMedia = image || video;
 
     return (
-        <Link href={href} className={`group ${color} rounded-2xl p-6 flex flex-col min-h-[400px] hover:bg-opacity-100 transition-all duration-300 border border-transparent hover:border-gray-100 relative overflow-hidden`}>
+        <Link href={href} onClick={closeMenu} className={`group ${color} rounded-2xl p-6 flex flex-col min-h-[400px] hover:bg-opacity-100 transition-all duration-300 border border-transparent hover:border-gray-100 relative overflow-hidden`}>
 
             {/* Background Media - Full Card */}
             {hasMedia && (
@@ -575,104 +588,176 @@ function LabsCard({ title, hook, href, color, image, video }: { title: string, h
     );
 }
 
-function PricingMenu() {
+function PricingMenu({ closeMenu }: { closeMenu: () => void }) {
     return (
         <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-3 space-y-4">
-                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">Pricing</h3>
-                <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">
-                    Transparent pricing for projects and partnerships.
+            {/* Left Side - Positioning + Reassurance */}
+            <div className="col-span-3 flex flex-col">
+                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">PRICING</h3>
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px] mb-3">
+                    Transparent pricing. Scoped to your needs.
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    We price based on scope, speed, and complexity — not fixed packages or hourly guesswork.
+                </p>
+                <p className="text-xs italic text-gray-500">
+                    No hidden fees. No bloated retainers.
                 </p>
             </div>
 
-            <div className="col-span-9 grid grid-cols-2 gap-6">
-                <PricingCard
-                    title="Funder & early teams"
-                    price="From $4,999"
-                    features={['High-converting website', 'Investor-ready pitch deck', 'Brand identity', 'MVP Product']}
-                    href="/pricing/startups"
+            {/* Right Side - 3 Engagement Snapshots */}
+            <div className="col-span-9 grid grid-cols-3 gap-4">
+                <EngagementSnapshot
+                    title="Launch / MVP"
+                    subtitle="For early ideas & first launches"
+                    description="Fast validation, focused builds, and launch-ready systems."
+                    href="/pricing"
+                    closeMenu={closeMenu}
                 />
-                <PricingCard
-                    title="Scale-ups & enterprise"
-                    price="Custom"
-                    features={['Pod-based engagement', 'Multiple pods', 'Design systems', 'Dedicated Support']}
+                <EngagementSnapshot
+                    title="Growth Systems"
+                    subtitle="For scaling teams & complex workflows"
+                    description="Custom software, automation, and systems that evolve with your business."
+                    highlighted
+                    href="/pricing"
+                    closeMenu={closeMenu}
+                />
+                <EngagementSnapshot
+                    title="Ongoing Partnership"
+                    subtitle="For long-term execution & evolution"
+                    description="Continuous development, optimization, and strategic collaboration."
+                    href="/pricing"
+                    closeMenu={closeMenu}
+                />
+            </div>
+
+            {/* Bottom - Optional Secondary Action */}
+            <div className="col-span-12 flex justify-center pt-4 border-t border-gray-200">
+                <Link
                     href="/contact"
-                    dark
-                />
+                    onClick={closeMenu}
+                    className="text-sm font-medium text-gray-600 hover:text-black transition-colors inline-flex items-center gap-1.5"
+                >
+                    Not sure what fits? <span className="font-semibold">Get a scoped estimate →</span>
+                </Link>
             </div>
         </div>
     );
 }
 
-function PricingCard({ title, price, features, href, dark }: { title: string, price: string, features: string[], href: string, dark?: boolean }) {
+function EngagementSnapshot({ title, subtitle, description, highlighted, href, closeMenu }: {
+    title: string;
+    subtitle: string;
+    description: string;
+    highlighted?: boolean;
+    href: string;
+    closeMenu: () => void;
+}) {
     return (
-        <div className={`rounded-2xl p-8 flex flex-col h-full ${dark ? 'bg-gradient-to-br from-gray-900 to-black text-white' : 'bg-gray-50 text-foreground'}`}>
-            <h4 className="font-serif text-2xl font-bold mb-2">{title}</h4>
-            <p className="text-lg font-medium opacity-80 mb-6">{price}</p>
-
-            <ul className="space-y-3 mb-8 flex-1">
-                {features.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm opacity-80">
-                        <Check size={16} className="mt-0.5 flex-shrink-0" />
-                        {item}
-                    </li>
-                ))}
-            </ul>
-
-            <Link href={href} className={`w-full flex items-center justify-between px-6 py-4 rounded-full transition-colors group ${dark ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
-                <span className="font-medium">Book a Discovery Call</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center transform group-hover:translate-x-1 transition-transform ${dark ? 'bg-black text-white' : 'bg-white text-black'}`}>
-                    <ArrowUpRight size={16} />
+        <Link
+            href={href}
+            onClick={closeMenu}
+            className={`group block rounded-2xl p-6 transition-all duration-300 relative ${highlighted
+                ? 'bg-gradient-to-br from-purple-50 to-blue-50 border-2 border-purple-200'
+                : 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
+                }`}
+        >
+            {highlighted && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
+                    Most Popular
                 </div>
-            </Link>
-        </div>
-    );
-}
-
-function ExploreMenu() {
-    return (
-        <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-3 space-y-4">
-                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">Explore</h3>
-                <p className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]">
-                    See how we think, build, and evolve.
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                    <Link href="/explore" className="text-sm font-medium underline underline-offset-4">Read Blog</Link>
-                    <Link href="/about" className="text-sm font-medium underline underline-offset-4">About Us</Link>
-                </div>
+            )}
+            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowUpRight className="w-4 h-4 text-gray-400" />
             </div>
-
-            <div className="col-span-6 grid grid-cols-2 gap-4">
-                <div className="col-span-2 md:col-span-1 space-y-4">
-                    <h4 className="font-serif text-xl font-medium">Resources & Blogs</h4>
-                    <p className="text-sm text-gray-500">Explore ready-made templates and insights.</p>
-                </div>
-                {/* Blog Cards */}
-                <BlogCard title="Top 10 Healthcare Website Design" category="Trends" href="/blog/healthcare-design" />
-                <BlogCard title="Best Rebranding Agencies 2025" category="Guide" href="/blog/rebranding" />
+            <h4 className="font-serif text-xl font-bold mb-1 text-foreground">{title}</h4>
+            <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3">{subtitle}</p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-4">{description}</p>
+            <div className="inline-flex items-center gap-1 text-sm font-medium text-black">
+                View Pricing
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </div>
-
-            <div className="col-span-3 bg-black text-white rounded-2xl p-6 flex flex-col justify-between h-full relative overflow-hidden">
-                <div className="relative z-10">
-                    <h3 className="font-serif text-2xl font-medium mb-4">Download free templates</h3>
-                    <Link href="/resources" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                        Download Now <ArrowUpRight size={14} />
-                    </Link>
-                </div>
-                {/* Abstract BG */}
-                <div className="absolute right-[-20px] bottom-[-20px] w-32 h-32 bg-gray-800 rounded-full blur-2xl opacity-50" />
-            </div>
-        </div>
-    );
-}
-
-function BlogCard({ title, category, href }: { title: string, category: string, href: string }) {
-    return (
-        <Link href={href} className="group block bg-gray-50 rounded-2xl p-5 hover:bg-gray-100 transition-colors">
-            <div className="aspect-video bg-gray-200 rounded-lg mb-4 w-full" />
-            <span className="text-xs font-semibold text-primary uppercase tracking-wide">{category}</span>
-            <h4 className="font-serif text-lg font-medium mt-2 group-hover:underline decoration-1 underline-offset-4">{title}</h4>
         </Link>
     );
 }
+
+function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
+    return (
+        <div className="grid grid-cols-12 gap-6">
+            {/* Left Side - Positioning */}
+            <div className="col-span-3 flex flex-col">
+                <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">EXPLORE</h3>
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px] mb-3">
+                    How we think, build, and refine systems.
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                    Our thinking, our work, and the ways people collaborate with us.
+                </p>
+            </div>
+
+            {/* Right Side - 4 Core Cards */}
+            <div className="col-span-9 grid grid-cols-2 gap-4">
+                <ExploreCard
+                    title="Case Studies"
+                    description="Real problems. Real systems. Real outcomes."
+                    href="/case-studies"
+                    closeMenu={closeMenu}
+                />
+                <ExploreCard
+                    title="About Mergex"
+                    description="Who we are, how we think, and why we're structured this way."
+                    href="/about"
+                    closeMenu={closeMenu}
+                />
+                <ExploreCard
+                    title="Partner With Us"
+                    description="Collaborate, refer, or build alongside Mergex."
+                    href="/partnership"
+                    closeMenu={closeMenu}
+                />
+                <ExploreCard
+                    title="Blog & Insights"
+                    description="Thoughts from building AI-driven systems and creative work."
+                    href="/blog"
+                    closeMenu={closeMenu}
+                />
+            </div>
+
+            {/* Bottom - Simple Links (positioned in left column bottom) */}
+            <div className="col-span-3 mt-auto pt-4 border-t border-gray-200">
+                <div className="flex flex-col gap-2">
+                    <Link href="/contact" onClick={closeMenu} className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
+                        Contact Us
+                    </Link>
+                    <Link href="/careers" onClick={closeMenu} className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
+                        Careers
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ExploreCard({ title, description, href, closeMenu }: { title: string; description: string; href: string; closeMenu: () => void }) {
+    return (
+        <Link
+            href={href}
+            onClick={closeMenu}
+            className="group block bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-all duration-300 relative"
+        >
+            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowUpRight className="w-5 h-5 text-gray-400" />
+            </div>
+            <h4 className="font-serif text-xl font-bold mb-2 text-foreground">{title}</h4>
+            <p className="text-sm text-gray-600 leading-relaxed mb-4">{description}</p>
+            <div className="inline-flex items-center gap-1 text-sm font-medium text-black">
+                {title === "Case Studies" && "View Case Studies"}
+                {title === "About Mergex" && "About Mergex"}
+                {title === "Partner With Us" && "Explore Partnerships"}
+                {title === "Blog & Insights" && "Read Insights"}
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
+        </Link>
+    );
+}
+

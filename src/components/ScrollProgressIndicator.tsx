@@ -47,7 +47,7 @@ export default function ScrollProgressIndicator() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:block" // Increased z-index
+            className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden md:block" // Lowered z-index to be below megamenu
         >
             <div className="flex flex-col items-end gap-6 py-6">
                 {sections.map((section, index) => {
@@ -59,46 +59,24 @@ export default function ScrollProgressIndicator() {
                     return (
                         <div
                             key={section.id}
-                            className="relative flex items-center justify-end group" // Use relative here
+                            className="relative flex items-center justify-end group"
                             onMouseEnter={() => setHoveredSection(index)}
                             onMouseLeave={() => setHoveredSection(null)}
                         >
-                            {/* POP-OUT CARD PREVIEW */}
+                            {/* HOVER LABEL */}
                             <AnimatePresence>
-                                {(isHovered) && (
+                                {isHovered && (
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.8, x: 10, rotateY: 15 }}
-                                        animate={{ opacity: 1, scale: 1, x: -20, rotateY: 0 }}
-                                        exit={{ opacity: 0, scale: 0.8, x: 10 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                                        className="absolute right-full mr-2 pointer-events-none" // Absolute position relative to the dot
-                                        style={{ perspective: "1000px" }}
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: -10 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute right-full mr-2 pointer-events-none"
                                     >
-                                        <div className="relative w-[300px] h-[168px] rounded-xl overflow-hidden" style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1)' }}>
-                                            {/* LIVE COMPONENT PREVIEW */}
-                                            {section.component ? (
-                                                <div className="absolute inset-0 w-[1920px] h-[1080px] origin-top-left scale-[0.156]">
-                                                    <div className="w-full h-full pointer-events-none select-none">
-                                                        {section.component}
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                /* Fallback: Show gradient if no component */
-                                                <>
-                                                    <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${section.gradient}`} />
-                                                    <div className="relative z-10 p-5 flex flex-col justify-center h-full">
-                                                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1 font-semibold">
-                                                            Section {String(index + 1).padStart(2, '0')}
-                                                        </p>
-                                                        <h4 className="text-xl font-bold text-white mb-1.5 leading-tight font-display">
-                                                            {section.label}
-                                                        </h4>
-                                                        <p className="text-xs text-gray-300 font-light leading-relaxed">
-                                                            {section.description}
-                                                        </p>
-                                                    </div>
-                                                </>
-                                            )}
+                                        <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm border border-gray-100">
+                                            <p className="text-xs font-semibold text-gray-900 whitespace-nowrap">
+                                                {section.label}
+                                            </p>
                                         </div>
                                     </motion.div>
                                 )}

@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { GridBackground } from '@/components/backgrounds/GridBackground';
 import Image from 'next/image';
 
 /**
@@ -55,8 +54,8 @@ export function SystemsFAQ() {
     };
 
     return (
-        <GridBackground className="py-20 md:py-28 bg-white">
-            <section className="container mx-auto px-6 md:px-12">
+        <section className="py-16 md:py-24 bg-white w-full">
+            <div className="container mx-auto px-6 md:px-12">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <motion.div
@@ -124,7 +123,7 @@ export function SystemsFAQ() {
                         ))}
                     </div>
                 </div>
-            </section>
-        </GridBackground>
+            </div>
+        </section>
     );
 }

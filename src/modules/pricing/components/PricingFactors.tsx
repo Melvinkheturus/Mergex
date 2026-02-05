@@ -49,6 +49,17 @@ export function PricingFactors() {
                 >
                     <p className="text-lg font-medium text-purple-900">{PRICING_FACTORS.closingStatement}</p>
                 </motion.div>
+
+                {/* Labs Clarification */}
+                <motion.p
+                    className="mx-auto max-w-2xl text-center text-sm text-gray-500 italic mt-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                    {PRICING_FACTORS.labsClarification}
+                </motion.p>
             </div>
         </section>
     );

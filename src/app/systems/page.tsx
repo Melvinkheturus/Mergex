@@ -14,6 +14,7 @@ import {
 import { SystemsCasePreviews } from '@/modules/caseStudies';
 import { PageTransition } from '@/components/transitions/PageTransition';
 import TargetCursor from '@/components/TargetCursor';
+import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRegistrar';
 
 export const metadata: Metadata = {
     title: 'Mergex Systems - Solution Partner | Custom Software & AI Automation',
@@ -35,6 +36,7 @@ export default function SystemsPage() {
     return (
         <PageTransition>
             <TargetCursor targetSelector="a, button, .cursor-target" />
+            <SystemsScrollRegistrar />
             <SystemsPageShell>
                 <main className="bg-white text-gray-900">
                     {/* 1. Hero - Minimal positioning */}
@@ -43,47 +45,47 @@ export default function SystemsPage() {
                     </div>
 
                     {/* 2. What We Solve - Pain Point Matching */}
-                    <div id="pain-points" className="systems-section py-20 md:py-28">
+                    <div id="pain-points" className="systems-section">
                         <WhatWeSolve />
                     </div>
 
                     {/* 3. Our Solutions - Service Pillars */}
-                    <div id="solutions" className="systems-section py-20 md:py-28">
+                    <div id="solutions" className="systems-section">
                         <OurSolutions />
                     </div>
 
                     {/* 4. Speed Advantage - Key Differentiator */}
-                    <div id="speed" className="systems-section py-20 md:py-28">
+                    <div id="speed" className="systems-section">
                         <SpeedAdvantage />
                     </div>
 
                     {/* 5. How We Work - Process Confidence */}
-                    <div id="process" className="systems-section py-20 md:py-28">
+                    <div id="process" className="systems-section">
                         <HowWeWorkSystems />
                     </div>
 
                     {/* 6. Proof - Tech Stack */}
-                    <div id="proof" className="systems-section py-20 md:py-28">
+                    <div id="proof" className="systems-section">
                         <ProofSystems />
                     </div>
 
                     {/* 7. Case Studies - Conversion Proof */}
-                    <div id="case-studies" className="systems-section py-20 md:py-28">
+                    <div id="case-studies" className="systems-section">
                         <SystemsCasePreviews />
                     </div>
 
                     {/* 8. FAQ Section */}
-                    <div id="faq" className="systems-section py-20 md:py-28">
+                    <div id="faq" className="systems-section">
                         <SystemsFAQ />
                     </div>
 
                     {/* 9. Engagement & Pricing */}
-                    <div id="engagement" className="systems-section py-20 md:py-28">
+                    <div id="engagement" className="systems-section">
                         <EngagementModel />
                     </div>
 
                     {/* 10. CTA - Final Conversion */}
-                    <div id="cta" className="systems-section py-20 md:py-28">
+                    <div id="cta" className="systems-section">
                         <SystemsCTA />
                     </div>
                 </main>
