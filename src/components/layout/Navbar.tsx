@@ -119,7 +119,10 @@ export function Navbar() {
                         <NavButton label="Systems" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} />
-                        <NavButton label="Pricing" active={activeMenu === 'pricing'} onEnter={() => setActiveMenu('pricing')} onLeave={() => setActiveMenu(null)} />
+                        {/* Direct Link for Pricing */}
+                        <Link href="/pricing" className="relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors text-black/80 hover:text-black">
+                            Pricing
+                        </Link>
                     </div>
 
                     {/* Right CTA */}
@@ -162,7 +165,6 @@ export function Navbar() {
                             {activeMenu === 'services' && <ServicesMenu closeMenu={() => setActiveMenu(null)} />}
                             {activeMenu === 'labs' && <LabsMenu closeMenu={() => setActiveMenu(null)} />}
                             {activeMenu === 'explore' && <ExploreMenu closeMenu={() => setActiveMenu(null)} />}
-                            {activeMenu === 'pricing' && <PricingMenu closeMenu={() => setActiveMenu(null)} />}
                         </motion.div>
                     )}
                 </AnimatePresence>
