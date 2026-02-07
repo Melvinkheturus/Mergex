@@ -10,6 +10,7 @@ import {
     LabsCTA,
 } from '@/modules/labs';
 import { LabsExperiments } from '@/modules/caseStudies';
+import { ExperimentsGallery } from '@/modules/labsPortfolio';
 
 export const metadata: Metadata = {
     title: 'Mergex Labs - AI Content Studio | Creative AI Solutions',
@@ -62,6 +63,11 @@ export default function LabsPage() {
             {/* 5. Work Gallery - CRITICAL Visual Proof */}
             <div id="work">
                 <WorkGallery />
+            </div>
+
+            {/* 5.5 Experiments Gallery - Visual Portfolio */}
+            <div id="experiments">
+                <ExperimentsGallery />
             </div>
 
             {/* 6. Why Labs Exists - Philosophy */}

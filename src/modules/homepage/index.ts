@@ -12,6 +12,7 @@ import { ProblemContext } from './components/ProblemContext';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
 import { ProofSection } from './components/ProofSection';
 import { ProductsGlimpseSection } from './components/ProductsGlimpseSection';
+import { FeaturedSystemsWork } from './components/FeaturedSystemsWork';
 
 export {
     HeroSection,
@@ -28,4 +29,5 @@ export {
     HowWeWorkSection,
     ProofSection,
     ProductsGlimpseSection,
+    FeaturedSystemsWork,
 };

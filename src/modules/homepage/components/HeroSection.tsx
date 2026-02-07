@@ -1,10 +1,5 @@
-'use client';
-
-import { useRef, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Playfair_Display } from 'next/font/google';
 
 const playfair = Playfair_Display({
@@ -13,61 +8,16 @@ const playfair = Playfair_Display({
     weight: ['400', '500', '600']
 });
 
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-}
-
 /**
- * HeroSection - Scroll-Driven Typography Transformation
+ * HeroSection - Simple Hero Section
  * 
- * Scroll Sequence:
- * 1. Start: Large editorial typography (light background)
- * 2. Mid: Text fades out sequentially
- * 3. Transition: Black layer rises from bottom
- * 4. End: 3D scene appears on dark background
- * 
- * Inspired by Urbix Studio typography + Coda scroll progression
+ * Clean hero section with editorial typography on light background.
+ * No animations - just simple scroll behavior.
  */
 export function HeroSection() {
-    const heroRef = useRef<HTMLDivElement>(null);
-
-    const headlineRef = useRef<HTMLDivElement>(null);
-    const supportingRef = useRef<HTMLParagraphElement>(null);
-    const authorityRef = useRef<HTMLParagraphElement>(null);
-    const ctaRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!heroRef.current) return;
-
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heroRef.current,
-                    start: 'top top',
-                    end: '+=200%',
-                    pin: true,
-                    scrub: 1,
-                    // markers: true, // Enable for debugging
-                }
-            });
-
-            // Sequential text fade out
-            tl.to(supportingRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.35)
-                .to(authorityRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.45)
-                .to(ctaRef.current, { opacity: 0, y: -50, duration: 0.3 }, 0.55)
-
-                // Headline fades last
-                .to(headlineRef.current, { opacity: 0, y: -100, duration: 0.4 }, 0.6);
-        }, heroRef);
-
-        return () => {
-            ctx.revert();
-        };
-    }, []);
 
     return (
         <section
-            ref={heroRef}
             className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
             style={{ fontFamily: 'var(--font-manrope)' }}
         >
@@ -80,7 +30,6 @@ export function HeroSection() {
 
                     {/* Editorial Headline - Mixed Typography */}
                     <h1
-                        ref={headlineRef}
                         className="mb-12 md:mb-16 mt-8 leading-[0.95] tracking-tight"
                     >
                         {/* Line 1: Where Ideas Merge */}
@@ -106,7 +55,6 @@ export function HeroSection() {
 
                     {/* Supporting Text */}
                     <p
-                        ref={supportingRef}
                         className="text-base md:text-xl text-gray-700 max-w-2xl mb-6 leading-relaxed"
                     >
                         We design and build scalable digital products that support complex workflows and business-critical systems.
@@ -114,14 +62,13 @@ export function HeroSection() {
 
                     {/* Authority Reinforcer */}
                     <p
-                        ref={authorityRef}
                         className="text-sm md:text-base text-gray-500 max-w-xl mb-10 leading-relaxed"
                     >
                         From early ideas to production-ready systems — we help you move fast without breaking things.
                     </p>
 
                     {/* CTAs */}
-                    <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 mb-4">
+                    <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
                         <Link
                             href="/contact"
                             className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a1a2e] text-white rounded-full text-base md:text-lg font-medium transition-all hover:scale-105 hover:shadow-xl shadow-lg"

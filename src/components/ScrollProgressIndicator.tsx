@@ -49,7 +49,7 @@ export default function ScrollProgressIndicator() {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden md:block" // Lowered z-index to be below megamenu
         >
-            <div className="flex flex-col items-end gap-6 py-6">
+            <div className="flex flex-col items-end gap-3 py-6">
                 {sections.map((section, index) => {
                     const isBigDash = index % 2 === 0;
                     const isCurrent = index === activeSection;
@@ -73,8 +73,8 @@ export default function ScrollProgressIndicator() {
                                         transition={{ duration: 0.2 }}
                                         className="absolute right-full mr-2 pointer-events-none"
                                     >
-                                        <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm border border-gray-100">
-                                            <p className="text-xs font-semibold text-gray-900 whitespace-nowrap">
+                                        <div className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-gray-100">
+                                            <p className="text-[10px] font-semibold text-gray-900 whitespace-nowrap">
                                                 {section.label}
                                             </p>
                                         </div>
@@ -85,18 +85,18 @@ export default function ScrollProgressIndicator() {
                             {/* NAVIGATION DOT/BUTTON */}
                             <motion.button
                                 onClick={() => scrollToSection(section.id)}
-                                className="relative flex items-center justify-start h-4 w-6 focus:outline-none" // Aligned to start to match original
+                                className="relative flex items-center justify-start h-3 w-5 focus:outline-none" // Aligned to start to match original
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                                 aria-label={`Go to ${section.label}`}
                             >
-                                <div className="relative flex items-center justify-center w-4 h-4">
+                                <div className="relative flex items-center justify-center w-3 h-3">
                                     {/* Glow effect for current */}
                                     {isCurrent && (
                                         <motion.div
                                             className="absolute inset-0 rounded-full"
                                             style={{
-                                                boxShadow: '0 0 12px 3px rgba(139, 92, 246, 0.4)',
+                                                boxShadow: '0 0 8px 2px rgba(139, 92, 246, 0.4)',
                                             }}
                                             animate={{
                                                 scale: [1, 1.4, 1],
@@ -112,11 +112,11 @@ export default function ScrollProgressIndicator() {
 
                                     {isCurrent ? (
                                         // Current position: refined dot with gradient (Original Style)
-                                        <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-violet-400 to-violet-900 shadow-lg shadow-violet-900/30 border-2 border-white transition-all duration-300 relative z-10" />
+                                        <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-violet-400 to-violet-900 shadow-lg shadow-violet-900/30 border border-white transition-all duration-300 relative z-10" />
                                     ) : (
                                         // Bolder dashes with gradient for filled (Original Style)
                                         <div
-                                            className={`${isBigDash ? 'w-4' : 'w-2.5'} h-1 rounded-full transition-all duration-300 ${isFilled ? 'bg-gradient-to-b from-violet-400 to-violet-900 shadow-sm shadow-violet-900/20' : 'bg-gray-300 group-hover:bg-gray-400'
+                                            className={`${isBigDash ? 'w-3' : 'w-1.5'} h-0.5 rounded-full transition-all duration-300 ${isFilled ? 'bg-gradient-to-b from-violet-400 to-violet-900 shadow-sm shadow-violet-900/20' : 'bg-gray-300 group-hover:bg-gray-400'
                                                 }`}
                                         />
                                     )}

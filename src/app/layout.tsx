@@ -1,69 +1,73 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk, Noto_Sans, Poppins, Playfair_Display, Pinyon_Script, Manrope } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const notoSans = Noto_Sans({
-  variable: "--font-noto-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
-
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const pinyon = Pinyon_Script({
-  variable: "--font-pinyon",
-  subsets: ["latin"],
-  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Mergex - Architecting the Future of Tech",
+  metadataBase: new URL('https://mergex.com'),
+  title: {
+    default: "Mergex | Architecting the Future of Tech",
+    template: "%s | Mergex"
+  },
   description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality with AI-driven development and strategic innovation.",
-  keywords: ["software development", "AI automation", "SaaS", "tech ecosystem", "digital transformation"],
+  keywords: ["software development", "AI automation", "SaaS", "tech ecosystem", "digital transformation", "enterprise software", "innovation labs"],
   authors: [{ name: "Mergex Ecosystems Inc." }],
+  creator: "Mergex Ecosystems Inc.",
+  publisher: "Mergex Ecosystems Inc.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Mergex - Architecting the Future of Tech",
+    title: "Mergex | Architecting the Future of Tech",
     description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality.",
-    type: "website",
+    url: 'https://mergex.com',
+    siteName: 'Mergex',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://mergex.com/og-image.jpg', // Ensure this image exists in public/
+        width: 1200,
+        height: 630,
+        alt: 'Mergex Ecosystems',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Mergex | Architecting the Future of Tech",
+    description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality.",
+    images: ['https://mergex.com/twitter-image.jpg'], // Ensure this image exists in public/
+    creator: '@mergex_inc',
+  },
+  alternates: {
+    canonical: 'https://mergex.com',
   },
 };
-import { LenisProvider } from "@/lib/lenis-provider";
-import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
 import LayoutContent from "@/components/LayoutContent";
 
 export default function RootLayout({
@@ -88,7 +92,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} ${poppins.variable} ${manrope.variable} ${playfair.variable} ${pinyon.variable} antialiased bg-background text-foreground`}
+        className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         <LayoutContent>{children}</LayoutContent>
       </body>

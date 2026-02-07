@@ -8,8 +8,8 @@ import {
   ProofSection,
   ProductsGlimpseSection,
   FAQSection,
+  FeaturedSystemsWork,
 } from '@/modules/homepage';
-import { FeaturedCasePreview, CASE_STUDIES } from '@/modules/caseStudies';
 import { TestimonialsSection } from '@/modules/shared';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
@@ -63,9 +63,9 @@ export default function Home() {
         <ProofSection />
       </div>
 
-      {/* 7. Featured Case Study - Social Proof */}
-      <div id="featured-case">
-        <FeaturedCasePreview caseStudy={CASE_STUDIES[0]} />
+      {/* 7. Featured Systems Work - Credibility Teaser */}
+      <div id="featured-work">
+        <FeaturedSystemsWork />
       </div>
 
       {/* 8. Products Glimpse - Future Vision */}

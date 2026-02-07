@@ -5,6 +5,30 @@ export type CaseStudyType = 'systems' | 'labs-experiment';
 export type BusinessType = 'startup' | 'ecommerce' | 'enterprise' | 'agency';
 export type ProblemType = 'mvp-launch' | 'automation' | 'scaling' | 'content-creation' | 'system-integration';
 
+// System categories for organizing case studies
+export type SystemCategory =
+    | 'platform'           // Full platforms, marketplaces, SaaS
+    | 'automation'         // AI automation, workflow automation
+    | 'commerce'           // E-commerce, payments, inventory
+    | 'dashboard'          // Admin panels, internal tools
+    | 'ai-intelligent';    // AI/ML integration, intelligent systems
+
+// Entry angle for presenting same project in different contexts
+export interface EntryAngle {
+    categoryId: SystemCategory;
+    headline: string;        // Alternative headline for this category
+    focusArea: string;       // What to emphasize for this angle
+}
+
+// Complexity indicators for technical depth
+export interface SystemComplexity {
+    architecture?: string[];   // Key architectural decisions
+    constraints?: string[];    // Technical constraints faced
+    tradeoffs?: string[];     // Major trade-off decisions
+    integrations?: string[];  // Third-party integrations
+    scale?: string[];         // Scalability considerations
+}
+
 // Tech stack item structure
 export interface TechItem {
     name: string;
@@ -25,6 +49,115 @@ export interface MetricItem {
     before?: string;
     after: string;
     improvement?: string;
+}
+
+// 10-Section Conversion-Focused Case Study Template
+export interface ConversionCaseStudy {
+    // Section 1: Hero
+    hero: {
+        headline: string;           // System-focused, not client-focused
+        subline: string;            // One-line context
+        heroImages: string[];       // Hero visual montage
+    };
+
+    // Section 2: Quick Snapshot
+    snapshot: {
+        industry: string;
+        systemType: string;
+        scope: string;
+        timeline: string;
+        role: string;
+    };
+
+    // Section 3: The Problem
+    problem: {
+        context: string;            // 2-3 paragraphs
+        realProblem: string;        // What they actually needed
+    };
+
+    // Section 4: The Constraints
+    constraints: {
+        intro: string;              // Opening line
+        categories: {
+            title: string;
+            items: string[];
+        }[];
+    };
+
+    // Section 5: The System We Designed
+    systemDesign: {
+        approach: string;           // Opening paragraph
+        components: {
+            title: string;
+            description: string;
+            details?: string[];
+        }[];
+        philosophy: string;         // Closing thought
+    };
+
+    // Section 6: Execution & Speed
+    execution: {
+        overview: string;
+        phases: {
+            week: string;
+            work: string;
+        }[];
+        techStack?: {
+            category: string;
+            items: string[];
+        }[];
+        stackPhilosophy?: string;
+    };
+
+    // Section 7: Visual Proof
+    visuals: {
+        title: string;
+        description: string;
+        image: string;
+        annotations?: string[];
+    }[];
+
+    // Section 8: The Outcome
+    outcome: {
+        intro: string;
+        categories: {
+            title: string;
+            items: string[];
+        }[];
+        systemPerformance?: string[];
+        qualitative: string[];
+        honesty: string;            // "We didn't inflate metrics..."
+    };
+
+    // Section 9: Reflection
+    reflection: {
+        whatWelearned: {
+            title: string;
+            insight: string;
+        }[];
+        whatWedDoDifferently: {
+            title: string;
+            insight: string;
+        }[];
+        closing: string;
+    };
+
+    // Section 10: Soft CTA
+    cta: {
+        headline: string;
+        context: string;
+        ctaText: string;
+        ctaSubtext: string;
+    };
+
+    // Optional: Technical Appendix
+    technicalAppendix?: {
+        decisions: {
+            question: string;
+            answer: string;
+        }[];
+        complexityIndicatorsMet: string[];
+    };
 }
 
 // Detailed case study structure for comprehensive case studies
@@ -120,6 +253,15 @@ export interface CaseStudy {
     speedIndicator: string; // "MVP in 3 weeks"
     thumbnailImage?: string;
 
+    // NEW: System categorization
+    systemTypes: SystemCategory[];  // Can belong to multiple categories
+
+    // NEW: Multiple entry angles
+    entryAngles: EntryAngle[];
+
+    // NEW: Complexity indicators
+    complexity: SystemComplexity;
+
     // Full Case Study Content (for systems cases)
     fullCase?: {
         // 1. Context
@@ -174,6 +316,9 @@ export interface CaseStudy {
     // Detailed Case Study (extensive documentation)
     detailedCase?: DetailedCaseContent;
 
+    // NEW: Conversion-Focused Case Study (10-section template)
+    conversionCase?: ConversionCaseStudy;
+
     // Labs Experiment (different format)
     experiment?: {
         concept: string;
@@ -199,6 +344,58 @@ export const CASE_STUDIES: CaseStudy[] = [
         problemSummary: 'A growing elevator parts distributor struggling with manual order processing, disconnected inventory, and zero online presence.',
         outcomeHint: 'Real-time inventory system, automated ordering, 60% faster fulfillment',
         speedIndicator: 'MVP in 3 weeks',
+
+        // System categorization
+        systemTypes: ['platform', 'commerce', 'dashboard'],
+
+        // Multiple entry angles
+        entryAngles: [
+            {
+                categoryId: 'platform',
+                headline: 'A Scalable B2B Commerce Platform',
+                focusArea: 'Multi-tier user system with real-time inventory synchronization'
+            },
+            {
+                categoryId: 'commerce',
+                headline: 'A Real-Time Inventory Orchestration System',
+                focusArea: 'Automated order processing with integrated payment workflows'
+            },
+            {
+                categoryId: 'dashboard',
+                headline: 'A Comprehensive Admin & CMS Platform',
+                focusArea: '17 management modules with bulk operations and content management'
+            }
+        ],
+
+        // Complexity indicators
+        complexity: {
+            architecture: [
+                'Multi-tier user authentication with role-based access control',
+                'Real-time inventory sync across multiple warehouses',
+                'Optimistic concurrency control for stock reservations',
+                'Server-side rendering with React Server Components'
+            ],
+            constraints: [
+                'Backward compatibility with existing accounting software',
+                'Support for complex B2B pricing tiers and bulk discounts',
+                'Mobile-first design for field sales teams',
+                'Must handle offline order queuing'
+            ],
+            tradeoffs: [
+                'Integration over replacement - kept existing CRM instead of building custom',
+                'Server Components for performance vs client-side flexibility',
+                'Phased rollout strategy vs big-bang launch to reduce risk',
+                'Supabase Row Level Security vs custom authorization layer'
+            ],
+            integrations: ['Supabase PostgreSQL', 'Clerk Auth', 'Razorpay Payments', 'Cloudinary CDN', 'Resend Email', 'Upstash Redis'],
+            scale: [
+                'Designed for 10x current transaction volume without re-architecture',
+                'Database optimized for millions of product records',
+                'Horizontal scaling ready with edge deployment',
+                'Caching strategy for frequently accessed catalog data'
+            ]
+        },
+
         fullCase: {
             context: {
                 industry: 'Industrial Equipment Distribution',
@@ -493,6 +690,58 @@ export const CASE_STUDIES: CaseStudy[] = [
         problemSummary: 'Support team drowning in repetitive questions, response times suffering, and customer satisfaction dropping despite team growth.',
         outcomeHint: 'AI-powered triage, 70% faster response time, happier team',
         speedIndicator: 'Deployed in 2 weeks',
+
+        // System categorization
+        systemTypes: ['automation', 'ai-intelligent', 'dashboard'],
+
+        // Multiple entry angles
+        entryAngles: [
+            {
+                categoryId: 'automation',
+                headline: 'An AI-Powered Support Triage System',
+                focusArea: 'Automated ticket classification and routing with intelligent prioritization'
+            },
+            {
+                categoryId: 'ai-intelligent',
+                headline: 'A Multi-Model AI Orchestration Platform',
+                focusArea: 'GPT-4 and Claude integration for context-aware automation'
+            },
+            {
+                categoryId: 'dashboard',
+                headline: 'A Real-Time Operations Dashboard',
+                focusArea: 'Live monitoring with predictive analytics and team performance metrics'
+            }
+        ],
+
+        // Complexity indicators
+        complexity: {
+            architecture: [
+                'Multi-model AI router with fallback strategies',
+                'Event-driven workflow engine with parallel processing',
+                'Real-time vector similarity search for knowledge base',
+                'Webhook-based integrations with third-party tools'
+            ],
+            constraints: [
+                'Must handle sensitive customer data with GDPR compliance',
+                'Response time requirements under 2 seconds for triage',
+                'Cost optimization across multiple AI model providers',
+                'Zero-downtime deployment requirement'
+            ],
+            tradeoffs: [
+                'Claude for accuracy vs GPT-4 for speed in different contexts',
+                'Custom ML model training vs leveraging foundation models',
+                'Real-time processing vs batch optimization for cost',
+                'Microservices complexity vs monolithic simplicity'
+            ],
+            integrations: ['OpenAI GPT-4', 'Anthropic Claude', 'Pinecone Vector DB', 'Slack API', 'Zendesk API', 'Webhooks'],
+            scale: [
+                'Designed to process 50,000+ tickets per month',
+                'Horizontal scaling with queue-based architecture',
+                'Rate limiting and cost controls across AI providers',
+                'Cached responses for common queries to reduce API costs'
+            ]
+        },
+
         fullCase: {
             context: {
                 industry: 'B2B SaaS',
@@ -551,8 +800,14 @@ export const CASE_STUDIES: CaseStudy[] = [
         businessType: 'ecommerce',
         problemType: 'content-creation',
         problemSummary: 'Fashion brand needed product photography for 500 SKUs. Traditional shoot would take 2 weeks and $15K.',
-        outcomeHint: 'AI-generated lifestyle shots, 3-day turnaround, <$2K cost',
-        speedIndicator: '3 days',
+        outcomeHint: 'AI-generated brand video suite delivered in 48 hours',
+        speedIndicator: 'Delivered in 48 hours',
+
+        // Minimal system categorization for Labs experiments
+        systemTypes: [],  // Labs experiments don't fit system categories
+        entryAngles: [],  // No alternative angles for experiments
+        complexity: {},   // Complexity not relevant for creative experiments
+
         experiment: {
             concept: 'Use AI to generate lifestyle product photography instead of traditional photoshoots',
             execution: 'Trained custom model on brand aesthetic. Generated 500 product renders with lifestyle backgrounds. Human curation selected best variants.',
@@ -561,6 +816,232 @@ export const CASE_STUDIES: CaseStudy[] = [
                 after: 'AI generation: 3 days, <$2K cost, infinite variations, instant revisions',
             },
             tools: ['Midjourney', 'Stable Diffusion', 'Custom LoRA Training'],
+        },
+    },
+    {
+        id: 'marketing-automation-platform',
+        type: 'systems',
+        slug: 'marketing-automation-platform',
+        title: 'From 2% to 15% Email Conversion with AI-Powered Automation',
+        client: 'A Growing DTC Brand',
+        businessType: 'ecommerce',
+        problemType: 'automation',
+        problemSummary: 'Manual email campaigns with zero segmentation led to low engagement, 2% conversion rates, and marketing team burnout.',
+        outcomeHint: '8x email engagement, 15% conversion rate, 40 hours/week saved',
+        speedIndicator: 'MVP in 4 weeks',
+
+        // System categorization
+        systemTypes: ['automation', 'ai-intelligent', 'commerce'],
+
+        // Multiple entry angles
+        entryAngles: [
+            {
+                categoryId: 'automation',
+                headline: 'A Behavioral Email Automation System',
+                focusArea: 'AI-powered segmentation with automated campaign workflows'
+            },
+            {
+                categoryId: 'ai-intelligent',
+                headline: 'An AI Customer Intent Prediction Platform',
+                focusArea: 'Machine learning for purchase prediction and product recommendations'
+            },
+            {
+                categoryId: 'commerce',
+                headline: 'A Revenue-Optimized Marketing Engine',
+                focusArea: 'Cart abandonment recovery and personalized product flows'
+            }
+        ],
+
+        // Complexity indicators
+        complexity: {
+            architecture: [
+                'Event-driven architecture with real-time behavioral tracking',
+                'ML pipeline for customer segmentation and scoring',
+                'Multi-channel orchestration (email, SMS, push)',
+                'A/B testing framework with statistical significance engine'
+            ],
+            constraints: [
+                'Must integrate with existing Shopify store without disruption',
+                'GDPR and CAN-SPAM compliance requirements',
+                'Email deliverability optimization to avoid spam filters',
+                'Cost per send optimization across providers'
+            ],
+            tradeoffs: [
+                'Real-time personalization vs batch campaign efficiency',
+                'Deep AI personalization vs email deliverability risk',
+                'Custom ML models vs pre-built recommendation engines',
+                'Feature richness vs interface simplicity for marketers'
+            ],
+            integrations: ['Shopify API', 'SendGrid', 'Customer.io', 'Segment CDP', 'Google Analytics', 'Meta Pixel'],
+            scale: [
+                'Built to handle 500K+ email sends per month',
+                'Real-time behavioral tracking for 50K+ active users',
+                'Horizontal scaling with queue-based processing',
+                'Distributed caching for customer profiles and product data'
+            ]
+        },
+
+        fullCase: {
+            context: {
+                industry: 'Direct-to-Consumer E-Commerce',
+                situation: 'A DTC brand with 50K+ email subscribers was seeing declining engagement. Marketing team manually sent batch emails, no personalization, no behavioral triggers. Conversion rates were stuck at 2%.',
+            },
+            realProblem: {
+                headline: 'More Emails Didn\'t Mean More Revenue',
+                whatWasntWorking: 'Team was sending 3-4 email blasts per week to entire list. No segmentation, no timing optimization, no triggered flows. Customers received irrelevant products, wrong timing, generic messaging.',
+                whyVendorsFailed: 'Existing email platform (Mailchimp) was too basic. Enterprise solutions (Klaviyo, Braze) quoted $2K+/month with complex setup. They needed smart automation without enterprise complexity.',
+                complexity: 'The challenge was behavioral segmentation. Understanding purchase patterns, browsing behavior, cart abandonment timing, and product affinity across thousands of customers.',
+            },
+            approach: {
+                headline: 'Smart Segmentation First, Automation Second',
+                simplification: 'Instead of building everything at once, we focused on the highest-impact flows: abandoned cart, post-purchase, browse abandonment. Each with AI-powered product recommendations.',
+                whatWeDidntBuild: 'We didn\'t build a custom ESP (integrated with existing). Didn\'t build SMS (email first). Didn\'t build complex multi-variant testing (A/B was enough).',
+                decisionProcess: 'Analyzed 6 months of email data to identify drop-off points. Built AI segmentation model to predict purchase intent. Automated the 3 flows responsible for 60% of potential revenue.',
+            },
+            execution: {
+                mvpTimeline: '4 weeks from data analysis to first automated campaign',
+                iterations: 3,
+                whatShippedFirst: 'Week 1-2: AI segmentation model trained on historical data. Week 3: Abandoned cart flow with dynamic product recommendations. Week 4: Post-purchase and browse abandonment flows.',
+            },
+            outcome: {
+                metrics: [
+                    'Email conversion rate: 2% → 15% (7.5x improvement)',
+                    'Click-through rate: 3% → 24% (8x improvement)',
+                    'Cart abandonment recovery: 0% → 35%',
+                    '40 hours/week saved in manual campaign creation',
+                ],
+                qualitativeResults: [
+                    'Marketing team shifted from execution to strategy',
+                    'Personalized recommendations increased average order value by 22%',
+                    'Customer feedback improved - "emails are actually relevant now"',
+                ],
+                direction: 'Platform deployed 6 weeks ago. Expanding to SMS and push notifications next quarter.',
+            },
+            reflection: {
+                headline: 'What We Learned',
+                learnings: [
+                    'Segmentation quality matters more than campaign volume. 3 smart emails beat 10 generic ones.',
+                    'AI product recommendations only work with clean behavioral data. We spent extra time on data hygiene.',
+                    'Gradual rollout prevented disasters. Testing with 10% of list first caught timing issues.',
+                ],
+            },
+            cta: {
+                headline: 'Ready to Automate Your Marketing?',
+                ctaText: 'Explore Marketing Automation',
+            },
+        },
+    },
+    {
+        id: 'multi-vendor-marketplace',
+        type: 'systems',
+        slug: 'multi-vendor-marketplace',
+        title: 'Building a Multi-Vendor Marketplace from Scratch in 5 Weeks',
+        client: 'A Regional Service Aggregator',
+        businessType: 'startup',
+        problemType: 'mvp-launch',
+        problemSummary: 'Phone-based vendor coordination, manual customer matching, and payment chaos were limiting growth potential.',
+        outcomeHint: '200+ vendors onboarded, 70% faster booking, automated payments',
+        speedIndicator: 'MVP in 5 weeks',
+
+        // System categorization
+        systemTypes: ['platform', 'automation', 'commerce'],
+
+        // Multiple entry angles
+        entryAngles: [
+            {
+                categoryId: 'platform',
+                headline: 'A Multi-Vendor Marketplace Platform',
+                focusArea: 'Vendor onboarding, service listings, and customer matching system'
+            },
+            {
+                categoryId: 'automation',
+                headline: 'A Smart Service Routing System',
+                focusArea: 'Automated vendor matching based on availability, pricing, and ratings'
+            },
+            {
+                categoryId: 'commerce',
+                headline: 'A Multi-Party Payment Orchestration System',
+                focusArea: 'Automated payment splits, escrow, and vendor payouts'
+            }
+        ],
+
+        // Complexity indicators
+        complexity: {
+            architecture: [
+                'Multi-tenant architecture with vendor isolation',
+                'Real-time availability matching algorithm',
+                'Payment orchestration with split transactions',
+                'Event-driven booking state machine'
+            ],
+            constraints: [
+                'Must handle concurrent booking requests without double-booking',
+                'Payment processing compliance (PCI-DSS)',
+                'Support for 200+ vendors with different service types',
+                'Mobile-responsive for field service providers'
+            ],
+            tradeoffs: [
+                'Marketplace model vs managed service model for vendor relations',
+                'Automated matching vs manual vendor selection for customers',
+                'Instant booking vs request-quote flow for complex services',
+                'Monolithic platform vs microservices for vendor management'
+            ],
+            integrations: ['Stripe Connect', 'Twilio SMS', 'Google Maps API', 'SendGrid', 'Cloudinary', 'Calendar APIs'],
+            scale: [
+                'Built to support 500+ vendors across multiple service categories',
+                'Handle 10,000+ bookings per month',
+                'Real-time matching with sub-second response times',
+                'Geographic sharding for location-based service routing'
+            ]
+        },
+
+        fullCase: {
+            context: {
+                industry: 'On-Demand Services Marketplace',
+                situation: 'A service aggregator connecting customers with local professionals (plumbers, electricians, cleaners) was operating entirely over phone and WhatsApp. Every booking required manual vendor matching, price negotiation, and payment collection.',
+            },
+            realProblem: {
+                headline: 'Manual Coordination Was the Bottleneck',
+                whatWasntWorking: 'Operations team manually matched each customer request with available vendors. Price negotiations happened over phone. Payments were collected in cash or via multiple payment apps. Zero visibility into vendor performance or customer satisfaction.',
+                whyVendorsFailed: 'Existing marketplace platforms (Thumbtack model) didn\'t fit regional needs. Custom development quotes were $100K+ with 6-month timelines. They needed to launch fast to beat competitors.',
+                complexity: 'Real challenge was vendor onboarding at scale, dynamic pricing based on location and urgency, automated matching algorithms, and multi-party payment splitting (platform fee + vendor payout).',
+            },
+            approach: {
+                headline: 'Marketplace MVP: Matching, Booking, Payments',
+                simplification: 'Focus on core marketplace mechanics: vendor profiles, customer requests, automated matching, integrated payments. Everything else (advanced scheduling, reviews, chat) could come later.',
+                whatWeDidntBuild: 'No custom chat (used WhatsApp integration). No advanced analytics dashboard (Google Sheets exports initially). No mobile app (mobile-optimized web first).',
+                decisionProcess: 'Interviewed 20 vendors and 30 customers to identify must-have vs. nice-to-have features. Prioritized features that eliminated manual phone calls.',
+            },
+            execution: {
+                mvpTimeline: '5 weeks from concept to first live booking',
+                iterations: 2,
+                whatShippedFirst: 'Week 1-2: Vendor onboarding portal with service listings and availability calendar. Week 3-4: Customer-facing request system with automated vendor matching. Week 5: Integrated payment processing with automatic split payouts.',
+            },
+            outcome: {
+                metrics: [
+                    '200+ vendors onboarded in first 2 months',
+                    '70% reduction in booking time (2 hours → 20 minutes)',
+                    '95% automated matching success rate',
+                    '100% payment processing through platform (vs. 0% cash)',
+                ],
+                qualitativeResults: [
+                    'Operations team scaled from 5 to 50 daily bookings without hiring',
+                    'Vendors report getting more consistent work',
+                    'Customers love transparent pricing and instant booking',
+                ],
+                direction: 'Platform handling 1,000+ bookings/month. Adding review system and subscription plans next.',
+            },
+            reflection: {
+                headline: 'What We Learned',
+                learnings: [
+                    'Automated matching is hard. Started with rule-based (location + availability), now training ML model on successful matches.',
+                    'Vendor education was critical. Spent time creating onboarding videos and support docs.',
+                    'Payment splits must be bulletproof. Any delay in vendor payouts kills trust instantly.',
+                ],
+            },
+            cta: {
+                headline: 'Building a Marketplace or Platform?',
+                ctaText: 'Let\'s Talk About Your System',
+            },
         },
     },
 ];

@@ -1,13 +1,20 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 import { LenisProvider } from "@/lib/lenis-provider";
-import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
 import { ScrollSectionProvider } from "@/context/scroll-section-context";
 import { Navbar } from "@/components/layout";
-import Footer from "@/components/Footer";
 import Script from "next/script";
+
+const ScrollProgressIndicator = dynamic(() => import("@/components/ScrollProgressIndicator"), {
+    ssr: false // Client-side only component
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+    ssr: true
+});
 
 interface LayoutContentProps {
     children: ReactNode;

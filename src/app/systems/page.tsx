@@ -1,4 +1,6 @@
+
 import type { Metadata } from 'next';
+
 import {
     SystemsHero,
     SystemsPageShell,
@@ -11,10 +13,12 @@ import {
     SystemsCTA,
     SystemsFAQ,
 } from '@/modules/systems';
-import { SystemsCasePreviews } from '@/modules/caseStudies';
+import { SystemsCasePreviews, CaseStudyOverview } from '@/modules/caseStudies';
 import { PageTransition } from '@/components/transitions/PageTransition';
-import TargetCursor from '@/components/TargetCursor';
+
 import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRegistrar';
+
+import TargetCursorWrapper from '@/components/TargetCursorWrapper';
 
 export const metadata: Metadata = {
     title: 'Mergex Systems - Solution Partner | Custom Software & AI Automation',
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
 export default function SystemsPage() {
     return (
         <PageTransition>
-            <TargetCursor targetSelector="a, button, .cursor-target" />
+            <TargetCursorWrapper targetSelector="a, button, .cursor-target" />
             <SystemsScrollRegistrar />
             <SystemsPageShell>
                 <main className="bg-white text-gray-900">
@@ -69,7 +73,12 @@ export default function SystemsPage() {
                         <ProofSystems />
                     </div>
 
-                    {/* 7. Case Studies - Conversion Proof */}
+                    {/* 7a. Case Study Overview - Quick Glimpse */}
+                    <div id="case-overview" className="systems-section">
+                        <CaseStudyOverview />
+                    </div>
+
+                    {/* 7b. Full Case Studies - Detailed Proof */}
                     <div id="case-studies" className="systems-section">
                         <SystemsCasePreviews />
                     </div>
