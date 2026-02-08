@@ -18,7 +18,8 @@ export function SystemsPageShell({ children }: SystemsPageShellProps) {
         if (!containerRef.current) return;
 
         const ctx = gsap.context(() => {
-            const sections = gsap.utils.toArray<HTMLElement>('.systems-section');
+            // Select sections but exclude #solutions which has its own ScrollTrigger
+            const sections = gsap.utils.toArray<HTMLElement>('.systems-section:not(#solutions)');
 
             sections.forEach((section) => {
                 gsap.fromTo(

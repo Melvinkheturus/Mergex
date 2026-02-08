@@ -10,6 +10,7 @@ import { ProofSystems } from './components/ProofSystems';
 import { EngagementModel } from './components/EngagementModel';
 import { SystemsCTA } from './components/SystemsCTA';
 import { SystemsFAQ } from './components/SystemsFAQ';
+import { ImpactSection } from './components/ImpactSection';
 
 export {
     SystemsHero,
@@ -22,4 +23,6 @@ export {
     EngagementModel,
     SystemsCTA,
     SystemsFAQ,
+    ImpactSection,
 };
+

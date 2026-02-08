@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ImageTrail from '../../../components/ImageTrail';
+import Image from 'next/image';
 import { LABS_HERO } from '../content/labs';
 
 /**
@@ -39,86 +40,104 @@ export function LabsHero() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 container mx-auto px-6 md:px-12 py-32 md:py-40 pointer-events-none">
-                <div className="max-w-4xl mx-auto text-center">
-                    {/* Eyebrow */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-sm md:text-base text-gray-600 tracking-wide mb-6"
-                    >
-                        {LABS_HERO.eyebrow}
-                    </motion.p>
-
-                    {/* Main Headline */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-gray-900"
-                        style={{ fontFamily: 'var(--font-manrope)' }}
-                    >
-                        Where{' '}
-                        <span
-                            className="font-serif italic font-normal relative z-10"
-                            style={{ fontFamily: 'var(--font-playfair)' }}
+            <div className="relative z-10 container mx-auto px-6 md:px-12 py-20 md:py-32 pointer-events-none">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="text-left order-2 lg:order-1">
+                        {/* Eyebrow */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-sm md:text-base text-gray-600 tracking-wide mb-6"
                         >
-                            creativity
-                        </span>{' '}
-                        meets intelligence.
-                    </motion.h1>
+                            {LABS_HERO.eyebrow}
+                        </motion.p>
 
-                    {/* Supporting Line */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6"
-                    >
-                        {LABS_HERO.supportingLine}
-                    </motion.p>
+                        {/* Main Headline */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.3 }}
+                            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-gray-900"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Where{' '}
+                            <span
+                                className="font-serif italic font-normal relative z-10"
+                                style={{ fontFamily: 'var(--font-playfair)' }}
+                            >
+                                creativity
+                            </span>{' '}
+                            meets intelligence.
+                        </motion.h1>
 
-                    {/* Reinforcement Line */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.7 }}
-                        className="text-base md:text-lg text-gray-600 italic max-w-2xl mx-auto mb-10"
-                    >
-                        {LABS_HERO.reinforcementLine}
-                    </motion.p>
+                        {/* Supporting Line */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                            className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6"
+                        >
+                            {LABS_HERO.supportingLine}
+                        </motion.p>
 
-                    {/* CTAs */}
+                        {/* Reinforcement Line */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.7 }}
+                            className="text-base md:text-lg text-gray-600 italic mb-10"
+                        >
+                            {LABS_HERO.reinforcementLine}
+                        </motion.p>
+
+                        {/* CTAs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.9 }}
+                            className="flex flex-col sm:flex-row gap-4 justify-start mb-8"
+                        >
+                            <a
+                                href={LABS_HERO.primaryCTA.href}
+                                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
+                            >
+                                {LABS_HERO.primaryCTA.text}
+                            </a>
+                            <a
+                                href={LABS_HERO.secondaryCTA.href}
+                                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 pointer-events-auto"
+                            >
+                                {LABS_HERO.secondaryCTA.text}
+                            </a>
+                        </motion.div>
+
+                        {/* Micro-copy */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 1.1 }}
+                            className="text-sm text-gray-500 italic"
+                        >
+                            {LABS_HERO.microcopy}
+                        </motion.p>
+                    </div>
+
+                    {/* Right Side Image */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.9 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.4 }}
+                        className="relative h-[600px] w-full hidden lg:block order-1 lg:order-2 pointer-events-auto"
                     >
-                        <a
-                            href={LABS_HERO.primaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
-                        >
-                            {LABS_HERO.primaryCTA.text}
-                        </a>
-                        <a
-                            href={LABS_HERO.secondaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 text-gray-900 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 pointer-events-auto"
-                        >
-                            {LABS_HERO.secondaryCTA.text}
-                        </a>
+                        <Image
+                            src="/assets/background/kyra-hero.png"
+                            alt="Kyra Hero"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
                     </motion.div>
-
-                    {/* Micro-copy */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 1.1 }}
-                        className="text-sm text-gray-500 italic"
-                    >
-                        {LABS_HERO.microcopy}
-                    </motion.p>
                 </div>
             </div>
         </section>

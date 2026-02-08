@@ -2,83 +2,103 @@
 
 import { motion } from 'framer-motion';
 import { WHAT_WE_SOLVE } from '../content/systems';
-import { Users, Zap, Clock, Link } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 /**
- * WhatWeSolve - Pain point identification
- * Minimal white design with subtle purple accents
+ * WhatWeSolve - Hero-style section with proof cards
+ * Following reference design with large headline, supporting text, CTA, and metric/testimonial cards
  */
 export function WhatWeSolve() {
-    const iconMap = {
-        users: Users,
-        zap: Zap,
-        clock: Clock,
-        link: Link,
-    };
-
     return (
-        <section className="py-16 md:py-24 bg-white w-full">
+        <section className="py-20 md:py-28 bg-white w-full">
             <div className="container mx-auto px-6 md:px-12">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#1A1A1A]"
-                        style={{ fontFamily: 'var(--font-geist-sans)' }}
+                {/* Hero Header */}
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
+                    {/* Left: Headline */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="max-w-2xl"
                     >
-                        {WHAT_WE_SOLVE.headline}
-                    </h2>
-                    <p className="text-lg md:text-xl text-[#666666] max-w-2xl mx-auto">
-                        {WHAT_WE_SOLVE.subheadline}
-                    </p>
-                </motion.div>
+                        <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-800 mb-6">
+                            Why Mergex Systems
+                        </span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A1A] leading-tight"
+                            style={{ fontFamily: 'var(--font-geist-sans)' }}
+                        >
+                            {WHAT_WE_SOLVE.headline}
+                        </h2>
+                    </motion.div>
 
-                {/* Problems Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-                    {WHAT_WE_SOLVE.problems.map((problem, index) => {
-                        const Icon = iconMap[problem.icon as keyof typeof iconMap];
+                    {/* Right: Subheadline + CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="max-w-md flex flex-col gap-6"
+                    >
+                        <p className="text-lg text-[#666666] leading-relaxed">
+                            {WHAT_WE_SOLVE.subheadline}
+                        </p>
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full font-medium hover:from-orange-600 hover:to-orange-700 transition-all shadow-sm hover:shadow-md w-fit"
+                        >
+                            {WHAT_WE_SOLVE.primaryCTA}
+                        </Link>
+                    </motion.div>
+                </div>
 
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-[#F0F0F0]"
-                            >
-                                {/* Icon */}
-                                <div className="w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-xl flex items-center justify-center mb-5">
-                                    <Icon size={24} className="text-purple-600" />
-                                </div>
-
-                                {/* Problem Title */}
-                                <h3 className="text-xl font-bold mb-3 text-[#1A1A1A]">
-                                    {problem.title}
-                                </h3>
-
-                                {/* Problem Description */}
-                                <p className="text-[#666666] mb-4 leading-relaxed text-sm">
-                                    {problem.description}
-                                </p>
-
-                                {/* Solution */}
-                                <div className="pt-4 border-t border-[#F5F5F5]">
-                                    <p className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent flex items-start gap-2">
-                                        <span className="text-purple-500">→</span>
-                                        {problem.solution}
+                {/* Proof Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                    {WHAT_WE_SOLVE.proofCards.map((card, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className={`
+                                rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-300
+                                ${card.type === 'testimonial'
+                                    ? 'bg-[#2D2D2D] text-white col-span-1 md:col-span-2 lg:col-span-1'
+                                    : 'bg-white border border-gray-100'
+                                }
+                            `}
+                        >
+                            {card.type === 'metric' ? (
+                                <>
+                                    <div className="mb-4">
+                                        <div className="text-5xl md:text-6xl font-bold text-[#1A1A1A] mb-2">
+                                            {card.value}
+                                        </div>
+                                        <div className="text-sm font-semibold text-[#1A1A1A] uppercase tracking-wide">
+                                            {card.label}
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-[#666666] leading-relaxed">
+                                        {card.description}
                                     </p>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                                </>
+                            ) : (
+                                <>
+                                    <div className="mb-6">
+                                        <p className="text-lg font-medium leading-relaxed mb-4">
+                                            "{card.quote}"
+                                        </p>
+                                    </div>
+                                    <div className="text-sm text-gray-400">
+                                        <div className="font-semibold text-white">{card.author}</div>
+                                        <div className="text-gray-500">{card.context}</div>
+                                    </div>
+                                </>
+                            )}
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
     );
 }
-

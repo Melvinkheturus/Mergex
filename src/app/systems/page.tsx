@@ -12,6 +12,7 @@ import {
     EngagementModel,
     SystemsCTA,
     SystemsFAQ,
+    ImpactSection,
 } from '@/modules/systems';
 import { SystemsCasePreviews, CaseStudyOverview } from '@/modules/caseStudies';
 import { PageTransition } from '@/components/transitions/PageTransition';
@@ -61,6 +62,11 @@ export default function SystemsPage() {
                     {/* 4. Speed Advantage - Key Differentiator */}
                     <div id="speed" className="systems-section">
                         <SpeedAdvantage />
+                    </div>
+
+                    {/* 4b. Impact - Measurable Results */}
+                    <div id="impact" className="systems-section">
+                        <ImpactSection />
                     </div>
 
                     {/* 5. How We Work - Process Confidence */}

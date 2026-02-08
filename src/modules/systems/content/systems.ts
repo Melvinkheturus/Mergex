@@ -10,32 +10,33 @@ export const SYSTEMS_HERO = {
 } as const;
 
 export const WHAT_WE_SOLVE = {
-    headline: 'What We Solve',
-    subheadline: 'The problems that drain time, budget, and momentum',
-    problems: [
+    headline: 'Custom software for businesses that want predictable growth.',
+    subheadline: 'We work with founders and small teams who want a clear plan, consistent execution, and measurable results from their tech investments.',
+    primaryCTA: 'Book a discovery call',
+    proofCards: [
         {
-            title: 'Fragmented Vendor Chaos',
-            description: 'Working with one designer, another developer, and a separate marketing team means endless coordination, misaligned priorities, and slow execution.',
-            solution: 'One integrated partner. One conversation. Fast execution.',
-            icon: 'users',
+            type: 'metric',
+            value: '2-4 weeks',
+            label: 'Average time to MVP',
+            description: 'From initial call to working product in your hands',
         },
         {
-            title: 'Manual Workflow Bottlenecks',
-            description: 'Your team is stuck doing repetitive tasks that should be automated. Hours wasted. Revenue lost. Growth stalled.',
-            solution: 'AI-powered automation that saves hours and eliminates errors.',
-            icon: 'zap',
+            type: 'testimonial',
+            quote: 'Clear process and great communication.',
+            author: 'Founder, DTC Brand',
+            context: 'E-commerce automation project',
         },
         {
-            title: 'Slow MVP Cycles',
-            description: 'By the time your MVP launches, your competitor has already pivoted twice. Market windows close fast.',
-            solution: 'MVPs in 2-4 weeks. Ship fast, learn faster.',
-            icon: 'clock',
+            type: 'metric',
+            value: '98%',
+            label: 'Uptime across all projects',
+            description: 'Production-grade infrastructure from day one',
         },
         {
-            title: 'Disconnected Tech & Brand',
-            description: 'You built the product without thinking about brand. Or you built the brand without thinking about product. Either way, it\'s fragmented.',
-            solution: 'Holistic execution—tech, design, and go-to-market working together.',
-            icon: 'link',
+            type: 'metric',
+            value: '20+',
+            label: 'Projects delivered',
+            description: 'From MVPs to full-scale platforms',
         },
     ],
 } as const;
@@ -45,8 +46,9 @@ export const OUR_SOLUTIONS = {
     subheadline: 'Outcome-focused, not feature-dumping',
     pillars: [
         {
+            navLabel: 'Development.',
             title: 'Software & App Development',
-            description: 'Modern, scalable applications built for speed and growth',
+            description: 'From concept to launch, we build production-ready applications. Web platforms, mobile apps, SaaS products - engineered for scale, maintained for longevity, designed to evolve with your business.',
             capabilities: [
                 'Web applications (Next.js, React, modern stacks)',
                 'Mobile apps (iOS, Android, cross-platform)',
@@ -58,11 +60,11 @@ export const OUR_SOLUTIONS = {
                 'Scalable from day one',
                 'Maintainable, modern code',
             ],
-            icon: 'code',
         },
         {
+            navLabel: 'Automation.',
             title: 'AI Automation & Integrations',
-            description: 'Intelligent systems that save time and reduce errors',
+            description: 'Eliminate repetitive work and connect your tech stack. We build intelligent automation systems that save hours daily, reduce errors, and let your team focus on what actually moves the needle.',
             capabilities: [
                 'Workflow automation (no-code + custom)',
                 'AI-powered tools & assistants',
@@ -74,27 +76,43 @@ export const OUR_SOLUTIONS = {
                 'Errors eliminated',
                 'Data-driven decisions',
             ],
-            icon: 'bot',
         },
         {
-            title: 'Design & Branding',
-            description: 'User-centered design with brand presence that sticks',
+            navLabel: 'Branding.',
+            title: 'Brand Identity & Strategy',
+            description: 'Build a brand that sticks. From visual identity to brand strategy, we create cohesive systems that resonate with your audience and differentiate you in crowded markets.',
             capabilities: [
                 'Brand identity & visual systems',
-                'UI/UX design for web & mobile',
-                'Design systems & component libraries',
-                'Product design & user research',
+                'Brand strategy & positioning',
+                'Logo & visual design',
+                'Brand guidelines & assets',
             ],
             outcomes: [
                 'Memorable brand presence',
-                'Intuitive user experiences',
+                'Clear market positioning',
                 'Consistent visual language',
             ],
-            icon: 'palette',
         },
         {
+            navLabel: 'Designing.',
+            title: 'UI/UX Design & Product',
+            description: 'Design that converts. User-centered interfaces that feel intuitive, look professional, and drive measurable results. From wireframes to high-fidelity prototypes.',
+            capabilities: [
+                'UI/UX design for web & mobile',
+                'Design systems & component libraries',
+                'Product design & user research',
+                'Prototyping & user testing',
+            ],
+            outcomes: [
+                'Intuitive user experiences',
+                'Higher conversion rates',
+                'Streamlined workflows',
+            ],
+        },
+        {
+            navLabel: 'Marketing.',
             title: 'Digital Marketing Systems',
-            description: 'Measurable growth through automated, data-driven campaigns',
+            description: 'Marketing infrastructure that runs on autopilot. From SEO to paid campaigns, we build systems that attract, convert, and retain customers while you focus on delivering value.',
             capabilities: [
                 'Marketing automation setup',
                 'SEO & content strategy',
@@ -106,7 +124,6 @@ export const OUR_SOLUTIONS = {
                 'Automated lead generation',
                 'Data-backed campaigns',
             ],
-            icon: 'megaphone',
         },
     ],
 } as const;

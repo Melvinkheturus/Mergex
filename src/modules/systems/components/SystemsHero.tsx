@@ -13,16 +13,28 @@ import { BlurVignette } from '@/components/ui/BlurVignette';
 export function SystemsHero() {
     return (
         <section className="relative min-h-screen flex items-center bg-white text-gray-900 overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/assets/background/system hero.png"
+                    alt="Systems Hero Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                {/* Overlay for readability if necessary - keeping minimal for now */}
+                {/* <div className="absolute inset-0 bg-white/50" /> */}
+            </div>
 
             {/* Content */}
-            <div className="w-full max-w-[95%] mx-auto px-4 md:px-8 py-20 md:py-32 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 lg:gap-16 items-center">
-                    {/* Left Column - Text Content */}
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 relative z-10 flex items-center justify-center text-center">
+                <div className="max-w-4xl mx-auto">
+                    {/* Text Content */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="space-y-6 md:space-y-8"
+                        className="space-y-6 md:space-y-8 flex flex-col items-center"
                         style={{ fontFamily: 'var(--font-manrope)' }}
                     >
                         {/* Eyebrow */}
@@ -57,7 +69,7 @@ export function SystemsHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-lg md:text-xl text-gray-700 leading-relaxed"
+                            className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto"
                         >
                             We design, build, and automate production-ready digital systems from MVPs to full platforms so businesses can move fast without breaking foundations.
                         </motion.p>
@@ -77,7 +89,7 @@ export function SystemsHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="flex flex-col sm:flex-row gap-4 pt-4"
+                            className="flex flex-col sm:flex-row gap-4 pt-4 justify-center"
                         >
                             <Link
                                 href="/contact"
@@ -103,29 +115,6 @@ export function SystemsHero() {
                         >
                             No sales pitch. No tech jargon. Just clarity on what to build next.
                         </motion.p>
-                    </motion.div>
-
-                    {/* Right Column - Image */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center -mt-12 lg:-mt-20"
-                    >
-                        <div className="relative w-full h-full">
-                            <Image
-                                src="/assets/background/convayer-hero.png"
-                                alt="Systems Visualization"
-                                fill
-                                className="object-contain"
-                                priority
-                            />
-                            {/* White Gradient Overlays for Seamless Blending */}
-                            <div className="absolute top-0 left-0 right-0 h-[50%] bg-gradient-to-b from-white via-white/90 to-transparent z-10" />
-                            <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-gradient-to-t from-white via-white/90 to-transparent z-10" />
-                            <div className="absolute top-0 left-0 bottom-0 w-[20%] bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
-                            <div className="absolute top-0 right-0 bottom-0 w-[20%] bg-gradient-to-l from-white via-white/90 to-transparent z-10" />
-                        </div>
                     </motion.div>
                 </div>
             </div>

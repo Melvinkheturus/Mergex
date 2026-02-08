@@ -10,6 +10,8 @@ export { SystemsCasePreviews } from './components/SystemsCasePreviews';
 export { LabsExperiments } from './components/LabsExperiments';
 export { CaseStudyOverview } from './components/CaseStudyOverview';
 export { SystemCategorySection } from './components/SystemCategorySection';
+export { StackedCaseCards } from './components/StackedCaseCards';
+
 
 // Content
 export * from './content/caseStudies';
