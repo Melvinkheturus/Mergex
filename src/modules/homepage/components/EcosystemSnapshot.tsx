@@ -1,6 +1,6 @@
 'use client';
 
-import { PORTAL_CARDS } from '../content';
+import { PORTAL_CARDS, ECOSYSTEM_CONTENT } from '../content';
 import VideoPortalCard from './VideoPortalCard';
 
 export default function EcosystemSnapshot() {
@@ -12,10 +12,10 @@ export default function EcosystemSnapshot() {
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Explore Our Ecosystem
+                        {ECOSYSTEM_CONTENT.headline}
                     </h2>
                     <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-                        Three divisions. One mission. Choose where to begin.
+                        {ECOSYSTEM_CONTENT.subheadline}
                     </p>
                 </div>
 
@@ -38,8 +38,8 @@ export default function EcosystemSnapshot() {
                         ))}
                     </div>
 
-                    {/* Desktop 3-Column Grid */}
-                    <div className="hidden lg:grid lg:grid-cols-3 gap-8">
+                    {/* Desktop 2-Column Grid */}
+                    <div className="hidden lg:grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         {cards.map((card) => (
                             <VideoPortalCard
                                 key={card.title}

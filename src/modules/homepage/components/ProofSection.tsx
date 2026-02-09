@@ -27,6 +27,11 @@ export function ProofSection() {
                 </motion.div>
 
                 {/* Tech Stack Grid */}
+                <div className="text-center mb-8">
+                    <span className="text-sm font-semibold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1 rounded-full">
+                        The Tools of Velocity
+                    </span>
+                </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
                     {PROOF_SIGNALS.techStack.map((tech, index) => (
                         <motion.div

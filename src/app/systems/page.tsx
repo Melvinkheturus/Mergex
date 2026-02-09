@@ -10,11 +10,11 @@ import {
     HowWeWorkSystems,
     ProofSystems,
     EngagementModel,
-    SystemsCTA,
     SystemsFAQ,
     ImpactSection,
 } from '@/modules/systems';
-import { SystemsCasePreviews, CaseStudyOverview } from '@/modules/caseStudies';
+import { FAQSection } from '@/modules/homepage';
+import { CaseStudyOverview } from '@/modules/caseStudies';
 import { PageTransition } from '@/components/transitions/PageTransition';
 
 import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRegistrar';
@@ -44,64 +44,54 @@ export default function SystemsPage() {
             <SystemsScrollRegistrar />
             <SystemsPageShell>
                 <main className="bg-white text-gray-900">
-                    {/* 1. Hero - Minimal positioning */}
+                    {/* 1. Systems Hero — Relief */}
                     <div id="systems-hero" className="systems-section">
                         <SystemsHero />
                     </div>
 
-                    {/* 2. What We Solve - Pain Point Matching */}
+                    {/* 2. What We Solve — Problem Alignment */}
                     <div id="pain-points" className="systems-section">
                         <WhatWeSolve />
                     </div>
 
-                    {/* 3. Our Solutions - Service Pillars */}
+                    {/* 3. Our System Types — NOT Services */}
                     <div id="solutions" className="systems-section">
                         <OurSolutions />
                     </div>
 
-                    {/* 4. Speed Advantage - Key Differentiator */}
+                    {/* 4. Speed Without Fragility */}
                     <div id="speed" className="systems-section">
                         <SpeedAdvantage />
                     </div>
 
-                    {/* 4b. Impact - Measurable Results */}
-                    <div id="impact" className="systems-section">
-                        <ImpactSection />
-                    </div>
-
-                    {/* 5. How We Work - Process Confidence */}
+                    {/* 5. How We Work — Risk Reduction */}
                     <div id="process" className="systems-section">
                         <HowWeWorkSystems />
                     </div>
 
-                    {/* 6. Proof - Tech Stack */}
+                    {/* 6. Tech Stack (After How We Work) */}
                     <div id="proof" className="systems-section">
                         <ProofSystems />
                     </div>
 
-                    {/* 7a. Case Study Overview - Quick Glimpse */}
+                    {/* 7. Case Studies — Proof */}
                     <div id="case-overview" className="systems-section">
                         <CaseStudyOverview />
                     </div>
 
-                    {/* 7b. Full Case Studies - Detailed Proof */}
-                    <div id="case-studies" className="systems-section">
-                        <SystemsCasePreviews />
+                    {/* 8. Impact — Measurable Results */}
+                    <div id="impact" className="systems-section">
+                        <ImpactSection />
                     </div>
 
-                    {/* 8. FAQ Section */}
-                    <div id="faq" className="systems-section">
-                        <SystemsFAQ />
-                    </div>
-
-                    {/* 9. Engagement & Pricing */}
+                    {/* 9. Engagement Models — Pricing Philosophy */}
                     <div id="engagement" className="systems-section">
                         <EngagementModel />
                     </div>
 
-                    {/* 10. CTA - Final Conversion */}
-                    <div id="cta" className="systems-section">
-                        <SystemsCTA />
+                    {/* 11. FAQs — Objection Handling */}
+                    <div id="faq" className="systems-section">
+                        <FAQSection variant="systems" />
                     </div>
                 </main>
             </SystemsPageShell>

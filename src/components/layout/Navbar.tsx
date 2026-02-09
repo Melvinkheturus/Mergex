@@ -90,7 +90,7 @@ export function Navbar() {
                         ${scrolled || activeMenu ? 'bg-white/95 shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
                         backdrop-blur-md pl-4 pr-8 h-20 flex items-center justify-between
                         border
-                        ${activeMenu ? 'rounded-t-2xl' : 'rounded-2xl'}
+                        ${activeMenu ? 'rounded-t-xl' : 'rounded-xl'}
                     `}
                 >
                     {/* Logo and Divider Group */}
@@ -103,13 +103,9 @@ export function Navbar() {
                                 height={76}
                                 className="object-contain"
                             />
-                            <Image
-                                src="/logo/typo-mergex-black.png"
-                                alt="Mergex"
-                                width={172}
-                                height={46}
-                                className="object-contain -ml-8"
-                            />
+                            <span className="font-clash font-bold text-3xl tracking-wide ml-3 text-neutral-900 mt-1" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                                MERGEX
+                            </span>
                         </Link>
                         <div className={`hidden lg:block h-20 w-[4px] bg-gray-200 ml-6 transition-opacity duration-300 ${scrolled || activeMenu ? 'opacity-100' : 'opacity-0'}`} />
                     </div>
@@ -160,7 +156,7 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                             onMouseEnter={() => setActiveMenu(activeMenu)}
                             onMouseLeave={() => setActiveMenu(null)}
-                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-2xl overflow-hidden p-5 -mt-px"
+                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-xl overflow-hidden p-5 -mt-px"
                         >
                             {activeMenu === 'services' && <ServicesMenu closeMenu={() => setActiveMenu(null)} />}
                             {activeMenu === 'labs' && <LabsMenu closeMenu={() => setActiveMenu(null)} />}
@@ -180,7 +176,7 @@ export function Navbar() {
                 <div className={`
                     w-full transition-all duration-300 ease-in-out pointer-events-auto
                     ${scrolled ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
-                    backdrop-blur-xl rounded-2xl px-5 h-16 flex items-center justify-between border relative
+                    backdrop-blur-xl rounded-xl px-5 h-16 flex items-center justify-between border relative
                 `}>
                     {/* Left: Logo Icon */}
                     <Link href="/" className="flex-shrink-0 z-10">
@@ -195,13 +191,9 @@ export function Navbar() {
 
                     {/* Center: MERGEX Typo Logo */}
                     <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <Image
-                            src="/logo/typo-mergex-black.png"
-                            alt="Mergex"
-                            width={110}
-                            height={28}
-                            className="object-contain"
-                        />
+                        <span className="font-clash font-bold text-2xl tracking-wide text-neutral-900" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                            MERGEX
+                        </span>
                     </div>
 
                     {/* Right: Hamburger Button */}

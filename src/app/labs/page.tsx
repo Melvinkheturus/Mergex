@@ -35,47 +35,47 @@ export default function LabsPage() {
         <main className="">
             <LabsScrollRegistrar />
 
-            {/* 1. Cinematic Hero - Let it breathe */}
+            {/* 1. Labs Hero — Invitation */}
             <div id="labs-hero">
                 <LabsHero />
             </div>
 
-            {/* 2. What Is Labs - Clear Definition */}
+            {/* 2. What Labs Is — Philosophical */}
             <div id="what-is-labs">
                 <WhatIsLabs />
             </div>
 
-            {/* 3. What We Create - Capabilities Showcase */}
+            {/* 3. What We Create — NOT Services */}
             <div id="capabilities">
                 <WhatWeCreate />
             </div>
 
-            {/* 3.5 Featured Work - Scroll Zoom Showcase (Kyra) */}
-            <div id="featured-work">
-                <ScrollZoomShowcase />
-            </div>
-
-            {/* 4. How Labs Works - Process Demystification */}
-            <div id="process">
-                <HowLabsWorks />
-            </div>
-
-            {/* 5. Work Gallery - CRITICAL Visual Proof */}
-            <div id="work">
-                <WorkGallery />
-            </div>
-
-            {/* 5.5 Experiments Gallery - Visual Portfolio */}
+            {/* 4. Featured Experiments Gallery */}
             <div id="experiments">
                 <ExperimentsGallery />
             </div>
 
-            {/* 6. Why Labs Exists - Philosophy */}
+            {/* 5. Work Gallery — CRITICAL Visual Proof */}
+            <div id="work">
+                <WorkGallery />
+            </div>
+
+            {/* 6. Kyra Reveal / Scroll Experience — After Proof */}
+            <div id="featured-work">
+                <ScrollZoomShowcase />
+            </div>
+
+            {/* 7. How Labs Works — VERY LIGHT */}
+            <div id="process">
+                <HowLabsWorks />
+            </div>
+
+            {/* 8. Why Labs Exists — Short Manifesto */}
             <div id="philosophy">
                 <WhyLabsExists />
             </div>
 
-            {/* 7. CTA - Conversion */}
+            {/* 9. Soft CTA */}
             <div id="cta">
                 <LabsCTA />
             </div>

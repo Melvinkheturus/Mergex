@@ -39,17 +39,6 @@ export const PORTAL_CARDS = {
         features: ['Custom software', 'Cloud architecture', 'Process automation'],
         href: '/systems',
     },
-    platform: {
-        title: 'Mergex Platform',
-        tagline: 'Products We Build',
-        description: 'Solutions born from real problems',
-        videoSrc: '/assets/ecosystem/videos/platform-portal.mp4',
-        videoPoster: '/assets/ecosystem/platform-portal-still.png',
-        colorTone: 'green' as const,
-        color: '#10B981',
-        features: ['Scalable SaaS', 'Unified tools', 'Enterprise ready'],
-        href: '/products',
-    },
 } as const;
 
 
@@ -70,12 +59,6 @@ export const WHAT_WE_BUILD = {
             division: 'Systems',
             icon: 'build',
         },
-        {
-            challenge: 'Operations that drain time',
-            solution: 'SaaS tools built for efficiency',
-            division: 'Platform',
-            icon: 'rocket_launch',
-        },
 
     ],
 } as const;
@@ -92,13 +75,7 @@ export const PORTFOLIO_PREVIEW = {
             tags: ['Next.js', 'Supabase', 'Stripe'],
             image: '/projects/cedar.jpg',
         },
-        {
-            title: 'Unisynk',
-            description: 'SaaS platform for unified communication',
-            division: 'Platform',
-            tags: ['React', 'Node.js', 'MongoDB'],
-            image: '/projects/unisynk.jpg',
-        },
+
         {
             title: 'AI Product Photography',
             description: 'Generated 500+ product visuals for e-commerce brand',
@@ -109,44 +86,7 @@ export const PORTFOLIO_PREVIEW = {
     ],
 } as const;
 
-export const SAAS_PRODUCTS = {
-    headline: 'Built on Open Innovation',
-    subheadline: "We don't just build for clients. We build for the world.",
-    products: [
-        {
-            name: 'Unisynk',
-            tagline: 'Unified communication platform',
-            status: 'live' as const,
-            description: 'Connect all your business communications in one place',
-            features: ['Multi-channel', 'Real-time sync', 'Team collaboration'],
-            href: '/platform/unisynk',
-        },
-        {
-            name: 'Kuthakai',
-            tagline: 'Smart automation toolkit',
-            status: 'beta' as const,
-            description: 'Automate repetitive tasks with AI-powered workflows',
-            features: ['No-code builder', 'AI triggers', 'Integration hub'],
-            href: '/platform/kuthakai',
-        },
-        {
-            name: 'CHR',
-            tagline: 'Customer relationship hub',
-            status: 'beta' as const,
-            description: 'Manage customer relationships with intelligence',
-            features: ['Smart CRM', 'AI insights', 'Pipeline automation'],
-            href: '/platform/chr',
-        },
-        {
-            name: 'Retail Connect',
-            tagline: 'Retail management system',
-            status: 'live' as const,
-            description: 'Complete retail operations platform',
-            features: ['Inventory', 'POS', 'Analytics'],
-            href: '/platform/retail-connect',
-        },
-    ],
-} as const;
+
 
 export const TRUST_SIGNALS = {
     headline: 'Trusted by Ambitious Makers',
@@ -223,32 +163,62 @@ export const FINAL_CTA = {
 
 // Problem Context Section
 export const PROBLEM_CONTEXT = {
-    headline: 'You Shouldn\'t Have to Choose Between Speed and Quality',
-    subheadline: 'But most businesses are stuck with one or the other',
+    headline: 'Why We Exist: To Kill the "Wait Time"',
+    subheadline: 'Great ideas die in the waiting room of "development cycles". We destroy the gap between thought and deployment.',
     problems: [
         {
-            title: 'Vendor Coordination Hell',
-            description: 'One designer. Another developer. A separate content team. Endless meetings, misaligned timelines, finger-pointing delays.',
+            title: 'Bloated Agency Models',
+            description: 'Layers of management, endless meetings, and bills for "strategy" before a single line of code is written.',
             icon: 'users',
         },
         {
-            title: 'Months Lost to "Process"',
-            description: 'By the time your MVP launches, your competitor already pivoted twice. Speed matters.',
+            title: 'Technical Stagnation',
+            description: 'By the time your MVP launches (6 months later), your competitor has already pivoted twice. Speed is survival.',
             icon: 'clock',
         },
         {
-            title: 'AI Tools Without Strategy',
-            description: 'You have access to ChatGPT, Midjourney, and dozens of automation tools. But who ties it all together?',
+            title: 'AI Without Strategy',
+            description: 'Access to tools isn\'t enough. You need the engineering to weave them into a coherent system.',
             icon: 'brain',
         },
         {
             title: 'Disconnected Systems',
-            description: 'Your CRM doesn\'t talk to your marketing tools. Your app doesn\'t sync with your database. Nothing works together.',
+            description: 'Marketing tools that don\'t talk to CRM. Apps that don\'t sync. Data silos that throttle growth.',
             icon: 'link',
         },
     ],
-    closingStatement: 'Mergex exists to end the chaos. You\'re building the future—your tools should empower, not slow you down.',
+    closingStatement: 'We believe software should be fluid, not frozen. If you\'re ready to sprint, we\'re ready to pave the road.',
 } as const;
+
+// Problem With Fragmentation Section
+export const PROBLEM_FRAGMENTATION = {
+    headline: 'The Problem With Fragmentation',
+    subheadline: 'Most businesses are held back not by a lack of tools—but by too many disconnected ones.',
+    problems: [
+        {
+            title: 'Multiple Vendors, One Headache',
+            description: 'One agency for branding, another for dev, a freelancer for AI, and a consultant for strategy. You\'re not building—you\'re coordinating.',
+            icon: 'users',
+        },
+        {
+            title: 'Disconnected Tools',
+            description: 'Your marketing platform doesn\'t talk to your CRM. Your analytics don\'t sync with your ads. Data lives in silos. Growth dies in the gaps.',
+            icon: 'link',
+        },
+        {
+            title: 'Slow Execution',
+            description: 'Timelines stretch because no one owns the full picture. Approvals ping-pong between teams. Momentum dies in the handoffs.',
+            icon: 'clock',
+        },
+        {
+            title: 'AI Hype Without Systems',
+            description: 'Access to ChatGPT doesn\'t make you automated. You need engineering, integration, and strategy—not just subscriptions.',
+            icon: 'brain',
+        },
+    ],
+    closingStatement: 'Mergex exists to eliminate the coordination tax. One partner. One system. Faster results.',
+} as const;
+
 
 // How We Work Section
 export const HOW_WE_WORK = {
@@ -289,8 +259,8 @@ export const HOW_WE_WORK = {
 
 // Proof/Trust Signals Section
 export const PROOF_SIGNALS = {
-    headline: 'Built with Modern, Proven Tools',
-    subheadline: 'No legacy tech. No shortcuts. Just scalable, maintainable solutions.',
+    headline: 'We Are Builders, Not Just Billers',
+    subheadline: 'Most agencies bill by the hour. We build for the outcome.',
     techStack: [
         { name: 'Next.js', category: 'Frontend' },
         { name: 'React', category: 'Frontend' },
@@ -301,13 +271,13 @@ export const PROOF_SIGNALS = {
         { name: 'OpenAI', category: 'AI' },
         { name: 'Vercel', category: 'Deployment' },
     ],
-    trustStatement: 'Every line of code is written for scale. Every design decision is made with users in mind. Every partnership is built to last.',
+    trustStatement: 'Mergex is a collective of product engineers, AI artists, and system architects who disbanded from traditional corporate structures to build faster, smarter systems for founders who refuse to wait.',
 } as const;
 
-// Products Glimpse Section
-export const PRODUCTS_GLIMPSE = {
-    headline: 'Products We\'re Building',
-    subheadline: 'Solutions born from real problems we\'ve solved',
-    // Will reference SAAS_PRODUCTS for actual product data
+export const ECOSYSTEM_CONTENT = {
+    headline: 'What We Are: A Full-Stack Growth Engine',
+    subheadline: 'The intersection of engineering and creativity. A single brain for your digital body.',
 } as const;
+
+
 

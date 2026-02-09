@@ -6,22 +6,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Mail } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FAQ_DATA } from '../content/faq';
+import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-export function FAQSection() {
+interface FAQSectionProps {
+    variant?: 'parent' | 'systems';
+}
+
+export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const sectionRef = useRef<HTMLElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const revealRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
+    // Select FAQ data based on variant
+    const FAQ_DATA = variant === 'systems' ? SYSTEMS_FAQ_DATA : PARENT_FAQ_DATA;
+
     const toggleQuestion = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
 
     useEffect(() => {
         const section = sectionRef.current;

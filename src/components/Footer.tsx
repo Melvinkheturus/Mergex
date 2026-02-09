@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const FOOTER_LINKS = {
     services: [
@@ -75,6 +76,8 @@ const staggerContainer = {
 
 export default function Footer() {
     const scrollTo = useLenisScroll();
+    const pathname = usePathname();
+    const subBrand = (pathname || '').includes('systems') ? 'Systems' : (pathname || '').includes('labs') ? 'Labs' : null;
 
     return (
         <>
@@ -266,14 +269,26 @@ export default function Footer() {
 
                     {/* Big Text Name */}
                     <div className="flex flex-col md:flex-row justify-between items-center md:items-end mt-20 lg:mt-24 xl:mt-32 mb-0 relative z-10 w-full px-4 gap-8 lg:gap-12 xl:gap-16">
-                        <motion.h1
-                            initial={{ filter: "blur(20px)", opacity: 0 }}
-                            whileInView={{ filter: "blur(0px)", opacity: 1 }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                            className="text-[15vw] leading-none font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-tight select-none font-[family-name:var(--font-playfair)] text-center md:text-left w-full md:w-auto pb-8 pr-6"
-                        >
-                            Mergex
-                        </motion.h1>
+                        <div className="relative w-full md:w-auto text-center md:text-left">
+                            <motion.h1
+                                initial={{ filter: "blur(20px)", opacity: 0 }}
+                                whileInView={{ filter: "blur(0px)", opacity: 1 }}
+                                transition={{ duration: 1.2, ease: "easeOut" }}
+                                className="text-[15vw] leading-none font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-tight select-none font-[family-name:var(--font-playfair)] w-full md:w-auto pb-8 pr-6"
+                            >
+                                Mergex
+                            </motion.h1>
+                            {subBrand && (
+                                <motion.span
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.2 }}
+                                    className="absolute bottom-6 right-6 md:right-8 text-2xl md:text-3xl lg:text-4xl font-body font-light text-gray-500 tracking-wider pointer-events-none select-none"
+                                >
+                                    {subBrand}
+                                </motion.span>
+                            )}
+                        </div>
                         <motion.div
                             className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3"
                             initial="hidden"

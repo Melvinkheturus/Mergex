@@ -179,6 +179,11 @@ html * {
   font-family: var(--font-manrope), var(--font-geist-sans), system-ui, sans-serif;
 }
 
+.font-clash {
+  font-family: 'Clash Display', var(--font-manrope), system-ui, sans-serif !important;
+  font-weight: 600;
+}
+
 .font-pinyon {
   font-family: var(--font-pinyon);
 }

@@ -2,13 +2,11 @@ import type { Metadata } from 'next';
 import {
   HeroSection,
   ProblemContext,
+  ProblemFragmentation,
   EcosystemSnapshot,
   WhatWeBuildSection,
-  HowWeWorkSection,
-  ProofSection,
-  ProductsGlimpseSection,
-  FAQSection,
   FeaturedSystemsWork,
+  FAQSection,
 } from '@/modules/homepage';
 import { TestimonialsSection } from '@/modules/shared';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
@@ -33,54 +31,45 @@ export default function Home() {
   return (
     <main className="">
       <HomeScrollRegistrar />
-      {/* 1. Hero - Solution Partner Positioning */}
+
+      {/* 1. Hero — Belief Framing */}
       <div id="hero">
         <HeroSection />
       </div>
 
-      {/* 2. Problem Context - Pain Point Understanding */}
+      {/* 2. Why Mergex Exists — Reframing the Problem */}
       <div id="problem-context">
         <ProblemContext />
       </div>
 
-      {/* 3. Ecosystem Portal Gallery - Core Navigation Hub */}
+      {/* 3. Problem With Fragmentation — Pain Naming */}
+      <div id="problem-fragmentation">
+        <ProblemFragmentation />
+      </div>
+
+      {/* 4. Explore Ecosystem — Choice Architecture */}
       <div id="ecosystem">
         <EcosystemSnapshot />
       </div>
 
-      {/* 4. What We Build - Problem-Solution Showcase */}
+      {/* 5. What We Build — High-Level Outcomes Only */}
       <div id="what-we-build">
         <WhatWeBuildSection />
       </div>
 
-      {/* 5. How We Work - Process Confidence */}
-      <div id="how-we-work">
-        <HowWeWorkSection />
-      </div>
-
-      {/* 6. Proof - Tech Stack Showcase */}
-      <div id="proof">
-        <ProofSection />
-      </div>
-
-      {/* 7. Featured Systems Work - Credibility Teaser */}
+      {/* 6. Selected Systems — Teaser */}
       <div id="featured-work">
         <FeaturedSystemsWork />
       </div>
 
-      {/* 8. Products Glimpse - Future Vision */}
-      <div id="products">
-        <ProductsGlimpseSection />
-      </div>
-
-      {/* 9. Testimonials - Trust Building */}
+      {/* 7. Testimonials — Belief-Based Only */}
       <div id="testimonials">
         <TestimonialsSection />
       </div>
 
-      {/* 10. FAQ - Final CTA (DO NOT MODIFY) */}
+      {/* 8. FAQ — Orientation */}
       <div id="faq">
-        <FAQSection />
+        <FAQSection variant="parent" />
       </div>
     </main>
   );
