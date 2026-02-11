@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PRODUCTS_GLIMPSE, SAAS_PRODUCTS } from '../content';
+import { PRODUCTS_GLIMPSE, SAAS_PRODUCTS } from '../content/products';
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -12,7 +12,7 @@ export function ProductsGlimpseSection() {
     // Show only first 3 products
     const featuredProducts = SAAS_PRODUCTS.products.slice(0, 3);
 
-    const statusColors = {
+    const statusColors: Record<string, string> = {
         live: 'bg-green-100 text-green-700 border-green-200',
         beta: 'bg-blue-100 text-blue-700 border-blue-200',
         'coming-soon': 'bg-gray-100 text-gray-700 border-gray-200',
@@ -38,7 +38,7 @@ export function ProductsGlimpseSection() {
 
                 {/* Product Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {featuredProducts.map((product, index) => (
+                    {featuredProducts.map((product: any, index: number) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 30 }}
@@ -50,7 +50,7 @@ export function ProductsGlimpseSection() {
                             {/* Status Badge */}
                             <div className="mb-6">
                                 <span
-                                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${statusColors[product.status as keyof typeof statusColors]
+                                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${statusColors[product.status]
                                         }`}
                                 >
                                     {product.status === 'live'
@@ -74,7 +74,7 @@ export function ProductsGlimpseSection() {
 
                             {/* Features List */}
                             <ul className="space-y-2 mb-6">
-                                {product.features.map((feature, idx) => (
+                                {product.features.map((feature: string, idx: number) => (
                                     <li key={idx} className="flex items-center text-sm text-foreground-muted">
                                         <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
                                         {feature}

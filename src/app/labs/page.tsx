@@ -9,7 +9,7 @@ import {
     WhyLabsExists,
     LabsCTA,
 } from '@/modules/labs';
-import { LabsExperiments } from '@/modules/caseStudies';
+
 import { ExperimentsGallery } from '@/modules/labsPortfolio';
 
 export const metadata: Metadata = {
