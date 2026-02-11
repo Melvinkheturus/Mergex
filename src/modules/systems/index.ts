@@ -6,7 +6,6 @@ import { WhatWeSolve } from './components/WhatWeSolve';
 import { OurSolutions } from './components/OurSolutions';
 import { SpeedAdvantage } from './components/SpeedAdvantage';
 import { HowWeWorkSystems } from './components/HowWeWorkSystems';
-import { ProofSystems } from './components/ProofSystems';
 import { EngagementModel } from './components/EngagementModel';
 import { SystemsCTA } from './components/SystemsCTA';
 import { SystemsFAQ } from './components/SystemsFAQ';
@@ -20,7 +19,6 @@ export {
     OurSolutions,
     SpeedAdvantage,
     HowWeWorkSystems,
-    ProofSystems,
     EngagementModel,
     SystemsCTA,
     SystemsFAQ,

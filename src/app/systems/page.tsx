@@ -8,7 +8,6 @@ import {
     OurSolutions,
     SpeedAdvantage,
     HowWeWorkSystems,
-    ProofSystems,
     EngagementModel,
     SystemsFAQ,
     ImpactSection,
@@ -69,27 +68,22 @@ export default function SystemsPage() {
                         <HowWeWorkSystems />
                     </div>
 
-                    {/* 6. Tech Stack (After How We Work) */}
-                    <div id="proof" className="systems-section">
-                        <ProofSystems />
-                    </div>
-
-                    {/* 7. Case Studies — Proof */}
+                    {/* 6. Case Studies — Proof */}
                     <div id="case-overview" className="systems-section">
                         <CaseStudySection />
                     </div>
 
-                    {/* 8. Impact — Measurable Results */}
+                    {/* 7. Impact — Measurable Results */}
                     <div id="impact" className="systems-section">
                         <ImpactSection />
                     </div>
 
-                    {/* 9. Engagement Models — Pricing Philosophy */}
+                    {/* 8. Engagement Models — Pricing Philosophy */}
                     <div id="engagement" className="systems-section">
                         <EngagementModel />
                     </div>
 
-                    {/* 11. FAQs — Objection Handling */}
+                    {/* 9. FAQs — Objection Handling */}
                     <div id="faq" className="systems-section">
                         <FAQSection variant="systems" />
                     </div>
