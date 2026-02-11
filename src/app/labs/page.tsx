@@ -50,14 +50,14 @@ export default function LabsPage() {
                 <WhatWeCreate />
             </div>
 
-            {/* 4. Featured Experiments Gallery */}
-            <div id="experiments">
-                <ExperimentsGallery />
-            </div>
-
             {/* 5. Work Gallery — CRITICAL Visual Proof */}
             <div id="work">
                 <WorkGallery />
+            </div>
+
+            {/* 4. Featured Experiments Gallery */}
+            <div id="experiments">
+                <ExperimentsGallery />
             </div>
 
             {/* 6. Kyra Reveal / Scroll Experience — After Proof */}

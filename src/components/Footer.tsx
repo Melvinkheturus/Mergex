@@ -77,7 +77,6 @@ const staggerContainer = {
 export default function Footer() {
     const scrollTo = useLenisScroll();
     const pathname = usePathname();
-    const subBrand = (pathname || '').includes('systems') ? 'Systems' : (pathname || '').includes('labs') ? 'Labs' : null;
 
     return (
         <>
@@ -278,16 +277,6 @@ export default function Footer() {
                             >
                                 Mergex
                             </motion.h1>
-                            {subBrand && (
-                                <motion.span
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
-                                    className="absolute bottom-6 right-6 md:right-8 text-2xl md:text-3xl lg:text-4xl font-body font-light text-gray-500 tracking-wider pointer-events-none select-none"
-                                >
-                                    {subBrand}
-                                </motion.span>
-                            )}
                         </div>
                         <motion.div
                             className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3"

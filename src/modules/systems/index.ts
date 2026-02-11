@@ -11,6 +11,7 @@ import { EngagementModel } from './components/EngagementModel';
 import { SystemsCTA } from './components/SystemsCTA';
 import { SystemsFAQ } from './components/SystemsFAQ';
 import { ImpactSection } from './components/ImpactSection';
+import { CaseStudySection } from './components/CaseStudySection';
 
 export {
     SystemsHero,
@@ -24,5 +25,6 @@ export {
     SystemsCTA,
     SystemsFAQ,
     ImpactSection,
+    CaseStudySection,
 };
 

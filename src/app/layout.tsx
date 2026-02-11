@@ -96,6 +96,42 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"
         />
+
+        {/* Space Grotesk - Distinctive modern geometric sans */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* JetBrains Mono - Technical monospace for labels */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* DM Sans - Distinctive geometric sans for How We Work */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* IBM Plex Mono - Technical monospace for labels in How We Work */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* Outfit - Geometric sans for Engagement Model */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* Urbanist - Modern sans for Tech Stack marquee */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}

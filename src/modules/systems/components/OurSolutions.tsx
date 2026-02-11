@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { OUR_SOLUTIONS } from '../content/systems';
+import { FlipText } from '../../../components/ui/text-effect-flipper';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -160,13 +161,14 @@ export function OurSolutions() {
                 <div className="grid lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-center">
                     {/* Left: Clickable Navigation */}
                     <div className="lg:col-span-4">
+
                         <nav className="space-y-3">
                             {OUR_SOLUTIONS.pillars.map((pillar, index) => (
                                 <button
                                     key={index}
                                     onClick={() => handleNavClick(index)}
                                     className={`
-                                        text-left w-full transition-all duration-500 cursor-pointer
+                                        text-left w-fit transition-all duration-500 cursor-pointer group
                                         text-3xl md:text-4xl lg:text-5xl font-normal
                                         hover:text-violet-600
                                         ${activeIndex === index
@@ -174,9 +176,16 @@ export function OurSolutions() {
                                             : 'text-[#999999] opacity-60'
                                         }
                                     `}
-                                    style={{ fontFamily: 'var(--font-geist-sans)' }}
+                                    style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
-                                    {pillar.navLabel}
+                                    <FlipText
+                                        active={activeIndex === index}
+                                        className={`
+                                        text-3xl md:text-4xl lg:text-5xl font-normal transition-colors duration-300
+                                        ${activeIndex === index ? 'text-[#1A1A1A]' : 'text-[#999999] group-hover:text-violet-600'}
+                                    `}>
+                                        {pillar.navLabel}
+                                    </FlipText>
                                 </button>
                             ))}
                         </nav>

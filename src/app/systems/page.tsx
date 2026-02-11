@@ -12,9 +12,9 @@ import {
     EngagementModel,
     SystemsFAQ,
     ImpactSection,
+    CaseStudySection,
 } from '@/modules/systems';
 import { FAQSection } from '@/modules/homepage';
-import { CaseStudyOverview } from '@/modules/caseStudies';
 import { PageTransition } from '@/components/transitions/PageTransition';
 
 import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRegistrar';
@@ -76,7 +76,7 @@ export default function SystemsPage() {
 
                     {/* 7. Case Studies — Proof */}
                     <div id="case-overview" className="systems-section">
-                        <CaseStudyOverview />
+                        <CaseStudySection />
                     </div>
 
                     {/* 8. Impact — Measurable Results */}

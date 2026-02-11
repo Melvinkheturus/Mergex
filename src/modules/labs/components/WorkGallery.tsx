@@ -57,7 +57,7 @@ export function WorkGallery() {
             />
 
             {/* Text Overlay - Left Side */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 z-30 pl-4 md:pl-8 lg:pl-12 max-w-xl pointer-events-none">
+            <div className="absolute left-0 top-[52%] -translate-y-1/2 z-30 pl-4 md:pl-8 lg:pl-12 max-w-xl pointer-events-none">
                 <h2
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                     style={{
@@ -69,16 +69,6 @@ export function WorkGallery() {
                     <span className="block mt-1">MASTERPIECES</span>
                     <span className="block mt-1">IN THE GALLERY</span>
                 </h2>
-
-                <button className="group text-white font-semibold transition-all duration-300 inline-flex items-center gap-2 pointer-events-auto hover:opacity-80">
-                    <span className="text-sm md:text-base uppercase tracking-wider drop-shadow-md">BROWSE GALLERY</span>
-                    <svg className="w-5 h-5 drop-shadow-md group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 430 430" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="18">
-                            <path stroke="#fff" d="M365 225v130c0 11.046-8.954 20-20 20H75c-11.046 0-20-8.954-20-20V85c0-11.046 8.954-20 20-20h130" />
-                            <path stroke="#e5d1fa" d="M375 55H250m125 0v125m0-125L215 215" />
-                        </g>
-                    </svg>
-                </button>
             </div>
 
             {/* Image Marquee Rows Container */}

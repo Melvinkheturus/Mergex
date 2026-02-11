@@ -25,7 +25,7 @@ export function WhatWeSolve() {
                             Why Mergex Systems
                         </span>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A1A] leading-tight"
-                            style={{ fontFamily: 'var(--font-geist-sans)' }}
+                            style={{ fontFamily: 'var(--font-manrope)' }}
                         >
                             {WHAT_WE_SOLVE.headline}
                         </h2>

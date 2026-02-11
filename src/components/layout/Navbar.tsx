@@ -16,9 +16,22 @@ export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Restored
     const [scrolled, setScrolled] = useState(false);
     const [visible, setVisible] = useState(true);
+    const [forceHidden, setForceHidden] = useState(false);
     const [showMobileCallButton, setShowMobileCallButton] = useState(false);
     const lastScrollY = useRef(0);
     const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+    // Listen for custom event to hide/show navbar from other components (e.g. ScrollZoomShowcase)
+    useEffect(() => {
+        const handleToggleNavbar = (e: CustomEvent<{ hidden: boolean }>) => {
+            setForceHidden(e.detail.hidden);
+        };
+
+        window.addEventListener('mergex:toggle-navbar', handleToggleNavbar as EventListener);
+        return () => {
+            window.removeEventListener('mergex:toggle-navbar', handleToggleNavbar as EventListener);
+        };
+    }, []);
 
     // Handle scroll effect for transparency and hide/show
     useEffect(() => {
@@ -79,7 +92,7 @@ export function Navbar() {
                 className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-2"
                 initial={{ y: -100, opacity: 0 }}
                 animate={{
-                    y: visible ? 0 : "-100%",
+                    y: (visible && !forceHidden) ? 0 : "-100%",
                     opacity: 1
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -169,7 +182,7 @@ export function Navbar() {
             {/* Mobile Navbar Header - Minimal */}
             <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: visible && !isMobileMenuOpen ? 0 : -100 }}
+                animate={{ y: (visible && !isMobileMenuOpen && !forceHidden) ? 0 : -100 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >

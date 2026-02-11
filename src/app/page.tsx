@@ -5,7 +5,6 @@ import {
   ProblemFragmentation,
   EcosystemSnapshot,
   WhatWeBuildSection,
-  FeaturedSystemsWork,
   FAQSection,
 } from '@/modules/homepage';
 import { TestimonialsSection } from '@/modules/shared';
@@ -57,17 +56,12 @@ export default function Home() {
         <WhatWeBuildSection />
       </div>
 
-      {/* 6. Selected Systems — Teaser */}
-      <div id="featured-work">
-        <FeaturedSystemsWork />
-      </div>
-
-      {/* 7. Testimonials — Belief-Based Only */}
+      {/* 6. Testimonials — Belief-Based Only */}
       <div id="testimonials">
         <TestimonialsSection />
       </div>
 
-      {/* 8. FAQ — Orientation */}
+      {/* 7. FAQ — Orientation */}
       <div id="faq">
         <FAQSection variant="parent" />
       </div>

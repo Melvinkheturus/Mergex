@@ -65,6 +65,21 @@ export function ScrollZoomShowcase() {
                         scrub: 1,
                         pin: true,
                         anticipatePin: 1,
+                        onEnter: () => {
+                            window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: true } }));
+                        },
+                        onLeave: () => {
+                            window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
+                        },
+                        onEnterBack: () => {
+                            window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: true } }));
+                        },
+                        onLeaveBack: () => {
+                            window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
+                        },
+                        onRefresh: () => {
+                            // Ensure pin spacing is calculated correctly
+                        }
                     },
                 }
             );
@@ -108,7 +123,15 @@ export function ScrollZoomShowcase() {
             );
         });
 
-        return () => ctx.revert();
+        // Force refresh after a short delay to ensure layout is settled
+        const timer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
+
+        return () => {
+            ctx.revert();
+            clearTimeout(timer);
+        };
     }, []);
 
     return (
