@@ -4,7 +4,7 @@ import {
   ProblemContext,
   ProblemFragmentation,
   EcosystemSnapshot,
-  WhatWeBuildSection,
+  // WhatWeBuildSection,
   FAQSection,
 } from '@/modules/homepage';
 import { TestimonialsSection } from '@/modules/shared';
@@ -53,7 +53,8 @@ export default function Home() {
 
       {/* 5. What We Build — High-Level Outcomes Only */}
       <div id="what-we-build">
-        <WhatWeBuildSection />
+        {/* What We Build - Commented out */}
+        {/* <WhatWeBuildSection /> */}
       </div>
 
       {/* 6. Testimonials — Belief-Based Only */}

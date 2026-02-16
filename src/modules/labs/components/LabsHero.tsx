@@ -15,7 +15,7 @@ export function LabsHero() {
             {/* Full Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/background/Kyra-hero.png"
+                    src="/assets/background/kyra-hero.png"
                     alt="Labs Hero Background"
                     fill
                     className="object-cover"

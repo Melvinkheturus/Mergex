@@ -1,6 +1,6 @@
 import { HeroSection } from './components/HeroSection';
 import { ProductPortalGallery } from './components/ProductPortalGallery';
-import { WhatWeBuildSection } from './components/WhatWeBuildSection';
+// import { WhatWeBuildSection } from './components/WhatWeBuildSection';
 import ClaritySection from './components/ClaritySection';
 import ProductSpotlight from './components/ProductSpotlight';
 import SolutionsComparison from './components/SolutionsComparison';
@@ -15,7 +15,7 @@ import { ProofSection } from './components/ProofSection';
 export {
     HeroSection,
     ProductPortalGallery,
-    WhatWeBuildSection,
+    // WhatWeBuildSection,
     ClaritySection,
     ProductSpotlight,
     SolutionsComparison,

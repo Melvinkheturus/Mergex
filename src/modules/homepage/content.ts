@@ -43,25 +43,49 @@ export const PORTAL_CARDS = {
 
 
 
-export const WHAT_WE_BUILD = {
-    headline: 'Built for Makers Who Move Fast',
-    subheadline: 'Your ideas deserve momentum. We clear the path.',
-    problems: [
-        {
-            challenge: 'Content that takes forever',
-            solution: 'AI-powered visual generation at scale',
-            division: 'Labs',
-            icon: 'spark',
-        },
-        {
-            challenge: 'Tech that holds you back',
-            solution: 'Custom apps & AI automation that work',
-            division: 'Systems',
-            icon: 'build',
-        },
 
-    ],
-} as const;
+// export const WHAT_WE_BUILD = {
+//     headline: 'Built for Makers Who Move Fast',
+//     subheadline: 'Your ideas deserve momentum. We clear the path.',
+//     problems: [
+//         {
+//             challenge: 'Content that takes forever',
+//             solution: 'AI-powered visual generation at scale',
+//             division: 'Labs',
+//             icon: 'spark',
+//         },
+//         {
+//             challenge: 'Tech that holds you back',
+//             solution: 'Custom apps & AI automation that work',
+//             division: 'Systems',
+//             icon: 'build',
+//         },
+//         {
+//             challenge: 'Branding that feels generic',
+//             solution: 'Design systems that stand out',
+//             division: 'Labs',
+//             icon: 'palette',
+//         },
+//         {
+//             challenge: 'Slow, manual workflows',
+//             solution: 'Marketing automation that scales',
+//             division: 'Systems',
+//             icon: 'flow',
+//         },
+//         {
+//             challenge: 'Ideas stuck in planning',
+//             solution: 'MVPs shipped in weeks, not months',
+//             division: 'Systems',
+//             icon: 'rocket',
+//         },
+//         {
+//             challenge: 'Disconnected tools',
+//             solution: 'Integrated systems that talk to each other',
+//             division: 'Systems',
+//             icon: 'link',
+//         },
+//     ],
+// } as const;
 
 export const PORTFOLIO_PREVIEW = {
     headline: 'Featured Work',
@@ -278,6 +302,5 @@ export const ECOSYSTEM_CONTENT = {
     headline: 'What We Are: A Full-Stack Growth Engine',
     subheadline: 'The intersection of engineering and creativity. A single brain for your digital body.',
 } as const;
-
 
 
