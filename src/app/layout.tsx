@@ -135,6 +135,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}
+        suppressHydrationWarning
       >
         <LayoutContent>{children}</LayoutContent>
       </body>
