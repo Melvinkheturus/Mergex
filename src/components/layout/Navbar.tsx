@@ -719,7 +719,7 @@ function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
                 <ExploreCard
                     title="Partner With Us"
                     description="Collaborate, refer, or build alongside Mergex."
-                    href="/partnership"
+                    href="/partner"
                     closeMenu={closeMenu}
                 />
                 <ExploreCard
