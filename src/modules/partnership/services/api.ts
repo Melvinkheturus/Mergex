@@ -32,7 +32,7 @@ export async function submitReferral(data: ReferralSubmission): Promise<ApiRespo
         table: 'referral',
         data: {
             'Referrer Name': data.referrerName,
-            'Referrer Email': data.referrerEmail,
+            'Email': data.referrerEmail,
             'Client Name': data.clientName,
             'Client Company': data.clientCompany,
             'Problem Description': data.problemDescription,
