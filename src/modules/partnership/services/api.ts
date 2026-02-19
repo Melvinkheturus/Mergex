@@ -1,6 +1,6 @@
 import { PartnerApplication, ReferralSubmission } from '../types';
 
-const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_PARTNER_API_URL || 'https://script.google.com/macros/s/AKfycbzWOdTmDvc5TzN8ZKEaNGVncPrT4x34qRLAVVYnQTz3gUt5rQGmNgsgKHquAHrA57I4/exec';
+const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_PARTNER_API_URL || 'https://script.google.com/macros/s/AKfycbwHDjgGzSjIhN0pb0QynXSKzCXbST96cg0rCfud_oIlUpo-oxY6iMEMmEJo5ZdbfUjJIg/exec';
 
 interface ApiResponse {
     success: boolean;
@@ -16,9 +16,9 @@ export async function submitPartnerApplication(data: PartnerApplication): Promis
     const payload: ApiPayload = {
         table: 'partner',
         data: {
-            'Contact Name': data.name,
+            'Name': data.name,
             'Email': data.email,
-            'Company Name': data.company,
+            'Company': data.company,
             'Partnership Type': data.partnershipType === 'strategic' ? 'Strategic' : 'Referral',
             'Message': data.message,
         }

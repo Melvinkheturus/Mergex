@@ -109,8 +109,28 @@ Any other value → **hard rejection**.
 ### `data`
 
 * Must be an **object**
-* Keys must match **sheet column headers**
+* Keys must match **sheet column headers** exactly (case-sensitive)
 * Missing fields are auto-filled as empty strings
+
+#### Partner Application fields (`table: "partner"`)
+
+| Field              | Required | Notes                              |
+| ------------------ | -------- | ---------------------------------- |
+| `Name`             | Yes      | Full name of the contact           |
+| `Email`            | Yes      | Contact email address              |
+| `Company`          | Yes      | Company or organization name       |
+| `Partnership Type` | Yes      | Must be `Strategic` or `Referral`  |
+| `Message`          | Yes      | Description of partnership interest|
+
+#### Referral Submission fields (`table: "referral"`)
+
+| Field                | Required | Notes                                |
+| -------------------- | -------- | ------------------------------------ |
+| `Referrer Name`      | Yes      | Name of the person making the referral |
+| `Referrer Email`     | Yes      | Email of the referrer                |
+| `Client Name`        | Yes      | Name of the referred client          |
+| `Client Company`     | Yes      | Company of the referred client       |
+| `Problem Description`| Yes      | Challenge or need of the client      |
 
 #### Client-forbidden fields
 
@@ -151,10 +171,11 @@ Content-Type: application/json
 {
   "table": "partner",
   "data": {
-    "Company Name": "Acme Corp",
-    "Contact Name": "Jane Doe",
+    "Name": "Jane Doe",
     "Email": "jane@acme.com",
-    "Partnership Type": "Strategic"
+    "Company": "Acme Corp",
+    "Partnership Type": "Strategic",
+    "Message": "We'd love to explore a strategic partnership."
   }
 }
 ```
@@ -323,3 +344,17 @@ This is a **full row snapshot**, not a diff.
 * Column header changes are safe
 * Removing `Status` disables status webhooks
 * Payloads >10KB are rejected immediately
+
+---
+
+## Email Server
+
+The webhook email notification server (`https://mergexemailserver.netlify.app/api`) is a separate service responsible for sending status-change and error emails.
+
+| Detail       | Value                                                                          |
+| ------------ | ------------------------------------------------------------------------------ |
+| Hosted by    | `connectwithsanthoshmk@gmail.com`                                              |
+| Repository   | [devsanthoshmk/partner-emailServer](https://github.com/devsanthoshmk/partner-emailServer) (Private) |
+| Platform     | Netlify                                                                        |
+
+> ⚠️ Access to the repository requires an invitation from the repository owner.
