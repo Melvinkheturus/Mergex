@@ -1,50 +1,45 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScrollVelocity } from '@/components/ScrollVelocity';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const galleryImages = [
     '/assets/mockups/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg',
     '/assets/mockups/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
 ];
 
+/**
+ * WorkGallery — Scroll-driven image marquee gallery
+ *
+ * The section has its own dark radial-gradient background (self-contained
+ * dark island). The LabsPageWrapper transitions the page background to dark
+ * before this section enters, creating a seamless blend.
+ *
+ * framer-motion useScroll drives a subtle scale+opacity on entry/exit
+ * so the gallery feels like it emerges from and dissolves back into the
+ * surrounding dark canvas.
+ */
 export function WorkGallery() {
     const sectionRef = useRef<HTMLElement>(null);
 
-    useEffect(() => {
-        if (!sectionRef.current) return;
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start end', 'end start'],
+    });
 
-        const section = sectionRef.current;
-
-        ScrollTrigger.create({
-            trigger: section,
-            start: 'top 80%', // Start fading to black before section is fully in view
-            end: 'bottom top',
-            onEnter: () => {
-                document.body.style.background = '#000';
-                document.body.style.transition = 'background 0.5s ease';
-            },
-            onLeaveBack: () => {
-                document.body.style.background = '#fff';
-                document.body.style.transition = 'background 0.5s ease';
-            }
-        });
-
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
-    }, []);
+    // Fade the section in as it enters from the bottom, out as it leaves the top
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.97, 1, 1, 0.97]);
 
     return (
-        <section
+        <motion.section
             ref={sectionRef}
             className="relative min-h-screen flex items-center overflow-hidden"
             style={{
                 background: 'radial-gradient(circle at center, #111 0%, #000 70%)',
+                opacity,
+                scale,
             }}
         >
             {/* Noise Texture Overlay */}
@@ -91,7 +86,7 @@ export function WorkGallery() {
 
                 {/* 3 Rows of Scrolling Images */}
                 <div className="py-12 space-y-4">
-                    {/* Row 1 - Moving Right: Image1, Image2, Image1, Image2... */}
+                    {/* Row 1 - Moving Right */}
                     <ScrollVelocity
                         images={[
                             galleryImages[0],
@@ -108,7 +103,7 @@ export function WorkGallery() {
                         scrollerClassName="flex items-center"
                     />
 
-                    {/* Row 2 - Moving Left: Image1, Image2, Image1, Image2... */}
+                    {/* Row 2 - Moving Left */}
                     <ScrollVelocity
                         images={[
                             galleryImages[0],
@@ -125,7 +120,7 @@ export function WorkGallery() {
                         scrollerClassName="flex items-center"
                     />
 
-                    {/* Row 3 - Moving Right: Image1, Image2, Image1, Image2... */}
+                    {/* Row 3 - Moving Right */}
                     <ScrollVelocity
                         images={[
                             galleryImages[0],
@@ -155,6 +150,6 @@ export function WorkGallery() {
                     `,
                 }}
             />
-        </section >
+        </motion.section>
     );
 }

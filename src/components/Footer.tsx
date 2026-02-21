@@ -2,24 +2,39 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import SplitText from '@/components/SplitText';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { TextRoll } from '@/components/ui/skiper-ui/skiper58';
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+    return (
+        <Link href={href} className="block py-0.5">
+            <TextRoll
+                className="text-white hover:text-white transition-colors tracking-widest"
+                style={{ lineHeight: '1.2', textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}
+            >
+                {label}
+            </TextRoll>
+        </Link>
+    );
+}
+
 const FOOTER_LINKS = {
-    services: [
-        { label: 'Mergex Systems', href: '/services/systems' },
-        { label: 'Digital Marketing', href: '/services/marketing' },
+    solutions: [
+        { label: 'Mergex Systems', href: '/systems' },
         { label: 'Mergex Labs', href: '/labs' },
     ],
-    explore: [
-        { label: 'Case Studies', href: '/explore/case-studies' },
-        { label: 'Blog', href: '/explore/blog' },
-        { label: 'Resources', href: '/resources' },
-        { label: 'Products', href: '/products', isSubtle: true },
+    insights: [
+        { label: 'Blog', href: '/blog' },
+        { label: 'Case Studies', href: '/case-studies' },
     ],
     company: [
-        { label: 'About Mergex', href: '/about', isPrimary: true },
-        { label: 'Careers', href: '/careers', isPrimary: true },
+        { label: 'About Mergex', href: '/about' },
+        { label: 'Careers', href: '/careers' },
+        { label: 'Partner With Us', href: '/partner' },
         { label: 'Contact', href: '/contact' },
     ],
 };
@@ -81,11 +96,11 @@ export default function Footer() {
     return (
         <>
             {/* Footer */}
-            <footer className="bg-transparent dark:bg-[#070b18] pt-16 lg:pt-20 pb-8 lg:pb-10 relative overflow-hidden">
+            <footer className="bg-transparent dark:bg-[#070b18] pt-12 lg:pt-16 pb-8 lg:pb-10 relative overflow-hidden">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/assets/footer.png"
+                        src="/assets/background/footer.png"
                         alt=""
                         fill
                         className="object-cover"
@@ -99,9 +114,12 @@ export default function Footer() {
                 {/* Additional Top Black Overlay for depth */}
                 <div className="absolute top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-black/80 to-transparent z-[6] pointer-events-none" />
 
+                {/* Additional Bottom Black Overlay for depth */}
+                <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-black/80 to-transparent z-[6] pointer-events-none" />
+
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-12 lg:mb-16 xl:mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-12 lg:mt-16">
                         {/* Brand Column */}
                         <motion.div
                             className="md:col-span-4 lg:col-span-5 xl:col-span-4"
@@ -193,47 +211,35 @@ export default function Footer() {
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            {/* Services Column (Primary) */}
+                            {/* Solutions Column */}
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Services</h4>
-                                <ul className="space-y-3 text-sm text-gray-300 font-body">
-                                    {FOOTER_LINKS.services.map((link) => (
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Solutions</h4>
+                                <ul className="space-y-4 text-sm font-body">
+                                    {FOOTER_LINKS.solutions.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <a className="hover:text-primary transition-colors tracking-wide" href={link.href}>
-                                                {link.label}
-                                            </a>
+                                            <FooterLink href={link.href} label={link.label} />
                                         </motion.li>
                                     ))}
                                 </ul>
                             </motion.div>
 
-                            {/* Explore Column */}
+                            {/* Insights Column */}
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Explore</h4>
-                                <ul className="space-y-3 text-sm text-gray-300 font-body">
-                                    {FOOTER_LINKS.explore.map((link) => (
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Insights</h4>
+                                <ul className="space-y-4 text-sm font-body">
+                                    {FOOTER_LINKS.insights.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <a
-                                                className={`transition-colors tracking-wide ${
-                                                    // @ts-ignore
-                                                    link.isSubtle
-                                                        ? 'text-gray-500 hover:text-gray-300'
-                                                        : 'hover:text-primary'
-                                                    }`}
-                                                href={link.href}
-                                            >
-                                                {link.label}
-                                            </a>
+                                            <FooterLink href={link.href} label={link.label} />
                                         </motion.li>
                                     ))}
                                 </ul>
@@ -246,19 +252,11 @@ export default function Footer() {
                                 viewport={{ once: true }}
                                 variants={menuStaggerContainer}
                             >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide">Company</h4>
-                                <ul className="space-y-3 text-sm font-body">
+                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Company</h4>
+                                <ul className="space-y-4 text-sm font-body">
                                     {FOOTER_LINKS.company.map((link) => (
                                         <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <a
-                                                className={`transition-colors tracking-wide ${link.isPrimary
-                                                    ? 'text-white hover:text-white/80 font-medium'
-                                                    : 'text-gray-300 hover:text-white'
-                                                    }`}
-                                                href={link.href}
-                                            >
-                                                {link.label}
-                                            </a>
+                                            <FooterLink href={link.href} label={link.label} />
                                         </motion.li>
                                     ))}
                                 </ul>
@@ -267,47 +265,61 @@ export default function Footer() {
                     </div>
 
                     {/* Big Text Name */}
-                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end mt-20 lg:mt-24 xl:mt-32 mb-0 relative z-10 w-full px-4 gap-8 lg:gap-12 xl:gap-16">
-                        <div className="relative w-full md:w-auto text-center md:text-left">
-                            <motion.h1
-                                initial={{ filter: "blur(20px)", opacity: 0 }}
-                                whileInView={{ filter: "blur(0px)", opacity: 1 }}
-                                transition={{ duration: 1.2, ease: "easeOut" }}
-                                className="text-[15vw] leading-none font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-tight select-none font-[family-name:var(--font-playfair)] w-full md:w-auto pb-8 pr-6"
+                </div>
+
+                <div className="w-full mt-4 lg:mt-6 mb-0 relative z-10 px-4 md:px-10 lg:px-16 xl:px-20 overflow-hidden">
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-center gap-8 lg:gap-12 xl:gap-16">
+                        <div className="relative w-full text-center md:text-left">
+                            {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
+                            <div
+                                style={{
+                                    WebkitMaskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
+                                    maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
+                                }}
                             >
-                                Mergex
-                            </motion.h1>
+                                <SplitText
+                                    text={pathname === '/labs' ? 'Mergex Labs' : pathname === '/systems' ? 'Mergex Systems' : 'Mergex'}
+                                    tag="h1"
+                                    className={`${pathname === '/labs' || pathname === '/systems' ? 'text-[12vw] md:text-[8vw] lg:text-[10vw]' : 'text-[16vw] md:text-[18vw]'} leading-none font-extrabold text-white tracking-tighter select-none font-[family-name:var(--font-manrope)] w-full pb-6 pr-0 whitespace-nowrap`}
+                                    splitType="chars"
+                                    delay={80}
+                                    duration={1.2}
+                                    ease="power3.out"
+                                    from={{ opacity: 0, y: 60 }}
+                                    to={{ opacity: 1, y: 0 }}
+                                    threshold={0.1}
+                                    rootMargin="-50px"
+                                    textAlign="left"
+                                />
+                            </div>
                         </div>
-                        <motion.div
-                            className="mb-6 md:mb-4 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3"
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={staggerContainer}
-                        >
-                            <style jsx global>{`
-                                @keyframes gradient-x {
-                                    0% { background-position: 0% 50%; }
-                                    100% { background-position: 200% 50%; }
-                                }
-                                .animate-gradient-x {
-                                    animation: gradient-x 3s linear infinite;
-                                }
-                            `}</style>
-                            <motion.p variants={fadeInUp} className="text-gray-400 text-sm lg:text-base leading-relaxed font-body line-clamp-3 mb-1">
-                                Mergex is a technology organization building software systems, AI solutions, and SaaS products through Labs, Services, and Platforms.
-                            </motion.p>
-                            <motion.a
-                                variants={fadeInUp}
-                                href="/partner"
-                                className="inline-flex items-center gap-2 group transition-all duration-300 transform -translate-y-1"
+                        {pathname !== '/labs' && pathname !== '/systems' && (
+                            <motion.div
+                                className="mb-8 md:mb-0 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3 md:-translate-y-4"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={staggerContainer}
                             >
-                                <span className="text-lg font-medium bg-[linear-gradient(90deg,#C4B5FD,#9333EA,#C4B5FD)] bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">Partner With Us</span>
-                                <ArrowUpRight className="w-5 h-5 text-purple-500 group-hover:text-purple-300 transition-colors" />
-                            </motion.a>
-                            <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm pt-4">We believe good systems outlast trends.</motion.p>
-                        </motion.div>
+                                <style jsx global>{`
+                                    @keyframes gradient-x {
+                                        0% { background-position: 0% 50%; }
+                                        100% { background-position: 200% 50%; }
+                                    }
+                                    .animate-gradient-x {
+                                        animation: gradient-x 3s linear infinite;
+                                    }
+                                `}</style>
+                                <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body mb-1" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                                    Mergex is a business architecture company replacing fragmented growth with engineered scale.
+                                </motion.p>
+                                <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm pt-4">We believe good systems outlast trends.</motion.p>
+                            </motion.div>
+                        )}
                     </div>
+                </div>
+
+                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
 
                     <motion.div
                         className="pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
@@ -328,6 +340,26 @@ export default function Footer() {
                             <a className="hover:text-white transition-colors" href="#">
                                 Terms & Conditions
                             </a>
+                            <button
+                                onClick={() => scrollTo(0)}
+                                className="ml-2 w-8 h-8 rounded-full bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white group"
+                                aria-label="Back to Top"
+                            >
+                                {/* Arrow-up-to-line icon: a top bar + upward arrow */}
+                                <svg
+                                    className="w-4 h-4"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <line x1="5" y1="4" x2="19" y2="4" />
+                                    <path d="M12 8v12" />
+                                    <path d="M7 13l5-5 5 5" />
+                                </svg>
+                            </button>
                         </div>
                     </motion.div>
                 </div>
