@@ -92,6 +92,7 @@ const staggerContainer = {
 export default function Footer() {
     const scrollTo = useLenisScroll();
     const pathname = usePathname();
+    const isLabsOrSystems = pathname === '/labs' || pathname === '/systems';
 
     return (
         <>
@@ -267,55 +268,109 @@ export default function Footer() {
                     {/* Big Text Name */}
                 </div>
 
-                <div className="w-full mt-4 lg:mt-6 mb-0 relative z-10 px-4 md:px-10 lg:px-16 xl:px-20 overflow-hidden">
-                    <div className="flex flex-col md:flex-row justify-between items-center md:items-center gap-8 lg:gap-12 xl:gap-16">
-                        <div className="relative w-full text-center md:text-left">
-                            {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
-                            <div
-                                style={{
-                                    WebkitMaskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
-                                    maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
-                                }}
-                            >
-                                <SplitText
-                                    text={pathname === '/labs' ? 'Mergex Labs' : pathname === '/systems' ? 'Mergex Systems' : 'Mergex'}
-                                    tag="h1"
-                                    className={`${pathname === '/labs' || pathname === '/systems' ? 'text-[12vw] md:text-[8vw] lg:text-[10vw]' : 'text-[16vw] md:text-[18vw]'} leading-none font-extrabold text-white tracking-tighter select-none font-[family-name:var(--font-manrope)] w-full pb-6 pr-0 whitespace-nowrap`}
-                                    splitType="chars"
-                                    delay={80}
-                                    duration={1.2}
-                                    ease="power3.out"
-                                    from={{ opacity: 0, y: 60 }}
-                                    to={{ opacity: 1, y: 0 }}
-                                    threshold={0.1}
-                                    rootMargin="-50px"
-                                    textAlign="left"
-                                />
+                <div className="w-full mt-4 lg:mt-6 mb-0 relative z-10 overflow-hidden">
+                    <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
+                        <div className={`flex flex-col md:flex-row items-center ${isLabsOrSystems ? 'justify-center' : 'md:items-end justify-between'} gap-8 md:gap-12 pb-8`}>
+                            <div className={`relative ${isLabsOrSystems ? 'text-center' : 'text-left'}`}>
+                                {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
+                                <div
+                                    style={{
+                                        WebkitMaskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
+                                        maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
+                                    }}
+                                >
+                                    <div className={`flex flex-row items-baseline ${isLabsOrSystems ? 'justify-center' : 'justify-center md:justify-start'} whitespace-nowrap`}>
+                                        <SplitText
+                                            text="Mergex"
+                                            tag="h1"
+                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-10"
+                                            splitType="chars"
+                                            delay={80}
+                                            duration={1.2}
+                                            ease="power3.out"
+                                            from={{ opacity: 0, y: 60 }}
+                                            to={{ opacity: 1, y: 0 }}
+                                            threshold={0.1}
+                                            rootMargin="-50px"
+                                            textAlign="center"
+                                        />
+                                        {(pathname === '/labs' || pathname === '/systems') && (
+                                            <div className="flex flex-row items-baseline ml-[0.3em]">
+                                                <SplitText
+                                                    text={pathname === '/labs' ? 'L' : 'S'}
+                                                    tag="span"
+                                                    className="text-[14vw] md:text-[13vw] leading-none font-normal text-white select-none overflow-visible px-[0.1em] pb-10"
+                                                    style={{ fontFamily: "'Great Vibes', cursive" }}
+                                                    splitType="chars"
+                                                    delay={200}
+                                                    duration={1.2}
+                                                    ease="power3.out"
+                                                    from={{ opacity: 0, y: 60 }}
+                                                    to={{ opacity: 1, y: 0 }}
+                                                    threshold={0.1}
+                                                    rootMargin="-50px"
+                                                    textAlign="center"
+                                                />
+                                                <SplitText
+                                                    text={pathname === '/labs' ? 'abs' : 'ystems'}
+                                                    tag="span"
+                                                    className="text-[10vw] md:text-[9vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] ml-[-0.05em] pb-10"
+                                                    splitType="chars"
+                                                    delay={300}
+                                                    duration={1.2}
+                                                    ease="power3.out"
+                                                    from={{ opacity: 0, y: 60 }}
+                                                    to={{ opacity: 1, y: 0 }}
+                                                    threshold={0.1}
+                                                    rootMargin="-50px"
+                                                    textAlign="center"
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
+                            {pathname !== '/labs' && pathname !== '/systems' && (
+                                <motion.div
+                                    className="max-w-sm lg:max-w-md text-center md:text-right flex flex-col items-center md:items-end gap-6 md:mb-10"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                    variants={staggerContainer}
+                                >
+                                    <style jsx global>{`
+                                        @keyframes gradient-x {
+                                            0% { background-position: 0% 50%; }
+                                            100% { background-position: 200% 50%; }
+                                        }
+                                        .animate-gradient-x {
+                                            animation: gradient-x 3s linear infinite;
+                                        }
+                                    `}</style>
+                                    <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                                        Mergex is a business architecture company replacing fragmented growth with engineered scale.
+                                    </motion.p>
+                                    <motion.div variants={fadeInUp}>
+                                        <Link
+                                            href="/pitch-deck.pdf"
+                                            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-300 rounded-lg border border-white/20 overflow-hidden"
+                                        >
+                                            <span className="relative z-10 font-medium tracking-wide text-sm">Download Pitch Deck</span>
+                                            <svg
+                                                className="w-4 h-4 relative z-10 transition-transform group-hover:translate-y-0.5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M7 10l5 5m0 0l5-5m-5 5V3" />
+                                            </svg>
+                                        </Link>
+                                    </motion.div>
+                                    <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm">We believe good systems outlast trends.</motion.p>
+                                </motion.div>
+                            )}
                         </div>
-                        {pathname !== '/labs' && pathname !== '/systems' && (
-                            <motion.div
-                                className="mb-8 md:mb-0 max-w-sm lg:max-w-md xl:max-w-lg text-center md:text-left flex flex-col items-center md:items-start gap-3 md:-translate-y-4"
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={staggerContainer}
-                            >
-                                <style jsx global>{`
-                                    @keyframes gradient-x {
-                                        0% { background-position: 0% 50%; }
-                                        100% { background-position: 200% 50%; }
-                                    }
-                                    .animate-gradient-x {
-                                        animation: gradient-x 3s linear infinite;
-                                    }
-                                `}</style>
-                                <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body mb-1" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
-                                    Mergex is a business architecture company replacing fragmented growth with engineered scale.
-                                </motion.p>
-                                <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm pt-4">We believe good systems outlast trends.</motion.p>
-                            </motion.div>
-                        )}
                     </div>
                 </div>
 

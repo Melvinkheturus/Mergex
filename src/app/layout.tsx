@@ -132,6 +132,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+
+        {/* Great Vibes - Elegant script font for footer division label initials */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}
