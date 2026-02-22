@@ -1,29 +1,26 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { WHAT_IS_LABS } from '../content/labs';
+import { TextReveal } from '@/components/ui/text-reveal';
 
 /**
- * WhatIsLabs - Clear definition section
+ * WhatIsLabs - Clear definition section with text reveal animation
  */
 export function WhatIsLabs() {
     return (
-        <section className="py-20 md:py-28 bg-white">
-            <div className="container mx-auto px-6 md:px-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto text-center"
-                >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6 text-foreground">
+        <section className="bg-white">
+            <TextReveal
+                className="h-[80vh]"
+                offset={["start 0.5", "end 0.0"]}
+                header={
+                    <h2 className="text-sm md:text-base font-bold uppercase tracking-[0.8em] text-foreground/90 mb-4">
                         {WHAT_IS_LABS.headline}
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground-muted leading-relaxed">
-                        {WHAT_IS_LABS.description}
-                    </p>
-                </motion.div>
-            </div>
+                }
+                textClassName="text-xl md:text-2xl lg:text-3xl text-foreground font-medium leading-relaxed max-w-4xl mx-auto"
+            >
+                {WHAT_IS_LABS.description}
+            </TextReveal>
         </section>
     );
 }

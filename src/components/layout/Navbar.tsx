@@ -120,7 +120,7 @@ export function Navbar() {
                                 MERGEX
                             </span>
                         </Link>
-                        <div className={`hidden lg:block h-20 w-[4px] bg-gray-200 ml-6 transition-opacity duration-300 ${scrolled || activeMenu ? 'opacity-100' : 'opacity-0'}`} />
+
                     </div>
 
                     {/* Center Menu */}
@@ -129,7 +129,7 @@ export function Navbar() {
                         <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} />
                         <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} />
                         {/* Direct Link for Pricing */}
-                        <Link href="/pricing" className="relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors text-black/80 hover:text-black">
+                        <Link href="/pricing" className="relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors text-black/80 hover:text-violet-600">
                             Pricing
                         </Link>
                     </div>

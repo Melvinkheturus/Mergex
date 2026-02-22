@@ -19,7 +19,7 @@ export const LABS_HERO = {
 
 export const WHAT_IS_LABS = {
     headline: 'What Is Mergex Labs?',
-    description: 'Mergex Labs is where generative AI meets human creativity. We help brands produce visuals, videos, campaigns, and brand assets at a pace traditional agencies can\'t match—without sacrificing quality. Think of us as your creative engine, powered by intelligence.',
+    description: 'Mergex Labs is where generative AI meets human creativity. We help brands produce visuals, videos, campaigns, and brand assets at a pace traditional agencies can\'t match without sacrificing quality. Think of us as your creative engine, powered by intelligence.',
 } as const;
 
 export const WHAT_WE_CREATE = {

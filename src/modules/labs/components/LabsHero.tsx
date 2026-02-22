@@ -105,13 +105,13 @@ export function LabsHero() {
                     >
                         <a
                             href={LABS_HERO.primaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-600 to-purple-800 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
+                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-600 to-purple-800 text-white rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.primaryCTA.text}
                         </a>
                         <a
                             href={LABS_HERO.secondaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-gray-200 text-gray-900 rounded-full font-medium hover:bg-white transition-all duration-300 pointer-events-auto"
+                            className="inline-flex items-center justify-center px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-gray-200 text-gray-900 rounded-xl font-medium hover:bg-white transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.secondaryCTA.text}
                         </a>

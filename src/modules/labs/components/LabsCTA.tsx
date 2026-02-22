@@ -120,7 +120,7 @@ export function LabsCTA() {
                         <motion.button
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
-                            className="group relative flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-semibold text-lg overflow-hidden shadow-lg"
+                            className="group relative flex items-center gap-3 px-8 py-4 rounded-xl text-white font-semibold text-lg overflow-hidden shadow-lg"
                             style={{
                                 background: 'linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)',
                                 boxShadow: '0 8px 32px rgba(124,58,237,0.35)',
@@ -145,7 +145,7 @@ export function LabsCTA() {
                         <motion.button
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
-                            className="group flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-lg border-2 border-gray-200 text-gray-700 bg-white hover:border-violet-300 hover:text-violet-700 transition-all duration-300"
+                            className="group flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 text-gray-700 bg-white hover:border-violet-300 hover:text-violet-700 transition-all duration-300"
                         >
                             <MessageSquare size={20} className="group-hover:text-violet-600 transition-colors" />
                             {LABS_CTA.secondaryCTA}
