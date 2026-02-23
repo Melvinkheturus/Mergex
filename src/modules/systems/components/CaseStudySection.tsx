@@ -1,122 +1,152 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
 import { CASE_STUDIES } from '@/modules/caseStudies';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function CaseStudySection() {
-    const [tooltipText, setTooltipText] = useState('');
-    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const [showTooltip, setShowTooltip] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const cardsContainerRef = useRef<HTMLDivElement>(null);
+    const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-    const handleMouseEnter = () => {
-        setTooltipText('View Case Study');
-        setShowTooltip(true);
-    };
+    useEffect(() => {
+        if (!cardsContainerRef.current) return;
 
-    const handleMouseLeave = () => {
-        setShowTooltip(false);
-    };
+        const cardElements = cardRefs.current.filter(Boolean) as HTMLAnchorElement[];
+        const totalCards = cardElements.length;
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        setTooltipPosition({ x: e.clientX, y: e.clientY });
-    };
+        if (totalCards < 2) return;
+
+        const ctx = gsap.context(() => {
+            // Set initial card positions
+            gsap.set(cardElements[0], { y: '0%', scale: 1, rotation: 0 });
+            for (let i = 1; i < totalCards; i++) {
+                gsap.set(cardElements[i], { y: '100%', scale: 1, rotation: 0 });
+            }
+
+            const scrollTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: cardsContainerRef.current,
+                    start: 'top top',
+                    end: `+=${window.innerHeight * (totalCards - 1)}`,
+                    pin: true,
+                    pinType: 'transform',
+                    scrub: 0.5,
+                    pinSpacing: true,
+                },
+            });
+
+            for (let i = 0; i < totalCards - 1; i++) {
+                const currentCard = cardElements[i];
+                const nextCard = cardElements[i + 1];
+
+                // Current card shrinks and rotates away
+                scrollTimeline.to(
+                    currentCard,
+                    { scale: 0.7, rotation: 5, duration: 1, ease: 'none' },
+                    i,
+                );
+
+                // Next card slides up into view
+                scrollTimeline.to(
+                    nextCard,
+                    { y: '0%', duration: 1, ease: 'none' },
+                    i,
+                );
+            }
+        }, containerRef);
+
+        // Delayed refresh to ensure layout is settled after page shell animations
+        const refreshTimer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
+
+        return () => {
+            clearTimeout(refreshTimer);
+            ctx.revert();
+        };
+    }, []);
 
     return (
-        <section className="relative py-24 lg:py-32 bg-slate-50 overflow-hidden">
-            <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4" style={{ fontFamily: "var(--font-manrope)" }}>
-                        Selected Work
-                    </h2>
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4" style={{ fontFamily: "var(--font-manrope)" }}>
-                        Case Studies
-                    </h3>
-                    <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: "var(--font-manrope)" }}>
-                        Explore our portfolio of successful projects and transformative solutions
-                    </p>
-                </div>
-
-                {/* Horizontal Scroll Gallery */}
-                <div className="relative">
-                    <div className="overflow-x-auto scrollbar-hide pb-8">
-                        <div className="flex gap-6 min-w-max px-4">
-                            {CASE_STUDIES.map((study) => (
-                                <Link
-                                    href={`/case-studies/${study.slug}`}
-                                    key={study.id}
-                                    className="cursor-none group relative w-[400px] md:w-[500px] lg:w-[600px] h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex-shrink-0 block"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                    onMouseMove={handleMouseMove}
-                                >
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={study.heroImage}
-                                            alt={study.heroImageAlt}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-
-                                        {/* Overlay Gradient & Content */}
-                                        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8 md:p-10">
-                                            <div className="transform transition-all duration-300 translate-y-0 group-hover:translate-y-[-8px]">
-                                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "var(--font-manrope)" }}>
-                                                    {study.title}
-                                                </h3>
-                                                <p className="text-white/80 text-base md:text-lg leading-relaxed line-clamp-2" style={{ fontFamily: "var(--font-manrope)" }}>
-                                                    {study.outcome}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Scroll Hint */}
-                    <div className="flex justify-center mt-8">
-                        <div className="flex items-center gap-2 text-gray-500 text-sm">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                            </svg>
-                            <span style={{ fontFamily: "var(--font-manrope)" }}>Scroll to explore more</span>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </div>
+        <div ref={containerRef}>
+            {/* Header — outside the pinned area */}
+            <div className="bg-slate-50 pt-24 lg:pt-32 pb-12">
+                <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+                    <div className="text-center">
+                        <h2
+                            className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Selected Work
+                        </h2>
+                        <h3
+                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Case Studies
+                        </h3>
+                        <p
+                            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Explore our portfolio of successful projects and transformative solutions
+                        </p>
                     </div>
                 </div>
             </div>
 
-            {/* Custom Cursor Tooltip */}
-            {showTooltip && (
-                <div
-                    className="fixed pointer-events-none z-[9998] transition-opacity duration-200"
-                    style={{
-                        left: `${tooltipPosition.x}px`,
-                        top: `${tooltipPosition.y}px`,
-                        transform: 'translate(20px, -50%)'
-                    }}
-                >
-                    <div className="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl" style={{ fontFamily: "var(--font-manrope)" }}>
-                        {tooltipText}
-                    </div>
-                </div>
-            )}
+            {/* Sticky Card Animation — pinned by ScrollTrigger */}
+            <div
+                ref={cardsContainerRef}
+                className="relative flex h-screen w-full items-center justify-center overflow-hidden p-3 lg:p-8"
+            >
+                <div className="relative h-[85%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
+                    {CASE_STUDIES.map((study, i) => (
+                        <Link
+                            href={`/case-studies/${study.slug}`}
+                            key={study.id}
+                            className="absolute inset-0 block cursor-pointer group"
+                            ref={(el) => {
+                                cardRefs.current[i] = el;
+                            }}
+                        >
+                            <img
+                                src={study.heroImage}
+                                alt={study.heroImageAlt}
+                                className="h-full w-full rounded-2xl object-cover"
+                            />
 
-            <style jsx>{`
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            `}</style>
-        </section>
+                            {/* Overlay with case study info */}
+                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8 md:p-12 lg:p-16 transition-opacity duration-300">
+                                <div className="transform transition-all duration-300 group-hover:translate-y-[-8px]">
+                                    <span
+                                        className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-violet-400 mb-3"
+                                        style={{ fontFamily: 'var(--font-manrope)' }}
+                                    >
+                                        {study.client.industry}
+                                    </span>
+                                    <h4
+                                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3"
+                                        style={{ fontFamily: 'var(--font-manrope)' }}
+                                    >
+                                        {study.title}
+                                    </h4>
+                                    <p
+                                        className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl"
+                                        style={{ fontFamily: 'var(--font-manrope)' }}
+                                    >
+                                        {study.outcome}
+                                    </p>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }
