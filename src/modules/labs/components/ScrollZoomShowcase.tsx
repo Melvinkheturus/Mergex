@@ -186,23 +186,25 @@ export function ScrollZoomShowcase() {
                                     FEATURED EXPLORATION
                                 </p>
                                 {/* Gradient Text Headline */}
-                                <h2 className="text-5xl md:text-[clamp(52px,6vw,76px)] font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2">
-                                    Meet <span className="font-pinyon font-normal text-[1.1em] relative top-2 text-white">Kyra.</span>
+                                <h2 className="text-4xl md:text-5xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2">
+                                    Meet <span className="font-normal text-[1.2em] relative top-1 text-white px-2" style={{ fontFamily: "'Great Vibes', cursive" }}>Kyra.</span>
                                 </h2>
                             </div>
 
                             {/* ZONE 2: CONTEXT & MEANING (Mid-Left) */}
                             <div className="md:absolute md:top-[38%] md:left-0 max-w-[420px] mt-12 md:mt-0 z-10">
-                                <h3 className="text-xl md:text-[24px] font-normal leading-[1.3] text-white/90 mb-6">
+                                <h3 className="text-base md:text-lg font-normal leading-[1.3] text-white/90">
                                     An AI-native creative exploration by Mergex Labs.
                                 </h3>
-                                <p className="text-base md:text-[17px] leading-[1.6] text-white/75">
-                                    Kyra represents how we experiment with generative AI  blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
-                                </p>
                             </div>
 
                             {/* ZONE 3: META + ACTION (Bottom Right) */}
                             <div className="md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10">
+                                {/* Moved Description */}
+                                <p className="text-base md:text-[17px] leading-[1.6] text-white/75 max-w-[420px] text-center md:text-right">
+                                    Kyra represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
+                                </p>
+
                                 {/* Meta Row */}
                                 <div className="flex flex-row gap-8 md:gap-12 border-t border-white/20 pt-6 md:border-none md:pt-0">
                                     <div className="text-center md:text-right">
@@ -230,24 +232,6 @@ export function ScrollZoomShowcase() {
                                         </p>
                                     </div>
                                 </div>
-
-                                {/* CTA Button */}
-                                <button className="group h-12 px-8 bg-white text-[#111] rounded-full hover:bg-[#e6e6e6] transition-colors duration-300 flex items-center gap-2.5 shadow-lg shadow-black/20">
-                                    <span className="font-medium text-[15px]">Explore Kyra's creation</span>
-                                    <svg
-                                        className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                        />
-                                    </svg>
-                                </button>
                             </div>
 
                         </div>

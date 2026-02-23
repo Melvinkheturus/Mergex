@@ -18,7 +18,7 @@ import { PageTransition } from '@/components/transitions/PageTransition';
 
 import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRegistrar';
 
-import TargetCursorWrapper from '@/components/TargetCursorWrapper';
+
 
 export const metadata: Metadata = {
     title: 'Mergex Systems - Solution Partner | Custom Software & AI Automation',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 export default function SystemsPage() {
     return (
         <PageTransition>
-            <TargetCursorWrapper targetSelector="a, button, .cursor-target" />
+
             <SystemsScrollRegistrar />
             <SystemsPageShell>
                 <main className="bg-white text-gray-900">

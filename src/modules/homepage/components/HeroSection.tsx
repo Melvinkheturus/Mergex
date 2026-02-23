@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Playfair_Display } from 'next/font/google';
@@ -18,77 +19,98 @@ export function HeroSection() {
 
     return (
         <section
-            className="relative min-h-screen bg-[#f8f7ff] overflow-hidden"
+            className="relative min-h-screen bg-black overflow-hidden"
             style={{ fontFamily: 'var(--font-manrope)' }}
         >
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/assets/background/footer.png"
+                    alt=""
+                    fill
+                    className="object-cover opacity-80"
+                    priority
+                />
+            </div>
 
 
 
-            {/* Typography Content Layer */}
-            <div className="relative z-[4] min-h-screen flex items-center pt-16 md:pt-24">
-                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
+            {/* Bottom Fade - Shifted lower (larger height but starts lower) */}
+            <div className="absolute bottom-0 left-0 right-0 h-[250px] z-[1] pointer-events-none"
+                style={{ background: 'linear-gradient(to bottom, transparent 0%, white 100%)' }}
+            />
 
-                    {/* Editorial Headline - Mixed Typography */}
-                    <h1
-                        className="mb-12 md:mb-16 mt-8 leading-[0.95] tracking-tight"
-                    >
-                        {/* Line 1: Where Ideas Merge */}
-                        <div className="mb-2 md:mb-4">
-                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
-                                Where Ideas{' '}
-                            </span>
-                            <span className={`${playfair.className} font-normal text-[clamp(2.5rem,8vw,6rem)] text-gray-900 italic`}>
-                                Merge
-                            </span>
+
+
+
+
+            {/* Typography Content Layer - fills full viewport height */}
+            <div className="relative z-[4] h-screen flex flex-col">
+                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] flex-1 flex">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full">
+                        {/* Left Column: Tagline + Headline pinned to top */}
+                        <div className="lg:pr-12 pt-36 md:pt-44 flex flex-col">
+                            {/* Tagline */}
+                            <div className="mb-6">
+                                <span className="text-[10px] md:text-xs font-medium text-white/50 uppercase tracking-[0.3em]">
+                                    From Chaos to Clarity . Mergex
+                                </span>
+                            </div>
+
+                            <h1 className="leading-[0.95] tracking-tight mb-0">
+                                {/* Line 1: Scale Is Not Luck */}
+                                <div className="mb-1 md:mb-2">
+                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] text-white">
+                                        Scale Is Not{' '}
+                                    </span>
+                                    <span className={`${playfair.className} font-normal text-[clamp(2rem,5vw,4.2rem)] text-white italic`}>
+                                        Luck.
+                                    </span>
+                                </div>
+
+                                {/* Line 2: It's Structure */}
+                                <div className="mb-1 md:mb-2">
+                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] text-white">
+                                        It’s{' '}
+                                    </span>
+                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent">
+                                        Structure.
+                                    </span>
+                                </div>
+                            </h1>
                         </div>
 
-                        {/* Line 2: With Intelligence */}
-                        <div className="mb-2 md:mb-4">
-                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] text-gray-900">
-                                With{' '}
-                            </span>
-                            <span className="font-semibold text-[clamp(2.5rem,8vw,6rem)] bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">
-                                Intelligence.
-                            </span>
+                        {/* Right Column: Copy + CTAs pinned to bottom */}
+                        <div className="lg:pl-12 flex flex-col items-start justify-end pb-16 md:pb-20">
+                            {/* Subheadline */}
+                            <p className="text-base md:text-xl text-white/95 max-w-xl mb-4 leading-relaxed font-medium">
+                                Mergex designs the architecture behind ambitious businesses — integrating systems, AI, and growth into one engineered foundation.
+                            </p>
+
+                            {/* Supporting Line */}
+                            <p className="text-sm md:text-base text-white/70 max-w-lg mb-10 leading-relaxed italic">
+                                Replace fragmented vendors with a single engineered ecosystem.
+                            </p>
+
+                            {/* CTAs */}
+                            <div className="flex flex-col sm:flex-row items-start gap-4">
+                                <Link
+                                    href="/systems"
+                                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-lg text-sm md:text-base font-medium transition-all hover:bg-gray-100 hover:shadow-xl shadow-lg"
+                                >
+                                    Explore Systems
+                                    <ArrowRight size={16} />
+                                </Link>
+
+                                <Link
+                                    href="/labs"
+                                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-black rounded-lg text-sm md:text-base font-medium text-black transition-all hover:bg-black/5"
+                                >
+                                    Discover Labs
+                                </Link>
+                            </div>
                         </div>
-                    </h1>
-
-                    {/* Supporting Text */}
-                    <p
-                        className="text-base md:text-xl text-gray-700 max-w-2xl mb-6 leading-relaxed"
-                    >
-                        We design and build scalable digital products that support complex workflows and business-critical systems.
-                    </p>
-
-                    {/* Authority Reinforcer */}
-                    <p
-                        className="text-sm md:text-base text-gray-500 max-w-xl mb-10 leading-relaxed"
-                    >
-                        From early ideas to production-ready systems — we help you move fast without breaking things.
-                    </p>
-
-                    {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a1a2e] text-white rounded-full text-base md:text-lg font-medium transition-all hover:scale-105 hover:shadow-xl shadow-lg"
-                        >
-                            Let's talk
-                            <ArrowRight size={18} />
-                        </Link>
-
-                        <Link
-                            href="#what-we-build"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 border border-gray-300 rounded-full text-base md:text-lg font-medium transition-all hover:bg-white hover:shadow-md"
-                        >
-                            Explore the ecosystem
-                        </Link>
                     </div>
-
-                    {/* Microcopy */}
-                    <p className="text-xs md:text-sm text-gray-400">
-                        No commitment. Just clarity.
-                    </p>
                 </div>
             </div>
         </section>

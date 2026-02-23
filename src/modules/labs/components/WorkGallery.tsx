@@ -5,8 +5,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScrollVelocity } from '@/components/ScrollVelocity';
 
 const galleryImages = [
-    '/assets/mockups/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg',
-    '/assets/mockups/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
+    '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+    '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
+    '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
 ];
 
 /**
@@ -28,16 +29,18 @@ export function WorkGallery() {
         offset: ['start end', 'end start'],
     });
 
-    // Fade the section in as it enters from the bottom, out as it leaves the top
-    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.97, 1, 1, 0.97]);
+    // We've removed the fade-in opacity/scale because it was causing 
+    // the underlying white body background to show through before
+    // the section was fully transitioned.
+    const opacity = 1;
+    const scale = 1;
 
     return (
         <motion.section
             ref={sectionRef}
             className="relative min-h-screen flex items-center overflow-hidden"
             style={{
-                background: 'radial-gradient(circle at center, #111 0%, #000 70%)',
+                background: '#000000',
                 opacity,
                 scale,
             }}
@@ -88,12 +91,7 @@ export function WorkGallery() {
                 <div className="py-12 space-y-4">
                     {/* Row 1 - Moving Right */}
                     <ScrollVelocity
-                        images={[
-                            galleryImages[0],
-                            galleryImages[1],
-                            galleryImages[0],
-                            galleryImages[1],
-                        ] as string[]}
+                        images={galleryImages}
                         velocity={50}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={400}
@@ -105,12 +103,7 @@ export function WorkGallery() {
 
                     {/* Row 2 - Moving Left */}
                     <ScrollVelocity
-                        images={[
-                            galleryImages[0],
-                            galleryImages[1],
-                            galleryImages[0],
-                            galleryImages[1],
-                        ] as string[]}
+                        images={galleryImages}
                         velocity={-45}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={420}
@@ -122,12 +115,7 @@ export function WorkGallery() {
 
                     {/* Row 3 - Moving Right */}
                     <ScrollVelocity
-                        images={[
-                            galleryImages[0],
-                            galleryImages[1],
-                            galleryImages[0],
-                            galleryImages[1],
-                        ] as string[]}
+                        images={galleryImages}
                         velocity={55}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={380}

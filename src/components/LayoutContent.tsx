@@ -9,9 +9,6 @@ import { Navbar } from "@/components/layout";
 import Script from "next/script";
 import FooterRevealWrapper from "@/components/FooterRevealWrapper";
 
-const ScrollProgressIndicator = dynamic(() => import("@/components/ScrollProgressIndicator"), {
-    ssr: false // Client-side only component
-});
 
 const Footer = dynamic(() => import("@/components/Footer"), {
     ssr: true
@@ -58,7 +55,6 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         <LenisProvider>
             <ScrollSectionProvider>
                 <Navbar />
-                <ScrollProgressIndicator />
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
                 {/* Curtain: sits above fixed footer, margin-bottom equals footer height */}
                 <main

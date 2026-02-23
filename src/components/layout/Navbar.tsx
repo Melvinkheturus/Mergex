@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MobileNav } from '@/components/layout/MobileNav'; // Restored
@@ -14,12 +15,14 @@ type MegaMenuKey = 'services' | 'labs' | 'explore' | 'pricing' | null;
 export function Navbar() {
     const [activeMenu, setActiveMenu] = useState<MegaMenuKey>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Restored
-    const [scrolled, setScrolled] = useState(false);
-    const [visible, setVisible] = useState(true);
     const [forceHidden, setForceHidden] = useState(false);
-    const [showMobileCallButton, setShowMobileCallButton] = useState(false);
-    const lastScrollY = useRef(0);
-    const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+    const pathname = usePathname();
+
+    // Determine if the current page has a light background (requires dark navbar text)
+    // Systems page is explicitly light.
+    const isLightPage = pathname?.startsWith('/systems') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about';
+    const textColorClass = (activeMenu || isLightPage) ? 'text-neutral-900' : 'text-white';
+    const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/80 hover:text-violet-600' : 'text-white/90 hover:text-white';
 
     // Listen for custom event to hide/show navbar from other components (e.g. ScrollZoomShowcase)
     useEffect(() => {
@@ -33,43 +36,6 @@ export function Navbar() {
         };
     }, []);
 
-    // Handle scroll effect for transparency and hide/show
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            // Set scrolled state for transparency
-            setScrolled(currentScrollY > 50);
-
-            // Show mobile call button on scroll
-            if (window.innerWidth < 1024) {
-                setShowMobileCallButton(true);
-                if (scrollTimeout.current) {
-                    clearTimeout(scrollTimeout.current);
-                }
-                scrollTimeout.current = setTimeout(() => {
-                    setShowMobileCallButton(false);
-                }, 2000);
-            }
-
-            // Show navbar when scrolling up, hide when scrolling down
-            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-                // Scrolling down & past threshold
-                setVisible(false);
-            } else {
-                // Scrolling up or at top
-                setVisible(true);
-            }
-
-            lastScrollY.current = currentScrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-        };
-    }, []);
 
     return (
         <>
@@ -81,7 +47,7 @@ export function Navbar() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-white/40 backdrop-blur-md z-40"
+                        className="fixed inset-0 bg-white/40 z-40"
                         onClick={() => setActiveMenu(null)}
                     />
                 )}
@@ -89,10 +55,10 @@ export function Navbar() {
 
             {/* Desktop Navbar */}
             <motion.div
-                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-2"
+                className="hidden lg:block w-full absolute top-0 left-0 right-0 z-50 p-2"
                 initial={{ y: -100, opacity: 0 }}
                 animate={{
-                    y: (visible && !forceHidden) ? 0 : "-100%",
+                    y: forceHidden ? "-100%" : 0,
                     opacity: 1
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -100,8 +66,8 @@ export function Navbar() {
                 <nav
                     className={`
                         w-full transition-all duration-300 ease-in-out
-                        ${scrolled || activeMenu ? 'bg-white/95 shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
-                        backdrop-blur-md pl-4 pr-8 h-20 flex items-center justify-between
+                        ${activeMenu ? 'bg-white shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
+                        pl-4 pr-8 h-20 flex items-center justify-between
                         border
                         ${activeMenu ? 'rounded-t-xl' : 'rounded-xl'}
                     `}
@@ -116,7 +82,7 @@ export function Navbar() {
                                 height={76}
                                 className="object-contain"
                             />
-                            <span className="font-clash font-bold text-3xl tracking-wide ml-3 text-neutral-900 mt-1" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                            <span className={`font-clash font-bold text-3xl tracking-wide ml-3 mt-1 ${textColorClass}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                                 MERGEX
                             </span>
                         </Link>
@@ -125,11 +91,11 @@ export function Navbar() {
 
                     {/* Center Menu */}
                     <div className="flex items-center gap-8 h-full">
-                        <NavButton label="Systems" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} />
-                        <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} />
-                        <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} />
+                        <NavButton label="Systems" active={activeMenu === 'services'} onEnter={() => setActiveMenu('services')} onLeave={() => setActiveMenu(null)} anyActive={!!activeMenu} isLightPage={isLightPage} />
+                        <NavButton label="Labs" active={activeMenu === 'labs'} onEnter={() => setActiveMenu('labs')} onLeave={() => setActiveMenu(null)} anyActive={!!activeMenu} isLightPage={isLightPage} />
+                        <NavButton label="Explore" active={activeMenu === 'explore'} onEnter={() => setActiveMenu('explore')} onLeave={() => setActiveMenu(null)} anyActive={!!activeMenu} isLightPage={isLightPage} />
                         {/* Direct Link for Pricing */}
-                        <Link href="/pricing" className="relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors text-black/80 hover:text-violet-600">
+                        <Link href="/pricing" className={`relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors ${navItemColorClass}`}>
                             Pricing
                         </Link>
                     </div>
@@ -169,7 +135,7 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                             onMouseEnter={() => setActiveMenu(activeMenu)}
                             onMouseLeave={() => setActiveMenu(null)}
-                            className="w-full bg-white/95 backdrop-blur-xl border-x border-b border-gray-200/50 shadow-2xl rounded-b-xl overflow-hidden p-5 -mt-px"
+                            className="w-full bg-white border-x border-b border-gray-200/50 shadow-2xl rounded-b-xl overflow-hidden p-5 -mt-px"
                         >
                             {activeMenu === 'services' && <ServicesMenu closeMenu={() => setActiveMenu(null)} />}
                             {activeMenu === 'labs' && <LabsMenu closeMenu={() => setActiveMenu(null)} />}
@@ -182,14 +148,14 @@ export function Navbar() {
             {/* Mobile Navbar Header - Minimal */}
             <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: (visible && !isMobileMenuOpen && !forceHidden) ? 0 : -100 }}
+                animate={{ y: (isMobileMenuOpen || forceHidden) ? -100 : 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
+                className="lg:hidden absolute top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >
                 <div className={`
                     w-full transition-all duration-300 ease-in-out pointer-events-auto
-                    ${scrolled ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
-                    backdrop-blur-xl rounded-xl px-5 h-16 flex items-center justify-between border relative
+                    ${isMobileMenuOpen ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
+                    rounded-xl px-5 h-16 flex items-center justify-between border relative
                 `}>
                     {/* Left: Logo Icon */}
                     <Link href="/" className="flex-shrink-0 z-10">
@@ -204,7 +170,7 @@ export function Navbar() {
 
                     {/* Center: MERGEX Typo Logo */}
                     <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <span className="font-clash font-bold text-2xl tracking-wide text-neutral-900" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                        <span className={`font-clash font-bold text-2xl tracking-wide ${(isMobileMenuOpen || isLightPage) ? 'text-neutral-900' : 'text-white'}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                             MERGEX
                         </span>
                     </div>
@@ -212,7 +178,7 @@ export function Navbar() {
                     {/* Right: Hamburger Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 -mr-2 text-foreground/80 focus:outline-none z-10"
+                        className={`p-2 -mr-2 focus:outline-none z-10 ${(isMobileMenuOpen || isLightPage) ? 'text-foreground/80' : 'text-white'}`}
                         aria-label="Toggle menu"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,60 +197,26 @@ export function Navbar() {
 
             <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-            {/* Mobile Floating Book Call Button - Centered Bottom */}
-            <AnimatePresence>
-                {showMobileCallButton && !isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                        transition={{ duration: 0.3 }}
-                        className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-auto"
-                    >
-                        <Link
-                            href="/contact"
-                            className="
-                                group relative flex items-center gap-2 px-6 py-3 rounded-full overflow-hidden
-                                bg-gradient-to-b from-violet-400 to-violet-900
-                                text-white font-medium text-base
-                                shadow-xl shadow-violet-900/40
-                                transition-all duration-200 ease-out
-                                active:scale-95
-                                whitespace-nowrap
-                            "
-                        >
-                            <lord-icon
-                                src="https://cdn.lordicon.com/fpvaxfly.json"
-                                trigger="loop-on-hover"
-                                state="morph-phone-ring"
-                                colors="primary:#ffffff"
-                                style={{ width: '24px', height: '24px' }}
-                            />
-                            <span>Book a Call</span>
-                        </Link>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </>
     );
 }
 
+function NavButton({ label, active, onEnter, onLeave, hasDropdown = true, anyActive, isLightPage }: { label: string; active: boolean; onEnter: () => void; onLeave: () => void; hasDropdown?: boolean; anyActive: boolean; isLightPage: boolean }) {
+    const itemActiveColor = (active || isLightPage || anyActive) ? 'text-neutral-900' : 'text-white/90 hover:text-white';
 
-
-function NavButton({ label, active, onEnter, onLeave, hasDropdown = true }: { label: string; active: boolean; onEnter: () => void; onLeave: () => void; hasDropdown?: boolean }) {
     return (
         <button
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             className={`
                 relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors group
-                ${active ? 'text-black' : 'text-black/80 hover:text-black'}
+                ${itemActiveColor}
             `}
         >
             {label}
             {hasDropdown && (
                 <NavArrowIcon
-                    className={`text-gray-400 transition-transform duration-300 group-hover:text-black ${active ? 'rotate-180' : ''}`}
+                    className={`transition-transform duration-300 ${(active || isLightPage || anyActive) ? 'text-black' : 'text-white/60 group-hover:text-white'} ${active ? 'rotate-180' : ''}`}
                 />
             )}
             {active && (

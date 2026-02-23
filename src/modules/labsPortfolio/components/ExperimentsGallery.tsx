@@ -1,14 +1,19 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Media items for the carousel
 const CAROUSEL_MEDIA = [
@@ -22,6 +27,95 @@ const CAROUSEL_MEDIA = [
 ] as const;
 
 export function ExperimentsGallery() {
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        // Everything that needs to transition color
+        const allTextEls = Array.from(section.querySelectorAll<HTMLElement>('h2, p, span'));
+        const TRANSITION = 'background-color 0.4s ease, color 0.4s ease';
+
+        const applyLight = () => {
+            document.body.style.transition = TRANSITION;
+            document.body.style.backgroundColor = '#ffffff';
+            section.style.transition = TRANSITION;
+            section.style.backgroundColor = '#ffffff';
+
+            // Handle edge fades
+            const leftFade = section.querySelector<HTMLElement>('.fade-left');
+            const rightFade = section.querySelector<HTMLElement>('.fade-right');
+            if (leftFade) {
+                leftFade.style.transition = TRANSITION;
+                leftFade.style.background = 'linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.8), transparent)';
+            }
+            if (rightFade) {
+                rightFade.style.transition = TRANSITION;
+                rightFade.style.background = 'linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0.8), transparent)';
+            }
+
+            allTextEls.forEach(el => {
+                el.style.transition = TRANSITION;
+                if (el.tagName === 'H2') el.style.color = '#111827';
+                else if (el.classList.contains('text-xl')) el.style.color = '#4b5563';
+                else if (!el.classList.contains('text-purple-400') && !el.classList.contains('text-purple-600')) {
+                    el.style.color = '#6b7280';
+                }
+            });
+        };
+
+        const applyDark = () => {
+            document.body.style.transition = TRANSITION;
+            document.body.style.backgroundColor = '#000000';
+            section.style.transition = TRANSITION;
+            section.style.backgroundColor = '#000000';
+
+            // Handle edge fades
+            const leftFade = section.querySelector<HTMLElement>('.fade-left');
+            const rightFade = section.querySelector<HTMLElement>('.fade-right');
+            if (leftFade) {
+                leftFade.style.transition = TRANSITION;
+                leftFade.style.background = 'linear-gradient(to right, #000000, rgba(0, 0, 0, 0.8), transparent)';
+            }
+            if (rightFade) {
+                rightFade.style.transition = TRANSITION;
+                rightFade.style.background = 'linear-gradient(to left, #000000, rgba(0, 0, 0, 0.8), transparent)';
+            }
+
+            allTextEls.forEach(el => {
+                el.style.transition = TRANSITION;
+                el.style.color = '#ffffff';
+            });
+        };
+
+        const trigger = ScrollTrigger.create({
+            trigger: section,
+            start: 'top top',     // delay transition until it fills viewport
+            onEnter: applyLight,    // down into section → white
+            onLeaveBack: applyDark, // back up out of section → black (WorkGallery)
+        });
+
+        return () => {
+            trigger.kill();
+            document.body.style.transition = '';
+            document.body.style.backgroundColor = '';
+            section.style.transition = '';
+            section.style.backgroundColor = '';
+
+            const fades = section.querySelectorAll<HTMLElement>('.fade-left, .fade-right');
+            fades.forEach(f => {
+                f.style.transition = '';
+                f.style.background = '';
+            });
+
+            allTextEls.forEach(el => {
+                el.style.transition = '';
+                el.style.color = '';
+            });
+        };
+    }, []);
+
     const swiperStyles = `
         .experiments-swiper {
             width: 100%;
@@ -71,9 +165,9 @@ export function ExperimentsGallery() {
     `;
 
     return (
-        <section className="relative bg-white py-32 overflow-hidden">
+        <section ref={sectionRef} className="relative bg-white py-32 overflow-hidden" style={{ willChange: 'background-color' }}>
             <style>{swiperStyles}</style>
-            <div className="container mx-auto max-w-7xl px-2">
+            <div className="container mx-auto max-w-7xl px-2 text-gray-900 transition-colors duration-300">
                 {/* Section Header */}
                 <motion.div
                     className="mb-20 text-center"
@@ -82,13 +176,13 @@ export function ExperimentsGallery() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-purple-50 rounded-full">
+                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-purple-50 rounded-full border border-purple-100">
                         <Sparkles className="h-4 w-4 text-purple-600" />
                         <span className="text-sm font-semibold text-purple-600 uppercase tracking-wide">
                             Labs Portfolio
                         </span>
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-5xl md:text-6xl font-bold mb-6">
                         Experiments & Explorations
                     </h2>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -102,10 +196,10 @@ export function ExperimentsGallery() {
                 {/* Swiper Coverflow Carousel with Edge Fades */}
                 <div className="relative w-full">
                     {/* Left Fade Overlay */}
-                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+                    <div className="fade-left absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
                     {/* Right Fade Overlay */}
-                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+                    <div className="fade-right absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
                     <Swiper
                         className="experiments-swiper"
@@ -128,7 +222,7 @@ export function ExperimentsGallery() {
                         pagination={{ clickable: true }}
                         modules={[EffectCoverflow, Autoplay, Pagination]}
                     >
-                        {/* First set of slides */}
+                        {/* Swiper slides mapping... */}
                         {CAROUSEL_MEDIA.map((media, index) => (
                             <SwiperSlide key={`slide-${index}`}>
                                 <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">
@@ -154,7 +248,7 @@ export function ExperimentsGallery() {
                                 </div>
                             </SwiperSlide>
                         ))}
-                        {/* Duplicate slides for smoother looping */}
+                        {/* Duplicate Slides for Looping */}
                         {CAROUSEL_MEDIA.map((media, index) => (
                             <SwiperSlide key={`slide-dup-${index}`}>
                                 <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">

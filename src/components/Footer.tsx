@@ -97,26 +97,8 @@ export default function Footer() {
     return (
         <>
             {/* Footer */}
-            <footer className="bg-transparent dark:bg-[#070b18] pt-12 lg:pt-16 pb-8 lg:pb-10 relative overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/assets/background/footer.png"
-                        alt=""
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </div>
+            <footer className="bg-black pt-12 lg:pt-16 pb-8 lg:pb-10 relative overflow-hidden">
 
-                {/* Extended Smoke Blend Overlay - extends into FAQ section for seamless transition */}
-                <div className="absolute -top-[400px] left-0 right-0 h-[800px] bg-gradient-to-b from-white via-[#070b18]/50 to-transparent z-[5] pointer-events-none" />
-
-                {/* Additional Top Black Overlay for depth */}
-                <div className="absolute top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-black/80 to-transparent z-[6] pointer-events-none" />
-
-                {/* Additional Bottom Black Overlay for depth */}
-                <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-black/80 to-transparent z-[6] pointer-events-none" />
 
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                     {/* Top Section */}
