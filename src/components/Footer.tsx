@@ -98,6 +98,24 @@ export default function Footer() {
         <>
             {/* Footer */}
             <footer className="bg-black pt-12 lg:pt-16 pb-8 lg:pb-10 relative overflow-hidden">
+                {/* Desktop Background Image */}
+                <div className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden lg:block">
+                    <Image
+                        src="/assets/background/footer.png"
+                        alt=""
+                        fill
+                        className="object-cover"
+                    />
+                </div>
+                {/* Mobile Background Image */}
+                <div className="absolute inset-0 z-0 opacity-40 pointer-events-none lg:hidden">
+                    <Image
+                        src="/assets/background/footermobile.jpeg"
+                        alt=""
+                        fill
+                        className="object-cover"
+                    />
+                </div>
 
 
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">

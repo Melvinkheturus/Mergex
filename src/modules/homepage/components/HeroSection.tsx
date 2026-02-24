@@ -19,16 +19,16 @@ export function HeroSection() {
 
     return (
         <section
-            className="relative min-h-screen bg-black overflow-hidden"
+            className="relative min-h-screen overflow-hidden"
             style={{ fontFamily: 'var(--font-manrope)' }}
         >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/background/footer.png"
+                    src="/assets/background/parent-hero.jpeg"
                     alt=""
                     fill
-                    className="object-cover opacity-80"
+                    className="object-cover"
                     priority
                 />
             </div>
@@ -46,69 +46,64 @@ export function HeroSection() {
 
             {/* Typography Content Layer - fills full viewport height */}
             <div className="relative z-[4] h-screen flex flex-col">
-                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] flex-1 flex">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full">
-                        {/* Left Column: Tagline + Headline pinned to top */}
-                        <div className="lg:pr-12 pt-36 md:pt-44 flex flex-col">
-                            {/* Tagline */}
-                            <div className="mb-6">
-                                <span className="text-[10px] md:text-xs font-medium text-white/50 uppercase tracking-[0.3em]">
-                                    From Chaos to Clarity . Mergex
+                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] flex-1 flex items-center justify-center">
+                    <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto pt-20">
+                        {/* Tagline */}
+                        <div className="mb-6">
+                            <span className="text-[10px] md:text-xs font-medium text-black/50 uppercase tracking-[0.3em]">
+                                From Chaos to Clarity . Mergex
+                            </span>
+                        </div>
+
+                        {/* Headline */}
+                        <h1 className="leading-[0.95] tracking-tight mb-8">
+                            {/* Line 1: Scale Is Not Luck */}
+                            <div className="mb-1 md:mb-2">
+                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black">
+                                    Scale Is Not{' '}
+                                </span>
+                                <span className={`${playfair.className} font-normal text-[clamp(2rem,6vw,5rem)] text-black italic`}>
+                                    Luck.
                                 </span>
                             </div>
 
-                            <h1 className="leading-[0.95] tracking-tight mb-0">
-                                {/* Line 1: Scale Is Not Luck */}
-                                <div className="mb-1 md:mb-2">
-                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] text-white">
-                                        Scale Is Not{' '}
-                                    </span>
-                                    <span className={`${playfair.className} font-normal text-[clamp(2rem,5vw,4.2rem)] text-white italic`}>
-                                        Luck.
-                                    </span>
-                                </div>
+                            {/* Line 2: It's Structure */}
+                            <div className="mb-1 md:mb-2">
+                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black">
+                                    It’s{' '}
+                                </span>
+                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent">
+                                    Structure.
+                                </span>
+                            </div>
+                        </h1>
 
-                                {/* Line 2: It's Structure */}
-                                <div className="mb-1 md:mb-2">
-                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] text-white">
-                                        It’s{' '}
-                                    </span>
-                                    <span className="font-semibold text-[clamp(2rem,5vw,4.2rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent">
-                                        Structure.
-                                    </span>
-                                </div>
-                            </h1>
-                        </div>
-
-                        {/* Right Column: Copy + CTAs pinned to bottom */}
-                        <div className="lg:pl-12 flex flex-col items-start justify-end pb-16 md:pb-20">
-                            {/* Subheadline */}
-                            <p className="text-base md:text-xl text-white/95 max-w-xl mb-4 leading-relaxed font-medium">
+                        {/* Subheadline stack */}
+                        <div className="flex flex-col items-center gap-4 mb-10">
+                            <p className="text-base md:text-xl text-black/95 max-w-2xl leading-relaxed font-medium">
                                 Mergex designs the architecture behind ambitious businesses — integrating systems, AI, and growth into one engineered foundation.
                             </p>
-
-                            {/* Supporting Line */}
-                            <p className="text-sm md:text-base text-white/70 max-w-lg mb-10 leading-relaxed italic">
+                            <p className="text-sm md:text-base text-black/70 max-w-lg leading-relaxed italic">
                                 Replace fragmented vendors with a single engineered ecosystem.
                             </p>
+                        </div>
 
-                            {/* CTAs */}
-                            <div className="flex flex-col sm:flex-row items-start gap-4">
-                                <Link
-                                    href="/systems"
-                                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-lg text-sm md:text-base font-medium transition-all hover:bg-gray-100 hover:shadow-xl shadow-lg"
-                                >
-                                    Explore Systems
-                                    <ArrowRight size={16} />
-                                </Link>
+                        {/* CTAs */}
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <Link
+                                href="/systems"
+                                className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-lg text-sm md:text-base font-medium transition-all hover:bg-neutral-800 hover:shadow-xl shadow-lg"
+                            >
+                                Explore Systems
+                                <ArrowRight size={16} />
+                            </Link>
 
-                                <Link
-                                    href="/labs"
-                                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-black rounded-lg text-sm md:text-base font-medium text-black transition-all hover:bg-black/5"
-                                >
-                                    Discover Labs
-                                </Link>
-                            </div>
+                            <Link
+                                href="/labs"
+                                className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-black rounded-lg text-sm md:text-base font-medium text-black transition-all hover:bg-black/5"
+                            >
+                                Discover Labs
+                            </Link>
                         </div>
                     </div>
                 </div>

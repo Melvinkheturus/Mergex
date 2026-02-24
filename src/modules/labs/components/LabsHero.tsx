@@ -15,14 +15,14 @@ export function LabsHero() {
             {/* Full Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/background/kyra-hero.png"
+                    src="/assets/background/Labs-hero.jpeg"
                     alt="Labs Hero Background"
                     fill
                     className="object-cover"
                     priority
                 />
                 {/* Overlay for text readability */}
-                <div className="absolute inset-0 bg-white/40" />
+                {/* Overlay removed as requested */}
 
                 {/* Gradient Mesh Overlay - Kept subtle for depth */}
                 <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-purple-300/30 rounded-full blur-[150px] mix-blend-multiply animate-float" />
@@ -48,32 +48,37 @@ export function LabsHero() {
             {/* Content Container */}
             <div className="relative z-10 container mx-auto px-6 md:px-12 py-20 md:py-32 pointer-events-none">
                 <div className="max-w-4xl mx-auto text-center">
-                    {/* Eyebrow */}
-                    <motion.p
+                    {/* Eyebrow Group */}
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-sm md:text-base text-gray-600 tracking-wide mb-6 font-medium uppercase"
+                        className="mb-8"
                     >
-                        {LABS_HERO.eyebrow}
-                    </motion.p>
+                        <p className="text-sm md:text-base text-gray-600 tracking-widest font-semibold uppercase mb-1">
+                            {LABS_HERO.eyebrow}
+                        </p>
+                        <p className="text-xs md:text-sm text-gray-500 tracking-wide font-medium uppercase">
+                            {LABS_HERO.subEyebrow}
+                        </p>
+                    </motion.div>
 
                     {/* Main Headline */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3 }}
-                        className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight text-gray-900"
+                        className="text-5xl md:text-6xl lg:text-8xl font-bold mb-10 leading-tight text-gray-900"
                         style={{ fontFamily: 'var(--font-manrope)' }}
                     >
-                        Where{' '}
+                        Create at the{' '}
                         <span
                             className="font-serif italic font-normal relative z-10"
                             style={{ fontFamily: 'var(--font-playfair)' }}
                         >
-                            creativity
+                            Speed
                         </span>{' '}
-                        meets intelligence.
+                        of Imagination.
                     </motion.h1>
 
                     {/* Supporting Line */}
@@ -81,7 +86,7 @@ export function LabsHero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.5 }}
-                        className="text-lg md:text-2xl text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto"
+                        className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto font-medium"
                     >
                         {LABS_HERO.supportingLine}
                     </motion.p>
@@ -91,7 +96,7 @@ export function LabsHero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.7 }}
-                        className="text-base md:text-lg text-gray-600 italic mb-12"
+                        className="text-base md:text-lg text-gray-600 italic mb-12 font-medium"
                     >
                         {LABS_HERO.reinforcementLine}
                     </motion.p>
@@ -101,17 +106,17 @@ export function LabsHero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.9 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+                        className="flex flex-col sm:flex-row gap-6 justify-center mb-8"
                     >
                         <a
                             href={LABS_HERO.primaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-b from-purple-600 to-purple-800 text-white rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
+                            className="inline-flex items-center justify-center px-10 py-4 bg-gray-900 text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.primaryCTA.text}
                         </a>
                         <a
                             href={LABS_HERO.secondaryCTA.href}
-                            className="inline-flex items-center justify-center px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-gray-200 text-gray-900 rounded-xl font-medium hover:bg-white transition-all duration-300 pointer-events-auto"
+                            className="inline-flex items-center justify-center px-10 py-4 bg-white/80 backdrop-blur-md border border-gray-200 text-gray-900 rounded-full font-semibold hover:bg-white transition-all duration-300 pointer-events-auto"
                         >
                             {LABS_HERO.secondaryCTA.text}
                         </a>

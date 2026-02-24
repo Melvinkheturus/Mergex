@@ -20,7 +20,7 @@ export function Navbar() {
 
     // Determine if the current page has a light background (requires dark navbar text)
     // Systems page is explicitly light.
-    const isLightPage = pathname?.startsWith('/systems') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about';
+    const isLightPage = pathname?.startsWith('/systems') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
     const textColorClass = (activeMenu || isLightPage) ? 'text-neutral-900' : 'text-white';
     const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/80 hover:text-violet-600' : 'text-white/90 hover:text-white';
 
@@ -67,7 +67,7 @@ export function Navbar() {
                     className={`
                         w-full transition-all duration-300 ease-in-out
                         ${activeMenu ? 'bg-white shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
-                        pl-4 pr-8 h-20 flex items-center justify-between
+                        pl-4 pr-8 h-16 flex items-center justify-between
                         border
                         ${activeMenu ? 'rounded-t-xl' : 'rounded-xl'}
                     `}
@@ -78,11 +78,11 @@ export function Navbar() {
                             <Image
                                 src="/logo/mergex-logo.png"
                                 alt="Mergex Logo"
-                                width={76}
-                                height={76}
+                                width={60}
+                                height={60}
                                 className="object-contain"
                             />
-                            <span className={`font-clash font-bold text-3xl tracking-wide ml-3 mt-1 ${textColorClass}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                            <span className={`font-clash font-bold text-2xl tracking-wide ml-3 mt-1 ${textColorClass}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                                 MERGEX
                             </span>
                         </Link>
@@ -155,22 +155,22 @@ export function Navbar() {
                 <div className={`
                     w-full transition-all duration-300 ease-in-out pointer-events-auto
                     ${isMobileMenuOpen ? 'bg-white/90 shadow-lg border-gray-200/50' : 'bg-transparent border-transparent'}
-                    rounded-xl px-5 h-16 flex items-center justify-between border relative
+                    rounded-xl px-5 h-14 flex items-center justify-between border relative
                 `}>
                     {/* Left: Logo Icon */}
                     <Link href="/" className="flex-shrink-0 z-10">
                         <Image
                             src="/logo/mergex-logo.png"
                             alt="Mergex Logo"
-                            width={42}
-                            height={42}
+                            width={32}
+                            height={32}
                             className="object-contain"
                         />
                     </Link>
 
                     {/* Center: MERGEX Typo Logo */}
                     <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <span className={`font-clash font-bold text-2xl tracking-wide ${(isMobileMenuOpen || isLightPage) ? 'text-neutral-900' : 'text-white'}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                        <span className={`font-clash font-bold text-xl tracking-wide ${(isMobileMenuOpen || isLightPage) ? 'text-neutral-900' : 'text-white'}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                             MERGEX
                         </span>
                     </div>
