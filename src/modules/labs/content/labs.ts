@@ -15,6 +15,7 @@ export const LABS_HERO = {
         text: 'View AI Portfolio →',
         href: '#portfolio'
     },
+    microcopy: 'Refined by humans. Powered by intelligence.',
 } as const;
 
 export const WHAT_IS_LABS = {
