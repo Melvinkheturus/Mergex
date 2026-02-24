@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { OUR_SOLUTIONS } from '../content/systems';
 import { FlipText } from '../../../components/ui/text-effect-flipper';
 
@@ -11,236 +12,144 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * OurSolutions - Sticky scroll with animated card transitions
- * Section pins, cards animate in/out based on scroll
+ * OurSolutions — Sticky Sidebar ScrollSpy layout
+ *
+ * Left column: sticky nav that stays pinned while the right panel scrolls.
+ * GSAP ScrollTrigger detects which right-side section is in the viewport
+ * center and updates the active nav item accordingly (no pinned section).
  */
 export function OurSolutions() {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const cardsContainerRef = useRef<HTMLDivElement>(null);
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isClient, setIsClient] = useState(false);
-    const totalCards = OUR_SOLUTIONS.pillars.length;
-    const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
-    const prevIndexRef = useRef(0);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // Pre-calculate SVG line coordinates to avoid hydration mismatch
-    const svgLines = Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i * 30 * Math.PI) / 180;
-        const x1 = 60;
-        const y1 = 60;
-        const x2 = Math.round((60 + Math.cos(angle) * 40) * 100) / 100;
-        const y2 = Math.round((60 + Math.sin(angle) * 40) * 100) / 100;
-        return { x1, y1, x2, y2 };
-    });
-
-    // Handle navigation click
-    const handleNavClick = useCallback((index: number) => {
-        if (scrollTriggerRef.current && sectionRef.current) {
-            const progress = index / totalCards;
-            const scrollPosition = scrollTriggerRef.current.start +
-                (scrollTriggerRef.current.end - scrollTriggerRef.current.start) * progress;
-
-            window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
+    // Bind ScrollTrigger to each right-side section
+    useGSAP(
+        () => {
+            OUR_SOLUTIONS.pillars.forEach((_, index) => {
+                ScrollTrigger.create({
+                    trigger: `#solution-item-${index}`,
+                    start: 'top center',
+                    end: 'bottom center',
+                    onEnter: () => setActiveIndex(index),
+                    onEnterBack: () => setActiveIndex(index),
+                });
             });
+        },
+        { scope: containerRef }
+    );
+
+    // Scroll via Lenis so smooth-scroll stays consistent throughout the page
+    const scrollToItem = (index: number) => {
+        const target = document.getElementById(`solution-item-${index}`);
+        if (!target) return;
+        const lenis = (window as { lenis?: { scrollTo: (el: HTMLElement, opts: { offset: number; duration: number }) => void } }).lenis;
+        if (lenis) {
+            lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+        } else {
+            // Fallback for SSR or when Lenis isn't ready
+            const y = target.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
         }
-    }, [totalCards]);
-
-    // Animate card transitions
-    useEffect(() => {
-        if (!isClient || !cardsContainerRef.current) return;
-
-        const prevCard = cardRefs.current[prevIndexRef.current];
-        const nextCard = cardRefs.current[activeIndex];
-
-        if (prevCard && nextCard && prevIndexRef.current !== activeIndex) {
-            const direction = activeIndex > prevIndexRef.current ? 1 : -1;
-
-            gsap.to(prevCard, {
-                opacity: 0,
-                y: -30 * direction,
-                scale: 0.95,
-                duration: 0.4,
-                ease: 'power2.out',
-            });
-
-            gsap.fromTo(nextCard,
-                {
-                    opacity: 0,
-                    y: 30 * direction,
-                    scale: 0.95,
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                }
-            );
-        }
-
-        prevIndexRef.current = activeIndex;
-    }, [activeIndex, isClient]);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    useEffect(() => {
-        if (!isClient || !sectionRef.current) return;
-
-        const initTimer = setTimeout(() => {
-            ScrollTrigger.getAll().forEach(st => {
-                if (st.vars.trigger === sectionRef.current) {
-                    st.kill();
-                }
-            });
-
-            scrollTriggerRef.current = ScrollTrigger.create({
-                trigger: sectionRef.current,
-                pin: true,
-                pinSpacing: true,
-                start: 'top top',
-                end: () => `+=${window.innerHeight * totalCards}`,
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    const newIndex = Math.min(
-                        Math.floor(progress * totalCards),
-                        totalCards - 1
-                    );
-                    setActiveIndex(newIndex);
-                },
-            });
-
-            ScrollTrigger.refresh();
-        }, 500);
-
-        return () => {
-            clearTimeout(initTimer);
-            if (scrollTriggerRef.current) {
-                scrollTriggerRef.current.kill();
-            }
-        };
-    }, [isClient, totalCards]);
-
-    if (!isClient) {
-        return (
-            <section className="relative bg-white h-screen flex items-center justify-center">
-                <div className="container mx-auto px-6 md:px-12">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#1A1A1A]">
-                            {OUR_SOLUTIONS.headline}
-                        </h2>
-                        <p className="text-lg md:text-xl text-[#666666] max-w-2xl mx-auto">
-                            {OUR_SOLUTIONS.subheadline}
-                        </p>
-                    </div>
-                </div>
-            </section>
-        );
-    }
+    };
 
     return (
-        <section ref={sectionRef} className="relative bg-white h-screen pt-26 md:pt-30">
-            <div className="container mx-auto px-6 md:px-12">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#1A1A1A]">
-                        {OUR_SOLUTIONS.headline}
-                    </h2>
-                    <p className="text-lg md:text-xl text-[#666666] max-w-2xl mx-auto">
-                        {OUR_SOLUTIONS.subheadline}
+        <section
+            ref={containerRef}
+            className="bg-white w-full relative"
+        >
+            <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
+
+                {/* ── LEFT COLUMN — sticky nav ──
+                     self-start is CRITICAL: prevents flex from stretching this
+                     column to the parent height, which would kill sticky range. */}
+                <div className="hidden md:flex flex-col justify-center w-[28%] h-screen sticky top-0 self-start px-8 lg:px-12 border-r border-gray-100">
+                    {/* Section label */}
+                    <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-10">
+                        Our Solutions
                     </p>
-                </div>
 
-                {/* Two Column Layout - Centered */}
-                <div className="grid lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-center">
-                    {/* Left: Clickable Navigation */}
-                    <div className="lg:col-span-4">
-
-                        <nav className="space-y-3">
-                            {OUR_SOLUTIONS.pillars.map((pillar, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => handleNavClick(index)}
+                    <nav className="flex flex-col gap-5">
+                        {OUR_SOLUTIONS.pillars.map((pillar, index) => (
+                            <button
+                                key={index}
+                                onClick={() => scrollToItem(index)}
+                                className="text-left w-fit group cursor-pointer"
+                            >
+                                <FlipText
+                                    active={activeIndex === index}
                                     className={`
-                                        text-left w-fit transition-all duration-500 cursor-pointer group
-                                        text-3xl md:text-4xl lg:text-5xl font-normal
-                                        hover:text-violet-600
+                                        text-2xl lg:text-3xl xl:text-4xl font-normal transition-colors duration-300
                                         ${activeIndex === index
-                                            ? 'text-[#1A1A1A] opacity-100'
-                                            : 'text-[#999999] opacity-60'
+                                            ? 'text-[#1A1A1A]'
+                                            : 'text-[#CCCCCC] group-hover:text-violet-500'
                                         }
                                     `}
-                                    style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
-                                    <FlipText
-                                        active={activeIndex === index}
-                                        className={`
-                                        text-3xl md:text-4xl lg:text-5xl font-normal transition-colors duration-300
-                                        ${activeIndex === index ? 'text-[#1A1A1A]' : 'text-[#999999] group-hover:text-violet-600'}
-                                    `}>
-                                        {pillar.navLabel}
-                                    </FlipText>
-                                </button>
-                            ))}
-                        </nav>
-                    </div>
+                                    {pillar.navLabel}
+                                </FlipText>
+                            </button>
+                        ))}
+                    </nav>
+                </div>
 
-                    {/* Right: Animated Cards */}
-                    <div ref={cardsContainerRef} className="lg:col-span-8 relative min-h-[350px]">
-                        {OUR_SOLUTIONS.pillars.map((pillar, index) => (
-                            <div
-                                key={index}
-                                ref={(el) => { cardRefs.current[index] = el; }}
-                                className={`
-                                    ${activeIndex === index
-                                        ? 'relative z-10'
-                                        : 'absolute inset-0 pointer-events-none z-0 opacity-0'
-                                    }
-                                `}
-                            >
-                                {/* Numbered Card - Brand Color */}
-                                <div className="bg-gradient-to-br from-violet-500 to-violet-700 rounded-3xl p-8 md:p-10 relative overflow-hidden shadow-xl">
-                                    {/* Decorative Pattern */}
-                                    <div className="absolute top-6 right-6 opacity-20">
-                                        <svg width="100" height="100" viewBox="0 0 120 120" fill="none">
-                                            {svgLines.map((line, i) => (
-                                                <line
-                                                    key={i}
-                                                    x1={line.x1}
-                                                    y1={line.y1}
-                                                    x2={line.x2}
-                                                    y2={line.y2}
-                                                    stroke="white"
-                                                    strokeWidth="2"
-                                                />
-                                            ))}
-                                        </svg>
-                                    </div>
-
-                                    {/* Number */}
-                                    <div className="text-white/30 text-6xl md:text-7xl font-bold mb-4">
+                {/* ── RIGHT COLUMN — scrolling cards ── */}
+                <div className="w-full md:w-[72%]">
+                    {OUR_SOLUTIONS.pillars.map((pillar, index) => (
+                        <div
+                            key={index}
+                            id={`solution-item-${index}`}
+                            className="min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
+                        >
+                            {/* Visual area */}
+                            <div className="relative w-full aspect-video mb-12 overflow-hidden rounded-2xl bg-gray-50">
+                                {/* Large number watermark */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-[120px] font-bold text-gray-100 select-none leading-none">
                                         {String(index + 1).padStart(2, '0')}
+                                    </span>
+                                </div>
+                                {/* Violet gradient accent */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 via-transparent to-transparent" />
+                            </div>
+
+                            {/* Content Grid */}
+                            <div className="border-t border-gray-200 pt-10">
+                                <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
+                                    {/* Left Side: Info */}
+                                    <div className="md:col-span-7 lg:col-span-8">
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <span className="text-sm font-mono text-gray-400">
+                                                [{String(index + 1).padStart(2, '0')}]
+                                            </span>
+                                            <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-[#1A1A1A] whitespace-nowrap">
+                                                {pillar.title}
+                                            </h3>
+                                        </div>
+                                        <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl">
+                                            {pillar.description}
+                                        </p>
                                     </div>
 
-                                    {/* Title */}
-                                    <h3 className="text-2xl md:text-3xl font-semibold text-white mb-3">
-                                        {pillar.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-xl">
-                                        {pillar.description}
-                                    </p>
+                                    {/* Right Side: Categories */}
+                                    <div className="md:col-span-5 lg:col-span-4">
+                                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
+                                            Categories
+                                        </p>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            {pillar.capabilities.map((cap, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-3 py-2 rounded-sm bg-white text-center"
+                                                >
+                                                    {cap}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
