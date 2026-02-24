@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -11,34 +12,84 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+/* Images mapped to each pillar (index-matched) */
+const PILLAR_IMAGES = [
+    '/assets/mockups/e.png',
+    '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+    '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
+    '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
+    '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
+];
+
 /**
- * OurSolutions — Sticky Sidebar ScrollSpy layout
+ * OurSolutions — Sticky Sidebar ScrollSpy + Parallax Text-Over-Image
  *
- * Left column: sticky nav that stays pinned while the right panel scrolls.
- * GSAP ScrollTrigger detects which right-side section is in the viewport
- * center and updates the active nav item accordingly (no pinned section).
+ * Left column: sticky nav that stays pinned.
+ * Right column: scrolling cards where the text content slides UP over the
+ * image during scroll (parallax overlap), creating a premium agency feel.
  */
 export function OurSolutions() {
     const [activeIndex, setActiveIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Bind ScrollTrigger to each right-side section
     useGSAP(
         () => {
             OUR_SOLUTIONS.pillars.forEach((_, index) => {
+                const card = document.getElementById(`solution-item-${index}`);
+                if (!card) return;
+
+                // ScrollSpy — update active nav item
                 ScrollTrigger.create({
-                    trigger: `#solution-item-${index}`,
+                    trigger: card,
                     start: 'top center',
                     end: 'bottom center',
                     onEnter: () => setActiveIndex(index),
                     onEnterBack: () => setActiveIndex(index),
                 });
+
+                // Parallax — image moves slower (creates depth)
+                const img = card.querySelector('.parallax-img');
+                if (img) {
+                    gsap.fromTo(
+                        img,
+                        { y: '-15%' },
+                        {
+                            y: '15%',
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'top bottom',
+                                end: 'bottom top',
+                                scrub: true,
+                            },
+                        }
+                    );
+                }
+
+                // Text overlap — text slides UP over the image
+                const textContent = card.querySelector('.text-overlap');
+                if (textContent) {
+                    gsap.fromTo(
+                        textContent,
+                        { y: 0 },
+                        {
+                            y: -120,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'top center',
+                                end: 'bottom top',
+                                scrub: 1,
+                            },
+                        }
+                    );
+                }
             });
         },
         { scope: containerRef }
     );
 
-    // Scroll via Lenis so smooth-scroll stays consistent throughout the page
+    // Scroll via Lenis so smooth-scroll stays consistent
     const scrollToItem = (index: number) => {
         const target = document.getElementById(`solution-item-${index}`);
         if (!target) return;
@@ -46,7 +97,6 @@ export function OurSolutions() {
         if (lenis) {
             lenis.scrollTo(target, { offset: -80, duration: 1.2 });
         } else {
-            // Fallback for SSR or when Lenis isn't ready
             const y = target.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
@@ -98,52 +148,54 @@ export function OurSolutions() {
                         <div
                             key={index}
                             id={`solution-item-${index}`}
-                            className="min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
+                            className="relative min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
                         >
-                            {/* Visual area */}
-                            <div className="relative w-full aspect-video mb-12 overflow-hidden rounded-2xl bg-gray-50">
-                                {/* Large number watermark */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-[120px] font-bold text-gray-100 select-none leading-none">
-                                        {String(index + 1).padStart(2, '0')}
-                                    </span>
-                                </div>
-                                {/* Violet gradient accent */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 via-transparent to-transparent" />
+                            {/* ── IMAGE LAYER (z-0) ── */}
+                            <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-900 z-0">
+                                <Image
+                                    src={PILLAR_IMAGES[index]}
+                                    alt={pillar.title}
+                                    fill
+                                    className="parallax-img object-cover scale-110"
+                                />
+                                {/* Bottom gradient so overlapping text stays readable */}
+                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
                             </div>
 
-                            {/* Content Grid */}
-                            <div className="border-t border-gray-200 pt-10">
-                                <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
-                                    {/* Left Side: Info */}
-                                    <div className="md:col-span-7 lg:col-span-8">
-                                        <div className="flex items-center gap-4 mb-8">
-                                            <span className="text-sm font-mono text-gray-400">
-                                                [{String(index + 1).padStart(2, '0')}]
-                                            </span>
-                                            <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-[#1A1A1A] whitespace-nowrap">
-                                                {pillar.title}
-                                            </h3>
-                                        </div>
-                                        <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl">
-                                            {pillar.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Right Side: Categories */}
-                                    <div className="md:col-span-5 lg:col-span-4">
-                                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
-                                            Categories
-                                        </p>
-                                        <div className="grid grid-cols-2 gap-2">
-                                            {pillar.capabilities.map((cap, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-3 py-2 rounded-sm bg-white text-center"
-                                                >
-                                                    {cap}
+                            {/* ── TEXT LAYER (z-10) — slides UP over the image on scroll ── */}
+                            <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4">
+                                <div className="border-t border-gray-200 pt-10">
+                                    <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
+                                        {/* Left Side: Info */}
+                                        <div className="md:col-span-7 lg:col-span-8">
+                                            <div className="flex items-center gap-4 mb-8">
+                                                <span className="text-sm font-mono text-gray-400">
+                                                    [{String(index + 1).padStart(2, '0')}]
                                                 </span>
-                                            ))}
+                                                <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-[#1A1A1A] whitespace-nowrap">
+                                                    {pillar.title}
+                                                </h3>
+                                            </div>
+                                            <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl">
+                                                {pillar.description}
+                                            </p>
+                                        </div>
+
+                                        {/* Right Side: Categories */}
+                                        <div className="md:col-span-5 lg:col-span-4">
+                                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
+                                                Categories
+                                            </p>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {pillar.capabilities.map((cap, i) => (
+                                                    <span
+                                                        key={i}
+                                                        className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-3 py-2 rounded-sm bg-white text-center"
+                                                    >
+                                                        {cap}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
