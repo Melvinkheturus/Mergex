@@ -46,8 +46,9 @@ export function HeroSection() {
 
             {/* Typography Content Layer - fills full viewport height */}
             <div className="relative z-[4] h-screen flex flex-col">
+                {/* Center Headline Section */}
                 <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] flex-1 flex items-center justify-center">
-                    <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto pt-20">
+                    <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto pt-20 -mt-24">
                         {/* Tagline */}
                         <div className="mb-6">
                             <span className="text-[10px] md:text-xs font-medium text-black/50 uppercase tracking-[0.3em]">
@@ -56,7 +57,7 @@ export function HeroSection() {
                         </div>
 
                         {/* Headline */}
-                        <h1 className="leading-[0.95] tracking-tight mb-8">
+                        <h1 className="leading-[0.95] tracking-tight">
                             {/* Line 1: Scale Is Not Luck */}
                             <div className="mb-1 md:mb-2">
                                 <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black">
@@ -77,18 +78,23 @@ export function HeroSection() {
                                 </span>
                             </div>
                         </h1>
+                    </div>
+                </div>
 
-                        {/* Subheadline stack */}
-                        <div className="flex flex-col items-center gap-4 mb-10">
-                            <p className="text-base md:text-xl text-black/95 max-w-2xl leading-relaxed font-medium">
+                {/* Bottom Row: Subheadline and CTAs */}
+                <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] pb-8 md:pb-12">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-16 w-full">
+                        {/* Subheadline (Bottom Left) */}
+                        <div className="max-w-xl text-left">
+                            <p className="text-base md:text-xl text-black/95 leading-relaxed font-medium mb-3">
                                 Mergex designs the architecture behind ambitious businesses — integrating systems, AI, and growth into one engineered foundation.
                             </p>
-                            <p className="text-sm md:text-base text-black/70 max-w-lg leading-relaxed italic">
+                            <p className="text-sm md:text-base text-black/70 leading-relaxed italic">
                                 Replace fragmented vendors with a single engineered ecosystem.
                             </p>
                         </div>
 
-                        {/* CTAs */}
+                        {/* CTAs (Bottom Right) */}
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <Link
                                 href="/systems"
