@@ -6,7 +6,6 @@ import {
     SystemsPageShell,
     WhatWeSolve,
     OurSolutions,
-    SpeedAdvantage,
     HowWeWorkSystems,
     EngagementModel,
     SystemsFAQ,
@@ -58,22 +57,17 @@ export default function SystemsPage() {
                         <OurSolutions />
                     </div>
 
-                    {/* 4. Speed Without Fragility */}
-                    <div id="speed" className="systems-section">
-                        <SpeedAdvantage />
-                    </div>
-
-                    {/* 5. How We Work — Risk Reduction */}
+                    {/* 4. How We Work — Risk Reduction */}
                     <div id="process" className="systems-section">
                         <HowWeWorkSystems />
                     </div>
 
-                    {/* 6. Case Studies — Proof */}
+                    {/* 5. Case Studies — Proof */}
                     <div id="case-overview" className="systems-section">
                         <CaseStudySection />
                     </div>
 
-                    {/* 7. Impact — Measurable Results */}
+                    {/* 6. Impact — Measurable Results */}
                     <div id="impact" className="systems-section">
                         <ImpactSection />
                     </div>

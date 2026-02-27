@@ -5,7 +5,6 @@ import {
     WhatWeCreate,
     ScrollZoomShowcase,
     WorkGallery,
-    HowLabsWorks,
     WhyLabsExists,
     LabsCTA,
 } from '@/modules/labs';
@@ -63,11 +62,6 @@ export default function LabsPage() {
             {/* 6. Kyra Reveal / Scroll Experience — After Proof */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
-            </div>
-
-            {/* 7. How Labs Works — VERY LIGHT */}
-            <div id="process">
-                <HowLabsWorks />
             </div>
 
             {/* 8. Why Labs Exists — Short Manifesto */}

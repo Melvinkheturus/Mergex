@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
+import { ScrollVelocity } from '@/components/ScrollVelocity';
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -140,10 +141,24 @@ export function ScrollZoomShowcase() {
             className="relative h-[150vh] bg-white"
         >
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+                {/* Background Text Marquee - Sits behind the image */}
+                <div className="absolute inset-0 z-0 flex items-center justify-center opacity-70">
+                    <div className="w-full">
+                        <ScrollVelocity
+                            texts={[
+                                "HUMAN STRATEGY · AI ACCELERATION · STRUCTURED CREATIVITY ·",
+                                "GENERATIVE SYSTEMS · VISUAL INTELLIGENCE · ENGINEERED EXPERIMENTATION ·"
+                            ]}
+                            velocity={50}
+                            className="text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter text-gray-900 whitespace-nowrap font-serif italic opacity-30 px-4"
+                        />
+                    </div>
+                </div>
+
                 {/* Image Container */}
                 <div
                     ref={imageContainerRef}
-                    className="relative w-full h-full will-change-transform"
+                    className="relative w-full h-full will-change-transform z-10"
                     style={{
                         transformOrigin: 'center center',
                     }}
