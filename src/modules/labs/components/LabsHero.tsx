@@ -103,20 +103,7 @@ export function LabsHero() {
     useEffect(() => {
         if (!headlineRef.current || !eyebrowRef.current) return;
 
-        // 1. On-Load Reveal (No Scroll)
-        // Eyebrow reveal
-        gsap.fromTo(eyebrowRef.current,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
-        );
-
-        // Headline "Growth" reveal
-        gsap.fromTo(headlineRef.current,
-            { y: 100, opacity: 0, letterSpacing: '-0.05em', scale: 0.9 },
-            { y: 0, opacity: 1, letterSpacing: '0em', scale: 1, duration: 1.5, ease: 'power3.out', delay: 0.3 }
-        );
-
-        // 2. On-Scroll Fade Out
+        // On-Scroll Fade Out
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
@@ -127,7 +114,13 @@ export function LabsHero() {
         });
 
         tl.to(eyebrowRef.current, { y: -50, opacity: 0 }, 0);
-        tl.to(headlineRef.current, { y: -100, opacity: 0, scale: 0.95 }, 0);
+
+        // Unified contraction and fade out
+        tl.to(headlineRef.current, {
+            opacity: 0,
+            letterSpacing: '-0.05em', // Contraction effect
+            scale: 0.95
+        }, 0);
 
         return () => {
             tl.kill();
@@ -205,14 +198,20 @@ export function LabsHero() {
                                 className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 drop-shadow-[0_8px_8px_rgba(0,0,0,0.6)] max-w-5xl mx-auto origin-bottom"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                             >
-                                Create at the{' '}
+                                <span className="hero-word inline-block">Create</span>{' '}
+                                <span className="hero-word inline-block">at</span>{' '}
+                                <span className="hero-word inline-block">the</span>{' '}
                                 <span
-                                    className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#e8b5ff] to-[#ffc5d9]"
-                                    style={{ fontFamily: 'var(--font-playfair)' }}
+                                    className="hero-word italic font-normal text-white drop-shadow-sm inline-block"
+                                    style={{
+                                        fontFamily: 'var(--font-playfair)',
+                                        WebkitTextFillColor: 'white' // overrides the gradient clip from the parent h1
+                                    }}
                                 >
                                     Speed
                                 </span>{' '}
-                                of Imagination.
+                                <span className="hero-word inline-block">of</span>{' '}
+                                <span className="hero-word inline-block">Imagination.</span>
                             </h1>
                         </div>
                     </div>
