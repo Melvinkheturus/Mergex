@@ -6,7 +6,7 @@ export const LABS_HERO = {
     subEyebrow: 'AI Creative Intelligence',
     headline: 'Create at the Speed of Imagination.',
     supportingLine: 'Mergex Labs turns generative AI into high-impact ads, visuals, motion, and brand content engineered for teams that want to move faster than the market.',
-    reinforcementLine: 'Human strategy. AI acceleration. Refined through experimentation.',
+    reinforcementLine: 'Human strategy. AI acceleration.\nRefined through experimentation.',
     primaryCTA: {
         text: 'Launch With AI →',
         href: '#launch'

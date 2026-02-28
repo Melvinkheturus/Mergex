@@ -171,10 +171,13 @@ export function LabsHero() {
                     <div className="pt-10 md:pt-16"></div>
 
                     {/* CENTRE — large serif headline and eyebrows */}
-                    <div className="flex-1 flex flex-col justify-center items-center px-8 md:px-16 pb-20 md:pb-40 text-center">
+                    <div className="flex-1 flex flex-col justify-center items-center px-8 md:px-16 pb-32 md:pb-40 text-center relative z-20">
+                        {/* ── Background Shadow Glow ── */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[120%] max-w-[900px] h-[350px] bg-black/50 blur-[100px] rounded-full pointer-events-none -z-10" />
+
                         <div
                             ref={eyebrowRef}
-                            className="mb-8 flex items-center justify-center gap-3 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]"
+                            className="mb-8 flex items-center justify-center gap-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
                         >
                             <p
                                 className="text-[10px] md:text-xs tracking-[0.3em] text-white/80 uppercase font-medium"
@@ -195,7 +198,7 @@ export function LabsHero() {
                         <div className="overflow-hidden p-4 -m-4">
                             <h1
                                 ref={headlineRef}
-                                className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 drop-shadow-[0_8px_8px_rgba(0,0,0,0.6)] max-w-5xl mx-auto origin-bottom"
+                                className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] max-w-5xl mx-auto origin-bottom"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                             >
                                 <span className="hero-word inline-block">Create</span>{' '}
@@ -217,15 +220,18 @@ export function LabsHero() {
                         </div>
                     </div>
                     {/* BOTTOM ROW — tagline bottom-left, keywords + CTAs bottom-right */}
-                    <div className="px-8 md:px-16 pb-10 flex items-end justify-between gap-8">
+                    <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-8">
 
                         {/* BOTTOM-LEFT: supporting tagline */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.6 }}
-                            className="max-w-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+                            className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20"
                         >
+                            {/* ── Background Shadow Glow ── */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] bg-black/50 blur-[60px] rounded-[100%] pointer-events-none -z-10" />
+
                             <p
                                 className="text-sm md:text-base text-white/70 leading-relaxed font-light"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
@@ -240,27 +246,34 @@ export function LabsHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.75 }}
-                            className="flex flex-col items-end gap-5"
+                            className="flex flex-col items-start md:items-end gap-4 md:gap-5 relative z-20 mt-4 md:mt-0"
                         >
+                            {/* ── Background Shadow Glow ── */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-black/40 blur-[80px] rounded-[100%] pointer-events-none -z-10" />
+
                             <div
-                                className="text-right text-[9px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] max-w-[200px] md:max-w-none"
+                                className="text-left md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
-                                <p>{LABS_HERO.reinforcementLine}</p>
+                                <p>
+                                    {LABS_HERO.reinforcementLine.split('\n').map((line, i) => (
+                                        <span key={i} className="block">{line}</span>
+                                    ))}
+                                </p>
                             </div>
 
                             {/* CTA Buttons — square with rounded corners, side by side */}
                             <div className="flex flex-row gap-2 md:gap-3 pointer-events-auto">
                                 <a
                                     href={LABS_HERO.primaryCTA.href}
-                                    className="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                                    className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
                                     {LABS_HERO.primaryCTA.text}
                                 </a>
                                 <a
                                     href={LABS_HERO.secondaryCTA.href}
-                                    className="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
+                                    className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
                                     {LABS_HERO.secondaryCTA.text}
