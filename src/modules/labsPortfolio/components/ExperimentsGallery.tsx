@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
@@ -29,6 +30,35 @@ const CAROUSEL_MEDIA = [
 
 export function ExperimentsGallery() {
     const sectionRef = useRef<HTMLElement>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
+
+    // Pause all videos except the active slide's video
+    const syncVideoPlayback = useCallback((swiper: SwiperType) => {
+        const slides = swiper.slides;
+        if (!slides) return;
+
+        slides.forEach((slide: HTMLElement, idx: number) => {
+            const video = slide.querySelector('video');
+            if (!video) return;
+
+            if (idx === swiper.activeIndex) {
+                video.currentTime = 0;
+                video.play().catch(() => { });
+            } else {
+                video.pause();
+            }
+        });
+    }, []);
+
+    const handleSwiper = useCallback((swiper: SwiperType) => {
+        swiperRef.current = swiper;
+        // Small delay to ensure DOM is ready
+        setTimeout(() => syncVideoPlayback(swiper), 100);
+    }, [syncVideoPlayback]);
+
+    const handleSlideChange = useCallback((swiper: SwiperType) => {
+        syncVideoPlayback(swiper);
+    }, [syncVideoPlayback]);
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -248,6 +278,8 @@ export function ExperimentsGallery() {
                         }}
                         pagination={{ clickable: true }}
                         modules={[EffectCoverflow, Autoplay, Pagination]}
+                        onSwiper={handleSwiper}
+                        onSlideChange={handleSlideChange}
                     >
                         {/* Swiper slides mapping... */}
                         {CAROUSEL_MEDIA.map((media, index) => (
@@ -257,7 +289,6 @@ export function ExperimentsGallery() {
                                         <video
                                             src={media.src}
                                             className="w-full h-full object-cover"
-                                            autoPlay
                                             muted
                                             loop
                                             playsInline
@@ -283,7 +314,6 @@ export function ExperimentsGallery() {
                                         <video
                                             src={media.src}
                                             className="w-full h-full object-cover"
-                                            autoPlay
                                             muted
                                             loop
                                             playsInline

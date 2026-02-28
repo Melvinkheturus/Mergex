@@ -1,27 +1,40 @@
 'use client';
 
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import ImageTrail from '../../../components/ImageTrail';
 import { LABS_HERO } from '../content/labs';
 
 gsap.registerPlugin(ScrollTrigger);
 import { BlurVignette } from '@/components/ui/BlurVignette';
+// Lazy-load heavy components so they don't block first paint
+const ImageTrail = lazy(() => import('../../../components/ImageTrail'));
 
 const FRAME_COUNT = 189;
 
-/**
- * LabsHero - Cinematic hero for AI Content Studio
- * Features: Video frame sequence background, serif typography, editorial layout
- */
+// CSS keyframes injected once for the ambient shimmer (pure CSS, no JS runtime cost)
+const ambientStyles = `
+@keyframes labsAmbientPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.08); }
+}
+@keyframes labsShimmerSweep {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+`;
+
 export function LabsHero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const imagesRef = useRef<HTMLImageElement[]>([]);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const eyebrowRef = useRef<HTMLDivElement>(null);
+    const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+    const rafRef = useRef<number>(0);
+    const lastFrameRef = useRef<number>(-1);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -36,89 +49,148 @@ export function LabsHero() {
     // Masking shape effect (comes up from bottom)
     const maskY = useTransform(scrollYProgress, [0.7, 1], ['100%', '0%']);
 
-    const drawFrame = (index: number) => {
+    // Set canvas dimensions only on mount and resize — never per-frame
+    const syncCanvasSize = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x to save GPU
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        // Only resize if dimensions actually changed (avoids clearing canvas)
+        if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = `${w}px`;
+            canvas.style.height = `${h}px`;
+            ctxRef.current?.scale(dpr, dpr);
+        }
+    }, []);
+
+    const drawFrame = useCallback((index: number) => {
         const img = imagesRef.current[index - 1];
         const canvas = canvasRef.current;
-        if (img && img.complete && canvas) {
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+        const ctx = ctxRef.current;
+        if (!img || !img.complete || !canvas || !ctx) return;
 
-                const canvasRatio = canvas.width / canvas.height;
-                const imgRatio = img.width / img.height;
+        // Skip if we already painted this exact frame
+        if (lastFrameRef.current === index) return;
+        lastFrameRef.current = index;
 
-                let drawWidth = canvas.width;
-                let drawHeight = canvas.height;
-                let offsetX = 0;
-                let offsetY = 0;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const canvasW = canvas.width / dpr;
+        const canvasH = canvas.height / dpr;
 
-                if (imgRatio > canvasRatio) {
-                    drawWidth = canvas.height * imgRatio;
-                    offsetX = (canvas.width - drawWidth) / 2;
-                } else {
-                    drawHeight = canvas.width / imgRatio;
-                    offsetY = (canvas.height - drawHeight) / 2;
-                }
+        const canvasRatio = canvasW / canvasH;
+        const imgRatio = img.naturalWidth / img.naturalHeight;
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-            }
+        let drawWidth = canvasW;
+        let drawHeight = canvasH;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (imgRatio > canvasRatio) {
+            drawWidth = canvasH * imgRatio;
+            offsetX = (canvasW - drawWidth) / 2;
+        } else {
+            drawHeight = canvasW / imgRatio;
+            offsetY = (canvasH - drawHeight) / 2;
         }
-    };
+
+        ctx.clearRect(0, 0, canvasW, canvasH);
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    }, []);
+
+    // RAF-batched draw — prevents multiple draws in the same frame
+    const requestDraw = useCallback((index: number) => {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => drawFrame(index));
+    }, [drawFrame]);
 
     useEffect(() => {
-        const images: HTMLImageElement[] = [];
-        let loadedFrames = 0;
+        // Cache the canvas context once
+        const canvas = canvasRef.current;
+        if (canvas) {
+            ctxRef.current = canvas.getContext('2d', { alpha: false });
+        }
 
+        syncCanvasSize();
+
+        const images: HTMLImageElement[] = [];
         for (let i = 1; i <= FRAME_COUNT; i++) {
             const img = new window.Image();
-            const frameNum = i.toString().padStart(4, '0');
-            img.src = `/assets/background/labs/frames_webp/frame_${frameNum}.webp`;
-            img.onload = () => {
-                loadedFrames++;
-                if (loadedFrames === 1 || i === 1) {
-                    drawFrame(1);
-                }
-            };
+            img.decoding = 'async';
             images.push(img);
         }
         imagesRef.current = images;
 
+        // 1. Load the First Frame with high priority
+        const firstImg = images[0];
+        firstImg.fetchPriority = 'high';
+        firstImg.onload = () => {
+            syncCanvasSize();
+            drawFrame(1);
+            setIsLoaded(true);
+
+            // 2. Load all remaining frames after 100ms
+            setTimeout(() => {
+                for (let i = 2; i <= FRAME_COUNT; i++) {
+                    const img = images[i - 1];
+                    // img.fetchPriority = 'high'; not working increates arround .5 sec
+
+                    img.onload = () => {
+                        if (Math.round(frameIndex.get()) === i) {
+                            requestDraw(i);
+                        }
+                    };
+
+                    const frameNum = i.toString().padStart(4, '0');
+                    img.src = `/assets/background/labs/frames_webp/frame_${frameNum}.webp`;
+                }
+            }, 100);
+        };
+
+        // Trigger first frame load
+        firstImg.src = `/assets/background/labs/frames_webp/frame_0001.webp`;
+
         const handleResize = () => {
+            syncCanvasSize();
+            lastFrameRef.current = -1; // force redraw
             const currentFrame = Math.round(frameIndex.get());
-            drawFrame(currentFrame);
+            requestDraw(currentFrame);
         };
 
         window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            cancelAnimationFrame(rafRef.current);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Use RAF-batched drawing for scroll events
     useMotionValueEvent(frameIndex, 'change', (latest) => {
-        drawFrame(Math.round(latest));
+        requestDraw(Math.round(latest));
     });
 
     // GSAP Text Reveal Animation
     useEffect(() => {
         if (!headlineRef.current || !eyebrowRef.current) return;
 
-        // On-Scroll Fade Out
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: "+=1200", // Fades out over the first 1200px of scroll
+                end: "+=1200",
                 scrub: 1,
             }
         });
 
         tl.to(eyebrowRef.current, { y: -50, opacity: 0 }, 0);
-
-        // Unified contraction and fade out
         tl.to(headlineRef.current, {
             opacity: 0,
-            letterSpacing: '-0.05em', // Contraction effect
+            letterSpacing: '-0.05em',
             scale: 0.95
         }, 0);
 
@@ -129,8 +201,12 @@ export function LabsHero() {
 
     return (
         <section ref={containerRef} className="relative h-[300vh]">
+            {/* Inject CSS keyframes (zero-cost, no re-renders) */}
+            <style dangerouslySetInnerHTML={{ __html: ambientStyles }} />
+
             {/* Sticky Container */}
             <div className="sticky top-0 h-screen w-full overflow-hidden">
+
                 <BlurVignette
                     radius="0px"
                     inset="0px"
@@ -139,29 +215,61 @@ export function LabsHero() {
                     className="absolute inset-0 z-20 pointer-events-none"
                 />
 
-                {/* Full Background Canvas */}
+                {/* ═══ BACKGROUND LAYER ═══ */}
                 <div className="absolute inset-0 z-0">
+
+                    {/* 
+                      Ambient Background — always rendered, pure CSS.
+                      Looks like an intentional dark cinematic atmosphere.
+                      Once the canvas loads it covers this completely.
+                    */}
+                    <div className="absolute inset-0 bg-neutral-950">
+                        {/* Centered radial glow */}
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(30,27,75,0.35)_0%,rgba(9,9,11,1)_70%)]" />
+
+                        {/* Soft ambient orb — CSS animation, no JS */}
+                        <div
+                            className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full will-change-transform"
+                            style={{
+                                background: 'radial-gradient(circle, rgba(59,7,100,0.4) 0%, transparent 70%)',
+                                animation: 'labsAmbientPulse 6s ease-in-out infinite',
+                            }}
+                        />
+
+                        {/* Subtle shimmer sweep — pure CSS, zero JS cost */}
+                        <div
+                            className="absolute inset-0 pointer-events-none will-change-transform"
+                            style={{
+                                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.015) 35%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.015) 65%, transparent 100%)',
+                                animation: 'labsShimmerSweep 3s ease-in-out infinite',
+                            }}
+                        />
+                    </div>
+
+                    {/* Canvas — fades in smoothly over the ambient background */}
                     <canvas
                         ref={canvasRef}
-                        className="w-full h-full"
+                        className="absolute inset-0 w-full h-full transition-opacity duration-700 ease-out will-change-[opacity]"
+                        style={{ opacity: isLoaded ? 1 : 0 }}
                     />
-                    {/* Dark gradient for text readability (removed per request) */}
 
-                    {/* Texture */}
+                    {/* Texture overlay */}
                     <div className="absolute inset-0 z-10 opacity-[0.10] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("/noise.png")' }} />
                 </div>
 
-                {/* Image Trail - Interactive Layer */}
+                {/* Image Trail - Lazy-loaded, only renders after hero is visible */}
                 <div className="absolute inset-0 z-[30] opacity-40 pointer-events-none">
-                    <ImageTrail
-                        variant={4}
-                        items={[
-                            '/assets/mockups/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
-                            '/assets/mockups/Gemini_Generated_Image_p2gmifp2gmifp2gm.png',
-                            '/assets/mockups/WhatsApp Image 2026-02-05 at 12.11.55 AM.jpeg',
-                            '/assets/mockups/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg'
-                        ]}
-                    />
+                    <Suspense fallback={null}>
+                        <ImageTrail
+                            variant={4}
+                            items={[
+                                '/assets/mockups/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
+                                '/assets/mockups/Gemini_Generated_Image_p2gmifp2gmifp2gm.png',
+                                '/assets/mockups/WhatsApp Image 2026-02-05 at 12.11.55 AM.jpeg',
+                                '/assets/mockups/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg'
+                            ]}
+                        />
+                    </Suspense>
                 </div>
 
                 {/* ── MAIN LAYOUT: pinned full-screen ── */}
@@ -208,7 +316,7 @@ export function LabsHero() {
                                     className="hero-word italic font-normal text-white drop-shadow-sm inline-block"
                                     style={{
                                         fontFamily: 'var(--font-playfair)',
-                                        WebkitTextFillColor: 'white' // overrides the gradient clip from the parent h1
+                                        WebkitTextFillColor: 'white'
                                     }}
                                 >
                                     Speed
@@ -219,6 +327,7 @@ export function LabsHero() {
                             </h1>
                         </div>
                     </div>
+
                     {/* BOTTOM ROW — tagline bottom-left, keywords + CTAs bottom-right */}
                     <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-8 md:gap-8">
 
