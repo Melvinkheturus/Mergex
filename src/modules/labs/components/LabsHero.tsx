@@ -10,7 +10,7 @@ import { LABS_HERO } from '../content/labs';
 gsap.registerPlugin(ScrollTrigger);
 import { BlurVignette } from '@/components/ui/BlurVignette';
 
-const FRAME_COUNT = 35;
+const FRAME_COUNT = 189;
 
 /**
  * LabsHero - Cinematic hero for AI Content Studio
@@ -73,8 +73,8 @@ export function LabsHero() {
 
         for (let i = 1; i <= FRAME_COUNT; i++) {
             const img = new window.Image();
-            const frameNum = i.toString().padStart(3, '0');
-            img.src = `/assets/background/Labs-Hero_bg/ezgif-frame-${frameNum}.jpg`;
+            const frameNum = i.toString().padStart(4, '0');
+            img.src = `/assets/background/labs/frames_webp/frame_${frameNum}.webp`;
             img.onload = () => {
                 loadedFrames++;
                 if (loadedFrames === 1 || i === 1) {
@@ -134,8 +134,8 @@ export function LabsHero() {
                 <BlurVignette
                     radius="0px"
                     inset="0px"
-                    transitionLength="120px"
-                    blur="8px"
+                    transitionLength="150px"
+                    blur="16px"
                     className="absolute inset-0 z-20 pointer-events-none"
                 />
 
@@ -145,10 +145,10 @@ export function LabsHero() {
                         ref={canvasRef}
                         className="w-full h-full"
                     />
-                    {/* Dark gradient for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/50" />
+                    {/* Dark gradient for text readability (removed per request) */}
+
                     {/* Texture */}
-                    <div className="absolute inset-0 z-10 opacity-[0.15] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("/noise.png")' }} />
+                    <div className="absolute inset-0 z-10 opacity-[0.10] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("/noise.png")' }} />
                 </div>
 
                 {/* Image Trail - Interactive Layer */}
@@ -210,6 +210,7 @@ export function LabsHero() {
                                 >
                                     Speed
                                 </span>{' '}
+                                <br className="block md:hidden" />
                                 <span className="hero-word inline-block">of</span>{' '}
                                 <span className="hero-word inline-block">Imagination.</span>
                             </h1>
@@ -241,27 +242,25 @@ export function LabsHero() {
                             transition={{ duration: 0.9, delay: 0.75 }}
                             className="flex flex-col items-end gap-5"
                         >
-                            {/* Keyword tags */}
                             <div
-                                className="text-right text-[11px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+                                className="text-right text-[9px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] max-w-[200px] md:max-w-none"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
-                                <p>HUMAN STRATEGY · AI ACCELERATION · STRUCTURED CREATIVITY</p>
-                                <p>GENERATIVE SYSTEMS · VISUAL INTELLIGENCE</p>
+                                <p>{LABS_HERO.reinforcementLine}</p>
                             </div>
 
                             {/* CTA Buttons — square with rounded corners, side by side */}
-                            <div className="flex flex-row gap-3 pointer-events-auto">
+                            <div className="flex flex-row gap-2 md:gap-3 pointer-events-auto">
                                 <a
                                     href={LABS_HERO.primaryCTA.href}
-                                    className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 rounded-lg font-semibold text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                                    className="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
                                     {LABS_HERO.primaryCTA.text}
                                 </a>
                                 <a
                                     href={LABS_HERO.secondaryCTA.href}
-                                    className="inline-flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-sm hover:bg-white/20 transition-all duration-300"
+                                    className="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
                                     {LABS_HERO.secondaryCTA.text}

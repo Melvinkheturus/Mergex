@@ -56,17 +56,16 @@ export function Navbar() {
             {/* Desktop Navbar */}
             <motion.div
                 className="hidden lg:block w-full absolute top-0 left-0 right-0 z-50 p-2"
-                initial={{ y: -100, opacity: 0 }}
+                initial={{ y: -100 }}
                 animate={{
-                    y: forceHidden ? "-100%" : 0,
-                    opacity: 1
+                    y: forceHidden ? "-100%" : 0
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <nav
                     className={`
-                        w-full transition-all duration-300 ease-in-out
-                        ${activeMenu ? 'bg-white shadow-lg border-gray-200/50' : 'bg-transparent shadow-none border-transparent'}
+                        w-full 
+                        ${activeMenu ? 'bg-white border-gray-200/50' : 'bg-transparent border-transparent'}
                         pl-4 pr-8 h-16 flex items-center justify-between
                         border
                         ${activeMenu ? 'rounded-t-xl' : 'rounded-xl'}
@@ -129,13 +128,13 @@ export function Navbar() {
                 <AnimatePresence>
                     {activeMenu && (
                         <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
+                            initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
+                            animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
+                            exit={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
+                            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                             onMouseEnter={() => setActiveMenu(activeMenu)}
                             onMouseLeave={() => setActiveMenu(null)}
-                            className="w-full bg-white border-x border-b border-gray-200/50 shadow-2xl rounded-b-xl overflow-hidden p-5 -mt-px"
+                            className="w-full bg-white border-x border-b border-gray-200/50 shadow-2xl rounded-b-xl overflow-hidden p-5 -mt-px pointer-events-auto origin-top"
                         >
                             {activeMenu === 'services' && <ServicesMenu closeMenu={() => setActiveMenu(null)} />}
                             {activeMenu === 'labs' && <LabsMenu closeMenu={() => setActiveMenu(null)} />}
@@ -209,7 +208,7 @@ function NavButton({ label, active, onEnter, onLeave, hasDropdown = true, anyAct
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             className={`
-                relative h-full flex items-center gap-1.5 px-1 text-base font-medium transition-colors group
+                relative h-full flex items-center gap-1.5 px-1 text-base font-medium group
                 ${itemActiveColor}
             `}
         >

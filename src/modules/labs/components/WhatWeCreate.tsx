@@ -193,13 +193,12 @@ export function WhatWeCreate() {
                                             {category.image && (
                                                 <div className="flex justify-center md:justify-end mt-6 md:mt-0 relative w-full items-center">
                                                     <motion.div
-                                                        initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                                                        initial={{ opacity: 0, clipPath: "inset(50% 50% 50% 50%)" }}
                                                         animate={{
                                                             opacity: isOpen ? 1 : 0,
-                                                            scale: isOpen ? 1 : 0.9,
-                                                            y: isOpen ? 0 : 15
+                                                            clipPath: isOpen ? "inset(0% 0% 0% 0%)" : "inset(50% 50% 50% 50%)"
                                                         }}
-                                                        transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                                        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                                                         className="relative w-full max-w-[300px] md:max-w-[310px] lg:max-w-[330px] aspect-[4/4.5] rounded-2xl overflow-hidden shadow-2xl"
                                                     >
                                                         <div className="absolute inset-0 bg-black/10 z-10 transition-colors duration-300 pointer-events-none"></div>
