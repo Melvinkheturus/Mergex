@@ -2,7 +2,7 @@
 // Visual-first experiment and exploration structure
 
 export type ExperimentCategory = 'visual' | 'video' | 'audio' | 'concept';
-export type CreatorType = 'Kyra' | 'Labs Team';
+export type CreatorType = 'Madonna' | 'Labs Team';
 
 export interface VisualAssets {
     images?: string[];
@@ -22,7 +22,7 @@ export interface LabsExperiment {
     createdBy: CreatorType;
     timeline: string; // "2 days", "1 week", etc.
     visualAssets: VisualAssets;
-    
+
     // Optional deeper content
     concept?: string; // Expanded explanation of the concept
     technicalNotes?: string; // Technical details for interested viewers

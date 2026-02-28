@@ -8,7 +8,7 @@ import { TextReveal } from '@/components/ui/text-reveal';
  */
 export function WhatIsLabs() {
     return (
-        <section>
+        <section className="-mt-24 md:-mt-40 relative z-20">
             <TextReveal
                 className="h-[80vh]"
                 offset={["start 0.5", "end 0.0"]}

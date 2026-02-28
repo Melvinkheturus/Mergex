@@ -17,13 +17,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Media items for the carousel
 const CAROUSEL_MEDIA = [
-    { src: '/assets/mockups/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
-    { src: '/assets/mockups/ad.mp4', alt: 'Advertisement Video', type: 'video' },
-    { src: '/assets/mockups/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
-    { src: '/assets/mockups/Gemini_Generated_Image_6mmg1y6mmg1y6mmg.png', alt: 'AI Generated Image', type: 'image' },
-    { src: '/assets/mockups/Influencer Video.mp4', alt: 'Influencer Video', type: 'video' },
-    { src: '/assets/mockups/Jewellery Video.mp4', alt: 'Jewellery Video', type: 'video' },
-    { src: '/assets/mockups/V3 Rose petals.mp4', alt: 'Rose Petals Video', type: 'video' },
+    { src: '/assets/labs portfolio/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
+    { src: '/assets/labs portfolio/ad.mp4', alt: 'Advertisement Video', type: 'video' },
+    { src: '/assets/labs portfolio/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
+    { src: '/assets/labs portfolio/Gemini_Generated_Image_6mmg1y6mmg1y6mmg.png', alt: 'AI Generated Image', type: 'image' },
+    { src: '/assets/labs portfolio/Influencer Video.mp4', alt: 'Influencer Video', type: 'video' },
+    { src: '/assets/labs portfolio/Jewellery Video.mp4', alt: 'Jewellery Video', type: 'video' },
+    { src: '/assets/labs portfolio/V3 Rose petals.mp4', alt: 'Rose Petals Video', type: 'video' },
+    { src: '/assets/labs portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4', alt: 'New Portfolio Video', type: 'video' },
 ] as const;
 
 export function ExperimentsGallery() {
@@ -57,10 +58,15 @@ export function ExperimentsGallery() {
 
             allTextEls.forEach(el => {
                 el.style.transition = TRANSITION;
-                if (el.tagName === 'H2') el.style.color = '#111827';
-                else if (el.classList.contains('text-xl')) el.style.color = '#4b5563';
-                else if (!el.classList.contains('text-purple-400') && !el.classList.contains('text-purple-600')) {
-                    el.style.color = '#6b7280';
+                const lightColor = el.getAttribute('data-light-color');
+                if (lightColor) {
+                    el.style.color = lightColor;
+                } else {
+                    if (el.tagName === 'H2') el.style.color = '#111827';
+                    else if (el.classList.contains('text-xl')) el.style.color = '#4b5563';
+                    else if (!el.classList.contains('text-purple-400') && !el.classList.contains('text-purple-600')) {
+                        el.style.color = '#6b7280';
+                    }
                 }
             });
         };
@@ -85,15 +91,21 @@ export function ExperimentsGallery() {
 
             allTextEls.forEach(el => {
                 el.style.transition = TRANSITION;
-                el.style.color = '#ffffff';
+                const darkColor = el.getAttribute('data-dark-color');
+                el.style.color = darkColor ? darkColor : '#ffffff';
             });
         };
 
+        // Set initial state to match WorkGallery (dark)
+        applyDark();
+
         const trigger = ScrollTrigger.create({
             trigger: section,
-            start: 'top top',     // delay transition until it fills viewport
-            onEnter: applyLight,    // down into section → white
-            onLeaveBack: applyDark, // back up out of section → black (WorkGallery)
+            start: 'top 55%',       // transition when section enters mid-viewport
+            onEnter: applyLight,    // scrolling down into section → white
+            onLeaveBack: applyDark, // scrolling back up → black (WorkGallery)
+            // Ensure transitions catch up if scrolling fast
+            onScrubComplete: () => ScrollTrigger.refresh()
         });
 
         return () => {
@@ -165,41 +177,56 @@ export function ExperimentsGallery() {
     `;
 
     return (
-        <section ref={sectionRef} className="relative bg-white py-32 overflow-hidden" style={{ willChange: 'background-color' }}>
+        <section ref={sectionRef} className="relative py-32 overflow-hidden" style={{ willChange: 'background-color' }}>
             <style>{swiperStyles}</style>
-            <div className="container mx-auto max-w-7xl px-2 text-gray-900 transition-colors duration-300">
+            <div className="container mx-auto max-w-7xl px-2 text-gray-900">
                 {/* Section Header */}
                 <motion.div
-                    className="mb-20 text-center"
+                    className="mb-24 flex flex-col xl:flex-row justify-between items-start gap-12 xl:gap-8 w-full px-4 md:px-8 xl:px-12 2xl:px-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-purple-50 rounded-full border border-purple-100">
-                        <Sparkles className="h-4 w-4 text-purple-600" />
-                        <span className="text-sm font-semibold text-purple-600 uppercase tracking-wide">
-                            Labs Portfolio
-                        </span>
+                    {/* Left Side - Headlines */}
+                    <div className="xl:w-auto flex flex-col justify-start text-left">
+                        <div className="mb-4">
+                            <span
+                                className="text-xs md:text-sm font-semibold text-purple-600 uppercase tracking-[0.25em]"
+                                data-light-color="#9333ea"
+                                data-dark-color="#d8b4fe"
+                            >
+                                EXPLORATIONS
+                            </span>
+                        </div>
+                        <h2
+                            className="text-4xl md:text-5xl lg:text-[3.5rem] tracking-tighter leading-[1] whitespace-nowrap flex flex-row items-baseline font-bold"
+                            data-light-color="#111827"
+                            data-dark-color="#ffffff"
+                        >
+                            Applied Creative Intelligence
+                        </h2>
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                        Experiments & Explorations
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Pushing the boundaries of what's possible with AI and creative technology.
-                    </p>
-                    <p className="text-base text-gray-500 max-w-2xl mx-auto mt-4">
-                        Every experiment is a question. Every exploration is a discovery. This is where Kyra and the Labs team explore the edge of creativity, technology, and possibility.
-                    </p>
+
+                    {/* Right Side - Description */}
+                    <div className="xl:flex-1 flex justify-end text-right w-full pt-4 xl:pt-8 min-w-0">
+                        <p
+                            className="text-base md:text-lg lg:text-xl text-gray-600 leading-[1.6] font-serif italic max-w-xs md:max-w-sm xl:max-w-[420px]"
+                            data-light-color="#4b5563"
+                            data-dark-color="#d1d5db"
+                        >
+                            From concept to campaign-ready assets, these projects demonstrate how structured AI experimentation becomes measurable creative advantage.
+                        </p>
+                    </div>
                 </motion.div>
 
                 {/* Swiper Coverflow Carousel with Edge Fades */}
                 <div className="relative w-full">
                     {/* Left Fade Overlay */}
-                    <div className="fade-left absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+                    <div className="fade-left absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" />
 
                     {/* Right Fade Overlay */}
-                    <div className="fade-right absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+                    <div className="fade-right absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" />
 
                     <Swiper
                         className="experiments-swiper"

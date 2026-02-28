@@ -44,6 +44,11 @@ export default function LabsPage() {
                 <WhatIsLabs />
             </div>
 
+            {/* 8. Why Labs Exists — Short Manifesto (Moved here) */}
+            <div id="why-labs-exists">
+                <WhyLabsExists />
+            </div>
+
             {/* 3. What We Create — NOT Services */}
             <div id="capabilities">
                 <WhatWeCreate />
@@ -59,14 +64,9 @@ export default function LabsPage() {
                 <ExperimentsGallery />
             </div>
 
-            {/* 6. Kyra Reveal / Scroll Experience — After Proof */}
+            {/* 6. Madonna Reveal / Scroll Experience — After Proof */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
-            </div>
-
-            {/* 8. Why Labs Exists — Short Manifesto */}
-            <div id="philosophy">
-                <WhyLabsExists />
             </div>
 
             {/* 9. Soft CTA */}

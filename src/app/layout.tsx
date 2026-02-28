@@ -138,6 +138,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
           rel="stylesheet"
         />
+
+        {/* Alex Brush - Elegant script font for Madonna text */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}

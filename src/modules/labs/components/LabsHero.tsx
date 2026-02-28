@@ -220,14 +220,14 @@ export function LabsHero() {
                         </div>
                     </div>
                     {/* BOTTOM ROW — tagline bottom-left, keywords + CTAs bottom-right */}
-                    <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-8">
+                    <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-8 md:gap-8">
 
                         {/* BOTTOM-LEFT: supporting tagline */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.6 }}
-                            className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20"
+                            className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20 mt-8 md:mt-0 text-center md:text-left"
                         >
                             {/* ── Background Shadow Glow ── */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] bg-black/50 blur-[60px] rounded-[100%] pointer-events-none -z-10" />
@@ -246,13 +246,13 @@ export function LabsHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.75 }}
-                            className="flex flex-col items-start md:items-end gap-4 md:gap-5 relative z-20 mt-4 md:mt-0"
+                            className="flex flex-col items-center md:items-end gap-5 md:gap-5 relative z-20 mt-6 md:mt-0"
                         >
                             {/* ── Background Shadow Glow ── */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-black/40 blur-[80px] rounded-[100%] pointer-events-none -z-10" />
 
                             <div
-                                className="text-left md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
+                                className="text-center md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
                                 <p>
@@ -263,7 +263,7 @@ export function LabsHero() {
                             </div>
 
                             {/* CTA Buttons — square with rounded corners, side by side */}
-                            <div className="flex flex-row gap-2 md:gap-3 pointer-events-auto">
+                            <div className="flex flex-row justify-center md:justify-end gap-2 md:gap-3 pointer-events-auto w-full">
                                 <a
                                     href={LABS_HERO.primaryCTA.href}
                                     className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"

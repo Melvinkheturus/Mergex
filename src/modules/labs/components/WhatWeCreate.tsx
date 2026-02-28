@@ -1,97 +1,19 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WHAT_WE_CREATE } from '../content/labs';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import gsap from 'gsap';
-
-gsap.registerPlugin(ScrollTrigger);
+import { Lens } from '@/components/ui/lens';
 
 /**
- * WhatWeCreate — Services section
- * Triggers a global dark theme when the section enters.
- * Stays dark when scrolling DOWN past the section (into WorkGallery etc).
- * Reverts to white ONLY when scrolling back UP past the section top.
+ * WhatWeCreate — Services section (static white background, no scroll theme change)
  */
 export function WhatWeCreate() {
     const sectionRef = useRef<HTMLElement>(null);
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    useEffect(() => {
-        const section = sectionRef.current;
-        if (!section) return;
-
-        const aboveSection = document.querySelector<HTMLElement>('#what-is-labs');
-
-        // Everything that needs a color — sections above + this section
-        const allTextEls = [
-            ...Array.from(section.querySelectorAll<HTMLElement>('h2, h3, p, li, span:not(.indicator-icon)')),
-            ...Array.from(aboveSection?.querySelectorAll<HTMLElement>('h2, h3, p, li, span') ?? []),
-        ];
-
-        const TRANSITION = 'background-color 0.35s ease, color 0.35s ease';
-
-        const applyDark = () => {
-            document.body.style.transition = TRANSITION;
-            document.body.style.backgroundColor = '#000000';
-            section.style.transition = TRANSITION;
-            section.style.backgroundColor = '#000000';
-            if (aboveSection) {
-                aboveSection.style.transition = TRANSITION;
-                aboveSection.style.backgroundColor = '#000000';
-            }
-            allTextEls.forEach(el => {
-                el.style.transition = TRANSITION;
-                el.style.color = '#ffffff';
-            });
-        };
-
-        const applyLight = () => {
-            document.body.style.transition = TRANSITION;
-            document.body.style.backgroundColor = '#ffffff';
-            section.style.transition = TRANSITION;
-            section.style.backgroundColor = '#ffffff';
-            if (aboveSection) {
-                aboveSection.style.transition = TRANSITION;
-                aboveSection.style.backgroundColor = '#ffffff';
-            }
-            allTextEls.forEach(el => {
-                el.style.transition = TRANSITION;
-                el.style.color = '#0a0a0a';
-            });
-        };
-
-        // Initial state
-        applyLight();
-
-        const trigger = ScrollTrigger.create({
-            trigger: section,
-            start: 'top 65%',      // go dark as section enters
-            // No 'end' — we never auto-revert on scroll-down
-            onEnter: applyDark,    // scrolling down into section → dark
-            onLeaveBack: applyLight, // scrolling back UP past section top → light
-        });
-
-        return () => {
-            trigger.kill();
-            document.body.style.transition = '';
-            document.body.style.backgroundColor = '';
-            section.style.transition = '';
-            section.style.backgroundColor = '';
-            if (aboveSection) {
-                aboveSection.style.transition = '';
-                aboveSection.style.backgroundColor = '';
-            }
-            allTextEls.forEach(el => {
-                el.style.transition = '';
-                el.style.color = '';
-            });
-        };
-    }, []);
-
     return (
-        <section ref={sectionRef} className="py-20 md:py-32" style={{ willChange: 'background-color' }}>
+        <section ref={sectionRef} className="py-20 md:py-32">
             <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -142,9 +64,11 @@ export function WhatWeCreate() {
                                                 ? 'bg-white text-black border-white opacity-100'
                                                 : 'border-white text-white opacity-100 group-hover:bg-white group-hover:text-black hover:scale-105'
                                                 }`}
-                                            style={{ transform: isOpen ? 'rotate(45deg)' : 'none' }}
+                                            style={{ transform: isOpen ? 'rotate(180deg)' : 'none' }}
                                         >
-                                            <span className="indicator-icon text-3xl md:text-4xl font-light leading-none mt-[-2px] mb-[2px] transition-all duration-300 group-hover:scale-125">+</span>
+                                            <span className="indicator-icon text-3xl md:text-4xl font-light leading-none mt-[-2px] mb-[2px] transition-all duration-300 group-hover:scale-125">
+                                                {isOpen ? '-' : '+'}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -202,12 +126,25 @@ export function WhatWeCreate() {
                                                         className="relative w-full max-w-[300px] md:max-w-[310px] lg:max-w-[330px] aspect-[4/4.5] rounded-2xl overflow-hidden shadow-2xl"
                                                     >
                                                         <div className="absolute inset-0 bg-black/10 z-10 transition-colors duration-300 pointer-events-none"></div>
-                                                        <img
-                                                            src={category.image}
-                                                            alt={category.title}
-                                                            loading="lazy"
-                                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                                                        />
+                                                        <Lens zoomFactor={2} lensSize={150} isStatic={false}>
+                                                            {category.image.endsWith('.mp4') ? (
+                                                                <video
+                                                                    src={category.image}
+                                                                    autoPlay
+                                                                    loop
+                                                                    muted
+                                                                    playsInline
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={category.image}
+                                                                    alt={category.title}
+                                                                    loading="lazy"
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                            )}
+                                                        </Lens>
                                                     </motion.div>
                                                 </div>
                                             )}

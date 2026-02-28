@@ -63,9 +63,9 @@ export function WorkGallery() {
                         letterSpacing: '-0.02em',
                     }}
                 >
-                    EXPLORE MORE{' '}
-                    <span className="block mt-1">MASTERPIECES</span>
-                    <span className="block mt-1">IN THE GALLERY</span>
+                    Discover Intelligence{' '}
+                    <span className="block mt-1">Shaped Into</span>
+                    <span className="block mt-1">Visuals</span>
                 </h2>
             </div>
 
@@ -138,6 +138,6 @@ export function WorkGallery() {
                     `,
                 }}
             />
-        </motion.section>
+        </motion.section >
     );
 }
