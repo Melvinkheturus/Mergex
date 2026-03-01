@@ -4,7 +4,6 @@ import { SystemsHero } from './components/SystemsHero';
 import { SystemsPageShell } from './components/SystemsPageShell';
 import { WhatWeSolve } from './components/WhatWeSolve';
 import { OurSolutions } from './components/OurSolutions';
-import { SpeedAdvantage } from './components/SpeedAdvantage';
 import { HowWeWorkSystems } from './components/HowWeWorkSystems';
 import { EngagementModel } from './components/EngagementModel';
 import { SystemsCTA } from './components/SystemsCTA';
@@ -17,7 +16,6 @@ export {
     SystemsPageShell,
     WhatWeSolve,
     OurSolutions,
-    SpeedAdvantage,
     HowWeWorkSystems,
     EngagementModel,
     SystemsCTA,

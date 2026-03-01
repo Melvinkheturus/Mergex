@@ -5,6 +5,7 @@ import ClaritySection from './components/ClaritySection';
 import ProductSpotlight from './components/ProductSpotlight';
 import SolutionsComparison from './components/SolutionsComparison';
 import EcosystemSnapshot from './components/EcosystemSnapshot';
+import CinematicPortalSection from './components/CinematicPortalSection';
 import VideoPortalCard from './components/VideoPortalCard';
 import { FAQSection } from './components/FAQSection';
 import { ProblemContext } from './components/ProblemContext';
@@ -20,6 +21,7 @@ export {
     ProductSpotlight,
     SolutionsComparison,
     EcosystemSnapshot,
+    CinematicPortalSection,
     VideoPortalCard,
     FAQSection,
     ProblemContext,

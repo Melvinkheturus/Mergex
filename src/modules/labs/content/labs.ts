@@ -2,24 +2,25 @@
 // AI Content Studio positioning and content
 
 export const LABS_HERO = {
-    eyebrow: 'Mergex Labs · AI Content Studio',
-    headline: 'Where creativity meets intelligence.',
-    supportingLine: 'We explore how generative AI, motion, and visual storytelling can be shaped with intent — turning emerging tools into thoughtful creative systems.',
-    reinforcementLine: 'Designed by humans. Directed by intelligence. Refined through experimentation.',
+    eyebrow: 'MERGEX LABS',
+    subEyebrow: 'AI Creative Intelligence',
+    headline: 'Create at the Speed of Imagination.',
+    supportingLine: 'Mergex Labs turns generative AI into high-impact ads, visuals, motion, and brand content engineered for teams that want to move faster than the market.',
+    reinforcementLine: 'Human strategy. AI acceleration.\nRefined through experimentation.',
     primaryCTA: {
-        text: 'Explore the experiments',
-        href: '#experiments'
+        text: 'Launch With AI →',
+        href: '#launch'
     },
     secondaryCTA: {
-        text: 'See featured explorations',
-        href: '#explorations'
+        text: 'View AI Portfolio →',
+        href: '#portfolio'
     },
-    microcopy: 'No pitches. Just process, visuals, and exploration.'
+    microcopy: 'Refined by humans. Powered by intelligence.',
 } as const;
 
 export const WHAT_IS_LABS = {
     headline: 'What Is Mergex Labs?',
-    description: 'Mergex Labs is where generative AI meets human creativity. We help brands produce visuals, videos, campaigns, and brand assets at a pace traditional agencies can\'t match—without sacrificing quality. Think of us as your creative engine, powered by intelligence.',
+    description: 'Mergex Labs is where generative AI meets human creativity. We help brands produce visuals, videos, campaigns, and brand assets at a pace traditional agencies can\'t match without sacrificing quality. Think of us as your creative engine, powered by intelligence.',
 } as const;
 
 export const WHAT_WE_CREATE = {
@@ -27,59 +28,74 @@ export const WHAT_WE_CREATE = {
     subheadline: 'From strategy to execution, powered by AI and refined by humans',
     categories: [
         {
-            title: 'AI-Generated Visuals',
-            description: 'Stunning imagery that would take weeks in days',
+            title: 'AI Avatars & Digital Personas',
+            description: 'Human presence. Infinite scalability.\n\nLong-term vision alignment: Foundation for cinematic AI characters.',
             capabilities: [
-                'Product renders and lifestyle shots',
-                'Brand imagery and hero visuals',
-                'Marketing assets for every channel',
-                'Social media graphics at scale',
+                'AI Brand Ambassador Creation',
+                'AI Influencer & Spokesperson Systems',
+                'AI Multilingual Video Avatars',
+                'AI Sales & Explainer Personas',
+                'Digital Character Development for Campaigns',
+                'Persistent AI Identity Systems (for brands & creators)',
             ],
             icon: 'image',
+            image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
         },
         {
-            title: 'Video & Reels',
-            description: 'Content that stops the scroll and drives action',
+            title: 'AI Motion & Storytelling Systems',
+            description: 'Cinema-grade experimentation. Structured execution.\n\nThis is where your cinema ambition lives.',
             capabilities: [
-                'Short-form videos for social',
-                'Brand story videos',
-                'Product demos that convert',
-                'Instagram/TikTok reels',
+                'AI-Driven Cinematic Visual Development',
+                'AI Storyboarding & Pre-Visualization',
+                'AI-Based Short Film Concepts',
+                'AI Reel & Short-Form Video Systems',
+                'AI Motion Graphics & Dynamic Scenes',
+                'Narrative Prototyping for Film & Digital Media',
             ],
             icon: 'video',
+            image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
         },
         {
-            title: 'Campaign Creatives',
-            description: 'End-to-end asset generation for multi-channel campaigns',
+            title: 'AI Creative Production (Ads & Campaign Assets)',
+            description: 'High-speed, high-volume creative.\n\nThis connects Labs to measurable marketing results.',
             capabilities: [
-                'Ad creatives for Meta, Google, LinkedIn',
-                'Landing page visuals optimized for conversion',
-                'Email campaign headers and assets',
-                'Consistent multi-platform content',
+                'AI Advertisement Visuals (Static & Motion)',
+                'AI Product Campaign Creatives',
+                'AI Ad Variant Generation at Scale',
+                'AI Social Media Creative Systems',
+                'AI Performance Creative Optimization',
+                'AI Banner & Display Asset Production',
             ],
             icon: 'megaphone',
+            image: '/assets/labs portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4',
         },
         {
-            title: 'Brand Asset Systems',
-            description: 'Visual identity kits that scale with your brand',
+            title: 'AI UGC & Social Content Systems',
+            description: 'Scalable authenticity.\n\nThis is extremely valuable for DTC & e-commerce brands.',
             capabilities: [
-                'Logo variations for every use case',
-                'Brand guidelines and style systems',
-                'Component libraries and design systems',
-                'Complete visual identity toolkits',
+                'AI UGC-Style Video Generation',
+                'AI Review & Testimonial Simulations',
+                'AI Influencer-Style Product Content',
+                'AI Script-to-Reel Automation',
+                'AI Content Repurposing Systems',
+                'Platform-Specific Video Optimization (Reels, Shorts, TikTok)',
             ],
             icon: 'palette',
+            image: '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
         },
         {
-            title: 'Experimental Formats',
-            description: 'Pushing the boundaries of what AI can create',
+            title: 'AI-Powered Visual Optimization for E-commerce',
+            description: 'Conversion-focused AI assets.\n\nThis ties directly into Systems.',
             capabilities: [
-                'AI-driven motion graphics and animations',
-                'Interactive and generative content',
-                'Novel formats that don\'t exist yet',
-                'Trend-responsive, real-time content',
+                'AI Product Visualization & Mockups',
+                'AI Lifestyle Product Scenes',
+                'AI-Based Website Hero Videos',
+                'AI Conversion-Focused Image Variations',
+                'AI Automated Creative Testing Assets',
+                'AI Visual Enhancement for CRO (Conversion Rate Optimization)',
             ],
             icon: 'sparkles',
+            image: '/assets/mockups/Gemini_Generated_Image_qx4kj5qx4kj5qx4k.png',
         },
     ],
 } as const;
@@ -100,24 +116,28 @@ export const HOW_LABS_WORKS = {
             title: 'Brief',
             description: 'Share your vision, goals, brand assets, and constraints. The clearer the input, the better the output.',
             icon: 'clipboard',
+            microcopy: '[DATA_INPUT]'
         },
         {
             number: '02',
             title: 'Generate',
             description: 'Our AI tools create dozens of variations rapidly, exploring creative possibilities at machine speed.',
             icon: 'cpu',
+            microcopy: '[PROCESS_0x4F]'
         },
         {
             number: '03',
             title: 'Refine',
             description: 'This is where humans shine. We curate, edit, and polish until every asset is perfect.',
             icon: 'edit',
+            microcopy: '[STRATEGY_SYNC]'
         },
         {
             number: '04',
             title: 'Deliver',
             description: 'Final assets in your preferred formats, ready to launch. No handoff hassle, just results.',
             icon: 'check',
+            microcopy: '[OUTPUT_FINAL]'
         },
     ],
     keyMessages: [
@@ -128,22 +148,35 @@ export const HOW_LABS_WORKS = {
 } as const;
 
 export const WHY_LABS_EXISTS = {
-    headline: 'Why Labs Exists',
-    statements: [
+    label: 'Why Labs Exists',
+    headline: 'Where Do You Need Creative Acceleration?',
+    cards: [
         {
-            text: 'AI is a tool, not magic. The real power doesn\'t come from the software—it comes from knowing when to use it, how to prompt it, and what to do with the output.',
-            emphasis: 'tool, not magic',
+            title: 'Because Creative Can’t Wait.',
+            description: "Modern brands move in real time. Traditional production cycles slow growth. Labs exists to compress creative timelines — turning ideas into deployable assets in days, not months.",
+            subtext: 'Velocity without compromise.',
+            gradient: 'from-[#E5E5E5] to-[#D4D4D4]',
+            textColor: 'text-black',
+            icon: 'TrendingUp'
         },
         {
-            text: 'Traditional agencies are slow because they rely on human bandwidth. Pure automation is soulless because it lacks judgment. Labs is the hybrid—AI speed with human taste.',
-            emphasis: 'the hybrid',
+            title: 'Because Volume Wins.',
+            description: 'Scaling requires creative output at scale — variations, formats, iterations. Labs builds AI-driven systems that generate high-volume content without losing strategic direction.',
+            subtext: 'Structured creativity at scale.',
+            gradient: 'from-[#8B5CF6] to-[#6D28D9]',
+            textColor: 'text-white',
+            highlight: true,
+            icon: 'Layers'
         },
         {
-            text: 'This isn\'t a side project. Labs feeds our other divisions. The content we create powers real businesses. The insights we gain build better products. It all connects.',
-            emphasis: 'It all connects',
-        },
-    ],
-    closingLine: 'We\'re not replacing creatives. We\'re making them 10x faster.',
+            title: 'Because The Future Is AI-Driven.',
+            description: 'Generative AI is redefining storytelling, motion, and digital identity. Labs exists to explore, refine, and deploy these technologies before they become standard.',
+            subtext: 'Experiment today. Lead tomorrow.',
+            gradient: 'from-[#262626] to-[#121212]',
+            textColor: 'text-white',
+            icon: 'Sparkles'
+        }
+    ]
 } as const;
 
 export const LABS_CTA = {

@@ -20,12 +20,12 @@ export const PORTAL_CARDS = {
     labs: {
         title: 'Mergex Labs',
         tagline: 'AI Content Studio',
-        description: 'Where creativity meets intelligent systems',
+        description: 'Where Creativity Meets Intelligence',
         videoSrc: '/assets/ecosystem/videos/labs-portal.mp4',
         videoPoster: '/assets/ecosystem/labs-portal-still.png',
         colorTone: 'purple' as const,
         color: '#8B5CF6',
-        features: ['AI visual generation', 'Content automation', 'Creative workflows'],
+        features: ['AI Visual Generation', 'Content Automation', 'Creative Workflows'],
         href: '/labs',
     },
     systems: {

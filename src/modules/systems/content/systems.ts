@@ -2,7 +2,7 @@
 // Solution Partner positioning and content
 
 export const SYSTEMS_HERO = {
-    headline: 'Building and Automating Systems\\nThat Help Businesses Scale',
+    headline: 'Building and Automating Systems That Help Businesses Scale',
     subheadline: 'Custom software · AI automation · Design & branding · Marketing systems',
     keyDifferentiator: 'MVPs in weeks, not months',
     primaryCTA: 'Book a Strategy Call',
@@ -10,34 +10,39 @@ export const SYSTEMS_HERO = {
 } as const;
 
 export const WHAT_WE_SOLVE = {
-    headline: 'Custom software for businesses that want predictable growth.',
-    subheadline: 'We work with founders and small teams who want a clear plan, consistent execution, and measurable results from their tech investments.',
-    primaryCTA: 'Book a discovery call',
+    headline: 'The Revenue Architecture Engine of Mergex.',
+    subheadline: 'Mergex Systems designs and deploys the full growth infrastructure behind modern businesses from positioning and automation to scalable software and AI-powered workflows. We don’t just build products. We architect structured systems that generate predictable revenue.',
+    primaryCTA: 'Book a Strategy Call',
     proofCards: [
         {
             type: 'metric',
-            value: '2-4 weeks',
-            label: 'Average time to MVP',
-            description: 'From initial call to working product in your hands',
+            value: 'Build in Weeks. Scale for Years.',
+            label: 'Speed & Scalability',
+            description: 'We deliver production-ready MVPs in 2-4 weeks engineered with the infrastructure required for long-term growth.',
+            dark: false,
         },
         {
-            type: 'testimonial',
-            quote: 'Clear process and great communication.',
-            author: 'Founder, DTC Brand',
-            context: 'E-commerce automation project',
-        },
-        {
-            type: 'metric',
-            value: '98%',
-            label: 'Uptime across all projects',
-            description: 'Production-grade infrastructure from day one',
+            type: 'statement',
+            value: 'From Chaos',
+            valueAccent: 'To Predictable Growth',
+            label: 'Our Promise',
+            description: 'We design integrated business systems that align strategy, automation, and execution engineered for scale.',
+            dark: true,
         },
         {
             type: 'metric',
-            value: '20+',
-            label: 'Projects delivered',
-            description: 'From MVPs to full-scale platforms',
+            value: 'Structured, Not Fragmented.',
+            label: 'Unified Architecture',
+            description: 'No juggling agencies. No disconnected tools. No chaos. Strategy, branding, automation, AI, and technology unified under one architecture.',
+            dark: false,
         },
+        {
+            type: 'metric',
+            value: '8+ growth systems engineered.',
+            label: 'Track Record',
+            description: 'From MVP launches to scalable revenue infrastructure each build engineered for long-term expansion, not short-term deployment.',
+            dark: false,
+        }
     ],
 } as const;
 

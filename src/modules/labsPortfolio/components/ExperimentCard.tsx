@@ -101,7 +101,7 @@ export function ExperimentCard({ experiment, index = 0 }: ExperimentCardProps) {
                 <div className="mt-4 pt-4 border-t border-white/10">
                     <p className="text-xs text-gray-500">
                         Created by{' '}
-                        <span className={`font-semibold ${experiment.createdBy === 'Kyra' ? 'text-purple-400' : 'text-gray-300'}`}>
+                        <span className={`font-semibold ${experiment.createdBy === 'Madonna' ? 'text-purple-400' : 'text-gray-300'}`}>
                             {experiment.createdBy}
                         </span>
                     </p>

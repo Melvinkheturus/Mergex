@@ -1,16 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Mail } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
-
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
 interface FAQSectionProps {
     variant?: 'parent' | 'systems';
@@ -19,9 +13,6 @@ interface FAQSectionProps {
 export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const sectionRef = useRef<HTMLElement>(null);
-    const overlayRef = useRef<HTMLDivElement>(null);
-    const revealRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
 
     // Select FAQ data based on variant
     const FAQ_DATA = variant === 'systems' ? SYSTEMS_FAQ_DATA : PARENT_FAQ_DATA;
@@ -30,76 +21,13 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-
-    useEffect(() => {
-        const section = sectionRef.current;
-        const overlay = overlayRef.current;
-        const reveal = revealRef.current;
-        const content = contentRef.current;
-
-        if (!section || !overlay || !reveal || !content) return;
-
-        const ctx = gsap.context(() => {
-            // Create timeline with instant transition (no scrub)
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'center center', // Trigger when FAQ center reaches screen center
-                    toggleActions: 'play reverse play reverse', // Enable bidirectional transition
-                }
-            });
-
-            // Set duration to 0 for instant transition
-            tl.to(overlay, { opacity: 1, ease: 'none', duration: 0 }, 0)
-                .to(reveal, { opacity: 1, ease: 'none', duration: 0 }, 0)
-                .to(content, { color: '#ffffff', ease: 'none', duration: 0 }, 0);
-        }, section);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
         <section
             ref={sectionRef}
             className="relative overflow-hidden bg-white pt-24 md:pt-32 pb-24 md:pb-32"
         >
-            {/* ✅ Footer image reveal layer */}
-            <div
-                ref={revealRef}
-                className="pointer-events-none absolute inset-0 z-0 opacity-0"
-                style={{
-                    backgroundImage: 'url(/assets/footer.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    transform: 'scale(1.05)',
-                }}
-            >
-                {/* Dark solid overlay */}
-                <div className="absolute inset-0 bg-[#0a0818]" />
-
-                {/* Soft reveal gradient mask */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background: 'radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0) 0%, rgba(8, 5, 21, 0.85) 60%, rgba(8, 5, 21, 1) 100%)'
-                    }}
-                />
-            </div>
-
-            {/* ✅ Dark overlay blend layer */}
-            <div
-                ref={overlayRef}
-                className="pointer-events-none absolute inset-0 z-[1] opacity-0"
-            >
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a0818] via-[#0a0818] to-[#0a0818]" />
-            </div>
-
-
-
             {/* ✅ Content */}
             <div
-                ref={contentRef}
                 className="container mx-auto px-6 md:px-12 relative z-10 text-gray-900"
             >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -251,16 +179,6 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                 </div>
             </div>
 
-            {/* ✅ Extra bottom gradient to merge perfectly into footer */}
-            <div
-                className="pointer-events-none absolute bottom-0 left-0 right-0 h-[300px] z-[2]"
-                style={{
-                    background: 'linear-gradient(to bottom, rgba(10, 8, 24, 0) 0%, rgba(10, 8, 24, 0.8) 50%, rgba(10, 8, 24, 1) 100%)'
-                }}
-            />
-
-            {/* ✅ Foggy blur layer for seamless edge hiding */}
-            <div className="absolute -bottom-10 left-0 right-0 h-[150px] bg-[#0a0818] blur-[60px] z-[2] pointer-events-none" />
         </section>
     );
 }

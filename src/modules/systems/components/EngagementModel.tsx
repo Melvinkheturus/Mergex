@@ -10,7 +10,7 @@ import { ENGAGEMENT_MODEL } from '../content/systems';
  */
 export function EngagementModel() {
     return (
-        <section className="relative py-24 lg:py-32 bg-slate-50/50 overflow-hidden">
+        <section className="relative py-12 md:py-16 bg-slate-50/50 overflow-hidden">
             <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-7xl">
                 {/* Header */}
                 <div className="text-center mb-16 lg:mb-20 animate-fadeIn">

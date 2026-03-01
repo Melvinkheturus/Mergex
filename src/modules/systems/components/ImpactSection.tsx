@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export function ImpactSection() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-12 md:py-16 bg-white">
             <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
