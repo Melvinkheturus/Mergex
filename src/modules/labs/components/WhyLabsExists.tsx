@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface WhyLabsExistsProps {
     content?: typeof WHY_LABS_EXISTS;
 }
+
 /**
  * WhyLabsExists – Scroll-triggered 3D card flip animation
  *
