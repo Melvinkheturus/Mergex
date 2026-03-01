@@ -148,7 +148,7 @@ export function OurSolutions() {
                         <div
                             key={index}
                             id={`solution-item-${index}`}
-                            className="relative min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
+                            className="relative min-h-[70vh] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-12 md:py-16 border-b border-gray-100 last:border-b-0"
                         >
                             {/* ── IMAGE LAYER (z-0) ── */}
                             <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-900 z-0">

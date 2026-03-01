@@ -24,8 +24,7 @@ export function SystemsHero() {
                     src="/assets/background/SYSTEM_BG_Vega.png"
                     alt="Futuristic Portal Background"
                     fill
-                    className="object-cover"
-                    style={{ objectPosition: 'center 20%' }}
+                    className="object-cover object-[50%_20%] md:object-[35%_20%]"
                     priority
                     quality={100}
                 />
@@ -59,23 +58,21 @@ export function SystemsHero() {
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.3)_40%,transparent_70%)] pointer-events-none -z-10 blur-xl scale-125 md:scale-150" />
 
                     {/* Eyebrow Label */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                        className="mb-8 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-sm"
+                        className="mb-8 text-[10px] md:text-xs font-medium text-black/50 uppercase tracking-[0.3em] drop-shadow-sm"
                     >
-                        <span className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-gray-500">
-                            MERGEX SYSTEMS · SOFTWARE, AUTOMATION & DIGITAL INFRASTRUCTURE
-                        </span>
-                    </motion.div>
+                        MERGEX SYSTEMS · SOFTWARE, AUTOMATION & DIGITAL INFRASTRUCTURE
+                    </motion.p>
 
                     {/* Main Headline */}
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-gray-900 mb-6 drop-shadow-sm"
+                        className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-gray-900 mb-6 drop-shadow-sm"
                     >
                         Architect Systems That <span className={`${playfair.className} text-violet-600`}>Scale</span>.
                     </motion.h1>
@@ -85,7 +82,7 @@ export function SystemsHero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                        className="text-base md:text-lg text-gray-800 max-w-2xl mx-auto mb-6 font-medium leading-relaxed drop-shadow-sm"
+                        className="text-sm md:text-lg text-gray-800 max-w-2xl mx-auto mb-6 font-medium leading-relaxed drop-shadow-sm"
                     >
                         Unify software, automation, and infrastructure into one system — built to scale without chaos.
                     </motion.p>
@@ -105,23 +102,23 @@ export function SystemsHero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-[60px] w-full"
+                        className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-[70px] w-full mx-auto mt-6 md:mt-0"
                     >
                         {/* Primary Button */}
                         <Link
                             href="#solutions"
-                            className="group flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 bg-gray-900 hover:bg-black text-white rounded-lg text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:ring-1 hover:ring-violet-400/30 active:scale-95"
+                            className="group flex items-center justify-center gap-2 w-[180px] sm:w-[220px] px-6 py-2.5 md:px-8 md:py-3 bg-black hover:bg-neutral-800 text-white rounded-full text-[13px] md:text-base font-medium transition-all shadow-md hover:shadow-lg active:scale-95"
                         >
-                            Explore Our Systems
-                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                            Explore Systems
+                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
 
                         {/* Secondary Button */}
                         <Link
-                            href="/contact"
-                            className="flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-white/90 hover:bg-white backdrop-blur-sm text-gray-900 border border-gray-300 rounded-lg text-sm font-semibold transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:border-violet-300 active:scale-95"
+                            href="/labs"
+                            className="flex items-center justify-center w-[180px] sm:w-[220px] px-6 py-2.5 md:px-8 md:py-3 bg-white hover:bg-neutral-50 backdrop-blur-sm text-black border border-black/10 md:border-gray-300 rounded-full text-[13px] md:text-base font-medium transition-all shadow-sm hover:shadow-md md:hover:border-violet-300 active:scale-95 text-center leading-tight"
                         >
-                            Book a Discovery Call
+                            Discover Labs
                         </Link>
                     </motion.div>
                 </motion.div>

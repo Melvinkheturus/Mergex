@@ -72,7 +72,7 @@ export function HowWeWorkSystems() {
     const [expandedIndex, setExpandedIndex] = useState<number>(0);
 
     return (
-        <section className="relative bg-white text-[#1A1A1A] py-24 lg:py-32">
+        <section className="relative bg-white text-[#1A1A1A] py-12 md:py-16">
             <div className="max-w-[1440px] mx-auto px-6 md:px-12">
 
                 {/* ── HEADER ── */}

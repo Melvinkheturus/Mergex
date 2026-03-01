@@ -54,7 +54,7 @@ export function SystemsFAQ() {
     };
 
     return (
-        <section className="py-16 md:py-24 bg-white w-full">
+        <section className="py-12 md:py-16 bg-white w-full">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}

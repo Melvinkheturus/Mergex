@@ -63,7 +63,7 @@ export function WhatWeSolve() {
     };
 
     return (
-        <section className="py-20 md:py-28 bg-white w-full overflow-hidden">
+        <section className="py-12 md:py-16 bg-white w-full overflow-hidden">
             <motion.div
                 className="container mx-auto px-6 md:px-12"
                 variants={containerVariants}

@@ -130,7 +130,7 @@ export function CaseStudySection() {
     return (
         <>
             {/* Section Header — outside the pinned area */}
-            <div className="bg-slate-50 pt-24 lg:pt-32 pb-12">
+            <div className="bg-slate-50 pt-12 lg:pt-16 pb-8">
                 <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                     <div className="text-center">
                         <h2
