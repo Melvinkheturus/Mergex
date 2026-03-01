@@ -4,108 +4,129 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Playfair_Display } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    style: ['italic'],
-    weight: ['400', '500', '600']
-});
-import { BlurVignette } from '@/components/ui/BlurVignette';
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
+const playfair = Playfair_Display({ subsets: ['latin'], style: ['italic'], weight: ['600', '700'] });
 
-/**
- * SystemsHero - Conversion-focused hero with white background
- * Two-column layout with compelling copy and image
- */
 export function SystemsHero() {
     return (
-        <section className="relative min-h-screen flex items-center bg-white text-gray-900 overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
+        <section className={`relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-[#fafafa] ${inter.className}`}>
+
+            {/* --- Background Image & Light Overlays --- */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="absolute inset-0 z-0"
+            >
                 <Image
-                    src="/assets/background/system hero.png"
-                    alt="Systems Hero Background"
+                    src="/assets/background/SYSTEM_BG_Vega.png"
+                    alt="Futuristic Portal Background"
                     fill
-                    className="object-cover opacity-100"
+                    className="object-cover"
+                    style={{ objectPosition: 'center 20%' }}
                     priority
+                    quality={100}
                 />
-                {/* Only Bottom Fade */}
-                <div className="absolute bottom-0 left-0 right-0 h-[400px] z-[2] pointer-events-none"
-                    style={{ background: 'linear-gradient(to bottom, transparent 0%, white 100%)' }}
-                />
-            </div>
 
-            {/* Content */}
-            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 relative z-10 flex items-center justify-center text-center">
-                <div className="max-w-4xl mx-auto">
-                    {/* Text Content */}
+                {/* Light Overlay: Top-to-bottom transparent to white (40%) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/60" />
+
+                {/* --- New: Soft Top-Left Light Source near Mergex Logo --- */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.9)_0%,rgba(243,239,255,0.5)_15%,transparent_40%)] mix-blend-screen" />
+
+                {/* Soft Lavender Tint Overlay (15%) */}
+                <div className="absolute inset-0 bg-[#f3efff]/20 mix-blend-overlay" />
+
+                {/* Extra White Gradient at the bottom to transition smoothly to the next section - Reduced intensity */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent" />
+            </motion.div>
+
+            {/* --- Main Centered Content --- */}
+            <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center mt-[-4vh]">
+
+                {/* 
+                  Text sits directly on the background with no solid card.
+                */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative px-6 py-12 md:px-0 md:py-0 flex flex-col items-center w-full"
+                >
+                    {/* Subtle Radial Glow purely behind the text block for readability */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.3)_40%,transparent_70%)] pointer-events-none -z-10 blur-xl scale-125 md:scale-150" />
+
+                    {/* Eyebrow Label */}
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="space-y-6 md:space-y-8 flex flex-col items-center"
-                        style={{ fontFamily: 'var(--font-manrope)' }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                        className="mb-8 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-sm"
                     >
-                        {/* Eyebrow */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-[10px] md:text-xs text-gray-900 font-medium tracking-[0.3em] uppercase"
-                        >
-                            Mergex Systems · Software, Automation & Digital Infrastructure
-                        </motion.p>
-
-                        {/* Primary Headline */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-gray-900"
-                        >
-                            Architecting <span className={`${playfair.className} italic font-normal`}>Scalable</span> Business Systems.
-                        </motion.h1>
-
-                        {/* Supporting Copy */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-base md:text-lg text-gray-800 leading-relaxed max-w-3xl mx-auto font-normal"
-                        >
-                            Build Systems that replace disconnected vendors and scattered tools with a unified revenue system designed to scale.
-                        </motion.p>
-
-                        {/* Value Proposition */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="text-sm md:text-base text-gray-500 font-normal italic"
-                        >
-                            Built for founders ready to move from chaos to structured scale.
-                        </motion.p>
-
-                        {/* CTAs */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="flex justify-center pt-4"
-                        >
-                            <Link
-                                href="#how-we-work"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-black border border-black rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-300"
-                            >
-                                View Case Studies
-                                <ArrowRight size={18} />
-                            </Link>
-                        </motion.div>
-
-
+                        <span className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-gray-500">
+                            MERGEX SYSTEMS · SOFTWARE, AUTOMATION & DIGITAL INFRASTRUCTURE
+                        </span>
                     </motion.div>
-                </div>
+
+                    {/* Main Headline */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-gray-900 mb-6 drop-shadow-sm"
+                    >
+                        Architect Systems That <span className={`${playfair.className} text-violet-600`}>Scale</span>.
+                    </motion.h1>
+
+                    {/* Subheadline */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                        className="text-base md:text-lg text-gray-800 max-w-2xl mx-auto mb-6 font-medium leading-relaxed drop-shadow-sm"
+                    >
+                        Unify software, automation, and infrastructure into one system — built to scale without chaos.
+                    </motion.p>
+
+                    {/* Support Line */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                        className="text-sm text-gray-600 italic mb-10 drop-shadow-sm"
+                    >
+                        Built for founders moving from chaos to structured scale.
+                    </motion.p>
+
+                    {/* Custom CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-[60px] w-full"
+                    >
+                        {/* Primary Button */}
+                        <Link
+                            href="#solutions"
+                            className="group flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 bg-gray-900 hover:bg-black text-white rounded-lg text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:ring-1 hover:ring-violet-400/30 active:scale-95"
+                        >
+                            Explore Our Systems
+                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+
+                        {/* Secondary Button */}
+                        <Link
+                            href="/contact"
+                            className="flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-white/90 hover:bg-white backdrop-blur-sm text-gray-900 border border-gray-300 rounded-lg text-sm font-semibold transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:border-violet-300 active:scale-95"
+                        >
+                            Book a Discovery Call
+                        </Link>
+                    </motion.div>
+                </motion.div>
             </div>
+
         </section>
     );
 }
