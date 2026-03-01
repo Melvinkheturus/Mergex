@@ -10,10 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 interface WhyLabsExistsProps {
     content?: typeof WHY_LABS_EXISTS;
 }
-
 /**
- * WhyLabsExists – Scroll-triggered 3D card flip animation (desktop only)
- * Mobile: Simple stacked card layout with Mountain Dew video as front face.
+ * WhyLabsExists – Scroll-triggered 3D card flip animation
+ *
+ * Phases:
+ *  1. Cards start flush (zero gap), seamless front face image.
+ *  2. Scroll: cards separate + title fades in.
+ *  3. Cards FLIP (rotateY 180°) — mid-flip each card bends inward via scaleX → 0 → 1.
+ *  4. Simultaneously as flip, left/right fan out (rotateZ) + slight y-drop.
+ *  5. Final state: dark bg, cards displayed fanned with subtle bottom-corner overlap.
  */
 export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
     const data = content || WHY_LABS_EXISTS;
@@ -23,6 +28,7 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
     const pinnedRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
+
 
     // ── Video sync: keep all 3 front-face videos frame-perfect ─────────────
     useEffect(() => {
