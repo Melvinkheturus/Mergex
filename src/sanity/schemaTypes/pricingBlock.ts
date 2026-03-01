@@ -1,25 +1,32 @@
 import { defineField, defineType } from 'sanity'
+import { CreditCardIcon } from '@sanity/icons'
 
 export const pricingBlockType = defineType({
     name: 'pricingBlock',
     title: 'Pricing Block',
     type: 'document',
-    description: 'Pricing content blocks (NOT price data)',
+    icon: CreditCardIcon,
+    description: 'Pricing tier descriptions and positioning — NOT actual price numbers',
+    groups: [
+        { name: 'content', title: '📝 Content', default: true },
+        { name: 'settings', title: '⚙️ Settings' },
+    ],
     fields: [
+        // ── Content ──
         defineField({
             name: 'tierName',
             title: 'Tier Name',
             type: 'string',
+            group: 'content',
+            description: 'e.g., "Starter", "Growth", "Enterprise"',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'slug',
             title: 'Slug',
             type: 'slug',
-            options: {
-                source: 'tierName',
-                maxLength: 96,
-            },
+            group: 'content',
+            options: { source: 'tierName', maxLength: 96 },
             validation: (Rule) => Rule.required(),
         }),
         defineField({
@@ -27,59 +34,70 @@ export const pricingBlockType = defineType({
             title: 'Description',
             type: 'text',
             rows: 3,
+            group: 'content',
+            description: 'What does this tier offer? One paragraph.',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'engagementModel',
-            title: 'Engagement Model Explanation',
+            title: 'Engagement Model',
             type: 'array',
             of: [{ type: 'block' }],
-            description: 'Explain how this engagement works',
+            group: 'content',
+            description: 'Explain how this engagement works (retainer, project-based, etc.)',
         }),
         defineField({
             name: 'featureHighlights',
             title: 'Feature Highlights',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'Key features/benefits (bullet points)',
+            group: 'content',
+            description: 'Bullet points of key features/benefits',
         }),
         defineField({
             name: 'idealFor',
             title: 'Ideal For',
             type: 'text',
             rows: 2,
-            description: 'Who is this pricing tier ideal for?',
+            group: 'content',
+            description: 'Who is this tier best suited for?',
         }),
         defineField({
             name: 'ctaText',
-            title: 'CTA Text',
+            title: 'CTA Button Text',
             type: 'string',
-            description: 'Call-to-action button text',
+            group: 'content',
+            description: 'e.g., "Get Started", "Book a Call"',
         }),
         defineField({
             name: 'ctaLink',
-            title: 'CTA Link',
+            title: 'CTA Button Link',
             type: 'string',
-            description: 'Where the CTA leads',
+            group: 'content',
         }),
+
+        // ── Settings ──
         defineField({
             name: 'position',
             title: 'Position',
             type: 'number',
-            description: 'Display order (lower appears first)',
+            group: 'settings',
+            description: 'Order on the pricing page (lower = further left)',
             validation: (Rule) => Rule.min(0),
         }),
         defineField({
             name: 'highlighted',
-            title: 'Highlighted',
+            title: 'Highlighted / Recommended',
             type: 'boolean',
-            description: 'Mark as recommended/popular',
+            group: 'settings',
+            description: 'Mark as "Popular" or "Recommended" — gets a visual highlight',
             initialValue: false,
         }),
         defineField({
             name: 'visible',
             title: 'Visible',
             type: 'boolean',
+            group: 'settings',
             initialValue: true,
         }),
     ],
@@ -87,6 +105,13 @@ export const pricingBlockType = defineType({
         select: {
             title: 'tierName',
             subtitle: 'description',
+            highlighted: 'highlighted',
+        },
+        prepare({ title, subtitle, highlighted }) {
+            return {
+                title: `${highlighted ? '⭐ ' : ''}${title}`,
+                subtitle: subtitle || 'No description',
+            }
         },
     },
     orderings: [

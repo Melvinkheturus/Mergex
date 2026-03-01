@@ -3,7 +3,17 @@
 import { motion } from 'framer-motion';
 import { PRICING_FACTORS } from '../content/pricing';
 
-export function PricingFactors() {
+interface PricingFactorsProps {
+    content?: typeof PRICING_FACTORS;
+}
+
+export function PricingFactors({ content }: PricingFactorsProps = {}) {
+    const data = content || PRICING_FACTORS;
+    const headline = data.headline || PRICING_FACTORS.headline;
+    const subheadline = data.subheadline || PRICING_FACTORS.subheadline;
+    const factors = (data as any).list?.length ? (data as any).list : PRICING_FACTORS.factors;
+    const closingStatement = data.closingStatement || PRICING_FACTORS.closingStatement;
+    const labsClarification = data.labsClarification || PRICING_FACTORS.labsClarification;
     return (
         <section className="bg-gray-50 py-20">
             <div className="container mx-auto max-w-6xl px-6">
@@ -15,16 +25,16 @@ export function PricingFactors() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {PRICING_FACTORS.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {PRICING_FACTORS.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Factors Grid */}
                 <div className="mb-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {PRICING_FACTORS.factors.map((factor, index) => (
+                    {factors.map((factor: any, index: number) => (
                         <motion.div
                             key={factor.title}
                             className="rounded-lg border border-gray-200 bg-white p-6 transition-shadow hover:shadow-md"
@@ -47,7 +57,7 @@ export function PricingFactors() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                    <p className="text-lg font-medium text-purple-900">{PRICING_FACTORS.closingStatement}</p>
+                    <p className="text-lg font-medium text-purple-900">{closingStatement}</p>
                 </motion.div>
 
                 {/* Labs Clarification */}
@@ -58,7 +68,7 @@ export function PricingFactors() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                    {PRICING_FACTORS.labsClarification}
+                    {labsClarification}
                 </motion.p>
             </div>
         </section>

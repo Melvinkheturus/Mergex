@@ -25,7 +25,16 @@ const ambientStyles = `
 }
 `;
 
-export function LabsHero() {
+interface LabsHeroProps {
+    content?: typeof LABS_HERO;
+}
+
+/**
+ * LabsHero - Cinematic hero for AI Content Studio
+ * Features: Video background support, poetic headline, minimal UI
+ */
+export function LabsHero({ content }: LabsHeroProps = {}) {
+    const data = content ?? LABS_HERO;
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -137,8 +146,6 @@ export function LabsHero() {
             setTimeout(() => {
                 for (let i = 2; i <= FRAME_COUNT; i++) {
                     const img = images[i - 1];
-                    // img.fetchPriority = 'high'; not working increates arround .5 sec
-
                     img.onload = () => {
                         if (Math.round(frameIndex.get()) === i) {
                             requestDraw(i);
@@ -246,6 +253,7 @@ export function LabsHero() {
                         />
                     </div>
 
+
                     {/* Canvas — fades in smoothly over the ambient background */}
                     <canvas
                         ref={canvasRef}
@@ -255,6 +263,7 @@ export function LabsHero() {
 
                     {/* Texture overlay */}
                     <div className="absolute inset-0 z-10 opacity-[0.10] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("/noise.png")' }} />
+
                 </div>
 
                 {/* Image Trail - Lazy-loaded, only renders after hero is visible */}
@@ -291,14 +300,14 @@ export function LabsHero() {
                                 className="text-[10px] md:text-xs tracking-[0.3em] text-white/80 uppercase font-medium"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
-                                {LABS_HERO.eyebrow}
+                                {data.eyebrow}
                             </p>
                             <span className="text-white/40 text-[10px] md:text-xs">|</span>
                             <p
                                 className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-100 to-white"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
-                                {LABS_HERO.subEyebrow}
+                                {data.subEyebrow || LABS_HERO.subEyebrow}
                             </p>
                         </div>
 
@@ -309,21 +318,21 @@ export function LabsHero() {
                                 className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] max-w-5xl mx-auto origin-bottom"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                             >
-                                <span className="hero-word inline-block">Create</span>{' '}
-                                <span className="hero-word inline-block">at</span>{' '}
-                                <span className="hero-word inline-block">the</span>{' '}
-                                <span
-                                    className="hero-word italic font-normal text-white drop-shadow-sm inline-block"
-                                    style={{
-                                        fontFamily: 'var(--font-playfair)',
-                                        WebkitTextFillColor: 'white'
-                                    }}
-                                >
-                                    Speed
-                                </span>{' '}
-                                <br className="block md:hidden" />
-                                <span className="hero-word inline-block">of</span>{' '}
-                                <span className="hero-word inline-block">Imagination.</span>
+                                {(() => {
+                                    const text = data.headline || LABS_HERO.headline;
+                                    // Make "Speed" or "Imagination" italic if we want, or just a generic italic based on a keyword.
+                                    // If user enters 'test', it will just render 'test'
+                                    return text.split(' ').map((word, i) => {
+                                        if (word.toLowerCase() === 'speed' || word.toLowerCase() === 'speed.') {
+                                            return (
+                                                <span key={i} className="hero-word italic font-normal text-white drop-shadow-sm inline-block mx-2" style={{ fontFamily: 'var(--font-playfair)', WebkitTextFillColor: 'white' }}>
+                                                    {word}
+                                                </span>
+                                            );
+                                        }
+                                        return <span key={i} className="hero-word inline-block mr-2">{word}</span>;
+                                    });
+                                })()}
                             </h1>
                         </div>
                     </div>
@@ -345,7 +354,7 @@ export function LabsHero() {
                                 className="text-sm md:text-base text-white/70 leading-relaxed font-light"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                             >
-                                {LABS_HERO.supportingLine}
+                                {data.supportingLine}
                             </p>
                         </motion.div>
 
@@ -365,7 +374,7 @@ export function LabsHero() {
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
                                 <p>
-                                    {LABS_HERO.reinforcementLine.split('\n').map((line, i) => (
+                                    {(data.reinforcementLine || LABS_HERO.reinforcementLine).split('\n').map((line, i) => (
                                         <span key={i} className="block">{line}</span>
                                     ))}
                                 </p>
@@ -374,18 +383,18 @@ export function LabsHero() {
                             {/* CTA Buttons — square with rounded corners, side by side */}
                             <div className="flex flex-row justify-center md:justify-end gap-2 md:gap-3 pointer-events-auto w-full">
                                 <a
-                                    href={LABS_HERO.primaryCTA.href}
+                                    href={data.primaryCTA?.href || LABS_HERO.primaryCTA.href}
                                     className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
-                                    {LABS_HERO.primaryCTA.text}
+                                    {data.primaryCTA?.text || LABS_HERO.primaryCTA.text}
                                 </a>
                                 <a
-                                    href={LABS_HERO.secondaryCTA.href}
+                                    href={data.secondaryCTA?.href || LABS_HERO.secondaryCTA.href}
                                     className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
                                     style={{ fontFamily: 'var(--font-manrope)' }}
                                 >
-                                    {LABS_HERO.secondaryCTA.text}
+                                    {data.secondaryCTA?.text || LABS_HERO.secondaryCTA.text}
                                 </a>
                             </div>
                         </motion.div>

@@ -63,7 +63,29 @@ const ORBIT_ITEMS: OrbitItem[] = [
  * 2. RadialIntro animation plays (showing connection/system)
  * 3. Transforms into grid view with copy
  */
-export function TeamSection() {
+
+// ── Hardcoded defaults ──
+const DEFAULT_EYEBROW = 'Mergex Minds';
+const DEFAULT_HEADLINE = "Not just hands on keyboards.\nPeople who think in systems.";
+const DEFAULT_BODY1 =
+    "Scale isn't about headcount; it's about alignment. We are a unified collective of designers, engineers, and strategists who prefer solving complex problems over shipping noise.";
+const DEFAULT_BODY2 =
+    "When you work with Mergex, you aren't managing a scattered roster of freelancers. You're plugging into a synchronized intelligence engine committed to the long game.";
+
+interface TeamSectionProps {
+    content?: {
+        teamEyebrow?: string;
+        teamHeadline?: string;
+        teamBody1?: string;
+        teamBody2?: string;
+    };
+}
+
+export function TeamSection({ content }: TeamSectionProps) {
+    const eyebrow = content?.teamEyebrow || DEFAULT_EYEBROW;
+    const headline = content?.teamHeadline || DEFAULT_HEADLINE;
+    const body1 = content?.teamBody1 || DEFAULT_BODY1;
+    const body2 = content?.teamBody2 || DEFAULT_BODY2;
     const [viewState, setViewState] = useState<'intro' | 'content'>('intro');
     const [hasEnteredView, setHasEnteredView] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -99,7 +121,7 @@ export function TeamSection() {
                         >
                             <div className="mb-8">
                                 <span className="block text-violet-600 font-medium tracking-widest text-sm md:text-base uppercase text-center">
-                                    Mergex Minds
+                                    {eyebrow}
                                 </span>
                             </div>
 
@@ -141,17 +163,16 @@ export function TeamSection() {
                                         transition={{ duration: 0.6 }}
                                         className="block text-violet-600 font-medium tracking-widest text-sm md:text-base mb-4 uppercase"
                                     >
-                                        Mergex Minds
+                                        {eyebrow}
                                     </motion.span>
 
                                     <motion.h2
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6, delay: 0.1 }}
-                                        className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-8 leading-tight"
+                                        className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-8 leading-tight whitespace-pre-line"
                                     >
-                                        Not just hands on keyboards.<br />
-                                        People who think in systems.
+                                        {headline}
                                     </motion.h2>
 
                                     <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -160,9 +181,7 @@ export function TeamSection() {
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.2 }}
                                         >
-                                            Scale isn't about headcount; it's about alignment.
-                                            We are a unified collective of designers, engineers, and strategists who prefer
-                                            solving complex problems over shipping noise.
+                                            {body1}
                                         </motion.p>
 
                                         <motion.p
@@ -170,8 +189,7 @@ export function TeamSection() {
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.3 }}
                                         >
-                                            When you work with Mergex, you aren't managing a scattered roster of freelancers.
-                                            You're plugging into a synchronized intelligence engine committed to the long game.
+                                            {body2}
                                         </motion.p>
                                     </div>
                                 </div>

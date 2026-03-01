@@ -14,11 +14,15 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+interface ScrollZoomShowcaseProps {
+    content?: any;
+}
+
 /**
  * ScrollZoomShowcase - Scroll-driven image zoom animation
  * Progressively zooms from small image to full-screen with overlay content
  */
-export function ScrollZoomShowcase() {
+export function ScrollZoomShowcase({ content }: ScrollZoomShowcaseProps = {}) {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageContainerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
@@ -196,7 +200,7 @@ export function ScrollZoomShowcase() {
                 <div className="absolute inset-0 z-0 flex items-center justify-center opacity-70">
                     <div className="w-full">
                         <ScrollVelocity
-                            texts={[
+                            texts={content?.marqueeTexts || [
                                 "HUMAN STRATEGY · AI ACCELERATION · STRUCTURED CREATIVITY ·",
                                 "GENERATIVE SYSTEMS · VISUAL INTELLIGENCE · ENGINEERED EXPERIMENTATION ·"
                             ]}
@@ -255,14 +259,14 @@ export function ScrollZoomShowcase() {
                                     isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
                                 )}>
                                     <p className="text-[12px] md:text-[13px] uppercase tracking-[0.12em] mb-4 opacity-70 font-medium text-white/80">
-                                        FEATURED EXPLORATION
+                                        {content?.badgeText || "FEATURED EXPLORATION"}
                                     </p>
                                     {/* Headline with Image */}
                                     <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2 whitespace-nowrap flex items-center">
-                                        Meet
+                                        {content?.headlinePrefix || "Meet"}
                                         <img
-                                            src="/assets/model/Madonna_Calligraphy.png"
-                                            alt="Madonna"
+                                            src={content?.headlineImageUrl || "/assets/model/Madonna_Calligraphy.png"}
+                                            alt={content?.headlinePrefix || "Madonna"}
                                             className="inline-block object-contain ml-3 mt-1 h-14 md:h-20 filter brightness-0 invert opacity-90 translate-y-2 md:translate-y-3"
                                         />
                                     </h2>
@@ -274,20 +278,20 @@ export function ScrollZoomShowcase() {
                                     isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
                                 )}>
                                     <h3 className="text-base md:text-lg font-normal leading-[1.3] text-white/90">
-                                        An AI-native creative exploration by Mergex Labs.
+                                        {content?.description || "An AI-native creative exploration by Mergex Labs."}
                                     </h3>
                                     {/* Instagram Link */}
                                     <div className="flex flex-col gap-1.5">
                                         <span className="text-[11px] md:text-[12px] uppercase tracking-[0.1em] text-white/50 font-medium">
-                                            Follow her journey:
+                                            {content?.socialLabel || "Follow her journey:"}
                                         </span>
                                         <a
-                                            href="https://instagram.com/madonna.ai"
+                                            href={content?.socialLinkUrl || "https://instagram.com/madonna.ai"}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors duration-300 w-fit border-b border-white/20 hover:border-white/60 pb-0.5"
                                         >
-                                            @madonna.ai
+                                            {content?.socialLinkText || "@madonna.ai"}
                                         </a>
                                     </div>
                                 </div>
@@ -307,35 +311,25 @@ export function ScrollZoomShowcase() {
                                 )}>
                                     {/* Moved Description */}
                                     <p className="text-base md:text-[17px] leading-[1.6] text-white/75 max-w-[420px] text-center md:text-right">
-                                        Madonna represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
+                                        {content?.bodyText || "Madonna represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic."}
                                     </p>
 
                                     {/* Meta Row */}
                                     <div className="flex flex-row gap-8 md:gap-12 border-t border-white/20 pt-6 md:border-none md:pt-0">
-                                        <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
-                                                Identity
-                                            </p>
-                                            <p className="text-[14px] font-medium opacity-90">
-                                                Madonna
-                                            </p>
-                                        </div>
-                                        <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
-                                                Created by
-                                            </p>
-                                            <p className="text-[14px] font-medium opacity-90">
-                                                Mergex Labs
-                                            </p>
-                                        </div>
-                                        <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
-                                                Focus
-                                            </p>
-                                            <p className="text-[14px] font-medium opacity-90">
-                                                Visual storytelling
-                                            </p>
-                                        </div>
+                                        {(content?.metaItems || [
+                                            { label: "Identity", value: "Madonna" },
+                                            { label: "Created by", value: "Mergex Labs" },
+                                            { label: "Focus", value: "Visual storytelling" }
+                                        ]).map((item: any, i: number) => (
+                                            <div key={i} className="text-center md:text-right">
+                                                <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
+                                                    {item.label}
+                                                </p>
+                                                <p className="text-[14px] font-medium opacity-90">
+                                                    {item.value}
+                                                </p>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 

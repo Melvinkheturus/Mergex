@@ -1,61 +1,83 @@
 import { defineField, defineType } from 'sanity'
+import { CommentIcon } from '@sanity/icons'
 
 export const testimonialType = defineType({
     name: 'testimonial',
     title: 'Testimonial',
     type: 'document',
+    icon: CommentIcon,
+    description: 'Client quotes and social proof — the most powerful trust builder',
+    groups: [
+        { name: 'quote', title: '💬 Quote', default: true },
+        { name: 'context', title: '🏢 Context' },
+        { name: 'settings', title: '⚙️ Settings' },
+    ],
     fields: [
+        // ── Quote ──
         defineField({
             name: 'quote',
             title: 'Quote',
             type: 'text',
             rows: 4,
+            group: 'quote',
+            description: 'The actual testimonial text — keep it authentic and impactful',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'authorName',
-            title: 'Author Name',
+            title: 'Person\'s Name',
             type: 'string',
+            group: 'quote',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'authorRole',
-            title: 'Author Role',
+            title: 'Their Role',
             type: 'string',
+            group: 'quote',
+            description: 'e.g., "CTO", "Marketing Director"',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'company',
             title: 'Company',
             type: 'string',
+            group: 'quote',
         }),
         defineField({
             name: 'authorImage',
-            title: 'Author Image',
+            title: 'Photo',
             type: 'image',
-            options: {
-                hotspot: true,
-            },
+            group: 'quote',
+            description: 'Headshot of the person giving the testimonial',
+            options: { hotspot: true },
             fields: [
-                {
-                    name: 'alt',
-                    type: 'string',
-                    title: 'Alternative text',
-                },
+                { name: 'alt', type: 'string', title: 'Alt Text' },
             ],
         }),
         defineField({
+            name: 'rating',
+            title: 'Rating',
+            type: 'number',
+            group: 'quote',
+            description: 'Optional star rating (1-5)',
+            validation: (Rule) => Rule.min(1).max(5),
+        }),
+
+        // ── Context ──
+        defineField({
             name: 'divisionContext',
-            title: 'Division Context',
+            title: 'Show on Division Pages',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'Which Mergex divisions this testimonial relates to',
+            group: 'context',
+            description: 'Which division pages should this testimonial appear on?',
             options: {
                 list: [
                     { title: 'Software', value: 'software' },
                     { title: 'Labs', value: 'labs' },
                     { title: 'Systems', value: 'systems' },
-                    { title: 'All', value: 'all' },
+                    { title: 'All Divisions', value: 'all' },
                 ],
             },
         }),
@@ -63,7 +85,8 @@ export const testimonialType = defineType({
             name: 'projectType',
             title: 'Project Type',
             type: 'string',
-            description: 'Type of project this testimonial is about',
+            group: 'context',
+            description: 'What kind of project was this testimonial about?',
             options: {
                 list: [
                     { title: 'Web Development', value: 'web' },
@@ -74,31 +97,29 @@ export const testimonialType = defineType({
                 ],
             },
         }),
-        defineField({
-            name: 'rating',
-            title: 'Rating',
-            type: 'number',
-            validation: (Rule) => Rule.min(1).max(5),
-            description: 'Optional star rating (1-5)',
-        }),
+
+        // ── Settings ──
         defineField({
             name: 'featured',
             title: 'Featured',
             type: 'boolean',
-            description: 'Show in featured/hero sections',
+            group: 'settings',
+            description: 'Show in primary testimonial spots (homepage, etc.)',
             initialValue: false,
         }),
         defineField({
             name: 'visible',
-            title: 'Visible',
+            title: 'Visible on Site',
             type: 'boolean',
-            description: 'Toggle visibility on the site',
+            group: 'settings',
+            description: 'Toggle off to hide without deleting',
             initialValue: true,
         }),
         defineField({
             name: 'displayOrder',
             title: 'Display Order',
             type: 'number',
+            group: 'settings',
             description: 'Lower numbers appear first',
             validation: (Rule) => Rule.min(0),
         }),
@@ -106,14 +127,27 @@ export const testimonialType = defineType({
             name: 'createdAt',
             title: 'Created At',
             type: 'datetime',
+            group: 'settings',
             initialValue: () => new Date().toISOString(),
         }),
     ],
     preview: {
         select: {
             title: 'authorName',
-            subtitle: 'authorRole',
+            role: 'authorRole',
+            company: 'company',
             media: 'authorImage',
+            featured: 'featured',
+            visible: 'visible',
+        },
+        prepare({ title, role, company, media, featured, visible }) {
+            const prefix = !visible ? '🔴 ' : featured ? '⭐ ' : ''
+            const subtitle = [role, company].filter(Boolean).join(' at ')
+            return {
+                title: `${prefix}${title}`,
+                subtitle,
+                media,
+            }
         },
     },
     orderings: [

@@ -1,14 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HOW_LABS_WORKS } from '../content/labs';
 import { Clipboard, Cpu, Edit, CheckCircle } from 'lucide-react';
+
+interface HowLabsWorksProps {
+    content?: typeof HOW_LABS_WORKS;
+}
 
 /**
  * HowLabsWorks - Process demonstration with high-impact "Engineered" aesthetic
  */
-export function HowLabsWorks() {
+export function HowLabsWorks({ content }: HowLabsWorksProps = {}) {
+    const data = content ?? HOW_LABS_WORKS;
+    const headline = data.headline || HOW_LABS_WORKS.headline;
+    const subheadline = data.subheadline || HOW_LABS_WORKS.subheadline;
+    const steps = data.steps?.length ? data.steps : HOW_LABS_WORKS.steps;
+    const keyMessages = data.keyMessages?.length ? data.keyMessages : HOW_LABS_WORKS.keyMessages;
+
     const iconMap = {
         clipboard: Clipboard,
         cpu: Cpu,
@@ -30,12 +40,10 @@ export function HowLabsWorks() {
                         backgroundSize: '40px 40px',
                     }}
                 />
-                {/* Visual Accent: Blueprint Coordinate Lines */}
                 <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent" />
                 <div className="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/10 to-transparent" />
                 <div className="absolute left-0 top-1/4 w-full h-px bg-gradient-to-r from-transparent via-purple-500/10 to-transparent" />
 
-                {/* Background Noise Texture */}
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
                     style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
                 />
@@ -53,10 +61,10 @@ export function HowLabsWorks() {
                         [ SYSTEM_PROCESS_001 ]
                     </span>
                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-display mb-6 text-white tracking-tight">
-                        {HOW_LABS_WORKS.headline}
+                        {headline}
                     </h2>
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
-                        {HOW_LABS_WORKS.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
@@ -94,8 +102,8 @@ export function HowLabsWorks() {
                     </svg>
 
                     <div className="flex flex-col gap-12 md:gap-24 lg:gap-0 lg:block lg:h-[1200px]">
-                        {HOW_LABS_WORKS.steps.map((step, index) => {
-                            const Icon = iconMap[step.icon as keyof typeof iconMap];
+                        {steps.map((step: any, index: number) => {
+                            const Icon = iconMap[step.icon as keyof typeof iconMap] || Clipboard;
 
                             // Desktop Positions
                             const positions = [
@@ -111,7 +119,7 @@ export function HowLabsWorks() {
                                     step={step}
                                     index={index}
                                     Icon={Icon}
-                                    className={`lg:absolute ${positions[index]}`}
+                                    className={`lg:absolute ${positions[index % positions.length]}`}
                                 />
                             );
                         })}
@@ -127,7 +135,7 @@ export function HowLabsWorks() {
                     className="mt-20 md:mt-32 border-t border-purple-500/10 pt-12"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                        {HOW_LABS_WORKS.keyMessages.map((message, index) => (
+                        {keyMessages.map((message: string, index: number) => (
                             <div key={index} className="flex flex-col md:flex-row items-center md:items-start gap-4 group">
                                 <div className="w-10 h-10 rounded-full bg-purple-500/5 border border-purple-500/10 flex items-center justify-center shrink-0 group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-all duration-300">
                                     <span className="text-purple-400 font-mono text-xs">0{index + 1}</span>
@@ -164,10 +172,8 @@ function StepCard({ step, index, Icon, className }: any) {
                 hover:bg-white/[0.05] hover:border-purple-500/30
                 ${isHovered ? 'shadow-[0_0_40px_-15px_rgba(168,85,247,0.3)]' : ''}
             `}>
-                {/* Glassmorphism Shine */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-                {/* Header Section */}
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex flex-col">
                         <span className="text-6xl font-black font-display text-white/5 group-hover:text-purple-500/10 transition-colors duration-500 leading-none">
@@ -183,20 +189,17 @@ function StepCard({ step, index, Icon, className }: any) {
                         </div>
                     </div>
 
-                    {/* Technical Microcopy */}
                     <div className="text-right font-mono text-[10px] text-purple-400/50 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {step.microcopy}
+                        {step.microcopy || 'SYSTEM_OPTIMIZED'}
                         <br />
                         <span className="text-white/20">READY_FOR_SYNC</span>
                     </div>
                 </div>
 
-                {/* Content */}
                 <p className="text-gray-400 leading-relaxed font-light mb-6 transition-colors duration-300 group-hover:text-gray-300">
                     {step.description}
                 </p>
 
-                {/* Footer Tech Details (Animated on Hover) */}
                 <div className="pt-6 border-t border-white/5 flex items-center justify-between">
                     <div className="flex gap-1">
                         {[1, 2, 3].map(i => (

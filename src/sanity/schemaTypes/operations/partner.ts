@@ -1,14 +1,16 @@
 import { defineField, defineType } from 'sanity'
+import { EnvelopeIcon } from '@sanity/icons'
 
 export const partnerType = defineType({
     name: 'partner',
     title: 'Partner Application',
     type: 'document',
-    description: 'Partner applications and records (Phase 1 - Simple)',
+    icon: EnvelopeIcon,
+    description: 'Incoming partner applications (Phase 1 — will move to Supabase later)',
     fields: [
         defineField({
             name: 'name',
-            title: 'Name',
+            title: 'Applicant Name',
             type: 'string',
             validation: (Rule) => Rule.required(),
         }),
@@ -32,6 +34,7 @@ export const partnerType = defineType({
                     { title: 'Strategic Partner', value: 'strategic' },
                     { title: 'Referral Partner', value: 'referral' },
                 ],
+                layout: 'radio',
             },
             validation: (Rule) => Rule.required(),
         }),
@@ -47,11 +50,11 @@ export const partnerType = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'New', value: 'new' },
-                    { title: 'Reviewing', value: 'reviewing' },
-                    { title: 'Accepted', value: 'accepted' },
-                    { title: 'Declined', value: 'declined' },
-                    { title: 'On Hold', value: 'hold' },
+                    { title: '🆕 New', value: 'new' },
+                    { title: '🔍 Reviewing', value: 'reviewing' },
+                    { title: '✅ Accepted', value: 'accepted' },
+                    { title: '❌ Declined', value: 'declined' },
+                    { title: '⏸️ On Hold', value: 'hold' },
                 ],
             },
             initialValue: 'new',
@@ -62,7 +65,7 @@ export const partnerType = defineType({
             title: 'Internal Notes',
             type: 'text',
             rows: 3,
-            description: 'Notes for internal use only',
+            description: '🔒 Only visible to your team, not on the site',
         }),
         defineField({
             name: 'submittedAt',
@@ -74,7 +77,18 @@ export const partnerType = defineType({
     preview: {
         select: {
             title: 'name',
-            subtitle: 'partnershipType',
+            company: 'company',
+            status: 'status',
+            type: 'partnershipType',
+        },
+        prepare({ title, company, status, type }) {
+            const statusEmoji: Record<string, string> = {
+                new: '🆕', reviewing: '🔍', accepted: '✅', declined: '❌', hold: '⏸️',
+            }
+            return {
+                title: `${statusEmoji[status] || ''} ${title}`,
+                subtitle: `${type || 'Unknown'} · ${company || 'No company'}`,
+            }
         },
     },
 })

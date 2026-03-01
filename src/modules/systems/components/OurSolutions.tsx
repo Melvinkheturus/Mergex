@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -21,6 +21,10 @@ const PILLAR_IMAGES = [
     '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
 ];
 
+interface OurSolutionsProps {
+    content?: typeof OUR_SOLUTIONS;
+}
+
 /**
  * OurSolutions — Sticky Sidebar ScrollSpy + Parallax Text-Over-Image
  *
@@ -28,13 +32,16 @@ const PILLAR_IMAGES = [
  * Right column: scrolling cards where the text content slides UP over the
  * image during scroll (parallax overlap), creating a premium agency feel.
  */
-export function OurSolutions() {
+export function OurSolutions({ content }: OurSolutionsProps = {}) {
+    const data = content ?? OUR_SOLUTIONS;
+    const pillars = data.pillars?.length ? data.pillars : OUR_SOLUTIONS.pillars;
+
     const [activeIndex, setActiveIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
         () => {
-            OUR_SOLUTIONS.pillars.forEach((_, index) => {
+            pillars.forEach((_, index) => {
                 const card = document.getElementById(`solution-item-${index}`);
                 if (!card) return;
 
@@ -86,7 +93,7 @@ export function OurSolutions() {
                 }
             });
         },
-        { scope: containerRef }
+        { scope: containerRef, dependencies: [pillars] }
     );
 
     // Scroll via Lenis so smooth-scroll stays consistent
@@ -109,17 +116,15 @@ export function OurSolutions() {
         >
             <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
 
-                {/* ── LEFT COLUMN — sticky nav ──
-                     self-start is CRITICAL: prevents flex from stretching this
-                     column to the parent height, which would kill sticky range. */}
+                {/* ── LEFT COLUMN — sticky nav ── */}
                 <div className="hidden md:flex flex-col justify-center w-[28%] h-screen sticky top-0 self-start px-8 lg:px-12 border-r border-gray-100">
                     {/* Section label */}
-                    <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-10">
+                    <p className="text-xs font-bold text-violet-600 uppercase tracking-[0.2em] mb-10">
                         Our Solutions
                     </p>
 
                     <nav className="flex flex-col gap-5">
-                        {OUR_SOLUTIONS.pillars.map((pillar, index) => (
+                        {pillars.map((pillar, index) => (
                             <button
                                 key={index}
                                 onClick={() => scrollToItem(index)}
@@ -144,56 +149,72 @@ export function OurSolutions() {
 
                 {/* ── RIGHT COLUMN — scrolling cards ── */}
                 <div className="w-full md:w-[72%]">
-                    {OUR_SOLUTIONS.pillars.map((pillar, index) => (
+                    {pillars.map((pillar, index) => (
                         <div
                             key={index}
                             id={`solution-item-${index}`}
                             className="relative min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
                         >
                             {/* ── IMAGE LAYER (z-0) ── */}
-                            <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-900 z-0">
+                            <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-900 z-0 shadow-2xl">
                                 <Image
-                                    src={PILLAR_IMAGES[index]}
+                                    src={PILLAR_IMAGES[index] || PILLAR_IMAGES[0]}
                                     alt={pillar.title}
                                     fill
                                     className="parallax-img object-cover scale-110"
                                 />
                                 {/* Bottom gradient so overlapping text stays readable */}
-                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                             </div>
 
                             {/* ── TEXT LAYER (z-10) — slides UP over the image on scroll ── */}
-                            <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4">
-                                <div className="border-t border-gray-200 pt-10">
+                            <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4 shadow-[0_-30px_60px_-15px_rgba(0,0,0,0.1)] rounded-t-xl px-1">
+                                <div className="border-t border-gray-100 pt-10">
                                     <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
                                         {/* Left Side: Info */}
                                         <div className="md:col-span-7 lg:col-span-8">
                                             <div className="flex items-center gap-4 mb-8">
-                                                <span className="text-sm font-mono text-gray-400">
+                                                <span className="text-sm font-mono text-violet-500 font-bold">
                                                     [{String(index + 1).padStart(2, '0')}]
                                                 </span>
-                                                <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-[#1A1A1A] whitespace-nowrap">
+                                                <h3 className="text-2xl md:text-3xl font-bold text-[#1A1A1A]">
                                                     {pillar.title}
                                                 </h3>
                                             </div>
-                                            <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl">
+                                            <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-xl">
                                                 {pillar.description}
                                             </p>
+
+                                            {/* Outcomes */}
+                                            <div className="mt-10 space-y-4">
+                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                                    Expected Outcomes
+                                                </p>
+                                                <div className="flex flex-wrap gap-3">
+                                                    {pillar.outcomes?.map((outcome, i) => (
+                                                        <div key={i} className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 px-4 py-2 rounded-full border border-gray-100">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+                                                            {outcome}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {/* Right Side: Categories */}
+                                        {/* Right Side: Capabilities */}
                                         <div className="md:col-span-5 lg:col-span-4">
-                                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
-                                                Categories
+                                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+                                                Capabilities
                                             </p>
-                                            <div className="grid grid-cols-2 gap-2">
+                                            <div className="flex flex-col gap-3">
                                                 {pillar.capabilities.map((cap, i) => (
-                                                    <span
+                                                    <div
                                                         key={i}
-                                                        className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-3 py-2 rounded-sm bg-white text-center"
+                                                        className="flex items-center gap-3 border-b border-gray-50 pb-3 last:border-0"
                                                     >
-                                                        {cap}
-                                                    </span>
+                                                        <span className="text-violet-500 font-bold">→</span>
+                                                        <span className="text-sm font-medium text-gray-800">{cap}</span>
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>

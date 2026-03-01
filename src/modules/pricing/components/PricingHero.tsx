@@ -3,7 +3,14 @@
 import { motion } from 'framer-motion';
 import { PRICING_HERO } from '../content/pricing';
 
-export function PricingHero() {
+interface PricingHeroProps {
+    content?: typeof PRICING_HERO;
+}
+
+export function PricingHero({ content }: PricingHeroProps = {}) {
+    const data = content || PRICING_HERO;
+    const headline = data.headline || PRICING_HERO.headline;
+    const subheadline = data.subheadline || PRICING_HERO.subheadline;
     return (
         <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 pt-32 pb-20">
             {/* Background Pattern */}
@@ -21,10 +28,10 @@ export function PricingHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <h1 className="mb-6 text-4xl font-bold leading-tight text-gray-900 md:text-5xl lg:text-6xl">
-                        {PRICING_HERO.headline}
+                        {headline}
                     </h1>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl">
-                        {PRICING_HERO.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
             </div>

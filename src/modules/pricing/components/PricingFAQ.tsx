@@ -5,7 +5,14 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { PRICING_FAQ } from '../content/pricing';
 
-export function PricingFAQ() {
+interface PricingFAQProps {
+    content?: typeof PRICING_FAQ;
+}
+
+export function PricingFAQ({ content }: PricingFAQProps = {}) {
+    const data = content || PRICING_FAQ;
+    const headline = data.headline || PRICING_FAQ.headline;
+    const questions = data.questions?.length ? data.questions : PRICING_FAQ.questions;
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
@@ -19,13 +26,13 @@ export function PricingFAQ() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {PRICING_FAQ.headline}
+                        {headline}
                     </h2>
                 </motion.div>
 
                 {/* FAQ Items */}
                 <div className="space-y-4">
-                    {PRICING_FAQ.questions.map((faq, index) => (
+                    {questions.map((faq: any, index: number) => (
                         <motion.div
                             key={index}
                             className="overflow-hidden rounded-lg border border-gray-200 bg-white"

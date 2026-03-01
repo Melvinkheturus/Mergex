@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { HERO_CONTENT } from '../constants';
 import { ArrowDown } from 'lucide-react';
 
-export function PartnershipHero() {
+interface PartnershipHeroProps {
+    content?: typeof HERO_CONTENT;
+}
+
+export function PartnershipHero({ content }: PartnershipHeroProps = {}) {
+    const data = content || HERO_CONTENT;
+    const headline = data.headline || HERO_CONTENT.headline;
+    const subheadline = data.subheadline || HERO_CONTENT.subheadline;
+    const ctaText = data.ctaText || HERO_CONTENT.ctaText;
     const scrollToTypes = () => {
         const element = document.getElementById('partnership-types');
         element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -19,10 +27,10 @@ export function PartnershipHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-6 leading-tight">
-                        {HERO_CONTENT.headline}
+                        {headline}
                     </h1>
                     <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-                        {HERO_CONTENT.subheadline}
+                        {subheadline}
                     </p>
 
                     <motion.button
@@ -40,7 +48,7 @@ export function PartnershipHero() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >
-                        <span>{HERO_CONTENT.ctaText}</span>
+                        <span>{ctaText}</span>
                         <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
                     </motion.button>
                 </motion.div>

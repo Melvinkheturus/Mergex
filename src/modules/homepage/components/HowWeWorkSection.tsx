@@ -4,11 +4,19 @@ import { motion } from 'framer-motion';
 import { HOW_WE_WORK } from '../content';
 import { Search, PenTool, Code2, Rocket } from 'lucide-react';
 
+interface HowWeWorkSectionProps {
+    content?: typeof HOW_WE_WORK;
+}
+
 /**
  * HowWeWorkSection - Process confidence builder
  * Shows systematic 4-step approach to build trust
+ * 
+ * Accepts optional `content` prop from server-side Sanity fetch.
+ * Falls back to hardcoded HOW_WE_WORK if no CMS data is provided.
  */
-export function HowWeWorkSection() {
+export function HowWeWorkSection({ content }: HowWeWorkSectionProps = {}) {
+    const data = content ?? HOW_WE_WORK;
     const iconMap = {
         search: Search,
         pencil: PenTool,
@@ -38,16 +46,16 @@ export function HowWeWorkSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
-                        {HOW_WE_WORK.headline}
+                        {data.headline}
                     </h2>
                     <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
-                        {HOW_WE_WORK.subheadline}
+                        {data.subheadline}
                     </p>
                 </motion.div>
 
                 {/* Process Steps - Horizontal on desktop, vertical on mobile */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    {HOW_WE_WORK.steps.map((step, index) => {
+                    {data.steps.map((step, index) => {
                         const Icon = iconMap[step.icon as keyof typeof iconMap];
 
                         return (
@@ -60,7 +68,7 @@ export function HowWeWorkSection() {
                                 className="relative"
                             >
                                 {/* Connector Line (desktop only, not for last item) */}
-                                {index < HOW_WE_WORK.steps.length - 1 && (
+                                {index < data.steps.length - 1 && (
                                     <div className="hidden lg:block absolute top-12 left-[calc(50%+40px)] w-[calc(100%-40px)] h-0.5 bg-gradient-to-r from-primary/40 to-transparent" />
                                 )}
 
@@ -97,7 +105,7 @@ export function HowWeWorkSection() {
                     transition={{ delay: 0.4 }}
                     className="flex flex-wrap justify-center gap-6"
                 >
-                    {HOW_WE_WORK.keyMessages.map((message, index) => (
+                    {data.keyMessages.map((message, index) => (
                         <div
                             key={index}
                             className="px-6 py-3 bg-primary/5 border border-primary/20 rounded-full text-primary font-medium"

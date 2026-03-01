@@ -4,20 +4,26 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Playfair_Display } from 'next/font/google';
-
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    style: ['italic'],
-    weight: ['400', '500', '600']
-});
 import { BlurVignette } from '@/components/ui/BlurVignette';
+
+import { SYSTEMS_HERO } from '../content/systems';
+
+interface SystemsHeroProps {
+    content?: typeof SYSTEMS_HERO & { eyebrow?: string };
+}
 
 /**
  * SystemsHero - Conversion-focused hero with white background
  * Two-column layout with compelling copy and image
  */
-export function SystemsHero() {
+export function SystemsHero({ content }: SystemsHeroProps = {}) {
+    const headline = content?.headline || SYSTEMS_HERO.headline;
+    const subheadline = content?.subheadline || SYSTEMS_HERO.subheadline;
+    const eyebrow = content?.eyebrow || 'Mergex Systems · Software, Automation & Digital Infrastructure';
+    const keyDifferentiator = content?.keyDifferentiator || SYSTEMS_HERO.keyDifferentiator;
+    const primaryCTA = content?.primaryCTA || SYSTEMS_HERO.primaryCTA;
+    const secondaryCTA = content?.secondaryCTA || SYSTEMS_HERO.secondaryCTA;
+
     return (
         <section className="relative min-h-screen flex items-center bg-white text-gray-900 overflow-hidden">
             {/* Background Image */}
@@ -53,7 +59,7 @@ export function SystemsHero() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="text-[10px] md:text-xs text-gray-900 font-medium tracking-[0.3em] uppercase"
                         >
-                            Mergex Systems · Software, Automation & Digital Infrastructure
+                            {eyebrow}
                         </motion.p>
 
                         {/* Primary Headline */}
@@ -63,7 +69,7 @@ export function SystemsHero() {
                             transition={{ duration: 0.8, delay: 0.3 }}
                             className="text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-gray-900"
                         >
-                            Architecting <span className={`${playfair.className} italic font-normal`}>Scalable</span> Business Systems.
+                            {headline}
                         </motion.h1>
 
                         {/* Supporting Copy */}
@@ -73,7 +79,7 @@ export function SystemsHero() {
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="text-base md:text-lg text-gray-800 leading-relaxed max-w-3xl mx-auto font-normal"
                         >
-                            Build Systems that replace disconnected vendors and scattered tools with a unified revenue system designed to scale.
+                            {subheadline}
                         </motion.p>
 
                         {/* Value Proposition */}
@@ -83,7 +89,7 @@ export function SystemsHero() {
                             transition={{ duration: 0.8, delay: 0.5 }}
                             className="text-sm md:text-base text-gray-500 font-normal italic"
                         >
-                            Built for founders ready to move from chaos to structured scale.
+                            {keyDifferentiator}
                         </motion.p>
 
                         {/* CTAs */}
@@ -91,18 +97,23 @@ export function SystemsHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="flex justify-center pt-4"
+                            className="flex justify-center flex-wrap gap-4 pt-4"
                         >
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-b from-violet-500 to-violet-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                            >
+                                {primaryCTA}
+                                <ArrowRight size={18} />
+                            </Link>
                             <Link
                                 href="#how-we-work"
                                 className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-black border border-black rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-300"
                             >
-                                View Case Studies
+                                {secondaryCTA}
                                 <ArrowRight size={18} />
                             </Link>
                         </motion.div>
-
-
                     </motion.div>
                 </div>
             </div>

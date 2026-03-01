@@ -3,7 +3,15 @@
 import { motion } from 'framer-motion';
 import { WHAT_WORKING_MEANS } from '../content/careers';
 
-export function WhatWorkingMeans() {
+interface WhatWorkingMeansProps {
+    content?: typeof WHAT_WORKING_MEANS;
+}
+
+export function WhatWorkingMeans({ content }: WhatWorkingMeansProps = {}) {
+    const data = content || WHAT_WORKING_MEANS;
+    const headline = data.headline || WHAT_WORKING_MEANS.headline;
+    const subheadline = data.subheadline || WHAT_WORKING_MEANS.subheadline;
+    const principles = data.principles?.length ? data.principles : WHAT_WORKING_MEANS.principles;
     return (
         <section className="bg-white py-20">
             <div className="container mx-auto max-w-6xl px-6">
@@ -16,16 +24,16 @@ export function WhatWorkingMeans() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {WHAT_WORKING_MEANS.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {WHAT_WORKING_MEANS.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Principles Grid */}
                 <div className="grid gap-8 md:grid-cols-2">
-                    {WHAT_WORKING_MEANS.principles.map((principle, index) => (
+                    {principles.map((principle: any, index: number) => (
                         <motion.div
                             key={index}
                             className="rounded-xl border border-gray-200 bg-gray-50 p-6"

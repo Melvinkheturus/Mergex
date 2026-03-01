@@ -11,7 +11,15 @@ const iconMap = {
     rocket: Rocket,
 } as const;
 
-export function CareerPaths() {
+interface CareerPathsProps {
+    content?: typeof CAREER_PATHS;
+}
+
+export function CareerPaths({ content }: CareerPathsProps = {}) {
+    const data = content || CAREER_PATHS;
+    const headline = data.headline || CAREER_PATHS.headline;
+    const subheadline = data.subheadline || CAREER_PATHS.subheadline;
+    const paths = data.paths?.length ? data.paths : CAREER_PATHS.paths;
     return (
         <section className="bg-white py-20" id="opportunities">
             <div className="container mx-auto max-w-7xl px-6">
@@ -24,26 +32,26 @@ export function CareerPaths() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {CAREER_PATHS.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {CAREER_PATHS.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Paths Grid */}
                 <div className="grid gap-8 md:grid-cols-2">
-                    {CAREER_PATHS.paths.map((path, index) => {
-                        const Icon = iconMap[path.icon as keyof typeof iconMap];
-                        const isInternship = path.id === 'internships';
+                    {paths.map((path: any, index: number) => {
+                        const Icon = iconMap[path.icon as keyof typeof iconMap] || Briefcase;
+                        const isInternship = path.id === 'internships' || path.pathId === 'internships';
 
                         return (
                             <motion.div
-                                key={path.id}
-                                id={path.id === 'internships' ? 'internships' : undefined}
+                                key={path.id || path.pathId}
+                                id={(path.id || path.pathId) === 'internships' ? 'internships' : undefined}
                                 className={`relative rounded-2xl border-2 p-8 ${isInternship
-                                        ? 'border-purple-300 bg-gradient-to-br from-purple-50 to-blue-50 shadow-lg'
-                                        : 'border-gray-200 bg-white'
+                                    ? 'border-purple-300 bg-gradient-to-br from-purple-50 to-blue-50 shadow-lg'
+                                    : 'border-gray-200 bg-white'
                                     }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -58,8 +66,8 @@ export function CareerPaths() {
                                             <Icon className="h-7 w-7" />
                                         </div>
                                         <span className={`rounded-full px-3 py-1 text-xs font-semibold ${isInternship
-                                                ? 'bg-purple-600 text-white'
-                                                : 'bg-gray-100 text-gray-700'
+                                            ? 'bg-purple-600 text-white'
+                                            : 'bg-gray-100 text-gray-700'
                                             }`}>
                                             {path.tagline}
                                         </span>
@@ -75,7 +83,7 @@ export function CareerPaths() {
                                     <div className="mb-6">
                                         <h4 className="mb-3 font-semibold text-gray-900">Open Roles:</h4>
                                         <ul className="space-y-2">
-                                            {path.roles.map((role, i) => (
+                                            {path.roles.map((role: string, i: number) => (
                                                 <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                                                     <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-purple-600"></span>
                                                     {role}
@@ -91,7 +99,7 @@ export function CareerPaths() {
                                         <div>
                                             <h4 className="mb-2 font-semibold text-gray-900">Who It's For:</h4>
                                             <ul className="space-y-1">
-                                                {path.whoItsFor.map((item, i) => (
+                                                {path.whoItsFor.map((item: string, i: number) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                                                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-purple-600" />
                                                         {item}
@@ -103,7 +111,7 @@ export function CareerPaths() {
                                             <div>
                                                 <h4 className="mb-2 font-semibold text-gray-900">What You Get:</h4>
                                                 <ul className="space-y-1">
-                                                    {path.whatTheyGet.map((item, i) => (
+                                                    {path.whatTheyGet.map((item: string, i: number) => (
                                                         <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                                                             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
                                                             {item}
@@ -116,7 +124,7 @@ export function CareerPaths() {
                                             <div>
                                                 <h4 className="mb-2 font-semibold text-gray-900">What We Expect:</h4>
                                                 <ul className="space-y-1">
-                                                    {path.whatWeExpect.map((item, i) => (
+                                                    {path.whatWeExpect.map((item: string, i: number) => (
                                                         <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                                                             <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-600"></span>
                                                             {item}
@@ -133,7 +141,7 @@ export function CareerPaths() {
                                     <div className="mb-6">
                                         <h4 className="mb-3 font-semibold text-gray-900">How It Works:</h4>
                                         <ul className="space-y-2">
-                                            {path.howItWorks.map((item, i) => (
+                                            {path.howItWorks.map((item: string, i: number) => (
                                                 <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                                                     <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600"></span>
                                                     {item}
@@ -158,8 +166,8 @@ export function CareerPaths() {
                                     <a
                                         href={path.ctaLink}
                                         className={`group inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold transition-all ${isInternship
-                                                ? 'bg-purple-600 text-white hover:bg-purple-700 hover:shadow-lg'
-                                                : 'border-2 border-gray-900 bg-white text-gray-900 hover:bg-gray-900 hover:text-white'
+                                            ? 'bg-purple-600 text-white hover:bg-purple-700 hover:shadow-lg'
+                                            : 'border-2 border-gray-900 bg-white text-gray-900 hover:bg-gray-900 hover:text-white'
                                             }`}
                                     >
                                         {path.ctaText}

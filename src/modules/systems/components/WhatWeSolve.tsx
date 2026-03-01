@@ -3,20 +3,20 @@
 import { motion } from 'framer-motion';
 import { WHAT_WE_SOLVE } from '../content/systems';
 import Link from 'next/link';
-import { Playfair_Display } from 'next/font/google';
 
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    style: ['italic', 'normal'],
-    weight: ['400', '500', '600', '700'],
-});
+interface WhatWeSolveProps {
+    content?: typeof WHAT_WE_SOLVE;
+}
 
 /**
  * WhatWeSolve - Hero-style section with proof cards
  * 4-card bento grid: 2nd card is dark, others are light.
  * Uses serif (Playfair Display) typography with italic accents.
  */
-export function WhatWeSolve() {
+export function WhatWeSolve({ content }: WhatWeSolveProps = {}) {
+    const data = content ?? WHAT_WE_SOLVE;
+    const proofCards = data.proofCards?.length ? data.proofCards : WHAT_WE_SOLVE.proofCards;
+
     // --- Animation Variants ---
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -90,7 +90,7 @@ export function WhatWeSolve() {
                             className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1]"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
-                            <span className="font-clash">The Revenue</span> <span className={`${playfair.className} italic font-normal`}>Architecture</span> <span className="font-clash">Engine of Mergex.</span>
+                            {data.headline || WHAT_WE_SOLVE.headline}
                         </h2>
                     </motion.div>
 
@@ -100,7 +100,7 @@ export function WhatWeSolve() {
                         className="max-w-4xl flex flex-col gap-6 lg:translate-x-6"
                     >
                         <div className="text-sm md:text-base text-[#444444] leading-relaxed max-w-4xl tracking-[0.002em]">
-                            <p>{WHAT_WE_SOLVE.subheadline}</p>
+                            <p>{data.subheadline || WHAT_WE_SOLVE.subheadline}</p>
                         </div>
                         <motion.div
                             whileHover={{ scale: 1.05 }}
@@ -110,7 +110,7 @@ export function WhatWeSolve() {
                                 href="/contact"
                                 className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-b from-violet-400 to-violet-900 text-white rounded-xl font-medium shadow-lg shadow-violet-900/20 hover:shadow-violet-900/30 transition-all w-fit"
                             >
-                                {WHAT_WE_SOLVE.primaryCTA}
+                                {data.primaryCTA || WHAT_WE_SOLVE.primaryCTA}
                             </Link>
                         </motion.div>
                     </motion.div>
@@ -118,7 +118,7 @@ export function WhatWeSolve() {
 
                 {/* 4-Card Bento Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto" style={{ perspective: '1000px' }}>
-                    {WHAT_WE_SOLVE.proofCards.map((card, index) => {
+                    {proofCards.map((card, index) => {
                         const isDark = card.dark;
 
                         return (
@@ -155,13 +155,14 @@ export function WhatWeSolve() {
                                         /* Dark statement card (2nd card) */
                                         <>
                                             <p
-                                                className={`${playfair.className} text-2xl md:text-3xl font-400 leading-snug`}
-                                                style={{ fontStyle: 'normal' }}
+                                                className="text-2xl md:text-3xl font-[400] leading-snug"
+                                                style={{ fontStyle: 'normal', fontFamily: 'var(--font-playfair)' }}
                                             >
                                                 {card.value}
                                             </p>
                                             <p
-                                                className={`${playfair.className} text-2xl md:text-3xl font-700 italic leading-snug text-violet-300`}
+                                                className="text-2xl md:text-3xl font-[700] italic leading-snug text-violet-300"
+                                                style={{ fontFamily: 'var(--font-playfair)' }}
                                             >
                                                 {card.valueAccent}
                                             </p>
@@ -170,9 +171,10 @@ export function WhatWeSolve() {
                                         /* Regular metric cards */
                                         <p
                                             className={[
-                                                `${playfair.className} text-xl md:text-2xl font-600 leading-snug`,
+                                                'text-xl md:text-2xl font-[600] leading-snug',
                                                 isDark ? 'text-white italic' : 'text-[#1A1A1A]',
                                             ].join(' ')}
+                                            style={{ fontFamily: 'var(--font-playfair)' }}
                                         >
                                             {card.value}
                                         </p>

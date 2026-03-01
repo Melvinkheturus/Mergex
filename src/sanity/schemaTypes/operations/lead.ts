@@ -1,10 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { TrendUpwardIcon } from '@sanity/icons'
 
 export const leadType = defineType({
     name: 'lead',
     title: 'Lead',
     type: 'document',
-    description: 'General lead tracking',
+    icon: TrendUpwardIcon,
+    description: 'General lead tracking from website forms and outreach',
     fields: [
         defineField({
             name: 'name',
@@ -25,15 +27,16 @@ export const leadType = defineType({
         }),
         defineField({
             name: 'source',
-            title: 'Source',
+            title: 'Lead Source',
             type: 'string',
+            description: 'Where did this lead come from?',
             options: {
                 list: [
-                    { title: 'Website Form', value: 'website' },
-                    { title: 'Referral', value: 'referral' },
-                    { title: 'Social Media', value: 'social' },
-                    { title: 'Direct Outreach', value: 'outreach' },
-                    { title: 'Other', value: 'other' },
+                    { title: '🌐 Website Form', value: 'website' },
+                    { title: '🔗 Referral', value: 'referral' },
+                    { title: '📱 Social Media', value: 'social' },
+                    { title: '📧 Direct Outreach', value: 'outreach' },
+                    { title: '📋 Other', value: 'other' },
                 ],
             },
         }),
@@ -42,6 +45,7 @@ export const leadType = defineType({
             title: 'Interested In',
             type: 'array',
             of: [{ type: 'string' }],
+            description: 'What services caught their attention?',
             options: {
                 list: [
                     { title: 'Software Development', value: 'software' },
@@ -59,16 +63,17 @@ export const leadType = defineType({
         }),
         defineField({
             name: 'status',
-            title: 'Status',
+            title: 'Pipeline Status',
             type: 'string',
+            description: 'Track where this lead is in your sales pipeline',
             options: {
                 list: [
-                    { title: 'New', value: 'new' },
-                    { title: 'Contacted', value: 'contacted' },
-                    { title: 'Qualified', value: 'qualified' },
-                    { title: 'Proposal Sent', value: 'proposal' },
-                    { title: 'Won', value: 'won' },
-                    { title: 'Lost', value: 'lost' },
+                    { title: '🆕 New', value: 'new' },
+                    { title: '📞 Contacted', value: 'contacted' },
+                    { title: '✅ Qualified', value: 'qualified' },
+                    { title: '📄 Proposal Sent', value: 'proposal' },
+                    { title: '🎉 Won', value: 'won' },
+                    { title: '❌ Lost', value: 'lost' },
                 ],
             },
             initialValue: 'new',
@@ -79,6 +84,7 @@ export const leadType = defineType({
             title: 'Internal Notes',
             type: 'text',
             rows: 3,
+            description: '🔒 Only visible to your team',
         }),
         defineField({
             name: 'createdAt',
@@ -90,7 +96,19 @@ export const leadType = defineType({
     preview: {
         select: {
             title: 'name',
-            subtitle: 'company',
+            company: 'company',
+            status: 'status',
+            source: 'source',
+        },
+        prepare({ title, company, status, source }) {
+            const statusEmoji: Record<string, string> = {
+                new: '🆕', contacted: '📞', qualified: '✅',
+                proposal: '📄', won: '🎉', lost: '❌',
+            }
+            return {
+                title: `${statusEmoji[status] || ''} ${title}`,
+                subtitle: `${company || 'No company'} · via ${source || 'unknown'}`,
+            }
         },
     },
 })

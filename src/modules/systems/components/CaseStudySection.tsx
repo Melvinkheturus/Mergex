@@ -1,10 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CASE_STUDIES } from '@/modules/caseStudies';
+import type { CaseStudy } from '@/modules/caseStudies';
+
+interface CaseStudySectionProps {
+    caseStudies?: CaseStudy[];
+}
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +20,10 @@ if (typeof window !== 'undefined') {
  * CaseStudySection — Sticky card stack animation
  * Follows the same GSAP pin pattern that works in OurSolutions.
  */
-export function CaseStudySection() {
+export function CaseStudySection({ caseStudies }: CaseStudySectionProps = {}) {
+    // Fallback to hardcoded data if Sanity data is not provided
+    const studies = caseStudies && caseStudies.length > 0 ? caseStudies : CASE_STUDIES;
+
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
     const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
@@ -22,7 +31,7 @@ export function CaseStudySection() {
     const [isClient, setIsClient] = useState(false);
     const [cursorVisible, setCursorVisible] = useState(false);
 
-    const totalCards = CASE_STUDIES.length;
+    const totalCards = studies.length;
 
     // Custom cursor follow logic
     const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -164,7 +173,7 @@ export function CaseStudySection() {
             >
                 {/* Card Container — increased height to 90% */}
                 <div className="relative h-[90%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
-                    {CASE_STUDIES.map((study, i) => (
+                    {studies.map((study, i) => (
                         <Link
                             href={`/case-studies/${study.slug}`}
                             key={study.id}

@@ -112,7 +112,13 @@ function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
     );
 }
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+    testimonials?: Testimonial[];
+}
+
+export function TestimonialsSection({ testimonials }: TestimonialsSectionProps = {}) {
+    const list = testimonials?.length ? testimonials : TESTIMONIALS;
+
     return (
         <section className="relative bg-white py-20 md:py-28 overflow-hidden">
             <div className="max-w-[1400px] mx-auto">
@@ -135,9 +141,9 @@ export function TestimonialsSection() {
                 {/* Horizontal Scroll Container */}
                 <div className="relative">
                     <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 px-6 md:px-12 lg:px-16 scrollbar-hide">
-                        {TESTIMONIALS.map((testimonial, index) => (
+                        {list.map((testimonial, index) => (
                             <TestimonialCard
-                                key={testimonial.id}
+                                key={testimonial.id || index}
                                 testimonial={testimonial}
                                 index={index}
                             />

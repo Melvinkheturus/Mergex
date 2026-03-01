@@ -48,6 +48,13 @@ interface CardData {
     accent: string;
 }
 
+export interface EcosystemSnapshotProps {
+    content?: {
+        systemsCard?: Partial<CardData>;
+        labsCard?: Partial<CardData>;
+    };
+}
+
 function PortalCard({ card, id }: { card: CardData; id: string }) {
     return (
         <Link
@@ -91,10 +98,10 @@ function PortalCard({ card, id }: { card: CardData; id: string }) {
                     >
                         {card.tagline}
                     </p>
-                    <h2 className="text-2xl md:text-7xl font-bold text-white mb-2 md:mb-4 leading-tight pointer-events-none">
+                    <h2 className="text-2xl md:text-7xl font-bold text-white mb-2 md:mb-4 leading-tight pointer-events-none whitespace-pre-wrap">
                         {card.title}
                     </h2>
-                    <p className="text-gray-300 text-xs md:text-xl mb-4 md:mb-8 leading-relaxed pointer-events-none">
+                    <p className="text-gray-300 text-xs md:text-xl mb-4 md:mb-8 leading-relaxed pointer-events-none whitespace-pre-wrap">
                         {card.description}
                     </p>
 
@@ -118,10 +125,20 @@ function PortalCard({ card, id }: { card: CardData; id: string }) {
     );
 }
 
-export default function CinematicPortalSection() {
+export default function CinematicPortalSection({ content }: EcosystemSnapshotProps = {}) {
     const sectionRef = useRef<HTMLDivElement>(null);
     const pinContainerRef = useRef<HTMLDivElement>(null);
     const cursorRef = useRef<HTMLDivElement>(null);
+
+    const systemsCard: CardData = {
+        ...SYSTEMS_CARD,
+        ...content?.systemsCard,
+    };
+
+    const labsCard: CardData = {
+        ...LABS_CARD,
+        ...content?.labsCard,
+    };
 
     useLayoutEffect(() => {
         const section = sectionRef.current;
@@ -289,10 +306,10 @@ export default function CinematicPortalSection() {
                 </div>
 
                 {/* Card 1: Mergex Systems */}
-                <PortalCard card={SYSTEMS_CARD} id="portal-card-1" />
+                <PortalCard card={systemsCard} id="portal-card-1" />
 
                 {/* Card 2: Mergex Labs */}
-                <PortalCard card={LABS_CARD} id="portal-card-2" />
+                <PortalCard card={labsCard} id="portal-card-2" />
 
                 {/* Progress dots (Hidden on mobile) */}
                 <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3 z-30">

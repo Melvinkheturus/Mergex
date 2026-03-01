@@ -1,8 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -14,10 +13,12 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
-// Media items for the carousel
-const CAROUSEL_MEDIA = [
+// Media items for the carousel fallback
+const DEFAULT_CAROUSEL_MEDIA = [
     { src: '/assets/labs portfolio/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
     { src: '/assets/labs portfolio/ad.mp4', alt: 'Advertisement Video', type: 'video' },
     { src: '/assets/labs portfolio/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
@@ -28,7 +29,36 @@ const CAROUSEL_MEDIA = [
     { src: '/assets/labs portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4', alt: 'New Portfolio Video', type: 'video' },
 ] as const;
 
-export function ExperimentsGallery() {
+// Hardcoded fallback gallery config
+const DEFAULT_GALLERY_CONFIG = {
+    headline: 'Applied Creative Intelligence',
+    subheadline: 'EXPLORATIONS',
+    description: 'From concept to campaign-ready assets, these projects demonstrate how structured AI experimentation becomes measurable creative advantage.',
+};
+
+// Props shape for Sanity CMS data injection
+export interface CarouselMediaItem {
+    src: string;
+    alt: string;
+    type: 'video' | 'image';
+}
+
+interface ExperimentsGalleryProps {
+    galleryConfig?: {
+        headline?: string;
+        subheadline?: string;
+        description?: string;
+    };
+    carouselMedia?: CarouselMediaItem[];
+}
+
+export function ExperimentsGallery({ galleryConfig, carouselMedia }: ExperimentsGalleryProps = {}) {
+    // Merge Sanity data with fallback defaults
+    const config = { ...DEFAULT_GALLERY_CONFIG, ...galleryConfig };
+    const media: CarouselMediaItem[] = carouselMedia && carouselMedia.length > 0
+        ? carouselMedia
+        : [...DEFAULT_CAROUSEL_MEDIA];
+
     const sectionRef = useRef<HTMLElement>(null);
     const swiperRef = useRef<SwiperType | null>(null);
 
@@ -226,7 +256,7 @@ export function ExperimentsGallery() {
                                 data-light-color="#9333ea"
                                 data-dark-color="#d8b4fe"
                             >
-                                EXPLORATIONS
+                                {config.subheadline}
                             </span>
                         </div>
                         <h2
@@ -234,7 +264,7 @@ export function ExperimentsGallery() {
                             data-light-color="#111827"
                             data-dark-color="#ffffff"
                         >
-                            Applied Creative Intelligence
+                            {config.headline}
                         </h2>
                     </div>
 
@@ -245,7 +275,7 @@ export function ExperimentsGallery() {
                             data-light-color="#4b5563"
                             data-dark-color="#d1d5db"
                         >
-                            From concept to campaign-ready assets, these projects demonstrate how structured AI experimentation becomes measurable creative advantage.
+                            {config.description}
                         </p>
                     </div>
                 </motion.div>
@@ -281,13 +311,12 @@ export function ExperimentsGallery() {
                         onSwiper={handleSwiper}
                         onSlideChange={handleSlideChange}
                     >
-                        {/* Swiper slides mapping... */}
-                        {CAROUSEL_MEDIA.map((media, index) => (
+                        {media.map((item, index) => (
                             <SwiperSlide key={`slide-${index}`}>
                                 <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">
-                                    {media.type === 'video' ? (
+                                    {item.type === 'video' ? (
                                         <video
-                                            src={media.src}
+                                            src={item.src}
                                             className="w-full h-full object-cover"
                                             muted
                                             loop
@@ -295,36 +324,11 @@ export function ExperimentsGallery() {
                                         />
                                     ) : (
                                         <Image
-                                            src={media.src}
+                                            src={item.src}
                                             width={300}
                                             height={400}
                                             className="w-full h-full object-cover"
-                                            alt={media.alt}
-                                            unoptimized
-                                        />
-                                    )}
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                        {/* Duplicate Slides for Looping */}
-                        {CAROUSEL_MEDIA.map((media, index) => (
-                            <SwiperSlide key={`slide-dup-${index}`}>
-                                <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">
-                                    {media.type === 'video' ? (
-                                        <video
-                                            src={media.src}
-                                            className="w-full h-full object-cover"
-                                            muted
-                                            loop
-                                            playsInline
-                                        />
-                                    ) : (
-                                        <Image
-                                            src={media.src}
-                                            width={300}
-                                            height={400}
-                                            className="w-full h-full object-cover"
-                                            alt={media.alt}
+                                            alt={item.alt}
                                             unoptimized
                                         />
                                     )}

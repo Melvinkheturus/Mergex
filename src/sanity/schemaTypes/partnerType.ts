@@ -1,25 +1,25 @@
 import { defineField, defineType } from 'sanity'
+import { UsersIcon } from '@sanity/icons'
 
 export const partnerTypeType = defineType({
     name: 'partnerType',
     title: 'Partner Type',
     type: 'document',
+    icon: UsersIcon,
+    description: 'Partnership offerings — the different ways people can partner with Mergex',
     fields: [
         defineField({
             name: 'typeName',
-            title: 'Type Name',
+            title: 'Partnership Type Name',
             type: 'string',
-            description: 'e.g., Strategic Partners, Referral Partners',
+            description: 'e.g., "Strategic Partners", "Referral Partners"',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'slug',
             title: 'Slug',
             type: 'slug',
-            options: {
-                source: 'typeName',
-                maxLength: 96,
-            },
+            options: { source: 'typeName', maxLength: 96 },
             validation: (Rule) => Rule.required(),
         }),
         defineField({
@@ -34,42 +34,39 @@ export const partnerTypeType = defineType({
             title: 'Benefits',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'Benefits for this type of partner',
+            description: 'Why should someone become this type of partner?',
         }),
         defineField({
             name: 'requirements',
             title: 'Requirements',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'What we look for in partners',
+            description: 'What Mergex looks for in this type of partner',
         }),
         defineField({
             name: 'ctaText',
-            title: 'CTA Text',
+            title: 'CTA Button Text',
             type: 'string',
-            description: 'Apply/Join button text',
+            description: 'e.g., "Become a Strategic Partner"',
         }),
         defineField({
             name: 'applicationProcess',
             title: 'Application Process',
             type: 'text',
             rows: 3,
-            description: 'How to become this type of partner',
+            description: 'How someone becomes this type of partner',
         }),
         defineField({
             name: 'icon',
             title: 'Icon',
             type: 'image',
             description: 'Visual icon for this partnership type',
-            options: {
-                hotspot: true,
-            },
+            options: { hotspot: true },
         }),
         defineField({
             name: 'position',
-            title: 'Position',
+            title: 'Display Order',
             type: 'number',
-            description: 'Display order',
             validation: (Rule) => Rule.min(0),
         }),
         defineField({
@@ -82,8 +79,15 @@ export const partnerTypeType = defineType({
     preview: {
         select: {
             title: 'typeName',
-            subtitle: 'description',
             media: 'icon',
+            visible: 'visible',
+        },
+        prepare({ title, media, visible }) {
+            return {
+                title: `${visible === false ? '🔴 ' : ''}${title}`,
+                subtitle: 'Partnership Type',
+                media,
+            }
         },
     },
     orderings: [

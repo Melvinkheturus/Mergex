@@ -1,0 +1,62 @@
+# Walkthrough: Post-Rebase CMS Integration
+
+## What Was Done
+
+### Phase 1: Fixed Existing Issues
+- Removed duplicate `Playfair_Display` font imports in [WhatWeSolve.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/systems/components/WhatWeSolve.tsx) and [SystemsHero.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/systems/components/SystemsHero.tsx) that were breaking the build. Now uses the global `--font-playfair` CSS variable from [layout.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/layout.tsx).
+
+---
+
+### Phase 2: About Module → Sanity
+
+| File | Change |
+|------|--------|
+| [aboutPage.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/schemaTypes/singletons/aboutPage.ts) | **[NEW]** Singleton schema with groups: Hero, Team, Ecosystem, Principles, Why, CTA, SEO |
+| [HeroSection.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/HeroSection.tsx) | Accepts `content` prop, falls back to hardcoded defaults |
+| [TeamSection.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/TeamSection.tsx) | Accepts `content` prop for eyebrow, headline, body text |
+| [EcosystemGlimpse.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/EcosystemGlimpse.tsx) | Accepts `content` prop for headline and cards array |
+| [PrinciplesSection.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/PrinciplesSection.tsx) | Accepts `content` prop for headline and principles list |
+| [WhySection.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/WhySection.tsx) | Accepts `content` prop for headline, lines, closing |
+| [CTASection.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/CTASection.tsx) | Accepts `content` prop for headline, guidance, CTA text |
+| [AboutPage.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/modules/about/components/AboutPage.tsx) | Parent passes content down to all children |
+| [about/page.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/about/page.tsx) | Server component fetches `aboutPage` singleton via `fetchWithFallback` |
+
+---
+
+### Phase 3: Products Module → Sanity
+
+| File | Change |
+|------|--------|
+| [productsPage.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/schemaTypes/singletons/productsPage.ts) | **[NEW]** Singleton schema with groups: Hero, Products, Why We Build, CTAs, SEO |
+| [products/page.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/products/page.tsx) | Server component fetches `productsPage` singleton |
+| [ProductsPageClient.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/products/ProductsPageClient.tsx) | **[NEW]** Client component with all hardcoded fallbacks |
+
+---
+
+### Phase 4: Blog & Resources → Sanity
+
+| File | Change |
+|------|--------|
+| [blogPage.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/schemaTypes/singletons/blogPage.ts) | **[NEW]** Lightweight singleton for blog hero text |
+| [resourcesPage.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/schemaTypes/singletons/resourcesPage.ts) | **[NEW]** Singleton for resources hub content |
+| [blog/page.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/blog/page.tsx) | Server component with Sanity fetch + fallbacks |
+| [resources/page.tsx](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/app/resources/page.tsx) | Server component with Sanity fetch + fallbacks |
+
+---
+
+### Infrastructure Changes
+
+| File | Change |
+|------|--------|
+| [schemaTypes/index.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/schemaTypes/index.ts) | Registered 5 new singletons: `aboutPage`, `productsPage`, `blogPage`, `resourcesPage` |
+| [structure.ts](file:///home/santhoshmk/EDUCATION%20CONTENT/Job%20-%20Mergex/Mergex/src/sanity/structure.ts) | Added 4 new sidebar entries under Page Content |
+
+## Build Verification
+
+- ✅ **Compilation**: Passed successfully (24.3s)
+- ⚠️ **TypeScript**: Pre-existing `mathjs` type error in `GradualBlur.tsx` (unrelated to our changes)
+
+## Next Steps
+1. Open Sanity Studio (`/studio`) to verify new schemas appear in the sidebar
+2. Enter content in the new `aboutPage`, `productsPage`, etc. singletons
+3. Fix the pre-existing `mathjs` dependency issue in `GradualBlur.tsx` (separate task)

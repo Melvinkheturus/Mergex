@@ -7,6 +7,46 @@ import {
     PricingFAQ,
     PricingCTA,
 } from '@/modules/pricing';
+import { fetchWithFallback } from '@/sanity/lib/contentFetcher';
+
+// ── GROQ Queries ──
+const PRICING_PAGE_QUERY = `
+    *[_type == "pricingPage"][0]{
+        "hero": {
+            "headline": heroHeadline,
+            "subheadline": heroSubheadline
+        },
+        "tiers": {
+            "headline": tiersHeadline,
+            "subheadline": tiersSubheadline,
+            "tiers": tiers
+        },
+        "factors": {
+            "headline": factorsHeadline,
+            "subheadline": factorsSubheadline,
+            "list": factors,
+            "closingStatement": factorsClosingStatement,
+            "labsClarification": factorsLabsClarification
+        },
+        "noPay": {
+            "headline": noPayHeadline,
+            "subheadline": noPaySubheadline,
+            "items": noPayItems
+        },
+        "faq": {
+            "headline": faqHeadline,
+            "questions": faqQuestions
+        },
+        "cta": {
+            "headline": ctaHeadline,
+            "subheadline": ctaSubheadline,
+            "primaryCTA": ctaPrimaryCTA,
+            "secondaryCTA": ctaSecondaryCTA,
+            "reassurance": ctaReassurance,
+            "finalReassurance": ctaFinalReassurance
+        }
+    }
+`;
 
 export const metadata: Metadata = {
     title: 'Pricing - Mergex | Transparent, Outcome-Driven Pricing',
@@ -24,15 +64,21 @@ export const metadata: Metadata = {
     },
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+    const pageConfig = await fetchWithFallback<any>(
+        PRICING_PAGE_QUERY,
+        null,
+        'Pricing Page Config'
+    );
+
     return (
         <main>
-            <PricingHero />
-            <EngagementTiers />
-            <PricingFactors />
-            <WhatYouDontPayFor />
-            <PricingFAQ />
-            <PricingCTA />
+            <PricingHero content={pageConfig?.hero} />
+            <EngagementTiers content={pageConfig?.tiers} />
+            <PricingFactors content={pageConfig?.factors} />
+            <WhatYouDontPayFor content={pageConfig?.noPay} />
+            <PricingFAQ content={pageConfig?.faq} />
+            <PricingCTA content={pageConfig?.cta} />
         </main>
     );
 }

@@ -11,7 +11,16 @@ import { Loader2 } from 'lucide-react';
 
 type FormType = 'partner' | 'referral' | null;
 
-export function PartnerCTA() {
+interface PartnerCTAProps {
+    content?: typeof CTA_SECTION;
+}
+
+export function PartnerCTA({ content }: PartnerCTAProps = {}) {
+    const data = content || CTA_SECTION;
+    const headline = data.headline || CTA_SECTION.headline;
+    const subheadline = data.subheadline || CTA_SECTION.subheadline;
+    const partnerButtonText = data.partnerButtonText || CTA_SECTION.partnerButtonText;
+    const referralButtonText = data.referralButtonText || CTA_SECTION.referralButtonText;
     const [activeForm, setActiveForm] = useState<FormType>(null);
 
     return (
@@ -25,10 +34,10 @@ export function PartnerCTA() {
                         transition={{ duration: 0.6 }}
                     >
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-4">
-                            {CTA_SECTION.headline}
+                            {headline}
                         </h2>
                         <p className="text-lg text-gray-600 mb-10">
-                            {CTA_SECTION.subheadline}
+                            {subheadline}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -45,7 +54,7 @@ export function PartnerCTA() {
                                 "
                             >
                                 <Briefcase className="w-5 h-5" />
-                                <span>{CTA_SECTION.partnerButtonText}</span>
+                                <span>{partnerButtonText}</span>
                             </button>
 
                             <button
@@ -61,7 +70,7 @@ export function PartnerCTA() {
                                 "
                             >
                                 <Send className="w-5 h-5" />
-                                <span>{CTA_SECTION.referralButtonText}</span>
+                                <span>{referralButtonText}</span>
                             </button>
                         </div>
                     </motion.div>

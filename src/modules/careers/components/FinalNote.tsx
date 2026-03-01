@@ -3,7 +3,13 @@
 import { motion } from 'framer-motion';
 import { FINAL_NOTE } from '../content/careers';
 
-export function FinalNote() {
+interface FinalNoteProps {
+    content?: typeof FINAL_NOTE;
+}
+
+export function FinalNote({ content }: FinalNoteProps = {}) {
+    const data = content || FINAL_NOTE;
+    const message = data.message || FINAL_NOTE.message;
     return (
         <section className="bg-gradient-to-br from-purple-600 to-blue-600 py-16">
             <div className="container mx-auto max-w-4xl px-6">
@@ -15,7 +21,7 @@ export function FinalNote() {
                     transition={{ duration: 0.6 }}
                 >
                     <p className="text-xl leading-relaxed text-white md:text-2xl">
-                        {FINAL_NOTE.message}
+                        {message}
                     </p>
                 </motion.div>
             </div>

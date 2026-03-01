@@ -1,0 +1,53 @@
+*[_type == "systemsPage"][0] {
+        hero: {
+            "headline": heroHeadline,
+            "subheadline": heroSubheadline,
+            "keyDifferentiator": heroKeyDifferentiator,
+            "primaryCTA": heroPrimaryCTA,
+            "secondaryCTA": heroSecondaryCTA
+        },
+        whatWeSolve: {
+            "headline": whatWeSolveHeadline,
+            "subheadline": whatWeSolveSubheadline,
+            "primaryCTA": "Book a discovery call",
+            "proofCards": whatWeSolveProofCards
+        },
+        solutions: {
+            "headline": solutionsHeadline,
+            "subheadline": solutionsSubheadline,
+            "pillars": solutionsPillars
+        },
+        speed: {
+            "headline": speedHeadline,
+            "subheadline": speedSubheadline,
+            "comparison": {
+                "traditional": speedTraditional,
+                "systems": speedMergex
+            },
+            "howWeDoIt": speedHowWeDoIt
+        },
+        process: {
+            "headline": processHeadline,
+            "subheadline": processSubheadline,
+            "phases": processPhases
+        },
+        proof: {
+            "headline": techStackHeadline,
+            "subheadline": techStackSubheadline,
+            "techStack": techStack,
+            "trustStatement": techStackTrustStatement
+        },
+        engagement: {
+            "headline": engagementHeadline,
+            "subheadline": engagementSubheadline,
+            "models": engagementModels,
+            "philosophy": "We price based on the value we deliver, not hours logged. Every engagement is custom-tailored to your goals, timeline, and budget.",
+            "cta": "Not sure which model fits? Let's talk through your project and find the right approach."
+        },
+        cta: {
+            "headline": ctaHeadline,
+            "subheadline": ctaSubheadline,
+            "primaryCTA": ctaPrimaryCTA,
+            "secondaryCTA": ctaSecondaryCTA
+        }
+    }

@@ -6,16 +6,40 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Mail } from 'lucide-react';
 import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
 
-interface FAQSectionProps {
-    variant?: 'parent' | 'systems';
+interface FAQContentData {
+    headline: string;
+    subheadline: string;
+    subheadlineItalic?: string;
+    description: string;
+    ctaText: string;
+    ctaSubtext: string;
+    buttonText: string;
+    email: string;
+    microcopy: string;
+    questions: { question: string; answer: string }[];
 }
 
-export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
+interface FAQSectionProps {
+    variant?: 'parent' | 'systems';
+    parentFaqData?: Partial<FAQContentData>;
+    systemsFaqData?: Partial<FAQContentData>;
+}
+
+/**
+ * FAQSection - FAQ Accordion with dark mode transition
+ * 
+ * Accepts optional content props from server-side Sanity fetch.
+ * Falls back to hardcoded FAQ data if no CMS data is provided.
+ */
+export function FAQSection({ variant = 'parent', parentFaqData, systemsFaqData }: FAQSectionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const sectionRef = useRef<HTMLElement>(null);
 
     // Select FAQ data based on variant
-    const FAQ_DATA = variant === 'systems' ? SYSTEMS_FAQ_DATA : PARENT_FAQ_DATA;
+    const defaultData = variant === 'systems' ? SYSTEMS_FAQ_DATA : PARENT_FAQ_DATA;
+    const cmsData = variant === 'systems' ? systemsFaqData : parentFaqData;
+
+    const FAQ_DATA = { ...defaultData, ...cmsData };
 
     const toggleQuestion = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);

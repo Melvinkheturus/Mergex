@@ -5,12 +5,28 @@ import { motion } from 'framer-motion';
 import { PROBLEM_CONTEXT } from '../content';
 import { Users, Clock, Brain, Link as LinkIcon, ArrowRight } from 'lucide-react';
 
+interface ProblemContextContent {
+    headline: string;
+    subheadline: string;
+    problems: { title: string; description: string; icon: string }[];
+    closingStatement: string;
+}
+
+interface ProblemContextProps {
+    content?: ProblemContextContent;
+}
+
 /**
  * ProblemContext - Why We Exist
  * BENTO GRID DESIGN (Reference: USD Bloom)
+ * 
+ * Accepts optional `content` prop from server-side Sanity fetch.
+ * Falls back to hardcoded PROBLEM_CONTEXT if no CMS data is provided.
  */
-export function ProblemContext() {
+export function ProblemContext({ content }: ProblemContextProps = {}) {
+    const data = content ?? PROBLEM_CONTEXT;
     const iconMap = {
+
         users: Users,
         clock: Clock,
         brain: Brain,
@@ -45,7 +61,7 @@ export function ProblemContext() {
                             transition={{ delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1] lg:w-1/2 flex-shrink-0"
                         >
-                            {PROBLEM_CONTEXT.headline}
+                            {data.headline}
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -54,7 +70,7 @@ export function ProblemContext() {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light lg:w-1/2 lg:pt-2"
                         >
-                            {PROBLEM_CONTEXT.subheadline}
+                            {data.subheadline}
                         </motion.p>
                     </div>
                 </div>
@@ -107,10 +123,10 @@ export function ProblemContext() {
                                     <Users size={24} />
                                 </span>
                                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-                                    {PROBLEM_CONTEXT.problems[0].title}
+                                    {data.problems[0].title}
                                 </h3>
                                 <p className="text-lg md:text-xl text-purple-100 leading-relaxed font-light">
-                                    {PROBLEM_CONTEXT.problems[0].description}
+                                    {data.problems[0].description}
                                 </p>
                             </div>
 
@@ -139,10 +155,10 @@ export function ProblemContext() {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-neutral-900 mb-3">
-                                        {PROBLEM_CONTEXT.problems[1].title}
+                                        {data.problems[1].title}
                                     </h3>
                                     <p className="text-neutral-600 leading-relaxed">
-                                        {PROBLEM_CONTEXT.problems[1].description}
+                                        {data.problems[1].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -166,10 +182,10 @@ export function ProblemContext() {
                                             <Brain size={20} className="text-violet-500 group-hover:text-purple-600 transition-colors" />
                                         </div>
                                         <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                            {PROBLEM_CONTEXT.problems[2].title}
+                                            {data.problems[2].title}
                                         </h3>
                                         <p className="text-sm text-neutral-600 leading-relaxed">
-                                            {PROBLEM_CONTEXT.problems[2].description}
+                                            {data.problems[2].description}
                                         </p>
                                     </div>
                                 </motion.div>
@@ -191,10 +207,10 @@ export function ProblemContext() {
                                             <LinkIcon size={20} className="text-violet-500 group-hover:text-purple-600 transition-colors" />
                                         </div>
                                         <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                            {PROBLEM_CONTEXT.problems[3].title}
+                                            {data.problems[3].title}
                                         </h3>
                                         <p className="text-sm text-neutral-600 leading-relaxed">
-                                            {PROBLEM_CONTEXT.problems[3].description}
+                                            {data.problems[3].description}
                                         </p>
                                     </div>
                                 </motion.div>
@@ -247,10 +263,10 @@ export function ProblemContext() {
                                         <Users size={24} />
                                     </span>
                                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
-                                        {PROBLEM_CONTEXT.problems[0].title}
+                                        {data.problems[0].title}
                                     </h3>
                                     <p className="text-base md:text-lg text-purple-100 leading-relaxed font-light">
-                                        {PROBLEM_CONTEXT.problems[0].description}
+                                        {data.problems[0].description}
                                     </p>
                                 </div>
 
@@ -276,10 +292,10 @@ export function ProblemContext() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {PROBLEM_CONTEXT.problems[1].title}
+                                        {data.problems[1].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {PROBLEM_CONTEXT.problems[1].description}
+                                        {data.problems[1].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -301,10 +317,10 @@ export function ProblemContext() {
                                         <Brain size={20} className="text-violet-500" />
                                     </div>
                                     <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {PROBLEM_CONTEXT.problems[2].title}
+                                        {data.problems[2].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {PROBLEM_CONTEXT.problems[2].description}
+                                        {data.problems[2].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -326,10 +342,10 @@ export function ProblemContext() {
                                         <LinkIcon size={20} className="text-violet-500" />
                                     </div>
                                     <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {PROBLEM_CONTEXT.problems[3].title}
+                                        {data.problems[3].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {PROBLEM_CONTEXT.problems[3].description}
+                                        {data.problems[3].description}
                                     </p>
                                 </div>
                             </motion.div>
