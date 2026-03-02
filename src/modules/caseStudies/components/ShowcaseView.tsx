@@ -31,7 +31,7 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
             `}</style>
 
             {/* Intro Hero */}
-            <section id="intro" className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden" style={{ background: '#050505' }}>
+            <section id="intro" className="relative min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden" style={{ background: '#050505' }}>
                 {/* SVG Background — Circuit Board / Tech Topology */}
                 <svg
                     className="absolute inset-0 w-full h-full pointer-events-none"
@@ -184,10 +184,10 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="relative z-10"
                 >
-                    <h1 className="text-6xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.95] mb-12 font-satoshi max-w-4xl mx-auto text-center">
+                    <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.95] mb-6 md:mb-12 font-satoshi max-w-4xl mx-auto text-center">
                         Engineering Growth Through <br /> <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">Digital Excellence</span>
                     </h1>
-                    <p className="text-xl text-white/50 max-w-2xl mx-auto font-normal leading-relaxed font-satoshi mb-16 text-center">
+                    <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-normal leading-relaxed font-satoshi mb-8 md:mb-16 text-center">
                         From complex business transformations to AI-powered marketing, see how we build the tools that define industry leaders.
                     </p>
                 </motion.div>
@@ -198,25 +198,24 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
             <CaseStudyCardStack studies={studies} />
 
             {/* Final CTA */}
-            <section id="final-cta" className="py-48 bg-white text-center relative overflow-hidden border-t border-gray-100">
-                <div className="absolute inset-0 bg-gray-50/50" />
+            <section className="bg-gray-950 py-24 md:py-32 text-center overflow-hidden relative">
+                <div className="absolute top-0 right-0 -m-20 w-[600px] h-[600px] bg-violet-600/10 blur-[120px] rounded-full" />
+                <div className="absolute bottom-0 left-0 -m-20 w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full" />
+
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-gray-950 rounded-[64px] p-24 lg:p-32 relative overflow-hidden shadow-2xl"
                     >
-                        <div className="absolute top-0 right-0 -m-20 w-80 h-80 bg-violet-600/10 blur-[100px]" />
-                        <div className="absolute bottom-0 left-0 -m-20 w-80 h-80 bg-violet-600/5 blur-[100px]" />
-
-                        <h2 className="text-5xl lg:text-7xl font-bold text-white mb-12 tracking-tighter leading-none font-satoshi">
-                            Ready for your <br /> <span className="text-violet-500">Breakthrough?</span>
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 md:mb-12 tracking-tight font-satoshi max-w-4xl mx-auto leading-[1.1]">
+                            Ready for your next <br />
+                            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent italic">Strategic Breakthrough?</span>
                         </h2>
-                        <button className="group bg-white hover:bg-gray-50 text-gray-950 px-14 py-7 rounded-full text-xl font-bold transition-all duration-300 flex items-center gap-4 mx-auto shadow-xl font-satoshi">
+                        <a href="/contact" className="group inline-flex items-center gap-4 bg-white text-gray-950 px-8 py-5 md:px-12 md:py-6 rounded-full font-bold text-lg md:text-xl hover:bg-violet-600 hover:text-white transition-all duration-500 font-satoshi shadow-2xl hover:shadow-violet-500/20">
                             Start Your Transformation
-                            <ArrowRightIcon className="group-hover:translate-x-2 transition-transform text-violet-600" />
-                        </button>
+                            <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                        </a>
                     </motion.div>
                 </div>
             </section>

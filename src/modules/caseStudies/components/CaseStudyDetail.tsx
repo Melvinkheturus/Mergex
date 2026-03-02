@@ -348,12 +348,16 @@ function TimelineLayout({ results }: { results: NonNullable<CaseStudy['results']
 
             {/* Timeline Wrap */}
             <div className="relative">
-                {/* Central Spine (Continuous) */}
-                <div className="absolute top-0 bottom-0 left-[35%] md:left-[40%] translate-x-[-1px] w-[2px] bg-gray-100 z-0">
-                    <motion.div
-                        style={{ height: spineHeight }}
-                        className="w-full bg-violet-600 origin-top shadow-[0_0_20px_rgba(124,110,245,0.4)]"
-                    />
+                {/* Central Spine (Continuous) - Wrapped in same padding as sections for perfect alignment */}
+                <div className="absolute inset-0 px-6 pointer-events-none z-30">
+                    <div className="relative h-full">
+                        <div className="absolute top-0 bottom-0 left-[40%] w-[2px] bg-gray-100 z-0">
+                            <motion.div
+                                style={{ height: spineHeight }}
+                                className="w-full bg-violet-600 origin-top"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Metric Sections */}
@@ -382,52 +386,39 @@ function TimelineSection({ metric, index, total }: { metric: NonNullable<CaseStu
     const descOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.65, 1], [0, 1, 1, 0]);
     const descY = useTransform(scrollYProgress, [0.2, 0.5, 0.65, 1], [250, 0, 0, -250]);
 
-    // Dot logic
-    const dotBg = useTransform(scrollYProgress, [0, 0.1], ["#F3F4F6", "#7C3AED"]);
-    const dotScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.4]);
-
     return (
         <div
             ref={sectionRef}
             className="relative h-[200vh] w-full"
-            style={{ marginTop: index > 0 ? '-80vh' : undefined, zIndex: total - index }}
+            style={{ marginTop: index > 0 ? '-80vh' : undefined, zIndex: 20 + (total - index) }}
         >
             <div className="sticky top-0 h-screen w-full flex items-center">
-                <div className="w-full grid grid-cols-[1fr_2px_1.5fr] gap-0 items-center relative z-10 px-6">
+                <div className="w-full grid grid-cols-[40%_2px_1fr] gap-0 items-center relative z-10 px-6">
 
                     {/* Left: Number */}
-                    <div className="pr-12 md:pr-24 text-right">
+                    <div className="pr-4 md:pr-12 lg:pr-24 text-right">
                         <motion.div style={{ opacity: titleOpacity, y: titleY }} className="space-y-3">
-                            <div className={`text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-none font-satoshi ${metric.prefix === '+' ? 'text-emerald-600' :
+                            <div className={`text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-none font-satoshi ${metric.prefix === '+' ? 'text-emerald-600' :
                                 metric.prefix === '-' ? 'text-rose-600' : 'text-gray-950'
                                 }`}>
                                 {metric.prefix}{metric.value}{metric.suffix}
                             </div>
-                            <div className="text-xs font-black text-gray-950 uppercase tracking-[0.3em] font-satoshi">
+                            <div className="text-[10px] md:text-xs font-black text-gray-950 uppercase tracking-[0.1em] md:tracking-[0.3em] font-satoshi break-words">
                                 {metric.label}
                             </div>
                         </motion.div>
                     </div>
 
-                    {/* Dot Positioned on Spine */}
-                    <div className="relative h-20 flex items-center justify-center">
-                        <motion.div
-                            style={{
-                                backgroundColor: dotBg,
-                                scale: dotScale,
-                                opacity: titleOpacity
-                            }}
-                            className="w-4 h-4 rounded-full border-2 border-white shadow-xl z-20"
-                        />
-                    </div>
+                    {/* Central Column - Empty to let the spine show through without any bulge */}
+                    <div className="relative h-20 flex items-center justify-center" />
 
                     {/* Right: Sequential Text Content */}
-                    <div className="pl-12 md:pl-24">
+                    <div className="pl-4 md:pl-12 lg:pl-24">
                         <div className="max-w-md space-y-10">
                             {/* Title (appears first — rises from below) */}
                             <motion.h3
                                 style={{ opacity: titleOpacity, y: titleY }}
-                                className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-950 tracking-tight font-satoshi leading-tight"
+                                className="text-xl md:text-3xl lg:text-4xl font-black text-gray-950 tracking-tight font-satoshi leading-tight break-words"
                             >
                                 {metric.label} <br />
                                 <span className="text-gray-950">Breakthrough</span>
@@ -516,13 +507,13 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
             <article className="pt-32 pb-24">
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
                     {/* Centered Large Header */}
-                    <div className="flex flex-col items-center text-center mb-24 lg:mb-32">
+                    <div className="flex flex-col items-center text-center mb-16 lg:mb-32">
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             className="mb-8"
                         >
-                            <span className="text-xs font-semibold text-violet-600 uppercase tracking-[0.4em] px-5 py-2.5 rounded-full bg-violet-600/5 border border-violet-600/10 backdrop-blur-sm font-satoshi">
+                            <span className="text-[10px] md:text-xs font-bold text-violet-600 uppercase tracking-[0.15em] md:tracking-[0.4em] px-4 py-1.5 md:px-5 md:py-2.5 rounded-full bg-violet-600/5 border border-violet-600/10 backdrop-blur-sm font-satoshi inline-block">
                                 {study.client.industry} Transformation
                             </span>
                         </motion.div>
@@ -560,17 +551,17 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                                 transition={{ duration: 0.8 }}
                                 className="lg:col-span-12 xl:col-span-8 relative group"
                             >
-                                <div className="absolute -inset-2 bg-gradient-to-tr from-gray-200 via-transparent to-gray-100 rounded-[52px] opacity-40" />
-                                <div className="relative rounded-[48px] overflow-hidden bg-gray-900 border-[1px] border-gray-200/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] aspect-[16/9]">
+                                <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-tr from-gray-200 via-transparent to-gray-100 rounded-[52px] opacity-40" />
+                                <div className="relative rounded-[48px] overflow-hidden bg-gray-900 border-[1px] border-gray-200/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] aspect-[3/2] md:aspect-[4/3] xl:aspect-[16/9]">
                                     <img
                                         src={study.heroImage}
                                         alt={study.heroImageAlt}
                                         className="w-full h-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/10 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/10 to-transparent xl:block hidden" />
 
-                                    {/* Business Outcome Overlay */}
-                                    <div className="absolute bottom-12 left-12 flex items-center gap-5">
+                                    {/* Business Outcome Overlay - Desktop Only */}
+                                    <div className="absolute bottom-12 left-12 hidden xl:flex items-center gap-5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-2xl border border-white/10 flex items-center justify-center text-white">
                                             <Zap size={24} className="fill-violet-500 text-violet-500" />
                                         </div>
@@ -580,9 +571,20 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Business Outcome - Mobile Only (Below Image) */}
+                                <div className="mt-8 xl:hidden flex items-start gap-4 p-6 rounded-3xl bg-gray-50 border border-gray-100">
+                                    <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-violet-600/10 flex items-center justify-center text-violet-600">
+                                        <Zap size={20} className="fill-current" />
+                                    </div>
+                                    <div>
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-1 font-satoshi">Business Outcome</div>
+                                        <div className="text-base font-semibold text-gray-900 leading-tight font-satoshi">{study.outcome}</div>
+                                    </div>
+                                </div>
                             </motion.div>
 
-                            <div className="lg:col-span-12 xl:col-span-4 space-y-10">
+                            <div className="lg:col-span-12 xl:col-span-4 space-y-10 mt-10 xl:mt-0">
                                 {study.metrics && study.metrics.length > 0 ? (
                                     <div className="space-y-8">
                                         <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4 font-satoshi">Strategic KPIs</h3>
@@ -712,7 +714,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    className="bg-[#219ebc]/8 border border-[#219ebc]/20 rounded-[56px] p-16 lg:p-20 relative overflow-hidden transition-all duration-700 hover:border-[#219ebc]/40 hover:shadow-xl hover:bg-[#219ebc]/12"
+                                    className="bg-[#219ebc]/8 border border-[#219ebc]/20 rounded-[40px] lg:rounded-[56px] p-10 lg:p-20 relative overflow-hidden transition-all duration-700 hover:border-[#219ebc]/40 hover:shadow-xl hover:bg-[#219ebc]/12"
                                 >
                                     <div className="absolute top-0 right-0 p-12 opacity-5 text-gray-900">
                                         <Sparkles size={80} />
@@ -756,6 +758,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
+                            className="hidden md:block"
                         >
                             <Link href="/case-studies" className="group flex items-center gap-2 text-sm font-bold text-gray-900 border-b-2 border-violet-600 pb-1 hover:text-violet-600 transition-all uppercase tracking-widest font-satoshi">
                                 View All Work <ArrowLeft size={14} className="rotate-180 group-hover:translate-x-1 transition-transform" />
@@ -767,6 +770,13 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                         {relatedStudies.map((s, i) => (
                             <RelatedCard key={s.id} study={s} index={i} />
                         ))}
+                    </div>
+
+                    {/* Mobile-only "View All Work" link below cards */}
+                    <div className="md:hidden flex justify-center mt-10">
+                        <Link href="/case-studies" className="group flex items-center gap-2 text-sm font-bold text-gray-900 border-b-2 border-violet-600 pb-1 hover:text-violet-600 transition-all uppercase tracking-widest font-satoshi">
+                            View All Work <ArrowLeft size={14} className="rotate-180 group-hover:translate-x-1 transition-transform" />
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -782,11 +792,11 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-12 tracking-tight font-satoshi max-w-4xl mx-auto leading-[1.1]">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 md:mb-12 tracking-tight font-satoshi max-w-4xl mx-auto leading-[1.1]">
                             Ready for your next <br />
                             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent italic">Strategic Breakthrough?</span>
                         </h2>
-                        <Link href="/contact" className="group inline-flex items-center gap-4 bg-white text-gray-950 px-12 py-6 rounded-full font-bold text-xl hover:bg-violet-600 hover:text-white transition-all duration-500 font-satoshi shadow-2xl hover:shadow-violet-500/20">
+                        <Link href="/contact" className="group inline-flex items-center gap-4 bg-white text-gray-950 px-8 py-5 md:px-12 md:py-6 rounded-full font-bold text-lg md:text-xl hover:bg-violet-600 hover:text-white transition-all duration-500 font-satoshi shadow-2xl hover:shadow-violet-500/20">
                             Start Your Transformation
                             <ArrowLeft size={20} className="rotate-180 group-hover:translate-x-2 transition-transform" />
                         </Link>
