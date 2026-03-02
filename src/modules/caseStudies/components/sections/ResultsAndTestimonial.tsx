@@ -9,29 +9,31 @@ export function ResultsAndTestimonial({ study }: ResultsAndTestimonialProps) {
     return (
         <>
             {/* Results */}
-            <section className="py-24 bg-white">
-                <div className="container mx-auto px-6 max-w-7xl">
-                    <div className="bg-violet-600 rounded-3xl p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
-                        <div className="relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-16 font-manrope">The Impact</h2>
-                            <div className="grid md:grid-cols-3 gap-12">
-                                {study.results.map((metric, index) => (
-                                    <div key={index} className="transform hover:scale-105 transition-transform duration-300">
-                                        <div className="text-5xl md:text-6xl font-bold mb-2">
-                                            {metric.prefix}{metric.value}{metric.suffix}
+            {study.results && study.results.length > 0 && (
+                <section className="py-24 bg-white">
+                    <div className="container mx-auto px-6 max-w-7xl">
+                        <div className="bg-violet-600 rounded-3xl p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
+                            <div className="relative z-10">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-16 font-manrope">The Impact</h2>
+                                <div className="grid md:grid-cols-3 gap-12">
+                                    {study.results.map((metric, index) => (
+                                        <div key={index} className="transform hover:scale-105 transition-transform duration-300">
+                                            <div className="text-5xl md:text-6xl font-bold mb-2">
+                                                {metric.prefix}{metric.value}{metric.suffix}
+                                            </div>
+                                            <div className="text-violet-200 font-medium text-lg uppercase tracking-wide">{metric.label}</div>
                                         </div>
-                                        <div className="text-violet-200 font-medium text-lg uppercase tracking-wide">{metric.label}</div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                            </div>
+                            {/* Abstract BG Pattern */}
+                            <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                                <div className="absolute top-[-50%] left-[-20%] w-[800px] h-[800px] rounded-full bg-white blur-3xl animate-pulse"></div>
                             </div>
                         </div>
-                        {/* Abstract BG Pattern */}
-                        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                            <div className="absolute top-[-50%] left-[-20%] w-[800px] h-[800px] rounded-full bg-white blur-3xl animate-pulse"></div>
-                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* Client Voice */}
             {study.testimonial && (

@@ -19,8 +19,8 @@ export function Navbar() {
     const pathname = usePathname();
 
     // Determine if the current page has a light background (requires dark navbar text)
-    // Systems page is explicitly light.
-    const isLightPage = pathname?.startsWith('/systems') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
+    const isCaseStudyIndex = pathname === '/case-studies';
+    const isLightPage = pathname?.startsWith('/systems') || (pathname?.startsWith('/case-studies') && !isCaseStudyIndex) || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
     const textColorClass = (activeMenu || isLightPage) ? 'text-neutral-900' : 'text-white';
     const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/80 hover:text-violet-600' : 'text-white/90 hover:text-white';
 

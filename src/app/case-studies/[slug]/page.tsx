@@ -1,8 +1,8 @@
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { fetchWithFallback } from '@/sanity/lib/contentFetcher';
 import type { CaseStudy } from '@/modules/caseStudies';
-import { getCaseStudyBySlug } from '@/modules/caseStudies';
+import { getCaseStudyBySlug, CaseStudyDetail } from '@/modules/caseStudies';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -110,8 +110,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
     const study = sanityStudy || getCaseStudyBySlug(slug);
 
     if (!study) {
-        redirect('/case-studies');
+        notFound();
     }
 
-    redirect(`/case-studies#${params.slug}`);
+    return <CaseStudyDetail key={slug} study={study} />;
 }
