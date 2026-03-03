@@ -166,7 +166,9 @@ export function CaseStudySection() {
                 <div className="relative h-[90%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
                     {CASE_STUDIES.map((study, i) => (
                         <Link
-                            href={`/case-studies/${study.slug}`}
+                            href={study.externalUrl ? study.externalUrl : `/case-studies/${study.slug}`}
+                            target={study.externalUrl ? "_blank" : "_self"}
+                            rel={study.externalUrl ? "noopener noreferrer" : undefined}
                             key={study.id}
                             className="absolute inset-0 block group"
                             style={{ cursor: 'none' }}

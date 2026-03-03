@@ -78,6 +78,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         categories: ['E-Commerce', 'Fashion', 'Cloud'],
         techStack: ['Next.js', 'Node.js', 'AWS', 'Python'],
         publishDate: '2025-10-15',
+        externalUrl: 'https://www.dudemw.com/',
 
         fitCriteria: {
             idealFor: [
@@ -169,6 +170,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         categories: ['Marketplace', 'Creative Industry', 'Networking'],
         techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
         publishDate: '2025-11-20',
+        externalUrl: 'https://heyprodata.com/',
 
         fitCriteria: {
             idealFor: [
@@ -260,6 +262,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         categories: ['Marketplace', 'Multi-Vendor', 'Industrial'],
         techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
         publishDate: '2025-12-05',
+        externalUrl: 'https://cedarelevator.com/',
 
         fitCriteria: {
             idealFor: [
