@@ -9,7 +9,7 @@ import { Navbar } from "@/components/layout";
 import Script from "next/script";
 import FooterRevealWrapper from "@/components/FooterRevealWrapper";
 
-const specalRoutes = ["/studio", "/connect"];
+const specialRoutes = ["/studio", "/connect"];
 
 
 const Footer = dynamic(() => import("@/components/Footer"), {
@@ -27,8 +27,9 @@ interface LayoutContentProps {
  */
 export default function LayoutContent({ children }: LayoutContentProps) {
     const pathname = usePathname();
-    const isConnectSubdomain = window.location.hostname === "connect.mergex.in";
-    const isSpecialRoute = specalRoutes.some(
+    const isConnectSubdomain =
+        typeof window !== "undefined" && window.location.hostname === "connect.mergex.in";
+    const isSpecialRoute = specialRoutes.some(
         (route) => pathname === route || pathname?.startsWith(route + "/")
     );
     const isSystemsRoute = pathname === "/systems";
