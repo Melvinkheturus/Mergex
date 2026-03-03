@@ -14,11 +14,11 @@ if (typeof window !== 'undefined') {
 
 /* Images mapped to each pillar (index-matched) */
 const PILLAR_IMAGES = [
-    '/assets/mockups/e.png',
-    '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-    '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
-    '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
-    '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
+    '/assets/systems/development.png',   // Software & App Development
+    '/assets/systems/automation.png',     // AI Automation & Integrations
+    '/assets/systems/branding.png',       // Brand Identity & Strategy
+    '/assets/systems/ui-ux.png',          // UI/UX Design & Product
+    '/assets/systems/marketing.png',      // Digital Marketing Systems
 ];
 
 /**

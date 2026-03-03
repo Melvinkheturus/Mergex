@@ -6,7 +6,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         slug: 'e-commerce-platform',
         title: 'E-Commerce AI Evolution',
         subtitle: 'Scaling a retail giant with predictive intelligence',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+        heroImage: '/assets/systems/case-studies/case-study-1.png',
         heroImageAlt: 'E-Commerce Platform Dashboard',
         outcome: 'From stagnant growth to 150% revenue increase in 6 months',
 
@@ -51,13 +51,13 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Visual Discovery',
                 description: 'We completely overhauled the product browsing experience, focusing on high-fidelity imagery and intuitive filtering.',
-                image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+                image: '/assets/systems/case-studies/case-study-1.png',
                 imageAlt: 'Product Discovery UI'
             },
             {
                 title: 'Smart Cart',
                 description: 'The new cart dynamically suggests complementary products, increasing average order value.',
-                image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+                image: '/assets/systems/case-studies/case-study-1.png',
                 imageAlt: 'Smart Cart UI'
             }
         ],
@@ -97,7 +97,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         slug: 'healthcare-management-system',
         title: 'Healthcare Unity System',
         subtitle: 'Streamlining patient care with secure data integration',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
+        heroImage: '/assets/systems/case-studies/case-study-2.png',
         heroImageAlt: 'Healthcare Management Dashboard',
         outcome: 'From fragmented records to unified patient insights in 90 days',
 
@@ -142,13 +142,13 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Patient 360 View',
                 description: 'A single dashboard showing all vital patient data, history, and upcoming appointments.',
-                image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
+                image: '/assets/systems/case-studies/case-study-2.png',
                 imageAlt: 'Patient Dashboard UI'
             },
             {
                 title: 'Smart Scheduling',
                 description: 'AI-assisted scheduling that optimizes doctor availability and reduces wait times.',
-                image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
+                image: '/assets/systems/case-studies/case-study-2.png',
                 imageAlt: 'Scheduling Interface'
             }
         ],
@@ -188,7 +188,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         slug: 'financial-dashboard',
         title: 'FinTech Analytics Core',
         subtitle: 'Real-time financial intelligence for modern visionaries',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
+        heroImage: '/assets/systems/case-studies/case-study-3.png',
         heroImageAlt: 'Financial Analytics Dashboard',
         outcome: 'From spreadsheet chaos to clear financial command in 30 days',
 
@@ -233,13 +233,13 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Live Market Watch',
                 description: 'A high-performance grid component handling thousands of concurrent updates without lag.',
-                image: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
+                image: '/assets/systems/case-studies/case-study-3.png',
                 imageAlt: 'Market Watch UI'
             },
             {
                 title: 'Portfolio Analysis',
                 description: 'Deep-dive analytics into portfolio performance, risk distribution, and attribution.',
-                image: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
+                image: '/assets/systems/case-studies/case-study-3.png',
                 imageAlt: 'Portfolio Analytics UI'
             }
         ],
