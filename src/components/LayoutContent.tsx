@@ -9,6 +9,8 @@ import { Navbar } from "@/components/layout";
 import Script from "next/script";
 import FooterRevealWrapper from "@/components/FooterRevealWrapper";
 
+const specalRoutes = ["/studio", "/connect"];
+
 
 const Footer = dynamic(() => import("@/components/Footer"), {
     ssr: true
@@ -25,12 +27,14 @@ interface LayoutContentProps {
  */
 export default function LayoutContent({ children }: LayoutContentProps) {
     const pathname = usePathname();
-    const isStudioRoute = pathname?.startsWith("/studio") ?? false;
+    const isSpecialRoute = specalRoutes.some(
+        (route) => pathname === route || pathname?.startsWith(route + "/")
+    );
     const isSystemsRoute = pathname === "/systems";
 
     // Add/remove data attribute on body for CSS targeting
     useEffect(() => {
-        if (isStudioRoute) {
+        if (isSpecialRoute) {
             document.body.setAttribute("data-studio-route", "true");
         } else {
             document.body.removeAttribute("data-studio-route");
@@ -38,9 +42,9 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         return () => {
             document.body.removeAttribute("data-studio-route");
         };
-    }, [isStudioRoute]);
+    }, [isSpecialRoute]);
 
-    if (isStudioRoute) {
+    if (isSpecialRoute) {
         // Studio route: No navbar, footer, cursor, or scroll indicator
         return (
             <>
