@@ -45,7 +45,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
     }, [isSpecialRoute]);
 
     if (isSpecialRoute) {
-        // Studio route: No navbar, footer, cursor, or scroll indicator
+        // Studio / Connect route: No navbar, footer, cursor, or scroll indicator
         return (
             <>
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />

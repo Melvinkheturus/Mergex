@@ -133,17 +133,17 @@ export default function ConnectCard() {
                     className="connect-cta connect-animate-in"
                 >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                    Book a Strategy Call
-                </a>
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        Book a Strategy Call
+    </a>
 
-                <div className="connect-divider connect-animate-in" />
+        <div className="connect-divider connect-animate-in" />
 
-                {/* ---- Social Icons ---- */}
+    {/* ---- Social Icons ---- */ }
                 <p className="connect-social-header connect-animate-in">Connect With Us</p>
 
                 <div className="connect-social-icons connect-animate-in">
@@ -159,63 +159,63 @@ export default function ConnectCard() {
                             <SocialIcon icon={link.icon} />
                         </a>
                     ))}
-                </div>
-
-                <div className="connect-divider connect-animate-in" />
-
-                {/* ---- Contact Info ---- */}
-                <div className="connect-contact-info connect-animate-in">
-                    <div className="connect-contact-row">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                        </svg>
-                        <a href="tel:+919042172025">+91 90421 72025</a>
-                    </div>
-                    <div className="connect-contact-row">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        <span>Ambattur, Chennai, Tamil Nadu</span>
-                    </div>
-                </div>
-
-                {/* ---- Footer Line ---- */}
-                <p className="connect-footer-line connect-animate-in">
-                    Clarity from Chaos.
-                </p>
-
-                {/* ---- Save Contact (desktop fallback) ---- */}
-                <button
-                    onClick={downloadVCard}
-                    className="connect-animate-in"
-                    style={{
-                        background: "none",
-                        border: "1px solid rgba(167, 139, 250, 0.2)",
-                        color: "rgba(167, 139, 250, 0.6)",
-                        padding: "0.5rem 1.5rem",
-                        borderRadius: "100px",
-                        fontSize: "0.75rem",
-                        fontFamily: "'JetBrains Mono', monospace",
-                        letterSpacing: "0.1em",
-                        cursor: "pointer",
-                        transition: "all 0.25s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.5)";
-                        e.currentTarget.style.color = "#a78bfa";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.2)";
-                        e.currentTarget.style.color = "rgba(167, 139, 250, 0.6)";
-                    }}
-                >
-                    ⬇ Save Contact
-                </button>
             </div>
 
-            {/* Mobile auto-popup */}
-            <SaveContactPopup />
-        </div>
+            <div className="connect-divider connect-animate-in" />
+
+            {/* ---- Contact Info ---- */}
+            <div className="connect-contact-info connect-animate-in">
+                <div className="connect-contact-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    <a href="tel:+919042172025">+91 90421 72025</a>
+                </div>
+                <div className="connect-contact-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <span>Ambattur, Chennai, Tamil Nadu</span>
+                </div>
+            </div>
+
+            {/* ---- Footer Line ---- */}
+            <p className="connect-footer-line connect-animate-in">
+                Clarity from Chaos.
+            </p>
+
+    {/* ---- Save Contact (desktop fallback) ---- */ }
+    <button
+        onClick={downloadVCard}
+        className="connect-animate-in"
+        style={{
+            background: "none",
+            border: "1px solid rgba(167, 139, 250, 0.2)",
+            color: "rgba(167, 139, 250, 0.6)",
+            padding: "0.5rem 1.5rem",
+            borderRadius: "100px",
+            fontSize: "0.75rem",
+            fontFamily: "'JetBrains Mono', monospace",
+            letterSpacing: "0.1em",
+            cursor: "pointer",
+            transition: "all 0.25s ease",
+        }}
+        onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.5)";
+            e.currentTarget.style.color = "#a78bfa";
+        }}
+        onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.2)";
+            e.currentTarget.style.color = "rgba(167, 139, 250, 0.6)";
+        }}
+    >
+        ⬇ Save Contact
+    </button>
+            </div >
+
+        {/* Mobile auto-popup */ }
+        < SaveContactPopup />
+        </div >
     );
 }
