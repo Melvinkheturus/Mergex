@@ -27,6 +27,7 @@ interface LayoutContentProps {
  */
 export default function LayoutContent({ children }: LayoutContentProps) {
     const pathname = usePathname();
+    const isConnectSubdomain = window.location.hostname === "connect.mergex.in";
     const isSpecialRoute = specalRoutes.some(
         (route) => pathname === route || pathname?.startsWith(route + "/")
     );
@@ -34,7 +35,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
 
     // Add/remove data attribute on body for CSS targeting
     useEffect(() => {
-        if (isSpecialRoute) {
+        if (pathname?.startsWith("/studio")) {
             document.body.setAttribute("data-studio-route", "true");
         } else {
             document.body.removeAttribute("data-studio-route");
@@ -44,7 +45,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         };
     }, [isSpecialRoute]);
 
-    if (isSpecialRoute) {
+    if (isSpecialRoute || isConnectSubdomain) {
         // Studio route: No navbar, footer, cursor, or scroll indicator
         return (
             <>
