@@ -72,6 +72,7 @@ export interface CaseStudy {
     categories: string[];
     techStack: string[];
     publishDate: string;
+    externalUrl?: string; // External link to client website (overrides internal case study page)
 
     // "Is This For You?" Filter
     fitCriteria: {
