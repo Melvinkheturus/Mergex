@@ -26,6 +26,7 @@ interface LayoutContentProps {
 export default function LayoutContent({ children }: LayoutContentProps) {
     const pathname = usePathname();
     const isStudioRoute = pathname?.startsWith("/studio") ?? false;
+    const isConnectRoute = pathname === "/connect";
     const isSystemsRoute = pathname === "/systems";
 
     // Add/remove data attribute on body for CSS targeting
@@ -40,8 +41,8 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         };
     }, [isStudioRoute]);
 
-    if (isStudioRoute) {
-        // Studio route: No navbar, footer, cursor, or scroll indicator
+    if (isStudioRoute || isConnectRoute) {
+        // Studio / Connect route: No navbar, footer, cursor, or scroll indicator
         return (
             <>
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />

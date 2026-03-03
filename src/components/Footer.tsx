@@ -46,7 +46,7 @@ const SOCIAL_LINKS = [
     { icon: 'threads', href: 'https://threads.com/mergex.co', label: 'Threads' },
     { icon: 'whatsapp', href: 'https://wa.me/919042172025', label: 'WhatsApp' },
     { icon: 'dribbble', href: 'https://dribbble.com/mergex', label: 'Dribbble' },
-    { icon: 'behance', href: 'https://behance.net/mergex', label: 'Behance' },
+    { icon: 'behance', href: 'https://behance.net/mergexco', label: 'Behance' },
 ];
 
 const fadeInUp = {
@@ -145,7 +145,7 @@ export default function Footer() {
                                 />
                             </motion.div>
                             <motion.p variants={fadeInUp} className="text-lg text-gray-300 font-body leading-relaxed mb-4 max-w-sm">
-                                Where ideas merge with innovation
+                                one system. zero friction
                             </motion.p>
 
                             {/* Social Icons */}
