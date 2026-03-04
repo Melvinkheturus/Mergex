@@ -63,7 +63,7 @@ function ResultsSection({ study }: { study: CaseStudy }) {
     const layout = study.layoutType || 1;
 
     return (
-        <div className="space-y-16">
+        <div className="space-y-6">
             {/* Eyebrow */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -344,7 +344,7 @@ function TimelineLayout({ results }: { results: NonNullable<CaseStudy['results']
     const spineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     return (
-        <div ref={containerRef} className="relative py-20">
+        <div ref={containerRef} className="relative pb-20">
 
             {/* Timeline Wrap */}
             <div className="relative">
@@ -377,14 +377,31 @@ function TimelineSection({ metric, index, total }: { metric: NonNullable<CaseStu
         offset: ["start start", "end end"]
     });
 
-    // Vertical carousel with ghost previews at edges
-    // Title never fully disappears — stays at 0.15 opacity so next/prev are visible
-    const titleOpacity = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.15, 1, 1, 0.15]);
-    const titleY = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [350, 0, 0, -350]);
+    // First item starts fully visible so there's no empty gap after the heading.
+    // Subsequent items use ghost previews at edges.
+    const isFirst = index === 0;
+    const titleOpacity = useTransform(
+        scrollYProgress,
+        isFirst ? [0, 0.05, 0.65, 1] : [0, 0.35, 0.65, 1],
+        isFirst ? [1, 1, 1, 0.15] : [0.15, 1, 1, 0.15]
+    );
+    const titleY = useTransform(
+        scrollYProgress,
+        isFirst ? [0, 0.05, 0.65, 1] : [0, 0.35, 0.65, 1],
+        isFirst ? [0, 0, 0, -350] : [350, 0, 0, -350]
+    );
 
     // Description fades fully — only the title acts as a preview
-    const descOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.65, 1], [0, 1, 1, 0]);
-    const descY = useTransform(scrollYProgress, [0.2, 0.5, 0.65, 1], [250, 0, 0, -250]);
+    const descOpacity = useTransform(
+        scrollYProgress,
+        isFirst ? [0, 0.1, 0.65, 1] : [0.2, 0.5, 0.65, 1],
+        isFirst ? [1, 1, 1, 0] : [0, 1, 1, 0]
+    );
+    const descY = useTransform(
+        scrollYProgress,
+        isFirst ? [0, 0.1, 0.65, 1] : [0.2, 0.5, 0.65, 1],
+        isFirst ? [0, 0, 0, -250] : [250, 0, 0, -250]
+    );
 
     return (
         <div
@@ -893,7 +910,7 @@ function RelatedCard({ study, index }: { study: CaseStudy; index: number }) {
                                 src={study.heroImage}
                                 alt={study.heroImageAlt}
                                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                                className="w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105"
+                                className="w-full h-full object-cover"
                                 animate={{ filter: isHovered ? 'grayscale(0%)' : 'grayscale(30%)' }}
                             />
 

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { fetchWithFallback } from '@/sanity/lib/contentFetcher';
 import type { CaseStudy } from '@/modules/caseStudies';
-import { getCaseStudyBySlug, CaseStudyDetail } from '@/modules/caseStudies';
+import { getCaseStudyBySlug, CaseStudyDetail, CASE_STUDIES } from '@/modules/caseStudies';
 
 interface PageProps {
     params: Promise<{ slug: string }>;

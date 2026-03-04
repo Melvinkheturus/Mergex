@@ -136,7 +136,7 @@ export function CaseStudyCardStack({ studies }: CaseStudyCardStackProps) {
                         <img
                             src={study.heroImage}
                             alt={study.heroImageAlt}
-                            className="h-full w-full rounded-2xl object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="h-full w-full rounded-2xl object-cover"
                         />
 
                         {/* Overlay with case study info */}

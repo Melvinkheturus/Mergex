@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { CaseStudy } from '../types';
 import { CaseStudyCardStack } from './CaseStudyCardStack';
 
@@ -31,166 +32,56 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
             `}</style>
 
             {/* Intro Hero */}
-            <section id="intro" className="relative min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden" style={{ background: '#050505' }}>
-                {/* SVG Background — Circuit Board / Tech Topology */}
-                <svg
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    viewBox="0 0 1440 900"
-                    preserveAspectRatio="xMidYMid slice"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <defs>
-                        <linearGradient id="trace1" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#6366f1" stopOpacity="0" />
-                            <stop offset="30%" stopColor="#6366f1" stopOpacity="0.4" />
-                            <stop offset="70%" stopColor="#818cf8" stopOpacity="0.4" />
-                            <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                        </linearGradient>
-                        <linearGradient id="trace2" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#a78bfa" stopOpacity="0" />
-                            <stop offset="40%" stopColor="#8b5cf6" stopOpacity="0.3" />
-                            <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
-                        </linearGradient>
-                        <linearGradient id="trace3" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.35" />
-                            <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                        </linearGradient>
-                        <filter id="padGlow" x="-100%" y="-100%" width="300%" height="300%">
-                            <feGaussianBlur stdDeviation="4" result="blur" />
-                            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-                        </filter>
-                        <filter id="chipGlow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="8" />
-                        </filter>
-                    </defs>
+            <section id="intro" className="relative min-h-[100dvh] w-full flex items-center justify-center text-center px-6 overflow-hidden bg-white">
 
-                    {/* === CIRCUIT TRACES — Right-angle PCB routing === */}
-                    {/* Horizontal bus lines */}
-                    <polyline points="0,180 400,180 400,280 700,280" stroke="url(#trace1)" strokeWidth="1" fill="none" opacity="0.35" />
-                    <polyline points="700,280 700,180 1100,180 1100,280 1440,280" stroke="url(#trace1)" strokeWidth="1" fill="none" opacity="0.25" />
-                    <polyline points="0,620 300,620 300,520 650,520" stroke="url(#trace1)" strokeWidth="1" fill="none" opacity="0.3" />
-                    <polyline points="650,520 650,620 1050,620 1050,520 1440,520" stroke="url(#trace1)" strokeWidth="1" fill="none" opacity="0.2" />
-
-                    {/* Vertical bus lines */}
-                    <polyline points="350,0 350,180 450,180 450,400" stroke="url(#trace2)" strokeWidth="0.8" fill="none" opacity="0.25" />
-                    <polyline points="1050,0 1050,180 950,180 950,400" stroke="url(#trace2)" strokeWidth="0.8" fill="none" opacity="0.2" />
-                    <polyline points="200,500 200,620 300,620 300,900" stroke="url(#trace2)" strokeWidth="0.8" fill="none" opacity="0.22" />
-                    <polyline points="1200,400 1200,520 1100,520 1100,900" stroke="url(#trace2)" strokeWidth="0.8" fill="none" opacity="0.18" />
-
-                    {/* Diagonal data paths (dashed) */}
-                    <line x1="450" y1="400" x2="650" y2="520" stroke="#6366f1" strokeWidth="0.6" strokeDasharray="8 6" opacity="0.2" />
-                    <line x1="950" y1="400" x2="1050" y2="520" stroke="#818cf8" strokeWidth="0.6" strokeDasharray="8 6" opacity="0.15" />
-                    <line x1="150" y1="100" x2="350" y2="180" stroke="#a78bfa" strokeWidth="0.5" strokeDasharray="6 8" opacity="0.15" />
-                    <line x1="1200" y1="200" x2="1050" y2="180" stroke="#6366f1" strokeWidth="0.5" strokeDasharray="6 8" opacity="0.12" />
-
-                    {/* === IC CHIP OUTLINES === */}
-                    {/* Chip 1 — top-left area */}
-                    <g opacity="0.2">
-                        <rect x="60" y="120" width="80" height="120" rx="4" fill="none" stroke="#6366f1" strokeWidth="1" />
-                        {/* Pins left */}
-                        <line x1="60" y1="145" x2="40" y2="145" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="60" y1="165" x2="40" y2="165" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="60" y1="185" x2="40" y2="185" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="60" y1="205" x2="40" y2="205" stroke="#6366f1" strokeWidth="0.8" />
-                        {/* Pins right */}
-                        <line x1="140" y1="145" x2="160" y2="145" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="140" y1="165" x2="160" y2="165" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="140" y1="185" x2="160" y2="185" stroke="#6366f1" strokeWidth="0.8" />
-                        <line x1="140" y1="205" x2="160" y2="205" stroke="#6366f1" strokeWidth="0.8" />
-                        {/* Orientation notch */}
-                        <circle cx="80" cy="135" r="3" fill="none" stroke="#6366f1" strokeWidth="0.6" />
-                    </g>
-
-                    {/* Chip 2 — bottom-right area */}
-                    <g opacity="0.15">
-                        <rect x="1250" y="600" width="100" height="80" rx="4" fill="none" stroke="#818cf8" strokeWidth="1" />
-                        <line x1="1270" y1="600" x2="1270" y2="580" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1290" y1="600" x2="1290" y2="580" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1310" y1="600" x2="1310" y2="580" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1330" y1="600" x2="1330" y2="580" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1270" y1="680" x2="1270" y2="700" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1290" y1="680" x2="1290" y2="700" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1310" y1="680" x2="1310" y2="700" stroke="#818cf8" strokeWidth="0.8" />
-                        <line x1="1330" y1="680" x2="1330" y2="700" stroke="#818cf8" strokeWidth="0.8" />
-                        <circle cx="1268" cy="615" r="3" fill="none" stroke="#818cf8" strokeWidth="0.6" />
-                    </g>
-
-                    {/* Chip 3 — small, bottom-left */}
-                    <g opacity="0.12">
-                        <rect x="80" y="700" width="60" height="50" rx="3" fill="none" stroke="#a78bfa" strokeWidth="0.8" />
-                        <line x1="95" y1="700" x2="95" y2="688" stroke="#a78bfa" strokeWidth="0.6" />
-                        <line x1="110" y1="700" x2="110" y2="688" stroke="#a78bfa" strokeWidth="0.6" />
-                        <line x1="125" y1="700" x2="125" y2="688" stroke="#a78bfa" strokeWidth="0.6" />
-                        <line x1="95" y1="750" x2="95" y2="762" stroke="#a78bfa" strokeWidth="0.6" />
-                        <line x1="110" y1="750" x2="110" y2="762" stroke="#a78bfa" strokeWidth="0.6" />
-                        <line x1="125" y1="750" x2="125" y2="762" stroke="#a78bfa" strokeWidth="0.6" />
-                    </g>
-
-                    {/* === SOLDER PADS at junctions === */}
-                    {/* Filled pads */}
-                    <circle cx="400" cy="180" r="4" fill="#6366f1" opacity="0.5" filter="url(#padGlow)" />
-                    <circle cx="700" cy="280" r="4" fill="#818cf8" opacity="0.45" filter="url(#padGlow)" />
-                    <circle cx="1100" cy="180" r="3.5" fill="#6366f1" opacity="0.35" filter="url(#padGlow)" />
-                    <circle cx="1100" cy="280" r="3.5" fill="#a78bfa" opacity="0.3" filter="url(#padGlow)" />
-                    <circle cx="300" cy="620" r="4" fill="#6366f1" opacity="0.4" filter="url(#padGlow)" />
-                    <circle cx="650" cy="520" r="4" fill="#818cf8" opacity="0.45" filter="url(#padGlow)" />
-                    <circle cx="1050" cy="620" r="3.5" fill="#a78bfa" opacity="0.3" filter="url(#padGlow)" />
-                    <circle cx="1050" cy="520" r="3.5" fill="#6366f1" opacity="0.35" filter="url(#padGlow)" />
-                    <circle cx="350" cy="180" r="3" fill="#818cf8" opacity="0.3" filter="url(#padGlow)" />
-                    <circle cx="450" cy="400" r="3.5" fill="#a78bfa" opacity="0.35" filter="url(#padGlow)" />
-                    <circle cx="950" cy="400" r="3.5" fill="#6366f1" opacity="0.3" filter="url(#padGlow)" />
-
-                    {/* Ring pads (via holes) */}
-                    <circle cx="700" cy="180" r="5" fill="none" stroke="#6366f1" strokeWidth="1" opacity="0.2" />
-                    <circle cx="650" cy="620" r="5" fill="none" stroke="#818cf8" strokeWidth="1" opacity="0.18" />
-                    <circle cx="200" cy="500" r="4" fill="none" stroke="#a78bfa" strokeWidth="0.8" opacity="0.15" />
-                    <circle cx="1200" cy="400" r="4" fill="none" stroke="#6366f1" strokeWidth="0.8" opacity="0.15" />
-
-                    {/* === CROSSHAIR ALIGNMENT MARKS === */}
-                    <g stroke="#6366f1" strokeWidth="0.5" opacity="0.12">
-                        <line x1="55" y1="50" x2="75" y2="50" /><line x1="65" y1="40" x2="65" y2="60" />
-                        <circle cx="65" cy="50" r="8" fill="none" />
-                    </g>
-                    <g stroke="#818cf8" strokeWidth="0.5" opacity="0.1">
-                        <line x1="1365" y1="830" x2="1385" y2="830" /><line x1="1375" y1="820" x2="1375" y2="840" />
-                        <circle cx="1375" cy="830" r="8" fill="none" />
-                    </g>
-                    <g stroke="#a78bfa" strokeWidth="0.5" opacity="0.08">
-                        <line x1="1355" y1="100" x2="1375" y2="100" /><line x1="1365" y1="90" x2="1365" y2="110" />
-                        <circle cx="1365" cy="100" r="8" fill="none" />
-                    </g>
-
-                    {/* === FAINT AMBIENT GLOW behind center === */}
-                    <circle cx="720" cy="450" r="300" fill="#6366f1" filter="url(#chipGlow)" opacity="0.06" />
-                    <circle cx="300" cy="200" r="200" fill="#4f46e5" filter="url(#chipGlow)" opacity="0.04" />
-                    <circle cx="1200" cy="300" r="180" fill="#8b5cf6" filter="url(#chipGlow)" opacity="0.04" />
-                </svg>
-
-                {/* Grain/Noise Texture Overlay */}
-                <div className="absolute inset-0 pointer-events-none opacity-[0.3] mix-blend-soft-light">
-                    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <filter id="hero-noise">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-                            <feColorMatrix type="saturate" values="0" />
-                        </filter>
-                        <rect width="100%" height="100%" filter="url(#hero-noise)" />
-                    </svg>
+                {/* Background Image (matching SystemsHero) */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/assets/background/case_study_hero_bg.jpg"
+                        alt="Case Studies Hero Background"
+                        fill
+                        className="object-cover opacity-100"
+                        priority
+                    />
+                    {/*Light Scrim to improve hero text readability*/}
+                    <div className="absolute inset-0 bg-[#f5f0ff]/25 z-[1]" />
+                    {/* Bottom Fade to blend with next section */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[250px] z-[2] pointer-events-none"
+                        style={{ background: 'linear-gradient(to bottom, transparent 0%, white 100%)' }}
+                    />
                 </div>
 
                 {/* Content */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="relative z-10"
-                >
-                    <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.95] mb-6 md:mb-12 font-satoshi max-w-4xl mx-auto text-center">
-                        Engineering Growth Through <br /> <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">Digital Excellence</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-normal leading-relaxed font-satoshi mb-8 md:mb-16 text-center">
-                        From complex business transformations to AI-powered marketing, see how we build the tools that define industry leaders.
-                    </p>
-                </motion.div>
+                <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-32 relative z-10 flex items-center justify-center text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="space-y-6 md:space-y-8 flex flex-col items-center"
+                        style={{ fontFamily: 'var(--font-manrope)' }}
+                    >
+                        {/* Eyebrow */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-[10px] md:text-xs text-[#1e143c] font-bold tracking-[0.3em] uppercase drop-shadow-sm"
+                        >
+                            Mergex · Showcase
+                        </motion.p>
+
+                        {/* Primary Headline */}
+                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-[#0d0820] tracking-tighter leading-[1.1] max-w-4xl mx-auto text-center drop-shadow-sm">
+                            Engineering Growth Through{' '}
+                            <span className="text-[#0d0820]">Digital Excellence</span>
+                        </h1>
+
+                        {/* Supporting Copy */}
+                        <p className="text-base md:text-lg text-[#140a32] max-w-2xl mx-auto font-medium leading-relaxed text-center drop-shadow-sm">
+                            From complex business transformations to AI-powered marketing, see how we build the tools that define industry leaders.
+                        </p>
+                    </motion.div>
+                </div>
 
             </section>
 
@@ -208,11 +99,11 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 md:mb-12 tracking-tight font-satoshi max-w-4xl mx-auto leading-[1.1]">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 md:mb-12 tracking-tight max-w-4xl mx-auto leading-[1.1]" style={{ fontFamily: 'var(--font-manrope)' }}>
                             Ready for your next <br />
                             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent italic">Strategic Breakthrough?</span>
                         </h2>
-                        <a href="/contact" className="group inline-flex items-center gap-4 bg-white text-gray-950 px-8 py-5 md:px-12 md:py-6 rounded-full font-bold text-lg md:text-xl hover:bg-violet-600 hover:text-white transition-all duration-500 font-satoshi shadow-2xl hover:shadow-violet-500/20">
+                        <a href="/contact" className="group inline-flex items-center gap-4 bg-white text-gray-950 px-8 py-5 md:px-12 md:py-6 rounded-full font-bold text-lg md:text-xl hover:bg-violet-600 hover:text-white transition-all duration-500 shadow-2xl hover:shadow-violet-500/20" style={{ fontFamily: 'var(--font-manrope)' }}>
                             Start Your Transformation
                             <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                         </a>
@@ -222,21 +113,3 @@ export const ShowcaseView: React.FC<ShowcaseViewProps> = ({ studies }) => {
         </div>
     );
 };
-
-const ArrowRightIcon = ({ className }: { className?: string }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={className}
-    >
-        <path d="M5 12h14" />
-        <path d="m12 5 7 7-7 7" />
-    </svg>
-);

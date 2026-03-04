@@ -1,20 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback, Suspense } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { CaseStudyCardStack } from '@/modules/caseStudies';
 import { CASE_STUDIES } from '@/modules/caseStudies';
 import type { CaseStudy } from '@/modules/caseStudies';
 
 interface CaseStudySectionProps {
     caseStudies?: CaseStudy[];
-}
-
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
 }
 
 /**
@@ -25,24 +17,7 @@ export function CaseStudySection({ caseStudies }: CaseStudySectionProps = {}) {
     // Fallback to hardcoded data if Sanity data is not provided
     const studies = caseStudies && caseStudies.length > 0 ? caseStudies : CASE_STUDIES;
 
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-    const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
-    const cursorRef = useRef<HTMLDivElement>(null);
     const [isClient, setIsClient] = useState(false);
-    const [cursorVisible, setCursorVisible] = useState(false);
-
-    const totalCards = studies.length;
-
-    // Custom cursor follow logic
-    const handleMouseMove = useCallback((e: React.MouseEvent) => {
-        if (!cursorRef.current) return;
-        cursorRef.current.style.left = `${e.clientX}px`;
-        cursorRef.current.style.top = `${e.clientY}px`;
-    }, []);
-
-    const handleMouseEnter = useCallback(() => setCursorVisible(true), []);
-    const handleMouseLeave = useCallback(() => setCursorVisible(false), []);
 
     // Hydration guard
     useEffect(() => {
