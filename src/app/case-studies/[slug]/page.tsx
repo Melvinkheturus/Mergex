@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation';
-import { getCaseStudyBySlug, CASE_STUDIES } from '@/modules/caseStudies';
-import { CaseStudyDetail } from '@/modules/caseStudies/components/CaseStudyDetail';
 import { Metadata } from 'next';
 import { fetchWithFallback } from '@/sanity/lib/contentFetcher';
 import type { CaseStudy } from '@/modules/caseStudies';
+import { getCaseStudyBySlug, CaseStudyDetail, CASE_STUDIES } from '@/modules/caseStudies';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -92,8 +91,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     return {
-        title: `${study.title} | Mergex Case Study`,
-        description: study.outcome,
+        title: `${study.title} | Mergex`,
+        description: study.subtitle,
     };
 }
 
@@ -114,5 +113,5 @@ export default async function CaseStudyPage({ params }: PageProps) {
         notFound();
     }
 
-    return <CaseStudyDetail study={study} />;
+    return <CaseStudyDetail key={slug} study={study} />;
 }

@@ -1,3 +1,5 @@
 export * from './types';
 export * from './data';
-// Components will be exported here as they are created
+export * from './components/ShowcaseView';
+export * from './components/CaseStudyDetail';
+export * from './components/CaseStudyCardStack';
