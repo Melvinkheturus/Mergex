@@ -14,11 +14,11 @@ if (typeof window !== 'undefined') {
 
 /* Images mapped to each pillar (index-matched) */
 const PILLAR_IMAGES = [
-    '/assets/mockups/e.png',
-    '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-    '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
-    '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
-    '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
+    '/assets/systems/development.png',   // Software & App Development
+    '/assets/systems/automation.png',     // AI Automation & Integrations
+    '/assets/systems/branding.png',       // Brand Identity & Strategy
+    '/assets/systems/ui-ux.png',          // UI/UX Design & Product
+    '/assets/systems/marketing.png',      // Digital Marketing Systems
 ];
 
 /**
@@ -148,7 +148,7 @@ export function OurSolutions() {
                         <div
                             key={index}
                             id={`solution-item-${index}`}
-                            className="relative min-h-[70vh] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-12 md:py-16 border-b border-gray-100 last:border-b-0"
+                            className="relative min-h-[60vh] md:min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-6 md:py-24 border-b border-gray-100 last:border-b-0"
                         >
                             {/* ── IMAGE LAYER (z-0) ── */}
                             <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-900 z-0">
@@ -163,11 +163,11 @@ export function OurSolutions() {
                             </div>
 
                             {/* ── TEXT LAYER (z-10) — slides UP over the image on scroll ── */}
-                            <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4">
-                                <div className="border-t border-gray-200 pt-10">
-                                    <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
-                                        {/* Left Side: Info */}
-                                        <div className="md:col-span-7 lg:col-span-8">
+                            <div className="text-overlap relative z-10 w-full bg-white pt-6 md:pt-10 -mt-4">
+                                <div className="border-t border-gray-200 pt-6 md:pt-10">
+                                    <div className="flex flex-col gap-8 lg:gap-12">
+                                        {/* Top Side: Info */}
+                                        <div>
                                             <div className="flex items-center gap-4 mb-8">
                                                 <span className="text-sm font-mono text-gray-400">
                                                     [{String(index + 1).padStart(2, '0')}]
@@ -181,12 +181,12 @@ export function OurSolutions() {
                                             </p>
                                         </div>
 
-                                        {/* Right Side: Categories */}
-                                        <div className="md:col-span-5 lg:col-span-4">
+                                        {/* Bottom Side: Categories */}
+                                        <div>
                                             <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
                                                 Categories
                                             </p>
-                                            <div className="grid grid-cols-2 gap-2">
+                                            <div className="flex flex-wrap gap-2">
                                                 {pillar.capabilities.map((cap, i) => (
                                                     <span
                                                         key={i}

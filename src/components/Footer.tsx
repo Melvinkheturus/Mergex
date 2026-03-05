@@ -46,7 +46,7 @@ const SOCIAL_LINKS = [
     { icon: 'threads', href: 'https://threads.com/mergex.co', label: 'Threads' },
     { icon: 'whatsapp', href: 'https://wa.me/919042172025', label: 'WhatsApp' },
     { icon: 'dribbble', href: 'https://dribbble.com/mergex', label: 'Dribbble' },
-    { icon: 'behance', href: 'https://behance.net/mergex', label: 'Behance' },
+    { icon: 'behance', href: 'https://behance.net/mergexco', label: 'Behance' },
 ];
 
 const fadeInUp = {
@@ -118,9 +118,9 @@ export default function Footer() {
                 </div>
 
 
-                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
+                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 relative z-20 overflow-hidden">
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-12 lg:mt-16">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-8 lg:mt-16 w-full">
                         {/* Brand Column */}
                         <motion.div
                             className="md:col-span-4 lg:col-span-5 xl:col-span-4"
@@ -137,15 +137,15 @@ export default function Footer() {
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <Image
-                                    src="/logo/flat_logo.png"
+                                    src="/logo/mergex-logo.png"
                                     alt="Mergex"
-                                    width={160}
-                                    height={54}
+                                    width={40}
+                                    height={40}
                                     className="h-10 w-auto"
                                 />
                             </motion.div>
                             <motion.p variants={fadeInUp} className="text-lg text-gray-300 font-body leading-relaxed mb-4 max-w-sm">
-                                Where ideas merge with innovation
+                                one system. zero friction
                             </motion.p>
 
                             {/* Social Icons */}
@@ -204,9 +204,9 @@ export default function Footer() {
                             </motion.div>
                         </motion.div>
 
-                        {/* Menu Group - Right Aligned */}
+                        {/* Menu Group - Right Aligned on Desktop, Grid on Mobile */}
                         <motion.div
-                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 flex flex-col md:flex-row justify-end gap-6 md:gap-8 lg:gap-12 xl:gap-16 md:pr-8 lg:pr-12 xl:pr-16"
+                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 grid grid-cols-2 sm:grid-cols-3 gap-8 md:justify-end md:gap-8 lg:gap-12 xl:gap-16 w-full"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -244,6 +244,7 @@ export default function Footer() {
                                         </motion.li>
                                     ))}
                                 </ul>
+
                             </motion.div>
 
                             {/* Company Column */}
@@ -270,8 +271,8 @@ export default function Footer() {
 
                 <div className="w-full mt-4 lg:mt-6 mb-0 relative z-10 overflow-hidden">
                     <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
-                        <div className={`flex flex-col md:flex-row items-center ${isLabsOrSystems ? 'justify-center' : 'md:items-end justify-between'} gap-8 md:gap-12 pb-8`}>
-                            <div className={`relative ${isLabsOrSystems ? 'text-center' : 'text-left'}`}>
+                        <div className={`flex flex-col md:flex-row items-start md:items-end justify-between gap-6 md:gap-12 pb-2 md:pb-8`}>
+                            <div className={`relative w-full md:w-auto text-left`}>
                                 {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
                                 <div
                                     style={{
@@ -279,11 +280,11 @@ export default function Footer() {
                                         maskImage: 'linear-gradient(to bottom, white 40%, rgba(255,255,255,0.45) 100%)',
                                     }}
                                 >
-                                    <div className={`flex flex-row items-baseline ${isLabsOrSystems ? 'justify-center' : 'justify-center md:justify-start'} whitespace-nowrap`}>
+                                    <div className={`flex flex-row items-baseline justify-start whitespace-nowrap overflow-hidden max-w-[90vw] md:max-w-none`}>
                                         <SplitText
                                             text="Mergex"
                                             tag="h1"
-                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-10"
+                                            className={`${isLabsOrSystems ? 'text-[12vw] sm:text-[11vw]' : 'text-[15vw] sm:text-[14vw]'} md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-6 md:pb-10`}
                                             splitType="chars"
                                             delay={80}
                                             duration={1.2}
@@ -292,14 +293,14 @@ export default function Footer() {
                                             to={{ opacity: 1, y: 0 }}
                                             threshold={0.1}
                                             rootMargin="-50px"
-                                            textAlign="center"
+                                            textAlign="left"
                                         />
                                         {(pathname === '/labs' || pathname === '/systems') && (
                                             <div className="flex flex-row items-baseline ml-[0.3em]">
                                                 <SplitText
                                                     text={pathname === '/labs' ? 'L' : 'S'}
                                                     tag="span"
-                                                    className="text-[14vw] md:text-[13vw] leading-none font-normal text-white select-none overflow-visible px-[0.1em] pb-10"
+                                                    className="text-[10vw] sm:text-[9vw] md:text-[13vw] leading-none font-normal text-white select-none overflow-visible px-[0.1em] pb-10"
                                                     style={{ fontFamily: "'Great Vibes', cursive" }}
                                                     splitType="chars"
                                                     delay={200}
@@ -309,12 +310,12 @@ export default function Footer() {
                                                     to={{ opacity: 1, y: 0 }}
                                                     threshold={0.1}
                                                     rootMargin="-50px"
-                                                    textAlign="center"
+                                                    textAlign="left"
                                                 />
                                                 <SplitText
                                                     text={pathname === '/labs' ? 'abs' : 'ystems'}
                                                     tag="span"
-                                                    className="text-[10vw] md:text-[9vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] ml-[-0.05em] pb-10"
+                                                    className="text-[8vw] sm:text-[7vw] md:text-[9vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] ml-[-0.05em] pb-10"
                                                     splitType="chars"
                                                     delay={300}
                                                     duration={1.2}
@@ -323,7 +324,7 @@ export default function Footer() {
                                                     to={{ opacity: 1, y: 0 }}
                                                     threshold={0.1}
                                                     rootMargin="-50px"
-                                                    textAlign="center"
+                                                    textAlign="left"
                                                 />
                                             </div>
                                         )}
@@ -332,7 +333,7 @@ export default function Footer() {
                             </div>
                             {pathname !== '/labs' && pathname !== '/systems' && (
                                 <motion.div
-                                    className="max-w-sm lg:max-w-md text-center md:text-right flex flex-col items-center md:items-end gap-6 md:mb-10"
+                                    className="w-full md:w-auto md:max-w-md text-left md:text-right flex flex-col items-start md:items-end justify-between md:gap-6 md:mb-10"
                                     initial="hidden"
                                     whileInView="visible"
                                     viewport={{ once: true }}
@@ -347,17 +348,17 @@ export default function Footer() {
                                             animation: gradient-x 3s linear infinite;
                                         }
                                     `}</style>
-                                    <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                                    <motion.p variants={fadeInUp} className="text-white text-xs sm:text-sm lg:text-base leading-relaxed font-body max-w-xs md:max-w-none" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
                                         Mergex is a business architecture company replacing fragmented growth with engineered scale.
                                     </motion.p>
                                     <motion.div variants={fadeInUp}>
                                         <Link
                                             href="/pitch-deck.pdf"
-                                            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-300 rounded-lg border border-white/20 overflow-hidden"
+                                            className="group relative inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-300 rounded-lg border border-white/20 overflow-hidden mt-2 md:mt-0"
                                         >
-                                            <span className="relative z-10 font-medium tracking-wide text-sm">Download Pitch Deck</span>
+                                            <span className="relative z-10 font-medium tracking-wide text-xs sm:text-sm">Download Pitch Deck</span>
                                             <svg
-                                                className="w-4 h-4 relative z-10 transition-transform group-hover:translate-y-0.5"
+                                                className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10 transition-transform group-hover:translate-y-0.5"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
@@ -367,8 +368,17 @@ export default function Footer() {
                                             </svg>
                                         </Link>
                                     </motion.div>
-                                    <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm">We believe good systems outlast trends.</motion.p>
                                 </motion.div>
+                            )}
+                            {(pathname === '/labs' || pathname === '/systems') && (
+                                <div className="w-full md:w-auto md:max-w-md hidden md:flex flex-col items-start md:items-end gap-4 md:gap-6 md:mb-10 opacity-0 pointer-events-none">
+                                    <p className="text-white text-xs sm:text-sm lg:text-base leading-relaxed font-body max-w-xs md:max-w-none">
+                                        Spacer spacer spacer spacer spacer spacer
+                                    </p>
+                                    <div className="group relative inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white/10 rounded-lg border border-white/20 mt-2 md:mt-0">
+                                        <span className="relative z-10 font-medium tracking-wide text-xs sm:text-sm">Spacer Spacer Spacer</span>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>
@@ -377,18 +387,18 @@ export default function Footer() {
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
 
                     <motion.div
-                        className="pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
+                        className="pt-15 pb-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
-                            <p>© 2026 Mergex. All rights reserved.</p>
+                        <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center text-left mb-4 md:mb-0">
+                            <p className="text-xs sm:text-sm">© 2026 Mergex. All rights reserved.</p>
                             <span className="hidden md:block text-gray-500">|</span>
-                            <p className="hidden md:block opacity-100 font-medium text-gray-300 text-center md:text-left">We believe good systems outlast trends.</p>
+                            <p className="opacity-100 font-medium text-gray-300 text-left text-xs sm:text-sm">We believe good systems outlast trends.</p>
                         </div>
-                        <div className="flex gap-6">
+                        <div className="flex flex-wrap items-center justify-start md:justify-end gap-x-4 gap-y-3 w-full md:w-auto mt-4 md:mt-0 text-xs sm:text-sm">
                             <a className="hover:text-white transition-colors" href="#">
                                 Privacy Policy
                             </a>
@@ -397,7 +407,7 @@ export default function Footer() {
                             </a>
                             <button
                                 onClick={() => scrollTo(0)}
-                                className="ml-2 w-8 h-8 rounded-full bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white group"
+                                className="ml-2 w-8 h-8 rounded-full bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white group shrink-0"
                                 aria-label="Back to Top"
                             >
                                 {/* Arrow-up-to-line icon: a top bar + upward arrow */}
