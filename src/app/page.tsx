@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import {
   HeroSection,
-  ProblemContext,
+  ShowreelSection,
+  ArchitectureSection,
   ProblemFragmentation,
   EcosystemSnapshot,
-  // WhatWeBuildSection,
+  ThreeDMarqueeDemo,
   FAQSection,
 } from '@/modules/homepage';
+import { TestimonialsSection } from '@/modules/shared/components/TestimonialsSection';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
 export const metadata: Metadata = {
@@ -35,30 +37,38 @@ export default function Home() {
         <HeroSection />
       </div>
 
-      {/* 2. Why Mergex Exists — Reframing the Problem */}
-      <div id="problem-context">
-        <ProblemContext />
+      {/* 2. Showreel — Visual Proof */}
+      <div id="showreel">
+        <ShowreelSection />
       </div>
 
-      {/* 3. Problem With Fragmentation — Pain Naming */}
+      {/* 3. Architecture — From Chaos to Clarity */}
+      <div id="architecture">
+        <ArchitectureSection />
+      </div>
+
+      {/* 4. Problem With Fragmentation — Pain Naming */}
       <div id="problem-fragmentation">
         <ProblemFragmentation />
       </div>
 
-      {/* 4. Explore Ecosystem — Choice Architecture */}
+      {/* 5. Explore Ecosystem — Choice Architecture */}
       <div id="ecosystem">
         <EcosystemSnapshot />
       </div>
 
-      {/* 5. What We Build — High-Level Outcomes Only */}
-      <div id="what-we-build">
-        {/* What We Build - Commented out */}
-        {/* <WhatWeBuildSection /> */}
+
+      {/* 7. Work Gallery — 3D Marquee Showcase */}
+      <div id="work-gallery">
+        <ThreeDMarqueeDemo />
       </div>
 
+      {/* 8. Testimonials — Social Proof */}
+      <div id="testimonials">
+        <TestimonialsSection />
+      </div>
 
-
-      {/* 7. FAQ — Orientation */}
+      {/* 9. FAQ — Orientation */}
       <div id="faq">
         <FAQSection variant="parent" />
       </div>

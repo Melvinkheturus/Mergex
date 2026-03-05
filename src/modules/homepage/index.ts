@@ -9,9 +9,15 @@ import CinematicPortalSection from './components/CinematicPortalSection';
 import VideoPortalCard from './components/VideoPortalCard';
 import { FAQSection } from './components/FAQSection';
 import { ProblemContext } from './components/ProblemContext';
+import { ArchitectureSection } from './components/ArchitectureSection';
 import { ProblemFragmentation } from './components/ProblemFragmentation';
 import { HowWeWorkSection } from './components/HowWeWorkSection';
 import { ProofSection } from './components/ProofSection';
+import { ShowreelSection } from './components/ShowreelSection';
+import { ParentHowItWorks } from './components/ParentHowItWorks';
+import { ParentWorkGallery } from './components/ParentWorkGallery';
+import { ThreeDMarqueeDemo } from './components/ThreeDMarqueeDemo';
+import { TestimonialsSection } from './components/TestimonialsSection';
 
 export {
     HeroSection,
@@ -25,7 +31,13 @@ export {
     VideoPortalCard,
     FAQSection,
     ProblemContext,
+    ArchitectureSection,
     ProblemFragmentation,
     HowWeWorkSection,
     ProofSection,
+    ShowreelSection,
+    ParentHowItWorks,
+    ParentWorkGallery,
+    ThreeDMarqueeDemo,
+    TestimonialsSection,
 };

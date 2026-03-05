@@ -28,28 +28,28 @@ export const LABS_EXPERIMENTS: LabsExperiment[] = [
         technicalNotes: 'Custom Stable Diffusion LoRA trained on 150 brand images. Midjourney for initial concepts. AI-powered upscaling and refinement in Photoshop. Total generation time: 6 hours. Curation and refinement: 12 hours.',
     },
     {
-        id: 'madonna-motion-experiment',
-        slug: 'madonna-motion-graphics',
-        title: 'Madonna: AI Motion Identity',
+        id: 'sara-motion-experiment',
+        slug: 'sara-motion-graphics',
+        title: 'Sara: AI Motion Identity',
         category: 'video',
-        shortDescription: 'Experimental brand motion system featuring Madonna, exploring the intersection of AI-generated visuals and dynamic brand storytelling.',
-        thumbnailImage: '/assets/experiments/madonna-motion-thumb.jpg',
-        heroImage: '/assets/experiments/madonna-motion-hero.jpg',
+        shortDescription: 'Experimental brand motion system featuring Sara, exploring the intersection of AI-generated visuals and dynamic brand storytelling.',
+        thumbnailImage: '/assets/experiments/sara-motion-thumb.jpg',
+        heroImage: '/assets/experiments/sara-motion-hero.jpg',
         tags: ['Runway Gen-3', 'After Effects', 'ComfyUI', 'GSAP'],
-        createdBy: 'Madonna',
+        createdBy: 'Sara',
         timeline: '5 days',
         featured: true,
         visualAssets: {
             videos: [
-                '/assets/experiments/madonna-intro.mp4',
-                '/assets/experiments/madonna-transition.mp4',
+                '/assets/experiments/sara-intro.mp4',
+                '/assets/experiments/sara-transition.mp4',
             ],
             images: [
-                '/assets/experiments/madonna-frame-1.jpg',
-                '/assets/experiments/madonna-frame-2.jpg',
+                '/assets/experiments/sara-frame-1.jpg',
+                '/assets/experiments/sara-frame-2.jpg',
             ],
         },
-        concept: 'What if a brand identity could evolve and adapt in real-time? This experiment explores generative motion systems where Madonna\'s visual presence responds to context, time, and interaction.',
+        concept: 'What if a brand identity could evolve and adapt in real-time? This experiment explores generative motion systems where Sara\'s visual presence responds to context, time, and interaction.',
         technicalNotes: 'Generated 300+ motion variations using Runway Gen-3. Composited in After Effects with procedural animation systems. Web integration using GSAP ScrollTrigger for reactive experiences.',
     },
     {
@@ -105,5 +105,5 @@ export const LABS_EXPERIMENTS: LabsExperiment[] = [
 export const EXPERIMENTS_GALLERY_CONFIG = {
     headline: 'Experiments & Explorations',
     subheadline: 'Pushing the boundaries of what\'s possible with AI and creative technology.',
-    description: 'Every experiment is a question. Every exploration is a discovery. This is where Madonna and the Labs team explore the edge of creativity, technology, and possibility.',
+    description: 'Every experiment is a question. Every exploration is a discovery. This is where Sara and the Labs team explore the edge of creativity, technology, and possibility.',
 } as const;

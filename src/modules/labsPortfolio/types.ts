@@ -2,7 +2,7 @@
 // Visual-first experiment and exploration structure
 
 export type ExperimentCategory = 'visual' | 'video' | 'audio' | 'concept';
-export type CreatorType = 'Madonna' | 'Labs Team';
+export type CreatorType = 'Sara' | 'Labs Team';
 
 export interface VisualAssets {
     images?: string[];

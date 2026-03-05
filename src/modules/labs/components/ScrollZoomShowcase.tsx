@@ -5,9 +5,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 import { ScrollVelocity } from '@/components/ScrollVelocity';
-import { Skiper67, VideoPopOver } from '@/components/ui/skiper-ui/skiper67';
 import { cn } from '@/lib/utils';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Qwigley } from 'next/font/google';
+
+const scriptFont = Qwigley({
+    subsets: ['latin'],
+    weight: ['400'],
+});
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -152,19 +157,18 @@ export function ScrollZoomShowcase() {
                 }
             );
 
-            // Content fade in with hold
+            // Content fade in with hold has been removed from GSAP scrub.
+            // We now use Framer Motion's whileInView for a more elegant reveal.
+            // We just ensure the parent container is visible during the last half.
             gsap.fromTo(
                 contentRef.current,
-                {
-                    opacity: 0,
-                    y: 30,
-                },
+                { opacity: 0 },
                 {
                     keyframes: [
-                        { opacity: 1, y: 0, duration: 0.5 },
-                        { opacity: 1, y: 0, duration: 0.5 }
+                        { opacity: 1, duration: 0.5 },
+                        { opacity: 1, duration: 0.5 }
                     ],
-                    ease: 'power2.out',
+                    ease: 'none',
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: 'top top',
@@ -250,107 +254,167 @@ export function ScrollZoomShowcase() {
                             <div className="relative w-full h-full max-w-[1600px] mx-auto flex flex-col md:block">
 
                                 {/* ZONE 1: PRIMARY STATEMENT (Top Left) */}
-                                <div className={cn(
-                                    "md:absolute md:top-[6%] md:left-0 max-w-[460px] z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
-                                    isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-                                )}>
-                                    <p className="text-[12px] md:text-[13px] uppercase tracking-[0.12em] mb-4 opacity-70 font-medium text-white/80">
-                                        FEATURED EXPLORATION
-                                    </p>
-                                    {/* Headline with Image */}
-                                    <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent pb-2 whitespace-nowrap flex items-center">
-                                        Meet
-                                        <img
-                                            src="/assets/model/Madonna_Calligraphy.png"
-                                            alt="Madonna"
-                                            className="inline-block object-contain ml-3 mt-1 h-14 md:h-20 filter brightness-0 invert opacity-90 translate-y-2 md:translate-y-3"
-                                        />
-                                    </h2>
-                                </div>
+                                <motion.div
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.3 }}
+                                    variants={{
+                                        hidden: {},
+                                        visible: {
+                                            transition: {
+                                                staggerChildren: 0.15
+                                            }
+                                        }
+                                    }}
+                                    className={cn(
+                                        "md:absolute md:top-[6%] md:left-0 max-w-[460px] z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
+                                        isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+                                    )}
+                                >
+                                    <motion.p
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] mb-4 opacity-60 font-medium text-white/80"
+                                    >
+                                        Featured Exploration
+                                    </motion.p>
+
+                                    {/* Headline: Mix of sans-serif and Playfair serif */}
+                                    <div className="overflow-hidden">
+                                        <motion.h2
+                                            variants={{
+                                                hidden: { opacity: 0, y: 40 },
+                                                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
+                                            }}
+                                            className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/60 to-white/80 bg-clip-text text-transparent pb-2 whitespace-nowrap flex items-baseline gap-3 tracking-tight"
+                                        >
+                                            Meet
+                                            <span
+                                                className="font-normal italic tracking-normal"
+                                                style={{ fontFamily: 'var(--font-playfair)' }}
+                                            >
+                                                Sara Vega
+                                            </span>
+                                        </motion.h2>
+                                    </div>
+                                </motion.div>
 
                                 {/* ZONE 2: CONTEXT & MEANING (Mid-Left) */}
-                                <div className={cn(
-                                    "md:absolute md:top-[33%] md:left-0 max-w-[420px] mt-8 md:mt-0 z-10 flex flex-col gap-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
-                                    isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-                                )}>
-                                    <h3 className="text-base md:text-lg font-normal leading-[1.3] text-white/90">
+                                <motion.div
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.3 }}
+                                    variants={{
+                                        hidden: {},
+                                        visible: {
+                                            transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+                                        }
+                                    }}
+                                    className={cn(
+                                        "md:absolute md:top-[33%] md:left-0 max-w-[420px] mt-8 md:mt-0 z-10 flex flex-col gap-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
+                                        isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+                                    )}
+                                >
+                                    <motion.h3
+                                        variants={{
+                                            hidden: { opacity: 0, y: 15 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="text-base md:text-lg font-light leading-[1.5] text-white/90 tracking-wide"
+                                    >
                                         An AI-native creative exploration by Mergex Labs.
-                                    </h3>
+                                    </motion.h3>
                                     {/* Instagram Link */}
-                                    <div className="flex flex-col gap-1.5">
-                                        <span className="text-[11px] md:text-[12px] uppercase tracking-[0.1em] text-white/50 font-medium">
+                                    <motion.div
+                                        variants={{
+                                            hidden: { opacity: 0, y: 15 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="flex flex-col gap-1.5 mt-2"
+                                    >
+                                        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/40 font-semibold selection:bg-white/20">
                                             Follow her journey:
                                         </span>
                                         <a
-                                            href="https://instagram.com/madonna.ai"
+                                            href="https://instagram.com/heysaravega"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors duration-300 w-fit border-b border-white/20 hover:border-white/60 pb-0.5"
+                                            className="text-sm md:text-base font-medium text-white/80 hover:text-white transition-colors duration-300 w-fit border-b border-white/20 hover:border-white/60 pb-0.5 tracking-wide flex items-center gap-1 group"
                                         >
-                                            @madonna.ai
+                                            @heysaravega
                                         </a>
-                                    </div>
-                                </div>
-
-                                {/* ZONE 2.5: VIDEO CARD (Top Right) */}
-                                <div
-                                    ref={videoCardRef}
-                                    className="hidden md:block absolute top-[12%] right-[3%] w-[260px] z-[20]"
-                                >
-                                    <Skiper67 onOpenChange={setIsVideoOpen} isOpen={isVideoOpen} />
-                                </div>
+                                    </motion.div>
+                                </motion.div>
 
                                 {/* ZONE 3: META + ACTION (Bottom Right) */}
-                                <div className={cn(
-                                    "md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
-                                    isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-                                )}>
+                                <motion.div
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.3 }}
+                                    variants={{
+                                        hidden: {},
+                                        visible: {
+                                            transition: { staggerChildren: 0.15, delayChildren: 0.5 }
+                                        }
+                                    }}
+                                    className={cn(
+                                        "md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
+                                        isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+                                    )}
+                                >
                                     {/* Moved Description */}
-                                    <p className="text-base md:text-[17px] leading-[1.6] text-white/75 max-w-[420px] text-center md:text-right">
-                                        Madonna represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
-                                    </p>
+                                    <motion.p
+                                        variants={{
+                                            hidden: { opacity: 0, x: 20 },
+                                            visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="text-sm md:text-base leading-[1.8] font-light text-white/70 max-w-[420px] text-center md:text-right tracking-wide"
+                                    >
+                                        Sara Vega represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
+                                    </motion.p>
 
                                     {/* Meta Row */}
-                                    <div className="flex flex-row gap-8 md:gap-12 border-t border-white/20 pt-6 md:border-none md:pt-0">
+                                    <motion.div
+                                        variants={{
+                                            hidden: { opacity: 0, y: 15 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="flex flex-row gap-8 md:gap-12 border-t border-white/10 pt-6 md:border-none md:pt-0"
+                                    >
                                         <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
+                                            <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-2 font-semibold">
                                                 Identity
                                             </p>
-                                            <p className="text-[14px] font-medium opacity-90">
-                                                Madonna
+                                            <p className="text-[13px] font-medium opacity-90 tracking-wide">
+                                                Sara Vega
                                             </p>
                                         </div>
                                         <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
+                                            <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-2 font-semibold">
                                                 Created by
                                             </p>
-                                            <p className="text-[14px] font-medium opacity-90">
+                                            <p className="text-[13px] font-medium opacity-90 tracking-wide">
                                                 Mergex Labs
                                             </p>
                                         </div>
                                         <div className="text-center md:text-right">
-                                            <p className="text-[11px] uppercase tracking-[0.1em] opacity-50 mb-1.5 font-medium">
+                                            <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-2 font-semibold">
                                                 Focus
                                             </p>
-                                            <p className="text-[14px] font-medium opacity-90">
+                                            <p className="text-[13px] font-medium opacity-90 tracking-wide">
                                                 Visual storytelling
                                             </p>
                                         </div>
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {/* Fullscreen Video Portal Replacement - Outside all transforms */}
-            <AnimatePresence>
-                {isVideoOpen && (
-                    <VideoPopOver setShowVideoPopOver={setIsVideoOpen} />
-                )}
-            </AnimatePresence>
         </section >
     );
 }

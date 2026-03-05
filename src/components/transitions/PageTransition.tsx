@@ -5,9 +5,15 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * PageTransition - Creates a dimming effect when navigating between pages
+ * PageTransition - Creates a transition effect when navigating between pages
  */
-export function PageTransition({ children }: { children: React.ReactNode }) {
+export function PageTransition({
+    children,
+    variant = 'dark'
+}: {
+    children: React.ReactNode;
+    variant?: 'dark' | 'light';
+}) {
     const pathname = usePathname();
     const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -27,7 +33,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="fixed inset-0 bg-black z-[9999] pointer-events-none"
+                        className={`fixed inset-0 z-[9999] pointer-events-none ${variant === 'light' ? 'bg-white' : 'bg-black'
+                            }`}
                     />
                 )}
             </AnimatePresence>

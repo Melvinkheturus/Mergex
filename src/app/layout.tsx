@@ -139,7 +139,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* Alex Brush - Elegant script font for Madonna text */}
+        {/* Alex Brush - Elegant script font for Sara text */}
         <link
           href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
           rel="stylesheet"

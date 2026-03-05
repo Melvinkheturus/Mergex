@@ -303,4 +303,70 @@ export const ECOSYSTEM_CONTENT = {
     subheadline: 'The intersection of engineering and creativity. A single brain for your digital body.',
 } as const;
 
+// Showreel Section
+export const SHOWREEL_CONTENT = {
+    headline: 'See What We Build',
+    subheadline: 'A cinematic glimpse into the future of business systems and creative AI.',
+    videoSrc: '/assets/mockups/Showreel.mov',
+    videoPoster: '/assets/projects/showreel-poster.jpg',
+} as const;
+
+// Parent Work Gallery (Bento Grid)
+export const PARENT_WORK_SAMPLES = [
+    {
+        title: 'Cedar Elevators',
+        category: 'Systems',
+        size: 'large',
+        image: '/projects/cedar.jpg',
+        description: 'Enterprise E-commerce & Inventory',
+    },
+    {
+        title: 'AI Product Photography',
+        category: 'Labs',
+        size: 'small',
+        image: '/projects/ai-photography.jpg',
+        description: 'Scalable visual generation',
+    },
+    {
+        title: 'Marketing Automation',
+        category: 'Systems',
+        size: 'small',
+        image: '/projects/automation.jpg',
+        description: 'Lead generation workflows',
+    },
+    {
+        title: 'Brand Design Systems',
+        category: 'Labs',
+        size: 'medium',
+        image: '/projects/branding.jpg',
+        description: 'Consistent identity at scale',
+    },
+] as const;
+
+// Parent Testimonials
+export const PARENT_TESTIMONIALS = [
+    {
+        name: 'Sarah Chen',
+        role: 'Founder',
+        company: 'Vanguard Realty',
+        quote: 'Mergex didn\'t just build our app; they built our entire digital infrastructure. The speed of execution is unlike any other partner we\'ve worked with.',
+        avatar: '/assets/testimonials/sarah.jpg',
+    },
+    {
+        name: 'Michael Ross',
+        role: 'CTO',
+        company: 'Cedar Elevators',
+        quote: 'The division between Labs and Systems is brilliant. We get high-end creative work and robust engineering under one roof. Our MVP was live in 3 weeks.',
+        avatar: '/assets/testimonials/michael.jpg',
+    },
+    {
+        name: 'Elena Rodriguez',
+        role: 'Marketing Director',
+        company: 'Pulse Media',
+        quote: 'Their AI automation systems saved our team 20+ hours a week. They don\'t just follow specs—they solve business problems.',
+        avatar: '/assets/testimonials/elena.jpg',
+    },
+] as const;
+
+
 

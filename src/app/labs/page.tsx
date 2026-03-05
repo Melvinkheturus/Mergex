@@ -64,7 +64,7 @@ export default function LabsPage() {
                 <ExperimentsGallery />
             </div>
 
-            {/* 6. Madonna Reveal / Scroll Experience — After Proof */}
+            {/* 6. Sara Reveal / Scroll Experience — After Proof */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
             </div>

@@ -87,10 +87,10 @@ export function WhatWeSolve() {
                             What is Mergex Systems?
                         </motion.span>
                         <h2
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1]"
+                            className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1A1A1A] leading-[1.1] tracking-tight"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
-                            <span className="font-clash">The Revenue</span> <span className={`${playfair.className} italic font-normal`}>Architecture</span> <span className="font-clash">Engine of Mergex.</span>
+                            The Revenue <span className={`${playfair.className} italic font-normal`}>Architecture</span> Engine of Mergex.
                         </h2>
                     </motion.div>
 

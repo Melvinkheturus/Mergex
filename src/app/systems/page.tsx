@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function SystemsPage() {
     return (
-        <PageTransition>
+        <PageTransition variant="light">
 
             <SystemsScrollRegistrar />
             <SystemsPageShell>
