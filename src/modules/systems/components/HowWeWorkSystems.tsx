@@ -72,7 +72,7 @@ export function HowWeWorkSystems() {
     const [expandedIndex, setExpandedIndex] = useState<number>(0);
 
     return (
-        <section className="relative bg-white text-[#1A1A1A] py-12 md:py-16">
+        <section className="relative bg-white text-[#1A1A1A] py-8 lg:py-16">
             <div className="max-w-[1440px] mx-auto px-6 md:px-12">
 
                 {/* ── HEADER ── */}
@@ -85,10 +85,10 @@ export function HowWeWorkSystems() {
                     </div>
                     {/* Right headline + supporting text */}
                     <div className="md:col-span-9">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-[#1A1A1A]">
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 md:mb-6 text-[#1A1A1A]">
                             Engineered <span className="font-serif italic font-medium">Execution.</span>
                         </h2>
-                        <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-2xl">
+                        <p className="text-sm md:text-lg text-gray-500 leading-relaxed max-w-2xl">
                             Every engagement follows a structured five-step framework designed to
                             reduce friction, align decisions, and deliver measurable outcomes. From
                             first call to scale-ready system, you&apos;ll always know what&apos;s next.
@@ -167,40 +167,60 @@ export function HowWeWorkSystems() {
 
                     {/* Mobile — Horizontal scroll cards */}
                     <div className="md:hidden col-span-full">
-                        {/* Mobile metrics row */}
-                        <div className="flex gap-6 mb-8 pb-6 border-b border-gray-200">
+                        {/* Mobile metrics row (Cards) */}
+                        <div className="grid grid-cols-2 gap-4 mb-8">
                             {SIDE_METRICS.map((metric, i) => (
-                                <div key={i} className="space-y-1">
-                                    <div className="text-gray-400">{metric.icon}</div>
-                                    <h4 className="text-xl font-bold text-[#1A1A1A]">{metric.value}</h4>
-                                    <p className="text-xs text-gray-500">{metric.detail}</p>
+                                <div key={i} className="flex flex-col space-y-2 p-4 md:p-5 rounded-xl border border-gray-200 bg-[#F7F7F7]">
+                                    <div className="text-gray-400 scale-90 origin-left mb-1">{metric.icon}</div>
+                                    <h4 className="text-lg font-bold text-[#1A1A1A] leading-none">{metric.value}</h4>
+                                    <p className="text-[10px] text-gray-500 leading-snug">{metric.detail}</p>
                                 </div>
                             ))}
                         </div>
 
-                        {/* Horizontal scrollable cards */}
-                        <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 hide-scrollbar snap-x snap-mandatory">
-                            {PROCESS_STEPS.map((step, index) => (
-                                <div
-                                    key={index}
-                                    className="snap-start shrink-0 w-[280px] h-[380px] rounded-md border border-gray-200 bg-[#F7F7F7] p-6 flex flex-col justify-between"
-                                >
-                                    <span className="text-6xl font-bold text-black/10 leading-none">
-                                        {step.number}
-                                    </span>
-                                    <div>
-                                        <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                                            {step.description}
-                                        </p>
-                                        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
-                                            {step.purpose}
-                                        </p>
+                        {/* Mobile Accordion */}
+                        <div className="flex flex-col gap-3">
+                            {PROCESS_STEPS.map((step, index) => {
+                                const isExpanded = expandedIndex === index;
+                                return (
+                                    <div
+                                        key={index}
+                                        onClick={() => setExpandedIndex(isExpanded ? -1 : index)}
+                                        className={`rounded-xl border transition-all duration-300 overflow-hidden cursor-pointer ${isExpanded ? 'border-gray-300 shadow-md bg-white' : 'border-gray-200 bg-[#F7F7F7]'}`}
+                                    >
+                                        <div className="p-4 flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-2xl font-bold text-black/10 leading-none pb-1">
+                                                    {step.number}
+                                                </span>
+                                                <h3 className="text-base font-bold text-[#1A1A1A]">
+                                                    {step.title}
+                                                </h3>
+                                            </div>
+                                            <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                                        >
+                                            <div className="overflow-hidden">
+                                                <div className="px-4 pb-4 pt-1 border-t border-gray-100">
+                                                    <p className="text-xs text-gray-500 leading-relaxed mb-3">
+                                                        {step.description}
+                                                    </p>
+                                                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">
+                                                        {step.purpose}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

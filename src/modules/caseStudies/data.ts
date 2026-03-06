@@ -3,22 +3,22 @@ import { CaseStudy } from './types';
 export const CASE_STUDIES: CaseStudy[] = [
     {
         id: '1',
-        slug: 'e-commerce-platform',
-        title: 'E-Commerce AI Evolution',
-        subtitle: 'Scaling a retail giant with predictive intelligence',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-        heroImageAlt: 'E-Commerce Platform Dashboard',
+        slug: 'dude-mens-wear',
+        title: 'Dude Mens Wear',
+        subtitle: 'Building a modern e-commerce platform for men\'s fashion',
+        heroImage: '/assets/systems/case-studies/case-study-1.png',
+        heroImageAlt: 'Dude Mens Wear E-Commerce Platform',
         outcome: 'From stagnant growth to 150% revenue increase in 6 months',
 
         client: {
-            industry: 'Retail & Fashion',
+            industry: 'E-Commerce & Fashion',
             location: 'New York, USA',
             companySize: '200-500 employees',
-            service: 'Full-Stack Development & AI Integration'
+            service: 'Full-Stack E-Commerce Development'
         },
 
         problem: {
-            narrative: 'The brand had a loyal following but their legacy platform was crashing during peak traffic. Manual inventory management was causing stockouts, and customers were bouncing due to generic experiences.',
+            narrative: 'Dude Mens Wear had a loyal following but their legacy platform was crashing during peak traffic. Manual inventory management was causing stockouts, and customers were bouncing due to generic experiences.',
             painPoints: [
                 'High cart abandonment rate (75%)',
                 'Frequent server downtime during sales',
@@ -51,14 +51,14 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Visual Discovery',
                 description: 'We completely overhauled the product browsing experience, focusing on high-fidelity imagery and intuitive filtering.',
-                image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-                imageAlt: 'Product Discovery UI'
+                image: '/assets/systems/case-studies/case-study-1.png',
+                imageAlt: 'Dude Mens Wear Product Discovery'
             },
             {
                 title: 'Smart Cart',
                 description: 'The new cart dynamically suggests complementary products, increasing average order value.',
-                image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-                imageAlt: 'Smart Cart UI'
+                image: '/assets/systems/case-studies/case-study-1.png',
+                imageAlt: 'Dude Mens Wear Smart Cart'
             }
         ],
 
@@ -72,17 +72,18 @@ export const CASE_STUDIES: CaseStudy[] = [
             quote: "Mergex didn't just build a website; they built a sales engine that works while we sleep.",
             author: 'Sarah Jenkins',
             role: 'CTO',
-            company: 'FashionForward',
+            company: 'Dude Mens Wear',
         },
 
-        categories: ['E-Commerce', 'AI', 'Cloud'],
+        categories: ['E-Commerce', 'Fashion', 'Cloud'],
         techStack: ['Next.js', 'Node.js', 'AWS', 'Python'],
         publishDate: '2025-10-15',
+        externalUrl: 'https://www.dudemw.com/',
 
         fitCriteria: {
             idealFor: [
                 'High-volume retailers',
-                'Brands needing custom AI solutions',
+                'Fashion & apparel brands',
                 'Companies aiming for rapid scaling'
             ],
             notIdealFor: [
@@ -94,183 +95,185 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     {
         id: '2',
-        slug: 'healthcare-management-system',
-        title: 'Healthcare Unity System',
-        subtitle: 'Streamlining patient care with secure data integration',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
-        heroImageAlt: 'Healthcare Management Dashboard',
-        outcome: 'From fragmented records to unified patient insights in 90 days',
+        slug: 'heyprodata',
+        title: 'HeyProData',
+        subtitle: 'MENA\'s crew infrastructure for film, media & events',
+        heroImage: '/assets/systems/case-studies/case-study-2.png',
+        heroImageAlt: 'HeyProData Creative Industry Marketplace',
+        outcome: 'From scattered industry contacts to a unified crew ecosystem powering productions across MENA',
 
         client: {
-            industry: 'Healthcare',
-            location: 'London, UK',
-            companySize: '1000+ employees',
-            service: 'Enterprise Software Development'
+            industry: 'Creative Industry & Media',
+            location: 'MENA Region',
+            companySize: '10-50 employees',
+            service: 'Marketplace Platform Development'
         },
 
         problem: {
-            narrative: 'Medical staff were spending 40% of their time on data entry across 5 disconnected systems. Patient history was scattered, leading to delays in treatment and high administrative burnout.',
+            narrative: 'The film, media, and events industry in MENA had no centralized platform to connect crew, freelancers, producers, and agencies. Finding the right professionals meant endless WhatsApp messages, outdated contact lists, and word-of-mouth — leaving talented crew invisible and productions understaffed.',
             painPoints: [
-                'Data siloed across legacy systems',
-                'High risk of manual entry errors',
-                'Slow patient onboarding process'
+                'No centralized crew discovery or visibility',
+                'Fragmented communication across WhatsApp and email',
+                'No structured way to submit or receive project briefs'
             ]
         },
 
         stakes: [
-            'Compromised patient care quality',
-            'Compliance violations and fines',
-            'Increasing staff turnover due to burnout'
+            'Talented crew remaining invisible to decision makers',
+            'Productions delayed due to slow crew sourcing',
+            'Industry professionals lacking a trusted digital presence'
         ],
 
         strategy: [
             {
-                title: 'Unified Data Layer',
-                description: 'Created a central secure data warehouse that syncs with all legacy systems in real-time.'
+                title: 'Crew-First Profile System',
+                description: 'Built professional profiles that let crew showcase their work, skills, and availability — letting their portfolio speak before they do.'
             },
             {
-                title: 'Clinician-First UX',
-                description: 'Designed interfaces based on doctor and nurse workflows, not database structures.'
+                title: 'Production Networking Engine',
+                description: 'Created a powerful connection layer enabling seamless chat, collaboration, and brief submissions between crew, agencies, and brands.'
             },
             {
-                title: 'Automated Compliance',
-                description: 'Built-in HIPAA and GDPR safeguards that handle regulatory requirements automatically.'
+                title: 'Freemium Growth Model',
+                description: 'Designed a freemium platform with core access open to all, with advanced features for founding members and decision makers.'
             }
         ],
 
         execution: [
             {
-                title: 'Patient 360 View',
-                description: 'A single dashboard showing all vital patient data, history, and upcoming appointments.',
-                image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
-                imageAlt: 'Patient Dashboard UI'
+                title: 'Professional Profiles',
+                description: 'A profile system where crew can showcase their work, connect with collaborators, and get discovered by producers and agencies across the MENA region.',
+                image: '/assets/systems/case-studies/case-study-2.png',
+                imageAlt: 'HeyProData Crew Profiles'
             },
             {
-                title: 'Smart Scheduling',
-                description: 'AI-assisted scheduling that optimizes doctor availability and reduces wait times.',
-                image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
-                imageAlt: 'Scheduling Interface'
+                title: 'Brief & Connect System',
+                description: 'A structured workflow for brands and agencies to submit project briefs, automatically matching them with the right professionals in the network.',
+                image: '/assets/systems/case-studies/case-study-2.png',
+                imageAlt: 'HeyProData Brief System'
             }
         ],
 
         results: [
-            { label: 'Admin Time', value: '-60', suffix: '%' },
-            { label: 'Data Accuracy', value: '99.9', suffix: '%' },
-            { label: 'Patient Satisfaction', value: '+40', suffix: '%' }
+            { label: 'Crew Visibility', value: '+300', suffix: '%' },
+            { label: 'Connection Speed', value: '-75', suffix: '% time' },
+            { label: 'Network Growth', value: '+150', suffix: '%' }
         ],
 
         testimonial: {
-            quote: "Our doctors can finally focus on patients instead of paperwork. The system is intuitive, fast, and secure.",
-            author: 'Dr. James Wilson',
-            role: 'Chief of Medicine',
-            company: 'MediCare Hub',
+            quote: "HeyProData gave our industry the structure it needed. Crew finally have visibility, and productions move faster than ever.",
+            author: 'HeyProData Team',
+            role: 'Founder',
+            company: 'HeyProData',
         },
 
-        categories: ['Healthcare', 'Enterprise', 'Security'],
-        techStack: ['React', 'Java', 'PostgreSQL', 'Azure'],
+        categories: ['Marketplace', 'Creative Industry', 'Networking'],
+        techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
         publishDate: '2025-11-20',
+        externalUrl: 'https://heyprodata.com/',
 
         fitCriteria: {
             idealFor: [
-                'Hospitals and clinics',
-                'Health-tech startups',
-                'Regulated industries'
+                'Creative industry platforms',
+                'Crew & talent marketplaces',
+                'Networking & community apps'
             ],
             notIdealFor: [
-                'Unregulated wellness apps',
-                'Single-practitioner offices',
-                'Marketing-only sites'
+                'Generic job boards',
+                'Single-company HR tools',
+                'Non-industry platforms'
             ]
         }
     },
     {
         id: '3',
-        slug: 'financial-dashboard',
-        title: 'FinTech Analytics Core',
-        subtitle: 'Real-time financial intelligence for modern visionaries',
-        heroImage: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
-        heroImageAlt: 'Financial Analytics Dashboard',
-        outcome: 'From spreadsheet chaos to clear financial command in 30 days',
+        slug: 'cedar-elevators',
+        title: 'Cedar Elevators',
+        subtitle: 'Powering a multi-vendor marketplace for the elevator industry',
+        heroImage: '/assets/systems/case-studies/case-study-3.png',
+        heroImageAlt: 'Cedar Elevators Multi-Vendor Marketplace',
+        outcome: 'From fragmented vendor management to a unified marketplace in 30 days',
 
         client: {
-            industry: 'FinTech',
+            industry: 'Marketplace & Industrial',
             location: 'Singapore',
             companySize: '50-200 employees',
-            service: 'Product Design & Development'
+            service: 'Multi-Vendor Marketplace Development'
         },
 
         problem: {
-            narrative: 'Investment managers needed to make split-second decisions but were relying on daily CSV exports. The data lag was costing millions in missed opportunities.',
+            narrative: 'Cedar Elevators needed a centralized platform to connect elevator manufacturers, installers, and maintenance providers. Vendor management was scattered across emails and spreadsheets, causing delays and miscommunication.',
             painPoints: [
-                '24-hour data latency',
-                'Cluttered, non-responsive interfaces',
-                'Inability to visualize complex trends'
+                'No unified vendor discovery or comparison',
+                'Manual quoting and order tracking',
+                'Inability to scale vendor onboarding'
             ]
         },
 
         stakes: [
-            'Loss of competitive trading edge',
-            'User churn to faster platforms',
-            'Inaccurate reporting leading to compliance risks'
+            'Losing deals due to slow vendor matching',
+            'Vendor churn from poor platform experience',
+            'Inaccurate reporting leading to missed opportunities'
         ],
 
         strategy: [
             {
-                title: 'Real-Time WebSocket Grid',
-                description: 'Implemented direct market data feeds with sub-100ms latency updates.'
+                title: 'Multi-Vendor Architecture',
+                description: 'Built a scalable marketplace platform supporting multiple vendor storefronts, product catalogs, and independent order flows.'
             },
             {
-                title: 'Data Visualization Grammar',
-                description: 'Created a custom charting library designed specifically for financial time-series data.'
+                title: 'Smart Vendor Matching',
+                description: 'Implemented intelligent search and filtering to connect buyers with the right vendors based on location, specialization, and ratings.'
             },
             {
-                title: 'Modular Widget Architecture',
-                description: 'Allowed users to customize their dashboard layout to match their specific trading strategies.'
+                title: 'Automated Quoting & Orders',
+                description: 'Streamlined the RFQ process with automated quoting, real-time order tracking, and vendor communication tools.'
             }
         ],
 
         execution: [
             {
-                title: 'Live Market Watch',
-                description: 'A high-performance grid component handling thousands of concurrent updates without lag.',
-                image: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
-                imageAlt: 'Market Watch UI'
+                title: 'Vendor Marketplace',
+                description: 'A multi-vendor storefront system with independent dashboards, inventory management, and analytics for each vendor.',
+                image: '/assets/systems/case-studies/case-study-3.png',
+                imageAlt: 'Cedar Elevators Vendor Marketplace'
             },
             {
-                title: 'Portfolio Analysis',
-                description: 'Deep-dive analytics into portfolio performance, risk distribution, and attribution.',
-                image: '/assets/mockups/Gemini_Generated_Image_q305hxq305hxq305.png',
-                imageAlt: 'Portfolio Analytics UI'
+                title: 'Order Management Hub',
+                description: 'Centralized order tracking with real-time status updates, vendor communication, and automated notifications.',
+                image: '/assets/systems/case-studies/case-study-3.png',
+                imageAlt: 'Cedar Elevators Order Management'
             }
         ],
 
         results: [
-            { label: 'Data Latency', value: '<50', suffix: 'ms' },
-            { label: 'User Retention', value: '+25', suffix: '%' },
-            { label: 'Trade Volume', value: '+200', suffix: '%' }
+            { label: 'Vendor Onboarding', value: '-70', suffix: '% time' },
+            { label: 'Order Accuracy', value: '99.5', suffix: '%' },
+            { label: 'Marketplace Growth', value: '+200', suffix: '%' }
         ],
 
         testimonial: {
-            quote: "Speed is everything in our business. Mergex delivered a platform that is not only fast but incredibly beautiful.",
+            quote: "Mergex delivered a marketplace that connected our entire industry. Vendors love it, buyers trust it, and our business has never grown faster.",
             author: 'Elena Rodriguez',
             role: 'Product Director',
-            company: 'WealthFlow',
+            company: 'Cedar Elevators',
         },
 
-        categories: ['FinTech', 'Real-time', 'Analytics'],
-        techStack: ['Vue.js', 'D3.js', 'Go', 'Redis'],
+        categories: ['Marketplace', 'Multi-Vendor', 'Industrial'],
+        techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
         publishDate: '2025-12-05',
+        externalUrl: 'https://cedarelevator.com/',
 
         fitCriteria: {
             idealFor: [
-                'Trading platforms',
-                'Investment firms',
-                'Data-heavy SaaS'
+                'Multi-vendor marketplaces',
+                'B2B platforms',
+                'Industry-specific marketplaces'
             ],
             notIdealFor: [
-                'Simple bookkeeping apps',
+                'Simple single-vendor shops',
                 'Static informational sites',
-                'Low-frequency data needs'
+                'Low-volume niche stores'
             ]
         }
     }

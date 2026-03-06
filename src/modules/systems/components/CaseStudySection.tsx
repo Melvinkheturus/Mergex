@@ -117,7 +117,7 @@ export function CaseStudySection() {
                         Selected Work
                     </h2>
                     <h3
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                        className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
                         style={{ fontFamily: 'var(--font-manrope)' }}
                     >
                         Case Studies
@@ -130,23 +130,23 @@ export function CaseStudySection() {
     return (
         <>
             {/* Section Header — outside the pinned area */}
-            <div className="bg-slate-50 pt-12 lg:pt-16 pb-8">
+            <div className="bg-slate-50 pt-16 md:pt-32 pb-4 md:pb-12">
                 <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                     <div className="text-center">
                         <h2
-                            className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
+                            className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-2 md:mb-4"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
                             Selected Work
                         </h2>
                         <h3
-                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                            className="text-2xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 md:mb-4"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
                             Case Studies
                         </h3>
                         <p
-                            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                            className="text-xs sm:text-sm md:text-xl text-gray-600 max-w-2xl mx-auto px-4 md:px-0"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
                             Explore our portfolio of successful projects and transformative solutions
@@ -158,15 +158,17 @@ export function CaseStudySection() {
             {/* Pinned Card Stack */}
             <section
                 ref={sectionRef}
-                className="relative h-screen flex items-center justify-center overflow-hidden p-3 lg:p-8"
+                className="relative h-screen flex flex-col items-center justify-center overflow-hidden p-4 md:p-3 lg:p-8"
                 onMouseMove={handleMouseMove}
                 style={{ cursor: 'none' }}
             >
                 {/* Card Container — increased height to 90% */}
-                <div className="relative h-[90%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
+                <div className="relative h-[65vh] md:h-[90%] w-full max-w-[92vw] overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl block">
                     {CASE_STUDIES.map((study, i) => (
                         <Link
-                            href={`/case-studies/${study.slug}`}
+                            href={study.externalUrl ? study.externalUrl : `/case-studies/${study.slug}`}
+                            target={study.externalUrl ? "_blank" : "_self"}
+                            rel={study.externalUrl ? "noopener noreferrer" : undefined}
                             key={study.id}
                             className="absolute inset-0 block group"
                             style={{ cursor: 'none' }}
@@ -192,13 +194,13 @@ export function CaseStudySection() {
                                         {study.client.industry}
                                     </span>
                                     <h4
-                                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3"
+                                        className="text-xl md:text-3xl lg:text-4xl font-bold text-white mb-3"
                                         style={{ fontFamily: 'var(--font-manrope)' }}
                                     >
                                         {study.title}
                                     </h4>
                                     <p
-                                        className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl"
+                                        className="text-white/80 text-sm md:text-lg lg:text-xl leading-relaxed max-w-2xl"
                                         style={{ fontFamily: 'var(--font-manrope)' }}
                                     >
                                         {study.outcome}

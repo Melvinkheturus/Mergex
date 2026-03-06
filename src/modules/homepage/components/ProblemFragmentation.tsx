@@ -18,7 +18,7 @@ export function ProblemFragmentation() {
     };
 
     return (
-        <section className="py-24 md:py-32 bg-white border-t border-neutral-100">
+        <section className="py-12 md:py-32 bg-white border-t border-neutral-100">
             <div className="container mx-auto px-6 md:px-12">
 
                 {/* 1. Header */}
@@ -120,17 +120,17 @@ export function ProblemFragmentation() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="bg-neutral-50 border border-neutral-100 rounded-[2rem] p-8 lg:p-10 flex flex-col lg:flex-row items-center gap-8 text-center lg:text-left hover:bg-neutral-100 transition-colors duration-300"
+                            className="bg-neutral-50 border border-neutral-100 rounded-[2rem] p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-8 hover:bg-neutral-100 transition-colors duration-300"
                         >
-                            <div className="flex-shrink-0">
-                                <span className="block text-5xl font-light text-neutral-300 font-display mb-2">03</span>
-                                <Clock size={32} className="text-neutral-400 mx-auto lg:mx-0" />
+                            <div className="flex justify-between items-start w-full lg:w-auto lg:block flex-shrink-0">
+                                <span className="text-4xl lg:text-5xl font-light text-neutral-300 font-display lg:mb-2 lg:block">03</span>
+                                <Clock size={24} className="text-neutral-400 lg:w-8 lg:h-8 lg:mx-0" />
                             </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-neutral-900 mb-3">
+                            <div className="text-left w-full">
+                                <h3 className="text-xl lg:text-2xl font-bold text-neutral-900 mb-3">
                                     {PROBLEM_FRAGMENTATION.problems[2].title}
                                 </h3>
-                                <p className="text-neutral-600 leading-relaxed">
+                                <p className="text-sm lg:text-base text-neutral-600 leading-relaxed">
                                     {PROBLEM_FRAGMENTATION.problems[2].description}
                                 </p>
                             </div>

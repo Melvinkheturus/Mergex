@@ -20,14 +20,18 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
 
         const syncHeight = () => {
             const height = el.offsetHeight;
-            document.documentElement.style.setProperty('--footer-height', `${height}px`);
+            // Only set footer-height for desktop reveal effect
+            if (window.innerWidth >= 768) {
+                document.documentElement.style.setProperty('--footer-height', `${height}px`);
+            } else {
+                document.documentElement.style.setProperty('--footer-height', '0px');
+            }
         };
 
         const handleScroll = () => {
+            if (window.innerWidth < 768) return; // No reveal effect on mobile
+
             const height = el.offsetHeight;
-            // The last `height` pixels of scrollable range ARE the footer reveal zone.
-            // Total scrollable px = scrollHeight - innerHeight (max possible scrollY).
-            // Footer starts revealing at: maxScroll - footerHeight.
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const revealThreshold = maxScroll - height;
             const isRevealing = window.scrollY >= revealThreshold;
@@ -45,11 +49,13 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
         observer.observe(el);
 
         window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', syncHeight, { passive: true });
 
         return () => {
             observer.disconnect();
             window.removeEventListener('scroll', handleScroll);
-            // Clean up the variable when the layout unmounts (e.g. studio route)
+            window.removeEventListener('resize', syncHeight);
+            // Clean up the variable when the layout unmounts
             document.documentElement.style.removeProperty('--footer-height');
             // Ensure navbar is visible when leaving
             window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', {
@@ -61,13 +67,7 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
     return (
         <div
             ref={wrapperRef}
-            style={{
-                position: 'fixed',
-                bottom: 0,
-                left: 0,
-                width: '100%',
-                zIndex: 1,
-            }}
+            className="w-full relative z-20 md:fixed md:bottom-0 md:left-0 md:z-[1]"
         >
             {children}
         </div>

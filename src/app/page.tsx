@@ -7,7 +7,6 @@ import {
   // WhatWeBuildSection,
   FAQSection,
 } from '@/modules/homepage';
-import { TestimonialsSection } from '@/modules/shared';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
 export const metadata: Metadata = {
@@ -57,10 +56,7 @@ export default function Home() {
         {/* <WhatWeBuildSection /> */}
       </div>
 
-      {/* 6. Testimonials — Belief-Based Only */}
-      <div id="testimonials">
-        <TestimonialsSection />
-      </div>
+
 
       {/* 7. FAQ — Orientation */}
       <div id="faq">

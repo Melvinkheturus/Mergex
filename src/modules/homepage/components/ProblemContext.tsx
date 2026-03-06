@@ -18,7 +18,7 @@ export function ProblemContext() {
     };
 
     return (
-        <section className="py-10 md:py-32 bg-white relative overflow-hidden">
+        <section className="py-12 md:py-32 bg-white relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-purple-100/50 rounded-full blur-[100px]" />
@@ -210,7 +210,7 @@ export function ProblemContext() {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2rem] p-6 md:p-8 flex flex-col justify-between min-h-[350px] w-[85vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center flex-shrink-0"
+                                className="bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2rem] p-6 flex flex-col gap-3 w-[90vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center flex-shrink-0"
                             >
                                 {/* Animated Gradient Blobs */}
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -242,11 +242,11 @@ export function ProblemContext() {
                                     />
                                 </div>
 
-                                <div className="relative z-10">
-                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white mb-6 border border-white/20 backdrop-blur-sm">
+                                <div className="relative z-10 flex flex-col gap-2">
+                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-sm">
                                         <Users size={24} />
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
                                         {PROBLEM_CONTEXT.problems[0].title}
                                     </h3>
                                     <p className="text-base md:text-lg text-purple-100 leading-relaxed font-light">
@@ -254,7 +254,7 @@ export function ProblemContext() {
                                     </p>
                                 </div>
 
-                                <div className="mt-6 pt-6 border-t border-white/20 flex items-center text-white font-medium opacity-80">
+                                <div className="mt-4 pt-4 border-t border-white/20 flex items-center text-white font-medium opacity-80">
                                     <span className="mr-2">Learn more</span> <ArrowRight size={16} />
                                 </div>
                             </motion.div>
@@ -265,7 +265,7 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col justify-between min-h-[350px] w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
@@ -274,11 +274,11 @@ export function ProblemContext() {
                                 <div className="bg-neutral-50 p-3 rounded-xl w-fit">
                                     <Clock size={24} className="text-violet-500" />
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                                <div className="flex flex-col gap-1">
+                                    <h3 className="text-xl font-bold text-neutral-900">
                                         {PROBLEM_CONTEXT.problems[1].title}
                                     </h3>
-                                    <p className="text-sm text-neutral-600 leading-relaxed min-h-[60px]">
+                                    <p className="text-sm text-neutral-600 leading-relaxed">
                                         {PROBLEM_CONTEXT.problems[1].description}
                                     </p>
                                 </div>
@@ -290,21 +290,23 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 justify-center min-h-[350px] w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
                                 }}
                             >
-                                <div className="w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center w-fit">
-                                    <Brain size={20} className="text-violet-500" />
+                                <div className="flex flex-col gap-1">
+                                    <div className="mb-2 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
+                                        <Brain size={20} className="text-violet-500" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-neutral-900">
+                                        {PROBLEM_CONTEXT.problems[2].title}
+                                    </h3>
+                                    <p className="text-sm text-neutral-600 leading-relaxed">
+                                        {PROBLEM_CONTEXT.problems[2].description}
+                                    </p>
                                 </div>
-                                <h3 className="text-xl font-bold text-neutral-900 mt-2">
-                                    {PROBLEM_CONTEXT.problems[2].title}
-                                </h3>
-                                <p className="text-sm text-neutral-600 leading-relaxed">
-                                    {PROBLEM_CONTEXT.problems[2].description}
-                                </p>
                             </motion.div>
 
                             {/* Small Card 2 */}
@@ -313,21 +315,23 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.3 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 justify-center min-h-[350px] w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
                                 }}
                             >
-                                <div className="w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center w-fit">
-                                    <LinkIcon size={20} className="text-violet-500" />
+                                <div className="flex flex-col gap-1">
+                                    <div className="mb-2 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
+                                        <LinkIcon size={20} className="text-violet-500" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-neutral-900">
+                                        {PROBLEM_CONTEXT.problems[3].title}
+                                    </h3>
+                                    <p className="text-sm text-neutral-600 leading-relaxed">
+                                        {PROBLEM_CONTEXT.problems[3].description}
+                                    </p>
                                 </div>
-                                <h3 className="text-xl font-bold text-neutral-900 mt-2">
-                                    {PROBLEM_CONTEXT.problems[3].title}
-                                </h3>
-                                <p className="text-sm text-neutral-600 leading-relaxed">
-                                    {PROBLEM_CONTEXT.problems[3].description}
-                                </p>
                             </motion.div>
                         </div>
                     </div>

@@ -4,11 +4,14 @@ import { motion } from 'framer-motion';
 import { HOW_WE_WORK } from '../content';
 import { Search, PenTool, Code2, Rocket } from 'lucide-react';
 
+import { useState } from 'react';
+
 /**
  * HowWeWorkSection - Process confidence builder
  * Shows systematic 4-step approach to build trust
  */
 export function HowWeWorkSection() {
+    const [expandedMobileIndex, setExpandedMobileIndex] = useState<number | null>(0);
     const iconMap = {
         search: Search,
         pencil: PenTool,
@@ -45,8 +48,8 @@ export function HowWeWorkSection() {
                     </p>
                 </motion.div>
 
-                {/* Process Steps - Horizontal on desktop, vertical on mobile */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                {/* Process Steps - Desktop (Grid) */}
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {HOW_WE_WORK.steps.map((step, index) => {
                         const Icon = iconMap[step.icon as keyof typeof iconMap];
 
@@ -65,7 +68,7 @@ export function HowWeWorkSection() {
                                 )}
 
                                 {/* Step Card */}
-                                <div className="relative bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
+                                <div className="relative bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300 h-full">
                                     {/* Step Number */}
                                     <div className="text-5xl font-bold text-primary/10 mb-2">
                                         {step.number}
@@ -85,6 +88,48 @@ export function HowWeWorkSection() {
                                     </p>
                                 </div>
                             </motion.div>
+                        );
+                    })}
+                </div>
+
+                {/* Process Steps - Mobile (Accordion) */}
+                <div className="md:hidden flex flex-col gap-3 mb-12">
+                    {HOW_WE_WORK.steps.map((step, index) => {
+                        const Icon = iconMap[step.icon as keyof typeof iconMap];
+                        const isExpanded = expandedMobileIndex === index;
+
+                        return (
+                            <div
+                                key={index}
+                                onClick={() => setExpandedMobileIndex(isExpanded ? null : index)}
+                                className={`relative bg-white border rounded-2xl p-5 cursor-pointer transition-all duration-300 ${isExpanded ? 'border-primary/30 shadow-md' : 'border-gray-100'}`}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+                                            <Icon size={20} className="text-blue-600" />
+                                        </div>
+                                        <h3 className="text-lg font-bold text-foreground">
+                                            {step.title}
+                                        </h3>
+                                    </div>
+                                    <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}
+                                >
+                                    <div className="overflow-hidden">
+                                        <p className="text-sm text-foreground-muted leading-relaxed pl-14">
+                                            {step.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         );
                     })}
                 </div>

@@ -10,7 +10,7 @@ import { ENGAGEMENT_MODEL } from '../content/systems';
  */
 export function EngagementModel() {
     return (
-        <section className="relative py-12 md:py-16 bg-slate-50/50 overflow-hidden">
+        <section className="relative py-12 lg:py-32 bg-slate-50/50 overflow-hidden">
             <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-7xl">
                 {/* Header */}
                 <div className="text-center mb-16 lg:mb-20 animate-fadeIn">
@@ -22,11 +22,11 @@ export function EngagementModel() {
                         </span>
                     </div>
 
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
+                    <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
                         style={{ fontFamily: "var(--font-manrope)" }}>
                         {ENGAGEMENT_MODEL.headline}
                     </h2>
-                    <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                    <p className="text-base md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
                         style={{ fontFamily: "var(--font-manrope)" }}>
                         {ENGAGEMENT_MODEL.subheadline}
                     </p>
@@ -49,19 +49,19 @@ export function EngagementModel() {
                                               flex flex-col`}>
 
                                     {/* Title */}
-                                    <h3 className="text-2xl font-bold mb-2 text-gray-900"
+                                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900"
                                         style={{ fontFamily: "var(--font-manrope)" }}>
                                         {model.title}
                                     </h3>
 
                                     {/* Tagline */}
-                                    <p className="text-sm font-medium mb-8 text-gray-500"
+                                    <p className="text-xs md:text-sm font-medium mb-6 md:mb-8 text-gray-500"
                                         style={{ fontFamily: "var(--font-manrope)" }}>
                                         {model.tagline}
                                     </p>
 
                                     {/* Description */}
-                                    <p className="text-base text-gray-600 leading-relaxed mb-8 flex-grow"
+                                    <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6 md:mb-8 flex-grow"
                                         style={{ fontFamily: "var(--font-manrope)" }}>
                                         {model.description}
                                     </p>
@@ -74,7 +74,7 @@ export function EngagementModel() {
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                 </svg>
-                                                <span className="text-sm text-gray-600"
+                                                <span className="text-xs md:text-sm text-gray-600"
                                                     style={{ fontFamily: "var(--font-manrope)" }}>
                                                     {feature}
                                                 </span>
@@ -108,9 +108,8 @@ export function EngagementModel() {
                     })}
                 </div>
 
-                {/* Bottom Philosophy & CTA */}
-                <div className="text-center max-w-4xl mx-auto space-y-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-                    <p className="text-lg text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto"
+                <div className="text-center max-w-4xl mx-auto space-y-6 md:space-y-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+                    <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto"
                         style={{ fontFamily: "var(--font-manrope)" }}>
                         {ENGAGEMENT_MODEL.philosophy}
                     </p>

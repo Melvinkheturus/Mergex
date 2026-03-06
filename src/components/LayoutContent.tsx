@@ -7,6 +7,7 @@ import { LenisProvider } from "@/lib/lenis-provider";
 import { ScrollSectionProvider } from "@/context/scroll-section-context";
 import { Navbar } from "@/components/layout";
 import Script from "next/script";
+import FooterRevealWrapper from "@/components/FooterRevealWrapper";
 
 const specialRoutes = ["/studio", "/connect"];
 
@@ -59,19 +60,20 @@ export default function LayoutContent({ children }: LayoutContentProps) {
     return (
         <LenisProvider>
             <ScrollSectionProvider>
-                <div className="flex flex-col min-h-screen">
+                <div className="min-h-screen flex flex-col md:block w-full overflow-x-hidden">
                     <Navbar />
                     <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
-                    {/* Main content takes remaining height, pushing footer to bottom naturally */}
+                    {/* Curtain: sits above fixed footer on desktop, normal flow on mobile */}
                     <main
                         id="main-content"
-                        className="flex-1 bg-background"
-                        style={{ zIndex: 10 }}
+                        className="flex-1 w-full relative bg-background z-10 md:mb-[var(--footer-height,0px)]"
                     >
                         {children}
                     </main>
-                    {/* Natural document-flow footer */}
-                    <Footer />
+                    {/* Footer is pinned behind main content on desktop, normal block on mobile */}
+                    <FooterRevealWrapper>
+                        <Footer />
+                    </FooterRevealWrapper>
                 </div>
             </ScrollSectionProvider>
         </LenisProvider>
