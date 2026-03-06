@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-demo';
 
 /**
  * ArchitectureSection — "From Chaos to Clarity"
@@ -17,28 +18,12 @@ import { ArrowUpRight, ArrowRight } from 'lucide-react';
  *  • Bottom: two-column split — left manifesto + right system intelligence cards
  */
 export function ArchitectureSection() {
-    const systemCards = [
-        {
-            number: '01',
-            title: 'Business Architecture',
-            description: 'Designing the structural systems that align operations, strategy, and execution.',
-        },
-        {
-            number: '02',
-            title: 'AI & Automation',
-            description: 'Embedding intelligence into workflows to reduce friction and amplify productivity.',
-        },
-        {
-            number: '03',
-            title: 'Scalable Infrastructure',
-            description: 'Building platforms and systems designed to evolve as businesses grow.',
-        },
-    ];
+
 
     const floatingCards = ['Structure', 'Intelligence', 'Leverage'];
 
     return (
-        <section className="relative bg-white overflow-hidden pb-28 md:pb-36">
+        <section className="relative z-40 bg-white overflow-hidden pb-12 md:pb-16 mt-[-100vh] rounded-t-[2rem] md:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.15)]">
 
             {/* ── TOP HERO: Big text + floating cards ───────────────────── */}
             <div className="relative w-full overflow-hidden px-10 md:px-16">
@@ -178,32 +163,35 @@ export function ArchitectureSection() {
                             </em>
                         </p>
 
+                        {/* CTA moved under title */}
+                        <div className="mb-10">
+                            <Link
+                                href="/systems"
+                                className="inline-flex items-center gap-2 text-base font-semibold text-neutral-900 hover:text-violet-700 transition-colors group"
+                            >
+                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                Explore the architecture
+                            </Link>
+                        </div>
+
                         <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-md">
                             Mergex architects integrated infrastructures that unify strategy, software,
-                            automation, and intelligence — transforming fragmented operations into
+                            automation, and intelligence transforming fragmented operations into
                             systems designed to grow.
                         </p>
 
                         {/* Numbered list */}
-                        <div className="space-y-3 mb-10">
+                        <div className="space-y-4 mb-12">
                             {['Extraordinary clarity', 'Unrivalled resilience', 'Compounding leverage'].map((item, i) => (
                                 <div key={item} className="flex items-center gap-4">
-                                    <span className="text-[11px] text-neutral-300 font-medium tabular-nums w-6">
+                                    <span className="text-sm md:text-base text-neutral-300 font-medium tabular-nums w-8">
                                         {String(i + 1).padStart(2, '0')}
                                     </span>
-                                    <span className="text-sm text-neutral-600 font-medium">{item}</span>
+                                    <span className="text-lg md:text-xl text-neutral-600 font-medium">{item}</span>
                                 </div>
                             ))}
                         </div>
 
-                        {/* CTA */}
-                        <Link
-                            href="/systems"
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-violet-700 transition-colors group"
-                        >
-                            <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            Explore the architecture
-                        </Link>
                     </motion.div>
 
                     {/* RIGHT — System intelligence cards */}
@@ -227,59 +215,20 @@ export function ArchitectureSection() {
                                 operate smarter, and scale without friction.
                             </p>
 
-                            {/* Customer social proof row */}
-                            <div className="flex items-center gap-3 mt-6">
-                                <div className="flex -space-x-2">
-                                    {['#a78bfa', '#7c3aed', '#ddd6fe', '#c4b5fd'].map((color, i) => (
-                                        <div
-                                            key={i}
-                                            className="w-8 h-8 rounded-full border-2 border-white"
-                                            style={{ background: color }}
-                                        />
-                                    ))}
-                                    <div className="w-8 h-8 rounded-full border-2 border-white bg-neutral-100 flex items-center justify-center">
-                                        <span className="text-[9px] font-bold text-neutral-500">+</span>
-                                    </div>
-                                </div>
-                                <span className="text-xs text-neutral-500 font-medium">Built for Modern Businesses</span>
+                            {/* About page link button */}
+                            <div className="mt-6">
+                                <Link
+                                    href="/about"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-200 bg-violet-50 text-violet-700 text-xs font-semibold hover:bg-violet-100 hover:border-violet-300 transition-all duration-200 group"
+                                >
+                                    Engineered for Modern Businesses
+                                    <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </Link>
                             </div>
                         </div>
 
-                        {/* System capability cards */}
-                        <div className="space-y-4">
-                            {systemCards.map((card, i) => (
-                                <motion.div
-                                    key={card.title}
-                                    initial={{ opacity: 0, y: 16 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.15 + i * 0.08 }}
-                                    className="group flex gap-5 p-5 rounded-2xl border border-neutral-100 bg-white hover:border-violet-200 hover:shadow-md hover:shadow-violet-50 transition-all duration-300 cursor-default"
-                                >
-                                    {/* Number */}
-                                    <span
-                                        className="text-xs text-neutral-300 font-medium tabular-nums mt-0.5 w-5 flex-shrink-0"
-                                        style={{ fontFamily: '"Outfit", system-ui' }}
-                                    >
-                                        {card.number}
-                                    </span>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between mb-1">
-                                            <h3 className="text-sm font-semibold text-neutral-900 group-hover:text-violet-800 transition-colors">
-                                                {card.title}
-                                            </h3>
-                                            <ArrowRight
-                                                size={12}
-                                                className="text-neutral-300 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-2"
-                                            />
-                                        </div>
-                                        <p className="text-xs text-neutral-500 leading-relaxed">
-                                            {card.description}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                        {/* Animated Beam — tool integration visualization */}
+                        <AnimatedBeamMultipleOutputDemo className="-mt-2 md:-mt-4" />
                     </motion.div>
 
                 </div>
