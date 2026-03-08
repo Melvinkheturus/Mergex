@@ -1,6 +1,7 @@
 'use client';
 
 import React, { forwardRef, useRef } from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
 
@@ -92,9 +93,11 @@ const Icons = {
         </svg>
     ),
     openai: () => (
-        <img
+        <Image
             src="/logo/mergex-logo.png"
             alt="Mergex Logo"
+            width={64}
+            height={64}
             className="w-full h-full object-contain drop-shadow-sm"
         />
     ),

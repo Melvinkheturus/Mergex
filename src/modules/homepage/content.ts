@@ -216,12 +216,12 @@ export const PROBLEM_CONTEXT = {
 
 // Problem With Fragmentation Section
 export const PROBLEM_FRAGMENTATION = {
-    headline: 'The Problem With Fragmentation',
-    subheadline: 'Most businesses are held back not by a lack of tools—but by too many disconnected ones.',
+    headline: 'The Friction of Scaling',
+    subheadline: 'As businesses grow, they often build a complex network of vendors, tools, and partners.',
     problems: [
         {
-            title: 'Multiple Vendors, One Headache',
-            description: 'One agency for branding, another for dev, a freelancer for AI, and a consultant for strategy. You\'re not building—you\'re coordinating.',
+            title: 'A Complex Ecosystem',
+            description: 'One agency for branding, another for dev, a freelancer for AI, and a consultant for strategy. Scaling often requires coordinating scattered tools and partners.',
             icon: 'users',
         },
         {
@@ -240,7 +240,7 @@ export const PROBLEM_FRAGMENTATION = {
             icon: 'brain',
         },
     ],
-    closingStatement: 'Mergex exists to eliminate the coordination tax. One partner. One system. Faster results.',
+    closingStatement: 'Mergex exists to streamline your ecosystem. One partner. One system. Faster results.',
 } as const;
 
 
@@ -307,7 +307,7 @@ export const ECOSYSTEM_CONTENT = {
 export const SHOWREEL_CONTENT = {
     headline: 'See What We Build',
     subheadline: 'A cinematic glimpse into the future of business systems and creative AI.',
-    videoSrc: '/assets/mockups/Showreel.mov',
+    videoSrc: '/mockups/common/Showreel.mp4',
     videoPoster: '/assets/projects/showreel-poster.jpg',
 } as const;
 

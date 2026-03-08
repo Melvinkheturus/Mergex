@@ -60,103 +60,6 @@ export function ExperimentsGallery() {
         syncVideoPlayback(swiper);
     }, [syncVideoPlayback]);
 
-    useEffect(() => {
-        const section = sectionRef.current;
-        if (!section) return;
-
-        // Everything that needs to transition color
-        const allTextEls = Array.from(section.querySelectorAll<HTMLElement>('h2, p, span'));
-        const TRANSITION = 'background-color 0.4s ease, color 0.4s ease';
-
-        const applyLight = () => {
-            document.body.style.transition = TRANSITION;
-            document.body.style.backgroundColor = '#ffffff';
-            section.style.transition = TRANSITION;
-            section.style.backgroundColor = '#ffffff';
-
-            // Handle edge fades
-            const leftFade = section.querySelector<HTMLElement>('.fade-left');
-            const rightFade = section.querySelector<HTMLElement>('.fade-right');
-            if (leftFade) {
-                leftFade.style.transition = TRANSITION;
-                leftFade.style.background = 'linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.8), transparent)';
-            }
-            if (rightFade) {
-                rightFade.style.transition = TRANSITION;
-                rightFade.style.background = 'linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0.8), transparent)';
-            }
-
-            allTextEls.forEach(el => {
-                el.style.transition = TRANSITION;
-                const lightColor = el.getAttribute('data-light-color');
-                if (lightColor) {
-                    el.style.color = lightColor;
-                } else {
-                    if (el.tagName === 'H2') el.style.color = '#111827';
-                    else if (el.classList.contains('text-xl')) el.style.color = '#4b5563';
-                    else if (!el.classList.contains('text-purple-400') && !el.classList.contains('text-purple-600')) {
-                        el.style.color = '#6b7280';
-                    }
-                }
-            });
-        };
-
-        const applyDark = () => {
-            document.body.style.transition = TRANSITION;
-            document.body.style.backgroundColor = '#000000';
-            section.style.transition = TRANSITION;
-            section.style.backgroundColor = '#000000';
-
-            // Handle edge fades
-            const leftFade = section.querySelector<HTMLElement>('.fade-left');
-            const rightFade = section.querySelector<HTMLElement>('.fade-right');
-            if (leftFade) {
-                leftFade.style.transition = TRANSITION;
-                leftFade.style.background = 'linear-gradient(to right, #000000, rgba(0, 0, 0, 0.8), transparent)';
-            }
-            if (rightFade) {
-                rightFade.style.transition = TRANSITION;
-                rightFade.style.background = 'linear-gradient(to left, #000000, rgba(0, 0, 0, 0.8), transparent)';
-            }
-
-            allTextEls.forEach(el => {
-                el.style.transition = TRANSITION;
-                const darkColor = el.getAttribute('data-dark-color');
-                el.style.color = darkColor ? darkColor : '#ffffff';
-            });
-        };
-
-        // Set initial state to match WorkGallery (dark)
-        applyDark();
-
-        const trigger = ScrollTrigger.create({
-            trigger: section,
-            start: 'top 55%',       // transition when section enters mid-viewport
-            onEnter: applyLight,    // scrolling down into section → white
-            onLeaveBack: applyDark, // scrolling back up → black (WorkGallery)
-            // Ensure transitions catch up if scrolling fast
-            onScrubComplete: () => ScrollTrigger.refresh()
-        });
-
-        return () => {
-            trigger.kill();
-            document.body.style.transition = '';
-            document.body.style.backgroundColor = '';
-            section.style.transition = '';
-            section.style.backgroundColor = '';
-
-            const fades = section.querySelectorAll<HTMLElement>('.fade-left, .fade-right');
-            fades.forEach(f => {
-                f.style.transition = '';
-                f.style.background = '';
-            });
-
-            allTextEls.forEach(el => {
-                el.style.transition = '';
-                el.style.color = '';
-            });
-        };
-    }, []);
 
     const swiperStyles = `
         .experiments-swiper {
@@ -207,7 +110,7 @@ export function ExperimentsGallery() {
     `;
 
     return (
-        <section ref={sectionRef} className="relative py-32 overflow-hidden" style={{ willChange: 'background-color' }}>
+        <section ref={sectionRef} className="relative py-32 overflow-hidden bg-white">
             <style>{swiperStyles}</style>
             <div className="container mx-auto max-w-7xl px-2 text-gray-900">
                 {/* Section Header */}
@@ -223,16 +126,12 @@ export function ExperimentsGallery() {
                         <div className="mb-4">
                             <span
                                 className="text-xs md:text-sm font-semibold text-purple-600 uppercase tracking-[0.25em]"
-                                data-light-color="#9333ea"
-                                data-dark-color="#d8b4fe"
                             >
                                 EXPLORATIONS
                             </span>
                         </div>
                         <h2
                             className="text-4xl md:text-5xl lg:text-[3.5rem] tracking-tighter leading-[1] whitespace-nowrap flex flex-row items-baseline font-bold"
-                            data-light-color="#111827"
-                            data-dark-color="#ffffff"
                         >
                             Applied Creative Intelligence
                         </h2>
@@ -242,8 +141,6 @@ export function ExperimentsGallery() {
                     <div className="xl:flex-1 flex justify-end text-right w-full pt-4 xl:pt-8 min-w-0">
                         <p
                             className="text-base md:text-lg lg:text-xl text-gray-600 leading-[1.6] font-serif italic max-w-xs md:max-w-sm xl:max-w-[420px]"
-                            data-light-color="#4b5563"
-                            data-dark-color="#d1d5db"
                         >
                             From concept to campaign-ready assets, these projects demonstrate how structured AI experimentation becomes measurable creative advantage.
                         </p>
@@ -253,10 +150,10 @@ export function ExperimentsGallery() {
                 {/* Swiper Coverflow Carousel with Edge Fades */}
                 <div className="relative w-full">
                     {/* Left Fade Overlay */}
-                    <div className="fade-left absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" />
+                    <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-r from-white via-white/80 to-transparent" />
 
                     {/* Right Fade Overlay */}
-                    <div className="fade-right absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-l from-white via-white/80 to-transparent" />
 
                     <Swiper
                         className="experiments-swiper"

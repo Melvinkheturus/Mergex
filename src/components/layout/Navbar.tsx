@@ -47,7 +47,7 @@ export function Navbar() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-white/40 z-40"
+                        className="fixed inset-0 bg-white/40 backdrop-blur-md z-40"
                         onClick={() => setActiveMenu(null)}
                     />
                 )}
@@ -161,8 +161,8 @@ export function Navbar() {
                         <Image
                             src="/logo/mergex-logo.png"
                             alt="Mergex Logo"
-                            width={32}
-                            height={32}
+                            width={48}
+                            height={48}
                             className="object-contain"
                         />
                     </Link>
@@ -343,7 +343,7 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
                     <ServiceCard
                         icon={<Sparkles className="w-6 h-6" />}
-                        title="Growth, Automation & Marketing"
+                        title="Growth & Automation Systems"
                         description="Systems that support growth"
                         tags={['AI automation', 'Digital marketing']}
                         href="/services/growth"
@@ -367,7 +367,7 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                     </h3>
                     <p className="text-sm text-gray-600 mb-8 leading-relaxed">
                         Tell us what you’re trying to build.<br />
-                        We’ll help you find the right system — fast.
+                        We’ll help you find the right system fast.
                     </p>
 
                     <Link href="/contact" onClick={closeMenu} className="w-full inline-flex items-center justify-between px-5 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-all shadow-md group/btn ring-1 ring-white/10">
@@ -631,6 +631,18 @@ function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
                 <p className="text-sm text-gray-600 leading-relaxed">
                     Our thinking, our work, and the ways people collaborate with us.
                 </p>
+
+                {/* Simple Links */}
+                <div className="mt-8 pt-4 border-t border-gray-200">
+                    <div className="flex flex-col gap-3">
+                        <Link href="/contact" onClick={closeMenu} className="group inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-black transition-colors w-max">
+                            Contact Us <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                        <Link href="/careers" onClick={closeMenu} className="group inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-black transition-colors w-max">
+                            Careers <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                    </div>
+                </div>
             </div>
 
             {/* Right Side - 4 Core Cards */}
@@ -659,18 +671,6 @@ function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
                     href="/blog"
                     closeMenu={closeMenu}
                 />
-            </div>
-
-            {/* Bottom - Simple Links (positioned in left column bottom) */}
-            <div className="col-span-3 mt-auto pt-4 border-t border-gray-200">
-                <div className="flex flex-col gap-2">
-                    <Link href="/contact" onClick={closeMenu} className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
-                        Contact Us
-                    </Link>
-                    <Link href="/careers" onClick={closeMenu} className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
-                        Careers
-                    </Link>
-                </div>
             </div>
         </div>
     );

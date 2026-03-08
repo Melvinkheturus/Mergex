@@ -11,7 +11,7 @@ import { BlurVignette } from '@/components/ui/BlurVignette';
 // Lazy-load heavy components so they don't block first paint
 const ImageTrail = lazy(() => import('../../../components/ImageTrail'));
 
-const FRAME_COUNT = 189;
+const FRAME_COUNT = 240;
 
 // CSS keyframes injected once for the ambient shimmer (pure CSS, no JS runtime cost)
 const ambientStyles = `
@@ -146,13 +146,13 @@ export function LabsHero() {
                     };
 
                     const frameNum = i.toString().padStart(4, '0');
-                    img.src = `/assets/background/labs/frames_webp/frame_${frameNum}.webp`;
+                    img.src = `/background/labs/frames_webp/frame_${frameNum}.webp`;
                 }
             }, 100);
         };
 
         // Trigger first frame load
-        firstImg.src = `/assets/background/labs/frames_webp/frame_0001.webp`;
+        firstImg.src = `/background/labs/frames_webp/frame_0001.webp`;
 
         const handleResize = () => {
             syncCanvasSize();
@@ -281,7 +281,7 @@ export function LabsHero() {
                     {/* CENTRE — large serif headline and eyebrows */}
                     <div className="flex-1 flex flex-col justify-center items-center px-8 md:px-16 pb-32 md:pb-40 text-center relative z-20">
                         {/* ── Background Shadow Glow ── */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[120%] max-w-[900px] h-[350px] bg-black/50 blur-[100px] rounded-full pointer-events-none -z-10" />
+                        {/* ── Background Shadow Glow Removed ── */}
 
                         <div
                             ref={eyebrowRef}
@@ -339,7 +339,7 @@ export function LabsHero() {
                             className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20 mt-8 md:mt-0 text-center md:text-left"
                         >
                             {/* ── Background Shadow Glow ── */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] bg-black/50 blur-[60px] rounded-[100%] pointer-events-none -z-10" />
+                            {/* ── Background Shadow Glow Removed ── */}
 
                             <p
                                 className="text-sm md:text-base text-white/70 leading-relaxed font-light"
@@ -358,7 +358,7 @@ export function LabsHero() {
                             className="flex flex-col items-center md:items-end gap-5 md:gap-5 relative z-20 mt-6 md:mt-0"
                         >
                             {/* ── Background Shadow Glow ── */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-black/40 blur-[80px] rounded-[100%] pointer-events-none -z-10" />
+                            {/* ── Background Shadow Glow Removed ── */}
 
                             <div
                                 className="text-center md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"

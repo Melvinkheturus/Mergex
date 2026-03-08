@@ -72,21 +72,17 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     <Image
                                         src="/logo/mergex-logo.png"
                                         alt="Mergex Logo"
-                                        width={42}
-                                        height={42}
+                                        width={48}
+                                        height={48}
                                         className="object-contain"
                                     />
                                 </Link>
 
                                 {/* Center: MERGEX Typo Logo */}
                                 <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                                    <Image
-                                        src="/logo/typo-mergex-black.png"
-                                        alt="Mergex"
-                                        width={110}
-                                        height={28}
-                                        className="object-contain"
-                                    />
+                                    <span className={`font-clash font-bold text-xl tracking-wide text-neutral-900`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                                        MERGEX
+                                    </span>
                                 </div>
 
                                 {/* Right: Close Button */}
@@ -177,7 +173,7 @@ function MobileServicesContent({ onClose }: { onClose: () => void }) {
                     Build systems that scale.
                 </h3>
                 <p className="text-sm text-gray-500">
-                    Product, platforms, and growth — built fast.
+                    Product, platforms, and growth built fast.
                 </p>
             </div>
 
@@ -186,7 +182,7 @@ function MobileServicesContent({ onClose }: { onClose: () => void }) {
                 <SimpleMenuRow href="/services/design" label="Design & Brand Systems" onClose={onClose} />
                 <SimpleMenuRow href="/services/web" label="Web & Digital Experiences" onClose={onClose} />
                 <SimpleMenuRow href="/services/mvp" label="Product & Platform Building" onClose={onClose} />
-                <SimpleMenuRow href="/services/growth" label="Growth & Automation" onClose={onClose} />
+                <SimpleMenuRow href="/services/growth" label="Growth & Automation Systems" onClose={onClose} />
             </div>
 
             {/* Bottom CTA */}
@@ -227,8 +223,8 @@ function MobileLabsContent({ onClose }: { onClose: () => void }) {
             {/* Simple Rows */}
             <div className="space-y-1">
                 <SimpleMenuRow href="/labs/ai-content" label="Generative AI" onClose={onClose} />
-                <SimpleMenuRow href="/labs/visual-content" label="Visual Content" onClose={onClose} />
-                <SimpleMenuRow href="/labs/experiments" label="Experiments" onClose={onClose} />
+                <SimpleMenuRow href="/labs/visual-content" label="Commercial Visuals & Ads" onClose={onClose} />
+                <SimpleMenuRow href="/labs/experiments" label="Experiments & Explorations" onClose={onClose} />
             </div>
 
             {/* Bottom CTA */}
@@ -273,13 +269,13 @@ function MobileExploreContent({ onClose }: { onClose: () => void }) {
             </div>
 
             {/* Bottom CTA */}
-            <div className="pt-2 px-2">
+            <div className="pt-2 px-2 space-y-4">
                 <Link
-                    href="/about"
+                    href="/contact"
                     onClick={onClose}
-                    className="block text-sm font-medium text-gray-600 underline underline-offset-4"
+                    className="block w-full py-4 bg-black text-white text-center rounded-xl font-medium text-base"
                 >
-                    About Mergex →
+                    Contact Us
                 </Link>
             </div>
         </div>

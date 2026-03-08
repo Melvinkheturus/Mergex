@@ -90,7 +90,7 @@ export default function ConnectCard() {
 
                 {/* ---- Description ---- */}
                 <p className="connect-description connect-animate-in">
-                    We design structured business systems that eliminate fragmentation and
+                    We design structured business systems that eliminate scattered workflows and
                     accelerate growth. From AI-driven creative to automation and scalable
                     infrastructure — built under one architecture.
                 </p>

@@ -113,7 +113,7 @@ export const CASE_STUDIES: CaseStudy[] = [
             narrative: 'The film, media, and events industry in MENA had no centralized platform to connect crew, freelancers, producers, and agencies. Finding the right professionals meant endless WhatsApp messages, outdated contact lists, and word-of-mouth — leaving talented crew invisible and productions understaffed.',
             painPoints: [
                 'No centralized crew discovery or visibility',
-                'Fragmented communication across WhatsApp and email',
+                'Scattered communication across WhatsApp and email',
                 'No structured way to submit or receive project briefs'
             ]
         },
@@ -192,7 +192,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         subtitle: 'Powering a multi-vendor marketplace for the elevator industry',
         heroImage: '/assets/systems/case-studies/case-study-3.png',
         heroImageAlt: 'Cedar Elevators Multi-Vendor Marketplace',
-        outcome: 'From fragmented vendor management to a unified marketplace in 30 days',
+        outcome: 'From scattered vendor management to a unified marketplace in 30 days',
 
         client: {
             industry: 'Marketplace & Industrial',

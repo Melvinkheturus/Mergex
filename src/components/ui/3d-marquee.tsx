@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 export const ThreeDMarquee = ({
   images,
@@ -67,7 +68,7 @@ export const ThreeDMarquee = ({
                           playsInline
                         />
                       ) : (
-                        <motion.img
+                        <motion.div
                           whileHover={{
                             y: -10,
                           }}
@@ -75,12 +76,16 @@ export const ThreeDMarquee = ({
                             duration: 0.3,
                             ease: "easeInOut",
                           }}
-                          src={image}
-                          alt={`Image ${imageIndex + 1}`}
-                          className="aspect-[970/700] w-[180px] sm:w-[240px] md:w-[320px] rounded-lg object-cover shadow-xl shadow-black/20 hover:shadow-2xl"
-                          width={320}
-                          height={231}
-                        />
+                          className="relative aspect-[970/700] w-[180px] sm:w-[240px] md:w-[320px] rounded-lg shadow-xl shadow-black/20 hover:shadow-2xl overflow-hidden"
+                        >
+                          <Image
+                            src={image}
+                            alt={`Image ${imageIndex + 1}`}
+                            fill
+                            sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 320px"
+                            className="object-cover"
+                          />
+                        </motion.div>
                       )}
                     </div>
                   )

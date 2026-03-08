@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CASE_STUDIES } from '@/modules/caseStudies';
 
 if (typeof window !== 'undefined') {
@@ -178,10 +179,11 @@ export function CaseStudySection() {
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <img
+                            <Image
                                 src={study.heroImage}
-                                alt={study.heroImageAlt}
-                                className="h-full w-full rounded-2xl object-cover"
+                                alt={study.heroImageAlt || "Case study"}
+                                fill
+                                className="rounded-2xl object-cover"
                             />
 
                             {/* Overlay with case study info */}

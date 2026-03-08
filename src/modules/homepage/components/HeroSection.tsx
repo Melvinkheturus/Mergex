@@ -99,7 +99,7 @@ export function HeroSection() {
                                 Mergex designs the architecture behind ambitious businesses integrating systems, AI, and growth into one engineered foundation.
                             </p>
                             <p className="text-sm md:text-base text-black/70 leading-relaxed italic">
-                                Replace fragmented vendors with a single engineered ecosystem.
+                                Replace a complex vendor ecosystem with a single engineered foundation.
                             </p>
                         </div>
 
@@ -114,7 +114,7 @@ export function HeroSection() {
 
                             {/* Fragmented Vendor line - Above buttons on mobile only */}
                             <p className="md:hidden text-[10px] text-black/70 leading-relaxed italic text-center px-4">
-                                Replace fragmented vendors with a single engineered ecosystem.
+                                Replace a complex vendor ecosystem with a single engineered foundation.
                             </p>
 
                             <div className="flex flex-row items-center justify-center gap-3 w-full sm:w-auto">

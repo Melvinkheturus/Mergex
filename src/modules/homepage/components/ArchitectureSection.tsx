@@ -26,7 +26,7 @@ export function ArchitectureSection() {
         <section className="relative z-40 bg-white overflow-hidden pb-12 md:pb-16 mt-[-100vh] rounded-t-[2rem] md:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.15)]">
 
             {/* ── TOP HERO: Big text + floating cards ───────────────────── */}
-            <div className="relative w-full overflow-hidden px-10 md:px-16">
+            <div className="relative w-full overflow-hidden px-4 md:px-10 lg:px-16">
                 {/* BIG TEXT + OVERLAPPING CARDS container */}
                 <div className="relative flex items-center justify-center select-none py-28" style={{ minHeight: '20vw' }}>
                     {/* The big bold black text */}
@@ -34,7 +34,7 @@ export function ArchitectureSection() {
                         aria-label="ARCHITECTURE"
                         className="relative z-0 font-medium uppercase text-neutral-950 leading-none whitespace-nowrap pointer-events-none w-full text-center"
                         style={{
-                            fontSize: 'clamp(4rem, 12.5vw, 13.5rem)',
+                            fontSize: 'clamp(2rem, 11vw, 13.5rem)',
                             fontFamily: '"Outfit", system-ui, sans-serif',
                             letterSpacing: '-0.02em',
                             lineHeight: 0.9,
@@ -45,68 +45,65 @@ export function ArchitectureSection() {
 
                     {/* 3 overlapping cards — slightly increased size and reduced roundness */}
                     <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                        <div className="relative" style={{ width: '135px', height: '160px' }}>
+                        <div className="relative w-[55px] h-[65px] md:w-[135px] md:h-[160px]">
 
-                            {/* Card 1 — micro back left */}
+                            {/* Card 1 — micro back left - Leverage */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.5, rotate: -20, y: 10 }}
                                 whileInView={{ opacity: 1, scale: 1, rotate: -18, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-                                className="absolute rounded-md overflow-hidden shadow-md border border-white/40"
+                                className="absolute rounded overflow-hidden shadow-md border border-white/40"
                                 style={{
                                     width: '100%',
                                     height: '100%',
                                     top: '0',
                                     left: '-50%',
-                                    background: 'linear-gradient(145deg, #e5deff 0%, #c4b5fd 60%, #a78bfa 100%)',
                                 }}
-                            />
+                            >
+                                <img src="/mockups/common/leverage.jpeg" alt="Leverage" className="w-full h-full object-cover" />
+                            </motion.div>
 
-                            {/* Card 2 — micro back right */}
+                            {/* Card 2 — micro back right - Structured */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.5, rotate: 18, y: 10 }}
                                 whileInView={{ opacity: 1, scale: 1, rotate: 15, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.05, ease: 'easeOut' }}
-                                className="absolute rounded-md overflow-hidden shadow-md border border-white/30"
+                                className="absolute rounded overflow-hidden shadow-md border border-white/30"
                                 style={{
                                     width: '95%',
                                     height: '95%',
                                     top: '5%',
                                     right: '-45%',
-                                    background: 'linear-gradient(145deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%)',
                                 }}
-                            />
+                            >
+                                <img src="/mockups/common/Structured.jpeg" alt="Structured" className="w-full h-full object-cover" />
+                            </motion.div>
 
-                            {/* Card 3 — micro front center */}
+                            {/* Card 3 — micro front center - Intelligence */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.6, y: 15 }}
                                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                                className="absolute rounded-lg overflow-hidden shadow-lg border border-white/50"
+                                className="absolute rounded-md overflow-hidden shadow-lg border border-white/50"
                                 style={{
                                     width: '105%',
                                     height: '110%',
                                     top: '-5%',
                                     left: '-2.5%',
-                                    background: 'linear-gradient(160deg, #f5f0ff 0%, #ddd6fe 35%, #a78bfa 80%, #7c3aed 100%)',
                                 }}
                             >
-                                {/* Micro dots instead of labels */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 opacity-20">
-                                    <div className="w-4 h-4 rounded-full bg-white/40 blur-[2px]" />
-                                    <div className="w-10 h-0.5 rounded-full bg-white/20" />
-                                </div>
+                                <img src="/mockups/common/Inteligence.jpeg" alt="Intelligence" className="w-full h-full object-cover" />
                             </motion.div>
                         </div>
                     </div>
                 </div>
 
                 {/* Concept word tags — moved back OUTSIDE because cards are too small now */}
-                <div className="relative z-10 container mx-auto px-6 max-w-[1300px] -mt-10 mb-20">
-                    <div className="flex justify-center gap-4">
+                <div className="relative z-10 container mx-auto px-4 lg:px-6 max-w-[1300px] -mt-6 md:-mt-10 mb-16 md:mb-20">
+                    <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
                         {floatingCards.map((word, i) => (
                             <motion.div
                                 key={word}
@@ -176,7 +173,7 @@ export function ArchitectureSection() {
 
                         <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-md">
                             Mergex architects integrated infrastructures that unify strategy, software,
-                            automation, and intelligence transforming fragmented operations into
+                            automation, and intelligence transforming disconnected operations into
                             systems designed to grow.
                         </p>
 
@@ -210,9 +207,7 @@ export function ArchitectureSection() {
                                 System Intelligence
                             </span>
                             <p className="text-base text-neutral-600 leading-relaxed max-w-md">
-                                Mergex integrates strategy, AI, automation, and software architecture
-                                into a unified operational layer — enabling businesses to move faster,
-                                operate smarter, and scale without friction.
+                                Mergex architects unified growth systems that help businesses move faster, operate with clarity, and scale with zero friction.
                             </p>
 
                             {/* About page link button */}

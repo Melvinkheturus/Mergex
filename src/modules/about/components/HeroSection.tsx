@@ -47,7 +47,7 @@ export function HeroSection() {
                         className="text-lg md:text-xl text-gray-600 leading-relaxed"
                     >
                         Most companies don't struggle because of a lack of tools or talent.
-                        They struggle because everything is fragmented — strategy in one place,
+                        They struggle because their systems are disconnected — strategy in one place,
                         execution in another, intelligence somewhere else.
                     </motion.p>
 

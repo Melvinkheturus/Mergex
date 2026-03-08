@@ -31,7 +31,7 @@ const PROCESS_STEPS = [
         number: '04',
         title: 'Unify & Optimize',
         description:
-            'We connect tools, workflows, data, and teams into a single integrated ecosystem. No fragmented vendors. No disconnected execution.',
+            'We connect tools, workflows, data, and teams into a single integrated ecosystem. No disconnected systems. No misaligned execution.',
         purpose: 'Integration over improvisation.',
     },
     {

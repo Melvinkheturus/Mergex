@@ -13,7 +13,7 @@ export const PARENT_FAQ_DATA = {
     questions: [
         {
             question: "What kind of company is Mergex?",
-            answer: "Mergex is a technology partner built to eliminate fragmentation. Instead of managing multiple vendors for development, AI, content, and automation, you work with one unified system. We're designed for teams that want speed, clarity, and smart execution without the coordination overhead."
+            answer: "Mergex is a technology partner built to simplify growth. Instead of managing a complex vendor ecosystem for development, AI, content, and automation, you work with one unified system. We're designed for teams that want speed, clarity, and smart execution without the coordination overhead."
         },
         {
             question: "What's the difference between Labs and Systems?",
@@ -21,15 +21,15 @@ export const PARENT_FAQ_DATA = {
         },
         {
             question: "Who is Mergex best suited for?",
-            answer: "We work best with founders, product teams, and businesses who need to move fast without building fragmented systems. If you're tired of coordinating between agencies, waiting on timelines, or dealing with tools that don't talk to each other, Mergex exists to solve that."
+            answer: "We work best with founders, product teams, and businesses who need to move fast without building a complex network of vendors. If you're tired of coordinating between agencies, waiting on timelines, or dealing with tools that don't talk to each other, Mergex exists to solve that."
         },
         {
             question: "Why work with one partner instead of hiring specialists?",
-            answer: "Multiple vendors create coordination tax — misaligned timelines, duplicated work, communication overhead, and siloed data. We eliminate that by owning the full picture. One roadmap. One accountability chain. Faster results."
+            answer: "A scattered network of tools and partners creates a coordination tax — misaligned timelines, duplicated work, communication overhead, and siloed data. We eliminate that by owning the full picture. One roadmap. One accountability chain. Faster results."
         },
         {
             question: "Do you only work with startups, or do you work with established businesses too?",
-            answer: "We work with both. Startups come to us for speed and system-building. Established businesses come to us to eliminate vendor fragmentation, modernize operations, or add AI capabilities without hiring internally. If you're solving a problem with technology, content, or automation, we can help."
+            answer: "We work with both. Startups come to us for speed and system-building. Established businesses come to us to simplify a complex vendor ecosystem, modernize operations, or add AI capabilities without hiring internally. If you're solving a problem with technology, content, or automation, we can help."
         },
         {
             question: "Where should I start if I'm exploring Mergex?",

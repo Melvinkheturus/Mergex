@@ -139,21 +139,21 @@ export function ShowreelSection() {
                 <div className="max-w-[1300px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                     {/* Left SideTitle */}
                     <div>
-                        <p className="text-xl md:text-2xl text-neutral-400 font-medium mb-1">
-                            Recent work.
+                        <p className="text-xl md:text-2xl text-neutral-400 font-medium mb-4">
+                            Introducing Mergex
                         </p>
                         <h2
                             className="text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 tracking-tight"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
-                            From Pixels to Products.
+                            The Architecture Behind Modern Businesses.
                         </h2>
                     </div>
 
                     {/* Right Side Description */}
-                    <div className="max-w-[340px]">
+                    <div className="max-w-[340px] md:pb-6">
                         <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-medium">
-                            Explore a curated selection of our finest engineered ecosystems, intelligent platforms, and defining digital experiences.
+                            A quick look at how Mergex brings strategy, systems, and intelligence together to build businesses that scale.
                         </p>
                     </div>
                 </div>
@@ -174,13 +174,13 @@ export function ShowreelSection() {
                         <span
                             className="font-medium uppercase text-neutral-950 tracking-[-0.02em] text-center flex items-center justify-center"
                             style={{
-                                fontSize: 'clamp(5rem, 16.5vw, 17.5rem)', // Reduced slightly from 20vw
+                                fontSize: 'clamp(4rem, 11vw, 12rem)', // Reduced to fit "ORCHESTRATION"
                                 fontFamily: '"Outfit", system-ui, sans-serif',
                                 lineHeight: 0.9,
                             }}
                         >
-                            <span ref={showRef} className="block will-change-transform">SHOW</span>
-                            <span ref={reelRef} className="block will-change-transform">REEL</span>
+                            <span ref={showRef} className="block will-change-transform">INFRAST</span>
+                            <span ref={reelRef} className="block will-change-transform">RUCTURE</span>
                         </span>
                     </div>
 

@@ -20,7 +20,7 @@ export const FEATURED_THINKING = [
     },
     {
         id: 'fragmentation-problem',
-        title: 'Why Fragmented Vendors Kill Growth',
+        title: 'Why a Scattered Tool Ecosystem Kills Growth',
         description:
             'The hidden cost of stitching together 10 vendors when one system does the work.',
         format: 'strategic-note' as const,
@@ -44,7 +44,7 @@ export const QUICK_TAKES = [
     'Automation without architecture creates chaos at scale.',
     'The agency model is dying. Systems-led companies are winning.',
     'Your biggest competitive moat is speed of iteration, not budget.',
-    'Fragmented tools are the #1 invisible tax on growing businesses.',
+    'A scattered network of tools and partners is the #1 invisible tax on growing businesses.',
 ];
 
 export const FORMAT_FILTERS = [
@@ -181,7 +181,7 @@ export const ASK_MERGEX = {
         'When should a startup automate?',
         'What is business architecture?',
         'What does Mergex Systems do?',
-        'How to fix fragmented vendor chaos?',
+        'How to fix vendor ecosystem chaos?',
     ],
     systemPrompt: `You are Mergex Intelligence — an AI assistant representing Mergex, a company that builds engineered business systems, AI-powered creative tools (Labs), and scalable software ecosystems.
 
@@ -190,7 +190,7 @@ You help founders, CTOs, and operators understand:
 - AI content and creative workflows  
 - Automation strategy (when to automate, when not to)
 - Scaling from 0→1→N
-- Why fragmented vendors kill growth
+- Why a complex vendor ecosystem kills growth
 - How Mergex Systems, Labs, and Software can help
 
 Always give structured, direct answers. Think like a senior systems architect who also understands growth strategy. Reference Mergex frameworks and philosophy where relevant.

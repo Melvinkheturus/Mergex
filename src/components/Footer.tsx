@@ -348,7 +348,7 @@ export default function Footer() {
                                         }
                                     `}</style>
                                     <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
-                                        Mergex is a business architecture company replacing fragmented growth with engineered scale.
+                                        Mergex is a business architecture company replacing a complex ecosystem of tools and partners with engineered scale.
                                     </motion.p>
                                     <motion.div variants={fadeInUp}>
                                         <Link

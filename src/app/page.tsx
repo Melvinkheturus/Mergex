@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import {
   HeroSection,
   ShowreelSection,
-  ArchitectureSection,
   ProblemFragmentation,
   EcosystemSnapshot,
-  ThreeDMarqueeDemo,
-  FAQSection,
 } from '@/modules/homepage';
-import { TestimonialsSection } from '@/modules/shared/components/TestimonialsSection';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
+
+const ArchitectureSection = dynamic(() => import('@/modules/homepage/components/ArchitectureSection').then(mod => mod.ArchitectureSection));
+const ThreeDMarqueeDemo = dynamic(() => import('@/modules/homepage/components/ThreeDMarqueeDemo').then(mod => mod.ThreeDMarqueeDemo));
+const FAQSection = dynamic(() => import('@/modules/homepage/components/FAQSection').then(mod => mod.FAQSection));
+const TestimonialsSection = dynamic(() => import('@/modules/shared/components/TestimonialsSection').then(mod => mod.TestimonialsSection));
 
 export const metadata: Metadata = {
   title: 'Mergex - Your All-in-One Solution Partner for AI, Automation & Growth',

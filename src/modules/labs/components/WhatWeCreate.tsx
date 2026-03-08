@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { WHAT_WE_CREATE } from '../content/labs';
 import { Lens } from '@/components/ui/lens';
 
@@ -137,11 +138,11 @@ export function WhatWeCreate() {
                                                                     className="w-full h-full object-cover"
                                                                 />
                                                             ) : (
-                                                                <img
+                                                                <Image
                                                                     src={category.image}
                                                                     alt={category.title}
-                                                                    loading="lazy"
-                                                                    className="w-full h-full object-cover"
+                                                                    fill
+                                                                    className="object-cover"
                                                                 />
                                                             )}
                                                         </Lens>

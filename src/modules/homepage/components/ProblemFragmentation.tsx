@@ -107,7 +107,7 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c1' }}
                     >
                         <Image
-                            src="/frag-card1.png"
+                            src="/mockups/common/bento-card2.png"
                             alt={PROBLEM_FRAGMENTATION.problems[0].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -144,7 +144,7 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c2' }}
                     >
                         <Image
-                            src="/frag-card2.png"
+                            src="/mockups/common/Disconnected tools.jpeg"
                             alt={PROBLEM_FRAGMENTATION.problems[1].title}
                             fill
                             className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -224,7 +224,7 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c4' }}
                     >
                         <Image
-                            src="/frag-card4.png"
+                            src="/mockups/common/frag-card4.png"
                             alt={PROBLEM_FRAGMENTATION.problems[3].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -288,14 +288,13 @@ export function ProblemFragmentation() {
                     }}
                 />
 
-                {/* ── Closing Statement ── */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mt-20 text-center max-w-3xl mx-auto"
                 >
-                    <p className="text-2xl md:text-3xl font-medium text-neutral-900 leading-relaxed">
+                    <p className={`text-2xl md:text-3xl font-medium text-neutral-900 leading-relaxed italic ${playfair.className}`}>
                         {PROBLEM_FRAGMENTATION.closingStatement}
                     </p>
                 </motion.div>

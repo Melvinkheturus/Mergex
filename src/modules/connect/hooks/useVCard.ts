@@ -15,7 +15,7 @@ export function useVCard() {
             "ADR;TYPE=WORK:;;Ambattur;Chennai;Tamil Nadu;;India",
             "URL:https://mergex.in",
             "EMAIL;TYPE=WORK:hello@mergex.in",
-            "NOTE:One system. Zero friction. — Structured business systems that eliminate fragmentation and accelerate growth.",
+            "NOTE:One system. Zero friction. — Structured business systems that eliminate scattered workflows and accelerate growth.",
             "END:VCARD",
         ].join("\r\n");
 
