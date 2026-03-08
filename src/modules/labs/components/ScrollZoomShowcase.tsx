@@ -227,7 +227,7 @@ export function ScrollZoomShowcase() {
                         <div
                             className="absolute inset-0 bg-cover bg-center"
                             style={{
-                                backgroundImage: 'url(/assets/model/Madonna.jpg)',
+                                backgroundImage: 'url(/model/Madonna.jpg)',
                             }}
                         />
                         {/* Complex Gradient Overlay - Targeted Darkening */}
