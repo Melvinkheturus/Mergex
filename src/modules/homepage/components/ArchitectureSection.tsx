@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-demo';
+import { CardSwipe } from '@/components/ui/card-swipe';
 
 /**
  * ArchitectureSection — "From Chaos to Clarity"
@@ -18,7 +19,11 @@ import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-de
  *  • Bottom: two-column split — left manifesto + right system intelligence cards
  */
 export function ArchitectureSection() {
-
+    const images = [
+        { src: "/mockups/common/leverage.jpeg", alt: "Leverage" },
+        { src: "/mockups/common/Structured.jpeg", alt: "Structured" },
+        { src: "/mockups/common/Inteligence.jpeg", alt: "Intelligence" },
+    ];
 
     const floatingCards = ['Structure', 'Intelligence', 'Leverage'];
 
@@ -43,60 +48,10 @@ export function ArchitectureSection() {
                         ARCHITECTURE
                     </div>
 
-                    {/* 3 overlapping cards — slightly increased size and reduced roundness */}
+                    {/* CardSwipe integration — replacing the manual overlapping cards */}
                     <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                        <div className="relative w-[55px] h-[65px] md:w-[135px] md:h-[160px]">
-
-                            {/* Card 1 — micro back left - Leverage */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.5, rotate: -20, y: 10 }}
-                                whileInView={{ opacity: 1, scale: 1, rotate: -18, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-                                className="absolute rounded overflow-hidden shadow-md border border-white/40"
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    top: '0',
-                                    left: '-50%',
-                                }}
-                            >
-                                <img src="/mockups/common/leverage.jpeg" alt="Leverage" className="w-full h-full object-cover" />
-                            </motion.div>
-
-                            {/* Card 2 — micro back right - Structured */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.5, rotate: 18, y: 10 }}
-                                whileInView={{ opacity: 1, scale: 1, rotate: 15, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.05, ease: 'easeOut' }}
-                                className="absolute rounded overflow-hidden shadow-md border border-white/30"
-                                style={{
-                                    width: '95%',
-                                    height: '95%',
-                                    top: '5%',
-                                    right: '-45%',
-                                }}
-                            >
-                                <img src="/mockups/common/Structured.jpeg" alt="Structured" className="w-full h-full object-cover" />
-                            </motion.div>
-
-                            {/* Card 3 — micro front center - Intelligence */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.6, y: 15 }}
-                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, ease: 'easeOut' }}
-                                className="absolute rounded-md overflow-hidden shadow-lg border border-white/50"
-                                style={{
-                                    width: '105%',
-                                    height: '110%',
-                                    top: '-5%',
-                                    left: '-2.5%',
-                                }}
-                            >
-                                <img src="/mockups/common/Inteligence.jpeg" alt="Intelligence" className="w-full h-full object-cover" />
-                            </motion.div>
+                        <div className="pointer-events-auto">
+                            <CardSwipe images={images} autoplayDelay={4500} slideShadows={false} />
                         </div>
                     </div>
                 </div>

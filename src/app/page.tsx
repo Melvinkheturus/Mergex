@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import {
+  HomePreloader,
   HeroSection,
   ShowreelSection,
   ProblemFragmentation,
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="">
+      <HomePreloader />
       <HomeScrollRegistrar />
 
       {/* 1. Hero — Belief Framing */}

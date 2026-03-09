@@ -1,7 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Playfair_Display } from 'next/font/google';
+import dynamic from 'next/dynamic';
+
+const ImageRipple = dynamic(() => import('@/components/ui/image-ripple'), { ssr: false });
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -24,22 +30,21 @@ export function HeroSection() {
         >
             {/* Background Images */}
             <div className="absolute inset-0 z-0">
-                {/* Desktop Background */}
-                <Image
-                    src="/assets/background/parent-hero.jpeg"
-                    alt=""
-                    fill
-                    className="object-cover hidden md:block"
-                    priority
-                />
-                {/* Mobile Background */}
-                <Image
-                    src="/assets/background/parent hero mobile.jpeg"
-                    alt=""
-                    fill
-                    className="object-cover md:hidden"
-                    priority
-                />
+                {/* Desktop: Image Ripple Effect */}
+                <div className="hidden md:block w-full h-full">
+                    <ImageRipple />
+                </div>
+
+                {/* Mobile: Static Background Image */}
+                <div className="block md:hidden w-full h-full relative">
+                    <Image
+                        src="/background/parent/parent hero mobile.jpeg"
+                        alt="Hero background"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
             </div>
 
 
@@ -78,11 +83,11 @@ export function HeroSection() {
                             </div>
 
                             {/* Line 2: It's Structure */}
-                            <div className="mb-1 md:mb-2">
-                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black">
-                                    It’s{' '}
+                            <div className="mb-1 md:mb-2 flex items-center justify-center flex-wrap">
+                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black mr-2">
+                                    It’s
                                 </span>
-                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent">
+                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent inline-block">
                                     Structure.
                                 </span>
                             </div>

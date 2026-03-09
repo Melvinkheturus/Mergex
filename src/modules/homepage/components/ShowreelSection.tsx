@@ -139,7 +139,7 @@ export function ShowreelSection() {
                 <div className="max-w-[1300px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                     {/* Left SideTitle */}
                     <div>
-                        <p className="text-xl md:text-2xl text-neutral-400 font-medium mb-4">
+                        <p className="text-xl md:text-2xl font-medium mb-4 bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent inline-block">
                             Introducing Mergex
                         </p>
                         <h2
