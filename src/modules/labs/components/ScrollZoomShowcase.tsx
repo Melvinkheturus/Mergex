@@ -177,6 +177,25 @@ export function ScrollZoomShowcase() {
                     },
                 }
             );
+
+            // Global fade-out at the end of the section (progression 0.8 to 1.0)
+            gsap.fromTo(
+                imageContainerRef.current,
+                { opacity: 1 },
+                {
+                    keyframes: [
+                        { opacity: 1, duration: 0.8 },
+                        { opacity: 0, duration: 0.2 }
+                    ],
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1,
+                    },
+                }
+            );
         });
 
         // Force refresh after a short delay to ensure layout is settled

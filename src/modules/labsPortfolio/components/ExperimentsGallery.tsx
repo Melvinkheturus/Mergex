@@ -18,14 +18,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Media items for the carousel
 const CAROUSEL_MEDIA = [
-    { src: '/assets/labs portfolio/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
-    { src: '/assets/labs portfolio/ad.mp4', alt: 'Advertisement Video', type: 'video' },
-    { src: '/assets/labs portfolio/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
-    { src: '/assets/labs portfolio/Gemini_Generated_Image_6mmg1y6mmg1y6mmg.png', alt: 'AI Generated Image', type: 'image' },
-    { src: '/assets/labs portfolio/Influencer Video.mp4', alt: 'Influencer Video', type: 'video' },
-    { src: '/assets/labs portfolio/Jewellery Video.mp4', alt: 'Jewellery Video', type: 'video' },
-    { src: '/assets/labs portfolio/V3 Rose petals.mp4', alt: 'Rose Petals Video', type: 'video' },
-    { src: '/assets/labs portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4', alt: 'New Portfolio Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/ACT Popcorn (online-video-cutter.com).mp4', alt: 'ACT Popcorn Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/Gemini_Generated_Image_6mmg1y6mmg1y6mmg.png', alt: 'AI Generated Image', type: 'image' },
+    { src: '/mockups/labs/Portfolio/Influencer Video.mp4', alt: 'Influencer Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/Jewellery Video.mp4', alt: 'Jewellery Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/KFC (online-video-cutter.com).mp4', alt: 'KFC Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/Mountain Dew (online-video-cutter.com).mp4', alt: 'Mountain Dew Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/V3 Rose petals.mp4', alt: 'Rose Petals Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4', alt: 'New Portfolio Video', type: 'video' },
+    { src: '/mockups/labs/Portfolio/ad.mp4', alt: 'Advertisement Video', type: 'video' },
 ] as const;
 
 export function ExperimentsGallery() {

@@ -67,7 +67,7 @@ export const WHAT_WE_CREATE = {
                 'AI Banner & Display Asset Production',
             ],
             icon: 'megaphone',
-            image: '/assets/labs portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4',
+            image: '/mockups/labs/Portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4',
         },
         {
             title: 'AI UGC & Social Content Systems',
@@ -108,43 +108,42 @@ export const WORK_GALLERY = {
 } as const;
 
 export const HOW_LABS_WORKS = {
-    headline: 'How Labs Works',
-    subheadline: 'AI accelerates. Humans curate. You win.',
+    label: 'PROCESS_v2.0',
+    headline: 'From Experiment to Impact',
+    subheadline: 'How we turn emerging intelligence into your competitive edge.',
     steps: [
         {
             number: '01',
-            title: 'Brief',
-            description: 'Share your vision, goals, brand assets, and constraints. The clearer the input, the better the output.',
-            icon: 'clipboard',
-            microcopy: '[DATA_INPUT]'
+            title: 'Experiment',
+            description: 'We explore emerging AI tools, visual languages, and generative techniques to find the edge.',
+            icon: 'beaker',
+            microcopy: '[EXPLORATION_PHASE]'
         },
         {
             number: '02',
-            title: 'Generate',
-            description: 'Our AI tools create dozens of variations rapidly, exploring creative possibilities at machine speed.',
-            icon: 'cpu',
-            microcopy: '[PROCESS_0x4F]'
+            title: 'Prototype',
+            description: 'Promising ideas are shaped into usable creative assets and systems refined for your brand.',
+            icon: 'layers',
+            microcopy: '[SYSTEMS_DEVELOPMENT]'
         },
         {
             number: '03',
-            title: 'Refine',
-            description: 'This is where humans shine. We curate, edit, and polish until every asset is perfect.',
-            icon: 'edit',
-            microcopy: '[STRATEGY_SYNC]'
-        },
-        {
-            number: '04',
-            title: 'Deliver',
-            description: 'Final assets in your preferred formats, ready to launch. No handoff hassle, just results.',
-            icon: 'check',
-            microcopy: '[OUTPUT_FINAL]'
+            title: 'Deploy',
+            description: 'The best explorations evolve into real campaigns, visuals, and experiences that drive results.',
+            icon: 'rocket',
+            microcopy: '[IMPACT_DEPLOYMENT]'
         },
     ],
-    keyMessages: [
-        'Turnaround in days, not weeks',
-        'AI speed meets creative judgment',
-        'Unlimited refinements included',
-    ],
+    intelligenceAction: {
+        headline: 'Creative Intelligence in Action',
+        description: 'Watch an idea evolve from a simple prompt to a production-grade asset.',
+        phases: [
+            { label: 'Prompt', content: 'Cinematic portrait of a brand persona, neon lighting, hyper-realistic, 8k.' },
+            { label: 'Generation', content: 'AI generates diverse visual directions based on core identity.' },
+            { label: 'Refinement', content: 'Human curation & technical polishing for brand consistency.' },
+            { label: 'Impact', content: 'Final asset deployed across all marketing touchpoints.' }
+        ]
+    }
 } as const;
 
 export const WHY_LABS_EXISTS = {
@@ -180,8 +179,8 @@ export const WHY_LABS_EXISTS = {
 } as const;
 
 export const LABS_CTA = {
-    headline: 'Have a Content Challenge?',
+    tag: 'The Lab Process',
+    headline: 'Let’s Turn Imagination Into Visual Reality',
     subheadline: 'Let\'s see what AI can do for you',
-    primaryCTA: 'Discuss Your Project',
-    secondaryCTA: 'View Our Work',
+    primaryCTA: 'Let’s see what AI can do for you',
 } as const;

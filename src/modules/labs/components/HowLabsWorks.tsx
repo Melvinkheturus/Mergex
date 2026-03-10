@@ -1,213 +1,141 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HOW_LABS_WORKS } from '../content/labs';
-import { Clipboard, Cpu, Edit, CheckCircle } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { ReactLenis } from 'lenis/react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import DecryptedText from '@/components/DecryptedText';
 
 /**
- * HowLabsWorks - Process demonstration with high-impact "Engineered" aesthetic
+ * HowLabsWorks - Simplified to Stacking Cards with a refined title
+ * Styled after WhyLabsExists with a clean white aesthetic.
  */
 export function HowLabsWorks() {
-    const iconMap = {
-        clipboard: Clipboard,
-        cpu: Cpu,
-        edit: Edit,
-        check: CheckCircle,
-    };
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-    return (
-        <section className="relative py-24 md:py-32 bg-[#050505] overflow-hidden">
-            {/* Blueprint Grid Background */}
-            <div className="absolute inset-0 z-0">
-                <div
-                    className="absolute inset-0 opacity-[0.2]"
-                    style={{
-                        backgroundImage: `
-                            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
-                        `,
-                        backgroundSize: '40px 40px',
-                    }}
-                />
-                {/* Visual Accent: Blueprint Coordinate Lines */}
-                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent" />
-                <div className="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/10 to-transparent" />
-                <div className="absolute left-0 top-1/4 w-full h-px bg-gradient-to-r from-transparent via-purple-500/10 to-transparent" />
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.95, 1, 1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 0.1], [40, 0]);
 
-                {/* Background Noise Texture */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-                    style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
-                />
-            </div>
+  // Dynamic Headline Content — Reflecting the Creative Transformation
+  const headlinePart = useTransform(
+    scrollYProgress,
+    [0.1, 0.35, 0.6, 0.85],
+    ["Spark", "Build", "Craft", "Outcome"]
+  );
 
-            <div className="container mx-auto px-6 md:px-12 relative z-10">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-24"
-                >
-                    <span className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-mono mb-4 tracking-widest uppercase">
-                        [ SYSTEM_PROCESS_001 ]
-                    </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-display mb-6 text-white tracking-tight">
-                        {HOW_LABS_WORKS.headline}
-                    </h2>
-                    <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
-                        {HOW_LABS_WORKS.subheadline}
-                    </p>
-                </motion.div>
+  const [currentHeadline, setCurrentHeadline] = React.useState("Spark");
 
-                {/* Process Steps (Staggered Layout) */}
-                <div className="relative">
-                    {/* SVG Connector Lines (Desktop) */}
-                    <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none overflow-visible" fill="none">
-                        <motion.path
-                            d="M 210,120 Q 500,120 500,320"
-                            stroke="rgba(168, 85, 247, 0.2)"
-                            strokeWidth="1"
-                            initial={{ pathLength: 0 }}
-                            whileInView={{ pathLength: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: 0.5 }}
-                        />
-                        <motion.path
-                            d="M 500,520 Q 500,720 790,720"
-                            stroke="rgba(168, 85, 247, 0.2)"
-                            strokeWidth="1"
-                            initial={{ pathLength: 0 }}
-                            whileInView={{ pathLength: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: 1.2 }}
-                        />
-                        <motion.path
-                            d="M 790,920 Q 790,1120 1080,1120"
-                            stroke="rgba(168, 85, 247, 0.2)"
-                            strokeWidth="1"
-                            initial={{ pathLength: 0 }}
-                            whileInView={{ pathLength: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: 1.9 }}
-                        />
-                    </svg>
+  // Sync state with motion value to trigger DecryptedText
+  useMotionValueEvent(headlinePart, "change", (latest) => {
+    if (latest !== currentHeadline) {
+      setCurrentHeadline(latest);
+    }
+  });
 
-                    <div className="flex flex-col gap-12 md:gap-24 lg:gap-0 lg:block lg:h-[1200px]">
-                        {HOW_LABS_WORKS.steps.map((step, index) => {
-                            const Icon = iconMap[step.icon as keyof typeof iconMap];
-
-                            // Desktop Positions
-                            const positions = [
-                                'lg:top-0 lg:left-0',
-                                'lg:top-[200px] lg:left-1/2 lg:-translate-x-1/2',
-                                'lg:top-[600px] lg:right-0',
-                                'lg:top-[1000px] lg:left-1/2 lg:-translate-x-1/2'
-                            ];
-
-                            return (
-                                <StepCard
-                                    key={index}
-                                    step={step}
-                                    index={index}
-                                    Icon={Icon}
-                                    className={`lg:absolute ${positions[index]}`}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Key Messages (Bottom Bar) */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 }}
-                    className="mt-20 md:mt-32 border-t border-purple-500/10 pt-12"
-                >
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                        {HOW_LABS_WORKS.keyMessages.map((message, index) => (
-                            <div key={index} className="flex flex-col md:flex-row items-center md:items-start gap-4 group">
-                                <div className="w-10 h-10 rounded-full bg-purple-500/5 border border-purple-500/10 flex items-center justify-center shrink-0 group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-all duration-300">
-                                    <span className="text-purple-400 font-mono text-xs">0{index + 1}</span>
-                                </div>
-                                <div className="flex flex-col">
-                                    <p className="text-white font-medium mb-1 tracking-wide">{message}</p>
-                                    <p className="text-gray-500 text-xs font-mono uppercase tracking-widest">Status: Verified</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-            </div>
-        </section>
-    );
-}
-
-function StepCard({ step, index, Icon, className }: any) {
-    const [isHovered, setIsHovered] = useState(false);
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            className={`w-full lg:w-[420px] ${className}`}
+  return (
+    <ReactLenis root>
+      <main ref={containerRef} className='bg-white'>
+        <motion.section 
+          style={{ opacity, scale, y }}
+          className='text-black w-full bg-white pb-32 pt-24'
         >
-            <div className={`
-                relative group p-8 rounded-3xl transition-all duration-500
-                bg-white/[0.03] backdrop-blur-xl border border-white/10
-                hover:bg-white/[0.05] hover:border-purple-500/30
-                ${isHovered ? 'shadow-[0_0_40px_-15px_rgba(168,85,247,0.3)]' : ''}
-            `}>
-                {/* Glassmorphism Shine */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          {/* Refined Title styled after WhyLabsExists */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
+            className="text-center mb-12 px-6"
+          >
+            <h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-neutral-900"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Where Ideas <em>Become</em> Reality.
+            </h2>
+            <div className="mt-6 h-px w-12 bg-black/10 mx-auto" />
+          </motion.div>
 
-                {/* Header Section */}
-                <div className="flex items-center justify-between mb-8">
-                    <div className="flex flex-col">
-                        <span className="text-6xl font-black font-display text-white/5 group-hover:text-purple-500/10 transition-colors duration-500 leading-none">
-                            {step.number}
-                        </span>
-                        <div className="flex items-center gap-2 mt-[-20px]">
-                            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_rgba(168,85,247,0.1)]">
-                                <Icon size={24} className="text-purple-400" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
-                                {step.title}
-                            </h3>
-                        </div>
-                    </div>
-
-                    {/* Technical Microcopy */}
-                    <div className="text-right font-mono text-[10px] text-purple-400/50 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {step.microcopy}
-                        <br />
-                        <span className="text-white/20">READY_FOR_SYNC</span>
-                    </div>
-                </div>
-
-                {/* Content */}
-                <p className="text-gray-400 leading-relaxed font-light mb-6 transition-colors duration-300 group-hover:text-gray-300">
-                    {step.description}
-                </p>
-
-                {/* Footer Tech Details (Animated on Hover) */}
-                <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                    <div className="flex gap-1">
-                        {[1, 2, 3].map(i => (
-                            <div key={i} className={`w-1 h-1 rounded-full ${isHovered ? 'bg-purple-500 animate-pulse' : 'bg-white/10'}`} style={{ animationDelay: `${i * 0.2}s` }} />
-                        ))}
-                    </div>
-                    <span className="font-mono text-[10px] text-white/20 tracking-widest">
-                        SECURE_PROCESS.EXE
-                    </span>
-                </div>
+          <div className='flex flex-col lg:flex-row justify-between px-6 md:px-16 gap-12 lg:gap-0 mt-8'>
+            <div className='grid gap-0 flex-1'>
+              <figure className='sticky top-0 h-screen grid place-content-center'>
+                <article className='bg-[#f8f9fa] border border-black/5 h-80 w-full max-w-lg rounded-2xl rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6'>
+                  <h1 className='text-3xl font-bold text-black'>I. Curiosity</h1>
+                  <p className='text-gray-600 text-lg leading-relaxed'>
+                    Every experiment begins with a question.
+                    What happens if we push creativity further?
+                  </p>
+                  <div className='w-fit border border-black/10 px-6 py-2 rounded-full text-sm font-medium'>
+                    The Spark
+                  </div>
+                </article>
+              </figure>
+              <figure className='sticky top-0 h-screen grid place-content-center'>
+                <article className='bg-[#f1f3f5] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6'>
+                  <h1 className='text-3xl font-bold text-black'>
+                    II. Generation
+                  </h1>
+                  <p className='text-gray-600 text-lg leading-relaxed'>
+                    Using AI and creative systems, 
+                    ideas quickly become visuals, motion, and prototypes.
+                  </p>
+                  <div className='w-fit border border-black/10 px-6 py-2 rounded-full text-sm font-medium'>
+                    The Build
+                  </div>
+                </article>
+              </figure>
+              <figure className='sticky top-0 h-screen grid place-content-center'>
+                <article className='bg-[#e9ecef] border border-black/5 h-80 w-full max-w-lg rounded-2xl -rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6'>
+                  <h1 className='text-3xl font-bold text-black'>III. Evolution</h1>
+                  <p className='text-gray-600 text-lg leading-relaxed'>
+                    The strongest concepts are refined, 
+                    shaped into something precise and production-ready.
+                  </p>
+                  <div className='w-fit border border-black/10 px-6 py-2 rounded-full text-sm font-medium'>
+                    The Craft
+                  </div>
+                </article>
+              </figure>
+              <figure className='sticky top-0 h-screen grid place-content-center'>
+                <article className='bg-[#dee2e6] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6'>
+                  <h1 className='text-3xl font-bold text-black'>IV. Emergence</h1>
+                  <p className='text-gray-600 text-lg leading-relaxed'>
+                    What began as an experiment becomes something real — 
+                    assets, visuals, and experiences ready for the world.
+                  </p>
+                  <div className='w-fit bg-black text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-widest'>
+                    The Outcome
+                  </div>
+                </article>
+              </figure>
             </div>
-        </motion.div>
-    );
+            <div className='sticky top-0 h-screen grid place-content-center flex-1'>
+              <div className='max-w-md'>
+                <span className='text-xs font-mono text-black/40 uppercase tracking-[0.3em] mb-4 block'>THE LAB PROCESS</span>
+                <h2 className='text-5xl md:text-6xl font-bold text-black leading-tight'>
+                  The <DecryptedText 
+                    key={currentHeadline}
+                    text={currentHeadline} 
+                    animateOn="view"
+                    revealDirection="center"
+                    speed={40}
+                  /> <br /> to Reality.
+                </h2>
+                <p className='mt-8 text-xl text-gray-500 font-light leading-relaxed'>
+                  In the Lab, ideas aren’t just explored — they evolve. 
+                  Through rapid experimentation and creative intelligence, 
+                  concepts transform into visuals, systems, and experiences 
+                  ready for the real world.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      </main>
+    </ReactLenis>
+  );
 }

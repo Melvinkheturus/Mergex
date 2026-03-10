@@ -6,6 +6,7 @@ import {
     ScrollZoomShowcase,
     WorkGallery,
     WhyLabsExists,
+    HowLabsWorks,
     LabsCTA,
 } from '@/modules/labs';
 
@@ -69,6 +70,11 @@ export default function LabsPage() {
                 <ScrollZoomShowcase />
             </div>
 
+            {/* 7. From Experiment to Impact — Process */}
+            <div id="process">
+                <HowLabsWorks />
+            </div>
+            
             {/* 9. Soft CTA */}
             <div id="cta">
                 <LabsCTA />
