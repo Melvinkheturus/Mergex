@@ -70,6 +70,12 @@ export const referralType = defineType({
             description: '🔒 Only visible to your team',
         }),
         defineField({
+            name: 'dynamicData',
+            title: 'Dynamic Form Data',
+            type: 'string',
+            description: 'JSON string of custom form fields submitted via dynamic forms',
+        }),
+        defineField({
             name: 'submittedAt',
             title: 'Submitted At',
             type: 'datetime',

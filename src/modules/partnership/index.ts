@@ -7,6 +7,7 @@ export { TrustSection } from './components/TrustSection';
 export { PartnerCTA } from './components/PartnerCTA';
 export { PartnerApplicationForm } from './components/PartnerApplicationForm';
 export { ReferralForm } from './components/ReferralForm';
+export { DynamicForm } from './components/DynamicForm';
 
 // Type exports
 export type {

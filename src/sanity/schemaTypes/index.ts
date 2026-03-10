@@ -32,6 +32,10 @@ import { pricingBlockType } from './pricingBlock'
 import { partnerTypeType } from './partnerType'
 import { careerRoleType } from './careerRole'
 
+// ── Form Configuration Schemas ──
+import { formConfig } from './formConfig'
+import { formField } from './formField'
+
 // ── Operational Schemas (Phase 1 — will migrate to Supabase) ──
 import { partnerType } from './operations/partner'
 import { referralType } from './operations/referral'
@@ -86,6 +90,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pricingBlockType,
     partnerTypeType,
     careerRoleType,
+
+    // Form Configuration
+    formConfig,
+    formField,
 
     // Operations
     partnerType,
