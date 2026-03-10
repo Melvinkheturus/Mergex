@@ -33,9 +33,12 @@ export async function submitReferral(data: ReferralSubmission): Promise<ApiRespo
         data: {
             'Referrer Name': data.referrerName,
             'Email': data.referrerEmail,
+            'Referrer Phone': data.referrerPhone,
             'Client Name': data.clientName,
-            'Client Company': data.clientCompany,
-            'Problem Description': data.problemDescription,
+            'Client Phone': data.clientPhone || 'N/A',
+            'Services': data.services,
+            'Client Business': data.clientBusiness || 'N/A',
+            'Message': data.message || 'N/A',
         }
     };
 

@@ -5,6 +5,8 @@ export { PartnershipTypes } from './components/PartnershipTypes';
 export { ReferralExplainer } from './components/ReferralExplainer';
 export { TrustSection } from './components/TrustSection';
 export { PartnerCTA } from './components/PartnerCTA';
+export { PartnerApplicationForm } from './components/PartnerApplicationForm';
+export { ReferralForm } from './components/ReferralForm';
 
 // Type exports
 export type {
