@@ -5,6 +5,7 @@ import { PROBLEM_FRAGMENTATION } from '../content';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Playfair_Display } from 'next/font/google';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -107,11 +108,12 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c1' }}
                     >
                         <Image
-                            src="/mockups/common/bento-card2.png"
+                            src={CLOUDINARY_ASSETS.fragmentationCard1}
                             alt={PROBLEM_FRAGMENTATION.problems[0].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, 33vw"
+                            onError={(e) => { (e.target as HTMLImageElement).src = '/mockups/parent/fragmentation/Inteligence.jpeg'; }}
                         />
                         {/* Bottom-heavy gradient */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/20 to-black/8" />
@@ -144,11 +146,12 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c2' }}
                     >
                         <Image
-                            src="/mockups/common/Disconnected tools.jpeg"
+                            src={CLOUDINARY_ASSETS.fragmentationCard2}
                             alt={PROBLEM_FRAGMENTATION.problems[1].title}
                             fill
                             className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, 66vw"
+                            onError={(e) => { (e.target as HTMLImageElement).src = '/mockups/parent/fragmentation/Disconnected tools.jpeg'; }}
                         />
                         {/* Subtle top gradient for text legibility */}
                         <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-transparent to-black/10" />
@@ -224,11 +227,12 @@ export function ProblemFragmentation() {
                         style={{ gridArea: 'c4' }}
                     >
                         <Image
-                            src="/mockups/common/frag-card4.png"
+                            src={CLOUDINARY_ASSETS.fragmentationCard4}
                             alt={PROBLEM_FRAGMENTATION.problems[3].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, 33vw"
+                            onError={(e) => { (e.target as HTMLImageElement).src = '/mockups/parent/fragmentation/ai hype.jpeg'; }}
                         />
                         {/* Dark overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/15" />

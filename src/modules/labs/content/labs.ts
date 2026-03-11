@@ -1,6 +1,9 @@
 // Mergex Labs Content
 // AI Content Studio positioning and content
 
+import { cloudinaryImage, cloudinaryVideo } from '@/lib/cloudinary';
+
+
 export const LABS_HERO = {
     eyebrow: 'MERGEX LABS',
     subEyebrow: 'AI Creative Intelligence',
@@ -39,7 +42,7 @@ export const WHAT_WE_CREATE = {
                 'Persistent AI Identity Systems (for brands & creators)',
             ],
             icon: 'image',
-            image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+            image: cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_6'),
         },
         {
             title: 'AI Motion & Storytelling Systems',
@@ -53,7 +56,7 @@ export const WHAT_WE_CREATE = {
                 'Narrative Prototyping for Film & Digital Media',
             ],
             icon: 'video',
-            image: '/assets/mockups/Gemini_Generated_Image_9ashti9ashti9ash.png',
+            image: cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_10'),
         },
         {
             title: 'AI Creative Production (Ads & Campaign Assets)',
@@ -67,7 +70,7 @@ export const WHAT_WE_CREATE = {
                 'AI Banner & Display Asset Production',
             ],
             icon: 'megaphone',
-            image: '/mockups/labs/Portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4',
+            image: cloudinaryVideo('mockups/labs/Portfolio/park_avenue_campaign'),
         },
         {
             title: 'AI UGC & Social Content Systems',
@@ -81,7 +84,7 @@ export const WHAT_WE_CREATE = {
                 'Platform-Specific Video Optimization (Reels, Shorts, TikTok)',
             ],
             icon: 'palette',
-            image: '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
+            image: cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_4'),
         },
         {
             title: 'AI-Powered Visual Optimization for E-commerce',
@@ -95,7 +98,7 @@ export const WHAT_WE_CREATE = {
                 'AI Visual Enhancement for CRO (Conversion Rate Optimization)',
             ],
             icon: 'sparkles',
-            image: '/assets/mockups/Gemini_Generated_Image_qx4kj5qx4kj5qx4k.png',
+            image: cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_11'),
         },
     ],
 } as const;

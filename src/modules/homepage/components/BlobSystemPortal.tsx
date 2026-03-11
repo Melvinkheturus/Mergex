@@ -2,6 +2,7 @@
 
 import React, { useMemo, useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { extend } from '@react-three/fiber';
 import { MathUtils, Vector3, Color } from 'three';
@@ -472,7 +473,7 @@ export default function BlobSystemPortal() {
                         label="MERGEX SYSTEMS"
                         title="Intelligent Core"
                         description="Scale your business with autonomous systems designed for the future of orchestration."
-                        videoSrc="/mockups/systems/Common/Human and Robot Handshake.mp4"
+                        videoSrc={CLOUDINARY_ASSETS.ecosystemSystemsVideo}
                         href="/systems"
                     />
                     <PortalCard
@@ -480,7 +481,7 @@ export default function BlobSystemPortal() {
                         label="MERGEX LABS"
                         title="Visual Future"
                         description="Where high-end production meets intelligent systems. Engineering immersive narratives."
-                        videoSrc="/mockups/parent/Flamingo Labs.mp4"
+                        videoSrc={CLOUDINARY_ASSETS.ecosystemLabsVideo}
                         href="/labs"
                     />
                 </div>

@@ -3,7 +3,8 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, Mail } from 'lucide-react';
+import { Plus, Minus, Mail, Sparkles } from 'lucide-react';
+import { AskMergex } from '@/modules/shared/components/AskMergex';
 import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
 
 interface FAQSectionProps {
@@ -43,12 +44,14 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                             <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.headline}
                             </h2>
-                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
-                                {FAQ_DATA.subheadline}{' '}
-                                <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
-                                    {FAQ_DATA.subheadlineItalic}
-                                </span>
-                            </h3>
+                            {(FAQ_DATA.subheadline || FAQ_DATA.subheadlineItalic) && (
+                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                                    {FAQ_DATA.subheadline}{' '}
+                                    <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
+                                        {FAQ_DATA.subheadlineItalic}
+                                    </span>
+                                </h3>
+                            )}
 
                             <p className="mb-12 text-base md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.description}
@@ -103,6 +106,14 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                                 <p className="text-sm italic opacity-70">
                                     {FAQ_DATA.microcopy}
                                 </p>
+                            </div>
+
+                            {/* Decision Assistant — appears below microcopy */}
+                            <div className="mt-8 pt-8 border-t border-gray-200/30">
+                                <AskMergex
+                                    variant="minimal"
+                                    suggestions={FAQ_DATA.aiSuggestions}
+                                />
                             </div>
                         </motion.div>
                     </div>
@@ -168,6 +179,11 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                                                     <p className="text-lg leading-relaxed font-light font-[family-name:var(--font-manrope)] opacity-80" style={{ color: 'inherit' }}>
                                                         {faq.answer}
                                                     </p>
+                                                    <div className="mt-5 flex">
+                                                        <Link href={`/ask-mergex?q=${encodeURIComponent(faq.question)}`} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-100/80 text-violet-700 hover:bg-violet-200 hover:text-violet-800 transition-colors text-sm font-medium">
+                                                            Ask Mergex about this
+                                                        </Link>
+                                                    </div>
                                                 </div>
                                             </motion.div>
                                         )}
@@ -177,8 +193,9 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                         </motion.div>
                     </div>
                 </div>
-            </div>
 
+
+            </div>
         </section>
     );
 }

@@ -114,24 +114,24 @@ export const PRICING_FAQ = {
     headline: 'Pricing Questions',
     questions: [
         {
-            question: 'Why don\'t you list exact prices?',
-            answer: 'Because every project is different. An MVP for a solo founder looks very different from a enterprise automation system. We price based on your specific needs, not generic packages. After our first conversation, you\'ll have a clear, transparent proposal.',
+            question: 'What actually determines the final project cost?',
+            answer: 'Cost is driven by two main factors: Technical complexity (what we are building) and Velocity (how fast you need it). After our strategy call, we provide a transparent quote that breaks down exactly where your investment is going.',
         },
         {
-            question: 'Can you work within a budget?',
-            answer: 'Absolutely. If you have a budget in mind, share it upfront. We\'ll design a phased approach that delivers maximum value within your constraints—or let you know honestly if it\'s not feasible.',
+            question: 'Do you offer fixed pricing?',
+            answer: 'For clearly defined projects like MVPs or brand foundations, we offer fixed pricing. For more complex, evolving systems, we often use a monthly or phased model that allows for agility and pivots without constant contract renegotiation.',
         },
         {
-            question: 'Do you offer phased pricing?',
-            answer: 'Yes. Most projects can be broken into phases: Phase 1 (MVP/Core), Phase 2 (Expansion), Phase 3 (Optimization). This lets you validate early and scale investment based on results.',
+            question: 'Do you work on monthly retainers?',
+            answer: 'We prefer the term "Partnerships." Unlike traditional agencies that charge for "access," our monthly models are focused on continuous delivery — meaning you pay for a dedicated amount of execution and progress every month.',
         },
         {
-            question: 'What happens after the first call?',
-            answer: 'We\'ll send a clear proposal with scope, timeline, deliverables, and pricing. No pressure. You decide if it makes sense. Most calls end with clarity, not commitment.',
+            question: 'Can we scale the project in phases to manage investment?',
+            answer: 'Absolutely. We highly recommend a phased approach. Start with the core system (Phase 1), validate it, and then unlock more advanced features (Phase 2) once the foundation is solid. This reduces risk and manages cash flow.',
         },
         {
-            question: 'Do you have equity-based partnerships?',
-            answer: 'For select early-stage startups with high potential, yes. We invest sweat equity in exchange for ownership. This is evaluated case-by-case during our initial conversation.',
+            question: 'How do you handle scope changes after a price is set?',
+            answer: 'We build flexibility into our agreements. Minor changes are usually absorbed. If a significant pivot is required, we simply re-evaluate the priority list together. You remain in control of the budget at all times.',
         },
     ],
 } as const;

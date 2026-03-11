@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Playfair_Display } from 'next/font/google';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -23,11 +24,12 @@ export function SystemsHero() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/background/system hero.png"
+                    src={CLOUDINARY_ASSETS.systemsHero}
                     alt="Systems Hero Background"
                     fill
                     className="object-cover opacity-100"
                     priority
+                    onError={(e) => { (e.target as HTMLImageElement).src = '/background/systems/system hero.png'; }}
                 />
                 {/* Only Bottom Fade */}
                 <div className="absolute bottom-0 left-0 right-0 h-[400px] z-[2] pointer-events-none"

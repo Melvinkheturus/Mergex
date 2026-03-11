@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, Sparkles } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * SystemsFAQ - FAQ accordion section
@@ -116,7 +117,12 @@ export function SystemsFAQ() {
                                     className="overflow-hidden"
                                 >
                                     <div className="px-6 pb-6 text-[#666666] text-sm leading-relaxed">
-                                        {faq.answer}
+                                        <p>{faq.answer}</p>
+                                        <div className="mt-4 flex">
+                                            <Link href={`/ask-mergex?q=${encodeURIComponent(faq.question)}`} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-50 text-purple-700 border border-purple-100 hover:bg-purple-100 hover:text-purple-800 transition-colors text-xs font-medium">
+                                                Ask Mergex about this
+                                            </Link>
+                                        </div>
                                     </div>
                                 </motion.div>
                             </motion.div>

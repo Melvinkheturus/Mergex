@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 import { motion } from 'framer-motion';
 import SplitText from '@/components/SplitText';
 import { ArrowUpRight } from 'lucide-react';
@@ -101,19 +102,21 @@ export default function Footer() {
                 {/* Desktop Background Image */}
                 <div className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden lg:block">
                     <Image
-                        src="/assets/background/footer.png"
+                        src={CLOUDINARY_ASSETS.footerDesktop}
                         alt=""
                         fill
                         className="object-cover"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                 </div>
                 {/* Mobile Background Image */}
                 <div className="absolute inset-0 z-0 opacity-40 pointer-events-none lg:hidden">
                     <Image
-                        src="/assets/background/footermobile.jpeg"
+                        src={CLOUDINARY_ASSETS.footerMobile}
                         alt=""
                         fill
                         className="object-cover"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                 </div>
 

@@ -8,6 +8,7 @@ import { ScrollSectionProvider } from "@/context/scroll-section-context";
 import { Navbar } from "@/components/layout";
 import Script from "next/script";
 import FooterRevealWrapper from "@/components/FooterRevealWrapper";
+import AskMergexWidget from "@/components/AskMergexWidget";
 
 const specialRoutes = ["/studio", "/connect"];
 
@@ -74,6 +75,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
                 <FooterRevealWrapper>
                     <Footer />
                 </FooterRevealWrapper>
+                <AskMergexWidget />
             </ScrollSectionProvider>
         </LenisProvider>
     );

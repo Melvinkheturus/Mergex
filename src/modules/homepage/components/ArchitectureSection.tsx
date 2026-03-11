@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-demo';
-import { CardSwipe } from '@/components/ui/card-swipe';
 
 /**
  * ArchitectureSection — "From Chaos to Clarity"
@@ -19,11 +18,6 @@ import { CardSwipe } from '@/components/ui/card-swipe';
  *  • Bottom: two-column split — left manifesto + right system intelligence cards
  */
 export function ArchitectureSection() {
-    const images = [
-        { src: "/mockups/common/leverage.jpeg", alt: "Leverage" },
-        { src: "/mockups/common/Structured.jpeg", alt: "Structured" },
-        { src: "/mockups/common/Inteligence.jpeg", alt: "Intelligence" },
-    ];
 
     const floatingCards = ['Structure', 'Intelligence', 'Leverage'];
 
@@ -32,7 +26,6 @@ export function ArchitectureSection() {
 
             {/* ── TOP HERO: Big text + floating cards ───────────────────── */}
             <div className="relative w-full overflow-hidden px-4 md:px-10 lg:px-16">
-                {/* BIG TEXT + OVERLAPPING CARDS container */}
                 <div className="relative flex items-center justify-center select-none py-28" style={{ minHeight: '20vw' }}>
                     {/* The big bold black text */}
                     <div
@@ -46,13 +39,6 @@ export function ArchitectureSection() {
                         }}
                     >
                         ARCHITECTURE
-                    </div>
-
-                    {/* CardSwipe integration — replacing the manual overlapping cards */}
-                    <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                        <div className="pointer-events-auto">
-                            <CardSwipe images={images} autoplayDelay={4500} slideShadows={false} />
-                        </div>
                     </div>
                 </div>
 

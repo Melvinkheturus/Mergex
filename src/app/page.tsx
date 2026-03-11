@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import {
-  HomePreloader,
   HeroSection,
   ShowreelSection,
   ProblemFragmentation,
@@ -10,6 +9,7 @@ import {
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
 const ArchitectureSection = dynamic(() => import('@/modules/homepage/components/ArchitectureSection').then(mod => mod.ArchitectureSection));
+const MarqueeStrip = dynamic(() => import('@/modules/homepage/components/MarqueeStrip').then(mod => mod.MarqueeStrip));
 const ThreeDMarqueeDemo = dynamic(() => import('@/modules/homepage/components/ThreeDMarqueeDemo').then(mod => mod.ThreeDMarqueeDemo));
 const FAQSection = dynamic(() => import('@/modules/homepage/components/FAQSection').then(mod => mod.FAQSection));
 const TestimonialsSection = dynamic(() => import('@/modules/shared/components/TestimonialsSection').then(mod => mod.TestimonialsSection));
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="">
-      <HomePreloader />
       <HomeScrollRegistrar />
 
       {/* 1. Hero — Belief Framing */}
@@ -50,6 +49,9 @@ export default function Home() {
       <div id="architecture">
         <ArchitectureSection />
       </div>
+
+      {/* Marquee Strip — floats as overlay on the section boundary */}
+      <MarqueeStrip />
 
       {/* 4. Problem With Fragmentation — Pain Naming */}
       <div id="problem-fragmentation">

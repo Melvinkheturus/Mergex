@@ -8,6 +8,7 @@ import { ScrollVelocity } from '@/components/ScrollVelocity';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Qwigley } from 'next/font/google';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 const scriptFont = Qwigley({
     subsets: ['latin'],
@@ -136,66 +137,6 @@ export function ScrollZoomShowcase() {
                 }
             );
 
-            // Dark overlay fade in with hold
-            gsap.fromTo(
-                overlayRef.current,
-                {
-                    opacity: 0,
-                },
-                {
-                    keyframes: [
-                        { opacity: 0.85, duration: 0.5 },
-                        { opacity: 0.85, duration: 0.5 }
-                    ],
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'top top',
-                        end: 'bottom bottom',
-                        scrub: 1,
-                    },
-                }
-            );
-
-            // Content fade in with hold has been removed from GSAP scrub.
-            // We now use Framer Motion's whileInView for a more elegant reveal.
-            // We just ensure the parent container is visible during the last half.
-            gsap.fromTo(
-                contentRef.current,
-                { opacity: 0 },
-                {
-                    keyframes: [
-                        { opacity: 1, duration: 0.5 },
-                        { opacity: 1, duration: 0.5 }
-                    ],
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'top top',
-                        end: 'bottom bottom',
-                        scrub: 1,
-                    },
-                }
-            );
-
-            // Global fade-out at the end of the section (progression 0.8 to 1.0)
-            gsap.fromTo(
-                imageContainerRef.current,
-                { opacity: 1 },
-                {
-                    keyframes: [
-                        { opacity: 1, duration: 0.8 },
-                        { opacity: 0, duration: 0.2 }
-                    ],
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'top top',
-                        end: 'bottom bottom',
-                        scrub: 1,
-                    },
-                }
-            );
         });
 
         // Force refresh after a short delay to ensure layout is settled
@@ -246,14 +187,14 @@ export function ScrollZoomShowcase() {
                         <div
                             className="absolute inset-0 bg-cover bg-center"
                             style={{
-                                backgroundImage: 'url(/model/Madonna.jpg)',
+                                backgroundImage: `url(${CLOUDINARY_ASSETS.saraVega}), url(/model/Sara Vega.jpg)`,
                             }}
                         />
                         {/* Complex Gradient Overlay - Targeted Darkening */}
                         <div
                             ref={overlayRef}
                             className="absolute inset-0"
-                            style={{ opacity: 0 }}
+                            style={{ opacity: 0.85 }}
                         >
                             {/* Heavy Top-Left Radial Gradient for Headline */}
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.6)_20%,rgba(0,0,0,0.2)_40%,transparent_70%)]" />
@@ -268,47 +209,24 @@ export function ScrollZoomShowcase() {
                         <div
                             ref={contentRef}
                             className="absolute inset-0 w-full h-full p-6 md:p-12 lg:p-16 text-white"
-                            style={{ opacity: 0 }}
+                            style={{ opacity: 1 }}
                         >
                             <div className="relative w-full h-full max-w-[1600px] mx-auto flex flex-col md:block">
 
                                 {/* ZONE 1: PRIMARY STATEMENT (Top Left) */}
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.3 }}
-                                    variants={{
-                                        hidden: {},
-                                        visible: {
-                                            transition: {
-                                                staggerChildren: 0.15
-                                            }
-                                        }
-                                    }}
+                                <div
                                     className={cn(
                                         "md:absolute md:top-[6%] md:left-0 max-w-[460px] z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
                                         isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
                                     )}
                                 >
-                                    <motion.p
-                                        variants={{
-                                            hidden: { opacity: 0, y: 20 },
-                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                                        }}
-                                        className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] mb-4 opacity-60 font-medium text-white/80"
-                                    >
+                                    <p className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] mb-4 opacity-60 font-medium text-white/80">
                                         Featured Exploration
-                                    </motion.p>
+                                    </p>
 
                                     {/* Headline: Mix of sans-serif and Playfair serif */}
                                     <div className="overflow-hidden">
-                                        <motion.h2
-                                            variants={{
-                                                hidden: { opacity: 0, y: 40 },
-                                                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
-                                            }}
-                                            className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/60 to-white/80 bg-clip-text text-transparent pb-2 whitespace-nowrap flex items-baseline gap-3 tracking-tight"
-                                        >
+                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] -ml-[2px] bg-gradient-to-b from-white via-white/60 to-white/80 bg-clip-text text-transparent pb-2 whitespace-nowrap flex items-baseline gap-3 tracking-tight">
                                             Meet
                                             <span
                                                 className="font-normal italic tracking-normal"
@@ -316,43 +234,22 @@ export function ScrollZoomShowcase() {
                                             >
                                                 Sara Vega
                                             </span>
-                                        </motion.h2>
+                                        </h2>
                                     </div>
-                                </motion.div>
+                                </div>
 
                                 {/* ZONE 2: CONTEXT & MEANING (Mid-Left) */}
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.3 }}
-                                    variants={{
-                                        hidden: {},
-                                        visible: {
-                                            transition: { staggerChildren: 0.15, delayChildren: 0.3 }
-                                        }
-                                    }}
+                                <div
                                     className={cn(
                                         "md:absolute md:top-[33%] md:left-0 max-w-[420px] mt-8 md:mt-0 z-10 flex flex-col gap-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
                                         isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
                                     )}
                                 >
-                                    <motion.h3
-                                        variants={{
-                                            hidden: { opacity: 0, y: 15 },
-                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                                        }}
-                                        className="text-base md:text-lg font-light leading-[1.5] text-white/90 tracking-wide"
-                                    >
+                                    <h3 className="text-base md:text-lg font-light leading-[1.5] text-white/90 tracking-wide">
                                         An AI-native creative exploration by Mergex Labs.
-                                    </motion.h3>
+                                    </h3>
                                     {/* Instagram Link */}
-                                    <motion.div
-                                        variants={{
-                                            hidden: { opacity: 0, y: 15 },
-                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                                        }}
-                                        className="flex flex-col gap-1.5 mt-2"
-                                    >
+                                    <div className="flex flex-col gap-1.5 mt-2">
                                         <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/40 font-semibold selection:bg-white/20">
                                             Follow her journey:
                                         </span>
@@ -364,44 +261,23 @@ export function ScrollZoomShowcase() {
                                         >
                                             @heysaravega
                                         </a>
-                                    </motion.div>
-                                </motion.div>
+                                    </div>
+                                </div>
 
                                 {/* ZONE 3: META + ACTION (Bottom Right) */}
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.3 }}
-                                    variants={{
-                                        hidden: {},
-                                        visible: {
-                                            transition: { staggerChildren: 0.15, delayChildren: 0.5 }
-                                        }
-                                    }}
+                                <div
                                     className={cn(
-                                        "md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] transition-opacity duration-300",
+                                        "md:absolute md:bottom-[6%] md:right-0 flex flex-col items-center md:items-end gap-10 mt-auto md:mt-0 z-10 drop-shadow-[0_2px_10_rgba(0,0,0,0.8)] transition-opacity duration-300",
                                         isVideoOpen ? "opacity-0 pointer-events-none" : "opacity-100"
                                     )}
                                 >
                                     {/* Moved Description */}
-                                    <motion.p
-                                        variants={{
-                                            hidden: { opacity: 0, x: 20 },
-                                            visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                                        }}
-                                        className="text-sm md:text-base leading-[1.8] font-light text-white/70 max-w-[420px] text-center md:text-right tracking-wide"
-                                    >
+                                    <p className="text-sm md:text-base leading-[1.8] font-light text-white/70 max-w-[420px] text-center md:text-right tracking-wide">
                                         Sara Vega represents how we experiment with generative AI blending visuals, motion, and narrative to create content that feels intentional, not synthetic.
-                                    </motion.p>
+                                    </p>
 
                                     {/* Meta Row */}
-                                    <motion.div
-                                        variants={{
-                                            hidden: { opacity: 0, y: 15 },
-                                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                                        }}
-                                        className="flex flex-row gap-8 md:gap-12 border-t border-white/10 pt-6 md:border-none md:pt-0"
-                                    >
+                                    <div className="flex flex-row gap-8 md:gap-12 border-t border-white/10 pt-6 md:border-none md:pt-0">
                                         <div className="text-center md:text-right">
                                             <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-2 font-semibold">
                                                 Identity
@@ -426,8 +302,8 @@ export function ScrollZoomShowcase() {
                                                 Visual storytelling
                                             </p>
                                         </div>
-                                    </motion.div>
-                                </motion.div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

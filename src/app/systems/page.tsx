@@ -79,7 +79,7 @@ export default function SystemsPage() {
 
                     {/* 9. FAQs — Objection Handling */}
                     <div id="faq" className="systems-section">
-                        <FAQSection variant="systems" />
+                        <FAQSection variant="systems" showAI={true} />
                     </div>
                 </main>
             </SystemsPageShell>

@@ -1,4 +1,5 @@
 'use client';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -36,31 +37,61 @@ export function LabsCTA() {
                     style={{ 
                         scale: cardScale,
                         opacity: cardOpacity,
+                        boxShadow: `
+                            0 20px 30px rgba(0,0,0,0.5),
+                            inset 0px 4px 12px rgba(255,255,255,0.7),
+                            inset 0px -6px 16px rgba(0,0,0,0.5),
+                            inset 4px 0px 12px rgba(255,255,255,0.3),
+                            inset -4px 0px 12px rgba(0,0,0,0.3)
+                        `
                     }}
-                    className="relative aspect-[16/10] md:aspect-[21/9] w-full bg-neutral-900 rounded-[40px] md:rounded-[80px] overflow-hidden border border-black/5 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.1)] group"
+                    className="relative aspect-[16/10] md:aspect-[21/9] w-full bg-neutral-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden group"
                 >
                     {/* Integrated Background within Card */}
-                    <div className="absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
                         <motion.div
                             className="hidden md:block absolute inset-0 bg-cover bg-center transition-transform duration-700"
                             style={{ 
-                                backgroundImage: 'url(/background/labs/Cta.jpeg)',
+                                backgroundImage: `url(${CLOUDINARY_ASSETS.labsCta}), url(/background/labs/Cta.jpeg)`,
                                 y: imageY,
                                 scale: 1.1
                             }}
                         />
-                         <motion.div
+                        <motion.div
                             className="block md:hidden absolute inset-0 bg-cover bg-center transition-transform duration-700"
                             style={{ 
-                                backgroundImage: 'url(/background/labs/Cta_Mobile.jpeg)',
+                                backgroundImage: `url(${CLOUDINARY_ASSETS.labsCta}), url(/background/labs/Cta.jpeg)`,
                                 y: imageY,
                                 scale: 1.1
                             }}
                         />
-                        {/* Subtle dark tint to ensure white text readability without blurring/frosting */}
-                        <div className="absolute inset-0 bg-black/30" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     </div>
+
+                    {/* Integrated Edge Blur softening */}
+                    <BlurVignette 
+                        radius="40px" 
+                        inset="0px" 
+                        transitionLength="150px" 
+                        blur="32px" 
+                        className="absolute inset-0 z-10 pointer-events-none"
+                    />
+
+                    {/* The Crystal Clear 3D Glass Overlay */}
+                    <div 
+                        className="absolute inset-0 z-10 border border-white/40 pointer-events-none"
+                        style={{
+                            background: `radial-gradient(
+                                circle at 50% 0%, 
+                                rgba(255, 255, 255, 0.15) 0%, 
+                                transparent 60%
+                            )`,
+                            borderBottomColor: 'rgba(255, 255, 255, 0.1)'
+                        }}
+                    />
+                    
+                    {/* Additional Tints */}
+                    <div className="absolute inset-0 z-10 bg-black/20" />
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                     {/* Card Content */}
                     <div className="relative z-10 h-full flex flex-col items-center justify-center p-8 md:p-16 text-center">
@@ -71,9 +102,9 @@ export function LabsCTA() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="mb-8"
                         >
-                            <div className="px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-lg">
+                            <div className="mx-auto px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex items-center justify-center">
                                 <span className="text-[10px] md:text-xs font-semibold text-white tracking-[0.2em] uppercase">
-                                    {LABS_CTA.tag || "The Lab Process"}
+                                    COLLABORATE
                                 </span>
                             </div>
                         </motion.div>
@@ -92,7 +123,7 @@ export function LabsCTA() {
                                 Where Ideas <br className="hidden md:block" /> <em>Become</em> Reality.
                             </h2>
                             <p className="text-neutral-300 text-sm md:text-xl font-light mb-10 max-w-xl mx-auto leading-relaxed">
-                                In the Lab, ideas aren't just explored — they evolve into experiences.
+                                In the Lab, ideas aren't just explored they evolve into experiences.
                             </p>
                         </motion.div>
 
@@ -102,14 +133,14 @@ export function LabsCTA() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
                         >
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="px-8 py-3 rounded-full bg-white text-black font-bold text-sm md:text-base transition-colors hover:bg-neutral-200 flex items-center gap-3"
+                            <button
+                                className="px-8 py-3 rounded-full bg-white flex items-center gap-3 active:scale-95 transition-transform group mix-blend-screen"
                             >
-                                {LABS_CTA.primaryCTA}
-                                <ArrowRight size={18} />
-                            </motion.button>
+                                <span className="font-bold text-sm md:text-base text-black">
+                                    Let’s see what AI can do for you
+                                </span>
+                                <ArrowRight size={18} className="text-black" />
+                            </button>
                         </motion.div>
                     </div>
 

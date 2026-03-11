@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { RadialIntro, type OrbitItem } from '@/components/animate-ui/components/community/radial-intro';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 /**
  * Note: Add team images to /public/images/team/
@@ -16,6 +17,7 @@ import { RadialIntro, type OrbitItem } from '@/components/animate-ui/components/
 interface TeamMember {
     id: string;
     image: string;
+    fallback?: string;
     alt: string;
     name: string;
     role: string;
@@ -26,35 +28,40 @@ const TEAM_MEMBERS: TeamMember[] = [
         id: '1',
         name: 'Manikandan',
         role: 'Founder & CEO',
-        image: '/images/team/hf_20260304_161027_64d35ebe-b943-4b2e-b8ed-9297c5604487.jpeg',
+        image: CLOUDINARY_ASSETS.teamManikandan,
+        fallback: '/team/Manikandan.jpeg',
         alt: 'Manikandan, Founder & CEO'
     },
     {
         id: '2',
         name: 'Sharukesh',
         role: 'Co-founder & CSO',
-        image: '/images/team/WhatsApp Image 2026-03-01 at 5.51.48 PM.jpeg',
+        image: CLOUDINARY_ASSETS.teamSharukesh,
+        fallback: '/team/Sharukesh.jpeg',
         alt: 'Sharukesh, Co-founder & CSO'
     },
     {
         id: '3',
         name: 'John Peter',
         role: 'CRO',
-        image: '/images/team/WhatsApp Image 2026-03-01 at 5.37.18 PM.jpeg',
+        image: CLOUDINARY_ASSETS.teamJohn,
+        fallback: '/team/John.jpeg',
         alt: 'John Peter, CRO'
     },
     {
         id: '4',
         name: 'Muralidharan',
         role: 'MD of Mergex Labs',
-        image: '/images/team/WhatsApp Image 2026-03-01 at 5.35.20 PM.jpeg',
+        image: CLOUDINARY_ASSETS.teamMuralidharan,
+        fallback: '/team/Muralidharan.jpeg',
         alt: 'Muralidharan, MD of Mergex Labs'
     },
     {
         id: '5',
         name: 'Yasshwanth',
         role: 'CPO',
-        image: '/images/team/WhatsApp Image 2026-03-01 at 5.43.01 PM.jpeg',
+        image: CLOUDINARY_ASSETS.teamYasshwanth,
+        fallback: '/team/yasshwanth.jpeg',
         alt: 'Yasshwanth, CPO'
     }
 ];

@@ -304,10 +304,12 @@ export const ECOSYSTEM_CONTENT = {
 } as const;
 
 // Showreel Section
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 export const SHOWREEL_CONTENT = {
     headline: 'See What We Build',
     subheadline: 'A cinematic glimpse into the future of business systems and creative AI.',
-    videoSrc: '/mockups/common/Showreel.mp4',
+    videoSrc: CLOUDINARY_ASSETS.showreelVideo,
+    videoFallback: '/mockups/parent/showreel/Showreel.mp4',
     videoPoster: '/assets/projects/showreel-poster.jpg',
 } as const;
 

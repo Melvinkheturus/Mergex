@@ -8,6 +8,7 @@ import {
     ReferralExplainer,
     TrustSection,
     PartnerCTA,
+    PartnerFAQ,
 } from '@/modules/partnership';
 
 export default function PartnerPage() {
@@ -29,6 +30,7 @@ export default function PartnerPage() {
             <PartnershipTypes onApplyClick={handlePartnershipTypeClick} />
             <ReferralExplainer />
             <TrustSection />
+            <PartnerFAQ />
             <PartnerCTA />
         </main>
     );

@@ -16,6 +16,7 @@
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^5.7.0",
     "@studio-freight/lenis": "^1.0.42",
+    "@supabase/supabase-js": "^2.99.0",
     "@tabler/icons-react": "^3.36.1",
     "@types/three": "^0.182.0",
     "class-variance-authority": "^0.7.1",

@@ -18,10 +18,8 @@ import { ParentHowItWorks } from './components/ParentHowItWorks';
 import { ParentWorkGallery } from './components/ParentWorkGallery';
 import { ThreeDMarqueeDemo } from './components/ThreeDMarqueeDemo';
 import { TestimonialsSection } from './components/TestimonialsSection';
-import { HomePreloader } from './components/HomePreloader';
 
 export {
-    HomePreloader,
     HeroSection,
     ProductPortalGallery,
     // WhatWeBuildSection,

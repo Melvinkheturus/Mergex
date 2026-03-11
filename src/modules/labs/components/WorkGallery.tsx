@@ -4,16 +4,18 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScrollVelocity } from '@/components/ScrollVelocity';
 
+import { cloudinaryImage } from '@/lib/cloudinary';
+
 const galleryImages = [
-    '/mockups/labs/Gallery/WhatsApp Image 2026-02-05 at 12.12.28 AM.jpeg',
-    '/mockups/labs/Gallery/Kyra-hero.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_qx4kj5qx4kj5qx4k.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_q305hxq305hxq305.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_m6ev2fm6ev2fm6ev.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_9ashti9ashti9ash.png',
-    '/mockups/labs/Gallery/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_1'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_2'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_3'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_4'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_5'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_6'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_7'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_8'),
+    cloudinaryImage('mockups/labs/Gallery/sara_digital_persona_9'),
 ];
 
 /**

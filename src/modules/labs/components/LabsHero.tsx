@@ -5,6 +5,7 @@ import { useRef, useEffect, useState, useCallback, lazy, Suspense } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { LABS_HERO } from '../content/labs';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 gsap.registerPlugin(ScrollTrigger);
 import { BlurVignette } from '@/components/ui/BlurVignette';
@@ -123,22 +124,25 @@ export function LabsHero() {
             img.decoding = 'async';
             images.push(img);
         }
-        imagesRef.current = images;
-
-        // 1. Load the First Frame with high priority
+        imagesRef.current = images;        // 1. Load the First Frame with high priority
         const firstImg = images[0];
         firstImg.fetchPriority = 'high';
-        firstImg.onload = () => {
+        
+        const onFirstFrameLoad = () => {
             syncCanvasSize();
-            drawFrame(1);
-            setIsLoaded(true);
+            // Ensure canvas is ready for the first draw
+            requestAnimationFrame(() => {
+                drawFrame(1);
+                setIsLoaded(true);
+                
+                // Redundant draw after short delay to catch any race conditions with mounting/layout
+                setTimeout(() => drawFrame(1), 50);
+            });
 
-            // 2. Load all remaining frames after 100ms
+            // 2. Load all remaining frames after a small buffer
             setTimeout(() => {
                 for (let i = 2; i <= FRAME_COUNT; i++) {
                     const img = images[i - 1];
-                    // img.fetchPriority = 'high'; not working increates arround .5 sec
-
                     img.onload = () => {
                         if (Math.round(frameIndex.get()) === i) {
                             requestDraw(i);
@@ -146,13 +150,24 @@ export function LabsHero() {
                     };
 
                     const frameNum = i.toString().padStart(4, '0');
-                    img.src = `/background/labs/frames_webp/frame_${frameNum}.webp`;
+                    const cloudinaryUrl = CLOUDINARY_ASSETS.labsFrame(frameNum);
+                    const localUrl = `/background/labs/frames_webp/frame_${frameNum}.webp`;
+                    img.onerror = () => { if (img.src !== localUrl) img.src = localUrl; };
+                    img.src = cloudinaryUrl;
                 }
-            }, 100);
+            }, 150);
         };
 
-        // Trigger first frame load
-        firstImg.src = `/background/labs/frames_webp/frame_0001.webp`;
+        firstImg.onload = onFirstFrameLoad;
+
+        // Trigger first frame load with Cloudinary primary + local fallback
+        const localFirst = `/background/labs/frames_webp/frame_0001.webp`;
+        firstImg.onerror = () => { 
+            if (firstImg.src !== localFirst) {
+                firstImg.src = localFirst; 
+            }
+        };
+        firstImg.src = CLOUDINARY_ASSETS.labsFrame('0001');
 
         const handleResize = () => {
             syncCanvasSize();
@@ -224,6 +239,18 @@ export function LabsHero() {
                       Once the canvas loads it covers this completely.
                     */}
                     <div className="absolute inset-0 bg-neutral-950">
+                        {/* 
+                          Static Fallback Image — Frame 1 (local)
+                          Provides immediate visual feedback even before JS runs or Cloudinary responds.
+                        */}
+                        <div 
+                            className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen transition-opacity duration-1000"
+                            style={{ 
+                                backgroundImage: 'url("/background/labs/frames_webp/frame_0001.webp")',
+                                opacity: isLoaded ? 0 : 0.4
+                            }}
+                        />
+
                         {/* Centered radial glow */}
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(30,27,75,0.35)_0%,rgba(9,9,11,1)_70%)]" />
 

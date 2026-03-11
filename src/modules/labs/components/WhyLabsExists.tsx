@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WHY_LABS_EXISTS } from '../content/labs';
+import { cloudinaryVideo } from '@/lib/cloudinary';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -248,7 +249,7 @@ export function WhyLabsExists() {
                         loop
                         playsInline
                     >
-                        <source src="/assets/background/Mountain Dew (online-video-cutter.com).mp4" type="video/mp4" />
+                        <source src={cloudinaryVideo('mockups/labs/Portfolio/mountain_dew_dynamic')} type="video/mp4" />
                     </video>
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
@@ -336,7 +337,7 @@ function FlipCard({ position, frontBgPos, backBg, backTextColor, title, descript
                         loop
                         playsInline
                     >
-                        <source src="/assets/background/Mountain Dew (online-video-cutter.com).mp4" type="video/mp4" />
+                        <source src={cloudinaryVideo('mockups/labs/Portfolio/mountain_dew_dynamic')} type="video/mp4" />
                     </video>
                 </div>
 

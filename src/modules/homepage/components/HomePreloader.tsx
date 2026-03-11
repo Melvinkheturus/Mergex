@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const wordsSequence = [
+const WORDS = [
     "Chaos",
     "Complexity",
     "Fragmentation",
@@ -13,110 +13,128 @@ const wordsSequence = [
     "Architecture",
     "Leverage",
     "Scale",
-    "Structure."
+    "Structure.",
 ];
 
-export function HomePreloader() {
-    const [index, setIndex] = useState(0);
-    // Start with isComplete true by default on the server, then check on client
-    const [isComplete, setIsComplete] = useState(true);
+// Per-word display duration (ms): starts at 400ms, accelerates to 250ms
+const getDelay = (i: number) => Math.max(250, 400 - i * 20);
 
+// How long to hold the final word before fading out
+const FINAL_HOLD_MS = 900;
+// Fade-out duration (must match framer-motion transition below)
+const FADE_OUT_MS = 800;
+
+function hideNavbar() {
+    window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: true } }));
+}
+function showNavbar() {
+    window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
+}
+
+export function HomePreloader() {
+    // On the server — and for returning visitors — preloader never shows.
+    const [active, setActive] = useState(false);
+    const [wordIndex, setWordIndex] = useState(0);
+    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    // ── 1. Client-side bootstrap ────────────────────────────────────────────
     useEffect(() => {
-        // Only run check on client side
-        const hasSeenPreloader = sessionStorage.getItem('has-seen-preloader');
-        if (!hasSeenPreloader) {
-            setIsComplete(false);
-            sessionStorage.setItem('has-seen-preloader', 'true');
-        }
+        const seen = sessionStorage.getItem('has-seen-preloader');
+        if (seen) return; // skip on revisit
+
+        sessionStorage.setItem('has-seen-preloader', 'true');
+
+        // Lock scroll & hide navbar immediately
+        document.body.style.overflow = 'hidden';
+        hideNavbar();
+        setActive(true);
     }, []);
 
+    // ── 2. Word cycling ─────────────────────────────────────────────────────
     useEffect(() => {
-        if (isComplete) return;
+        if (!active) return;
 
-        // Prevent scrolling while preloader is active
-        document.body.style.overflow = 'hidden';
+        const isLast = wordIndex >= WORDS.length - 1;
 
-        // Hide navbar
-        window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: true } }));
-
-        return () => {
-            document.body.style.overflow = '';
-            window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
-        };
-    }, []); // Removed isComplete from array. We use empty dependency array to run only once on mount.
-
-    useEffect(() => {
-        if (isComplete) return;
-
-        if (index >= wordsSequence.length - 1) {
-            // Hold on the last word slightly longer before animating out the preloader
-            const timeout1 = setTimeout(() => {
+        if (isLast) {
+            // Hold the final word, then start the fade
+            timerRef.current = setTimeout(() => {
                 document.body.style.overflow = '';
-                window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
-            }, 1200);
+                // Trigger framer-motion exit
+                setActive(false);
 
-            const timeout2 = setTimeout(() => {
-                setIsComplete(true); // Fades out the background
-            }, 1500);
-
-            return () => { clearTimeout(timeout1); clearTimeout(timeout2); };
+                // Show navbar only AFTER the preloader has fully faded out
+                // + 200ms grace so the hero has time to paint first
+                timerRef.current = setTimeout(() => {
+                    showNavbar();
+                }, FADE_OUT_MS + 200);
+            }, FINAL_HOLD_MS);
+        } else {
+            timerRef.current = setTimeout(() => {
+                setWordIndex((prev) => prev + 1);
+            }, getDelay(wordIndex));
         }
 
-        // Flashing timing: Starts a bit slower (400ms), accelerates towards 250ms
-        const delay = Math.max(250, 400 - index * 25);
-        const timeout = setTimeout(() => {
-            setIndex((prev) => prev + 1);
-        }, delay);
+        return () => {
+            if (timerRef.current) clearTimeout(timerRef.current);
+        };
+    }, [active, wordIndex]);
 
-        return () => clearTimeout(timeout);
-    }, [index]); // Removed isComplete from array to keep array size consistent between renders
+    // ── 3. Safety cleanup (e.g. unmount before completion) ─────────────────
+    useEffect(() => {
+        return () => {
+            document.body.style.overflow = '';
+            showNavbar();
+        };
+    }, []);
 
     return (
         <AnimatePresence>
-            {!isComplete && (
+            {active && (
                 <motion.div
                     key="preloader"
-                    className="fixed inset-0 z-[100] bg-black flex items-center justify-center pointer-events-none"
+                    className="fixed inset-0 z-[200] bg-black flex items-center justify-center pointer-events-none"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
+                    transition={{ duration: FADE_OUT_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
                 >
-                    {/* Subtle glow in the background that pulses slightly */}
+                    {/* Subtle ambient pulse */}
                     <motion.div
-                        className="absolute inset-0 bg-white/5 opacity-50"
-                        style={{ filter: 'blur(100px)' }}
-                        animate={{ opacity: [0.1, 0.3, 0.1] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                            background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%)',
+                        }}
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                     />
 
+                    {/* Word flip */}
                     <AnimatePresence mode="wait">
-                        <motion.h2
-                            key={index}
-                            className={`text-white text-3xl md:text-5xl lg:text-7xl font-semibold tracking-tight absolute text-center ${index === wordsSequence.length - 1 ? 'z-50' : ''}`}
-                            initial={{
-                                opacity: 0,
-                                filter: `blur(${Math.max(0, 20 - index * 2.5)}px)`,
-                                y: 10,
-                                scale: index === 0 ? 0.95 : 1
-                            }}
-                            animate={{
-                                opacity: 1,
-                                filter: `blur(${Math.max(0, 10 - index * 2)}px)`,
-                                y: 0,
-                                scale: 1
-                            }}
-                            exit={{
-                                opacity: 0,
-                                filter: `blur(${Math.max(0, 10 - index * 2)}px)`,
-                            }}
+                        <motion.span
+                            key={wordIndex}
+                            className="text-white text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight select-none"
+                            style={{ fontFamily: '"Outfit", system-ui, sans-serif' }}
+                            initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
                             transition={{
-                                duration: index === wordsSequence.length - 1 ? 0.8 : 0.15,
-                                ease: "easeOut"
+                                duration: wordIndex === WORDS.length - 1 ? 0.6 : 0.12,
+                                ease: 'easeOut',
                             }}
                         >
-                            {wordsSequence[index]}
-                        </motion.h2>
+                            {WORDS[wordIndex]}
+                        </motion.span>
                     </AnimatePresence>
+
+                    {/* Subtle progress bar */}
+                    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-24 h-px bg-white/10 overflow-hidden rounded-full">
+                        <motion.div
+                            className="h-full bg-white/40 rounded-full"
+                            initial={{ width: '0%' }}
+                            animate={{ width: `${((wordIndex + 1) / WORDS.length) * 100}%` }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
+                        />
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

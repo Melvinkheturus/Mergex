@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { OrthographicCamera, useFBO, useTexture } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from "three"
+import { CLOUDINARY_ASSETS } from "@/lib/cloudinary"
 
 import { Suspense, useMemo } from "react"
 
@@ -42,9 +43,9 @@ function Model() {
   const { viewport } = useThree()
 
 
-  // Load background images
-  const desktopTexture = useTexture("/background/parent/parent-hero.jpeg")
-  const mobileTexture = useTexture("/background/parent/parent hero mobile.jpeg")
+  // Load background images — Cloudinary primary, local fallback via Three's texture loader error handling
+  const desktopTexture = useTexture(CLOUDINARY_ASSETS.parentHeroDesktop)
+  const mobileTexture = useTexture(CLOUDINARY_ASSETS.parentHeroMobile)
 
   // Generate procedural soft brush texture for the ripples to avoid needing `/brush.png`
   const brushTexture = useMemo(() => {

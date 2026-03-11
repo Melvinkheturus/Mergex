@@ -1,8 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, X } from 'lucide-react';
+import { cloudinaryVideo, cloudinaryImage } from '@/lib/cloudinary';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -18,50 +19,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Media items for the carousel
 const CAROUSEL_MEDIA = [
-    { src: '/mockups/labs/Portfolio/ABC MIX.mp4', alt: 'ABC Mix Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/ACT Popcorn (online-video-cutter.com).mp4', alt: 'ACT Popcorn Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/Banana Choco Mix.mp4', alt: 'Banana Choco Mix Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/Gemini_Generated_Image_6mmg1y6mmg1y6mmg.png', alt: 'AI Generated Image', type: 'image' },
-    { src: '/mockups/labs/Portfolio/Influencer Video.mp4', alt: 'Influencer Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/Jewellery Video.mp4', alt: 'Jewellery Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/KFC (online-video-cutter.com).mp4', alt: 'KFC Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/Mountain Dew (online-video-cutter.com).mp4', alt: 'Mountain Dew Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/V3 Rose petals.mp4', alt: 'Rose Petals Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/WhatsApp Video 2026-02-28 at 2.16.34 PM.mp4', alt: 'New Portfolio Video', type: 'video' },
-    { src: '/mockups/labs/Portfolio/ad.mp4', alt: 'Advertisement Video', type: 'video' },
+    { id: 'mockups/labs/Portfolio/abc_mix_visual', alt: 'ABC Mix Visual', type: 'video' },
+    { id: 'mockups/labs/Portfolio/act_popcorn_reel', alt: 'ACT Popcorn Reel', type: 'video' },
+    { id: 'mockups/labs/Portfolio/jewelry_ai_model', alt: 'AI Generated Jewelry Model', type: 'image' },
+    { id: 'mockups/labs/Portfolio/ai_influencer_demo', alt: 'AI Influencer Demo', type: 'video' },
+    { id: 'mockups/labs/Portfolio/jewelry_marketing_motion', alt: 'Jewelry Marketing Motion', type: 'video' },
+    { id: 'mockups/labs/Portfolio/kfc_social_ad', alt: 'KFC Social Ad', type: 'video' },
+    { id: 'mockups/labs/Portfolio/mountain_dew_dynamic', alt: 'Mountain Dew Dynamic', type: 'video' },
+    { id: 'mockups/labs/Portfolio/park_avenue_campaign', alt: 'Park Avenue Campaign', type: 'video' },
+    { id: 'mockups/labs/Portfolio/facewash_ad_promo', alt: 'Facewash Ad Promo', type: 'video' },
 ] as const;
 
 export function ExperimentsGallery() {
     const sectionRef = useRef<HTMLElement>(null);
     const swiperRef = useRef<SwiperType | null>(null);
 
-    // Pause all videos except the active slide's video
-    const syncVideoPlayback = useCallback((swiper: SwiperType) => {
-        const slides = swiper.slides;
-        if (!slides) return;
-
-        slides.forEach((slide: HTMLElement, idx: number) => {
-            const video = slide.querySelector('video');
-            if (!video) return;
-
-            if (idx === swiper.activeIndex) {
-                video.currentTime = 0;
-                video.play().catch(() => { });
-            } else {
-                video.pause();
-            }
-        });
-    }, []);
-
     const handleSwiper = useCallback((swiper: SwiperType) => {
         swiperRef.current = swiper;
-        // Small delay to ensure DOM is ready
-        setTimeout(() => syncVideoPlayback(swiper), 100);
-    }, [syncVideoPlayback]);
-
-    const handleSlideChange = useCallback((swiper: SwiperType) => {
-        syncVideoPlayback(swiper);
-    }, [syncVideoPlayback]);
+    }, []);
 
 
     const swiperStyles = `
@@ -149,90 +124,119 @@ export function ExperimentsGallery() {
                         </p>
                     </div>
                 </motion.div>
+            </div>
 
-                {/* Swiper Coverflow Carousel with Edge Fades */}
-                <div className="relative w-full">
-                    {/* Left Fade Overlay */}
-                    <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-r from-white via-white/80 to-transparent" />
+            {/* Swiper Coverflow Carousel */}
+            <div className="relative w-full">
+                <Swiper
+                    className="experiments-swiper"
+                    spaceBetween={50}
+                    autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    }}
+                    effect="coverflow"
+                    grabCursor={true}
+                    centeredSlides={true}
+                    loop={true}
+                    slidesPerView="auto"
+                    coverflowEffect={{
+                        rotate: 0,
+                        stretch: 0,
+                        depth: 80,
+                        modifier: 2.0,
+                    }}
+                    pagination={{ clickable: true }}
+                    modules={[EffectCoverflow, Autoplay, Pagination]}
+                    onSwiper={handleSwiper}
+                >
+                    {/* Swiper slides mapping... */}
+                    {CAROUSEL_MEDIA.map((item, index) => {
+                        const cloudinarySrc = item.type === 'video' 
+                            ? cloudinaryVideo(item.id, 'q_auto:eco') 
+                            : cloudinaryImage(item.id, 'q_auto');
+                        const localSrc = item.type === 'video' 
+                            ? `/${item.id}.mp4` 
+                            : `/${item.id}.webp`;
 
-                    {/* Right Fade Overlay */}
-                    <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-l from-white via-white/80 to-transparent" />
-
-                    <Swiper
-                        className="experiments-swiper"
-                        spaceBetween={50}
-                        autoplay={{
-                            delay: 2000,
-                            disableOnInteraction: false,
-                        }}
-                        effect="coverflow"
-                        grabCursor={true}
-                        centeredSlides={true}
-                        loop={true}
-                        slidesPerView="auto"
-                        coverflowEffect={{
-                            rotate: 0,
-                            stretch: 0,
-                            depth: 80,
-                            modifier: 2.0,
-                        }}
-                        pagination={{ clickable: true }}
-                        modules={[EffectCoverflow, Autoplay, Pagination]}
-                        onSwiper={handleSwiper}
-                        onSlideChange={handleSlideChange}
-                    >
-                        {/* Swiper slides mapping... */}
-                        {CAROUSEL_MEDIA.map((media, index) => (
+                        return (
                             <SwiperSlide key={`slide-${index}`}>
-                                <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">
-                                    {media.type === 'video' ? (
+                                <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
+                                    {item.type === 'video' ? (
                                         <video
-                                            src={media.src}
                                             className="w-full h-full object-cover"
+                                            autoPlay
                                             muted
                                             loop
                                             playsInline
-                                        />
+                                        >
+                                            <source src={cloudinarySrc} type="video/mp4" />
+                                            <source src={localSrc} type="video/mp4" />
+                                        </video>
                                     ) : (
                                         <Image
-                                            src={media.src}
+                                            src={cloudinarySrc}
                                             width={300}
                                             height={400}
                                             className="w-full h-full object-cover"
-                                            alt={media.alt}
+                                            alt={item.alt}
                                             unoptimized
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                if (target.src !== localSrc) {
+                                                    target.src = localSrc;
+                                                }
+                                            }}
                                         />
                                     )}
                                 </div>
                             </SwiperSlide>
-                        ))}
-                        {/* Duplicate Slides for Looping */}
-                        {CAROUSEL_MEDIA.map((media, index) => (
+                        );
+                    })}
+                    {/* Duplicate Slides for Looping */}
+                    {CAROUSEL_MEDIA.map((item, index) => {
+                        const cloudinarySrc = item.type === 'video' 
+                            ? cloudinaryVideo(item.id, 'q_auto:eco') 
+                            : cloudinaryImage(item.id, 'q_auto');
+                        const localSrc = item.type === 'video' 
+                            ? `/${item.id}.mp4` 
+                            : `/${item.id}.webp`;
+
+                        return (
                             <SwiperSlide key={`slide-dup-${index}`}>
-                                <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl">
-                                    {media.type === 'video' ? (
+                                <div className="w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
+                                    {item.type === 'video' ? (
                                         <video
-                                            src={media.src}
                                             className="w-full h-full object-cover"
+                                            autoPlay
                                             muted
                                             loop
                                             playsInline
-                                        />
+                                        >
+                                            <source src={cloudinarySrc} type="video/mp4" />
+                                            <source src={localSrc} type="video/mp4" />
+                                        </video>
                                     ) : (
                                         <Image
-                                            src={media.src}
+                                            src={cloudinarySrc}
                                             width={300}
                                             height={400}
                                             className="w-full h-full object-cover"
-                                            alt={media.alt}
+                                            alt={item.alt}
                                             unoptimized
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                if (target.src !== localSrc) {
+                                                    target.src = localSrc;
+                                                }
+                                            }}
                                         />
                                     )}
                                 </div>
                             </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
+                        );
+                    })}
+                </Swiper>
             </div>
         </section>
     );

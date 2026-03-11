@@ -16,7 +16,6 @@ export function HowLabsWorks() {
     offset: ["start end", "end start"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.95, 1, 1, 0.95]);
   const y = useTransform(scrollYProgress, [0, 0.1], [40, 0]);
 
@@ -40,13 +39,13 @@ export function HowLabsWorks() {
     <ReactLenis root>
       <main ref={containerRef} className='bg-white'>
         <motion.section 
-          style={{ opacity, scale, y }}
+          style={{ scale, y }}
           className='text-black w-full bg-white pb-32 pt-24'
         >
           {/* Refined Title styled after WhyLabsExists */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
             className="text-center mb-12 px-6"
@@ -104,7 +103,7 @@ export function HowLabsWorks() {
                 <article className='bg-[#dee2e6] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6'>
                   <h1 className='text-3xl font-bold text-black'>IV. Emergence</h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
-                    What began as an experiment becomes something real — 
+                    What began as an experiment becomes something real
                     assets, visuals, and experiences ready for the world.
                   </p>
                   <div className='w-fit bg-black text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-widest'>
@@ -116,7 +115,10 @@ export function HowLabsWorks() {
             <div className='sticky top-0 h-screen grid place-content-center flex-1'>
               <div className='max-w-md'>
                 <span className='text-xs font-mono text-black/40 uppercase tracking-[0.3em] mb-4 block'>THE LAB PROCESS</span>
-                <h2 className='text-5xl md:text-6xl font-bold text-black leading-tight'>
+                <h2 
+                  className='text-5xl md:text-6xl font-bold text-black leading-tight font-serif'
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
                   The <DecryptedText 
                     key={currentHeadline}
                     text={currentHeadline} 
@@ -126,7 +128,7 @@ export function HowLabsWorks() {
                   /> <br /> to Reality.
                 </h2>
                 <p className='mt-8 text-xl text-gray-500 font-light leading-relaxed'>
-                  In the Lab, ideas aren’t just explored — they evolve. 
+                  In the Lab, ideas aren’t just explored they evolve. 
                   Through rapid experimentation and creative intelligence, 
                   concepts transform into visuals, systems, and experiences 
                   ready for the real world.

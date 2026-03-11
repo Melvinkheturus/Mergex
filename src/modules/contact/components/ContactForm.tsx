@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Send, ArrowRight } from "lucide-react";
+import { Send, ArrowRight, Clock, ClipboardCheck, Calendar } from "lucide-react";
 
 export default function ContactForm() {
     const [submitting, setSubmitting] = useState(false);
@@ -158,6 +158,37 @@ export default function ContactForm() {
                     <p className="text-xs text-muted-foreground ml-1">
                         We review every inquiry personally.
                     </p>
+                </div>
+
+                {/* Reassurance Block */}
+                <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 space-y-4">
+                    <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-primary" />
+                        What happens next?
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="flex gap-3">
+                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">1</div>
+                            <p className="text-xs text-gray-600 leading-normal">
+                                <span className="font-semibold block text-gray-900 mb-1">Review</span>
+                                We analyze your request and alignment.
+                            </p>
+                        </div>
+                        <div className="flex gap-3">
+                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">2</div>
+                            <p className="text-xs text-gray-600 leading-normal">
+                                <span className="font-semibold block text-gray-900 mb-1">Discovery</span>
+                                We schedule a deep-dive strategy call.
+                            </p>
+                        </div>
+                        <div className="flex gap-3">
+                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">3</div>
+                            <p className="text-xs text-gray-600 leading-normal">
+                                <span className="font-semibold block text-gray-900 mb-1">Proposal</span>
+                                You get a clear roadmap and quote.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Subtle trust line */}

@@ -60,7 +60,7 @@ export function Navbar() {
                 animate={{
                     y: forceHidden ? "-100%" : 0
                 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
                 <nav
                     className={`
@@ -148,7 +148,7 @@ export function Navbar() {
             <motion.div
                 initial={{ y: 0 }}
                 animate={{ y: (isMobileMenuOpen || forceHidden) ? -100 : 0 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="lg:hidden absolute top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >
                 <div className={`
