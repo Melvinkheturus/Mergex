@@ -26,9 +26,12 @@ export interface PartnerApplication {
 export interface ReferralSubmission {
     referrerName: string;
     referrerEmail: string;
+    referrerPhone: string;
     clientName: string;
-    clientCompany: string;
-    problemDescription: string;
+    clientPhone?: string;
+    services: string;
+    clientBusiness?: string;
+    message?: string;
 }
 
 export interface Benefit {

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
     PartnershipHero,
     WhyPartner,
@@ -15,14 +16,18 @@ interface PartnerPageClientProps {
 }
 
 export default function PartnerPageClient({ pageConfig }: PartnerPageClientProps) {
-    const [selectedType, setSelectedType] = useState<'strategic' | 'referral' | null>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        if ((window as any).lenis) {
+            (window as any).lenis.scrollTo(0, { immediate: true });
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, []);
 
     const handlePartnershipTypeClick = (typeId: 'strategic' | 'referral') => {
-        setSelectedType(typeId);
-        setTimeout(() => {
-            const ctaSection = document.querySelector('section:last-of-type');
-            ctaSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
+        router.push(typeId === 'strategic' ? '/partner/apply' : '/partner/refer');
     };
 
     return (

@@ -68,6 +68,12 @@ export const partnerType = defineType({
             description: '🔒 Only visible to your team, not on the site',
         }),
         defineField({
+            name: 'dynamicData',
+            title: 'Dynamic Form Data',
+            type: 'string',
+            description: 'JSON string of custom form fields submitted via dynamic forms',
+        }),
+        defineField({
             name: 'submittedAt',
             title: 'Submitted At',
             type: 'datetime',
