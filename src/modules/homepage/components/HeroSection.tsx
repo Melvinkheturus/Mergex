@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Playfair_Display } from 'next/font/google';
 import dynamic from 'next/dynamic';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 const ImageRipple = dynamic(() => import('@/components/ui/image-ripple'), { ssr: false });
 
@@ -38,11 +39,14 @@ export function HeroSection() {
                 {/* Mobile: Static Background Image */}
                 <div className="block md:hidden w-full h-full relative">
                     <Image
-                        src="/background/parent/parent hero mobile.jpeg"
+                        src={CLOUDINARY_ASSETS.parentHeroMobile}
                         alt="Hero background"
                         fill
                         className="object-cover"
                         priority
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "/background/parent/hero/parent hero mobile.jpeg";
+                        }}
                     />
                 </div>
             </div>

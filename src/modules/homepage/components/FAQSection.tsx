@@ -9,9 +9,10 @@ import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
 
 interface FAQSectionProps {
     variant?: 'parent' | 'systems';
+    showAI?: boolean;
 }
 
-export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
+export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -109,12 +110,14 @@ export function FAQSection({ variant = 'parent' }: FAQSectionProps) {
                             </div>
 
                             {/* Decision Assistant — appears below microcopy */}
-                            <div className="mt-8 pt-8 border-t border-gray-200/30">
-                                <AskMergex
-                                    variant="minimal"
-                                    suggestions={FAQ_DATA.aiSuggestions}
-                                />
-                            </div>
+                            {showAI && (
+                                <div className="mt-8 pt-8 border-t border-gray-200/30">
+                                    <AskMergex
+                                        variant="minimal"
+                                        suggestions={FAQ_DATA.aiSuggestions}
+                                    />
+                                </div>
+                            )}
                         </motion.div>
                     </div>
 

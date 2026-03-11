@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
+
 gsap.registerPlugin(ScrollTrigger);
 
 /**
@@ -23,8 +25,9 @@ const SYSTEMS_CARD = {
     title: 'Mergex Systems',
     tagline: 'Solution Partner',
     description: 'Building and automating systems that scale',
-    image: '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
-    video: '/assets/background/Create_a_smooth_1080p_202602241148 (1).mp4',
+    image: CLOUDINARY_ASSETS.ecosystemSystemsVideo.replace('.mp4', '.jpg'), // Using Cloudinary auto-poster if possible
+    video: CLOUDINARY_ASSETS.ecosystemSystemsVideo,
+    fallbackVideo: '/background/parent/divition/Human and Robot Handshake.mp4',
     href: '/systems',
     accent: '#3B82F6',
 };
@@ -33,7 +36,9 @@ const LABS_CARD = {
     title: 'Mergex Labs',
     tagline: 'AI Content Studio',
     description: 'Where creativity meets intelligent systems',
-    image: '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
+    image: CLOUDINARY_ASSETS.ecosystemLabsVideo.replace('.mp4', '.jpg'),
+    video: CLOUDINARY_ASSETS.ecosystemLabsVideo,
+    fallbackVideo: '/background/parent/divition/Flamingo Labs.mp4',
     href: '/labs',
     accent: '#8B5CF6',
 };
@@ -44,6 +49,7 @@ interface CardData {
     description: string;
     image: string;
     video?: string;
+    fallbackVideo?: string;
     href: string;
     accent: string;
 }
@@ -69,6 +75,7 @@ function PortalCard({ card, id }: { card: CardData; id: string }) {
                     poster={card.image}
                 >
                     <source src={card.video} type="video/mp4" />
+                    {card.fallbackVideo && <source src={card.fallbackVideo} type="video/mp4" />}
                 </video>
             ) : (
                 <div

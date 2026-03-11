@@ -33,6 +33,7 @@ export function ScrollZoomShowcase() {
     const videoCardRef = useRef<HTMLDivElement>(null);
     const lenisRef = useRef<Lenis | null>(null);
     const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const [modelImageUrl, setModelImageUrl] = useState(CLOUDINARY_ASSETS.saraVega);
 
     useEffect(() => {
         // Initialize Lenis smooth scroll
@@ -187,9 +188,16 @@ export function ScrollZoomShowcase() {
                         <div
                             className="absolute inset-0 bg-cover bg-center"
                             style={{
-                                backgroundImage: `url(${CLOUDINARY_ASSETS.saraVega}), url(/model/Sara Vega.jpg)`,
+                                backgroundImage: `url(${modelImageUrl})`,
                             }}
-                        />
+                        >
+                            <img 
+                                src={modelImageUrl} 
+                                alt="" 
+                                className="hidden" 
+                                onError={() => setModelImageUrl('/model/Sara Vega.jpg')} 
+                            />
+                        </div>
                         {/* Complex Gradient Overlay - Targeted Darkening */}
                         <div
                             ref={overlayRef}

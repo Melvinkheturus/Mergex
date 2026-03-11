@@ -29,7 +29,9 @@ export function SystemsHero() {
                     fill
                     className="object-cover opacity-100"
                     priority
-                    onError={(e) => { (e.target as HTMLImageElement).src = '/background/systems/system hero.png'; }}
+                    onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/background/systems/system hero.png';
+                    }}
                 />
                 {/* Only Bottom Fade */}
                 <div className="absolute bottom-0 left-0 right-0 h-[400px] z-[2] pointer-events-none"

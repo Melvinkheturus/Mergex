@@ -76,12 +76,12 @@ export const CLOUDINARY_ASSETS = {
     showreelVideo: cloudinaryVideo('mockups/parent/showreel/Showreel', 'f_auto,q_auto'),
 
     // Model
-    saraVega: cloudinaryImage('model/Sara_Vega', 'f_auto,q_auto,w_2560'),
+    saraVega: cloudinaryImage('model/Madonna', 'f_auto,q_auto,w_2560'),
 
     // Team members
-    teamManikandan: cloudinaryImage('team/Manikandan', 'f_auto,q_auto,w_600'),
-    teamSharukesh: cloudinaryImage('team/Sharukesh', 'f_auto,q_auto,w_600'),
-    teamJohn: cloudinaryImage('team/John', 'f_auto,q_auto,w_600'),
-    teamMuralidharan: cloudinaryImage('team/Muralidharan', 'f_auto,q_auto,w_600'),
-    teamYasshwanth: cloudinaryImage('team/yasshwanth', 'f_auto,q_auto,w_600'),
+    teamManikandan: cloudinaryImage('Team/hf_20260311_040000_0e37920f_rxgdf2', 'f_auto,q_auto,w_600'),
+    teamSharukesh: cloudinaryImage('Team/hf_20260311_035307_e0c67548_qac2tc', 'f_auto,q_auto,w_600'),
+    teamJohn: cloudinaryImage('Team/hf_20260311_035824_cc0551a4_gr1vjv', 'f_auto,q_auto,w_600'),
+    teamMuralidharan: cloudinaryImage('Team/hf_20260311_035307_e0c67548_qac2tc', 'f_auto,q_auto,w_600'), // Fallback to available team image if exact match is missing
+    teamYasshwanth: cloudinaryImage('Team/hf_20260311_040000_0e37920f_rxgdf2', 'f_auto,q_auto,w_600'), // Fallback to available team image if exact match is missing
 } as const;

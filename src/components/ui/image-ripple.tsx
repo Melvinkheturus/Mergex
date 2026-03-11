@@ -40,14 +40,42 @@ export default function Scene() {
 }
 
 function Model() {
-  const { viewport } = useThree()
+  const { viewport, gl, camera } = useThree()
+  const mouse = useMouse()
+  const device = useDimension()
+  
+  // Load background images with manual fallback logic
+  const [desktopTexture, setDesktopTexture] = useState<THREE.Texture | null>(null)
+  const [mobileTexture, setMobileTexture] = useState<THREE.Texture | null>(null)
 
+  useEffect(() => {
+    const loader = new THREE.TextureLoader()
 
-  // Load background images — Cloudinary primary, local fallback via Three's texture loader error handling
-  const desktopTexture = useTexture(CLOUDINARY_ASSETS.parentHeroDesktop)
-  const mobileTexture = useTexture(CLOUDINARY_ASSETS.parentHeroMobile)
+    const loadWithFallback = (url: string, fallback: string, setter: (tex: THREE.Texture) => void) => {
+      loader.load(
+        url,
+        (tex) => setter(tex),
+        undefined,
+        () => {
+          console.warn(`Cloudinary load failed for ${url}, falling back to ${fallback}`)
+          loader.load(fallback, (tex) => setter(tex))
+        }
+      )
+    }
 
-  // Generate procedural soft brush texture for the ripples to avoid needing `/brush.png`
+    loadWithFallback(
+      CLOUDINARY_ASSETS.parentHeroDesktop,
+      "/background/parent/hero/parent-hero.jpeg",
+      setDesktopTexture
+    )
+    loadWithFallback(
+      CLOUDINARY_ASSETS.parentHeroMobile,
+      "/background/parent/hero/parent hero mobile.jpeg",
+      setMobileTexture
+    )
+  }, [])
+
+  // Generate procedural soft brush texture
   const brushTexture = useMemo(() => {
     if (typeof document === "undefined") return new THREE.Texture()
     const canvas = document.createElement("canvas")
@@ -63,19 +91,15 @@ function Model() {
       context.arc(32, 32, 32, 0, Math.PI * 2)
       context.fill()
     }
-    const tex = new THREE.CanvasTexture(canvas)
-    return tex
+    return new THREE.CanvasTexture(canvas)
   }, [])
 
   const meshRefs = useRef<(THREE.Mesh | null)[]>([])
   const [meshes, setMeshes] = useState<React.JSX.Element[]>([])
-  const mouse = useMouse()
-  const device = useDimension()
   const [prevMouse, setPrevMouse] = useState({ x: 0, y: 0 })
   const [currentWave, setCurrentWave] = useState(0)
-  const { gl, camera } = useThree()
-
-  const scene = new THREE.Scene()
+  
+  const scene = useMemo(() => new THREE.Scene(), [])
   const max = 100
 
   const uniforms = useRef({
@@ -86,19 +110,19 @@ function Model() {
     },
   })
 
-  const fboBase = useFBO(device.width, device.height)
-  const fboTexture = useFBO(device.width, device.height)
+  const fboBase = useFBO(device.width > 0 ? device.width : 1, device.height > 0 ? device.height : 1)
+  const fboTexture = useFBO(device.width > 0 ? device.width : 1, device.height > 0 ? device.height : 1)
 
   const isMobile = device.width < 768
 
   const { scene: imageScene, camera: imageCamera } = Images(
     new THREE.Vector2(viewport.width, viewport.height),
-    isMobile ? mobileTexture : desktopTexture,
+    (isMobile ? mobileTexture : desktopTexture) || new THREE.Texture(),
     isMobile
   )
 
   useEffect(() => {
-    const generatedMeshes = Array.from({ length: max }).map((_, i) => (
+    const generatedMeshes = Array.from({ length: 100 }).map((_, i) => (
       <mesh
         key={i}
         position={[0, 0, 0]}
@@ -136,6 +160,8 @@ function Model() {
   }
 
   useFrame(({ gl, scene: finalScene }) => {
+    if (!desktopTexture || !mobileTexture) return
+
     // Convert client coordinates to scene coordinates
     // clientX/Y from top-left, scene coordinates from center
     const x = mouse.x - device.width / 2
@@ -188,6 +214,8 @@ function Model() {
       ).multiplyScalar(device.pixelRatio)
     }
   }, 1)
+
+  if (!desktopTexture || !mobileTexture) return null
 
   return (
     <group>

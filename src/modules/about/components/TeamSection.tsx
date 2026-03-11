@@ -23,13 +23,13 @@ interface TeamMember {
     role: string;
 }
 
-const TEAM_MEMBERS: TeamMember[] = [
+const TEAM_MEMBERS_DATA = [
     {
         id: '1',
         name: 'Manikandan',
         role: 'Founder & CEO',
         image: CLOUDINARY_ASSETS.teamManikandan,
-        fallback: '/team/Manikandan.jpeg',
+        fallback: '/team/Manikandan.jpg',
         alt: 'Manikandan, Founder & CEO'
     },
     {
@@ -37,7 +37,7 @@ const TEAM_MEMBERS: TeamMember[] = [
         name: 'Sharukesh',
         role: 'Co-founder & CSO',
         image: CLOUDINARY_ASSETS.teamSharukesh,
-        fallback: '/team/Sharukesh.jpeg',
+        fallback: '/team/sharukesh.jpg',
         alt: 'Sharukesh, Co-founder & CSO'
     },
     {
@@ -45,7 +45,7 @@ const TEAM_MEMBERS: TeamMember[] = [
         name: 'John Peter',
         role: 'CRO',
         image: CLOUDINARY_ASSETS.teamJohn,
-        fallback: '/team/John.jpeg',
+        fallback: '/team/johnpeter.jpg',
         alt: 'John Peter, CRO'
     },
     {
@@ -53,7 +53,7 @@ const TEAM_MEMBERS: TeamMember[] = [
         name: 'Muralidharan',
         role: 'MD of Mergex Labs',
         image: CLOUDINARY_ASSETS.teamMuralidharan,
-        fallback: '/team/Muralidharan.jpeg',
+        fallback: '/team/Muralidharan.jpg',
         alt: 'Muralidharan, MD of Mergex Labs'
     },
     {
@@ -61,7 +61,7 @@ const TEAM_MEMBERS: TeamMember[] = [
         name: 'Yasshwanth',
         role: 'CPO',
         image: CLOUDINARY_ASSETS.teamYasshwanth,
-        fallback: '/team/yasshwanth.jpeg',
+        fallback: '/team/yasshwanth.jpg',
         alt: 'Yasshwanth, CPO'
     }
 ];
@@ -74,7 +74,7 @@ const LOGO_ITEM: OrbitItem = {
 
 // Map for Radial Intro - 8 items total (Logo + 7 Team Members)
 // We take the first 7 items from a doubled list to ensure we have enough
-const TEAM_DOUBLED = [...TEAM_MEMBERS, ...TEAM_MEMBERS];
+const TEAM_DOUBLED = [...TEAM_MEMBERS_DATA, ...TEAM_MEMBERS_DATA];
 const ORBIT_ITEMS: OrbitItem[] = [
     LOGO_ITEM,
     ...TEAM_DOUBLED.slice(0, 7).map((member, index) => ({
@@ -95,6 +95,14 @@ const ORBIT_ITEMS: OrbitItem[] = [
 export function TeamSection() {
     const [viewState, setViewState] = useState<'intro' | 'content'>('intro');
     const [hasEnteredView, setHasEnteredView] = useState(false);
+    const [teamImages, setTeamImages] = useState<Record<string, string>>(
+        Object.fromEntries(TEAM_MEMBERS_DATA.map(m => [m.id, m.image]))
+    );
+    
+    const handleImageError = (id: string, fallback: string) => {
+        setTeamImages(prev => ({ ...prev, [id]: fallback }));
+    };
+
     const containerRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const isPausedRef = useRef(false);
@@ -154,7 +162,7 @@ export function TeamSection() {
         const interval = setInterval(() => {
             if (isPausedRef.current || !scrollRef.current) return;
             const el = scrollRef.current;
-            const maxIndex = TEAM_MEMBERS.length - 1;
+            const maxIndex = TEAM_MEMBERS_DATA.length - 1;
 
             currentIndexRef.current = (currentIndexRef.current + 1) % (maxIndex + 1);
             const target = currentIndexRef.current * STEP;
@@ -264,13 +272,11 @@ export function TeamSection() {
                                 </motion.p>
                             </div>
 
-                            {/* Horizontal Image Scroll/Grid */}
-                            <div className="w-full mt-8">
                                 <div
                                     ref={scrollRef}
                                     className="flex gap-4 md:gap-6 px-6 md:px-0 w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 justify-start md:justify-center"
                                 >
-                                    {TEAM_MEMBERS.map((member, index) => (
+                                    {TEAM_MEMBERS_DATA.map((member, index) => (
                                         <motion.div
                                             key={member.id}
                                             initial={{ opacity: 0, y: 30 }}
@@ -279,14 +285,15 @@ export function TeamSection() {
                                             className="relative w-[280px] shrink-0 snap-center md:w-full md:max-w-[220px] aspect-[4/5] md:aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-gray-100 group"
                                         >
                                             <Image
-                                                src={member.image}
+                                                src={teamImages[member.id]}
                                                 alt={member.alt}
                                                 fill
                                                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                                onError={() => handleImageError(member.id, member.fallback)}
                                             />
                                             {/* Bottom gradient overlay - always visible */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
+                                            
                                             {/* Name and Role - always visible at bottom */}
                                             <div className="absolute bottom-0 left-0 right-0 p-4 text-left">
                                                 <h3 className="text-white font-semibold text-base leading-tight">{member.name}</h3>
@@ -295,7 +302,6 @@ export function TeamSection() {
                                         </motion.div>
                                     ))}
                                 </div>
-                            </div>
 
                         </motion.div>
                     )}
