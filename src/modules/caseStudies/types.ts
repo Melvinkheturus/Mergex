@@ -94,6 +94,7 @@ export interface CaseStudy {
     categories: string[];
     techStack: string[];
     publishDate?: string;
+    externalUrl?: string;
 
     // "Is This For You?" Filter
     fitCriteria?: {
