@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Testimonial } from '../types/testimonial';
 
 const TESTIMONIALS: Testimonial[] = [
@@ -113,8 +114,27 @@ function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
 }
 
 export function TestimonialsSection() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    const yTransform = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+
     return (
-        <section className="relative bg-white py-20 md:py-28 overflow-hidden">
+        <section ref={containerRef} className="relative h-screen bg-white flex flex-col justify-center overflow-hidden">
+            
+            {/* Background Ghost Word */}
+            <motion.div
+                style={{ 
+                    y: yTransform,
+                    fontFamily: '"Outfit", system-ui, sans-serif',
+                }}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vh] font-black text-neutral-950 opacity-[0.02] select-none pointer-events-none z-0 tracking-[-0.05em] leading-none whitespace-nowrap"
+            >
+                TRUST
+            </motion.div>
             <div className="max-w-[1400px] mx-auto">
                 {/* Section Header */}
                 <motion.div

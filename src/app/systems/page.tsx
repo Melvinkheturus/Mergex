@@ -7,7 +7,6 @@ import {
     WhatWeSolve,
     OurSolutions,
     HowWeWorkSystems,
-    EngagementModel,
     SystemsFAQ,
     ImpactSection,
     CaseStudySection,
@@ -72,10 +71,6 @@ export default function SystemsPage() {
                         <ImpactSection />
                     </div>
 
-                    {/* 8. Engagement Models — Pricing Philosophy */}
-                    <div id="engagement" className="systems-section">
-                        <EngagementModel />
-                    </div>
 
                     {/* 9. FAQs — Objection Handling */}
                     <div id="faq" className="systems-section">

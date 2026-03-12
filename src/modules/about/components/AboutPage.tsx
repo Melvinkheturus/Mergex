@@ -2,10 +2,10 @@
 
 import { HeroSection } from './HeroSection';
 import { ProblemSection } from './ProblemSection';
+import { WhatIsSection } from './WhatIsSection';
+import { ModelSection } from './ModelSection';
 import { TeamSection } from './TeamSection';
-import { EcosystemGlimpse } from './EcosystemGlimpse';
-import { PrinciplesSection } from './PrinciplesSection';
-import { WhySection } from './WhySection';
+import { PhilosophySection } from './PhilosophySection';
 import { CTASection } from './CTASection';
 import { TestimonialsSection } from '@/modules/shared';
 
@@ -14,24 +14,25 @@ import { TestimonialsSection } from '@/modules/shared';
  * 
  * Structure:
  * 1. Orientation (Hero)
- * 2. Problem Reframing (ProblemSection)
- * 3. Human Proof (TeamSection)
- * 4. Ecosystem Glimpse (Labs/Systems)
- * 5. How We Work (Principles)
- * 6. Why We Exist (WhySection)
+ * 2. Problem (Chaos)
+ * 3. What Mergex Is (The Fix)
+ * 4. The Model (How it works)
+ * 5. Philosophy (Why it works)
+ * 6. Team (The Architects)
  * 7. Trust Building (Testimonials)
  * 8. Directional Check (CTASection)
  */
 export function AboutPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <div className="bg-white">
             <HeroSection />
+            <ProblemSection />
+            <WhatIsSection />
+            <ModelSection />
+            <PhilosophySection />
             <TeamSection />
-            <EcosystemGlimpse />
-            <PrinciplesSection />
-            <WhySection />
             <TestimonialsSection />
             <CTASection />
-        </main>
+        </div>
     );
 }

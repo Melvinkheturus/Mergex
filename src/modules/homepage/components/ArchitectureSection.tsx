@@ -22,7 +22,7 @@ export function ArchitectureSection() {
     const floatingCards = ['Structure', 'Intelligence', 'Leverage'];
 
     return (
-        <section className="relative z-40 bg-white overflow-hidden pb-12 md:pb-16 mt-[-100vh] rounded-t-[2rem] md:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.15)]">
+        <section className="relative z-40 bg-white overflow-hidden pb-12 md:pb-16 mt-[-100vh] shadow-[0_-20px_50px_rgba(0,0,0,0.15)]">
 
             {/* ── TOP HERO: Big text + floating cards ───────────────────── */}
             <div className="relative w-full overflow-hidden px-4 md:px-10 lg:px-16">

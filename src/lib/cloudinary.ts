@@ -76,7 +76,7 @@ export const CLOUDINARY_ASSETS = {
     showreelVideo: cloudinaryVideo('mockups/parent/showreel/Showreel', 'f_auto,q_auto'),
 
     // Model
-    saraVega: cloudinaryImage('model/Madonna', 'f_auto,q_auto,w_2560'),
+    saraVega: cloudinaryImage('model/Sara_Vega', 'f_auto,q_auto,w_2560'),
 
     // Team members
     teamManikandan: cloudinaryImage('Team/hf_20260311_040000_0e37920f_rxgdf2', 'f_auto,q_auto,w_600'),
