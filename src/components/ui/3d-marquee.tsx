@@ -24,7 +24,7 @@ export const ThreeDMarquee = ({
       )}
     >
       <div className="flex size-full items-center justify-center perspective-[1000px]">
-        <div className="shrink-0 scale-[0.35] sm:scale-[0.55] lg:scale-[0.75] flex items-center justify-center">
+        <div className="shrink-0 scale-[0.45] sm:scale-[0.65] lg:scale-[0.85] flex items-center justify-center">
           <div
             style={{
               transform: "rotateX(55deg) rotateZ(-45deg)",
@@ -33,14 +33,15 @@ export const ThreeDMarquee = ({
           >
             {chunks.map((subarray, colIndex) => (
               <motion.div
-                animate={{ y: colIndex % 2 === 0 ? 100 : -100 }}
+                animate={{ y: colIndex % 2 === 0 ? [0, 600] : [0, -600] }}
                 transition={{
-                  duration: colIndex % 2 === 0 ? 10 : 15,
+                  duration: colIndex % 2 === 0 ? 15 : 20,
                   repeat: Infinity,
                   repeatType: "reverse",
+                  ease: "linear"
                 }}
                 key={colIndex + "marquee"}
-                className="flex flex-col items-start gap-8"
+                className="flex flex-col items-start gap-8 [will-change:transform]"
               >
                 <GridLineVertical className="-left-4" offset="80px" />
                 {subarray.map((image, imageIndex) => {
@@ -51,17 +52,10 @@ export const ThreeDMarquee = ({
                       <GridLineHorizontal className="-top-4" offset="20px" />
                       {isVideo ? (
                         <motion.video
-                          whileHover={{
-                            y: -10,
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            ease: "easeInOut",
-                          }}
+                          whileHover={{ scale: 1.05, z: 50 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
                           src={image}
-                          className="aspect-[970/700] w-[180px] sm:w-[240px] md:w-[320px] rounded-lg object-cover shadow-xl shadow-black/20 hover:shadow-2xl"
-                          width={320}
-                          height={231}
+                          className="w-[220px] sm:w-[300px] md:w-[400px] h-auto rounded-lg object-contain shadow-xl shadow-black/20 hover:shadow-2xl transition-transform cursor-pointer [will-change:transform]"
                           autoPlay
                           loop
                           muted
@@ -69,26 +63,22 @@ export const ThreeDMarquee = ({
                         />
                       ) : (
                         <motion.div
-                          whileHover={{
-                            y: -10,
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            ease: "easeInOut",
-                          }}
-                          className="relative aspect-[970/700] w-[180px] sm:w-[240px] md:w-[320px] rounded-lg shadow-xl shadow-black/20 hover:shadow-2xl overflow-hidden"
+                          whileHover={{ scale: 1.05, z: 50 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="relative w-[220px] sm:w-[300px] md:w-[400px] h-auto rounded-lg shadow-xl shadow-black/20 hover:shadow-2xl overflow-hidden cursor-pointer transition-transform [will-change:transform]"
                         >
                           <Image
                             src={image}
                             alt={`Image ${imageIndex + 1}`}
-                            fill
-                            sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 320px"
-                            className="object-cover"
+                            width={400}
+                            height={600}
+                            className="w-full h-auto object-contain"
+                            priority={imageIndex < 2}
                           />
                         </motion.div>
                       )}
                     </div>
-                  )
+                  );
                 })}
               </motion.div>
             ))}

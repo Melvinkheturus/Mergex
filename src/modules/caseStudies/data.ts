@@ -3,10 +3,104 @@ import { CaseStudy } from './types';
 export const CASE_STUDIES: CaseStudy[] = [
     {
         id: '1',
+        slug: 'cedar-elevators',
+        title: 'Cedar Elevators',
+        subtitle: 'Powering a multi-vendor marketplace for the elevator industry',
+        // Corrected: Mapping Cedar Data to Cedar Image (xpafhm.jpg)
+        heroImage: 'https://res.cloudinary.com/mergex/image/upload/v1773281647/hf_20260311_163353_f0f3679b-6783-46a7-9590-66f51eacbf6f_xpafhm.jpg',
+        heroImageAlt: 'Cedar Elevators Multi-Vendor Marketplace',
+        outcome: 'From scattered vendor management to a unified marketplace in 30 days',
+
+        client: {
+            industry: 'Marketplace & Industrial',
+            location: 'Singapore',
+            companySize: '50-200 employees',
+            service: 'Multi-Vendor Marketplace Development'
+        },
+
+        problem: {
+            narrative: 'Cedar Elevators needed a centralized platform to connect elevator manufacturers, installers, and maintenance providers. Vendor management was scattered across emails and spreadsheets, causing delays and miscommunication.',
+            painPoints: [
+                'No unified vendor discovery or comparison',
+                'Manual quoting and order tracking',
+                'Inability to scale vendor onboarding'
+            ]
+        },
+
+        stakes: [
+            'Losing market share to tech-savvy competitors',
+            'Vendor churn from poor platform experience',
+            'Inaccurate reporting leading to missed opportunities'
+        ],
+
+        strategy: [
+            {
+                title: 'Multi-Vendor Architecture',
+                description: 'Built a scalable marketplace platform supporting multiple vendor storefronts, product catalogs, and independent order flows.'
+            },
+            {
+                title: 'Smart Vendor Matching',
+                description: 'Implemented intelligent search and filtering to connect buyers with the right vendors based on location, specialization, and ratings.'
+            },
+            {
+                title: 'Automated Quoting & Orders',
+                description: 'Streamlined the RFQ process with automated quoting, real-time order tracking, and vendor communication tools.'
+            }
+        ],
+
+        execution: [
+            {
+                title: 'Vendor Marketplace',
+                description: 'A multi-vendor storefront system with independent dashboards, inventory management, and analytics for each vendor.',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773281647/hf_20260311_163353_f0f3679b-6783-46a7-9590-66f51eacbf6f_xpafhm.jpg',
+                imageAlt: 'Cedar Elevators Vendor Marketplace'
+            },
+            {
+                title: 'Order Management Hub',
+                description: 'Centralized order tracking with real-time status updates, vendor communication, and automated notifications.',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773281647/hf_20260311_163353_f0f3679b-6783-46a7-9590-66f51eacbf6f_xpafhm.jpg',
+                imageAlt: 'Cedar Elevators Order Management'
+            }
+        ],
+
+        results: [
+            { label: 'Vendor Onboarding', value: '-70', suffix: '%' },
+            { label: 'Order Accuracy', value: '99.5', suffix: '%' },
+            { label: 'Marketplace Growth', value: '+200', suffix: '%' }
+        ],
+
+        testimonial: {
+            quote: "Mergex delivered a marketplace that connected our entire industry. Vendors love it, buyers trust it, and our business has never grown faster.",
+            author: 'Elena Rodriguez',
+            role: 'Product Director',
+            company: 'Cedar Elevators',
+        },
+
+        categories: ['Marketplace', 'Multi-Vendor', 'Industrial'],
+        techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
+        publishDate: '2025-12-05',
+        externalUrl: 'https://cedarelevator.com/',
+
+        fitCriteria: {
+            idealFor: [
+                'Multi-vendor marketplaces',
+                'B2B platforms',
+                'Industry-specific marketplaces'
+            ],
+            notIdealFor: [
+                'Simple single-vendor shops',
+                'Static informational sites',
+                'Low-volume niche stores'
+            ]
+        }
+    },
+    {
+        id: '2',
         slug: 'dude-mens-wear',
         title: 'Dude Mens Wear',
         subtitle: 'Building a modern e-commerce platform for men\'s fashion',
-        heroImage: '/assets/systems/case-studies/case-study-1.png',
+        // Corrected: Mapping Dude Data to Dude Image (jfxzlv.jpg)
+        heroImage: 'https://res.cloudinary.com/mergex/image/upload/v1773284562/hf_20260311_172615_3fa6f4ef-332f-4aee-8d39-255e3890a1fd_jfxzlv.jpg',
         heroImageAlt: 'Dude Mens Wear E-Commerce Platform',
         outcome: 'From stagnant growth to 150% revenue increase in 6 months',
 
@@ -51,13 +145,13 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Visual Discovery',
                 description: 'We completely overhauled the product browsing experience, focusing on high-fidelity imagery and intuitive filtering.',
-                image: '/assets/systems/case-studies/case-study-1.png',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773284562/hf_20260311_172615_3fa6f4ef-332f-4aee-8d39-255e3890a1fd_jfxzlv.jpg',
                 imageAlt: 'Dude Mens Wear Product Discovery'
             },
             {
                 title: 'Smart Cart',
                 description: 'The new cart dynamically suggests complementary products, increasing average order value.',
-                image: '/assets/systems/case-studies/case-study-1.png',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773284562/hf_20260311_172615_3fa6f4ef-332f-4aee-8d39-255e3890a1fd_jfxzlv.jpg',
                 imageAlt: 'Dude Mens Wear Smart Cart'
             }
         ],
@@ -94,11 +188,12 @@ export const CASE_STUDIES: CaseStudy[] = [
         }
     },
     {
-        id: '2',
+        id: '3',
         slug: 'heyprodata',
         title: 'HeyProData',
         subtitle: 'MENA\'s crew infrastructure for film, media & events',
-        heroImage: '/assets/systems/case-studies/case-study-2.png',
+        // Corrected: Mapping Heypro Data to Heypro Image (mwv0uy.png)
+        heroImage: 'https://res.cloudinary.com/mergex/image/upload/v1773285065/hf_20260311_183005_95996d0c-20cb-4de4-9f94-752894ae80c5_1_mwv0uy.png',
         heroImageAlt: 'HeyProData Creative Industry Marketplace',
         outcome: 'From scattered industry contacts to a unified crew ecosystem powering productions across MENA',
 
@@ -143,13 +238,13 @@ export const CASE_STUDIES: CaseStudy[] = [
             {
                 title: 'Professional Profiles',
                 description: 'A profile system where crew can showcase their work, connect with collaborators, and get discovered by producers and agencies across the MENA region.',
-                image: '/assets/systems/case-studies/case-study-2.png',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773285065/hf_20260311_183005_95996d0c-20cb-4de4-9f94-752894ae80c5_1_mwv0uy.png',
                 imageAlt: 'HeyProData Crew Profiles'
             },
             {
                 title: 'Brief & Connect System',
                 description: 'A structured workflow for brands and agencies to submit project briefs, automatically matching them with the right professionals in the network.',
-                image: '/assets/systems/case-studies/case-study-2.png',
+                image: 'https://res.cloudinary.com/mergex/image/upload/v1773285065/hf_20260311_183005_95996d0c-20cb-4de4-9f94-752894ae80c5_1_mwv0uy.png',
                 imageAlt: 'HeyProData Brief System'
             }
         ],
@@ -182,98 +277,6 @@ export const CASE_STUDIES: CaseStudy[] = [
                 'Generic job boards',
                 'Single-company HR tools',
                 'Non-industry platforms'
-            ]
-        }
-    },
-    {
-        id: '3',
-        slug: 'cedar-elevators',
-        title: 'Cedar Elevators',
-        subtitle: 'Powering a multi-vendor marketplace for the elevator industry',
-        heroImage: '/assets/systems/case-studies/case-study-3.png',
-        heroImageAlt: 'Cedar Elevators Multi-Vendor Marketplace',
-        outcome: 'From scattered vendor management to a unified marketplace in 30 days',
-
-        client: {
-            industry: 'Marketplace & Industrial',
-            location: 'Singapore',
-            companySize: '50-200 employees',
-            service: 'Multi-Vendor Marketplace Development'
-        },
-
-        problem: {
-            narrative: 'Cedar Elevators needed a centralized platform to connect elevator manufacturers, installers, and maintenance providers. Vendor management was scattered across emails and spreadsheets, causing delays and miscommunication.',
-            painPoints: [
-                'No unified vendor discovery or comparison',
-                'Manual quoting and order tracking',
-                'Inability to scale vendor onboarding'
-            ]
-        },
-
-        stakes: [
-            'Losing deals due to slow vendor matching',
-            'Vendor churn from poor platform experience',
-            'Inaccurate reporting leading to missed opportunities'
-        ],
-
-        strategy: [
-            {
-                title: 'Multi-Vendor Architecture',
-                description: 'Built a scalable marketplace platform supporting multiple vendor storefronts, product catalogs, and independent order flows.'
-            },
-            {
-                title: 'Smart Vendor Matching',
-                description: 'Implemented intelligent search and filtering to connect buyers with the right vendors based on location, specialization, and ratings.'
-            },
-            {
-                title: 'Automated Quoting & Orders',
-                description: 'Streamlined the RFQ process with automated quoting, real-time order tracking, and vendor communication tools.'
-            }
-        ],
-
-        execution: [
-            {
-                title: 'Vendor Marketplace',
-                description: 'A multi-vendor storefront system with independent dashboards, inventory management, and analytics for each vendor.',
-                image: '/assets/systems/case-studies/case-study-3.png',
-                imageAlt: 'Cedar Elevators Vendor Marketplace'
-            },
-            {
-                title: 'Order Management Hub',
-                description: 'Centralized order tracking with real-time status updates, vendor communication, and automated notifications.',
-                image: '/assets/systems/case-studies/case-study-3.png',
-                imageAlt: 'Cedar Elevators Order Management'
-            }
-        ],
-
-        results: [
-            { label: 'Vendor Onboarding', value: '-70', suffix: '% time' },
-            { label: 'Order Accuracy', value: '99.5', suffix: '%' },
-            { label: 'Marketplace Growth', value: '+200', suffix: '%' }
-        ],
-
-        testimonial: {
-            quote: "Mergex delivered a marketplace that connected our entire industry. Vendors love it, buyers trust it, and our business has never grown faster.",
-            author: 'Elena Rodriguez',
-            role: 'Product Director',
-            company: 'Cedar Elevators',
-        },
-
-        categories: ['Marketplace', 'Multi-Vendor', 'Industrial'],
-        techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
-        publishDate: '2025-12-05',
-        externalUrl: 'https://cedarelevator.com/',
-
-        fitCriteria: {
-            idealFor: [
-                'Multi-vendor marketplaces',
-                'B2B platforms',
-                'Industry-specific marketplaces'
-            ],
-            notIdealFor: [
-                'Simple single-vendor shops',
-                'Static informational sites',
-                'Low-volume niche stores'
             ]
         }
     }

@@ -30,7 +30,7 @@ export function SystemsHero() {
                     className="object-cover opacity-100"
                     priority
                     onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/background/systems/system hero.png';
+                        (e.target as HTMLImageElement).src = '/background/systems/system_hero.png';
                     }}
                 />
                 {/* Only Bottom Fade */}

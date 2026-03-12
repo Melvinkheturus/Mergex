@@ -57,7 +57,7 @@ export const CLOUDINARY_ASSETS = {
     parentHeroMobile: cloudinaryImage('background/parent/hero/parent_hero_mobile', 'f_auto,q_auto,w_1080'),
 
     // Systems
-    systemsHero: cloudinaryImage('background/systems/system_hero', 'f_auto,q_auto,w_2560'),
+    systemsHero: cloudinaryImage('system_hero_osseww', 'f_auto,q_auto,w_2560'),
 
     // Ecosystem (divition) videos
     ecosystemLabsVideo: cloudinaryVideo('background/parent/divition/Flamingo_Labs', 'f_auto,q_auto'),

@@ -67,14 +67,19 @@ export function CaseStudySection() {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: 'top top',
-                    end: `+=${window.innerHeight * (totalCards - 1)}`,
+                    // Slightly reduced end distance for a snappier feel
+                    end: `+=${window.innerHeight * totalCards * 1.2}`,
                     pin: true,
                     pinSpacing: true,
-                    scrub: 0.5,
+                    scrub: 1,
                 },
             });
 
             scrollTriggerRef.current = tl.scrollTrigger ?? null;
+
+            // Reduced stay period relative to transition
+            const segmentDuration = 1.4;
+            const transitionDuration = 1;
 
             for (let i = 0; i < totalCards - 1; i++) {
                 const currentCard = cardElements[i];
@@ -82,16 +87,29 @@ export function CaseStudySection() {
 
                 if (!currentCard || !nextCard) continue;
 
+                // Reduced initial "stay" period from 1 to 0.4
+                const startTime = i * segmentDuration + 0.4;
+
                 tl.to(
                     currentCard,
-                    { scale: 0.7, rotation: 5, duration: 1, ease: 'none' },
-                    i,
+                    { 
+                        scale: 0.8, 
+                        rotation: 3, 
+                        opacity: 0.5,
+                        duration: transitionDuration, 
+                        ease: 'power2.inOut' 
+                    },
+                    startTime
                 );
 
                 tl.to(
                     nextCard,
-                    { y: '0%', duration: 1, ease: 'none' },
-                    i,
+                    { 
+                        y: '0%', 
+                        duration: transitionDuration, 
+                        ease: 'power2.inOut' 
+                    },
+                    startTime
                 );
             }
 
@@ -167,9 +185,7 @@ export function CaseStudySection() {
                 <div className="relative h-[90%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
                     {CASE_STUDIES.map((study, i) => (
                         <Link
-                            href={study.externalUrl ? study.externalUrl : `/case-studies/${study.slug}`}
-                            target={study.externalUrl ? "_blank" : "_self"}
-                            rel={study.externalUrl ? "noopener noreferrer" : undefined}
+                            href={`/case-studies/${study.slug}`}
                             key={study.id}
                             className="absolute inset-0 block group"
                             style={{ cursor: 'none' }}
@@ -186,29 +202,6 @@ export function CaseStudySection() {
                                 className="rounded-2xl object-cover"
                             />
 
-                            {/* Overlay with case study info */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8 md:p-12 lg:p-16 transition-opacity duration-300">
-                                <div className="transform transition-all duration-300 group-hover:translate-y-[-8px]">
-                                    <span
-                                        className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-violet-400 mb-3"
-                                        style={{ fontFamily: 'var(--font-manrope)' }}
-                                    >
-                                        {study.client.industry}
-                                    </span>
-                                    <h4
-                                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3"
-                                        style={{ fontFamily: 'var(--font-manrope)' }}
-                                    >
-                                        {study.title}
-                                    </h4>
-                                    <p
-                                        className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl"
-                                        style={{ fontFamily: 'var(--font-manrope)' }}
-                                    >
-                                        {study.outcome}
-                                    </p>
-                                </div>
-                            </div>
                         </Link>
                     ))}
                 </div>
