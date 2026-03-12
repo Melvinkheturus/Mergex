@@ -54,7 +54,7 @@ export function SystemsFAQ() {
     };
 
     return (
-        <section className="py-16 md:py-24 bg-white w-full">
+        <section className="py-12 md:py-24 bg-white w-full">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
@@ -64,15 +64,15 @@ export function SystemsFAQ() {
                         viewport={{ once: true }}
                         className="mb-12"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A1A1A]"
+                        <h2 className="text-2xl md:text-5xl font-bold mb-3 md:mb-4 text-[#1A1A1A]"
                             style={{ fontFamily: 'var(--font-geist-sans)' }}
                         >
                             FAQ
                         </h2>
-                        <p className="text-lg text-[#666666]">
+                        <p className="text-sm md:text-lg text-[#666666]">
                             Most Common Questions
                         </p>
-                        <p className="text-sm text-[#999999] mt-1">
+                        <p className="text-[10px] md:text-sm text-[#999999] mt-1">
                             We compiled these are the FAQ all the answers
                         </p>
                     </motion.div>
@@ -93,7 +93,7 @@ export function SystemsFAQ() {
                                     onClick={() => toggleFAQ(index)}
                                     className="w-full flex items-center justify-between p-6 text-left hover:bg-[#FAFAFA] transition-colors"
                                 >
-                                    <span className="text-[#1A1A1A] font-medium pr-4">
+                                    <span className="text-xs md:text-base text-[#1A1A1A] font-medium pr-4">
                                         {faq.question}
                                     </span>
                                     <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-purple-600 to-purple-400 rounded-md flex items-center justify-center">
@@ -115,7 +115,7 @@ export function SystemsFAQ() {
                                     transition={{ duration: 0.3 }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="px-6 pb-6 text-[#666666] text-sm leading-relaxed">
+                                    <div className="px-6 pb-6 text-[#666666] text-[11px] md:text-sm leading-relaxed">
                                         {faq.answer}
                                     </div>
                                 </motion.div>

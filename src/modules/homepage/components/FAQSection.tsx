@@ -48,7 +48,7 @@ export function FAQSection({ variant = 'parent', parentFaqData, systemsFaqData }
     return (
         <section
             ref={sectionRef}
-            className="relative overflow-hidden bg-white pt-24 md:pt-32 pb-24 md:pb-32"
+            className="relative overflow-hidden bg-white pt-12 md:pt-32 pb-12 md:pb-32"
         >
             {/* ✅ Content */}
             <div
@@ -64,27 +64,27 @@ export function FAQSection({ variant = 'parent', parentFaqData, systemsFaqData }
                             transition={{ duration: 0.6 }}
                             className="-ml-4 md:-ml-8"
                         >
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
+                            <h2 className="text-xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.headline}
                             </h2>
-                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                            <h3 className="text-xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.subheadline}{' '}
                                 <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
                                     {FAQ_DATA.subheadlineItalic}
                                 </span>
                             </h3>
 
-                            <p className="mb-12 text-base md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
+                            <p className="mb-12 text-xs md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
                                 {FAQ_DATA.description}
                             </p>
 
                             {/* CTA Area */}
                             <div className="space-y-6">
                                 <div>
-                                    <p className="font-semibold text-lg mb-2" style={{ color: 'inherit' }}>
+                                    <p className="font-semibold text-sm md:text-lg mb-2" style={{ color: 'inherit' }}>
                                         {FAQ_DATA.ctaText}
                                     </p>
-                                    <p className="text-sm opacity-70" style={{ color: 'inherit' }}>
+                                    <p className="text-[10px] md:text-sm opacity-70" style={{ color: 'inherit' }}>
                                         {FAQ_DATA.ctaSubtext}
                                     </p>
                                 </div>
@@ -149,7 +149,7 @@ export function FAQSection({ variant = 'parent', parentFaqData, systemsFaqData }
                                         onClick={() => toggleQuestion(index)}
                                         className="w-full flex items-center justify-between gap-6 py-8 text-left group transition-all"
                                     >
-                                        <span className="text-xl font-[family-name:var(--font-manrope)] font-medium transition-all pr-8 leading-snug group-hover:bg-gradient-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:!text-transparent" style={{ color: 'inherit' }}>
+                                        <span className="text-sm md:text-xl font-[family-name:var(--font-manrope)] font-medium transition-all pr-8 leading-snug group-hover:bg-gradient-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:!text-transparent" style={{ color: 'inherit' }}>
                                             {faq.question}
                                         </span>
                                         <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center transition-colors" style={{ color: 'inherit' }}>
@@ -189,7 +189,7 @@ export function FAQSection({ variant = 'parent', parentFaqData, systemsFaqData }
                                                 className="overflow-hidden"
                                             >
                                                 <div className="pr-12">
-                                                    <p className="text-lg leading-relaxed font-light font-[family-name:var(--font-manrope)] opacity-80" style={{ color: 'inherit' }}>
+                                                    <p className="text-xs md:text-lg leading-relaxed font-light font-[family-name:var(--font-manrope)] opacity-80" style={{ color: 'inherit' }}>
                                                         {faq.answer}
                                                     </p>
                                                 </div>

@@ -4,27 +4,12 @@ import { motion } from 'framer-motion';
 import { PROBLEM_FRAGMENTATION } from '../content';
 import { Users, Clock, Brain, Link } from 'lucide-react';
 
-interface ProblemFragmentationContent {
-    headline: string;
-    subheadline: string;
-    problems: { title: string; description: string; icon: string }[];
-    closingStatement: string;
-}
-
-interface ProblemFragmentationProps {
-    content?: ProblemFragmentationContent;
-}
-
 /**
  * ProblemFragmentation - The Problem With Fragmentation
  * Explains vendor fragmentation, disconnected tools, slow execution, and AI hype
  * BENTO GRID DESIGN (Matches ProblemContext)
- * 
- * Accepts optional `content` prop from server-side Sanity fetch.
- * Falls back to hardcoded PROBLEM_FRAGMENTATION if no CMS data is provided.
  */
-export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}) {
-    const data = content ?? PROBLEM_FRAGMENTATION;
+export function ProblemFragmentation() {
     const iconMap = {
         users: Users,
         clock: Clock,
@@ -33,7 +18,7 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
     };
 
     return (
-        <section className="py-24 md:py-32 bg-white border-t border-neutral-100">
+        <section className="py-12 md:py-32 bg-white border-t border-neutral-100">
             <div className="container mx-auto px-6 md:px-12">
 
                 {/* 1. Header */}
@@ -55,7 +40,7 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                             transition={{ delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1] lg:w-1/2 flex-shrink-0"
                         >
-                            {data.headline}
+                            {PROBLEM_FRAGMENTATION.headline}
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +49,7 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light lg:w-1/2 lg:pt-2"
                         >
-                            {data.subheadline}
+                            {PROBLEM_FRAGMENTATION.subheadline}
                         </motion.p>
                     </div>
                 </div>
@@ -98,10 +83,10 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-neutral-900 mb-3">
-                                        {data.problems[0].title}
+                                        {PROBLEM_FRAGMENTATION.problems[0].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {data.problems[0].description}
+                                        {PROBLEM_FRAGMENTATION.problems[0].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -120,10 +105,10 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-neutral-900 mb-3">
-                                        {data.problems[1].title}
+                                        {PROBLEM_FRAGMENTATION.problems[1].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {data.problems[1].description}
+                                        {PROBLEM_FRAGMENTATION.problems[1].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -135,18 +120,18 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="bg-neutral-50 border border-neutral-100 rounded-[2rem] p-8 lg:p-10 flex flex-col lg:flex-row items-center gap-8 text-center lg:text-left hover:bg-neutral-100 transition-colors duration-300"
+                            className="bg-neutral-50 border border-neutral-100 rounded-[2rem] p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-8 hover:bg-neutral-100 transition-colors duration-300"
                         >
-                            <div className="flex-shrink-0">
-                                <span className="block text-5xl font-light text-neutral-300 font-display mb-2">03</span>
-                                <Clock size={32} className="text-neutral-400 mx-auto lg:mx-0" />
+                            <div className="flex justify-between items-start w-full lg:w-auto lg:block flex-shrink-0">
+                                <span className="text-4xl lg:text-5xl font-light text-neutral-300 font-display lg:mb-2 lg:block">03</span>
+                                <Clock size={24} className="text-neutral-400 lg:w-8 lg:h-8 lg:mx-0" />
                             </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-neutral-900 mb-3">
-                                    {data.problems[2].title}
+                            <div className="text-left w-full">
+                                <h3 className="text-xl lg:text-2xl font-bold text-neutral-900 mb-3">
+                                    {PROBLEM_FRAGMENTATION.problems[2].title}
                                 </h3>
-                                <p className="text-neutral-600 leading-relaxed">
-                                    {data.problems[2].description}
+                                <p className="text-sm lg:text-base text-neutral-600 leading-relaxed">
+                                    {PROBLEM_FRAGMENTATION.problems[2].description}
                                 </p>
                             </div>
                         </motion.div>
@@ -200,10 +185,10 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                             </div>
 
                             <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                                {data.problems[3].title}
+                                {PROBLEM_FRAGMENTATION.problems[3].title}
                             </h3>
                             <p className="text-lg text-neutral-400 leading-relaxed mb-8">
-                                {data.problems[3].description}
+                                {PROBLEM_FRAGMENTATION.problems[3].description}
                             </p>
                         </div>
                     </motion.div>
@@ -218,7 +203,7 @@ export function ProblemFragmentation({ content }: ProblemFragmentationProps = {}
                     className="mt-24 text-center max-w-3xl mx-auto"
                 >
                     <p className="text-2xl md:text-3xl font-medium text-neutral-900 leading-relaxed">
-                        {data.closingStatement}
+                        {PROBLEM_FRAGMENTATION.closingStatement}
                     </p>
                 </motion.div>
 

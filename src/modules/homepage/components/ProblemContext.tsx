@@ -5,28 +5,12 @@ import { motion } from 'framer-motion';
 import { PROBLEM_CONTEXT } from '../content';
 import { Users, Clock, Brain, Link as LinkIcon, ArrowRight } from 'lucide-react';
 
-interface ProblemContextContent {
-    headline: string;
-    subheadline: string;
-    problems: { title: string; description: string; icon: string }[];
-    closingStatement: string;
-}
-
-interface ProblemContextProps {
-    content?: ProblemContextContent;
-}
-
 /**
  * ProblemContext - Why We Exist
  * BENTO GRID DESIGN (Reference: USD Bloom)
- * 
- * Accepts optional `content` prop from server-side Sanity fetch.
- * Falls back to hardcoded PROBLEM_CONTEXT if no CMS data is provided.
  */
-export function ProblemContext({ content }: ProblemContextProps = {}) {
-    const data = content ?? PROBLEM_CONTEXT;
+export function ProblemContext() {
     const iconMap = {
-
         users: Users,
         clock: Clock,
         brain: Brain,
@@ -34,7 +18,7 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
     };
 
     return (
-        <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+        <section className="py-12 md:py-32 bg-white relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-purple-100/50 rounded-full blur-[100px]" />
@@ -61,7 +45,7 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                             transition={{ delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1] lg:w-1/2 flex-shrink-0"
                         >
-                            {data.headline}
+                            {PROBLEM_CONTEXT.headline}
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +54,7 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light lg:w-1/2 lg:pt-2"
                         >
-                            {data.subheadline}
+                            {PROBLEM_CONTEXT.subheadline}
                         </motion.p>
                     </div>
                 </div>
@@ -123,10 +107,10 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                     <Users size={24} />
                                 </span>
                                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-                                    {data.problems[0].title}
+                                    {PROBLEM_CONTEXT.problems[0].title}
                                 </h3>
                                 <p className="text-lg md:text-xl text-purple-100 leading-relaxed font-light">
-                                    {data.problems[0].description}
+                                    {PROBLEM_CONTEXT.problems[0].description}
                                 </p>
                             </div>
 
@@ -155,10 +139,10 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-neutral-900 mb-3">
-                                        {data.problems[1].title}
+                                        {PROBLEM_CONTEXT.problems[1].title}
                                     </h3>
                                     <p className="text-neutral-600 leading-relaxed">
-                                        {data.problems[1].description}
+                                        {PROBLEM_CONTEXT.problems[1].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -182,10 +166,10 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                             <Brain size={20} className="text-violet-500 group-hover:text-purple-600 transition-colors" />
                                         </div>
                                         <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                            {data.problems[2].title}
+                                            {PROBLEM_CONTEXT.problems[2].title}
                                         </h3>
                                         <p className="text-sm text-neutral-600 leading-relaxed">
-                                            {data.problems[2].description}
+                                            {PROBLEM_CONTEXT.problems[2].description}
                                         </p>
                                     </div>
                                 </motion.div>
@@ -207,10 +191,10 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                             <LinkIcon size={20} className="text-violet-500 group-hover:text-purple-600 transition-colors" />
                                         </div>
                                         <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                            {data.problems[3].title}
+                                            {PROBLEM_CONTEXT.problems[3].title}
                                         </h3>
                                         <p className="text-sm text-neutral-600 leading-relaxed">
-                                            {data.problems[3].description}
+                                            {PROBLEM_CONTEXT.problems[3].description}
                                         </p>
                                     </div>
                                 </motion.div>
@@ -226,7 +210,7 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2rem] p-8 flex flex-col justify-between min-h-[450px] w-[90vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center flex-shrink-0"
+                                className="bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2rem] p-6 flex flex-col gap-3 w-[90vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center flex-shrink-0"
                             >
                                 {/* Animated Gradient Blobs */}
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -258,19 +242,19 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                     />
                                 </div>
 
-                                <div className="relative z-10">
-                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white mb-6 border border-white/20 backdrop-blur-sm">
+                                <div className="relative z-10 flex flex-col gap-2">
+                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-sm">
                                         <Users size={24} />
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
-                                        {data.problems[0].title}
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                                        {PROBLEM_CONTEXT.problems[0].title}
                                     </h3>
                                     <p className="text-base md:text-lg text-purple-100 leading-relaxed font-light">
-                                        {data.problems[0].description}
+                                        {PROBLEM_CONTEXT.problems[0].description}
                                     </p>
                                 </div>
 
-                                <div className="mt-6 pt-6 border-t border-white/20 flex items-center text-white font-medium opacity-80">
+                                <div className="mt-4 pt-4 border-t border-white/20 flex items-center text-white font-medium opacity-80">
                                     <span className="mr-2">Learn more</span> <ArrowRight size={16} />
                                 </div>
                             </motion.div>
@@ -281,7 +265,7 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col gap-4 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
@@ -290,12 +274,12 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 <div className="bg-neutral-50 p-3 rounded-xl w-fit">
                                     <Clock size={24} className="text-violet-500" />
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {data.problems[1].title}
+                                <div className="flex flex-col gap-1">
+                                    <h3 className="text-xl font-bold text-neutral-900">
+                                        {PROBLEM_CONTEXT.problems[1].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {data.problems[1].description}
+                                        {PROBLEM_CONTEXT.problems[1].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -306,21 +290,21 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
                                 }}
                             >
-                                <div>
-                                    <div className="mb-4 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
+                                <div className="flex flex-col gap-1">
+                                    <div className="mb-2 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
                                         <Brain size={20} className="text-violet-500" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {data.problems[2].title}
+                                    <h3 className="text-xl font-bold text-neutral-900">
+                                        {PROBLEM_CONTEXT.problems[2].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {data.problems[2].description}
+                                        {PROBLEM_CONTEXT.problems[2].description}
                                     </p>
                                 </div>
                             </motion.div>
@@ -331,21 +315,21 @@ export function ProblemContext({ content }: ProblemContextProps = {}) {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.3 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-3 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
                                 }}
                             >
-                                <div>
-                                    <div className="mb-4 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
+                                <div className="flex flex-col gap-1">
+                                    <div className="mb-2 w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center">
                                         <LinkIcon size={20} className="text-violet-500" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                                        {data.problems[3].title}
+                                    <h3 className="text-xl font-bold text-neutral-900">
+                                        {PROBLEM_CONTEXT.problems[3].title}
                                     </h3>
                                     <p className="text-sm text-neutral-600 leading-relaxed">
-                                        {data.problems[3].description}
+                                        {PROBLEM_CONTEXT.problems[3].description}
                                     </p>
                                 </div>
                             </motion.div>

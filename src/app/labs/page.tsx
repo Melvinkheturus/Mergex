@@ -144,7 +144,7 @@ export default async function LabsPage() {
 
             {/* 8. Why Labs Exists — Short Manifesto (Moved here) */}
             <div id="why-labs-exists">
-                <WhyLabsExists content={pageConfig?.whyExists} />
+                <WhyLabsExists />
             </div>
 
             {/* 3. What We Create — NOT Services */}

@@ -9,7 +9,7 @@ import { Navbar } from "@/components/layout";
 import Script from "next/script";
 import FooterRevealWrapper from "@/components/FooterRevealWrapper";
 
-const specalRoutes = ["/studio", "/connect"];
+const specialRoutes = ["/studio", "/connect"];
 
 
 const Footer = dynamic(() => import("@/components/Footer"), {
@@ -27,14 +27,16 @@ interface LayoutContentProps {
  */
 export default function LayoutContent({ children }: LayoutContentProps) {
     const pathname = usePathname();
-    const isSpecialRoute = specalRoutes.some(
+    const isConnectSubdomain =
+        typeof window !== "undefined" && window.location.hostname === "connect.mergex.in";
+    const isSpecialRoute = specialRoutes.some(
         (route) => pathname === route || pathname?.startsWith(route + "/")
     );
     const isSystemsRoute = pathname === "/systems";
 
     // Add/remove data attribute on body for CSS targeting
     useEffect(() => {
-        if (isSpecialRoute) {
+        if (pathname?.startsWith("/studio")) {
             document.body.setAttribute("data-studio-route", "true");
         } else {
             document.body.removeAttribute("data-studio-route");
@@ -44,8 +46,8 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         };
     }, [isSpecialRoute]);
 
-    if (isSpecialRoute) {
-        // Studio / Connect route: No navbar, footer, cursor, or scroll indicator
+    if (isSpecialRoute || isConnectSubdomain) {
+        // Studio route: No navbar, footer, cursor, or scroll indicator
         return (
             <>
                 <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
@@ -58,20 +60,21 @@ export default function LayoutContent({ children }: LayoutContentProps) {
     return (
         <LenisProvider>
             <ScrollSectionProvider>
-                <Navbar />
-                <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
-                {/* Curtain: sits above fixed footer, margin-bottom equals footer height */}
-                <main
-                    id="main-content"
-                    className="relative bg-background"
-                    style={{ zIndex: 10, marginBottom: 'var(--footer-height, 0px)' }}
-                >
-                    {children}
-                </main>
-                {/* Footer is pinned behind main content (z-index: 1) */}
-                <FooterRevealWrapper>
-                    <Footer />
-                </FooterRevealWrapper>
+                <div className="min-h-screen flex flex-col md:block w-full overflow-x-hidden">
+                    <Navbar />
+                    <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
+                    {/* Curtain: sits above fixed footer on desktop, normal flow on mobile */}
+                    <main
+                        id="main-content"
+                        className="flex-1 w-full relative bg-background z-10 md:mb-[var(--footer-height,0px)]"
+                    >
+                        {children}
+                    </main>
+                    {/* Footer is pinned behind main content on desktop, normal block on mobile */}
+                    <FooterRevealWrapper>
+                        <Footer />
+                    </FooterRevealWrapper>
+                </div>
             </ScrollSectionProvider>
         </LenisProvider>
     );

@@ -7,29 +7,15 @@ import { WHY_LABS_EXISTS } from '../content/labs';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface WhyLabsExistsProps {
-    content?: typeof WHY_LABS_EXISTS;
-}
-
 /**
- * WhyLabsExists – Scroll-triggered 3D card flip animation
- *
- * Phases:
- *  1. Cards start flush (zero gap), seamless front face image.
- *  2. Scroll: cards separate + title fades in.
- *  3. Cards FLIP (rotateY 180°) — mid-flip each card bends inward via scaleX → 0 → 1.
- *  4. Simultaneously as flip, left/right fan out (rotateZ) + slight y-drop.
- *  5. Final state: dark bg, cards displayed fanned with subtle bottom-corner overlap.
+ * WhyLabsExists – Scroll-triggered 3D card flip animation (desktop only)
+ * Mobile: Simple stacked card layout with Mountain Dew video as front face.
  */
-export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
-    const data = content || WHY_LABS_EXISTS;
-    const headline = data.headline || WHY_LABS_EXISTS.headline;
-    const cards = data.cards?.length ? data.cards : WHY_LABS_EXISTS.cards;
+export function WhyLabsExists() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const pinnedRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-
 
     // ── Video sync: keep all 3 front-face videos frame-perfect ─────────────
     useEffect(() => {
@@ -171,7 +157,7 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                             zIndex: 2,
                         }}
                     >
-                        {headline || <>Where Do You Need <em>Creative</em> Acceleration?</>}
+                        Where Do You Need <em>Creative</em> Acceleration?
                     </h2>
 
                     <div
@@ -192,9 +178,9 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                             initialBorderRadius="14px 0 0 14px"
                             backBg="linear-gradient(160deg, #EAEAEA 0%, #C8C8C8 100%)"
                             backTextColor="#111111"
-                            title={cards[0]?.title || WHY_LABS_EXISTS.cards[0].title}
-                            description={cards[0]?.description || WHY_LABS_EXISTS.cards[0].description}
-                            subtext={cards[0]?.subtext || WHY_LABS_EXISTS.cards[0].subtext}
+                            title={WHY_LABS_EXISTS.cards[0].title}
+                            description={WHY_LABS_EXISTS.cards[0].description}
+                            subtext={WHY_LABS_EXISTS.cards[0].subtext}
                             iconSvg={
                                 <svg width="20" height="14" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                     <polyline points="1,12 8,5 13,10 20,2" />
@@ -208,9 +194,9 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                             initialBorderRadius="0"
                             backBg="linear-gradient(160deg, #9D68FF 0%, #5B21B6 100%)"
                             backTextColor="#ffffff"
-                            title={cards[1]?.title || WHY_LABS_EXISTS.cards[1].title}
-                            description={cards[1]?.description || WHY_LABS_EXISTS.cards[1].description}
-                            subtext={cards[1]?.subtext || WHY_LABS_EXISTS.cards[1].subtext}
+                            title={WHY_LABS_EXISTS.cards[1].title}
+                            description={WHY_LABS_EXISTS.cards[1].description}
+                            subtext={WHY_LABS_EXISTS.cards[1].subtext}
                             iconSvg={
                                 <svg width="20" height="16" viewBox="0 0 26 18" fill="currentColor">
                                     <circle cx="13" cy="4" r="2" />
@@ -225,9 +211,9 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                             initialBorderRadius="0 14px 14px 0"
                             backBg="linear-gradient(160deg, #2A2A2A 0%, #080808 100%)"
                             backTextColor="#ffffff"
-                            title={cards[2]?.title || WHY_LABS_EXISTS.cards[2].title}
-                            description={cards[2]?.description || WHY_LABS_EXISTS.cards[2].description}
-                            subtext={cards[2]?.subtext || WHY_LABS_EXISTS.cards[2].subtext}
+                            title={WHY_LABS_EXISTS.cards[2].title}
+                            description={WHY_LABS_EXISTS.cards[2].description}
+                            subtext={WHY_LABS_EXISTS.cards[2].subtext}
                             iconSvg={
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -250,7 +236,7 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                     className="text-center mb-10 text-2xl font-light text-neutral-900 leading-snug tracking-tight"
                     style={{ fontFamily: 'var(--font-playfair)' }}
                 >
-                    {headline || <>Where Do You Need <em>Creative</em> Acceleration?</>}
+                    Where Do You Need <em>Creative</em> Acceleration?
                 </h2>
 
                 {/* Video Card — full-width hero */}
@@ -268,14 +254,14 @@ export function WhyLabsExists({ content }: WhyLabsExistsProps = {}) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                     {/* First card label on the video */}
                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-white/60 mb-1">{cards[0]?.subtext || WHY_LABS_EXISTS.cards[0].subtext}</p>
-                        <h3 className="text-xl font-normal text-white leading-tight mb-2">{cards[0]?.title || WHY_LABS_EXISTS.cards[0].title}</h3>
-                        <p className="text-xs text-white/50 leading-relaxed">{cards[0]?.description || WHY_LABS_EXISTS.cards[0].description}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-white/60 mb-1">{WHY_LABS_EXISTS.cards[0].subtext}</p>
+                        <h3 className="text-xl font-normal text-white leading-tight mb-2">{WHY_LABS_EXISTS.cards[0].title}</h3>
+                        <p className="text-xs text-white/50 leading-relaxed">{WHY_LABS_EXISTS.cards[0].description}</p>
                     </div>
                 </div>
 
                 {/* Remaining cards — stacked */}
-                {[cards[1] || WHY_LABS_EXISTS.cards[1], cards[2] || WHY_LABS_EXISTS.cards[2]].map((card, i) => {
+                {[WHY_LABS_EXISTS.cards[1], WHY_LABS_EXISTS.cards[2]].map((card, i) => {
                     const gradients = [
                         'linear-gradient(160deg, #9D68FF 0%, #5B21B6 100%)',
                         'linear-gradient(160deg, #2A2A2A 0%, #080808 100%)',
