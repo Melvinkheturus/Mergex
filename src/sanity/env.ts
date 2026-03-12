@@ -3,18 +3,18 @@ export const apiVersion =
 
 export const dataset = assertValue(
   process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'production'
+  'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
 )
 
 export const projectId = assertValue(
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'missing-project-id'
+  'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
 )
 
-function assertValue<T>(v: T | undefined, fallback: string): string {
+function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
-    return fallback
+    throw new Error(errorMessage)
   }
 
-  return v as unknown as string
+  return v
 }
