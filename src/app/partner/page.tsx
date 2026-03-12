@@ -1,35 +1,55 @@
-'use client';
+import type { Metadata } from 'next';
+import { fetchWithFallback } from '@/sanity/lib/contentFetcher';
+import PartnerPageClient from './PartnerPageClient';
 
-import { useState } from 'react';
-import {
-    PartnershipHero,
-    WhyPartner,
-    PartnershipTypes,
-    ReferralExplainer,
-    TrustSection,
-    PartnerCTA,
-} from '@/modules/partnership';
+export const metadata: Metadata = {
+    title: 'Partner with Mergex | Build Together, Not Compete',
+    description: 'Partner with Mergex to expand your service offering. Strategic partnerships for agencies and referral programs for professionals.',
+};
 
-export default function PartnerPage() {
-    const [selectedType, setSelectedType] = useState<'strategic' | 'referral' | null>(null);
+// ── GROQ Query ──
+const PARTNER_PAGE_QUERY = `
+    *[_type == "partnerPage"][0]{
+        "hero": {
+            "headline": heroHeadline,
+            "subheadline": heroSubheadline,
+            "ctaText": heroCtaText
+        },
+        "whyPartner": {
+            "headline": whyPartnerHeadline,
+            "subheadline": whyPartnerSubheadline
+        },
+        "benefits": benefits,
+        "partnershipTypes": {
+            "headline": partnershipTypesHeadline,
+            "subheadline": partnershipTypesSubheadline,
+            "types": partnershipTypes
+        },
+        "referral": {
+            "headline": referralHeadline,
+            "steps": referralSteps,
+            "commissionNote": referralCommissionNote
+        },
+        "trust": {
+            "headline": trustHeadline,
+            "subheadline": trustSubheadline,
+            "principles": trustPrinciples
+        },
+        "cta": {
+            "headline": ctaHeadline,
+            "subheadline": ctaSubheadline,
+            "partnerButtonText": ctaPartnerButtonText,
+            "referralButtonText": ctaReferralButtonText
+        }
+    }
+`;
 
-    const handlePartnershipTypeClick = (typeId: 'strategic' | 'referral') => {
-        setSelectedType(typeId);
-        // Scroll to CTA section
-        setTimeout(() => {
-            const ctaSection = document.querySelector('section:last-of-type');
-            ctaSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-    };
-
-    return (
-        <main className="min-h-screen bg-white">
-            <PartnershipHero />
-            <WhyPartner />
-            <PartnershipTypes onApplyClick={handlePartnershipTypeClick} />
-            <ReferralExplainer />
-            <TrustSection />
-            <PartnerCTA />
-        </main>
+export default async function PartnerPage() {
+    const pageConfig = await fetchWithFallback<any>(
+        PARTNER_PAGE_QUERY,
+        null,
+        'Partner Page Config'
     );
+
+    return <PartnerPageClient pageConfig={pageConfig} />;
 }

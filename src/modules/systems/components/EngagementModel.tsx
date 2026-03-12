@@ -2,13 +2,21 @@
 
 import { ENGAGEMENT_MODEL } from '../content/systems';
 
+interface EngagementModelProps {
+    content?: typeof ENGAGEMENT_MODEL;
+}
+
 /**
  * EngagementModel - Premium Pricing Cards
- * 
- * Distinctive design with Outfit typography and pricing card layout.
- * Features pricing badges, feature lists, and purple/violet gradient theme.
+ * Accepts optional `content` prop from server-side Sanity fetch.
  */
-export function EngagementModel() {
+export function EngagementModel({ content }: EngagementModelProps = {}) {
+    const data = content ?? ENGAGEMENT_MODEL;
+    const headline = data.headline || ENGAGEMENT_MODEL.headline;
+    const subheadline = data.subheadline || ENGAGEMENT_MODEL.subheadline;
+    const philosophy = data.philosophy || ENGAGEMENT_MODEL.philosophy || "We price based on the value we deliver, not hours logged. Every engagement is custom-tailored to your goals, timeline, and budget.";
+    const cta = data.cta || ENGAGEMENT_MODEL.cta || "Not sure which model fits? Let's talk through your project and find the right approach.";
+    const models = data.models?.length ? data.models : ENGAGEMENT_MODEL.models;
     return (
         <section className="relative py-12 lg:py-32 bg-slate-50/50 overflow-hidden">
             <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-7xl">
@@ -24,17 +32,17 @@ export function EngagementModel() {
 
                     <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
                         style={{ fontFamily: "var(--font-manrope)" }}>
-                        {ENGAGEMENT_MODEL.headline}
+                        {headline}
                     </h2>
                     <p className="text-base md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
                         style={{ fontFamily: "var(--font-manrope)" }}>
-                        {ENGAGEMENT_MODEL.subheadline}
+                        {subheadline}
                     </p>
                 </div>
 
                 {/* Pricing Cards Grid */}
                 <div className="grid md:grid-cols-3 gap-8 mb-16">
-                    {ENGAGEMENT_MODEL.models.map((model, index) => {
+                    {models.map((model: any, index: number) => {
                         const isFeatured = 'featured' in model && model.featured === true;
 
                         return (
@@ -68,7 +76,7 @@ export function EngagementModel() {
 
                                     {/* Features List */}
                                     <div className="space-y-4 mb-8">
-                                        {model.features.map((feature, idx) => (
+                                        {(model.features || model.includes || []).map((feature: string, idx: number) => (
                                             <div key={idx} className="flex items-start gap-3">
                                                 <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-400"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,12 +119,12 @@ export function EngagementModel() {
                 <div className="text-center max-w-4xl mx-auto space-y-6 md:space-y-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
                     <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto"
                         style={{ fontFamily: "var(--font-manrope)" }}>
-                        {ENGAGEMENT_MODEL.philosophy}
+                        {philosophy}
                     </p>
                     <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200">
                         <span className="text-base font-semibold"
                             style={{ fontFamily: "var(--font-manrope)" }}>
-                            {ENGAGEMENT_MODEL.cta}
+                            {cta}
                         </span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

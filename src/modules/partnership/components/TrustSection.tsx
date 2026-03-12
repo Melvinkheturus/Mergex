@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { TRUST_SECTION, TRUST_PRINCIPLES } from '../constants';
 import { CheckCircle2 } from 'lucide-react';
 
-export function TrustSection() {
+interface TrustSectionProps {
+    content?: typeof TRUST_SECTION;
+}
+
+export function TrustSection({ content }: TrustSectionProps = {}) {
+    const data = content || TRUST_SECTION;
+    const headline = data.headline || TRUST_SECTION.headline;
+    const subheadline = data.subheadline || TRUST_SECTION.subheadline;
+    const principles = (data as any).principles?.length ? (data as any).principles : TRUST_PRINCIPLES;
     return (
         <section className="py-20 md:py-28 bg-gradient-to-b from-white to-purple-50/30">
             <div className="max-w-4xl mx-auto px-6 md:px-12">
@@ -16,10 +24,10 @@ export function TrustSection() {
                     className="text-center mb-12"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-4">
-                        {TRUST_SECTION.headline}
+                        {headline}
                     </h2>
                     <p className="text-lg text-gray-600">
-                        {TRUST_SECTION.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
@@ -31,7 +39,7 @@ export function TrustSection() {
                     className="bg-white rounded-3xl border-2 border-gray-200 shadow-xl p-8 md:p-10"
                 >
                     <ul className="space-y-6">
-                        {TRUST_PRINCIPLES.map((principle, index) => (
+                        {principles.map((principle: any, index: number) => (
                             <motion.li
                                 key={index}
                                 initial={{ opacity: 0, x: -20 }}

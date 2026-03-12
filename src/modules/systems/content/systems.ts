@@ -2,7 +2,7 @@
 // Solution Partner positioning and content
 
 export const SYSTEMS_HERO = {
-    headline: 'Building and Automating Systems That Help Businesses Scale',
+    headline: 'Building and Automating Systems\nThat Help Businesses Scale',
     subheadline: 'Custom software · AI automation · Design & branding · Marketing systems',
     keyDifferentiator: 'MVPs in weeks, not months',
     primaryCTA: 'Book a Strategy Call',

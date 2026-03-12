@@ -11,7 +11,16 @@ const ICONS = {
     'trending-up': TrendingUp,
 };
 
-export function WhyPartner() {
+interface WhyPartnerProps {
+    content?: typeof WHY_PARTNER_CONTENT;
+    benefits?: any[];
+}
+
+export function WhyPartner({ content, benefits }: WhyPartnerProps = {}) {
+    const data = content || WHY_PARTNER_CONTENT;
+    const headline = data.headline || WHY_PARTNER_CONTENT.headline;
+    const subheadline = data.subheadline || WHY_PARTNER_CONTENT.subheadline;
+    const benefitsList = benefits?.length ? benefits : PARTNERSHIP_BENEFITS;
     return (
         <section className="py-20 md:py-28 bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -23,16 +32,16 @@ export function WhyPartner() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-4">
-                        {WHY_PARTNER_CONTENT.headline}
+                        {headline}
                     </h2>
                     <p className="text-lg text-gray-600">
-                        {WHY_PARTNER_CONTENT.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {PARTNERSHIP_BENEFITS.map((benefit, index) => {
-                        const Icon = ICONS[benefit.icon as keyof typeof ICONS];
+                    {benefitsList.map((benefit: any, index: number) => {
+                        const Icon = ICONS[benefit.icon as keyof typeof ICONS] || Target;
                         return (
                             <motion.div
                                 key={benefit.title}

@@ -3,33 +3,34 @@
 import { motion } from 'framer-motion';
 import type { Principle } from '../types';
 
-const PRINCIPLES: Principle[] = [
-    {
-        id: '1',
-        text: 'We start with the problem, not the deliverable'
-    },
-    {
-        id: '2',
-        text: 'We design systems, not one-off outputs'
-    },
-    {
-        id: '3',
-        text: 'We move fast without breaking foundations'
-    },
-    {
-        id: '4',
-        text: 'We treat AI as leverage, not spectacle'
-    }
+// ── Hardcoded defaults ──
+const DEFAULT_HEADLINE = 'How we approach every engagement';
+const DEFAULT_PRINCIPLES: Principle[] = [
+    { id: '1', text: 'We start with the problem, not the deliverable' },
+    { id: '2', text: 'We design systems, not one-off outputs' },
+    { id: '3', text: 'We move fast without breaking foundations' },
+    { id: '4', text: 'We treat AI as leverage, not spectacle' },
 ];
+
+interface PrinciplesSectionProps {
+    content?: {
+        principlesHeadline?: string;
+        principles?: { text: string }[];
+    };
+}
 
 /**
  * PrinciplesSection - How We Work
- * 
+ *
  * Purpose: Reduce buyer anxiety through clear principles
- * Psychology: Commitment & Consistency, Pratfall Effect (honest about approach)
- * Copy: Active voice, confident tone, benefits over features
  */
-export function PrinciplesSection() {
+export function PrinciplesSection({ content }: PrinciplesSectionProps) {
+    const headline = content?.principlesHeadline || DEFAULT_HEADLINE;
+    const principles =
+        content?.principles?.length
+            ? content.principles.map((p, i) => ({ id: String(i + 1), text: p.text }))
+            : DEFAULT_PRINCIPLES;
+
     return (
         <section className="relative bg-white py-20 md:py-32">
             <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1200px]">
@@ -42,12 +43,12 @@ export function PrinciplesSection() {
                     transition={{ duration: 0.6 }}
                     className="text-3xl md:text-4xl font-semibold text-gray-900 mb-12"
                 >
-                    How we approach every engagement
+                    {headline}
                 </motion.h2>
 
                 {/* Principles list */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl">
-                    {PRINCIPLES.map((principle, index) => (
+                    {principles.map((principle, index) => (
                         <motion.div
                             key={principle.id}
                             initial={{ opacity: 0, y: 30 }}

@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { WHAT_WE_DONT_OFFER } from '../content/careers';
 
-export function WhatWeDontOffer() {
+interface WhatWeDontOfferProps {
+    content?: typeof WHAT_WE_DONT_OFFER;
+}
+
+export function WhatWeDontOffer({ content }: WhatWeDontOfferProps = {}) {
+    const data = content || WHAT_WE_DONT_OFFER;
+    const headline = data.headline || WHAT_WE_DONT_OFFER.headline;
+    const subheadline = data.subheadline || WHAT_WE_DONT_OFFER.subheadline;
+    const items = data.items?.length ? data.items : WHAT_WE_DONT_OFFER.items;
     return (
         <section className="bg-white py-20">
             <div className="container mx-auto max-w-4xl px-6">
@@ -17,16 +25,16 @@ export function WhatWeDontOffer() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {WHAT_WE_DONT_OFFER.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {WHAT_WE_DONT_OFFER.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Items */}
                 <div className="grid gap-4 md:grid-cols-2">
-                    {WHAT_WE_DONT_OFFER.items.map((item, index) => (
+                    {items.map((item: string, index: number) => (
                         <motion.div
                             key={index}
                             className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4"

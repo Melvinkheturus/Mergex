@@ -1,8 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Stardom';
+  src: url('/fonts/stardom/Stardom-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* 
+  Brand Font: Satoshi 
+  Using static files for primary weights (400, 500, 700, 900) to ensure maximum design fidelity,
+  with the variable font as a fallback for intermediate weights.
+*/
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Brand Fonts */
+  --font-iceberg: 'Iceberg', cursive;
+  --font-satoshi: 'Satoshi', var(--font-manrope), sans-serif;
+  --font-stardom: 'Stardom', serif;
+
   /* Light Theme - Clean & Modern */
   --background-soft: #f8f7fc;
   --background-subtle: #f3f2f7;
@@ -75,6 +134,9 @@
   --font-display: var(--font-manrope), var(--font-geist-sans), sans-serif;
   --font-body: var(--font-manrope), var(--font-geist-sans), sans-serif;
   --font-serif: var(--font-playfair), serif;
+  --font-iceberg: var(--font-iceberg);
+  --font-satoshi: var(--font-satoshi);
+  --font-stardom: var(--font-stardom);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -188,6 +250,10 @@ html * {
 
 .font-pinyon {
   font-family: var(--font-pinyon);
+}
+
+.font-stardom {
+  font-family: var(--font-stardom);
 }
 
 /* Background Utilities */
@@ -329,18 +395,25 @@ html * {
   opacity: 0;
 }
 
-/* Hide All Scrollbars - Using Progress Indicator */
+/* Custom Scrollbar Styling (Optional, but makes it look premium) */
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
-/* Firefox */
-* {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Hide Scrollbar Utility */
+::-webkit-scrollbar-thumb {
+  background: rgba(33, 158, 188, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(33, 158, 188, 0.4);
+}
+
+/* Hide Scrollbar Utility - kept for specific use cases */
 .hide-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */

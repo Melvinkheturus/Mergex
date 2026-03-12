@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { WHAT_YOU_DONT_PAY_FOR } from '../content/pricing';
 
-export function WhatYouDontPayFor() {
+interface WhatYouDontPayForProps {
+    content?: typeof WHAT_YOU_DONT_PAY_FOR;
+}
+
+export function WhatYouDontPayFor({ content }: WhatYouDontPayForProps = {}) {
+    const data = content || WHAT_YOU_DONT_PAY_FOR;
+    const headline = data.headline || WHAT_YOU_DONT_PAY_FOR.headline;
+    const subheadline = data.subheadline || WHAT_YOU_DONT_PAY_FOR.subheadline;
+    const items = data.items?.length ? data.items : WHAT_YOU_DONT_PAY_FOR.items;
     return (
         <section className="bg-white py-20">
             <div className="container mx-auto max-w-6xl px-6">
@@ -16,16 +24,16 @@ export function WhatYouDontPayFor() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {WHAT_YOU_DONT_PAY_FOR.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {WHAT_YOU_DONT_PAY_FOR.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Items Grid */}
                 <div className="grid gap-6 md:grid-cols-2">
-                    {WHAT_YOU_DONT_PAY_FOR.items.map((item, index) => (
+                    {items.map((item: any, index: number) => (
                         <motion.div
                             key={item.title}
                             className="flex gap-4 rounded-lg border-2 border-red-100 bg-red-50/50 p-6"

@@ -240,4 +240,76 @@ Questions about:
 - **Technical issues**: Contact dev team
 - **Content strategy**: Review with marketing
 
-Last updated: January 2026
+---
+
+## Technical Implementation Notes
+
+### Configuration
+
+The Mergex Sanity integration uses the following architecture:
+
+- **Studio**: Mounted at `/studio` route
+- **API Version**: `2026-01-29` (pinned for stability)
+- **Image CDN**: `cdn.sanity.io` (configured in `next.config.ts`)
+
+### Query System
+
+All content fetching uses the centralized query system in `@/sanity/lib/queries`:
+
+```typescript
+import { fetchWithFallback, getHomepage, getAllPosts } from '@/sanity/lib/queries';
+```
+
+For custom queries, use `fetchWithFallback` with your GROQ query:
+
+```typescript
+const content = await fetchWithFallback<MyType>(
+  `*[_type == "myType"][0]`,
+  fallbackData,
+  'myTypeLabel'
+);
+```
+
+### Type Safety
+
+All Sanity types are defined in `@/sanity/lib/types.ts`. Import them for type-safe queries:
+
+```typescript
+import type { Post, CaseStudy, Testimonial } from '@/sanity/lib/types';
+```
+
+### Fallback Pattern
+
+Every query supports automatic fallback to hardcoded content:
+
+```typescript
+const posts = await fetchWithFallback(
+  POSTS_QUERY,
+  [{ title: "Fallback Post", slug: { current: "fallback" } }], // fallback data
+  'posts'
+);
+```
+
+This ensures 100% uptime even if Sanity is unavailable.
+
+### Live Preview
+
+The `<SanityLive />` component is mounted in `layout.tsx` for real-time preview in Studio.
+
+### Environment Variables
+
+Required in `.env.local`:
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2026-01-29
+```
+
+---
+
+### Known Limitations
+
+1. **No Draft Mode in Production**: Currently, live preview only works in Studio. Public site shows published content only.
+2. **CDN Caching**: Images are served through Sanity CDN. Allow up to 5 minutes for cache invalidation.
+
+Last updated: March 2026

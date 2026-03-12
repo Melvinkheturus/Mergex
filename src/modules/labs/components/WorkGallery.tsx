@@ -4,7 +4,11 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScrollVelocity } from '@/components/ScrollVelocity';
 
-const galleryImages = [
+interface WorkGalleryProps {
+    content?: any;
+}
+
+const defaultImages = [
     '/assets/mockups/Gemini_Generated_Image_7mmyde7mmyde7mmy.png',
     '/assets/mockups/Gemini_Generated_Image_vvlwccvvlwccvvlw.png',
     '/assets/mockups/Gemini_Generated_Image_rh4aggrh4aggrh4a.png',
@@ -21,8 +25,13 @@ const galleryImages = [
  * so the gallery feels like it emerges from and dissolves back into the
  * surrounding dark canvas.
  */
-export function WorkGallery() {
+export function WorkGallery({ content }: WorkGalleryProps = {}) {
     const sectionRef = useRef<HTMLElement>(null);
+    const images = content?.images?.length ? content.images : defaultImages;
+    const headlineText = content?.headline || "Discover Intelligence\nShaped Into\nVisuals";
+
+    // Split the headline by newline to replicate the block shape
+    const headlineLines = headlineText.split('\n');
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -63,9 +72,11 @@ export function WorkGallery() {
                         letterSpacing: '-0.02em',
                     }}
                 >
-                    Discover Intelligence{' '}
-                    <span className="block mt-1">Shaped Into</span>
-                    <span className="block mt-1">Visuals</span>
+                    {headlineLines.map((line: string, index: number) => (
+                        <span key={index} className={index > 0 ? "block mt-1" : ""}>
+                            {line}{index === 0 && ' '}
+                        </span>
+                    ))}
                 </h2>
             </div>
 
@@ -91,7 +102,7 @@ export function WorkGallery() {
                 <div className="py-12 space-y-4">
                     {/* Row 1 - Moving Right */}
                     <ScrollVelocity
-                        images={galleryImages}
+                        images={images}
                         velocity={50}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={400}
@@ -103,7 +114,7 @@ export function WorkGallery() {
 
                     {/* Row 2 - Moving Left */}
                     <ScrollVelocity
-                        images={galleryImages}
+                        images={images}
                         velocity={-45}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={420}
@@ -115,7 +126,7 @@ export function WorkGallery() {
 
                     {/* Row 3 - Moving Right */}
                     <ScrollVelocity
-                        images={galleryImages}
+                        images={images}
                         velocity={55}
                         imageClassName="gallery-image inline-block mx-3"
                         imageWidth={380}

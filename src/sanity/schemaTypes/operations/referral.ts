@@ -1,15 +1,18 @@
 import { defineField, defineType } from 'sanity'
+import { TransferIcon } from '@sanity/icons'
 
 export const referralType = defineType({
     name: 'referral',
     title: 'Referral Submission',
     type: 'document',
-    description: 'Referral tracking (Phase 1 - Simple)',
+    icon: TransferIcon,
+    description: 'Referral tracking (Phase 1 — will move to Supabase later)',
     fields: [
         defineField({
             name: 'referrerName',
             title: 'Referrer Name',
             type: 'string',
+            description: 'Who sent the referral?',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
@@ -20,13 +23,14 @@ export const referralType = defineType({
         }),
         defineField({
             name: 'referredName',
-            title: 'Referred Client Name',
+            title: 'Referred Person/Company',
             type: 'string',
+            description: 'Who is being referred?',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'referredEmail',
-            title: 'Referred Client Email',
+            title: 'Referred Email',
             type: 'string',
             validation: (Rule) => Rule.email(),
         }),
@@ -48,11 +52,11 @@ export const referralType = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'Pending', value: 'pending' },
-                    { title: 'Contacted', value: 'contacted' },
-                    { title: 'Qualified', value: 'qualified' },
-                    { title: 'Converted', value: 'converted' },
-                    { title: 'Not Qualified', value: 'not-qualified' },
+                    { title: '⏳ Pending', value: 'pending' },
+                    { title: '📞 Contacted', value: 'contacted' },
+                    { title: '✅ Qualified', value: 'qualified' },
+                    { title: '🎉 Converted', value: 'converted' },
+                    { title: '❌ Not Qualified', value: 'not-qualified' },
                 ],
             },
             initialValue: 'pending',
@@ -63,6 +67,13 @@ export const referralType = defineType({
             title: 'Internal Notes',
             type: 'text',
             rows: 3,
+            description: '🔒 Only visible to your team',
+        }),
+        defineField({
+            name: 'dynamicData',
+            title: 'Dynamic Form Data',
+            type: 'string',
+            description: 'JSON string of custom form fields submitted via dynamic forms',
         }),
         defineField({
             name: 'submittedAt',
@@ -74,7 +85,17 @@ export const referralType = defineType({
     preview: {
         select: {
             title: 'referredName',
-            subtitle: 'referrerName',
+            referrer: 'referrerName',
+            status: 'status',
+        },
+        prepare({ title, referrer, status }) {
+            const statusEmoji: Record<string, string> = {
+                pending: '⏳', contacted: '📞', qualified: '✅', converted: '🎉', 'not-qualified': '❌',
+            }
+            return {
+                title: `${statusEmoji[status] || ''} ${title}`,
+                subtitle: `Referred by ${referrer || 'Unknown'}`,
+            }
         },
     },
 })

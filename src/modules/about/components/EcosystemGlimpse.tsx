@@ -5,31 +5,57 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import type { EcosystemCard } from '../types';
 
-const ECOSYSTEM_CARDS: EcosystemCard[] = [
+// ── Hardcoded defaults ──
+const DEFAULT_HEADLINE = 'One ecosystem. Two focused modes.';
+const DEFAULT_CARDS: EcosystemCard[] = [
     {
         id: 'labs',
         title: 'Mergex Labs',
-        description: 'Where we explore AI-native creativity — experimenting with generative visuals, motion, and storytelling before it becomes predictable.',
+        description:
+            'Where we explore AI-native creativity — experimenting with generative visuals, motion, and storytelling before it becomes predictable.',
         href: '/labs',
-        ctaText: 'Explore Mergex Labs'
+        ctaText: 'Explore Mergex Labs',
     },
     {
         id: 'systems',
         title: 'Mergex Systems',
-        description: 'Where ideas turn into production-ready systems — software, automation, and platforms designed to scale with real businesses.',
+        description:
+            'Where ideas turn into production-ready systems — software, automation, and platforms designed to scale with real businesses.',
         href: '/systems',
-        ctaText: 'Explore Mergex Systems'
-    }
+        ctaText: 'Explore Mergex Systems',
+    },
 ];
+
+interface EcosystemGlimpseSanityCard {
+    title?: string;
+    description?: string;
+    href?: string;
+    ctaText?: string;
+}
+
+interface EcosystemGlimpseProps {
+    content?: {
+        ecosystemHeadline?: string;
+        ecosystemCards?: EcosystemGlimpseSanityCard[];
+    };
+}
 
 /**
  * EcosystemGlimpse - Two Clear Doors
- * 
- * Purpose: Create invitation to Labs/Systems, not explanation
- * Psychology: Hick's Law (simpler choices), Paradox of Choice, AIDA Funnel
- * Copy: No bullet points, no service lists - pure invitation
  */
-export function EcosystemGlimpse() {
+export function EcosystemGlimpse({ content }: EcosystemGlimpseProps) {
+    const headline = content?.ecosystemHeadline || DEFAULT_HEADLINE;
+    const cards: EcosystemCard[] =
+        content?.ecosystemCards?.length
+            ? content.ecosystemCards.map((c, i) => ({
+                id: `card-${i}`,
+                title: c.title || '',
+                description: c.description || '',
+                href: c.href || '#',
+                ctaText: c.ctaText || 'Learn more',
+            }))
+            : DEFAULT_CARDS;
+
     return (
         <section className="relative bg-white py-20 md:py-32">
             <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
@@ -42,12 +68,12 @@ export function EcosystemGlimpse() {
                     transition={{ duration: 0.8 }}
                     className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-16 text-center"
                 >
-                    One ecosystem. Two focused modes.
+                    {headline}
                 </motion.h2>
 
                 {/* Cards */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {ECOSYSTEM_CARDS.map((card, index) => (
+                    {cards.map((card, index) => (
                         <motion.div
                             key={card.id}
                             initial={{ opacity: 0, y: 50 }}

@@ -10,6 +10,7 @@ import { SystemsCTA } from './components/SystemsCTA';
 import { SystemsFAQ } from './components/SystemsFAQ';
 import { ImpactSection } from './components/ImpactSection';
 import { CaseStudySection } from './components/CaseStudySection';
+import { SpeedAdvantage } from './components/SpeedAdvantage';
 
 export {
     SystemsHero,
@@ -22,5 +23,6 @@ export {
     SystemsFAQ,
     ImpactSection,
     CaseStudySection,
+    SpeedAdvantage,
 };
 

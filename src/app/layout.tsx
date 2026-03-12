@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import { SanityLive } from "@/sanity/lib/live";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -149,6 +150,7 @@ export default function RootLayout({
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
+        <SanityLive />
         <LayoutContent>{children}</LayoutContent>
       </body>
     </html>

@@ -10,7 +10,15 @@ const iconMap = {
     users: Users,
 };
 
-export function EngagementTiers() {
+interface EngagementTiersProps {
+    content?: typeof ENGAGEMENT_TIERS;
+}
+
+export function EngagementTiers({ content }: EngagementTiersProps = {}) {
+    const data = content || ENGAGEMENT_TIERS;
+    const headline = data.headline || ENGAGEMENT_TIERS.headline;
+    const subheadline = data.subheadline || ENGAGEMENT_TIERS.subheadline;
+    const tiers = data.tiers?.length ? data.tiers : ENGAGEMENT_TIERS.tiers;
     return (
         <section className="bg-white py-20">
             <div className="container mx-auto max-w-7xl px-6">
@@ -23,24 +31,24 @@ export function EngagementTiers() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {ENGAGEMENT_TIERS.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {ENGAGEMENT_TIERS.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Tiers Grid */}
                 <div className="grid gap-8 md:grid-cols-3">
-                    {ENGAGEMENT_TIERS.tiers.map((tier, index) => {
-                        const Icon = iconMap[tier.icon as keyof typeof iconMap];
+                    {tiers.map((tier: any, index: number) => {
+                        const Icon = iconMap[tier.icon as keyof typeof iconMap] || Sparkles;
 
                         return (
                             <motion.div
                                 key={tier.name}
                                 className={`relative rounded-2xl border-2 p-8 transition-all hover:shadow-xl ${tier.recommended
-                                        ? 'border-purple-500 bg-gradient-to-br from-purple-50 to-white'
-                                        : 'border-gray-200 bg-white hover:border-purple-200'
+                                    ? 'border-purple-500 bg-gradient-to-br from-purple-50 to-white'
+                                    : 'border-gray-200 bg-white hover:border-purple-200'
                                     }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +83,7 @@ export function EngagementTiers() {
                                 <div className="mb-6">
                                     <p className="mb-3 text-sm font-semibold text-gray-700">Includes:</p>
                                     <ul className="space-y-2">
-                                        {tier.includes.map((item, i) => (
+                                        {(tier.includes || []).map((item: string, i: number) => (
                                             <li key={i} className="flex items-start gap-2">
                                                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-green-600" />
                                                 <span className="text-sm text-gray-600">{item}</span>

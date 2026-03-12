@@ -3,11 +3,19 @@
 import { motion } from 'framer-motion';
 import { PROOF_SIGNALS } from '../content';
 
+interface ProofSectionProps {
+    content?: typeof PROOF_SIGNALS;
+}
+
 /**
  * ProofSection - Tech stack showcase to build trust
  * Shows technologies we work with, establishing technical credibility
+ * 
+ * Accepts optional `content` prop from server-side Sanity fetch.
+ * Falls back to hardcoded PROOF_SIGNALS if no CMS data is provided.
  */
-export function ProofSection() {
+export function ProofSection({ content }: ProofSectionProps = {}) {
+    const data = content ?? PROOF_SIGNALS;
     return (
         <section className="py-20 md:py-28 bg-gradient-to-b from-white to-purple-50/30">
             <div className="container mx-auto px-6 md:px-12">
@@ -19,10 +27,10 @@ export function ProofSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
-                        {PROOF_SIGNALS.headline}
+                        {data.headline}
                     </h2>
                     <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
-                        {PROOF_SIGNALS.subheadline}
+                        {data.subheadline}
                     </p>
                 </motion.div>
 
@@ -33,7 +41,7 @@ export function ProofSection() {
                     </span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-                    {PROOF_SIGNALS.techStack.map((tech, index) => (
+                    {data.techStack.map((tech, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -61,7 +69,7 @@ export function ProofSection() {
                     className="text-center max-w-3xl mx-auto"
                 >
                     <p className="text-lg text-foreground-muted italic">
-                        {PROOF_SIGNALS.trustStatement}
+                        {data.trustStatement}
                     </p>
                 </motion.div>
             </div>

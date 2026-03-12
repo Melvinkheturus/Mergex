@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function ImpactSection() {
+interface ImpactSectionProps {
+    content?: any;
+}
+
+export function ImpactSection({ content }: ImpactSectionProps = {}) {
     return (
         <section className="py-12 md:py-20 bg-white">
             <div className="container mx-auto px-6 md:px-12">

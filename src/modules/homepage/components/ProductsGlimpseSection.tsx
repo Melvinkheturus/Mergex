@@ -4,13 +4,23 @@ import { motion } from 'framer-motion';
 import { PRODUCTS_GLIMPSE, SAAS_PRODUCTS } from '../content/products';
 import { ArrowRight } from 'lucide-react';
 
+interface ProductsGlimpseSectionProps {
+    productsGlimpse?: typeof PRODUCTS_GLIMPSE;
+    saasProducts?: typeof SAAS_PRODUCTS;
+}
+
 /**
  * ProductsGlimpseSection - Subtle products showcase (10% visibility)
  * Shows ambition without aggressive selling
+ * 
+ * Accepts optional props from server-side Sanity fetch.
+ * Falls back to hardcoded data if no CMS data is provided.
  */
-export function ProductsGlimpseSection() {
+export function ProductsGlimpseSection({ productsGlimpse, saasProducts }: ProductsGlimpseSectionProps = {}) {
+    const glimpse = productsGlimpse ?? PRODUCTS_GLIMPSE;
+    const products = saasProducts ?? SAAS_PRODUCTS;
     // Show only first 3 products
-    const featuredProducts = SAAS_PRODUCTS.products.slice(0, 3);
+    const featuredProducts = products.products.slice(0, 3);
 
     const statusColors: Record<string, string> = {
         live: 'bg-green-100 text-green-700 border-green-200',
@@ -29,10 +39,10 @@ export function ProductsGlimpseSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
-                        {PRODUCTS_GLIMPSE.headline}
+                        {glimpse.headline}
                     </h2>
                     <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
-                        {PRODUCTS_GLIMPSE.subheadline}
+                        {glimpse.subheadline}
                     </p>
                 </motion.div>
 

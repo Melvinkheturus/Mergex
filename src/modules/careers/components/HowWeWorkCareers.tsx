@@ -11,7 +11,15 @@ const iconMap = {
     'trending-up': TrendingUp,
 } as const;
 
-export function HowWeWorkCareers() {
+interface HowWeWorkCareersProps {
+    content?: typeof HOW_WE_WORK;
+}
+
+export function HowWeWorkCareers({ content }: HowWeWorkCareersProps = {}) {
+    const data = content || HOW_WE_WORK;
+    const headline = data.headline || HOW_WE_WORK.headline;
+    const subheadline = data.subheadline || HOW_WE_WORK.subheadline;
+    const principles = (data as any).principles?.length ? (data as any).principles : ((data as any).workingPrinciples?.length ? (data as any).workingPrinciples : HOW_WE_WORK.workingPrinciples);
     return (
         <section className="bg-gradient-to-br from-gray-50 to-white py-20">
             <div className="container mx-auto max-w-6xl px-6">
@@ -24,17 +32,17 @@ export function HowWeWorkCareers() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {HOW_WE_WORK.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg font-medium text-purple-600">
-                        {HOW_WE_WORK.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Working Principles */}
                 <div className="grid gap-6 md:grid-cols-2">
-                    {HOW_WE_WORK.workingPrinciples.map((principle, index) => {
-                        const Icon = iconMap[principle.icon as keyof typeof iconMap];
+                    {principles.map((principle: any, index: number) => {
+                        const Icon = iconMap[principle.icon as keyof typeof iconMap] || Lightbulb;
                         return (
                             <motion.div
                                 key={index}

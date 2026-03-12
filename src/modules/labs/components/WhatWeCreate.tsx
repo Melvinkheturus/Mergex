@@ -5,10 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { WHAT_WE_CREATE } from '../content/labs';
 import { Lens } from '@/components/ui/lens';
 
+interface WhatWeCreateProps {
+    content?: typeof WHAT_WE_CREATE;
+}
+
 /**
  * WhatWeCreate — Services section (static white background, no scroll theme change)
  */
-export function WhatWeCreate() {
+export function WhatWeCreate({ content }: WhatWeCreateProps = {}) {
+    const data = content || WHAT_WE_CREATE;
+    const headline = data.headline || WHAT_WE_CREATE.headline;
+    const subheadline = data.subheadline || WHAT_WE_CREATE.subheadline;
+    const categories = data.categories?.length ? data.categories : WHAT_WE_CREATE.categories;
     const sectionRef = useRef<HTMLElement>(null);
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -22,14 +30,15 @@ export function WhatWeCreate() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-20"
                 >
-                    <p className="text-sm uppercase tracking-wider mb-4">WHAT WE DO</p>
-                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">SERVICES</h2>
-                    <p className="text-lg md:text-xl max-w-3xl">{WHAT_WE_CREATE.subheadline}</p>
+                    <p className="text-sm uppercase tracking-wider text-gray-500 mb-4">WHAT WE DO</p>
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">{headline}</h2>
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl">{subheadline}</p>
                 </motion.div>
 
                 <div className="flex flex-col">
-                    {WHAT_WE_CREATE.categories.map((category, index) => {
+                    {categories.map((category: any, index: number) => {
                         const isOpen = openIndex === index;
+
 
                         return (
                             <motion.div
@@ -99,7 +108,7 @@ export function WhatWeCreate() {
                                                     }}
                                                     className="space-y-4 md:space-y-6"
                                                 >
-                                                    {category.capabilities.map((capability, idx) => (
+                                                    {(category.capabilities || []).map((capability: string, idx: number) => (
                                                         <motion.li
                                                             key={idx}
                                                             variants={{

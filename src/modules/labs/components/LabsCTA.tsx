@@ -11,13 +11,22 @@ const FEATURES = [
     'Unlimited revisions',
 ];
 
+interface LabsCTAProps {
+    content?: typeof LABS_CTA;
+}
+
 /**
  * LabsCTA — "Have a Content Challenge?" section
  *
  * Modern white-bg design with a bold split headline, animated floating
  * accent orbs, feature pills, and two CTA buttons. Scroll-driven entrance.
  */
-export function LabsCTA() {
+export function LabsCTA({ content }: LabsCTAProps = {}) {
+    const data = content || LABS_CTA;
+    const headline = data.headline || LABS_CTA.headline;
+    const subheadline = data.subheadline || LABS_CTA.subheadline;
+    const primaryCTA = data.primaryCTA || LABS_CTA.primaryCTA;
+    const secondaryCTA = data.secondaryCTA || LABS_CTA.secondaryCTA;
     const sectionRef = useRef<HTMLElement>(null);
 
     const { scrollYProgress } = useScroll({
@@ -54,7 +63,7 @@ export function LabsCTA() {
                             className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.05] tracking-tight"
                             style={{ fontFamily: 'var(--font-manrope)', letterSpacing: '-0.04em' }}
                         >
-                            {LABS_CTA.headline.split('Content').map((part, i) =>
+                            {headline.split('Content').map((part: string, i: number) =>
                                 i === 0 ? (
                                     <span key={i}>{part}</span>
                                 ) : (
@@ -83,7 +92,7 @@ export function LabsCTA() {
                         transition={{ delay: 0.2, duration: 0.6 }}
                         className="text-xl md:text-2xl text-gray-500 text-center mb-12 font-medium"
                     >
-                        {LABS_CTA.subheadline}
+                        {subheadline}
                     </motion.p>
 
                     {/* Feature Pills */}
@@ -134,7 +143,7 @@ export function LabsCTA() {
                                 }}
                             />
                             <Sparkles size={20} className="relative z-10" />
-                            <span className="relative z-10">{LABS_CTA.primaryCTA}</span>
+                            <span className="relative z-10">{primaryCTA}</span>
                             <ArrowRight
                                 size={18}
                                 className="relative z-10 group-hover:translate-x-1 transition-transform duration-200"
@@ -148,7 +157,7 @@ export function LabsCTA() {
                             className="group flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 text-gray-700 bg-white hover:border-violet-300 hover:text-violet-700 transition-all duration-300"
                         >
                             <MessageSquare size={20} className="group-hover:text-violet-600 transition-colors" />
-                            {LABS_CTA.secondaryCTA}
+                            {secondaryCTA}
                         </motion.button>
                     </motion.div>
 
@@ -162,6 +171,7 @@ export function LabsCTA() {
                     >
                         No pitches. No fluff. Just results.
                     </motion.p>
+
                 </motion.div>
             </div>
         </section>

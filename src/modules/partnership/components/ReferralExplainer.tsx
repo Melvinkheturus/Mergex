@@ -10,7 +10,15 @@ const STEP_ICONS = {
     '03': DollarSign,
 };
 
-export function ReferralExplainer() {
+interface ReferralExplainerProps {
+    content?: typeof REFERRAL_EXPLAINER;
+}
+
+export function ReferralExplainer({ content }: ReferralExplainerProps = {}) {
+    const data = content || REFERRAL_EXPLAINER;
+    const headline = data.headline || REFERRAL_EXPLAINER.headline;
+    const steps = data.steps?.length ? data.steps : REFERRAL_EXPLAINER.steps;
+    const commissionNote = data.commissionNote || REFERRAL_EXPLAINER.commissionNote;
     return (
         <section className="py-20 md:py-28 bg-white">
             <div className="max-w-6xl mx-auto px-6 md:px-12">
@@ -22,7 +30,7 @@ export function ReferralExplainer() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-4">
-                        {REFERRAL_EXPLAINER.headline}
+                        {headline}
                     </h2>
                     <p className="text-lg text-gray-600">
                         A simple, transparent process
@@ -31,8 +39,8 @@ export function ReferralExplainer() {
 
                 {/* Steps */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    {REFERRAL_EXPLAINER.steps.map((step, index) => {
-                        const Icon = STEP_ICONS[step.number as keyof typeof STEP_ICONS];
+                    {steps.map((step: any, index: number) => {
+                        const Icon = STEP_ICONS[step.number as keyof typeof STEP_ICONS] || Send;
                         return (
                             <motion.div
                                 key={step.number}
@@ -43,7 +51,7 @@ export function ReferralExplainer() {
                                 className="relative text-center"
                             >
                                 {/* Connector Line (hidden on last item) */}
-                                {index < REFERRAL_EXPLAINER.steps.length - 1 && (
+                                {index < steps.length - 1 && (
                                     <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-purple-300 to-transparent" />
                                 )}
 
@@ -76,7 +84,7 @@ export function ReferralExplainer() {
                 >
                     <p className="text-sm text-gray-700 leading-relaxed text-center">
                         <span className="font-semibold text-purple-900">Commission Transparency: </span>
-                        {REFERRAL_EXPLAINER.commissionNote}
+                        {commissionNote}
                     </p>
                 </motion.div>
             </div>

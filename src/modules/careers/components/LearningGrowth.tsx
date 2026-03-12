@@ -4,7 +4,16 @@ import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { LEARNING_GROWTH } from '../content/careers';
 
-export function LearningGrowth() {
+interface LearningGrowthProps {
+    content?: typeof LEARNING_GROWTH;
+}
+
+export function LearningGrowth({ content }: LearningGrowthProps = {}) {
+    const data = content || LEARNING_GROWTH;
+    const headline = data.headline || LEARNING_GROWTH.headline;
+    const subheadline = data.subheadline || LEARNING_GROWTH.subheadline;
+    const disclaimer = data.disclaimer || LEARNING_GROWTH.disclaimer;
+    const benefits = data.benefits?.length ? data.benefits : LEARNING_GROWTH.benefits;
     return (
         <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
             <div className="container mx-auto max-w-6xl px-6">
@@ -17,16 +26,16 @@ export function LearningGrowth() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-                        {LEARNING_GROWTH.headline}
+                        {headline}
                     </h2>
                     <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                        {LEARNING_GROWTH.subheadline}
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 {/* Benefits */}
                 <div className="mb-8 grid gap-6 md:grid-cols-2">
-                    {LEARNING_GROWTH.benefits.map((benefit, index) => (
+                    {benefits.map((benefit: any, index: number) => (
                         <motion.div
                             key={index}
                             className="rounded-xl border border-purple-200 bg-white/80 p-6 backdrop-blur-sm"
@@ -52,7 +61,7 @@ export function LearningGrowth() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                    <p className="text-sm font-medium text-gray-700">{LEARNING_GROWTH.disclaimer}</p>
+                    <p className="text-sm font-medium text-gray-700">{disclaimer}</p>
                 </motion.div>
             </div>
         </section>

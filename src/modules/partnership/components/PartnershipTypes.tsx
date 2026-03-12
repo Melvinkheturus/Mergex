@@ -10,10 +10,16 @@ const ICONS = {
 };
 
 interface PartnershipTypesProps {
+    content?: typeof PARTNERSHIP_TYPES;
+    typesHeadline?: string;
+    typesSubheadline?: string;
     onApplyClick?: (typeId: 'strategic' | 'referral') => void;
 }
 
-export function PartnershipTypes({ onApplyClick }: PartnershipTypesProps) {
+export function PartnershipTypes({ content, typesHeadline, typesSubheadline, onApplyClick }: PartnershipTypesProps) {
+    const types = content?.length ? content : PARTNERSHIP_TYPES;
+    const headline = typesHeadline || 'Partnership Models';
+    const subheadline = typesSubheadline || 'Choose the partnership model that aligns with your expertise and goals';
     return (
         <section id="partnership-types" className="py-20 md:py-28 bg-gradient-to-b from-purple-50/30 via-white to-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -25,23 +31,23 @@ export function PartnershipTypes({ onApplyClick }: PartnershipTypesProps) {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-4">
-                        Partnership Models
+                        {headline}
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Choose the partnership model that aligns with your expertise and goals
+                        {subheadline}
                     </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {PARTNERSHIP_TYPES.map((type, index) => {
-                        const Icon = ICONS[type.icon as keyof typeof ICONS];
+                    {types.map((type: any, index: number) => {
+                        const Icon = ICONS[(type.icon as keyof typeof ICONS)] || Building2;
                         const gradientClass = type.accentColor === 'violet'
                             ? 'from-violet-400 to-violet-900'
                             : 'from-purple-400 to-purple-900';
 
                         return (
                             <motion.div
-                                key={type.id}
+                                key={type.id || type.typeId || index}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -109,7 +115,7 @@ export function PartnershipTypes({ onApplyClick }: PartnershipTypesProps) {
 
                                 {/* CTA Button */}
                                 <button
-                                    onClick={() => onApplyClick?.(type.id)}
+                                    onClick={() => onApplyClick?.((type.id || type.typeId) as 'strategic' | 'referral')}
                                     className={`
                                         group/btn w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl
                                         bg-gradient-to-b ${gradientClass}
