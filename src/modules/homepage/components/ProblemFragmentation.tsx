@@ -53,7 +53,7 @@ export function ProblemFragmentation() {
     };
 
     return (
-        <section className="relative z-40 pt-4 md:pt-8 pb-24 md:pb-32 bg-white overflow-hidden">
+        <section className="relative z-40 pt-4 md:pt-8 pb-24 md:pb-32 bg-white overflow-hidden mt-[-12vh]">
             <motion.div
                 className="container mx-auto px-6 md:px-12"
                 variants={containerVariants}
@@ -67,7 +67,7 @@ export function ProblemFragmentation() {
                         <span
                             className="text-neutral-500 font-semibold tracking-wide uppercase text-sm mb-6 block"
                         >
-                            The Friction
+                            The Problem
                         </span>
                     </TextReveal>
 

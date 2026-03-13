@@ -216,8 +216,8 @@ export const PROBLEM_CONTEXT = {
 
 // Problem With Fragmentation Section
 export const PROBLEM_FRAGMENTATION = {
-    headline: 'The Friction of Scaling',
-    subheadline: 'As businesses grow, they often build a complex network of vendors, tools, and partners.',
+    headline: 'Growth Creates Complexity',
+    subheadline: 'As businesses grow, they accumulate vendors, tools, agencies, and disconnected workflows. What once worked for a small team becomes difficult to manage at scale.',
     problems: [
         {
             title: 'A Complex Ecosystem',

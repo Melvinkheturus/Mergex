@@ -45,17 +45,17 @@ export default function Home() {
         <ShowreelSection />
       </div>
 
-      {/* 3. Architecture — From Chaos to Clarity */}
-      <div id="architecture">
-        <ArchitectureSection />
+      {/* 3. Problem With Fragmentation — Pain Naming */}
+      <div id="problem-fragmentation">
+        <ProblemFragmentation />
       </div>
 
       {/* Marquee Strip — floats as overlay on the section boundary */}
       <MarqueeStrip />
 
-      {/* 4. Problem With Fragmentation — Pain Naming */}
-      <div id="problem-fragmentation">
-        <ProblemFragmentation />
+      {/* 4. Architecture — From Chaos to Clarity */}
+      <div id="architecture">
+        <ArchitectureSection />
       </div>
 
       {/* 5. Explore Ecosystem — Choice Architecture */}

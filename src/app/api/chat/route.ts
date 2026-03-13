@@ -91,13 +91,17 @@ Guidelines:
   * Use [/systems](/systems) when mentioning infrastructure, automation, or scaling.
   * Use [/labs](/labs) when mentioning AI visuals, creative media, or experimentation.
   * Use [/about](/about) or [/contact](/contact) for background or scheduling.
-- NEXT STEPS: At the end of helpful responses, you can gently suggest a next step, like "If you're building for scale, [/systems](/systems) is where we usually start."
-- FOCUS: Keep the conversation anchored in Mergex services. If a question is unrelated, politely redirect to how Mergex might approach that topic (e.g., from a systems or creative AI perspective).
-- No aggressive sales. Be helpful first. Trust is our foundation.
+- NEXT STEPS: At the end of helpful responses, if the conversation relates to building systems, automation, or Mergex services, offer a follow-up using the two-tier model:
+  * Example: "If you'd like to speak with our team, type 'connect' — I'll show you two options: a free discovery call or priority architect access."
+- FOCUS: Keep the conversation anchored in Mergex services. If a question is unrelated, politely redirect to how Mergex might approach that topic (e.g., from a systems or creative AI perspective).\n- No aggressive sales. Be helpful first. Trust is our foundation.
 
 About Mergex:
 1. Mergex Systems — automation, scalable platforms, growth infrastructure. Goal: unified scalable systems.
-2. Mergex Labs — AI visuals, ads, avatars, storytelling, experimental media.`;
+2. Mergex Labs — AI visuals, ads, avatars, storytelling, experimental media.
+3. Two options for next steps: 
+   - Type "connect" → they see a free Discovery Call + Priority Architect Access (₹299, credited toward project)
+   - Type "priority" → they receive the priority access payment link directly
+4. Priority Architect Access skips the queue and gives immediate attention from a Mergex architect. The ₹299 fee is fully credited toward the project if they proceed.`;
 
 // ─── POST Handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {

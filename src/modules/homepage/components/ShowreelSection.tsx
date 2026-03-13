@@ -177,6 +177,9 @@ export function ShowreelSection() {
                                 Modern <span className="italic" style={{ fontFamily: 'var(--font-playfair)' }}>Businesses.</span>
                             </span>
                         </h2>
+                        <p className="text-[10px] md:text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mt-6">
+                            Trusted by ambitious brands
+                        </p>
                     </div>
 
                     {/* Right Side Description */}

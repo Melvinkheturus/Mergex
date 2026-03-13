@@ -84,6 +84,16 @@ const GUIDED_QUESTIONS = [
     },
 ];
 
+const INTENT_WORDS = [
+    'build',
+    'automation',
+    'system',
+    'website',
+    'platform',
+    'pricing',
+    'project',
+];
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function createSession(): Session {
     return {
@@ -280,8 +290,63 @@ export default function AskMergexWidget() {
         const updated = [...messages, userMsg];
         setMessages(updated);
         setIsTyping(true);
+        let answer = '';
 
-        const answer = await callAPI(text);
+        // ── Priority Access trigger ──────────────────────────────────────────
+        if (text.toLowerCase() === 'priority') {
+            answer = `**Priority Architect Access — ₹299**
+
+You can unlock priority access here:
+
+[Unlock Priority Access →](https://rzp.io/l/mergex-priority)
+
+This gives you:
+- **Immediate attention** from a Mergex architect
+- **Skip the queue** — no waiting
+- **Direct review** of your project or system
+
+**₹299 is fully credited toward your project if we work together.**
+
+After payment, schedule your priority session at:
+[cal.com/mergex/priority](https://cal.com/mergex/priority)
+
+*We only accept a limited number of architecture projects each month.*`;
+
+        // ── Connect trigger → show two-tier offer ───────────────────────────
+        } else if (text.toLowerCase() === 'connect') {
+            answer = `Here are two ways to connect with our team:
+
+---
+
+**Discovery Call** — Free
+
+Schedule a call with our team. Ideal for most projects.
+
+[Schedule a Free Call →](https://cal.com/mergex/discovery)
+
+---
+
+**Priority Architect Access** — ₹299
+
+Skip the queue and get immediate attention from a Mergex architect. ₹299 is fully credited toward your project if we work together.
+
+Type **"priority"** and I'll send the access link.
+
+*We only accept a limited number of architecture projects each month.*`;
+
+        } else {
+            answer = await callAPI(text);
+
+            // Add auto-follow-up CTA if intent is detected
+            const hasIntent = INTENT_WORDS.some(word =>
+                text.toLowerCase().includes(word)
+            );
+
+            if (hasIntent && !answer.toLowerCase().includes('connect')) {
+                answer += '\n\nIf you\'d like to speak with our team, type **"connect"** — I\'ll show you a free discovery call and our Priority Architect Access option.';
+            }
+        }
+
         const aiMsg: Message = { id: `a-${Date.now()}`, role: 'assistant', content: answer };
         const final = [...updated, aiMsg];
         setMessages(final);

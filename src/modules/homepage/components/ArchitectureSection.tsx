@@ -27,7 +27,7 @@ export function ArchitectureSection() {
     return (
         <section 
             ref={sectionRef}
-            className="relative z-40 bg-white overflow-hidden pb-4 md:pb-8 mt-[-100vh]"
+            className="relative z-40 bg-white overflow-hidden pb-4 md:pb-8"
         >
             <motion.div style={{ opacity, y: contentY }}>
                 {/* ── TOP HERO: Big text + floating cards ───────────────────── */}

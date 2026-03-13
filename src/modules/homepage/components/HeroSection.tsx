@@ -124,7 +124,7 @@ export function HeroSection() {
                         <div className="hidden md:block max-w-xl text-left">
                             <TextReveal delay={0.6} className="mb-3">
                                 <p className="text-base md:text-xl text-black/95 leading-relaxed font-medium">
-                                    Mergex designs the architecture behind ambitious businesses integrating systems, AI, and growth into one engineered foundation.
+                                    Mergex engineers the systems behind modern businesses unifying strategy, software, AI, and growth into one scalable foundation.
                                 </p>
                             </TextReveal>
                             <TextReveal delay={0.7}>
