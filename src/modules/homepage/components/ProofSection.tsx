@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { PROOF_SIGNALS } from '../content';
 
 /**
@@ -11,20 +12,18 @@ export function ProofSection() {
     return (
         <section className="py-20 md:py-28 bg-gradient-to-b from-white to-purple-50/30">
             <div className="container mx-auto px-6 md:px-12">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
-                        {PROOF_SIGNALS.headline}
-                    </h2>
-                    <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
-                        {PROOF_SIGNALS.subheadline}
-                    </p>
-                </motion.div>
+                <div className="text-center mb-16">
+                    <TextReveal>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-4 text-foreground">
+                            {PROOF_SIGNALS.headline}
+                        </h2>
+                    </TextReveal>
+                    <TextReveal delay={0.1}>
+                        <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+                            {PROOF_SIGNALS.subheadline}
+                        </p>
+                    </TextReveal>
+                </div>
 
                 {/* Tech Stack Grid */}
                 <div className="text-center mb-8">
@@ -53,17 +52,13 @@ export function ProofSection() {
                 </div>
 
                 {/* Trust Statement */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="text-center max-w-3xl mx-auto"
-                >
-                    <p className="text-lg text-foreground-muted italic">
-                        {PROOF_SIGNALS.trustStatement}
-                    </p>
-                </motion.div>
+                <div className="text-center max-w-3xl mx-auto">
+                    <TextReveal delay={0.4}>
+                        <p className="text-lg text-foreground-muted italic">
+                            {PROOF_SIGNALS.trustStatement}
+                        </p>
+                    </TextReveal>
+                </div>
             </div>
         </section>
     );

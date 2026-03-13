@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 export function ImpactSection() {
     return (
@@ -10,19 +11,18 @@ export function ImpactSection() {
             <div className="container mx-auto px-6 md:px-12">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="max-w-2xl"
-                    >
-                        <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-800 mb-6">
-                            Impact
-                        </span>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-[#1A1A1A] leading-tight">
-                            Driving measurable <br /> impact.
-                        </h2>
-                    </motion.div>
+                    <div className="max-w-2xl">
+                        <TextReveal delay={0.1}>
+                            <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-800 mb-6">
+                                Impact
+                            </span>
+                        </TextReveal>
+                        <TextReveal delay={0.2} duration={1.6}>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-[#1A1A1A] leading-tight">
+                                Driving measurable <br /> impact.
+                            </h2>
+                        </TextReveal>
+                    </div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

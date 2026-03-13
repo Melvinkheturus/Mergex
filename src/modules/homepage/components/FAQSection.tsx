@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Mail, Sparkles } from 'lucide-react';
 import { AskMergex } from '@/modules/shared/components/AskMergex';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { PARENT_FAQ_DATA, SYSTEMS_FAQ_DATA } from '../content/faq';
 
 interface FAQSectionProps {
@@ -35,28 +36,28 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                     {/* Left Column - Hero Content */}
                     <div className="lg:col-span-5">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="-ml-4 md:-ml-8"
-                        >
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
-                                {FAQ_DATA.headline}
-                            </h2>
+                        <div className="-ml-4 md:-ml-8">
+                            <TextReveal>
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
+                                    {FAQ_DATA.headline}
+                                </h2>
+                            </TextReveal>
                             {(FAQ_DATA.subheadline || FAQ_DATA.subheadlineItalic) && (
-                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
-                                    {FAQ_DATA.subheadline}{' '}
-                                    <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
-                                        {FAQ_DATA.subheadlineItalic}
-                                    </span>
-                                </h3>
+                                <TextReveal delay={0.1}>
+                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                                        {FAQ_DATA.subheadline}{' '}
+                                        <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
+                                            {FAQ_DATA.subheadlineItalic}
+                                        </span>
+                                    </h3>
+                                </TextReveal>
                             )}
 
-                            <p className="mb-12 text-base md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
-                                {FAQ_DATA.description}
-                            </p>
+                            <TextReveal delay={0.2} className="mb-12">
+                                <p className="text-base md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
+                                    {FAQ_DATA.description}
+                                </p>
+                            </TextReveal>
 
                             {/* CTA Area */}
                             <div className="space-y-6">
@@ -118,7 +119,7 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                     />
                                 </div>
                             )}
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Right Column - FAQ Accordion */}
@@ -183,9 +184,17 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                                         {faq.answer}
                                                     </p>
                                                     <div className="mt-5 flex">
-                                                        <Link href={`/ask-mergex?q=${encodeURIComponent(faq.question)}`} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-100/80 text-violet-700 hover:bg-violet-200 hover:text-violet-800 transition-colors text-sm font-medium">
+                                                        <button 
+                                                            onClick={() => {
+                                                                const event = new CustomEvent('mergex-open-chat', {
+                                                                    detail: { message: faq.question }
+                                                                });
+                                                                window.dispatchEvent(event);
+                                                            }}
+                                                            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-100/80 text-violet-700 hover:bg-violet-200 hover:text-violet-800 transition-colors text-sm font-medium"
+                                                        >
                                                             Ask Mergex about this
-                                                        </Link>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </motion.div>

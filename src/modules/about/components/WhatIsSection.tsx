@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * WhatIsSection - Identity Definition
@@ -28,40 +29,34 @@ export function WhatIsSection() {
             >
                 CLARITY
             </motion.div>
-
+ 
             <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1200px] relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
                     
                     {/* Left: Headline & The Core Message */}
                     <div className="lg:col-span-12 xl:col-span-7">
-                        <motion.span
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="block text-violet-600 font-bold tracking-widest text-xs uppercase mb-6"
-                        >
-                            The Identity
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400 mb-8"
-                        >
-                            Mergex is a <br />
-                            <span className="italic font-medium" style={{ fontFamily: 'var(--font-playfair)' }}>Business Architecture Company.</span>
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.1 }}
-                            className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12 max-w-2xl"
-                        >
-                            We scale organizations by designing integrated systems powered by <span className="text-gray-900 font-medium">automation, AI workflows, and bespoke digital platforms.</span> 
-                        </motion.p>
+                        <TextReveal delay={0.1}>
+                            <span className="block text-violet-600 font-bold tracking-widest text-xs uppercase mb-6">
+                                The Identity
+                            </span>
+                        </TextReveal>
+                        <div className="max-w-4xl">
+                            <TextReveal delay={0.2} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400 mb-4">
+                                    Mergex is a
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.4} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400 mb-8">
+                                    <span className="italic font-medium" style={{ fontFamily: 'var(--font-playfair)' }}>Business Architecture Company.</span>
+                                </h2>
+                            </TextReveal>
+                        </div>
+                        <TextReveal delay={0.6} duration={1.2}>
+                            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12 max-w-2xl">
+                                We scale organizations by designing integrated systems powered by <span className="text-gray-900 font-medium">automation, AI workflows, and bespoke digital platforms.</span> 
+                            </p>
+                        </TextReveal>
 
                         {/* GEO Definition Block */}
                         <motion.div

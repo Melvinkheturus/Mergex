@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { LABS_HERO } from '../content/labs';
 import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 import { BlurVignette } from '@/components/ui/BlurVignette';
@@ -310,24 +311,26 @@ export function LabsHero() {
                         {/* ── Background Shadow Glow ── */}
                         {/* ── Background Shadow Glow Removed ── */}
 
-                        <div
-                            ref={eyebrowRef}
-                            className="mb-8 flex items-center justify-center gap-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                        >
-                            <p
-                                className="text-[10px] md:text-xs tracking-[0.3em] text-white/80 uppercase font-medium"
-                                style={{ fontFamily: 'var(--font-manrope)' }}
+                        <TextReveal delay={0.1}>
+                            <div
+                                ref={eyebrowRef}
+                                className="mb-8 flex items-center justify-center gap-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
                             >
-                                {LABS_HERO.eyebrow}
-                            </p>
-                            <span className="text-white/40 text-[10px] md:text-xs">|</span>
-                            <p
-                                className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-100 to-white"
-                                style={{ fontFamily: 'var(--font-manrope)' }}
-                            >
-                                {LABS_HERO.subEyebrow}
-                            </p>
-                        </div>
+                                <p
+                                    className="text-[10px] md:text-xs tracking-[0.3em] text-white/80 uppercase font-medium"
+                                    style={{ fontFamily: 'var(--font-manrope)' }}
+                                >
+                                    {LABS_HERO.eyebrow}
+                                </p>
+                                <span className="text-white/40 text-[10px] md:text-xs">|</span>
+                                <p
+                                    className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-100 to-white"
+                                    style={{ fontFamily: 'var(--font-manrope)' }}
+                                >
+                                    {LABS_HERO.subEyebrow}
+                                </p>
+                            </div>
+                        </TextReveal>
 
                         {/* Overflow hidden for the mask effect */}
                         <div className="overflow-hidden p-4 -m-4">
@@ -359,22 +362,18 @@ export function LabsHero() {
                     <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-8 md:gap-8">
 
                         {/* BOTTOM-LEFT: supporting tagline */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.6 }}
+                        <div
                             className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20 mt-8 md:mt-0 text-center md:text-left"
                         >
-                            {/* ── Background Shadow Glow ── */}
-                            {/* ── Background Shadow Glow Removed ── */}
-
-                            <p
-                                className="text-sm md:text-base text-white/70 leading-relaxed font-light"
-                                style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-                            >
-                                {LABS_HERO.supportingLine}
-                            </p>
-                        </motion.div>
+                            <TextReveal delay={0.6} duration={1.2}>
+                                <p
+                                    className="text-sm md:text-base text-white/70 leading-relaxed font-light"
+                                    style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+                                >
+                                    {LABS_HERO.supportingLine}
+                                </p>
+                            </TextReveal>
+                        </div>
 
                         {/* BOTTOM-RIGHT: keyword tags + CTA buttons */}
                         <motion.div
@@ -384,37 +383,38 @@ export function LabsHero() {
                             transition={{ duration: 0.9, delay: 0.75 }}
                             className="flex flex-col items-center md:items-end gap-5 md:gap-5 relative z-20 mt-6 md:mt-0"
                         >
-                            {/* ── Background Shadow Glow ── */}
-                            {/* ── Background Shadow Glow Removed ── */}
-
                             <div
                                 className="text-center md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
-                                <p>
-                                    {LABS_HERO.reinforcementLine.split('\n').map((line, i) => (
-                                        <span key={i} className="block">{line}</span>
-                                    ))}
-                                </p>
+                                <TextReveal delay={0.8}>
+                                    <p>
+                                        {LABS_HERO.reinforcementLine.split('\n').map((line, i) => (
+                                            <span key={i} className="block">{line}</span>
+                                        ))}
+                                    </p>
+                                </TextReveal>
                             </div>
 
                             {/* CTA Buttons — square with rounded corners, side by side */}
-                            <div className="flex flex-row justify-center md:justify-end gap-2 md:gap-3 pointer-events-auto w-full">
-                                <a
-                                    href={LABS_HERO.primaryCTA.href}
-                                    className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
-                                    style={{ fontFamily: 'var(--font-manrope)' }}
-                                >
-                                    {LABS_HERO.primaryCTA.text}
-                                </a>
-                                <a
-                                    href={LABS_HERO.secondaryCTA.href}
-                                    className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
-                                    style={{ fontFamily: 'var(--font-manrope)' }}
-                                >
-                                    {LABS_HERO.secondaryCTA.text}
-                                </a>
-                            </div>
+                            <TextReveal delay={1}>
+                                <div className="flex flex-row justify-center md:justify-end gap-2 md:gap-3 pointer-events-auto w-full">
+                                    <a
+                                        href={LABS_HERO.primaryCTA.href}
+                                        className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white text-gray-900 rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                                        style={{ fontFamily: 'var(--font-manrope)' }}
+                                    >
+                                        {LABS_HERO.primaryCTA.text}
+                                    </a>
+                                    <a
+                                        href={LABS_HERO.secondaryCTA.href}
+                                        className="inline-flex items-center justify-center px-3 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-lg font-semibold text-[10px] md:text-sm hover:bg-white/20 transition-all duration-300"
+                                        style={{ fontFamily: 'var(--font-manrope)' }}
+                                    >
+                                        {LABS_HERO.secondaryCTA.text}
+                                    </a>
+                                </div>
+                            </TextReveal>
                         </motion.div>
                     </div>
                 </div>

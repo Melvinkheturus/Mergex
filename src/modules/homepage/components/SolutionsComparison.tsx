@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { PROBLEMS, SOLUTIONS } from '../constants';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 export default function SolutionsComparison() {
     return (
@@ -11,9 +12,11 @@ export default function SolutionsComparison() {
                         <div className="absolute top-0 right-0 p-4 opacity-5">
                             <span className="material-symbols-outlined text-9xl">block</span>
                         </div>
-                        <h3 className="text-gray-500 font-bold uppercase tracking-wider text-sm mb-8">
-                            The Old Way
-                        </h3>
+                        <TextReveal>
+                            <h3 className="text-gray-500 font-bold uppercase tracking-wider text-sm mb-8">
+                                The Old Way
+                            </h3>
+                        </TextReveal>
                         <ul className="space-y-6">
                             {PROBLEMS.map((problem) => (
                                 <li key={problem.id} className="flex items-start gap-4">
@@ -36,9 +39,11 @@ export default function SolutionsComparison() {
                         <div className="absolute top-0 right-0 p-4 text-primary opacity-5">
                             <span className="material-symbols-outlined text-9xl">check_circle</span>
                         </div>
-                        <h3 className="text-primary font-bold uppercase tracking-wider text-sm mb-8">
-                            The Mergex Way
-                        </h3>
+                        <TextReveal>
+                            <h3 className="text-primary font-bold uppercase tracking-wider text-sm mb-8">
+                                The Mergex Way
+                            </h3>
+                        </TextReveal>
                         <ul className="space-y-6">
                             {SOLUTIONS.map((solution) => (
                                 <li key={solution.id} className="flex items-start gap-4">

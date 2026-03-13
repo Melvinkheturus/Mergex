@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * ProblemSection - Problem Reframing
@@ -30,30 +31,32 @@ export function ProblemSection() {
                     <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-violet-600/10 blur-[120px]" />
                     <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/5 blur-[120px]" />
                 </div>
-
+ 
                 <div className="relative z-10">
                     {/* Header Row */}
                     <div className="mb-16 md:mb-24">
-                        <motion.span 
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-500 mb-4"
-                        >
-                            Context / 01
-                        </motion.span>
-                        <motion.h2 
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight max-w-4xl"
-                            style={{ fontFamily: 'var(--font-playfair)' }}
-                        >
-                            Architecture is the <br />
-                            <span className="italic font-medium text-neutral-500">Silent Determinant</span> <br />
-                            of Scale.
-                        </motion.h2>
+                        <TextReveal delay={0.1}>
+                            <span className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-500 mb-4">
+                                Context / 01
+                            </span>
+                        </TextReveal>
+                        <div className="max-w-4xl">
+                            <TextReveal delay={0.2} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+                                    Architecture is the
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.4} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+                                    <span className="italic font-medium text-neutral-500">Silent Determinant</span>
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.6} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+                                    of Scale.
+                                </h2>
+                            </TextReveal>
+                        </div>
                     </div>
 
                     {/* Main Asymmetric Grid */}

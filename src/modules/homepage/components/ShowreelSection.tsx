@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SHOWREEL_CONTENT } from '../content';
+import { BlurVignette } from '@/components/ui/BlurVignette';
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -44,12 +45,11 @@ export function ShowreelSection() {
             const mm = gsap.matchMedia();
 
             // 1. SHOW and REEL slide in to join behind the video
-            // They start apart by 100vw, joining in the center.
             const textJoinRange = {
                 trigger: section,
-                start: 'top 40%',     // Start closing when the top of the section reaches near the center (40% from top)
-                end: 'top 0%',        // Finish closing when the top of the section hits the very top of the window
-                scrub: 1.5,           // Slower scrub value for smoother, slower join
+                start: 'top 40%',
+                end: 'top 0%',
+                scrub: 1.5,
             } as const;
 
             gsap.fromTo(bgShow,
@@ -74,42 +74,55 @@ export function ShowreelSection() {
 
             const expansionRange = {
                 trigger: section,
-                start: 'top -10%',    // Wait until scrolling past the top (where text finishes joining) to start expanding
+                start: 'top -10%',
                 end: 'bottom bottom',
-                scrub: 1.5,           // Slower expansion
+                scrub: 1.5,
             } as const;
 
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            const initialScaleX = 0.2;
-            const initialScaleY = (vw * initialScaleX) / vh;
+            mm.add({
+                isMobile: "(max-width: 768px)",
+                isDesktop: "(min-width: 769px)"
+            }, (context) => {
+                const { isMobile } = context.conditions as any;
+                
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+                const initialScaleX = 0.2;
+                const initialScaleY = (vw * initialScaleX) / vh;
 
-            gsap.fromTo(card,
-                { scaleX: initialScaleX, scaleY: initialScaleY, borderRadius: '24px' },
-                {
-                    scaleX: 1,
-                    scaleY: 1,
-                    borderRadius: '0px',
-                    ease: 'power1.inOut',
-                    scrollTrigger: {
-                        ...expansionRange,
-                        end: '55% bottom',
-                    },
-                }
-            );
+                // On mobile, we want a tighter, square-ish cinematic look that expands but doesn't fill
+                // We use scale to maintain a consistent aspect ratio around 16:9 or similar
+                const targetScaleY = isMobile ? 0.5 : 1; 
+                const targetScaleX = isMobile ? 0.9 : 1;
+                const targetBorderRadius = isMobile ? '16px' : '0px';
 
-            gsap.fromTo(inner,
-                { scaleX: 1 / initialScaleX, scaleY: 1 / initialScaleY },
-                {
-                    scaleX: 1,
-                    scaleY: 1,
-                    ease: 'power1.inOut',
-                    scrollTrigger: {
-                        ...expansionRange,
-                        end: '55% bottom',
-                    },
-                }
-            );
+                gsap.fromTo(card,
+                    { scaleX: initialScaleX, scaleY: initialScaleY, borderRadius: '24px' },
+                    {
+                        scaleX: targetScaleX,
+                        scaleY: targetScaleY,
+                        borderRadius: targetBorderRadius,
+                        ease: 'power1.inOut',
+                        scrollTrigger: {
+                            ...expansionRange,
+                            end: '55% bottom',
+                        },
+                    }
+                );
+
+                gsap.fromTo(inner,
+                    { scaleX: 1 / initialScaleX, scaleY: 1 / initialScaleY },
+                    {
+                        scaleX: 1 / targetScaleX,
+                        scaleY: 1 / targetScaleY,
+                        ease: 'power1.inOut',
+                        scrollTrigger: {
+                            ...expansionRange,
+                            end: '55% bottom',
+                        },
+                    }
+                );
+            });
 
             // 3. Fade out the background text as the video expands
             gsap.to(bgTitle, {
@@ -119,6 +132,19 @@ export function ShowreelSection() {
                     trigger: section,
                     start: '25% top', // Start fading out as video really gets bigger
                     end: '50% bottom',
+                    scrub: true,
+                }
+            });
+
+            // 4. Final Parallax Exit — as architecture section enters
+            gsap.to(cardRef.current, {
+                y: -150,
+                opacity: 0.9,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "bottom bottom-=10%", // When the section bottom starts entering the view
+                    end: "bottom bottom",
                     scrub: true,
                 }
             });
@@ -135,7 +161,7 @@ export function ShowreelSection() {
     return (
         <>
             {/* ── Pre-Showreel Editorial Header ── */}
-            <section className="w-full bg-white px-6 md:px-12 pt-12 pb-2 md:pt-20 md:pb-4">
+            <section className="w-full bg-white px-6 md:px-12 pt-4 pb-0 md:pt-20 md:pb-4">
                 <div className="max-w-[1300px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                     {/* Left SideTitle */}
                     <div>
@@ -143,10 +169,13 @@ export function ShowreelSection() {
                             Introducing Mergex
                         </p>
                         <h2
-                            className="text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 tracking-tight"
+                            className="text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 tracking-tight leading-[1.3] md:leading-[1.4]"
                             style={{ fontFamily: 'var(--font-manrope)' }}
                         >
-                            The Architecture Behind Modern Businesses.
+                            The Architecture Behind <br className="hidden md:block" />
+                            <span className="block mt-1 md:mt-1">
+                                Modern <span className="italic" style={{ fontFamily: 'var(--font-playfair)' }}>Businesses.</span>
+                            </span>
                         </h2>
                     </div>
 
@@ -157,14 +186,49 @@ export function ShowreelSection() {
                         </p>
                     </div>
                 </div>
+                {/* Brand Logos - Marquee Loop */}
+                <div className="w-full mt-4 md:mt-24 overflow-hidden py-5 md:py-8 border-y border-neutral-100 relative">
+                    <div className="flex w-max animate-marquee space-x-16 md:space-x-24 items-center opacity-40 grayscale contrast-125 transition-opacity hover:opacity-100">
+                        {/* First Set */}
+                        <div className="flex space-x-16 md:space-x-24 items-center">
+                            <img src="/logo/brand logo/Cinn Astra.png" alt="Cinn Astra" className="h-6 md:h-9 w-auto object-contain" />
+                            <img src="/logo/brand logo/MicandMac.png" alt="MicandMac" className="h-8 md:h-12 w-auto object-contain" />
+                            <img src="/logo/brand logo/cedarelevators.png" alt="Cedar Elevators" className="h-8 md:h-12 w-auto object-contain" />
+                        </div>
+                        {/* Second Set (Loop) */}
+                        <div className="flex space-x-16 md:space-x-24 items-center" aria-hidden="true">
+                            <img src="/logo/brand logo/Cinn Astra.png" alt="Cinn Astra" className="h-6 md:h-9 w-auto object-contain" />
+                            <img src="/logo/brand logo/MicandMac.png" alt="MicandMac" className="h-8 md:h-12 w-auto object-contain" />
+                            <img src="/logo/brand logo/cedarelevators.png" alt="Cedar Elevators" className="h-8 md:h-12 w-auto object-contain" />
+                        </div>
+                        {/* Third Set (Loop) */}
+                        <div className="flex space-x-16 md:space-x-24 items-center" aria-hidden="true">
+                            <img src="/logo/brand logo/Cinn Astra.png" alt="Cinn Astra" className="h-6 md:h-9 w-auto object-contain" />
+                            <img src="/logo/brand logo/MicandMac.png" alt="MicandMac" className="h-8 md:h-12 w-auto object-contain" />
+                            <img src="/logo/brand logo/cedarelevators.png" alt="Cedar Elevators" className="h-8 md:h-12 w-auto object-contain" />
+                        </div>
+                    </div>
+                </div>
+
+                <style jsx>{`
+                    @keyframes marquee {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-33.333%); }
+                    }
+                    .animate-marquee {
+                        animation: marquee 30s linear infinite;
+                        display: flex;
+                        white-space: nowrap;
+                    }
+                `}</style>
             </section>
 
             <section
                 ref={wrapperRef}
                 className="relative bg-white"
-                style={{ height: '400vh' }}
+                style={{ height: '280vh' }}
             >
-                <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+                <div className="sticky top-[15vh] md:top-0 h-[60vh] md:h-screen w-full overflow-hidden flex items-center justify-center">
 
                     {/* Background Title - Sits behind the card initially */}
                     <div
@@ -174,7 +238,7 @@ export function ShowreelSection() {
                         <span
                             className="font-medium uppercase text-neutral-950 tracking-[-0.02em] text-center flex items-center justify-center"
                             style={{
-                                fontSize: 'clamp(4rem, 11vw, 12rem)', // Reduced to fit "ORCHESTRATION"
+                                fontSize: 'clamp(3rem, 9vw, 12rem)', // Reduced for mobile to prevent cropping
                                 fontFamily: '"Outfit", system-ui, sans-serif',
                                 lineHeight: 0.9,
                             }}
@@ -195,15 +259,23 @@ export function ShowreelSection() {
                             className="absolute inset-0 will-change-transform"
                             style={{ transformOrigin: 'center center' }}
                         >
-                            <video
-                                src={SHOWREEL_CONTENT.videoSrc}
-                                poster={SHOWREEL_CONTENT.videoPoster}
-                                className="absolute inset-0 w-full h-full object-cover"
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                            />
+                            <BlurVignette
+                                radius="0px"
+                                inset="0px"
+                                transitionLength="150px"
+                                blur="12px"
+                                className="w-full h-full"
+                            >
+                                <video
+                                    src={SHOWREEL_CONTENT.videoSrc}
+                                    poster={SHOWREEL_CONTENT.videoPoster}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                />
+                            </BlurVignette>
                         </div>
                     </div>
 

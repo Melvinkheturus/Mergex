@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { WHAT_WE_SOLVE } from '../content/systems';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import Link from 'next/link';
 import { Playfair_Display } from 'next/font/google';
 
@@ -74,34 +75,29 @@ export function WhatWeSolve() {
                 {/* Hero Header */}
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end lg:gap-32 gap-8 mb-14">
                     {/* Left: Headline */}
-                    <motion.div
-                        variants={headerItemVariants}
-                        className="max-w-2xl lg:-translate-x-6"
-                    >
-                        <motion.span
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="inline-block px-3 py-1 bg-gray-100 rounded-full text-[10px] md:text-xs font-medium text-gray-800 mb-6 uppercase tracking-wider"
-                        >
-                            What is Mergex Systems?
-                        </motion.span>
-                        <h2
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1]"
-                            style={{ fontFamily: 'var(--font-manrope)' }}
-                        >
-                            <span className="font-clash">The Revenue</span> <span className={`${playfair.className} italic font-normal`}>Architecture</span> <span className="font-clash">Engine of Mergex.</span>
-                        </h2>
-                    </motion.div>
+                    <div className="max-w-2xl lg:-translate-x-6">
+                        <TextReveal>
+                            <span
+                                className="inline-block px-3 py-1 bg-gray-100 rounded-full text-[10px] md:text-xs font-medium text-gray-800 mb-6 uppercase tracking-wider"
+                            >
+                                What is Mergex Systems?
+                            </span>
+                        </TextReveal>
+                        <TextReveal delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1]"
+                                style={{ fontFamily: 'var(--font-manrope)' }}
+                            >
+                                <span className="font-clash">The Revenue</span> <span className={`${playfair.className} italic font-normal`}>Architecture</span> <span className="font-clash">Engine of Mergex.</span>
+                            </h2>
+                        </TextReveal>
+                    </div>
 
                     {/* Right: Subheadline + CTA */}
-                    <motion.div
-                        variants={headerItemVariants}
-                        className="max-w-4xl flex flex-col gap-6 lg:translate-x-6"
-                    >
-                        <div className="text-sm md:text-base text-[#444444] leading-relaxed max-w-4xl tracking-[0.002em]">
+                    <div className="max-w-4xl flex flex-col gap-6 lg:translate-x-6">
+                        <TextReveal delay={0.2} className="text-sm md:text-base text-[#444444] leading-relaxed max-w-4xl tracking-[0.002em]">
                             <p>{WHAT_WE_SOLVE.subheadline}</p>
-                        </div>
+                        </TextReveal>
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.98 }}
@@ -113,7 +109,7 @@ export function WhatWeSolve() {
                                 {WHAT_WE_SOLVE.primaryCTA}
                             </Link>
                         </motion.div>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* 4-Card Bento Grid */}

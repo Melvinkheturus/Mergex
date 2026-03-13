@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { TextReveal } from "@/modules/shared/components/TextReveal";
 
 export default function ContactInfo() {
     return (
@@ -11,9 +12,11 @@ export default function ContactInfo() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-full card p-8 sm:p-10 border border-border shadow-sm flex flex-col gap-8 bg-white"
         >
-            <h3 className="text-xl font-display font-medium text-foreground tracking-tight">
-                Other Ways to Reach Us
-            </h3>
+            <TextReveal>
+                <h3 className="text-xl font-display font-medium text-foreground tracking-tight">
+                    Other Ways to Reach Us
+                </h3>
+            </TextReveal>
 
             <div className="flex flex-col gap-6">
                 {/* Email */}
@@ -58,7 +61,9 @@ export default function ContactInfo() {
 
             {/* Expectation / Trust Section */}
             <div className="mt-4 pt-6 border-t border-border/60">
-                <h4 className="text-sm font-medium text-foreground mb-4">What Happens Next?</h4>
+                <TextReveal delay={0.2}>
+                    <h4 className="text-sm font-medium text-foreground mb-4">What Happens Next?</h4>
+                </TextReveal>
                 <ol className="relative border-l border-border/60 ml-3 space-y-5">
                     <li className="mb-0 ml-6">
                         <span className="absolute flex items-center justify-center w-6 h-6 bg-background rounded-full -left-3 ring-4 ring-white border border-border text-xs font-medium">1</span>

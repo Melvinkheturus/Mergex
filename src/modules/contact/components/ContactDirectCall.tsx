@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { TextReveal } from "@/modules/shared/components/TextReveal";
 
 export default function ContactDirectCall() {
     return (
@@ -15,12 +16,16 @@ export default function ContactDirectCall() {
 
             <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-6">
                 <div className="space-y-3">
-                    <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground tracking-tight">
-                        Prefer to Skip the Form?
-                    </h2>
-                    <p className="text-lg md:text-xl text-muted-foreground">
-                        Book a Call Directly.
-                    </p>
+                    <TextReveal>
+                        <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground tracking-tight">
+                            Prefer to Skip the Form?
+                        </h2>
+                    </TextReveal>
+                    <TextReveal delay={0.1}>
+                        <p className="text-lg md:text-xl text-muted-foreground">
+                            Book a Call Directly.
+                        </p>
+                    </TextReveal>
                 </div>
 
                 <a
@@ -34,9 +39,11 @@ export default function ContactDirectCall() {
                     <div className="absolute inset-0 z-0 bg-white/20 opacity-0 transition-opacity group-hover:opacity-100 mix-blend-overlay"></div>
                 </a>
 
-                <p className="text-sm text-muted-foreground mt-2">
-                    Choose a time that works for you and we&apos;ll connect.
-                </p>
+                <TextReveal delay={0.5}>
+                    <p className="text-sm text-muted-foreground mt-2">
+                        Choose a time that works for you and we&apos;ll connect.
+                    </p>
+                </TextReveal>
             </div>
         </motion.div>
     );

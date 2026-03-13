@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Plus, Minus, Sparkles } from 'lucide-react';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -59,24 +60,25 @@ export function SystemsFAQ() {
             <div className="container mx-auto px-6 md:px-12">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="mb-12"
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A1A1A]"
-                            style={{ fontFamily: 'var(--font-geist-sans)' }}
-                        >
-                            FAQ
-                        </h2>
-                        <p className="text-lg text-[#666666]">
-                            Most Common Questions
-                        </p>
-                        <p className="text-sm text-[#999999] mt-1">
-                            We compiled these are the FAQ all the answers
-                        </p>
-                    </motion.div>
+                    <div className="mb-12">
+                        <TextReveal>
+                            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A1A1A]"
+                                style={{ fontFamily: 'var(--font-geist-sans)' }}
+                            >
+                                FAQ
+                            </h2>
+                        </TextReveal>
+                        <TextReveal delay={0.1}>
+                            <p className="text-lg text-[#666666]">
+                                Most Common Questions
+                            </p>
+                        </TextReveal>
+                        <TextReveal delay={0.2}>
+                            <p className="text-sm text-[#999999] mt-1">
+                                We compiled these are the FAQ all the answers
+                            </p>
+                        </TextReveal>
+                    </div>
 
                     {/* FAQ List */}
                     <div className="space-y-4">

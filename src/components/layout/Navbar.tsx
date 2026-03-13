@@ -290,7 +290,7 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                     <Link
                         href="/systems"
                         onClick={closeMenu}
-                        className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group"
+                        className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-all shadow-md group w-max"
                     >
                         Explore Systems <ArrowUpRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                     </Link>
@@ -312,41 +312,41 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
             >
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
                     <ServiceCard
-                        icon={<Palette className="w-6 h-6" />}
-                        title="Design & Brand Systems"
-                        description="Design people trust and remember"
-                        tags={['UI/UX design', 'Brand identity']}
-                        href="/services/design"
+                        icon={<Code2 className="w-6 h-6" />}
+                        title="Digital Architecture"
+                        description="Design the structure behind scalable digital products."
+                        tags={['Product Strategy', 'UX Architecture', 'System Mapping']}
+                        href="/systems#architecture"
                         closeMenu={closeMenu}
                     />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
                     <ServiceCard
                         icon={<Layout className="w-6 h-6" />}
-                        title="Web & Digital Experiences"
-                        description="Websites that do more than exist"
-                        tags={['Business websites', 'Web platforms']}
-                        href="/services/web"
-                        closeMenu={closeMenu}
-                    />
-                </motion.div>
-                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
-                    <ServiceCard
-                        icon={<Rocket className="w-6 h-6" />}
-                        title="Product & Platform Building"
-                        description="Turn ideas into real products"
-                        tags={['MVP development', 'SaaS & Mobile']}
-                        href="/services/mvp"
+                        title="Infrastructure"
+                        description="Production-ready platforms engineered for performance and scale."
+                        tags={['Web Platforms', 'Custom Software', 'Technical Systems']}
+                        href="/systems#infrastructure"
                         closeMenu={closeMenu}
                     />
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
                     <ServiceCard
                         icon={<Sparkles className="w-6 h-6" />}
-                        title="Growth & Automation Systems"
-                        description="Systems that support growth"
-                        tags={['AI automation', 'Digital marketing']}
-                        href="/services/growth"
+                        title="Automation"
+                        description="AI and workflow automation that removes manual work."
+                        tags={['AI Workflows', 'System Integrations', 'Process Automation']}
+                        href="/systems#automation"
+                        closeMenu={closeMenu}
+                    />
+                </motion.div>
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-full">
+                    <ServiceCard
+                        icon={<Rocket className="w-6 h-6" />}
+                        title="Growth Systems"
+                        description="Marketing and data systems designed to compound growth."
+                        tags={['Marketing Infrastructure', 'Analytics', 'Revenue Systems']}
+                        href="/systems#growth"
                         closeMenu={closeMenu}
                     />
                 </motion.div>
@@ -376,13 +376,13 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                     </Link>
                 </div>
 
-                {/* Image at bottom */}
-                <div className="absolute bottom-[-5%] right-[-10%] w-[120%] h-[120%] translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none opacity-50 md:opacity-100">
+                {/* Image at bottom only */}
+                <div className="absolute bottom-0 -left-8 -right-8 h-[90%] z-[5] opacity-100 transition-all duration-700 pointer-events-none">
                     <Image
-                        src="/assets/mockups/cedarwbg.png"
-                        alt="Cedar Project Mockup"
+                        src="/background/parent/cedarwbg.png"
+                        alt="Background"
                         fill
-                        className="object-contain object-bottom"
+                        className="object-contain object-bottom transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 400px"
                     />
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { TextReveal } from "@/modules/shared/components/TextReveal";
 
 export default function ContactHero() {
     const containerVariants = {
@@ -30,20 +31,22 @@ export default function ContactHero() {
             initial="hidden"
             animate="visible"
         >
-            <motion.h1
-                variants={itemVariants}
-                className="text-4xl md:text-5xl lg:text-6xl font-display font-medium leading-tight text-foreground tracking-tight"
-            >
-                Let&apos;s Build Something <br className="hidden md:block" />
-                <span className="text-muted">That Scales.</span>
-            </motion.h1>
+            <TextReveal delay={0.1} duration={1.6}>
+                <h1
+                    className="text-4xl md:text-5xl lg:text-6xl font-display font-medium leading-tight text-foreground tracking-tight"
+                >
+                    Let&apos;s Build Something <br className="hidden md:block" />
+                    <span className="text-muted">That Scales.</span>
+                </h1>
+            </TextReveal>
 
-            <motion.p
-                variants={itemVariants}
-                className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed"
-            >
-                Tell us about your project, challenge, or idea. If there&apos;s a system to build, we&apos;ll help architect it.
-            </motion.p>
+            <TextReveal delay={0.3} duration={1.2}>
+                <p
+                    className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed"
+                >
+                    Tell us about your project, challenge, or idea. If there&apos;s a system to build, we&apos;ll help architect it.
+                </p>
+            </TextReveal>
 
             <motion.div
                 variants={itemVariants}

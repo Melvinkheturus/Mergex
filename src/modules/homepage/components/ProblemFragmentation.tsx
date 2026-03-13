@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { PROBLEM_FRAGMENTATION } from '../content';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Playfair_Display } from 'next/font/google';
@@ -52,7 +53,7 @@ export function ProblemFragmentation() {
     };
 
     return (
-        <section className="relative z-40 pt-12 md:pt-16 pb-24 md:pb-32 bg-white overflow-hidden">
+        <section className="relative z-40 pt-4 md:pt-8 pb-24 md:pb-32 bg-white overflow-hidden">
             <motion.div
                 className="container mx-auto px-6 md:px-12"
                 variants={containerVariants}
@@ -62,27 +63,30 @@ export function ProblemFragmentation() {
             >
                 {/* ── Header ── */}
                 <div className="mb-14">
-                    <motion.span
-                        variants={headerItemVariants}
-                        className="text-neutral-500 font-semibold tracking-wide uppercase text-sm mb-6 block"
-                    >
-                        The Friction
-                    </motion.span>
+                    <TextReveal>
+                        <span
+                            className="text-neutral-500 font-semibold tracking-wide uppercase text-sm mb-6 block"
+                        >
+                            The Friction
+                        </span>
+                    </TextReveal>
 
                     <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-                        <motion.h2
-                            variants={headerItemVariants}
-                            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-[1.1] lg:w-1/2 flex-shrink-0"
-                            style={{ fontFamily: 'var(--font-manrope)' }}
-                        >
-                            {PROBLEM_FRAGMENTATION.headline}
-                        </motion.h2>
-                        <motion.p
-                            variants={headerItemVariants}
-                            className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light lg:w-1/2 lg:pt-2"
-                        >
-                            {PROBLEM_FRAGMENTATION.subheadline}
-                        </motion.p>
+                        <TextReveal delay={0.1} className="lg:w-1/2 flex-shrink-0">
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-[1.1]"
+                                style={{ fontFamily: 'var(--font-manrope)' }}
+                            >
+                                {PROBLEM_FRAGMENTATION.headline}
+                            </h2>
+                        </TextReveal>
+                        <TextReveal delay={0.2} className="lg:w-1/2 lg:pt-2">
+                            <p
+                                className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light"
+                            >
+                                {PROBLEM_FRAGMENTATION.subheadline}
+                            </p>
+                        </TextReveal>
                     </div>
                 </div>
 
@@ -292,16 +296,13 @@ export function ProblemFragmentation() {
                     }}
                 />
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-20 text-center max-w-3xl mx-auto"
-                >
-                    <p className={`text-2xl md:text-3xl font-medium text-neutral-900 leading-relaxed italic ${playfair.className}`}>
-                        {PROBLEM_FRAGMENTATION.closingStatement}
-                    </p>
-                </motion.div>
+                <div className="mt-20 text-center max-w-3xl mx-auto">
+                    <TextReveal>
+                        <p className={`text-2xl md:text-3xl font-medium text-neutral-900 leading-relaxed italic ${playfair.className}`}>
+                            {PROBLEM_FRAGMENTATION.closingStatement}
+                        </p>
+                    </TextReveal>
+                </div>
             </motion.div>
         </section>
     );

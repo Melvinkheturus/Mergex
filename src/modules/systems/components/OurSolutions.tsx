@@ -35,7 +35,9 @@ export function OurSolutions() {
     useGSAP(
         () => {
             OUR_SOLUTIONS.pillars.forEach((_, index) => {
-                const card = document.getElementById(`solution-item-${index}`);
+                const ids = ['architecture', 'infrastructure', 'automation', 'growth'];
+                const id = ids[index] || `solution-item-${index}`;
+                const card = document.getElementById(id);
                 if (!card) return;
 
                 // ScrollSpy — update active nav item
@@ -91,7 +93,9 @@ export function OurSolutions() {
 
     // Scroll via Lenis so smooth-scroll stays consistent
     const scrollToItem = (index: number) => {
-        const target = document.getElementById(`solution-item-${index}`);
+        const ids = ['architecture', 'infrastructure', 'automation', 'growth'];
+        const id = ids[index] || `solution-item-${index}`;
+        const target = document.getElementById(id);
         if (!target) return;
         const lenis = (window as { lenis?: { scrollTo: (el: HTMLElement, opts: { offset: number; duration: number }) => void } }).lenis;
         if (lenis) {
@@ -147,7 +151,7 @@ export function OurSolutions() {
                     {OUR_SOLUTIONS.pillars.map((pillar, index) => (
                         <div
                             key={index}
-                            id={`solution-item-${index}`}
+                            id={index === 0 ? 'architecture' : index === 1 ? 'infrastructure' : index === 2 ? 'automation' : index === 3 ? 'growth' : `solution-item-${index}`}
                             className="relative min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
                         >
                             {/* ── IMAGE LAYER (z-0) ── */}

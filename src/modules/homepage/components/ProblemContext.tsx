@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PROBLEM_CONTEXT } from '../content';
 import { Users, Clock, Brain, Link as LinkIcon, ArrowRight } from 'lucide-react';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * ProblemContext - Why We Exist
@@ -28,34 +29,23 @@ export function ProblemContext() {
             <div className="container mx-auto px-6 md:px-12 relative z-10">
                 {/* 1. Header */}
                 <div className="mb-16">
-                    <motion.span
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-purple-600 font-semibold tracking-wide uppercase text-sm mb-6 block"
-                    >
-                        Challenge Overview
-                    </motion.span>
+                    <TextReveal>
+                        <span className="text-purple-600 font-semibold tracking-wide uppercase text-sm mb-6 block">
+                            Challenge Overview
+                        </span>
+                    </TextReveal>
 
                     <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1] lg:w-1/2 flex-shrink-0"
-                        >
-                            {PROBLEM_CONTEXT.headline}
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light lg:w-1/2 lg:pt-2"
-                        >
-                            {PROBLEM_CONTEXT.subheadline}
-                        </motion.p>
+                        <TextReveal delay={0.1} className="lg:w-1/2 flex-shrink-0">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1]">
+                                {PROBLEM_CONTEXT.headline}
+                            </h2>
+                        </TextReveal>
+                        <TextReveal delay={0.2} className="lg:w-1/2 lg:pt-2">
+                            <p className="text-lg md:text-xl text-neutral-500 leading-relaxed font-light">
+                                {PROBLEM_CONTEXT.subheadline}
+                            </p>
+                        </TextReveal>
                     </div>
                 </div>
 

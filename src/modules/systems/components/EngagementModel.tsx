@@ -1,6 +1,7 @@
 'use client';
 
 import { ENGAGEMENT_MODEL } from '../content/systems';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * EngagementModel - Premium Pricing Cards
@@ -13,23 +14,30 @@ export function EngagementModel() {
         <section className="relative py-24 lg:py-32 bg-slate-50/50 overflow-hidden">
             <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-7xl">
                 {/* Header */}
-                <div className="text-center mb-16 lg:mb-20 animate-fadeIn">
+                <div className="text-center mb-16 lg:mb-20">
                     {/* Eyebrow */}
-                    <div className="flex items-center justify-center gap-3 mb-6">
-                        <span className="text-gray-500 font-semibold text-xs uppercase tracking-[0.2em]"
-                            style={{ fontFamily: "var(--font-manrope)" }}>
-                            Pricing Models
-                        </span>
-                    </div>
+                    <TextReveal delay={0.1}>
+                        <div className="flex items-center justify-center gap-3 mb-6">
+                            <span className="text-gray-500 font-semibold text-xs uppercase tracking-[0.2em]"
+                                style={{ fontFamily: "var(--font-manrope)" }}>
+                                Pricing Models
+                            </span>
+                        </div>
+                    </TextReveal>
 
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
-                        style={{ fontFamily: "var(--font-manrope)" }}>
-                        {ENGAGEMENT_MODEL.headline}
-                    </h2>
-                    <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-                        style={{ fontFamily: "var(--font-manrope)" }}>
-                        {ENGAGEMENT_MODEL.subheadline}
-                    </p>
+                    <TextReveal delay={0.2} duration={1.6}>
+                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
+                            style={{ fontFamily: "var(--font-manrope)" }}>
+                            {ENGAGEMENT_MODEL.headline}
+                        </h2>
+                    </TextReveal>
+                    
+                    <TextReveal delay={0.4} duration={1.2}>
+                        <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                            style={{ fontFamily: "var(--font-manrope)" }}>
+                            {ENGAGEMENT_MODEL.subheadline}
+                        </p>
+                    </TextReveal>
                 </div>
 
                 {/* Pricing Cards Grid */}

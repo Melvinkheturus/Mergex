@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowUpRight, Network, Scissors, Cpu, ArrowRight } from 'lucide-react'; // Combined and fixed lucide-react imports
 import Link from 'next/link'; // Added for potential use in new sections
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * PhilosophySection - Thinking Frameworks
@@ -30,43 +31,37 @@ export function PhilosophySection() {
             >
                 PHILOSOPHY
             </motion.div>
-
+ 
             <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] relative z-10">
                 
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 md:mb-32">
                     <div className="max-w-3xl">
-                        <motion.span
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="block text-violet-600 font-bold tracking-widest text-xs uppercase mb-6"
-                        >
-                            The Thinking
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl lg:text-8xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400"
-                        >
-                            Design for <br />
-                            <span className="italic font-medium" style={{ fontFamily: 'var(--font-playfair)' }}>Systemic Scale.</span>
-                        </motion.h2>
+                        <TextReveal delay={0.1}>
+                            <span className="block text-violet-600 font-bold tracking-widest text-xs uppercase mb-6">
+                                The Thinking
+                            </span>
+                        </TextReveal>
+                        <div className="max-w-4xl">
+                            <TextReveal delay={0.2} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl lg:text-8xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400">
+                                    Design for
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.4} duration={1.6}>
+                                <h2 className="text-4xl md:text-6xl lg:text-8xl font-semibold leading-[1.05] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 via-blue-600 to-indigo-400">
+                                    <span className="italic font-medium" style={{ fontFamily: 'var(--font-playfair)' }}>Systemic Scale.</span>
+                                </h2>
+                            </TextReveal>
+                        </div>
                     </div>
                     
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="max-w-sm"
-                    >
-                        <p className="text-gray-500 text-xl leading-relaxed lg:text-right">
-                            The fusion of architecture, engineering, and strategy to build resilient, future-ready business systems.
-                        </p>
-                    </motion.div>
+                    <div className="max-w-sm">
+                        <TextReveal delay={0.6} duration={1.2}>
+                            <p className="text-gray-500 text-xl leading-relaxed lg:text-right">
+                                The fusion of architecture, engineering, and strategy to build resilient, future-ready business systems.
+                            </p>
+                        </TextReveal>
+                    </div>
                 </div>
 
                 {/* Principles Grid */}

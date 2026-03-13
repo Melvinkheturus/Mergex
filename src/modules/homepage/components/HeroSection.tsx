@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 
 const ImageRipple = dynamic(() => import('@/components/ui/image-ripple'), { ssr: false });
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -32,7 +33,22 @@ export function HeroSection() {
             {/* Background Images */}
             <div className="absolute inset-0 z-0">
                 {/* Desktop: Image Ripple Effect */}
-                <div className="hidden md:block w-full h-full">
+                {/* Desktop Background Layer (Immediate Load) */}
+                <div className="hidden md:block w-full h-full absolute inset-0">
+                    <Image
+                        src={CLOUDINARY_ASSETS.parentHeroDesktop}
+                        alt="Hero background"
+                        fill
+                        className="object-cover"
+                        priority
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "/background/parent/hero/parent-hero.jpeg";
+                        }}
+                    />
+                </div>
+
+                {/* Desktop: Interactive Layer (Loads after hydration) */}
+                <div className="hidden md:block w-full h-full absolute inset-0 z-[1]">
                     <ImageRipple />
                 </div>
 
@@ -63,38 +79,40 @@ export function HeroSection() {
 
 
             {/* Typography Content Layer - fills full viewport height */}
-            <div className="relative z-[4] h-screen flex flex-col">
+            <div className="relative z-[4] h-[100dvh] flex flex-col">
                 {/* Center Headline Section */}
                 <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px] flex-1 flex items-center justify-center">
                     <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto pt-12 md:pt-20 -mt-64 md:-mt-24">
                         {/* Tagline */}
-                        <div className="mb-6">
-                            <span className="text-[10px] md:text-xs font-medium text-black/50 uppercase tracking-[0.3em]">
+                        <TextReveal delay={0.1} duration={1}>
+                            <span className="text-[10px] md:text-xs font-medium text-black/50 uppercase tracking-[0.3em] block mb-4 md:mb-6">
                                 Clarity from Chaos • Mergex
                             </span>
-                        </div>
+                        </TextReveal>
 
                         {/* Headline */}
                         <h1 className="leading-[0.95] tracking-tight">
                             {/* Line 1: Scale Is Not Luck */}
-                            <div className="mb-1 md:mb-2">
+                            <TextReveal delay={0.2}>
                                 <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black">
                                     Scale Is Not{' '}
                                 </span>
                                 <span className={`${playfair.className} font-normal text-[clamp(2rem,6vw,5rem)] text-black italic`}>
                                     Luck.
                                 </span>
-                            </div>
+                            </TextReveal>
 
                             {/* Line 2: It's Structure */}
-                            <div className="mb-1 md:mb-2 flex items-center justify-center flex-wrap">
-                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black mr-2">
-                                    It’s
-                                </span>
-                                <span className="font-semibold text-[clamp(2rem,6vw,5rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent inline-block">
-                                    Structure.
-                                </span>
-                            </div>
+                            <TextReveal delay={0.4} className="mt-1 md:mt-2">
+                                <div className="flex items-center justify-center flex-wrap">
+                                    <span className="font-semibold text-[clamp(2rem,6vw,5rem)] text-black mr-2">
+                                        It’s
+                                    </span>
+                                    <span className="font-semibold text-[clamp(2rem,6vw,5rem)] bg-gradient-to-b from-violet-300 to-violet-800 bg-clip-text text-transparent inline-block">
+                                        Structure.
+                                    </span>
+                                </div>
+                            </TextReveal>
                         </h1>
                     </div>
                 </div>
@@ -104,29 +122,40 @@ export function HeroSection() {
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-16 w-full">
                         {/* Subheadline (Bottom Left) - Hidden on mobile, moved above */}
                         <div className="hidden md:block max-w-xl text-left">
-                            <p className="text-base md:text-xl text-black/95 leading-relaxed font-medium mb-3">
-                                Mergex designs the architecture behind ambitious businesses integrating systems, AI, and growth into one engineered foundation.
-                            </p>
-                            <p className="text-sm md:text-base text-black/70 leading-relaxed italic">
-                                Replace a complex vendor ecosystem with a single engineered foundation.
-                            </p>
+                            <TextReveal delay={0.6} className="mb-3">
+                                <p className="text-base md:text-xl text-black/95 leading-relaxed font-medium">
+                                    Mergex designs the architecture behind ambitious businesses integrating systems, AI, and growth into one engineered foundation.
+                                </p>
+                            </TextReveal>
+                            <TextReveal delay={0.7}>
+                                <p className="text-sm md:text-base text-black/70 leading-relaxed italic">
+                                    Replace a complex vendor ecosystem with a single engineered foundation.
+                                </p>
+                            </TextReveal>
                         </div>
 
                         {/* CTAs (Bottom Right) */}
                         <div className="flex flex-col items-center md:items-end gap-6 w-full md:w-auto">
                             {/* Mobile Description (Above Fragmented Line on mobile) */}
-                            <div className="md:hidden text-center max-w-lg mb-2">
+                            <TextReveal delay={0.6} className="md:hidden text-center max-w-lg mb-2">
                                 <p className="text-sm text-black/95 leading-relaxed font-medium">
                                     Mergex designs the architecture behind ambitious businesses integrating systems, AI, and growth into one engineered foundation.
                                 </p>
-                            </div>
+                            </TextReveal>
 
                             {/* Fragmented Vendor line - Above buttons on mobile only */}
-                            <p className="md:hidden text-[10px] text-black/70 leading-relaxed italic text-center px-4">
-                                Replace a complex vendor ecosystem with a single engineered foundation.
-                            </p>
+                            <TextReveal delay={0.7} className="md:hidden mb-4">
+                                <p className="text-[10px] text-black/70 leading-relaxed italic text-center px-4">
+                                    Replace a complex vendor ecosystem with a single engineered foundation.
+                                </p>
+                            </TextReveal>
 
-                            <div className="flex flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
+                                className="flex flex-row items-center justify-center gap-3 w-full sm:w-auto"
+                            >
                                 <Link
                                     href="/systems"
                                     className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 bg-black text-white rounded-lg text-xs md:text-base font-medium transition-all hover:bg-neutral-800 hover:shadow-xl shadow-lg whitespace-nowrap"
@@ -141,7 +170,7 @@ export function HeroSection() {
                                 >
                                     Discover Labs
                                 </Link>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { LABS_CTA } from '../content/labs';
 import { ArrowRight } from 'lucide-react';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { BlurVignette } from '@/components/ui/BlurVignette';
 import GlassSurface from '@/components/ui/GlassSurface';
 
@@ -95,53 +96,44 @@ export function LabsCTA() {
 
                     {/* Card Content */}
                     <div className="relative z-10 h-full flex flex-col items-center justify-center p-8 md:p-16 text-center">
-                        {/* Floating "new moment" style tag */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
-                            className="mb-8"
-                        >
-                            <div className="mx-auto px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex items-center justify-center">
+                        <TextReveal delay={0.2} duration={0.8}>
+                            <div className="mx-auto px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex items-center justify-center mb-8">
                                 <span className="text-[10px] md:text-xs font-semibold text-white tracking-[0.2em] uppercase">
                                     COLLABORATE
                                 </span>
                             </div>
-                        </motion.div>
+                        </TextReveal>
 
                         {/* Centered Transformation Narrative */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 1 }}
-                            className="max-w-3xl"
-                        >
-                            <h2 
-                                className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-                                style={{ fontFamily: 'Playfair Display, serif' }}
-                            >
-                                Where Ideas <br className="hidden md:block" /> <em>Become</em> Reality.
-                            </h2>
-                            <p className="text-neutral-300 text-sm md:text-xl font-light mb-10 max-w-xl mx-auto leading-relaxed">
-                                In the Lab, ideas aren't just explored they evolve into experiences.
-                            </p>
-                        </motion.div>
+                        <div className="max-w-3xl">
+                            <TextReveal delay={0.4} duration={1}>
+                                <h2 
+                                    className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                                    style={{ fontFamily: 'Playfair Display, serif' }}
+                                >
+                                    Where Ideas <br className="hidden md:block" /> <em>Become</em> Reality.
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.5} duration={1}>
+                                <p className="text-neutral-300 text-sm md:text-xl font-light mb-10 max-w-xl mx-auto leading-relaxed">
+                                    In the Lab, ideas aren't just explored they evolve into experiences.
+                                </p>
+                            </TextReveal>
+                        </div>
 
                         {/* CTA Button */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.6, duration: 0.8 }}
-                        >
-                            <button
+                        <TextReveal delay={0.6} duration={0.8}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
                                 className="px-8 py-3 rounded-full bg-white flex items-center gap-3 active:scale-95 transition-transform group mix-blend-screen"
                             >
                                 <span className="font-bold text-sm md:text-base text-black">
                                     Let’s see what AI can do for you
                                 </span>
                                 <ArrowRight size={18} className="text-black" />
-                            </button>
-                        </motion.div>
+                            </motion.button>
+                        </TextReveal>
                     </div>
 
                     {/* Inner highlight ring */}

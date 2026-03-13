@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { WHAT_WE_CREATE } from '../content/labs';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { Lens } from '@/components/ui/lens';
 
 /**
@@ -16,17 +17,17 @@ export function WhatWeCreate() {
     return (
         <section ref={sectionRef} className="py-20 md:py-32">
             <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="mb-20"
-                >
-                    <p className="text-sm uppercase tracking-wider mb-4">WHAT WE DO</p>
-                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">SERVICES</h2>
-                    <p className="text-lg md:text-xl max-w-3xl">{WHAT_WE_CREATE.subheadline}</p>
-                </motion.div>
+                <div className="mb-20">
+                    <TextReveal>
+                        <p className="text-sm uppercase tracking-wider mb-4">WHAT WE DO</p>
+                    </TextReveal>
+                    <TextReveal delay={0.1}>
+                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">SERVICES</h2>
+                    </TextReveal>
+                    <TextReveal delay={0.2}>
+                        <p className="text-lg md:text-xl max-w-3xl">{WHAT_WE_CREATE.subheadline}</p>
+                    </TextReveal>
+                </div>
 
                 <div className="flex flex-col">
                     {WHAT_WE_CREATE.categories.map((category, index) => {

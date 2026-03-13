@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /* ─── Content ─── */
 
@@ -79,20 +80,26 @@ export function HowWeWorkSystems() {
                 <div className="grid md:grid-cols-12 gap-8 mb-20 lg:mb-28">
                     {/* Left label */}
                     <div className="md:col-span-3">
-                        <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
-                            [04] Process
-                        </p>
+                        <TextReveal>
+                            <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+                                [04] Process
+                            </p>
+                        </TextReveal>
                     </div>
                     {/* Right headline + supporting text */}
                     <div className="md:col-span-9">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-[#1A1A1A]">
-                            Engineered <span className="font-serif italic font-medium">Execution.</span>
-                        </h2>
-                        <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-2xl">
-                            Every engagement follows a structured five-step framework designed to
-                            reduce friction, align decisions, and deliver measurable outcomes. From
-                            first call to scale-ready system, you&apos;ll always know what&apos;s next.
-                        </p>
+                        <TextReveal delay={0.1}>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-[#1A1A1A]">
+                                Engineered <span className="font-serif italic font-medium">Execution.</span>
+                            </h2>
+                        </TextReveal>
+                        <TextReveal delay={0.2}>
+                            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-2xl">
+                                Every engagement follows a structured five-step framework designed to
+                                reduce friction, align decisions, and deliver measurable outcomes. From
+                                first call to scale-ready system, you&apos;ll always know what&apos;s next.
+                            </p>
+                        </TextReveal>
                     </div>
                 </div>
 

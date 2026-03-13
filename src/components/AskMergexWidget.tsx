@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import {
     X,
     SendHorizontal,
@@ -13,6 +14,8 @@ import {
     MessageSquare,
     LoaderIcon,
     ChevronRight,
+    Volume2,
+    VolumeX,
 } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -195,6 +198,31 @@ export default function AskMergexWidget() {
     const [hasStarted, setHasStarted] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
 
+    // Speech states
+    const [speakingId, setSpeakingId] = useState<string | null>(null);
+
+    const toggleSpeech = useCallback((id: string, text: string) => {
+        if (speakingId === id) {
+            window.speechSynthesis.cancel();
+            setSpeakingId(null);
+        } else {
+            window.speechSynthesis.cancel();
+            
+            // Clean markdown for clearer speech
+            const cleanText = text
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // [label](url) -> label
+                .replace(/(\*\*|__)(.*?)\1/g, '$2')      // bold
+                .replace(/(\*|_)(.*?)\1/g, '$2')        // italic
+                .replace(/`([^`]+)`/g, '$1');            // inline code
+
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.onend = () => setSpeakingId(null);
+            utterance.onerror = () => setSpeakingId(null);
+            window.speechSynthesis.speak(utterance);
+            setSpeakingId(id);
+        }
+    }, [speakingId]);
+
     // Guided flow
     const [guidedStep, setGuidedStep] = useState<number | null>(null);
     const [guidedAnswers, setGuidedAnswers] = useState<string[]>([]);
@@ -208,10 +236,19 @@ export default function AskMergexWidget() {
         setSessions(loadSessions());
     }, []);
 
+
     // Scroll to bottom on new messages
     useEffect(() => {
         if (open) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, isTyping, open]);
+
+    // Handle closing speech
+    useEffect(() => {
+        if (!open) {
+            window.speechSynthesis.cancel();
+            setSpeakingId(null);
+        }
+    }, [open]);
 
     // ─── API ─────────────────────────────────────────────────────────────────
     const callAPI = async (text: string): Promise<string> => {
@@ -262,6 +299,19 @@ export default function AskMergexWidget() {
             return next;
         });
     };
+
+    // Listen for custom event to open chat
+    useEffect(() => {
+        const handleOpenChat = (e: any) => {
+            const message = (e as CustomEvent).detail?.message;
+            setOpen(true);
+            if (message) {
+                handleSend(message);
+            }
+        };
+        window.addEventListener('mergex-open-chat', handleOpenChat as EventListener);
+        return () => window.removeEventListener('mergex-open-chat', handleOpenChat as EventListener);
+    }, [handleSend]);
 
     // ─── Conversation controls ────────────────────────────────────────────────
     const handleNewConversation = () => {
@@ -344,13 +394,26 @@ export default function AskMergexWidget() {
     // ─── Render ───────────────────────────────────────────────────────────────
     return (
         <>
+            {/* Backdrop Blur Overlay */}
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setOpen(false)}
+                        className="fixed inset-0 z-[118] bg-black/10 backdrop-blur-[6px]"
+                    />
+                )}
+            </AnimatePresence>
+
             {/* ── FAB Button ── */}
             <motion.button
                 layout
                 onClick={() => setOpen(v => !v)}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="fixed bottom-6 right-6 z-[120] overflow-hidden flex items-center bg-gradient-to-b from-violet-400 to-violet-900 text-white text-[12px] font-medium select-none shadow-lg shadow-violet-900/30 rounded-[10px]"
+                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[120] overflow-hidden flex items-center bg-gradient-to-b from-violet-300 to-violet-800 text-white text-[11px] md:text-[12px] font-medium select-none shadow-lg shadow-violet-900/30 rounded-[10px]"
                 initial={false}
                 animate={{
                     paddingLeft: isExpanded ? 14 : 10,
@@ -413,9 +476,9 @@ export default function AskMergexWidget() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.96 }}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        className="fixed bottom-[76px] right-6 z-[119] flex flex-col pointer-events-auto"
+                        className="fixed bottom-[64px] right-4 md:bottom-[76px] md:right-6 z-[119] flex flex-col pointer-events-auto"
                         style={{
-                            width: 'min(420px, calc(100vw - 24px))',
+                            width: 'min(420px, calc(100vw - 32px))',
                             height: 'min(600px, calc(100dvh - 100px))',
                             background: '#ffffff',
                             borderRadius: '20px',
@@ -425,11 +488,11 @@ export default function AskMergexWidget() {
                         }}
                     >
                         {/* ── Header ── */}
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-white flex-shrink-0">
-                            <div className="flex items-center gap-2.5">
-                                <MergexOrb size={28} />
+                        <div className="flex items-center justify-between px-3 md:px-4 py-3 border-b border-gray-100 bg-white flex-shrink-0">
+                            <div className="flex items-center gap-2 md:gap-2.5">
+                                <MergexOrb size={24} className="md:w-[28px] md:h-[28px]" />
                                 <div>
-                                    <p className="text-[13px] font-bold text-gray-900 leading-none">Mergex</p>
+                                    <p className="text-[12px] md:text-[13px] font-bold text-gray-900 leading-none">Mergex</p>
                                     <p className="text-[10px] text-violet-500 font-semibold uppercase tracking-widest mt-0.5">Intelligence</p>
                                 </div>
                             </div>
@@ -536,7 +599,8 @@ export default function AskMergexWidget() {
                                     className="flex-1 flex flex-col min-h-0"
                                 >
                                     {/* Messages area */}
-                                    <div className="flex-1 overflow-y-auto px-4 py-4 min-h-0" data-lenis-prevent="true">
+                                    <div className="flex-1 relative overflow-hidden min-h-0">
+                                        <div className="h-full overflow-y-auto px-4 py-4 pb-32 scroll-smooth" data-lenis-prevent="true">
 
                                         {/* Empty / Welcome state */}
                                         {!hasStarted && (
@@ -558,8 +622,8 @@ export default function AskMergexWidget() {
                                                         </h2>
                                                         <p className="text-[13px] text-gray-400 mb-5 max-w-[260px] leading-relaxed">
                                                             Tell me what you're trying to build.<br />
-                                                            I'll help you discover the fastest path using<br />
-                                                            Mergex Systems or Mergex Labs.
+                                                            I'll help you discover the fastest path
+                                                            
                                                         </p>
 
                                                         {/* Guided flow trigger */}
@@ -681,23 +745,54 @@ export default function AskMergexWidget() {
                                                     >
                                                         {msg.role === 'user' ? (
                                                             <div className="flex justify-end">
-                                                                <div className="max-w-[80%] bg-violet-600 text-white rounded-2xl rounded-br-md px-3.5 py-2.5 text-[13px] leading-relaxed">
+                                                                <div className="max-w-[80%] bg-gradient-to-b from-violet-300 to-violet-800 text-white rounded-2xl rounded-br-md px-4 py-2.5 text-[13px] leading-relaxed shadow-lg shadow-violet-500/10">
                                                                     {msg.content}
                                                                 </div>
                                                             </div>
                                                         ) : (
                                                             <div className="flex gap-2.5">
                                                                 <div className="flex-shrink-0 mt-0.5">
-                                                                    <div className="w-6 h-6 rounded-full overflow-hidden">
-                                                                        <MergexOrb size={24} />
-                                                                    </div>
+                                                                    <MergexOrb size={22} />
                                                                 </div>
                                                                 <div className="flex-1 min-w-0">
-                                                                    <p className="text-[10px] font-bold text-violet-500 mb-1 uppercase tracking-wider">
-                                                                        Mergex Intelligence
-                                                                    </p>
-                                                                    <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] text-gray-700 leading-relaxed shadow-sm">
-                                                                        {msg.content}
+                                                                    <div className="flex items-center justify-between mb-1">
+                                                                        <p className="text-[10px] font-bold text-violet-500 uppercase tracking-wider">
+                                                                            Mergex Intelligence
+                                                                        </p>
+                                                                        <button
+                                                                            onClick={() => toggleSpeech(msg.id, msg.content)}
+                                                                            className={cn(
+                                                                                "p-1.5 rounded-lg transition-all",
+                                                                                speakingId === msg.id 
+                                                                                    ? "bg-violet-100 text-violet-600 scale-110" 
+                                                                                    : "text-gray-300 hover:text-gray-500 hover:bg-gray-100"
+                                                                            )}
+                                                                        >
+                                                                            {speakingId === msg.id ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
+                                                                        </button>
+                                                                    </div>
+                                                                    <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-bl-md px-4 py-3 text-[13.5px] text-gray-700 leading-relaxed shadow-sm">
+                                                                        <div className="markdown-content prose-sm max-w-none">
+                                                                            <ReactMarkdown
+                                                                                components={{
+                                                                                    a: ({ node, ...props }) => {
+                                                                                        const label = typeof props.children === 'string' && props.children.startsWith('/') 
+                                                                                            ? props.children.substring(1) 
+                                                                                            : props.children;
+                                                                                        return (
+                                                                                            <Link href={props.href || '#'} className="text-violet-600 font-bold hover:underline" onClick={(e) => { e.stopPropagation(); setOpen(false); }}>
+                                                                                                {label}
+                                                                                            </Link>
+                                                                                        );
+                                                                                    },
+                                                                                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                                                                                    strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
+                                                                                    em: ({ children }) => <em className="italic text-gray-800">{children}</em>,
+                                                                                }}
+                                                                            >
+                                                                                {msg.content}
+                                                                            </ReactMarkdown>
+                                                                        </div>
                                                                     </div>
                                                                     {/* Inline CTAs after last AI message */}
                                                                     {idx === messages.length - 1 && (
@@ -738,8 +833,8 @@ export default function AskMergexWidget() {
                                                             exit={{ opacity: 0 }}
                                                             className="flex gap-2.5"
                                                         >
-                                                            <div className="flex-shrink-0 mt-0.5 w-6 h-6 rounded-full overflow-hidden">
-                                                                <MergexOrb size={24} />
+                                                            <div className="flex-shrink-0 mt-0.5">
+                                                                <MergexOrb size={22} />
                                                             </div>
                                                             <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-bl-md px-3.5 py-2.5 flex items-center gap-2 shadow-sm">
                                                                 <Image src="/icons/sparkle star.png" alt="Thinking" width={12} height={12} className="animate-pulse opacity-60" />
@@ -750,15 +845,18 @@ export default function AskMergexWidget() {
                                                     )}
                                                 </AnimatePresence>
 
-                                                <div ref={messagesEndRef} />
-                                            </div>
+                                            <div ref={messagesEndRef} />
+                                        </div>
                                         )}
                                     </div>
 
+                                    {/* Bottom Gradient Fade */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-[15]" />
+                                </div>
+
                                     {/* ── Input area ── */}
-                                    <div className="flex-shrink-0 border-t border-gray-100 bg-white/80 backdrop-blur-md px-3 py-3 relative">
-                                        {/* Mild background glow behind input area */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-violet-100/40 via-fuchsia-100/30 to-pink-100/40 blur-xl pointer-events-none" />
+                                    <div className="absolute bottom-0 left-0 right-0 px-3 py-6 z-[20] pointer-events-none">
+                                        <div className="pointer-events-auto">
                                         
                                         <div className="relative group z-10">
                                             {/* Intense Glow on focus */}
@@ -821,9 +919,10 @@ export default function AskMergexWidget() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-center text-[10px] text-gray-300 mt-1.5 flex items-center justify-center gap-1.5">
-                                            Powered by Mergex Intelligence
-                                        </p>
+                                            <p className="text-center text-[10px] text-gray-300 mt-2.5 flex items-center justify-center gap-1.5 bg-white/40 backdrop-blur-sm py-1 rounded-full w-fit mx-auto px-3 border border-white/20">
+                                                Powered by Mergex Intelligence
+                                            </p>
+                                        </div>
                                     </div>
                                 </motion.div>
                             )}

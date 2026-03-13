@@ -31,15 +31,12 @@ export function MarqueeStrip() {
 
     return (
         <div
-            className="relative z-50 w-full overflow-hidden py-16 -rotate-[0.8deg] scale-[1.02]"
+            className="relative z-50 w-full overflow-hidden py-8 -rotate-[0.8deg] scale-[1.02]"
         >
-            {/* Solid grey strip */}
+            {/* Solid white strip */}
             <div
-                className="h-[32px] flex items-center"
-                style={{
-                    background: '#ebebed',
-                    boxShadow: '0 1px 0 0 rgba(0,0,0,0.06), 0 -1px 0 0 rgba(0,0,0,0.06)',
-                }}
+                className="h-[20px] flex items-center"
+                style={{ background: '#ebebed' }}
             >
                 <motion.div
                     className="flex whitespace-nowrap"

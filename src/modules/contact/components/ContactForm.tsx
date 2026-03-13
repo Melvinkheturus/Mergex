@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Send, ArrowRight, Clock, ClipboardCheck, Calendar } from "lucide-react";
+import { TextReveal } from "@/modules/shared/components/TextReveal";
 
 export default function ContactForm() {
     const [submitting, setSubmitting] = useState(false);
@@ -25,11 +26,13 @@ export default function ContactForm() {
             className="w-full flex flex-col gap-8"
         >
             {/* Lead Qualification Tag */}
-            <div className="inline-flex self-start">
-                <div className="rounded-full border border-border/50 bg-background-subtle/50 backdrop-blur-sm px-4 py-1.5 text-xs font-medium tracking-wide text-primary shadow-sm ring-1 ring-inset ring-primary/10">
-                    New Projects &bull; Partnerships &bull; Collaborations
+            <TextReveal duration={0.8}>
+                <div className="inline-flex self-start">
+                    <div className="rounded-full border border-border/50 bg-background-subtle/50 backdrop-blur-sm px-4 py-1.5 text-xs font-medium tracking-wide text-primary shadow-sm ring-1 ring-inset ring-primary/10">
+                        New Projects &bull; Partnerships &bull; Collaborations
+                    </div>
                 </div>
-            </div>
+            </TextReveal>
 
             {/* The Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
@@ -162,10 +165,12 @@ export default function ContactForm() {
 
                 {/* Reassurance Block */}
                 <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 space-y-4">
-                    <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-primary" />
-                        What happens next?
-                    </h4>
+                    <TextReveal delay={0.1}>
+                        <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-primary" />
+                            What happens next?
+                        </h4>
+                    </TextReveal>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="flex gap-3">
                             <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">1</div>

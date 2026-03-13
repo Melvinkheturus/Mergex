@@ -64,9 +64,30 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         className="fixed top-0 left-0 right-0 z-[61] p-2 flex flex-col pointer-events-none"
                     >
                         <div className="w-full h-auto max-h-[85vh] bg-white rounded-xl overflow-hidden flex flex-col pointer-events-auto shadow-2xl relative">
+                            {/* Background Image Layer - Applied to full megamenu card */}
+                            <AnimatePresence>
+                                {activeMenu === 'services' && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.4 }}
+                                        className="absolute inset-0 z-0 pointer-events-none"
+                                    >
+                                        <Image
+                                            src="/background/systems/System_Mobile.jpeg"
+                                            alt="Systems Background"
+                                            fill
+                                            className="object-cover opacity-20"
+                                            priority
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-white/20" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
 
                             {/* Unified Header Row */}
-                            <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 flex-shrink-0">
+                            <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 flex-shrink-0 relative z-10">
                                 {/* Left: Logo Icon */}
                                 <Link href="/" onClick={onClose} className="flex-shrink-0">
                                     <Image
@@ -98,7 +119,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                             </div>
 
                             {/* Menu Content Area */}
-                            <div className="flex-1 overflow-y-auto px-4 pb-32 pt-6 hide-scrollbar">
+                            <div className="flex-1 overflow-y-auto px-4 pb-32 pt-6 hide-scrollbar relative z-10">
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeMenu}
@@ -166,31 +187,33 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
 // SYSTEMS TAB CONTENT
 function MobileServicesContent({ onClose }: { onClose: () => void }) {
     return (
-        <div className="space-y-6 pt-4">
-            {/* Header */}
-            <div className="px-2 space-y-1">
-                <h3 className="text-2xl font-serif font-medium text-gray-900 leading-tight">
-                    Build systems that scale.
-                </h3>
-                <p className="text-sm text-gray-500">
-                    Product, platforms, and growth built fast.
-                </p>
-            </div>
+        <div className="space-y-6 pt-4 relative min-h-[450px] flex flex-col justify-between">
+            <div className="relative z-10 space-y-6">
+                {/* Header */}
+                <div className="px-2 space-y-1">
+                    <h3 className="text-2xl font-serif font-medium text-gray-900 leading-tight">
+                        Build systems that scale.
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                        Product, platforms, and growth built fast.
+                    </p>
+                </div>
 
-            {/* Simple Rows */}
-            <div className="space-y-1">
-                <SimpleMenuRow href="/services/design" label="Design & Brand Systems" onClose={onClose} />
-                <SimpleMenuRow href="/services/web" label="Web & Digital Experiences" onClose={onClose} />
-                <SimpleMenuRow href="/services/mvp" label="Product & Platform Building" onClose={onClose} />
-                <SimpleMenuRow href="/services/growth" label="Growth & Automation Systems" onClose={onClose} />
+                {/* Simple Rows */}
+                <div className="space-y-1">
+                    <SimpleMenuRow href="/systems#architecture" label="Digital Architecture" onClose={onClose} />
+                    <SimpleMenuRow href="/systems#infrastructure" label="Infrastructure" onClose={onClose} />
+                    <SimpleMenuRow href="/systems#automation" label="Automation" onClose={onClose} />
+                    <SimpleMenuRow href="/systems#growth" label="Growth Systems" onClose={onClose} />
+                </div>
             </div>
 
             {/* Bottom CTA */}
-            <div className="pt-2 px-2 space-y-4">
+            <div className="pt-2 px-2 space-y-4 relative z-10">
                 <Link
                     href="/systems"
                     onClick={onClose}
-                    className="block w-full py-4 bg-black text-white text-center rounded-xl font-medium text-base"
+                    className="block w-full py-4 bg-black text-white text-center rounded-xl font-medium text-base shadow-lg"
                 >
                     Explore All Systems
                 </Link>

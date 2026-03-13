@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, BriefcaseBusiness } from "lucide-react";
+import { TextReveal } from "@/modules/shared/components/TextReveal";
 
 export default function ContactPartner() {
     return (
@@ -20,13 +21,17 @@ export default function ContactPartner() {
                     <BriefcaseBusiness className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-xl font-display font-medium text-foreground tracking-tight">
-                    Looking to Collaborate?
-                </h3>
+                <TextReveal delay={0.1}>
+                    <h3 className="text-xl font-display font-medium text-foreground tracking-tight">
+                        Looking to Collaborate?
+                    </h3>
+                </TextReveal>
 
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                    We partner with founders, agencies, and operators who want to build scalable systems, launch products, or create new ventures together.
-                </p>
+                <TextReveal delay={0.2}>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        We partner with founders, agencies, and operators who want to build scalable systems, launch products, or create new ventures together.
+                    </p>
+                </TextReveal>
 
                 <Link
                     href="/partner-with-us"

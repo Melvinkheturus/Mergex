@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { BlurVignette } from '@/components/ui/BlurVignette';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
  * CTASection - Cinematic Directional Conversion
@@ -82,64 +83,52 @@ export function CTASection() {
                     {/* Card Content */}
                     <div className="relative z-20 h-full flex flex-col items-center justify-center p-8 md:p-12 text-center">
                         {/* Tag */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
-                            className="mb-6 md:mb-8"
-                        >
-                            <div className="mx-auto px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-md shadow-lg flex items-center justify-center">
+                        <TextReveal delay={0.2} duration={0.8}>
+                            <div className="mx-auto px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-md shadow-lg flex items-center justify-center mb-6 md:mb-8">
                                 <span className="text-[9px] md:text-[10px] font-bold text-white/70 tracking-[0.4em] uppercase">
                                     Strategic Direction
                                 </span>
                             </div>
-                        </motion.div>
+                        </TextReveal>
 
                         {/* Headline */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4, duration: 1 }}
-                            className="max-w-3xl"
-                        >
-                            <h2 
-                                className="text-3xl md:text-5xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight"
-                                style={{ fontFamily: 'var(--font-playfair)' }}
-                            >
-                                Build the System <br className="hidden md:block" />
-                                <span className="italic font-medium">Behind</span> Your Business.
-                            </h2>
-                            <p className="text-neutral-400 text-xs md:text-sm font-light mb-10 max-w-xl mx-auto leading-relaxed">
-                                Business scale is an <span className="text-white font-normal">architectural challenge</span>. <br className="hidden md:block" />
-                                Let’s design the system that connects yours.
-                            </p>
-                        </motion.div>
+                        <div className="max-w-3xl">
+                            <TextReveal delay={0.4} duration={1.2}>
+                                <h2 
+                                    className="text-3xl md:text-5xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight"
+                                    style={{ fontFamily: 'var(--font-playfair)' }}
+                                >
+                                    Build the System <br className="hidden md:block" />
+                                    <span className="italic font-medium">Behind</span> Your Business.
+                                </h2>
+                            </TextReveal>
+                            <TextReveal delay={0.6} duration={1}>
+                                <p className="text-neutral-400 text-xs md:text-sm font-light mb-10 max-w-xl mx-auto leading-relaxed">
+                                    Business scale is an <span className="text-white font-normal">architectural challenge</span>. <br className="hidden md:block" />
+                                    Let’s design the system that connects yours.
+                                </p>
+                            </TextReveal>
+                        </div>
 
                         {/* Simplified CTAs for focus */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.6, duration: 1 }}
-                            className="flex flex-col md:flex-row gap-3 md:gap-4"
-                        >
-                            <Link
-                                href="/systems"
-                                className="px-6 md:px-8 py-3 rounded-full bg-white text-black font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition-transform active:scale-95 group"
-                            >
-                                See How Mergex Systems Works
-                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            
-                            <Link
-                                href="/contact"
-                                className="px-6 md:px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-xs md:text-sm backdrop-blur-md transition-all hover:bg-white/10 active:scale-95 text-center"
-                            >
-                                Talk to Our Team
-                            </Link>
-                        </motion.div>
+                        <TextReveal delay={0.8} duration={1}>
+                            <div className="flex flex-col md:flex-row gap-3 md:gap-4">
+                                <Link
+                                    href="/systems"
+                                    className="px-6 md:px-8 py-3 rounded-full bg-white text-black font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition-transform active:scale-95 group"
+                                >
+                                    See How Mergex Systems Works
+                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                                
+                                <Link
+                                    href="/contact"
+                                    className="px-6 md:px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-xs md:text-sm backdrop-blur-md transition-all hover:bg-white/10 active:scale-95 text-center"
+                                >
+                                    Talk to Our Team
+                                </Link>
+                            </div>
+                        </TextReveal>
                     </div>
 
                     {/* Subtle inner detailing */}

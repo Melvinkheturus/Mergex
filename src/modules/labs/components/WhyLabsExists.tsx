@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WHY_LABS_EXISTS } from '../content/labs';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { cloudinaryVideo } from '@/lib/cloudinary';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -142,24 +143,26 @@ export function WhyLabsExists() {
                         backgroundColor: '#ffffff',
                     }}
                 >
-                    <h2
-                        ref={titleRef}
-                        style={{
-                            opacity: 0,
-                            transform: 'translateY(-40px)',
-                            marginBottom: 52,
-                            fontFamily: 'var(--font-playfair)',
-                            fontWeight: 300,
-                            fontSize: 'clamp(1.6rem, 3.5vw, 3rem)',
-                            color: '#0a0a0a',
-                            letterSpacing: '-0.02em',
-                            textAlign: 'center',
-                            position: 'relative',
-                            zIndex: 2,
-                        }}
-                    >
-                        Where Do You Need <em>Creative</em> Acceleration?
-                    </h2>
+                    <TextReveal>
+                        <h2
+                            ref={titleRef}
+                            style={{
+                                opacity: 0,
+                                transform: 'translateY(-40px)',
+                                marginBottom: 52,
+                                fontFamily: 'var(--font-playfair)',
+                                fontWeight: 300,
+                                fontSize: 'clamp(1.6rem, 3.5vw, 3rem)',
+                                color: '#0a0a0a',
+                                letterSpacing: '-0.02em',
+                                textAlign: 'center',
+                                position: 'relative',
+                                zIndex: 2,
+                            }}
+                        >
+                            Where Do You Need <em>Creative</em> Acceleration?
+                        </h2>
+                    </TextReveal>
 
                     <div
                         ref={wrapperRef}
@@ -233,12 +236,14 @@ export function WhyLabsExists() {
                 className="md:hidden bg-white px-5 py-14"
             >
                 {/* Section Title */}
-                <h2
-                    className="text-center mb-10 text-2xl font-light text-neutral-900 leading-snug tracking-tight"
-                    style={{ fontFamily: 'var(--font-playfair)' }}
-                >
-                    Where Do You Need <em>Creative</em> Acceleration?
-                </h2>
+                <TextReveal>
+                    <h2
+                        className="text-center mb-10 text-2xl font-light text-neutral-900 leading-snug tracking-tight"
+                        style={{ fontFamily: 'var(--font-playfair)' }}
+                    >
+                        Where Do You Need <em>Creative</em> Acceleration?
+                    </h2>
+                </TextReveal>
 
                 {/* Video Card — full-width hero */}
                 <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: '9/11' }}>

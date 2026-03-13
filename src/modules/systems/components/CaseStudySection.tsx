@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CASE_STUDIES } from '@/modules/caseStudies';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -129,18 +130,22 @@ export function CaseStudySection() {
         return (
             <section className="relative bg-slate-50 h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h2
-                        className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
-                        style={{ fontFamily: 'var(--font-manrope)' }}
-                    >
-                        Selected Work
-                    </h2>
-                    <h3
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
-                        style={{ fontFamily: 'var(--font-manrope)' }}
-                    >
-                        Case Studies
-                    </h3>
+                    <TextReveal>
+                        <h2
+                            className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Selected Work
+                        </h2>
+                    </TextReveal>
+                    <TextReveal delay={0.1}>
+                        <h3
+                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                            style={{ fontFamily: 'var(--font-manrope)' }}
+                        >
+                            Case Studies
+                        </h3>
+                    </TextReveal>
                 </div>
             </section>
         );
@@ -152,24 +157,30 @@ export function CaseStudySection() {
             <div className="bg-slate-50 pt-24 lg:pt-32 pb-12">
                 <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                     <div className="text-center">
-                        <h2
-                            className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
-                            style={{ fontFamily: 'var(--font-manrope)' }}
-                        >
-                            Selected Work
-                        </h2>
-                        <h3
-                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
-                            style={{ fontFamily: 'var(--font-manrope)' }}
-                        >
-                            Case Studies
-                        </h3>
-                        <p
-                            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
-                            style={{ fontFamily: 'var(--font-manrope)' }}
-                        >
-                            Explore our portfolio of successful projects and transformative solutions
-                        </p>
+                        <TextReveal>
+                            <h2
+                                className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 mb-4"
+                                style={{ fontFamily: 'var(--font-manrope)' }}
+                            >
+                                Selected Work
+                            </h2>
+                        </TextReveal>
+                        <TextReveal delay={0.1}>
+                            <h3
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                                style={{ fontFamily: 'var(--font-manrope)' }}
+                            >
+                                Case Studies
+                            </h3>
+                        </TextReveal>
+                        <TextReveal delay={0.2}>
+                            <p
+                                className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                                style={{ fontFamily: 'var(--font-manrope)' }}
+                            >
+                                Explore our portfolio of successful projects and transformative solutions
+                            </p>
+                        </TextReveal>
                     </div>
                 </div>
             </div>
