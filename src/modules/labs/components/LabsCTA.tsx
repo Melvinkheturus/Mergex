@@ -46,7 +46,7 @@ export function LabsCTA() {
                             inset -4px 0px 12px rgba(0,0,0,0.3)
                         `
                     }}
-                    className="relative aspect-[16/10] md:aspect-[21/9] w-full bg-neutral-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden group"
+                    className="relative aspect-[4/5] md:aspect-[16/9] w-full bg-neutral-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden group"
                 >
                     {/* Integrated Background within Card */}
                     <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
@@ -122,18 +122,23 @@ export function LabsCTA() {
                         </div>
 
                         {/* CTA Button */}
-                        <TextReveal delay={0.6} duration={0.8}>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6, duration: 0.8 }}
+                        >
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-8 py-3 rounded-full bg-white flex items-center gap-3 active:scale-95 transition-transform group mix-blend-screen"
+                                className="px-8 py-3 rounded-full bg-white flex items-center gap-3 active:scale-95 transition-transform group"
                             >
-                                <span className="font-bold text-sm md:text-base text-black">
+                                <span className="font-bold text-[13px] md:text-base text-black">
                                     Let’s see what AI can do for you
                                 </span>
                                 <ArrowRight size={18} className="text-black" />
                             </motion.button>
-                        </TextReveal>
+                        </motion.div>
                     </div>
 
                     {/* Inner highlight ring */}

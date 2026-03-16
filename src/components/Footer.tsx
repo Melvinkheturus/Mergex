@@ -73,8 +73,8 @@ const menuStaggerContainer = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.08,
-            delayChildren: 0.3
+            staggerChildren: 0.05,
+            delayChildren: 0.1
         }
     }
 };
@@ -88,12 +88,12 @@ import { useLenisScroll } from '@/lib/lenis-provider';
 
 
 const staggerContainer = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.15,
-            delayChildren: 0.3
+            staggerChildren: 0.1,
+            delayChildren: 0.1
         }
     }
 };
@@ -106,7 +106,7 @@ export default function Footer() {
     return (
         <>
             {/* Footer */}
-            <footer className="bg-black pt-12 lg:pt-16 pb-8 lg:pb-10 relative overflow-hidden">
+            <footer className="bg-black pt-[60vh] lg:pt-16 pb-4 lg:pb-10 relative overflow-hidden">
                 {/* Desktop Background Image */}
                 <div className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden lg:block">
                     <Image
@@ -131,7 +131,7 @@ export default function Footer() {
 
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-12 lg:mt-16">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-[10vh] lg:mt-16">
                         {/* Brand Column */}
                         <motion.div
                             className="md:col-span-4 lg:col-span-5 xl:col-span-4"
@@ -217,59 +217,55 @@ export default function Footer() {
 
                         {/* Menu Group - Right Aligned */}
                         <motion.div
-                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 flex flex-col md:flex-row justify-end gap-6 md:gap-8 lg:gap-12 xl:gap-16 md:pr-8 lg:pr-12 xl:pr-16"
+                            className="md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-6 xl:col-span-8 xl:col-start-5 grid grid-cols-2 md:flex md:flex-row justify-end gap-x-8 gap-y-12 md:gap-8 lg:gap-12 xl:gap-16 md:pr-8 lg:pr-12 xl:pr-16"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            {/* Solutions Column */}
-                            <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={menuStaggerContainer}
-                            >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Solutions</h4>
-                                <ul className="space-y-4 text-sm font-body">
-                                    {FOOTER_LINKS.solutions.map((link) => (
-                                        <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <FooterLink href={link.href} label={link.label} />
-                                        </motion.li>
-                                    ))}
-                                </ul>
-                            </motion.div>
+                            <div className="flex flex-col gap-4 md:contents">
+                                {/* Solutions Column */}
+                                <motion.div
+                                    variants={menuStaggerContainer}
+                                    className="order-1"
+                                >
+                                    <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Solutions</h4>
+                                    <ul className="space-y-4 text-sm font-body">
+                                        {FOOTER_LINKS.solutions.map((link) => (
+                                            <li key={link.label}>
+                                                <FooterLink href={link.href} label={link.label} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
 
-                            {/* Insights Column */}
-                            <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={menuStaggerContainer}
-                            >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Insights</h4>
-                                <ul className="space-y-4 text-sm font-body">
-                                    {FOOTER_LINKS.insights.map((link) => (
-                                        <motion.li key={link.label} variants={menuItemFadeUp}>
-                                            <FooterLink href={link.href} label={link.label} />
-                                        </motion.li>
-                                    ))}
-                                </ul>
-                            </motion.div>
+                                {/* Insights Column */}
+                                <motion.div
+                                    variants={menuStaggerContainer}
+                                    className="order-3 md:order-2"
+                                >
+                                    <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Insights</h4>
+                                    <ul className="space-y-4 text-sm font-body">
+                                        {FOOTER_LINKS.insights.map((link) => (
+                                            <li key={link.label}>
+                                                <FooterLink href={link.href} label={link.label} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            </div>
 
                             {/* Company Column */}
                             <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
                                 variants={menuStaggerContainer}
+                                className="order-2"
                             >
                                 <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Company</h4>
                                 <ul className="space-y-4 text-sm font-body">
                                     {FOOTER_LINKS.company.map((link) => (
-                                        <motion.li key={link.label} variants={menuItemFadeUp}>
+                                        <li key={link.label}>
                                             <FooterLink href={link.href} label={link.label} />
-                                        </motion.li>
+                                        </li>
                                     ))}
                                 </ul>
                             </motion.div>
@@ -279,9 +275,9 @@ export default function Footer() {
                     {/* Big Text Name */}
                 </div>
 
-                <div className="w-full mt-4 lg:mt-6 mb-0 relative z-10 overflow-hidden">
+                <div className="w-full mt-20 lg:mt-6 mb-0 relative z-10 overflow-hidden">
                     <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
-                        <div className={`flex flex-col md:flex-row items-center ${isLabsOrSystems ? 'justify-center' : 'md:items-end justify-between'} gap-8 md:gap-12 pb-8`}>
+                        <div className={`flex flex-col md:flex-row items-center ${isLabsOrSystems ? 'justify-center' : 'md:items-end justify-between'} gap-8 md:gap-12 pb-4 md:pb-8`}>
                             <div className={`relative ${isLabsOrSystems ? 'text-center' : 'text-left'}`}>
                                 {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
                                 <div
@@ -294,7 +290,7 @@ export default function Footer() {
                                         <SplitText
                                             text="Mergex"
                                             tag="h1"
-                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-10"
+                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-2 md:pb-10"
                                             splitType="chars"
                                             delay={80}
                                             duration={1.2}
@@ -342,15 +338,14 @@ export default function Footer() {
                                     </div>
                                 </div>
                             </div>
-                            {pathname !== '/labs' && pathname !== '/systems' && (
-                                <motion.div
-                                    className="max-w-sm lg:max-w-md text-center md:text-right flex flex-col items-center md:items-end gap-6 md:mb-10"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    variants={staggerContainer}
-                                >
-                                    <style jsx global>{`
+                            <motion.div
+                                className={`max-w-sm lg:max-w-md text-center flex flex-col items-center gap-6 md:mb-10 ${isLabsOrSystems ? 'md:text-center md:items-center' : 'md:text-right md:items-end'}`}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={staggerContainer}
+                            >
+                                <style jsx global>{`
                                         @keyframes gradient-x {
                                             0% { background-position: 0% 50%; }
                                             100% { background-position: 200% 50%; }
@@ -359,9 +354,10 @@ export default function Footer() {
                                             animation: gradient-x 3s linear infinite;
                                         }
                                     `}</style>
-                                    <motion.p variants={fadeInUp} className="text-white text-sm lg:text-base leading-relaxed font-body" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
-                                        Mergex is a business architecture company replacing a complex ecosystem of tools and partners with engineered scale.
-                                    </motion.p>
+                                <motion.p variants={fadeInUp} className={`text-white text-sm lg:text-base leading-relaxed font-body ${isLabsOrSystems ? 'hidden' : 'hidden md:block'}`} style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                                    Mergex is a business architecture company replacing a complex ecosystem of tools and partners with engineered scale.
+                                </motion.p>
+                                {pathname === '/' && (
                                     <motion.div variants={fadeInUp}>
                                         <Link
                                             href="/pitch-deck.pdf"
@@ -379,9 +375,9 @@ export default function Footer() {
                                             </svg>
                                         </Link>
                                     </motion.div>
-                                    <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm">We believe good systems outlast trends.</motion.p>
-                                </motion.div>
-                            )}
+                                )}
+                                <motion.p variants={fadeInUp} className="block md:hidden opacity-100 font-medium text-gray-300 text-center text-sm">We believe good systems outlast trends.</motion.p>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
@@ -389,7 +385,7 @@ export default function Footer() {
                 <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
 
                     <motion.div
-                        className="pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
+                        className="pt-2 md:pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
@@ -398,7 +394,7 @@ export default function Footer() {
                         <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
                             <p>© 2026 Mergex. All rights reserved.</p>
                             <span className="hidden md:block text-gray-500">|</span>
-                            <p className="hidden md:block opacity-100 font-medium text-gray-300 text-center md:text-left">We believe good systems outlast trends.</p>
+                            <p className={`hidden md:block opacity-100 font-medium text-gray-300 text-center ${isLabsOrSystems ? 'md:text-center' : 'md:text-left'}`}>We believe good systems outlast trends.</p>
                         </div>
                         <div className="flex gap-6">
                             <a className="hover:text-white transition-colors" href="#">

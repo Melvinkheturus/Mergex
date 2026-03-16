@@ -35,6 +35,10 @@ export function HowLabsWorks() {
     }
   });
 
+  // Animate title upwards slowly after the 4th card (0.85 progress)
+  const titleExitY = useTransform(scrollYProgress, [0.85, 0.98], [0, -100]);
+  const titleOpacity = useTransform(scrollYProgress, [0.85, 0.98], [1, 0]);
+
   return (
     <ReactLenis root>
       <main ref={containerRef} className='bg-white'>
@@ -48,7 +52,7 @@ export function HowLabsWorks() {
             whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
-            className="text-center mb-12 px-6"
+            className="text-center mb-6 px-6"
           >
             <h2 
               className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-neutral-900"
@@ -60,9 +64,36 @@ export function HowLabsWorks() {
           </motion.div>
 
           <div className='flex flex-col lg:flex-row justify-between px-6 md:px-16 gap-12 lg:gap-0 mt-8'>
-            <div className='grid gap-0 flex-1'>
+            <motion.div 
+              style={{ y: titleExitY, opacity: titleOpacity }}
+              className='sticky top-0 h-screen grid place-content-center flex-1 lg:order-2'
+            >
+              <div className='max-w-md translate-y-8 md:translate-y-12'>
+                <span className='text-xs font-mono text-black/40 uppercase tracking-[0.3em] mb-4 block text-center lg:text-left'>THE LAB PROCESS</span>
+                <h2 
+                  className='text-5xl md:text-6xl font-bold text-black leading-tight font-serif text-center lg:text-left'
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  The <DecryptedText 
+                    key={currentHeadline}
+                    text={currentHeadline} 
+                    animateOn="view"
+                    revealDirection="center"
+                    speed={40}
+                  /> <br /> to Reality.
+                </h2>
+                <p className='hidden md:block mt-8 text-xl text-gray-500 font-light leading-relaxed text-center lg:text-left'>
+                  In the Lab, ideas aren’t just explored they evolve. 
+                  Through rapid experimentation and creative intelligence, 
+                  concepts transform into visuals, systems, and experiences 
+                  ready for the real world.
+                </p>
+              </div>
+            </motion.div>
+
+            <div className='grid gap-0 flex-1 lg:order-1'>
               <figure className='sticky top-0 h-screen grid place-content-center'>
-                <article className='bg-[#f8f9fa] border border-black/5 h-80 w-full max-w-lg rounded-2xl rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6'>
+                <article className='bg-[#f8f9fa] border border-black/5 h-80 w-full max-w-lg rounded-2xl rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6 translate-y-12'>
                   <h1 className='text-3xl font-bold text-black'>I. Curiosity</h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
                     Every experiment begins with a question.
@@ -74,7 +105,7 @@ export function HowLabsWorks() {
                 </article>
               </figure>
               <figure className='sticky top-0 h-screen grid place-content-center'>
-                <article className='bg-[#f1f3f5] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6'>
+                <article className='bg-[#f1f3f5] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6 translate-y-12'>
                   <h1 className='text-3xl font-bold text-black'>
                     II. Generation
                   </h1>
@@ -88,7 +119,7 @@ export function HowLabsWorks() {
                 </article>
               </figure>
               <figure className='sticky top-0 h-screen grid place-content-center'>
-                <article className='bg-[#e9ecef] border border-black/5 h-80 w-full max-w-lg rounded-2xl -rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6'>
+                <article className='bg-[#e9ecef] border border-black/5 h-80 w-full max-w-lg rounded-2xl -rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6 translate-y-12'>
                   <h1 className='text-3xl font-bold text-black'>III. Evolution</h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
                     The strongest concepts are refined, 
@@ -100,7 +131,7 @@ export function HowLabsWorks() {
                 </article>
               </figure>
               <figure className='sticky top-0 h-screen grid place-content-center'>
-                <article className='bg-[#dee2e6] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6'>
+                <article className='bg-[#dee2e6] border border-black/5 h-80 w-full max-w-lg rounded-2xl p-8 shadow-xl flex flex-col justify-center gap-6 translate-y-12'>
                   <h1 className='text-3xl font-bold text-black'>IV. Emergence</h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
                     What began as an experiment becomes something real
@@ -111,29 +142,6 @@ export function HowLabsWorks() {
                   </div>
                 </article>
               </figure>
-            </div>
-            <div className='sticky top-0 h-screen grid place-content-center flex-1'>
-              <div className='max-w-md'>
-                <span className='text-xs font-mono text-black/40 uppercase tracking-[0.3em] mb-4 block'>THE LAB PROCESS</span>
-                <h2 
-                  className='text-5xl md:text-6xl font-bold text-black leading-tight font-serif'
-                  style={{ fontFamily: 'Playfair Display, serif' }}
-                >
-                  The <DecryptedText 
-                    key={currentHeadline}
-                    text={currentHeadline} 
-                    animateOn="view"
-                    revealDirection="center"
-                    speed={40}
-                  /> <br /> to Reality.
-                </h2>
-                <p className='mt-8 text-xl text-gray-500 font-light leading-relaxed'>
-                  In the Lab, ideas aren’t just explored they evolve. 
-                  Through rapid experimentation and creative intelligence, 
-                  concepts transform into visuals, systems, and experiences 
-                  ready for the real world.
-                </p>
-              </div>
             </div>
           </div>
         </motion.section>
