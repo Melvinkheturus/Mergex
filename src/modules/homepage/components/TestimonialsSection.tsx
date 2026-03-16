@@ -2,70 +2,131 @@
 
 import { motion } from 'framer-motion';
 import { PARENT_TESTIMONIALS } from '../content';
-import { Quote } from 'lucide-react';
+import { Quote, Play } from 'lucide-react';
+import Image from 'next/image';
+import { Alex_Brush } from 'next/font/google';
+
+const signatureFont = Alex_Brush({
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap',
+});
 
 /**
  * TestimonialsSection - High-end social proof
- * Uses premium typography and minimalist card design.
+ * Curated for builders and makers.
  */
 export function TestimonialsSection() {
     return (
-        <section className="py-24 md:py-40 bg-white">
-            <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
-                {/* Header */}
-                <div className="text-center mb-20 md:mb-32">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-6xl font-bold font-display tracking-tight text-neutral-900 mb-6"
-                    >
-                        Voices of <span className="text-violet-600 italic">Momentum.</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto font-light"
-                    >
-                        We build for makers who refuse to wait. Here is what they have to say.
-                    </motion.p>
+        <section className="py-24 md:py-32 bg-white overflow-hidden">
+            <div className="container mx-auto px-6 max-w-7xl">
+                {/* Header Section - Matched to Process Section style */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-8">
+                    <div className="max-w-xl">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-2.5 h-2.5 rounded-full bg-violet-600 shadow-[0_0_10px_rgba(124,58,237,0.2)]" />
+                            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider text-neutral-500">
+                                WHAT MAKERS SAY
+                            </span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
+                            Don't just take our word.<br />
+                            Hear it from the builders.
+                        </h2>
+                    </div>
+                    <div className="hidden md:block h-[1px] flex-1 bg-neutral-100 ml-12 mb-6" />
                 </div>
 
-                {/* Testimonials Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    {PARENT_TESTIMONIALS.map((testimonial, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
-                            className="relative p-10 md:p-12 rounded-[2.5rem] bg-neutral-50 border border-neutral-100 hover:border-violet-100 transition-colors group"
-                        >
-                            <Quote className="absolute top-10 right-10 text-neutral-200 group-hover:text-violet-100 transition-colors" size={40} strokeWidth={1.5} />
+                {/* Horizontal Scroll Container - Bleeds to the right */}
+                <div className="flex overflow-x-auto snap-x snap-mandatory pb-12 -ml-6 pl-6 md:-ml-12 md:pl-12 scrollbar-hide">
+                    <div className="flex gap-6 pr-6 md:pr-12">
+                        {PARENT_TESTIMONIALS.map((testimonial, index) => {
+                            const isVideoCard = index === 1; // Arjun Mehta - Video card
 
-                            <p className="text-xl md:text-2xl text-neutral-800 leading-relaxed italic mb-12 relative z-10 font-medium">
-                                "{testimonial.quote}"
-                            </p>
+                            if (isVideoCard) {
+                                return (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.8, delay: index * 0.1 }}
+                                        className="relative group min-w-[280px] md:min-w-[340px] h-[480px] rounded-[1.5rem] overflow-hidden snap-center"
+                                    >
+                                        <Image
+                                            src={testimonial.avatar}
+                                            alt={testimonial.name}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                        
+                                        {/* Play Button Overlay */}
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
+                                                <Play className="text-white fill-white ml-1" size={16} />
+                                            </div>
+                                            <span className="text-[9px] text-white/80 font-medium tracking-widest uppercase">
+                                                Watch his story
+                                            </span>
+                                        </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-full bg-neutral-200 overflow-hidden relative border-2 border-white shadow-sm">
-                                    {/* Placeholder for real image if missing */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-neutral-200 to-neutral-400" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-neutral-900 text-lg">{testimonial.name}</h4>
-                                    <p className="text-sm text-neutral-500 uppercase tracking-widest font-bold">
-                                        {testimonial.role} • {testimonial.company}
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                                        {/* Signature Overlay */}
+                                        <div className="absolute bottom-8 left-8 right-8">
+                                            <h4 className={`${signatureFont.className} text-3xl text-white mb-1`}>
+                                                {testimonial.name}
+                                            </h4>
+                                            <p className="text-white/60 text-[9px] font-medium tracking-widest uppercase text-balance">
+                                                {testimonial.role}, {testimonial.company}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                );
+                            }
+
+                            return (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                                    className="relative p-8 rounded-[1.5rem] bg-white border border-neutral-100 flex flex-col justify-between min-w-[300px] md:min-w-[340px] snap-center hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500"
+                                >
+                                    <div>
+                                        <div className="mb-8 text-violet-500/20">
+                                            <Quote size={28} fill="currentColor" />
+                                        </div>
+
+                                        <p className="text-base md:text-[17px] text-neutral-800 leading-relaxed font-normal mb-8 italic">
+                                            "{testimonial.quote}"
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h4 className={`${signatureFont.className} text-3xl text-neutral-900 mb-1`}>
+                                            {testimonial.name}
+                                        </h4>
+                                        <p className="text-[9px] text-neutral-400 font-semibold tracking-widest uppercase">
+                                            {testimonial.role}, {testimonial.company}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
+
+            <style jsx global>{`
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
         </section>
     );
 }

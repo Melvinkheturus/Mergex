@@ -5,15 +5,15 @@ import {
   ShowreelSection,
   ProblemFragmentation,
   EcosystemSnapshot,
+  SkiperShowcase,
   ProcessSection,
+  TestimonialsSection,
 } from '@/modules/homepage';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
 const ArchitectureSection = dynamic(() => import('@/modules/homepage/components/ArchitectureSection').then(mod => mod.ArchitectureSection));
 const MarqueeStrip = dynamic(() => import('@/modules/homepage/components/MarqueeStrip').then(mod => mod.MarqueeStrip));
-const ThreeDMarqueeDemo = dynamic(() => import('@/modules/homepage/components/ThreeDMarqueeDemo').then(mod => mod.ThreeDMarqueeDemo));
 const FAQSection = dynamic(() => import('@/modules/homepage/components/FAQSection').then(mod => mod.FAQSection));
-const TestimonialsSection = dynamic(() => import('@/modules/shared/components/TestimonialsSection').then(mod => mod.TestimonialsSection));
 
 export default function Home() {
   return (
@@ -54,9 +54,9 @@ export default function Home() {
         <ProcessSection />
       </div>
 
-      {/* 5. Work Gallery — 3D Marquee Showcase */}
+      {/* 5. Work Gallery — Parallax Showcase */}
       <div id="work-gallery">
-        <ThreeDMarqueeDemo />
+        <SkiperShowcase />
       </div>
 
       {/* 8. Testimonials — Social Proof */}

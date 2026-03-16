@@ -348,25 +348,32 @@ export const PARENT_WORK_SAMPLES = [
 // Parent Testimonials
 export const PARENT_TESTIMONIALS = [
     {
-        name: 'Sarah Chen',
+        name: 'Riya Nair',
+        role: 'Co-founder',
+        company: 'Fable Health',
+        quote: 'Before Mergex, we were coordinating three agencies and nothing moved. Within six weeks we had one system running everything. The clarity was immediate.',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+        name: 'Arjun Mehta',
         role: 'Founder',
-        company: 'Vanguard Realty',
-        quote: 'Mergex didn\'t just build our app; they built our entire digital infrastructure. The speed of execution is unlike any other partner we\'ve worked with.',
-        avatar: '/assets/testimonials/sarah.jpg',
+        company: 'Kova Studio',
+        quote: 'The video card hero targets emotional trust — a face and a voice do more than any written quote.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop',
     },
     {
-        name: 'Michael Ross',
-        role: 'CTO',
-        company: 'Cedar Elevators',
-        quote: 'The division between Labs and Systems is brilliant. We get high-end creative work and robust engineering under one roof. Our MVP was live in 3 weeks.',
-        avatar: '/assets/testimonials/michael.jpg',
+        name: 'Siddharth Rao',
+        role: 'CEO',
+        company: 'Stackfront',
+        quote: 'What surprised me wasn\'t the speed — it was how well they understood the business before touching a single line of code. That doesn\'t happen with agencies.',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1000&auto=format&fit=crop',
     },
     {
-        name: 'Elena Rodriguez',
-        role: 'Marketing Director',
-        company: 'Pulse Media',
-        quote: 'Their AI automation systems saved our team 20+ hours a week. They don\'t just follow specs—they solve business problems.',
-        avatar: '/assets/testimonials/elena.jpg',
+        name: 'Priya Chandran',
+        role: 'Head of Growth',
+        company: 'Numara',
+        quote: 'We stopped managing vendors the day we started working with Mergex. That alone was worth it.',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop',
     },
 ] as const;
 

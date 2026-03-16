@@ -16,7 +16,7 @@ import { ProofSection } from './components/ProofSection';
 import { ShowreelSection } from './components/ShowreelSection';
 import { ParentHowItWorks } from './components/ParentHowItWorks';
 import { ParentWorkGallery } from './components/ParentWorkGallery';
-import { ThreeDMarqueeDemo } from './components/ThreeDMarqueeDemo';
+import { SkiperShowcase } from './components/SkiperShowcase';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ProcessSection } from './components/ProcessSection';
 
@@ -39,7 +39,7 @@ export {
     ShowreelSection,
     ParentHowItWorks,
     ParentWorkGallery,
-    ThreeDMarqueeDemo,
+    SkiperShowcase,
     TestimonialsSection,
     ProcessSection,
 };

@@ -239,7 +239,7 @@ export function LabsHero() {
                       Looks like an intentional dark cinematic atmosphere.
                       Once the canvas loads it covers this completely.
                     */}
-                    <div className="absolute inset-0 bg-neutral-950">
+                    <div className="absolute inset-0 bg-white">
                         {/* 
                           Static Fallback Image — Frame 1 (local)
                           Provides immediate visual feedback even before JS runs or Cloudinary responds.
@@ -252,14 +252,14 @@ export function LabsHero() {
                             }}
                         />
 
-                        {/* Centered radial glow */}
-                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(30,27,75,0.35)_0%,rgba(9,9,11,1)_70%)]" />
+                        {/* Centered radial glow - switched to a light variant */}
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(255,255,255,0.8)_0%,rgba(255,255,255,1)_70%)]" />
 
                         {/* Soft ambient orb — CSS animation, no JS */}
                         <div
                             className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full will-change-transform"
                             style={{
-                                background: 'radial-gradient(circle, rgba(59,7,100,0.4) 0%, transparent 70%)',
+                                background: 'radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)',
                                 animation: 'labsAmbientPulse 6s ease-in-out infinite',
                             }}
                         />
@@ -314,7 +314,7 @@ export function LabsHero() {
                         <TextReveal delay={0.1}>
                             <div
                                 ref={eyebrowRef}
-                                className="mb-8 flex items-center justify-center gap-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                                className="mb-8 flex items-center justify-center gap-3"
                             >
                                 <p
                                     className="text-[10px] md:text-xs tracking-[0.3em] text-white/80 uppercase font-medium"
@@ -336,14 +336,14 @@ export function LabsHero() {
                         <div className="overflow-hidden p-4 -m-4">
                             <h1
                                 ref={headlineRef}
-                                className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] max-w-5xl mx-auto origin-bottom"
+                                className="text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] font-semibold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/60 max-w-5xl mx-auto origin-bottom"
                                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                             >
                                 <span className="hero-word inline-block">Create</span>{' '}
                                 <span className="hero-word inline-block">at</span>{' '}
                                 <span className="hero-word inline-block">the</span>{' '}
                                 <span
-                                    className="hero-word italic font-normal text-white drop-shadow-sm inline-block"
+                                    className="hero-word italic font-normal text-white inline-block"
                                     style={{
                                         fontFamily: 'var(--font-playfair)',
                                         WebkitTextFillColor: 'white'
@@ -363,7 +363,7 @@ export function LabsHero() {
 
                         {/* BOTTOM-LEFT: supporting tagline */}
                         <div
-                            className="max-w-xs md:max-w-sm drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] relative z-20 mt-8 md:mt-0 text-center md:text-left"
+                            className="max-w-xs md:max-w-sm relative z-20 mt-8 md:mt-0 text-center md:text-left"
                         >
                             <TextReveal delay={0.6} duration={1.2}>
                                 <p
@@ -384,7 +384,7 @@ export function LabsHero() {
                             className="flex flex-col items-center md:items-end gap-5 md:gap-5 relative z-20 mt-6 md:mt-0"
                         >
                             <div
-                                className="text-center md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
+                                className="text-center md:text-right text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase leading-[1.8] font-light"
                                 style={{ fontFamily: 'var(--font-manrope)' }}
                             >
                                 <TextReveal delay={0.8}>
