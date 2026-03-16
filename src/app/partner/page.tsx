@@ -1,37 +1,24 @@
-'use client';
+import type { Metadata } from 'next';
+import { PartnerPageView } from '@/modules/partnership/components/PartnerPageView';
 
-import { useState } from 'react';
-import {
-    PartnershipHero,
-    WhyPartner,
-    PartnershipTypes,
-    ReferralExplainer,
-    TrustSection,
-    PartnerCTA,
-    PartnerFAQ,
-} from '@/modules/partnership';
+export const metadata: Metadata = {
+    title: {
+        absolute: 'Mergex — Build Together. Grow Together.'
+    },
+    description: 'Strategic partnerships and referral programs designed for growth. Build together, grow together with Mergex.',
+    keywords: ['partnerships', 'referral program', 'strategic partnership', 'business growth', 'Mergex partner'],
+    openGraph: {
+        title: 'Mergex — Build Together. Grow Together.',
+        description: 'Strategic partnerships and referral programs designed for growth.',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Mergex — Build Together. Grow Together.',
+        description: 'Strategic partnerships and referral programs designed for growth.',
+    },
+};
 
 export default function PartnerPage() {
-    const [selectedType, setSelectedType] = useState<'strategic' | 'referral' | null>(null);
-
-    const handlePartnershipTypeClick = (typeId: 'strategic' | 'referral') => {
-        setSelectedType(typeId);
-        // Scroll to CTA section
-        setTimeout(() => {
-            const ctaSection = document.querySelector('section:last-of-type');
-            ctaSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-    };
-
-    return (
-        <main className="min-h-screen bg-white">
-            <PartnershipHero />
-            <WhyPartner />
-            <PartnershipTypes onApplyClick={handlePartnershipTypeClick} />
-            <ReferralExplainer />
-            <TrustSection />
-            <PartnerFAQ />
-            <PartnerCTA />
-        </main>
-    );
+    return <PartnerPageView />;
 }

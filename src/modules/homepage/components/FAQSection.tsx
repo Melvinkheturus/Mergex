@@ -187,7 +187,10 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                                         <button 
                                                             onClick={() => {
                                                                 const event = new CustomEvent('mergex-open-chat', {
-                                                                    detail: { message: faq.question }
+                                                                    detail: { 
+                                                                        question: faq.question,
+                                                                        chatPrompt: (faq as any).chatPrompt 
+                                                                    }
                                                                 });
                                                                 window.dispatchEvent(event);
                                                             }}

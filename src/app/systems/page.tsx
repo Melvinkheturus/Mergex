@@ -19,20 +19,23 @@ import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRe
 
 
 export const metadata: Metadata = {
-    title: 'Mergex Systems - Solution Partner | Custom Software & AI Automation',
+    title: {
+        absolute: 'Mergex Systems — Build. Automate. Scale.'
+    },
     description: 'Building and automating systems that help businesses scale. MVPs in weeks, not months. Custom software, AI automation, design, and marketing solutions.',
     keywords: ['custom software development', 'MVP development', 'AI automation', 'solution partner', 'web app development', 'mobile app development', 'business automation'],
     openGraph: {
-        title: 'Mergex Systems - Your Solution Partner',
+        title: 'Mergex Systems — Build. Automate. Scale.',
         description: 'MVPs in weeks, not months. Building systems that scale.',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mergex Systems - Solution Partner',
+        title: 'Mergex Systems — Build. Automate. Scale.',
         description: 'Building and automating systems that help businesses scale',
     },
 };
+
 
 export default function SystemsPage() {
     return (

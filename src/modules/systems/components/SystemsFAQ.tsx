@@ -6,47 +6,12 @@ import { Plus, Minus, Sparkles } from 'lucide-react';
 import { TextReveal } from '@/modules/shared/components/TextReveal';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SYSTEMS_FAQ_DATA } from '@/modules/homepage/content/faq';
 
 /**
  * SystemsFAQ - FAQ accordion section
  * Minimal white design with purple gradient accents
  */
-
-interface FAQItem {
-    question: string;
-    answer: string;
-}
-
-const FAQ_DATA: FAQItem[] = [
-    {
-        question: 'What is the incubation program?',
-        answer: 'Our incubation program provides early-stage startups with comprehensive support including technical development, strategic guidance, and resources to help transform ideas into successful products.'
-    },
-    {
-        question: 'What is the acceleration program?',
-        answer: 'The acceleration program is designed for startups that have achieved product-market fit and are ready to scale. We provide intensive support to accelerate growth through technology, marketing, and strategic partnerships.'
-    },
-    {
-        question: 'Which verticals are you investing in?',
-        answer: 'We focus on technology-driven startups across SaaS, AI/ML, fintech, healthtech, and enterprise software. We look for innovative solutions that solve real problems with scalable business models.'
-    },
-    {
-        question: 'What is your investment thesis?',
-        answer: 'We invest in pre-seed and seed stage startups with strong technical teams, clear market opportunities, and the potential for rapid growth. We typically take equity positions in exchange for comprehensive technical and strategic support.'
-    },
-    {
-        question: 'In which stages are you investing?',
-        answer: 'We primarily focus on pre-seed and seed stage investments, where we can have the most impact through our technical expertise and strategic guidance. We offer extensive resources and guidance to help startups achieve a successful launch and sustainable growth.'
-    },
-    {
-        question: 'Who should apply for the acceleration and incubation programs?',
-        answer: 'Early-stage founders with innovative ideas (incubation) or startups with validated products seeking to scale (acceleration). Ideal candidates are committed teams with clear vision and willingness to collaborate closely with our experts.'
-    },
-    {
-        question: 'How does Chainlink Labs differentiate itself from other investment firms?',
-        answer: 'Unlike traditional investment firms, we provide hands-on technical development, design, and go-to-market support. We\'re not just investors—we\'re your technical co-founders and strategic partners committed to building your success.'
-    },
-];
 
 export function SystemsFAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -65,24 +30,24 @@ export function SystemsFAQ() {
                             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A1A1A]"
                                 style={{ fontFamily: 'var(--font-geist-sans)' }}
                             >
-                                FAQ
+                                {SYSTEMS_FAQ_DATA.headline}
                             </h2>
                         </TextReveal>
                         <TextReveal delay={0.1}>
                             <p className="text-lg text-[#666666]">
-                                Most Common Questions
+                                {SYSTEMS_FAQ_DATA.subheadline} {SYSTEMS_FAQ_DATA.subheadlineItalic}
                             </p>
                         </TextReveal>
                         <TextReveal delay={0.2}>
                             <p className="text-sm text-[#999999] mt-1">
-                                We compiled these are the FAQ all the answers
+                                {SYSTEMS_FAQ_DATA.description}
                             </p>
                         </TextReveal>
                     </div>
 
                     {/* FAQ List */}
                     <div className="space-y-4">
-                        {FAQ_DATA.map((faq, index) => (
+                        {SYSTEMS_FAQ_DATA.questions.map((faq, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
@@ -121,10 +86,23 @@ export function SystemsFAQ() {
                                     <div className="px-6 pb-6 text-[#666666] text-sm leading-relaxed">
                                         <p>{faq.answer}</p>
                                         <div className="mt-4 flex">
-                                            <Link href={`/ask-mergex?q=${encodeURIComponent(faq.question)}`} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-50 text-purple-700 border border-purple-100 hover:bg-purple-100 hover:text-purple-800 transition-colors text-xs font-medium">
+                                            <button 
+                                                onClick={() => {
+                                                    const event = new CustomEvent('mergex-open-chat', {
+                                                        detail: { 
+                                                            question: faq.question,
+                                                            chatPrompt: (faq as any).chatPrompt 
+                                                        }
+                                                    });
+
+                                                    window.dispatchEvent(event);
+                                                }}
+                                                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-50 text-purple-700 border border-purple-100 hover:bg-purple-100 hover:text-purple-800 transition-colors text-xs font-medium"
+                                            >
                                                 Ask Mergex about this
-                                            </Link>
+                                            </button>
                                         </div>
+
                                     </div>
                                 </motion.div>
                             </motion.div>

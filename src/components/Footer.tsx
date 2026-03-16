@@ -9,6 +9,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { TextRoll } from '@/components/ui/skiper-ui/skiper58';
+import { Great_Vibes } from 'next/font/google';
+
+const greatVibes = Great_Vibes({
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 
 function FooterLink({ href, label }: { href: string; label: string }) {
     return (
@@ -303,7 +311,8 @@ export default function Footer() {
                                                     text={pathname === '/labs' ? 'L' : 'S'}
                                                     tag="span"
                                                     className="text-[14vw] md:text-[13vw] leading-none font-normal text-white select-none overflow-visible px-[0.1em] pb-10"
-                                                    style={{ fontFamily: "'Great Vibes', cursive" }}
+                                                    style={greatVibes.style}
+
                                                     splitType="chars"
                                                     delay={200}
                                                     duration={1.2}

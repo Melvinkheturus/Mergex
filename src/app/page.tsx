@@ -15,22 +15,6 @@ const ThreeDMarqueeDemo = dynamic(() => import('@/modules/homepage/components/Th
 const FAQSection = dynamic(() => import('@/modules/homepage/components/FAQSection').then(mod => mod.FAQSection));
 const TestimonialsSection = dynamic(() => import('@/modules/shared/components/TestimonialsSection').then(mod => mod.TestimonialsSection));
 
-export const metadata: Metadata = {
-  title: 'Mergex - Your All-in-One Solution Partner for AI, Automation & Growth',
-  description: 'From AI-powered content to custom development—we help businesses build and scale faster. Explore Mergex Labs, Systems, and Platform divisions.',
-  keywords: ['AI automation', 'custom software development', 'content creation', 'business solutions', 'MVP development', 'AI content studio'],
-  openGraph: {
-    title: 'Mergex - Your Solution Partner for AI & Growth',
-    description: 'One partner. Multiple capabilities. Fast results.',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mergex - Your Solution Partner',
-    description: 'AI, automation, and development solutions for modern businesses',
-  },
-};
-
 export default function Home() {
   return (
     <main className="">

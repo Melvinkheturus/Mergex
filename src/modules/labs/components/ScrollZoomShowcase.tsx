@@ -31,7 +31,9 @@ export function ScrollZoomShowcase() {
     const overlayRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const videoCardRef = useRef<HTMLDivElement>(null);
+    const marqueeRef = useRef<HTMLDivElement>(null);
     const lenisRef = useRef<Lenis | null>(null);
+
     const [isVideoOpen, setIsVideoOpen] = useState(false);
     const [modelImageUrl, setModelImageUrl] = useState(CLOUDINARY_ASSETS.saraVega);
 
@@ -63,7 +65,7 @@ export function ScrollZoomShowcase() {
         if (!containerRef.current || !imageContainerRef.current || !contentRef.current || !overlayRef.current) return;
 
         const ctx = gsap.context(() => {
-            // Image zoom animation with a "hold" duration at the end
+            // Image scale animation: 0-70% Zoom, 70-100% Hold
             gsap.fromTo(
                 imageContainerRef.current,
                 {
@@ -71,8 +73,8 @@ export function ScrollZoomShowcase() {
                 },
                 {
                     keyframes: [
-                        { scale: 1, duration: 0.5 }, // Finish growth at 50% scroll
-                        { scale: 1, duration: 0.5 }  // Hold for the last 50%
+                        { scale: 1, duration: 0.7 }, // First 70%: Scale up to 1
+                        { scale: 1, duration: 0.3 }, // Final 30%: Hold at 1
                     ],
                     ease: 'none',
                     scrollTrigger: {
@@ -92,6 +94,37 @@ export function ScrollZoomShowcase() {
                         onLeaveBack: () => {
                             window.dispatchEvent(new CustomEvent('mergex:toggle-navbar', { detail: { hidden: false } }));
                         }
+                    },
+                }
+            );
+
+            // Opacity animation for the exit - now triggers even earlier (at 70%)
+            gsap.to(
+                [contentRef.current, imageContainerRef.current],
+                {
+                    opacity: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: '70% top', // Trigger significantly earlier while in "Image 2" state
+                        end: '78% top',   // Relative immediate fade
+                        scrub: true,
+                    },
+                }
+            );
+
+            // Black background fade-in to prepare for the dark Gallery section
+            gsap.fromTo(
+                ".exit-bg-overlay",
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: '65% top',
+                        end: '75% top',
+                        scrub: 1,
                     },
                 }
             );
@@ -137,8 +170,22 @@ export function ScrollZoomShowcase() {
                     },
                 }
             );
-
+            // Hide marquee when image reaches full screen (at 70% scroll)
+            gsap.to(
+                marqueeRef.current,
+                {
+                    opacity: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: '70% top',
+                        end: '72% top', // Fast fade out
+                        scrub: true,
+                    },
+                }
+            );
         });
+
 
         // Force refresh after a short delay to ensure layout is settled
         const timer = setTimeout(() => {
@@ -156,9 +203,16 @@ export function ScrollZoomShowcase() {
             ref={containerRef}
             className="relative h-[250vh] bg-white"
         >
+            {/* Dark background overlay for seamless transition to dark WorkGallery */}
+            <div className="exit-bg-overlay absolute inset-0 bg-black pointer-events-none z-0" />
+
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
                 {/* Background Text Marquee - Sits behind the image */}
-                <div className="absolute inset-0 z-0 flex items-center justify-center opacity-70">
+                <div 
+                    ref={marqueeRef}
+                    className="absolute inset-0 z-0 flex items-center justify-center opacity-70"
+                >
+
                     <div className="w-full">
                         <ScrollVelocity
                             texts={[

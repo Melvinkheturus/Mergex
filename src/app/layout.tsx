@@ -20,54 +20,71 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mergex.com'),
+  metadataBase: new URL("https://mergex.in"),
   title: {
-    default: "Mergex | Architecting the Future of Tech",
-    template: "%s | Mergex"
+    default: "Mergex — One System. Zero Friction.",
+    template: "%s | Mergex",
   },
-  description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality with AI-driven development and strategic innovation.",
-  keywords: ["software development", "AI automation", "SaaS", "tech ecosystem", "digital transformation", "enterprise software", "innovation labs"],
-  authors: [{ name: "Mergex Ecosystems Inc." }],
-  creator: "Mergex Ecosystems Inc.",
-  publisher: "Mergex Ecosystems Inc.",
+  description:
+    "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation. One system. Zero friction.",
+  keywords: [
+    "Mergex",
+    "business systems",
+    "workflow automation",
+    "AI infrastructure",
+    "scalable foundation",
+    "unified systems",
+    "software development",
+    "growth infrastructure",
+    "AI automation",
+    "startup systems",
+    "MVP development",
+    "business architecture",
+  ],
+  authors: [{ name: "Mergex" }],
+  creator: "Mergex",
+  publisher: "Mergex",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
-    title: "Mergex | Architecting the Future of Tech",
-    description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality.",
-    url: 'https://mergex.com',
-    siteName: 'Mergex',
-    locale: 'en_US',
-    type: 'website',
+    title: "Mergex — One System. Zero Friction.",
+    description:
+      "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
+    url: "https://mergex.in",
+    siteName: "Mergex",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: 'https://mergex.com/og-image.jpg', // Ensure this image exists in public/
+        url: "https://mergex.in/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Mergex Ecosystems',
+        alt: "Mergex — One System. Zero Friction.",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Mergex | Architecting the Future of Tech",
-    description: "We build ecosystems, not just software. Bridging the gap between concept and scalable reality.",
-    images: ['https://mergex.com/twitter-image.jpg'], // Ensure this image exists in public/
-    creator: '@mergex_inc',
+    card: "summary_large_image",
+    title: "Mergex — One System. Zero Friction.",
+    description:
+      "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
+    images: ["https://mergex.in/twitter-image.jpg"],
+    creator: "@mergexco",
   },
   alternates: {
-    canonical: 'https://mergex.com',
+    canonical: "https://mergex.in",
   },
 };
+
 import LayoutContent from "@/components/LayoutContent";
 
 export default function RootLayout({
@@ -78,15 +95,34 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect to Google Fonts */}
+        {/* Preconnect to font sources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="preconnect" href="https://api.fontshare.com" />
 
         {/* Favicon */}
         <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon/favicon-16x16.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicon/apple-touch-icon.png"
+        />
         <link rel="manifest" href="/favicon/site.webmanifest" />
 
         {/* Material Icons */}
@@ -95,60 +131,77 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* Clash Display Font */}
+        {/* Clash Display — primary display font */}
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"
         />
 
-        {/* Space Grotesk - Distinctive modern geometric sans */}
+        {/* Space Grotesk — modern geometric sans */}
         <link
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
-        {/* JetBrains Mono - Technical monospace for labels */}
+        {/* JetBrains Mono — technical labels */}
         <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
 
-        {/* DM Sans - Distinctive geometric sans for How We Work */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* IBM Plex Mono - Technical monospace for labels in How We Work */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Outfit - Geometric sans for Engagement Model */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Urbanist - Modern sans for Tech Stack marquee */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Great Vibes - Elegant script font for footer division label initials */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Alex Brush - Elegant script font for Sara text */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
-          rel="stylesheet"
+        {/* Schema.org — Organization */}
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Mergex",
+              url: "https://mergex.in",
+              logo: "https://mergex.in/logo/mergex-logo.png",
+              description:
+                "Mergex builds the systems behind modern businesses by integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
+              email: "hello@mergex.in",
+              areaServed: "Worldwide",
+              foundingLocation: {
+                "@type": "Place",
+                address: {
+                  "@type": "PostalAddress",
+                  addressRegion: "Tamil Nadu",
+                  addressCountry: "IN",
+                },
+              },
+              sameAs: ["https://twitter.com/mergexco"],
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Mergex Services",
+                itemListElement: [
+                  {
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Mergex Systems",
+                      description:
+                        "Business infrastructure, software platforms, workflow automation, and AI integrations.",
+                    },
+                  },
+                  {
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Mergex Labs",
+                      description:
+                        "AI-powered creative production — ads, visual assets, video content, and digital media.",
+                    },
+                  },
+                ],
+              },
+            }),
+          }}
         />
       </head>
+
       <body
         className={`${manrope.variable} ${playfair.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning

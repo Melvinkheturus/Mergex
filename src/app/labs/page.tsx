@@ -13,20 +13,23 @@ import {
 import { ExperimentsGallery } from '@/modules/labsPortfolio';
 
 export const metadata: Metadata = {
-    title: 'Mergex Labs - AI Content Studio | Creative AI Solutions',
+    title: {
+        absolute: 'Mergex Labs — AI-Powered Creative Production'
+    },
     description: 'Where creativity meets intelligent systems. Gen-AI workflows for brands that need to move fast. AI-generated visuals, videos, campaigns, and brand assets.',
     keywords: ['AI content studio', 'generative AI', 'AI visuals', 'AI video creation', 'content automation', 'creative AI', 'brand assets'],
     openGraph: {
-        title: 'Mergex Labs - AI Content Studio',
+        title: 'Mergex Labs — AI-Powered Creative Production',
         description: 'Creative AI solutions for modern brands',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mergex Labs - AI Content Studio',
+        title: 'Mergex Labs — AI-Powered Creative Production',
         description: 'Where creativity meets intelligent systems',
     },
 };
+
 
 import LabsScrollRegistrar from "@/modules/labs/components/LabsScrollRegistrar";
 
@@ -55,11 +58,6 @@ export default function LabsPage() {
                 <WhatWeCreate />
             </div>
 
-            {/* 5. Work Gallery — CRITICAL Visual Proof */}
-            <div id="work">
-                <WorkGallery />
-            </div>
-
             {/* 4. Featured Experiments Gallery */}
             <div id="experiments">
                 <ExperimentsGallery />
@@ -68,6 +66,11 @@ export default function LabsPage() {
             {/* 6. Sara Reveal / Scroll Experience — After Proof */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
+            </div>
+
+            {/* 5. Work Gallery — CRITICAL Visual Proof */}
+            <div id="work">
+                <WorkGallery />
             </div>
 
             {/* 7. From Experiment to Impact — Process */}

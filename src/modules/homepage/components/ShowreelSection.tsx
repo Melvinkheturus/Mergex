@@ -5,6 +5,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SHOWREEL_CONTENT } from '../content';
 import { BlurVignette } from '@/components/ui/BlurVignette';
+import { Outfit } from 'next/font/google';
+
+const outfit = Outfit({
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -242,7 +249,8 @@ export function ShowreelSection() {
                             className="font-medium uppercase text-neutral-950 tracking-[-0.02em] text-center flex items-center justify-center"
                             style={{
                                 fontSize: 'clamp(3rem, 9vw, 12rem)', // Reduced for mobile to prevent cropping
-                                fontFamily: '"Outfit", system-ui, sans-serif',
+                                fontFamily: outfit.style.fontFamily,
+
                                 lineHeight: 0.9,
                             }}
                         >

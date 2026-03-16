@@ -114,27 +114,33 @@ export const PRICING_FAQ = {
     headline: 'Pricing Questions',
     questions: [
         {
-            question: 'What actually determines the final project cost?',
-            answer: 'Cost is driven by two main factors: Technical complexity (what we are building) and Velocity (how fast you need it). After our strategy call, we provide a transparent quote that breaks down exactly where your investment is going.',
+            question: 'How does Mergex price its projects?',
+            answer: 'Pricing depends on the complexity and scope of the system being built. Every engagement is scoped honestly — Mergex recommends the most efficient approach, not the most expensive one. After a strategy conversation, you receive a transparent quote that breaks down exactly where your investment is going.',
+            chatPrompt: "What's the scope of your project? I'll help you understand the pricing factors."
         },
         {
-            question: 'Do you offer fixed pricing?',
-            answer: 'For clearly defined projects like MVPs or brand foundations, we offer fixed pricing. For more complex, evolving systems, we often use a monthly or phased model that allows for agility and pivots without constant contract renegotiation.',
+            question: 'What factors affect the cost of a system build?',
+            answer: 'The main factors are technical complexity — what is actually being built — and velocity — how fast it needs to be delivered. Other variables include the number of integrations, AI and automation components, and whether the engagement is a one-time build or an ongoing partnership. Mergex will always tell you what is worth building and what is not.',
+            chatPrompt: "Is your project a one-time build or an ongoing partnership? Let's discuss what impacts the cost."
         },
         {
-            question: 'Do you work on monthly retainers?',
-            answer: 'We prefer the term "Partnerships." Unlike traditional agencies that charge for "access," our monthly models are focused on continuous delivery — meaning you pay for a dedicated amount of execution and progress every month.',
+            question: 'Do you offer fixed pricing or flexible engagement models?',
+            answer: 'Both. Launch and MVP projects are structured as fixed builds with defined scope and milestones. Growth and infrastructure engagements are scoped iteratively. Ongoing partnerships are structured as monthly or phased engagements based on what the business actually needs. Mergex recommends the model that best fits the project — not the one that maximizes revenue.',
+            chatPrompt: "Are you looking for a fixed MVP build or an iterative growth partnership? I'll explain the best model for you."
         },
         {
-            question: 'Can we scale the project in phases to manage investment?',
-            answer: 'Absolutely. We highly recommend a phased approach. Start with the core system (Phase 1), validate it, and then unlock more advanced features (Phase 2) once the foundation is solid. This reduces risk and manages cash flow.',
+            question: 'Is the ₹299 priority access credited toward the project?',
+            answer: 'Yes. The ₹299 priority access fee is a project credit. If you move forward with a Mergex engagement, the full amount is deducted from the first project payment. It exists to ensure focused, genuine conversations — not to generate revenue.',
+            chatPrompt: "Ready to book your priority access? I can clarify how the credit works toward your first payment."
         },
         {
-            question: 'How do you handle scope changes after a price is set?',
-            answer: 'We build flexibility into our agreements. Minor changes are usually absorbed. If a significant pivot is required, we simply re-evaluate the priority list together. You remain in control of the budget at all times.',
+            question: 'What happens after the system is built?',
+            answer: 'After launch, businesses can continue working with Mergex to expand and optimize their systems. This may include new automation workflows, AI integrations, system upgrades, and infrastructure improvements as the business grows. The initial build is the foundation — the partnership is ongoing.',
+            chatPrompt: "What is your long-term goal for this system? I'll share how we support growth after launch."
         },
     ],
 } as const;
+
 
 export const PRICING_CTA = {
     headline: 'Let\'s Define the Right Scope Before We Define the Price',

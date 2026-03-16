@@ -14,22 +14,27 @@ const PARTNER_FAQ_DATA = {
     description: "Everything you need to know about working together as strategic or referral partners.",
     questions: [
         {
-            question: "Who is the ideal Mergex partner?",
-            answer: "We partner with agencies, consultants, individual connectors, and platform owners who work with businesses needing technology, AI, or content systems. If you have clients who need to move faster or simplify their vendor stack, we're likely a good fit."
+            question: "What does it mean to partner with Mergex?",
+            answer: "Partnering with Mergex means having a single team responsible for building and evolving your business systems over time. Instead of coordinating multiple vendors, you work with Mergex as a unified technology and growth partner — one system, one team, aligned to your long-term goals.",
+            chatPrompt: "Are you looking for a technology partner or a growth partner? Let's discuss how we can align."
         },
         {
-            question: "Is the referral program purely revenue-based?",
-            answer: "While we offer competitive referral commissions, we prioritize value alignment. We want partners who believe in our 'Unified Growth' philosophy. We're looking for quality connections where Mergex can truly move the needle for the client."
+            question: "Who is the partnership model designed for?",
+            answer: "The partnership model is designed for businesses that need continuous system development and infrastructure support — not a one-time build. This includes startups scaling their first real system, companies replacing fragmented vendor ecosystems, and established businesses that want to automate and grow with structure.",
+            chatPrompt: "What is the biggest technical challenge currently blocking your growth?"
         },
         {
-            question: "Do you offer white-label services for agencies?",
-            answer: "Yes, for select strategic partners. We can function as your 'AI & Systems' extension, allowing you to offer advanced technical and creative capabilities under your own brand while we handle the execution architecture."
+            question: "How does the venture partnership model work?",
+            answer: "In select cases, Mergex works as a long-term venture partner — helping build and operate the digital infrastructure of a business while staying aligned with the company's growth trajectory. The exact structure depends on the business model, stage, and goals. These partnerships are scoped through a dedicated conversation.",
+            chatPrompt: "Tell me about your business model. I'll explain how our venture partnership structure works."
         },
         {
-            question: "What is the first step to becoming a partner?",
-            answer: "Start by filling out the partnership form or asking our AI assistant below. We'll then schedule a brief conversation to understand your network, how you work, and where we can create the most mutual value."
+            question: "How do we start a partnership conversation with Mergex?",
+            answer: "Start by reaching out through the website or emailing hello@mergex.in. The first step is a focused conversation where Mergex learns about your business, your current systems, and where growth is being blocked. From there, the team recommends the clearest way forward. No pitch. Just clarity.",
+            chatPrompt: "Ready to simplify your systems? What's the best way for us to learn about your current setup?"
         }
     ],
+
     aiSuggestions: [
         "What are the referral commission rates?",
         "Do you provide marketing materials for partners?",
@@ -94,7 +99,26 @@ export function PartnerFAQ() {
                             )}>
                                 <div className="p-6 pt-0 text-gray-600 leading-relaxed font-light text-lg">
                                     {faq.answer}
+                                    <div className="mt-4 flex">
+                                        <button 
+                                            onClick={() => {
+                                                const event = new CustomEvent('mergex-open-chat', {
+                                                    detail: { 
+                                                        question: faq.question,
+                                                        chatPrompt: faq.chatPrompt 
+                                                    }
+                                                });
+
+                                                window.dispatchEvent(event);
+                                            }}
+                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 border border-violet-100 hover:bg-violet-100 hover:text-violet-800 transition-all text-xs font-semibold"
+                                        >
+                                            <MessageCircle className="w-3.5 h-3.5" />
+                                            Ask Mergex about this
+                                        </button>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     ))}

@@ -2,6 +2,13 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Outfit } from 'next/font/google';
+
+const outfit = Outfit({
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 import type { Testimonial } from '../types/testimonial';
 
 const TESTIMONIALS: Testimonial[] = [
@@ -129,7 +136,8 @@ export function TestimonialsSection() {
             <motion.div
                 style={{ 
                     y: yTransform,
-                    fontFamily: '"Outfit", system-ui, sans-serif',
+                    fontFamily: outfit.style.fontFamily,
+
                 }}
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vh] font-black text-neutral-950 opacity-[0.02] select-none pointer-events-none z-0 tracking-[-0.05em] leading-none whitespace-nowrap"
             >

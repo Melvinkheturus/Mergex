@@ -47,8 +47,27 @@ export function PricingFAQ() {
                             {openIndex === index && (
                                 <div className="border-t border-gray-100 px-6 pb-6 pt-4">
                                     <p className="leading-relaxed text-gray-600">{faq.answer}</p>
+                                    <div className="mt-4 flex">
+                                        <button 
+                                            onClick={() => {
+                                                const event = new CustomEvent('mergex-open-chat', {
+                                                    detail: { 
+                                                        question: faq.question,
+                                                        chatPrompt: (faq as any).chatPrompt 
+                                                    }
+                                                });
+
+                                                window.dispatchEvent(event);
+                                            }}
+                                            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-50 text-violet-700 border border-violet-100 hover:bg-violet-100 hover:text-violet-800 transition-colors text-xs font-medium"
+                                        >
+                                            Ask Mergex about this
+                                        </button>
+                                    </div>
                                 </div>
                             )}
+
+
                         </motion.div>
                     ))}
                 </div>

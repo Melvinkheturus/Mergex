@@ -2,8 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Outfit } from 'next/font/google';
 import Image from 'next/image';
 import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
+
+const outfit = Outfit({
+    subsets: ['latin'],
+    display: 'swap',
+});
 
 /**
  * Note: Add team images to /public/images/team/
@@ -168,7 +174,8 @@ export function TeamSection() {
             <motion.div
                 style={{ 
                     y: yTransform,
-                    fontFamily: '"Outfit", system-ui, sans-serif',
+                    fontFamily: outfit.style.fontFamily,
+
                 }}
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vh] font-black text-neutral-900 opacity-[0.02] select-none pointer-events-none z-0 tracking-[-0.05em] leading-none whitespace-nowrap uppercase"
             >

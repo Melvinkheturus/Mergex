@@ -4,6 +4,13 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { Outfit } from 'next/font/google';
+
+const outfit = Outfit({
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-demo';
 import { TextReveal } from '@/modules/shared/components/TextReveal';
 
@@ -38,7 +45,8 @@ export function ArchitectureSection() {
                             style={{ 
                                 y: titleY,
                                 fontSize: 'clamp(2rem, 11vw, 13.5rem)',
-                                fontFamily: '"Outfit", system-ui, sans-serif',
+                                fontFamily: outfit.style.fontFamily,
+
                                 letterSpacing: '-0.02em',
                                 lineHeight: 0.9,
                             }}
@@ -75,7 +83,8 @@ export function ArchitectureSection() {
                             <TextReveal>
                                 <span
                                     className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-6"
-                                    style={{ fontFamily: '"Outfit", system-ui' }}
+                                    style={outfit.style}
+
                                 >
                                     The Foundation
                                 </span>
@@ -84,7 +93,8 @@ export function ArchitectureSection() {
                             <TextReveal delay={0.1}>
                                 <p
                                     className="text-2xl md:text-3xl lg:text-[2.1rem] font-medium leading-[1.3] text-neutral-900 mb-8"
-                                    style={{ fontFamily: '"Outfit", system-ui', letterSpacing: '-0.01em' }}
+                                    style={{ ...outfit.style, letterSpacing: '-0.01em' }}
+
                                 >
                                     Behind every scalable company
                                     <br className="hidden md:block" /> is a{' '}
@@ -137,7 +147,8 @@ export function ArchitectureSection() {
                                 <TextReveal>
                                     <span
                                         className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-3"
-                                        style={{ fontFamily: '"Outfit", system-ui' }}
+                                        style={outfit.style}
+
                                     >
                                         System Intelligence
                                     </span>

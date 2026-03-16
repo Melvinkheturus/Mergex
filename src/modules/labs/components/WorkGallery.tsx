@@ -32,14 +32,6 @@ const galleryImages = [
 export function WorkGallery() {
     const sectionRef = useRef<HTMLElement>(null);
 
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ['start end', 'end start'],
-    });
-
-    // We've removed the fade-in opacity/scale because it was causing 
-    // the underlying white body background to show through before
-    // the section was fully transitioned.
     const opacity = 1;
     const scale = 1;
 
@@ -63,17 +55,17 @@ export function WorkGallery() {
             />
 
             {/* Text Overlay - Left Side */}
-            <div className="absolute left-0 top-[52%] -translate-y-1/2 z-30 pl-4 md:pl-8 lg:pl-12 max-w-xl pointer-events-none">
+            <div className="absolute left-0 top-[55%] -translate-y-1/2 z-30 pl-4 md:pl-8 lg:pl-12 max-w-xl pointer-events-none">
                 <h2
-                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.1] mb-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.1] mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]"
                     style={{
                         fontFamily: 'var(--font-manrope)',
                         letterSpacing: '-0.02em',
                     }}
                 >
-                    Discover Intelligence{' '}
-                    <span className="block mt-1">Shaped Into</span>
-                    <span className="block mt-1">Visuals</span>
+                    The New Standard in
+                    <span className="block mt-1 text-white/90">Digital Identity &</span>
+                    <span className="block mt-1 text-white/90">Commercial Muses</span>
                 </h2>
             </div>
 

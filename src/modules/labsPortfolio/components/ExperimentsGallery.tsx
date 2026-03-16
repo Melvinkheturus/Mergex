@@ -90,40 +90,38 @@ export function ExperimentsGallery() {
     return (
         <section ref={sectionRef} className="relative py-32 overflow-hidden bg-white">
             <style>{swiperStyles}</style>
-            <div className="container mx-auto max-w-7xl px-2 text-gray-900">
+            <div className="container mx-auto max-w-[1600px] px-2 text-gray-900">
+
                 {/* Section Header */}
                 <motion.div
-                    className="mb-24 flex flex-col xl:flex-row justify-between items-start gap-12 xl:gap-8 w-full px-4 md:px-8 xl:px-12 2xl:px-20"
+                    className="mb-24 flex flex-col items-center text-center w-full px-4 md:px-6"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    {/* Left Side - Headlines */}
-                    <div className="xl:w-auto flex flex-col justify-start text-left">
-                        <div className="mb-4">
-                            <span
-                                className="text-xs md:text-sm font-semibold text-purple-600 uppercase tracking-[0.25em]"
-                            >
-                                EXPLORATIONS
-                            </span>
-                        </div>
-                        <h2
-                            className="text-4xl md:text-5xl lg:text-[3.5rem] tracking-tighter leading-[1] whitespace-nowrap flex flex-row items-baseline font-bold"
+                    <div className="mb-6">
+                        <span
+                            className="text-xs md:text-sm font-semibold text-purple-600 uppercase tracking-[0.25em]"
                         >
-                            Applied Creative Intelligence
-                        </h2>
+                            EXPLORATIONS
+                        </span>
                     </div>
 
-                    {/* Right Side - Description */}
-                    <div className="xl:flex-1 flex justify-end text-right w-full pt-4 xl:pt-8 min-w-0">
-                        <p
-                            className="text-base md:text-lg lg:text-xl text-gray-600 leading-[1.6] font-serif italic max-w-xs md:max-w-sm xl:max-w-[420px]"
-                        >
-                            From concept to campaign-ready assets, these projects demonstrate how structured AI experimentation becomes measurable creative advantage.
-                        </p>
-                    </div>
+                    <h2
+                        className="text-4xl md:text-5xl lg:text-7xl tracking-tight leading-tight font-medium mb-8"
+                        style={{ fontFamily: 'var(--font-playfair)' }}
+                    >
+                        Applied Creative Intelligence
+                    </h2>
+
+                    <p
+                        className="text-lg md:text-xl text-gray-500 leading-relaxed font-sans max-w-2xl mx-auto"
+                    >
+                        Structured AI experimentation transformed into measurable creative advantage.
+                    </p>
                 </motion.div>
+
             </div>
 
             {/* Swiper Coverflow Carousel */}
