@@ -11,6 +11,7 @@ import { Environment, Lightformer, Html } from '@react-three/drei';
 import { forwardRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { isWebGLAvailable } from '@/lib/webgl-detect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -320,6 +321,12 @@ export default function BlobSystemPortal() {
     const scaleProgress = useRef(0.1);
     const colorProgress = useRef(0);
 
+    const [webglSupported, setWebglSupported] = useState(true);
+
+    useEffect(() => {
+        setWebglSupported(isWebGLAvailable());
+    }, []);
+
     useEffect(() => {
         // Pre-warm the labs video
         // Video pre-warming is now handled by individual PortalCard components
@@ -428,28 +435,43 @@ export default function BlobSystemPortal() {
                 >
                     {/* Blob Canvas Layer */}
                     <div className="blob-canvas-container absolute inset-0 z-0 transition-opacity">
-                        <Canvas camera={{ position: [0.0, 0.0, 8.0] }}>
-                            <planeGeometry args={[0.026, 0.5]} />
-                            <Environment preset="studio" environmentIntensity={0.5} />
-                            <Blob
-                                scaleProgress={scaleProgress}
-                                colorProgress={colorProgress}
-                                labOrbTextRef={labOrbTextRef}
-                            />
-                            <Environment
-                                files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr"
-                                resolution={1024}
-                            >
-                                <group rotation={[-Math.PI / 3, 0, 0]}>
-                                    <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
-                                    {[2, 0, 2, 0, 2, 0, 2, 0].map((x, i) => (
-                                        <Lightformer key={i} form="circle" intensity={4} rotation={[Math.PI / 2, 0, 0]} position={[x, 4, i * 4]} scale={[4, 1, 1]} />
-                                    ))}
-                                    <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[50, 2, 1]} />
-                                    <Lightformer intensity={2} rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[50, 2, 1]} />
-                                </group>
-                            </Environment>
-                        </Canvas>
+                        {webglSupported ? (
+                            <Canvas camera={{ position: [0.0, 0.0, 8.0] }}>
+                                <planeGeometry args={[0.026, 0.5]} />
+                                <Environment preset="studio" environmentIntensity={0.5} />
+                                <Blob
+                                    scaleProgress={scaleProgress}
+                                    colorProgress={colorProgress}
+                                    labOrbTextRef={labOrbTextRef}
+                                />
+                                <Environment
+                                    files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr"
+                                    resolution={1024}
+                                >
+                                    <group rotation={[-Math.PI / 3, 0, 0]}>
+                                        <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
+                                        {[2, 0, 2, 0, 2, 0, 2, 0].map((x, i) => (
+                                            <Lightformer key={i} form="circle" intensity={4} rotation={[Math.PI / 2, 0, 0]} position={[x, 4, i * 4]} scale={[4, 1, 1]} />
+                                        ))}
+                                        <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[50, 2, 1]} />
+                                        <Lightformer intensity={2} rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[50, 2, 1]} />
+                                    </group>
+                                </Environment>
+                            </Canvas>
+                        ) : (
+                            /* CSS fallback blob when WebGL is unavailable */
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    className="rounded-full animate-pulse"
+                                    style={{
+                                        width: '320px',
+                                        height: '320px',
+                                        background: 'radial-gradient(circle, rgba(253,244,255,0.9) 0%, rgba(139,92,246,0.15) 60%, transparent 80%)',
+                                        filter: 'blur(20px)',
+                                    }}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     {/* Systems Hub Text */}

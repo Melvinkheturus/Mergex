@@ -5,11 +5,21 @@ import { OrthographicCamera, useFBO, useTexture } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from "three"
 import { CLOUDINARY_ASSETS } from "@/lib/cloudinary"
+import { isWebGLAvailable } from "@/lib/webgl-detect"
 
 import { Suspense, useMemo } from "react"
 
 export default function Scene() {
   const device = useDimension()
+  const [webglSupported, setWebglSupported] = useState(true)
+
+  useEffect(() => {
+    setWebglSupported(isWebGLAvailable())
+  }, [])
+
+  // If WebGL is not available, don't render the Canvas at all.
+  // The static <Image> fallback in HeroSection will remain visible.
+  if (!webglSupported) return null
 
   const frustumSize = device.height || 1080
   const aspect = (device.width || 1920) / (device.height || 1080)

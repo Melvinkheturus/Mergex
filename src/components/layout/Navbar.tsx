@@ -450,8 +450,9 @@ function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
                     title="Generative AI"
                     hook="Human-directed AI workflows for creative generation."
                     href="/labs/ai-content"
-                    color="bg-purple-50/50"
-                    image="/assets/mockups/genai.jpg.jpeg"
+                    color="bg-white"
+                    image="/background/labs/labs.png"
+                    lightMedia={true}
                     closeMenu={closeMenu}
                 />
                 <LabsCard
@@ -459,7 +460,7 @@ function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
                     hook="Creating high-end brand narratives and advertising assets that scale across media."
                     href="/labs/visual-content"
                     color="bg-blue-50/50"
-                    video="/assets/mockups/ad.mp4"
+                    video="/mockups/labs/Portfolio/ad.mp4"
                     closeMenu={closeMenu}
                 />
                 <LabsCard
@@ -467,6 +468,7 @@ function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
                     hook="Testing ideas, agents, and creative systems before they scale."
                     href="/labs/experiments"
                     color="bg-emerald-50/50"
+                    video="/background/labs/Exprements.mp4"
                     closeMenu={closeMenu}
                 />
             </div>
@@ -474,7 +476,7 @@ function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
     );
 }
 
-function LabsCard({ title, hook, href, color, image, video, closeMenu }: { title: string, hook: string, href: string, color: string, image?: string, video?: string, closeMenu: () => void }) {
+function LabsCard({ title, hook, href, color, image, video, closeMenu, lightMedia }: { title: string, hook: string, href: string, color: string, image?: string, video?: string, closeMenu: () => void, lightMedia?: boolean }) {
     const hasMedia = image || video;
 
     return (
@@ -503,21 +505,21 @@ function LabsCard({ title, hook, href, color, image, video, closeMenu }: { title
                         )}
                     </div>
                     {/* Gradient Overlay for text readability - Bottom Up */}
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    {!lightMedia && <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />}
                 </>
             )}
 
             <div className="relative z-20 h-full flex flex-col justify-between">
-                <div className={`w-8 h-8 rounded-full ${hasMedia ? 'bg-white/20 text-white backdrop-blur-md' : 'bg-white/80 text-gray-900 backdrop-blur-sm'} mb-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-sm`}>
+                <div className={`w-8 h-8 rounded-full ${hasMedia && !lightMedia ? 'bg-white/20 text-white backdrop-blur-md' : 'bg-white/80 text-gray-900 backdrop-blur-sm'} mb-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-sm`}>
                     <ArrowUpRight size={14} />
                 </div>
 
                 <div className="mt-auto">
-                    <h4 className={`font-serif text-xl font-bold mb-2 leading-tight ${hasMedia ? 'text-white' : 'text-gray-900'}`}>
+                    <h4 className={`font-serif text-xl font-bold mb-2 leading-tight ${hasMedia && !lightMedia ? 'text-white' : 'text-gray-900'}`}>
                         {title}
                     </h4>
 
-                    <p className={`text-xs leading-relaxed font-medium mt-2 ${hasMedia ? 'text-gray-200' : 'text-gray-600'}`}>
+                    <p className={`text-xs leading-relaxed font-medium mt-2 ${hasMedia && !lightMedia ? 'text-gray-200' : 'text-gray-600'}`}>
                         {hook}
                     </p>
                 </div>

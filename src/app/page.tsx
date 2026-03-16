@@ -5,6 +5,7 @@ import {
   ShowreelSection,
   ProblemFragmentation,
   EcosystemSnapshot,
+  ProcessSection,
 } from '@/modules/homepage';
 import HomeScrollRegistrar from '@/modules/homepage/components/HomeScrollRegistrar';
 
@@ -58,13 +59,18 @@ export default function Home() {
         <ArchitectureSection />
       </div>
 
-      {/* 5. Explore Ecosystem — Choice Architecture */}
+
+      {/* 6. Explore Ecosystem — Choice Architecture */}
       <div id="ecosystem">
         <EcosystemSnapshot />
       </div>
 
+      {/* 7. Process — Step by Step Flow */}
+      <div id="process">
+        <ProcessSection />
+      </div>
 
-      {/* 7. Work Gallery — 3D Marquee Showcase */}
+      {/* 5. Work Gallery — 3D Marquee Showcase */}
       <div id="work-gallery">
         <ThreeDMarqueeDemo />
       </div>

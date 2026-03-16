@@ -18,6 +18,7 @@ import { ParentHowItWorks } from './components/ParentHowItWorks';
 import { ParentWorkGallery } from './components/ParentWorkGallery';
 import { ThreeDMarqueeDemo } from './components/ThreeDMarqueeDemo';
 import { TestimonialsSection } from './components/TestimonialsSection';
+import { ProcessSection } from './components/ProcessSection';
 
 export {
     HeroSection,
@@ -40,4 +41,5 @@ export {
     ParentWorkGallery,
     ThreeDMarqueeDemo,
     TestimonialsSection,
+    ProcessSection,
 };
