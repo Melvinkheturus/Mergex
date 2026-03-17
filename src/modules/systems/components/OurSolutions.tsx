@@ -22,7 +22,7 @@ const PILLAR_IMAGES = [
 ];
 
 /**
- * OurSolutions — Sticky Sidebar ScrollSpy + Parallax Text-Over-Image
+ * OurSolutions - Sticky Sidebar ScrollSpy + Parallax Text-Over-Image
  *
  * Left column: sticky nav that stays pinned.
  * Right column: scrolling cards where the text content slides UP over the
@@ -40,7 +40,7 @@ export function OurSolutions() {
                 const card = document.getElementById(id);
                 if (!card) return;
 
-                // ScrollSpy — update active nav item
+                // ScrollSpy - update active nav item
                 ScrollTrigger.create({
                     trigger: card,
                     start: 'top center',
@@ -49,7 +49,7 @@ export function OurSolutions() {
                     onEnterBack: () => setActiveIndex(index),
                 });
 
-                // Parallax — image moves slower (creates depth)
+                // Parallax - image moves slower (creates depth)
                 const img = card.querySelector('.parallax-img');
                 if (img) {
                     gsap.fromTo(
@@ -68,7 +68,7 @@ export function OurSolutions() {
                     );
                 }
 
-                // Text overlap — text slides UP over the image
+                // Text overlap - text slides UP over the image
                 const textContent = card.querySelector('.text-overlap');
                 if (textContent) {
                     gsap.fromTo(
@@ -113,7 +113,7 @@ export function OurSolutions() {
         >
             <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
 
-                {/* ── LEFT COLUMN — sticky nav ──
+                {/* ── LEFT COLUMN - sticky nav ──
                      self-start is CRITICAL: prevents flex from stretching this
                      column to the parent height, which would kill sticky range. */}
                 <div className="hidden md:flex flex-col justify-center w-[28%] h-screen sticky top-0 self-start px-8 lg:px-12 border-r border-gray-100">
@@ -146,7 +146,7 @@ export function OurSolutions() {
                     </nav>
                 </div>
 
-                {/* ── RIGHT COLUMN — scrolling cards ── */}
+                {/* ── RIGHT COLUMN - scrolling cards ── */}
                 <div className="w-full md:w-[72%]">
                     {OUR_SOLUTIONS.pillars.map((pillar, index) => (
                         <div
@@ -166,7 +166,7 @@ export function OurSolutions() {
                                 <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
                             </div>
 
-                            {/* ── TEXT LAYER (z-10) — slides UP over the image on scroll ── */}
+                            {/* ── TEXT LAYER (z-10) - slides UP over the image on scroll ── */}
                             <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4">
                                 <div className="border-t border-gray-200 pt-10">
                                     <div className="grid md:grid-cols-12 gap-8 lg:gap-16">

@@ -31,7 +31,7 @@ export function AboutPage() {
             <ModelSection />
             <PhilosophySection />
             <TeamSection />
-            <TestimonialsSection />
+            {/* <TestimonialsSection /> */}
             <CTASection />
         </div>
     );

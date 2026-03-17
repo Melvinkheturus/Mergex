@@ -35,7 +35,7 @@ export function QuickTakes() {
                         </motion.div>
                     </div>
 
-                    {/* Right — Takes list */}
+                    {/* Right - Takes list */}
                     <div className="lg:col-span-9 flex flex-col divide-y divide-gray-100">
                         {QUICK_TAKES.map((take, i) => {
                             const isOpen = expanded === i;

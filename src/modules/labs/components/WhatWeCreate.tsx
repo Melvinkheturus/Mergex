@@ -8,7 +8,7 @@ import { TextReveal } from '@/modules/shared/components/TextReveal';
 import { Lens } from '@/components/ui/lens';
 
 /**
- * WhatWeCreate — Services section (static white background, no scroll theme change)
+ * WhatWeCreate - Services section (static white background, no scroll theme change)
  */
 export function WhatWeCreate() {
     const sectionRef = useRef<HTMLElement>(null);

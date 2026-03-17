@@ -125,7 +125,7 @@ export function InsightGrid({ posts, activeCategory, onCategoryChange }: Insight
                                 No insights in this category yet.
                             </p>
                             <p className="text-gray-400 text-sm mt-2">
-                                Check back — we&apos;re writing.
+                                Check back - we&apos;re writing.
                             </p>
                         </motion.div>
                     )}

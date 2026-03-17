@@ -224,7 +224,7 @@ export default async function InsightPostPage({
                         )}
                     </div>
 
-                    {/* Sidebar — LLM-friendly structured sections */}
+                    {/* Sidebar - LLM-friendly structured sections */}
                     <div className="flex flex-col gap-6 lg:sticky lg:top-28 self-start">
                         {/* Key Takeaway */}
                         {post.keyTakeaway && (

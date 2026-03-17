@@ -8,7 +8,7 @@
 
 ## Philosophy
 
-The Insights page is not a blog. It is a **public intelligence layer** — a knowledge interface designed for two audiences simultaneously: human readers and LLM crawlers (ChatGPT, Gemini, Perplexity).
+The Insights page is not a blog. It is a **public intelligence layer** - a knowledge interface designed for two audiences simultaneously: human readers and LLM crawlers (ChatGPT, Gemini, Perplexity).
 
 > "Written for humans. Structured for machines."
 
@@ -94,7 +94,7 @@ NEXT_PUBLIC_SANITY_PROJECT_ID= # Already set
 NEXT_PUBLIC_SANITY_DATASET=    # Already set
 ```
 
-**Groq Model:** `llama3-70b-8192` — fast, free tier, excellent reasoning  
+**Groq Model:** `llama3-70b-8192` - fast, free tier, excellent reasoning  
 **Max tokens:** 600 per response  
 **Temperature:** 0.65 (balanced creativity + accuracy)
 
@@ -116,7 +116,7 @@ NEXT_PUBLIC_SANITY_DATASET=    # Already set
 
 ---
 
-## Writing Guide — LLM-Optimized Format
+## Writing Guide - LLM-Optimized Format
 
 Every insight should follow this structure in Sanity:
 
@@ -185,16 +185,16 @@ src/
 
 ## Future Upgrades
 
-### Phase 2 — Vector Search
+### Phase 2 - Vector Search
 Replace Sanity keyword fetch with **Supabase Vector** or **Pinecone** embeddings for semantic search in the chat context.
 
-### Phase 3 — Knowledge Graph
+### Phase 3 - Knowledge Graph
 Replace category tags with visual idea connections (e.g., "AI Avatars → Digital Identity → Marketing Systems"). Build as a D3.js or React Flow visualization.
 
-### Phase 4 — "Ask Mergex" Mode
-Add a toggle on the page: **Read Insights | Ask Mergex** — full-width chat interface as an alternative to browsing.
+### Phase 4 - "Ask Mergex" Mode
+Add a toggle on the page: **Read Insights | Ask Mergex** - full-width chat interface as an alternative to browsing.
 
-### Phase 5 — Newsletter Integration
+### Phase 5 - Newsletter Integration
 "Notify me" in Quick Takes connects to an email capture → notified when the full insight publishes.
 
 ---

@@ -10,7 +10,7 @@ export const CAREERS_HERO = {
 
 export const WHAT_WORKING_MEANS = {
     headline: 'What Working at Mergex Means',
-    subheadline: 'How work actually happens here—no buzzwords, just principles.',
+    subheadline: 'How work actually happens here-no buzzwords, just principles.',
     principles: [
         {
             title: 'We care about why before what',
@@ -37,7 +37,7 @@ export const HOW_WE_WORK = {
     workingPrinciples: [
         {
             title: 'Problem-First Thinking',
-            description: 'Every project starts with deep understanding. We don\'t build features—we solve business problems.',
+            description: 'Every project starts with deep understanding. We don\'t build features-we solve business problems.',
             icon: 'lightbulb',
         },
         {
@@ -140,7 +140,7 @@ export const LEARNING_GROWTH = {
     benefits: [
         {
             title: 'Learning by Building Real Systems',
-            description: 'You\'ll ship MVPs, automate workflows, and design AI systems—not toy projects. Real stakes, real learning.',
+            description: 'You\'ll ship MVPs, automate workflows, and design AI systems-not toy projects. Real stakes, real learning.',
         },
         {
             title: 'Exposure to AI, Automation, and Modern Stacks',
@@ -162,10 +162,10 @@ export const WHAT_WE_DONT_OFFER = {
     headline: 'What We Don\'t Offer',
     subheadline: 'Honesty over hype.',
     items: [
-        'No micromanagement—we trust you to own your work',
-        'No meaningless busywork—every task has a purpose',
-        'No fake urgency—we move fast, but with intention',
-        'No politics-driven growth—your work speaks louder than office games',
+        'No micromanagement-we trust you to own your work',
+        'No meaningless busywork-every task has a purpose',
+        'No fake urgency-we move fast, but with intention',
+        'No politics-driven growth-your work speaks louder than office games',
     ],
 } as const;
 
@@ -196,5 +196,5 @@ export const HOW_TO_APPLY = {
 } as const;
 
 export const FINAL_NOTE = {
-    message: 'We\'re still growing, and we\'re intentional about who we build with. If you\'re curious, thoughtful, and willing to learn by doing—we\'d like to hear from you.',
+    message: 'We\'re still growing, and we\'re intentional about who we build with. If you\'re curious, thoughtful, and willing to learn by doing-we\'d like to hear from you.',
 } as const;

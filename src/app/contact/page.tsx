@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ContactPageContent from '@/modules/contact/components/ContactPageContent';
 
 export const metadata: Metadata = {
-    title: 'Contact — Let\'s Build Something That Scales',
+    title: 'Contact - Let\'s Build Something That Scales',
     description: 'Tell us about your project, challenge, or idea. If there\'s a system to build, we\'ll help architect it.',
 };
 

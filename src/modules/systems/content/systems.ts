@@ -135,7 +135,7 @@ export const OUR_SOLUTIONS = {
 
 export const SPEED_ADVANTAGE = {
     headline: 'MVPs in Weeks, Not Months',
-    subheadline: 'Speed is our competitive edge—and yours',
+    subheadline: 'Speed is our competitive edge-and yours',
     comparison: {
         traditional: '3-6 months for an MVP',
         systems: '2-4 weeks to first working version',
@@ -156,7 +156,7 @@ export const HOW_WE_WORK_SYSTEMS = {
             number: '01',
             title: 'Discovery & Strategy',
             timeframe: '2-3 Days',
-            description: 'We map your business goals, technical requirements, and success metrics. No assumptions—just direct questions that surface what actually matters.',
+            description: 'We map your business goals, technical requirements, and success metrics. No assumptions-just direct questions that surface what actually matters.',
             outcome: 'Detailed project roadmap with scope, timeline, and milestones',
             deliverables: ['Technical specification document', 'Project timeline & budget', 'Success metrics defined'],
         },
@@ -164,7 +164,7 @@ export const HOW_WE_WORK_SYSTEMS = {
             number: '02',
             title: 'Design & Planning',
             timeframe: 'Week 1',
-            description: 'Wireframes, user flows, and system architecture—all mapped before we write code. You\'ll see exactly what you\'re getting before development starts.',
+            description: 'Wireframes, user flows, and system architecture-all mapped before we write code. You\'ll see exactly what you\'re getting before development starts.',
             outcome: 'Approved designs and technical blueprint ready for build',
             deliverables: ['UI/UX wireframes & prototypes', 'Database schema & API design', 'Tech stack finalized'],
         },
@@ -180,7 +180,7 @@ export const HOW_WE_WORK_SYSTEMS = {
             number: '04',
             title: 'Launch & Deploy',
             timeframe: '2-4 Days',
-            description: 'Production deployment, final QA, performance testing, and go-live support. We don\'t just hand it off—we make sure it works.',
+            description: 'Production deployment, final QA, performance testing, and go-live support. We don\'t just hand it off-we make sure it works.',
             outcome: 'Live product accessible to your users',
             deliverables: ['Production environment setup', 'Domain & SSL configuration', 'Launch day support'],
         },

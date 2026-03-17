@@ -22,7 +22,7 @@ export const ECOSYSTEM_CARDS: EcosystemCard[] = [
         iconBgColor: 'bg-blue-50',
         iconTextColor: 'text-blue-600',
         title: 'Mergex Studio',
-        description: 'We build the websites, apps, and systems that bring your vision to life—designed to scale as you grow.',
+        description: 'We build the websites, apps, and systems that bring your vision to life-designed to scale as you grow.',
     },
     {
         id: 'mergex-labs',
@@ -30,7 +30,7 @@ export const ECOSYSTEM_CARDS: EcosystemCard[] = [
         iconBgColor: 'bg-purple-50',
         iconTextColor: 'text-primary',
         title: 'Mergex Labs',
-        description: 'Turn ideas into stunning visuals, ads, and content with AI—instantly. Perfect for founders who need a creative team without the budget.',
+        description: 'Turn ideas into stunning visuals, ads, and content with AI-instantly. Perfect for founders who need a creative team without the budget.',
     },
     {
         id: 'mergex-products',
@@ -38,7 +38,7 @@ export const ECOSYSTEM_CARDS: EcosystemCard[] = [
         iconBgColor: 'bg-green-50',
         iconTextColor: 'text-green-600',
         title: 'Mergex Products',
-        description: 'We don\'t just build for clients—we build our own tools. Unisynk and other products born from solving real founder problems.',
+        description: 'We don\'t just build for clients-we build our own tools. Unisynk and other products born from solving real founder problems.',
     },
 
 ];
@@ -46,12 +46,12 @@ export const ECOSYSTEM_CARDS: EcosystemCard[] = [
 export const PROBLEMS: ProblemItem[] = [
     { id: '1', text: 'Waiting months for an agency to understand your vision' },
     { id: '2', text: 'Burning budget on developers who can\'t deliver' },
-    { id: '3', text: 'Choosing between quality and speed—never getting both' },
+    { id: '3', text: 'Choosing between quality and speed-never getting both' },
 ];
 
 export const SOLUTIONS: SolutionItem[] = [
     { id: '1', text: 'AI-powered content and development that moves at the speed of your ideas' },
-    { id: '2', text: 'Fixed-cost solutions with transparent milestones—no surprises' },
+    { id: '2', text: 'Fixed-cost solutions with transparent milestones-no surprises' },
     { id: '3', text: 'Launch-ready code built for scale from day one' },
 ];
 

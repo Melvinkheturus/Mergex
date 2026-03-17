@@ -19,7 +19,7 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * ShowreelSection — Cinematic scroll-driven reveal
+ * ShowreelSection - Cinematic scroll-driven reveal
  *
  * Animation behaviour:
  *   • Card begins in a narrower, smaller state (further reduced width).
@@ -91,7 +91,7 @@ export function ShowreelSection() {
                 isDesktop: "(min-width: 769px)"
             }, (context) => {
                 const { isMobile } = context.conditions as any;
-                
+
                 const vw = window.innerWidth;
                 const vh = window.innerHeight;
                 const initialScaleX = 0.2;
@@ -99,7 +99,7 @@ export function ShowreelSection() {
 
                 // On mobile, we want a tighter, square-ish cinematic look that expands but doesn't fill
                 // We use scale to maintain a consistent aspect ratio around 16:9 or similar
-                const targetScaleY = isMobile ? 0.5 : 1; 
+                const targetScaleY = isMobile ? 0.5 : 1;
                 const targetScaleX = isMobile ? 0.9 : 1;
                 const targetBorderRadius = isMobile ? '16px' : '0px';
 
@@ -143,7 +143,7 @@ export function ShowreelSection() {
                 }
             });
 
-            // 4. Final Parallax Exit — as architecture section enters
+            // 4. Final Parallax Exit - as architecture section enters
             gsap.to(cardRef.current, {
                 y: -150,
                 opacity: 0.9,

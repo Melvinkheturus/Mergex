@@ -8,9 +8,9 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/studio/',   // CMS — never index
-          '/api/',      // API routes — never index
-          '/_next/',    // Next.js internals — never index
+          '/studio/',   // CMS - never index
+          '/api/',      // API routes - never index
+          '/_next/',    // Next.js internals - never index
           '/admin/',    // Admin routes if any
         ],
       },

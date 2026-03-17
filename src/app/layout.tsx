@@ -22,11 +22,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mergex.in"),
   title: {
-    default: "Mergex — One System. Zero Friction.",
+    default: "Mergex - One System. Zero Friction.",
     template: "%s | Mergex",
   },
   description:
-    "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation. One system. Zero friction.",
+    "Mergex builds the systems behind modern businesses - integrating software, automation, AI, and growth infrastructure into one scalable foundation. One system. Zero friction.",
   keywords: [
     "Mergex",
     "business systems",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mergex — One System. Zero Friction.",
+    title: "Mergex - One System. Zero Friction.",
     description:
-      "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
+      "Mergex builds the systems behind modern businesses - integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
     url: "https://mergex.in",
     siteName: "Mergex",
     locale: "en_US",
@@ -68,15 +68,15 @@ export const metadata: Metadata = {
         url: "https://mergex.in/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Mergex — One System. Zero Friction.",
+        alt: "Mergex - One System. Zero Friction.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mergex — One System. Zero Friction.",
+    title: "Mergex - One System. Zero Friction.",
     description:
-      "Mergex builds the systems behind modern businesses — integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
+      "Mergex builds the systems behind modern businesses - integrating software, automation, AI, and growth infrastructure into one scalable foundation.",
     images: ["https://mergex.in/twitter-image.jpg"],
     creator: "@mergexco",
   },
@@ -131,25 +131,25 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* Clash Display — primary display font */}
+        {/* Clash Display - primary display font */}
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"
         />
 
-        {/* Space Grotesk — modern geometric sans */}
+        {/* Space Grotesk - modern geometric sans */}
         <link
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
-        {/* JetBrains Mono — technical labels */}
+        {/* JetBrains Mono - technical labels */}
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
 
-        {/* Schema.org — Organization */}
+        {/* Schema.org - Organization */}
         <Script
           id="schema-org"
           type="application/ld+json"
@@ -192,7 +192,7 @@ export default function RootLayout({
                       "@type": "Service",
                       name: "Mergex Labs",
                       description:
-                        "AI-powered creative production — ads, visual assets, video content, and digital media.",
+                        "AI-powered creative production - ads, visual assets, video content, and digital media.",
                     },
                   },
                 ],

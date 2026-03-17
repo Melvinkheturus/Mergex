@@ -205,7 +205,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         },
 
         problem: {
-            narrative: 'The film, media, and events industry in MENA had no centralized platform to connect crew, freelancers, producers, and agencies. Finding the right professionals meant endless WhatsApp messages, outdated contact lists, and word-of-mouth — leaving talented crew invisible and productions understaffed.',
+            narrative: 'The film, media, and events industry in MENA had no centralized platform to connect crew, freelancers, producers, and agencies. Finding the right professionals meant endless WhatsApp messages, outdated contact lists, and word-of-mouth - leaving talented crew invisible and productions understaffed.',
             painPoints: [
                 'No centralized crew discovery or visibility',
                 'Scattered communication across WhatsApp and email',
@@ -222,7 +222,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         strategy: [
             {
                 title: 'Crew-First Profile System',
-                description: 'Built professional profiles that let crew showcase their work, skills, and availability — letting their portfolio speak before they do.'
+                description: 'Built professional profiles that let crew showcase their work, skills, and availability - letting their portfolio speak before they do.'
             },
             {
                 title: 'Production Networking Engine',

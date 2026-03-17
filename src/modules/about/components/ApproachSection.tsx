@@ -25,27 +25,27 @@ export function ApproachSection() {
     const steps = [
         {
             icon: <Network className="w-6 h-6" />,
-            title: "1 — Business Architecture",
+            title: "1 - Business Architecture",
             description: "We start by designing the structural foundation of your business. We map operational dependencies and data flows to ensure alignment with your long-term strategy."
         },
         {
             icon: <Scissors className="w-6 h-6" />,
-            title: "2 — Systems Strategy",
+            title: "2 - Systems Strategy",
             description: "We design the integrated machine that powers your growth. We identify systemic friction and build the automated workflows that allow your team to operate at scale."
         },
         {
             icon: <Cpu className="w-6 h-6" />,
-            title: "3 — Modern Engineering",
+            title: "3 - Modern Engineering",
             description: "We translate strategy into reality. We engineer the AI workflows, digital platforms, and operational infrastructure that act as the backbone of your modern business."
         }
     ];
 
     return (
         <section ref={containerRef} className="relative bg-white py-24 md:py-40 overflow-hidden">
-            
+
             {/* Background Ghost Word */}
             <motion.div
-                style={{ 
+                style={{
                     x: xTransform,
                     fontFamily: outfit.style.fontFamily
 
@@ -55,7 +55,7 @@ export function ApproachSection() {
                 SCALE
             </motion.div>
             <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-[1400px]">
-                
+
                 {/* Header */}
                 <div className="max-w-3xl mb-20">
                     <motion.h2
@@ -68,7 +68,7 @@ export function ApproachSection() {
                         How We Approach <br />
                         <span className="italic" style={{ fontFamily: 'var(--font-playfair)' }}>Complex Problems</span>
                     </motion.h2>
-                    
+
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ export function ApproachSection() {
                         transition={{ duration: 1 }}
                         className="text-gray-500 font-medium tracking-tight"
                     >
-                        Because scaling businesses requires more than code — <br className="hidden md:block" />
+                        Because scaling businesses requires more than code - <br className="hidden md:block" />
                         <span className="text-gray-900 italic" style={{ fontFamily: 'var(--font-playfair)' }}>it requires systems.</span>
                     </motion.p>
 
@@ -128,8 +128,8 @@ export function ApproachSection() {
                         className="group"
                     >
                         <p className="text-sm text-gray-400 mb-2 font-medium">Curious how this would work for your business?</p>
-                        <Link 
-                            href="/chat" 
+                        <Link
+                            href="/chat"
                             className="inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-violet-600 transition-all duration-300 shadow-lg shadow-gray-200"
                         >
                             Ask Mergex Intelligence

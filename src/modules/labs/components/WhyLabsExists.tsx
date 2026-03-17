@@ -245,7 +245,7 @@ export function WhyLabsExists() {
                     </h2>
                 </TextReveal>
 
-                {/* Video Card — full-width hero */}
+                {/* Video Card - full-width hero */}
                 <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: '9/11' }}>
                     <video
                         className="absolute inset-0 w-full h-full object-cover"
@@ -266,7 +266,7 @@ export function WhyLabsExists() {
                     </div>
                 </div>
 
-                {/* Remaining cards — stacked */}
+                {/* Remaining cards - stacked */}
                 {[WHY_LABS_EXISTS.cards[1], WHY_LABS_EXISTS.cards[2]].map((card, i) => {
                     const gradients = [
                         'linear-gradient(160deg, #9D68FF 0%, #5B21B6 100%)',
@@ -323,7 +323,7 @@ function FlipCard({ position, frontBgPos, backBg, backTextColor, title, descript
                 className="flip-card-inner"
                 style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d' }}
             >
-                {/* ── FRONT FACE — Mountain Dew video ── */}
+                {/* ── FRONT FACE - Mountain Dew video ── */}
                 <div
                     className="flip-face"
                     style={{
@@ -346,7 +346,7 @@ function FlipCard({ position, frontBgPos, backBg, backTextColor, title, descript
                     </video>
                 </div>
 
-                {/* ── BACK FACE — content ── */}
+                {/* ── BACK FACE - content ── */}
                 <div
                     className="flip-face"
                     style={{

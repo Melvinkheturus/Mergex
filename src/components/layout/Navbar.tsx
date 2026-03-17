@@ -538,7 +538,7 @@ function PricingMenu({ closeMenu }: { closeMenu: () => void }) {
                     Transparent pricing. Scoped to your needs.
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                    We price based on scope, speed, and complexity — not fixed packages or hourly guesswork.
+                    We price based on scope, speed, and complexity - not fixed packages or hourly guesswork.
                 </p>
                 <p className="text-xs italic text-gray-500">
                     No hidden fees. No bloated retainers.

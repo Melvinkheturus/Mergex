@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 /**
- * ProblemFragmentation — Editorial bento-grid layout
+ * ProblemFragmentation - Editorial bento-grid layout
  *
  * Desktop (CSS grid-template-areas):
  *  ┌──────────┬──────────────────┐

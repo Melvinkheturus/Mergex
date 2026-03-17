@@ -14,18 +14,18 @@ import { ExperimentsGallery } from '@/modules/labsPortfolio';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Mergex Labs — AI-Powered Creative Production'
+        absolute: 'Mergex Labs - AI-Powered Creative Production'
     },
     description: 'Where creativity meets intelligent systems. Gen-AI workflows for brands that need to move fast. AI-generated visuals, videos, campaigns, and brand assets.',
     keywords: ['AI content studio', 'generative AI', 'AI visuals', 'AI video creation', 'content automation', 'creative AI', 'brand assets'],
     openGraph: {
-        title: 'Mergex Labs — AI-Powered Creative Production',
+        title: 'Mergex Labs - AI-Powered Creative Production',
         description: 'Creative AI solutions for modern brands',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mergex Labs — AI-Powered Creative Production',
+        title: 'Mergex Labs - AI-Powered Creative Production',
         description: 'Where creativity meets intelligent systems',
     },
 };
@@ -38,22 +38,22 @@ export default function LabsPage() {
         <main className="">
             <LabsScrollRegistrar />
 
-            {/* 1. Labs Hero — Invitation */}
+            {/* 1. Labs Hero - Invitation */}
             <div id="labs-hero">
                 <LabsHero />
             </div>
 
-            {/* 2. What Labs Is — Philosophical */}
+            {/* 2. What Labs Is - Philosophical */}
             <div id="what-is-labs">
                 <WhatIsLabs />
             </div>
 
-            {/* 8. Why Labs Exists — Short Manifesto (Moved here) */}
+            {/* 8. Why Labs Exists - Short Manifesto (Moved here) */}
             <div id="why-labs-exists">
                 <WhyLabsExists />
             </div>
 
-            {/* 3. What We Create — NOT Services */}
+            {/* 3. What We Create - NOT Services */}
             <div id="capabilities">
                 <WhatWeCreate />
             </div>
@@ -63,21 +63,21 @@ export default function LabsPage() {
                 <ExperimentsGallery />
             </div>
 
-            {/* 6. Sara Reveal / Scroll Experience — After Proof */}
+            {/* 6. Sara Reveal / Scroll Experience - After Proof */}
             <div id="featured-work">
                 <ScrollZoomShowcase />
             </div>
 
-            {/* 5. Work Gallery — CRITICAL Visual Proof */}
+            {/* 5. Work Gallery - CRITICAL Visual Proof */}
             <div id="work">
                 <WorkGallery />
             </div>
 
-            {/* 7. From Experiment to Impact — Process */}
+            {/* 7. From Experiment to Impact - Process */}
             <div id="process">
                 <HowLabsWorks />
             </div>
-            
+
             {/* 9. Soft CTA */}
             <div id="cta">
                 <LabsCTA />

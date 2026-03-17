@@ -1,10 +1,10 @@
-// Insights Module — Static Content
+// Insights Module - Static Content
 
 export const INSIGHTS_HERO = {
     eyebrow: 'Mergex Intelligence',
     headline: 'Ideas Behind\nEngineered Scale',
     subtext:
-        'Short explorations on systems, AI, automation, and growth architecture — built for builders, not casual readers.',
+        'Short explorations on systems, AI, automation, and growth architecture - built for builders, not casual readers.',
     microLine: 'Written for humans. Structured for machines.',
 };
 
@@ -13,7 +13,7 @@ export const FEATURED_THINKING = [
         id: 'architecture-of-engineered-scale',
         title: 'The Architecture of Engineered Scale',
         description:
-            'Our core philosophy — how businesses move from chaos to compounding systems.',
+            'Our core philosophy - how businesses move from chaos to compounding systems.',
         format: 'framework' as const,
         category: 'Systems',
         color: 'purple',
@@ -39,7 +39,7 @@ export const FEATURED_THINKING = [
 ];
 
 export const QUICK_TAKES = [
-    'AI won\'t replace creativity — but it will replace slow creators.',
+    'AI won\'t replace creativity - but it will replace slow creators.',
     'Most businesses don\'t need marketing. They need systems.',
     'Automation without architecture creates chaos at scale.',
     'The agency model is dying. Systems-led companies are winning.',
@@ -64,14 +64,14 @@ export const CATEGORY_FILTERS = [
     'Scaling',
 ];
 
-// Placeholder insights — shown when Sanity has no posts yet
+// Placeholder insights - shown when Sanity has no posts yet
 export const PLACEHOLDER_INSIGHTS = [
     {
         _id: 'p1',
         title: 'The 0 → 1 → N Growth Architecture',
         slug: { current: 'growth-architecture' },
         excerpt:
-            'How to think about building a business in three distinct phases — each requiring a completely different operating model.',
+            'How to think about building a business in three distinct phases - each requiring a completely different operating model.',
         insightFormat: 'framework' as const,
         categories: ['systems', 'scaling'],
         publishedAt: '2026-03-01T00:00:00Z',
@@ -97,7 +97,7 @@ export const PLACEHOLDER_INSIGHTS = [
         title: 'AI Avatars vs Human Influencers',
         slug: { current: 'ai-avatars-vs-human-influencers' },
         excerpt:
-            'We ran a 6-week test. The results surprised everyone — including us.',
+            'We ran a 6-week test. The results surprised everyone - including us.',
         insightFormat: 'experiment' as const,
         categories: ['ai', 'creative', 'media'],
         publishedAt: '2026-02-10T00:00:00Z',
@@ -183,7 +183,7 @@ export const ASK_MERGEX = {
         'What does Mergex Systems do?',
         'How to fix vendor ecosystem chaos?',
     ],
-    systemPrompt: `You are Mergex Intelligence — an AI assistant representing Mergex, a company that builds engineered business systems, AI-powered creative tools (Labs), and scalable software ecosystems.
+    systemPrompt: `You are Mergex Intelligence - an AI assistant representing Mergex, a company that builds engineered business systems, AI-powered creative tools (Labs), and scalable software ecosystems.
 
 You help founders, CTOs, and operators understand:
 - Business systems architecture

@@ -11,14 +11,14 @@ const PROCESS_STEPS = [
         number: '01',
         title: 'Diagnose the System',
         description:
-            'We begin with a deep Business DNA audit — understanding your market, revenue model, operations, and bottlenecks. Before we build anything, we define what must be fixed, optimized, or engineered.',
+            'We begin with a deep Business DNA audit - understanding your market, revenue model, operations, and bottlenecks. Before we build anything, we define what must be fixed, optimized, or engineered.',
         purpose: 'Clarity before execution.',
     },
     {
         number: '02',
         title: 'Design the Architecture',
         description:
-            'We blueprint the full growth infrastructure — positioning, automation layers, AI workflows, and scalable tech systems. Every component is aligned before development begins.',
+            'We blueprint the full growth infrastructure - positioning, automation layers, AI workflows, and scalable tech systems. Every component is aligned before development begins.',
         purpose: 'Structure before speed.',
     },
     {
@@ -106,7 +106,7 @@ export function HowWeWorkSystems() {
                 {/* ── MAIN CONTENT: Sidebar Metrics + Expandable Cards ── */}
                 <div className="grid md:grid-cols-12 gap-8 lg:gap-12">
 
-                    {/* Left Sidebar — metrics (hidden on mobile) */}
+                    {/* Left Sidebar - metrics (hidden on mobile) */}
                     <div className="hidden md:flex md:col-span-3 flex-col justify-start gap-16 pr-8 border-r border-gray-200">
                         {SIDE_METRICS.map((metric, i) => (
                             <div key={i} className="space-y-3">
@@ -121,7 +121,7 @@ export function HowWeWorkSystems() {
                         ))}
                     </div>
 
-                    {/* Right — Expandable Cards */}
+                    {/* Right - Expandable Cards */}
                     {/* Desktop: flex row with hover expand */}
                     <div className="hidden md:flex md:col-span-9 gap-2 h-[500px] lg:h-[560px]">
                         {PROCESS_STEPS.map((step, index) => {
@@ -172,7 +172,7 @@ export function HowWeWorkSystems() {
                         })}
                     </div>
 
-                    {/* Mobile — Horizontal scroll cards */}
+                    {/* Mobile - Horizontal scroll cards */}
                     <div className="md:hidden col-span-full">
                         {/* Mobile metrics row */}
                         <div className="flex gap-6 mb-8 pb-6 border-b border-gray-200">

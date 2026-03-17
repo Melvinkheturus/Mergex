@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * CaseStudySection — Sticky card stack animation
+ * CaseStudySection - Sticky card stack animation
  * Follows the same GSAP pin pattern that works in OurSolutions.
  */
 export function CaseStudySection() {
@@ -41,7 +41,7 @@ export function CaseStudySection() {
         setIsClient(true);
     }, []);
 
-    // ScrollTrigger setup — deferred by 500ms like OurSolutions
+    // ScrollTrigger setup - deferred by 500ms like OurSolutions
     useEffect(() => {
         if (!isClient || !sectionRef.current) return;
 
@@ -93,22 +93,22 @@ export function CaseStudySection() {
 
                 tl.to(
                     currentCard,
-                    { 
-                        scale: 0.8, 
-                        rotation: 3, 
+                    {
+                        scale: 0.8,
+                        rotation: 3,
                         opacity: 0.5,
-                        duration: transitionDuration, 
-                        ease: 'power2.inOut' 
+                        duration: transitionDuration,
+                        ease: 'power2.inOut'
                     },
                     startTime
                 );
 
                 tl.to(
                     nextCard,
-                    { 
-                        y: '0%', 
-                        duration: transitionDuration, 
-                        ease: 'power2.inOut' 
+                    {
+                        y: '0%',
+                        duration: transitionDuration,
+                        ease: 'power2.inOut'
                     },
                     startTime
                 );
@@ -153,7 +153,7 @@ export function CaseStudySection() {
 
     return (
         <>
-            {/* Section Header — outside the pinned area */}
+            {/* Section Header - outside the pinned area */}
             <div className="bg-slate-50 pt-24 lg:pt-32 pb-12">
                 <div className="container mx-auto px-6 md:px-12 max-w-7xl">
                     <div className="text-center">
@@ -192,7 +192,7 @@ export function CaseStudySection() {
                 onMouseMove={handleMouseMove}
                 style={{ cursor: 'none' }}
             >
-                {/* Card Container — increased height to 90% */}
+                {/* Card Container - increased height to 90% */}
                 <div className="relative h-[90%] w-full max-w-sm overflow-hidden rounded-2xl sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl">
                     {CASE_STUDIES.map((study, i) => (
                         <Link
@@ -217,7 +217,7 @@ export function CaseStudySection() {
                     ))}
                 </div>
 
-                {/* Custom Cursor — "View Case Study" label */}
+                {/* Custom Cursor - "View Case Study" label */}
                 <div
                     ref={cursorRef}
                     className="pointer-events-none fixed z-[9999] flex items-center gap-2 transition-opacity duration-200"

@@ -15,7 +15,7 @@ import { AnimatedBeamMultipleOutputDemo } from '@/components/ui/animated-beam-de
 import { TextReveal } from '@/modules/shared/components/TextReveal';
 
 /**
- * ArchitectureSection — "From Chaos to Clarity"
+ * ArchitectureSection - "From Chaos to Clarity"
  */
 export function ArchitectureSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -32,7 +32,7 @@ export function ArchitectureSection() {
     const floatingCards = ['Structure', 'Intelligence', 'Leverage'];
 
     return (
-        <section 
+        <section
             ref={sectionRef}
             className="relative z-40 bg-white overflow-hidden pb-4 md:pb-8"
         >
@@ -42,7 +42,7 @@ export function ArchitectureSection() {
                     <div className="relative flex items-center justify-center select-none py-28" style={{ minHeight: '20vw' }}>
                         {/* The big bold black text */}
                         <motion.div
-                            style={{ 
+                            style={{
                                 y: titleY,
                                 fontSize: 'clamp(2rem, 11vw, 13.5rem)',
                                 fontFamily: outfit.style.fontFamily,
@@ -78,7 +78,7 @@ export function ArchitectureSection() {
                 {/* ── Main two-column content ─────────────────────────────── */}
                 <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-[1300px]">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-                        {/* LEFT — Manifesto copy */}
+                        {/* LEFT - Manifesto copy */}
                         <div>
                             <TextReveal>
                                 <span
@@ -141,7 +141,7 @@ export function ArchitectureSection() {
                             </div>
                         </div>
 
-                        {/* RIGHT — System intelligence cards */}
+                        {/* RIGHT - System intelligence cards */}
                         <div className="lg:col-span-1">
                             <div className="mb-8 pb-8 border-b border-neutral-100">
                                 <TextReveal>

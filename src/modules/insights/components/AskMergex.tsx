@@ -31,7 +31,7 @@ export function AskMergex() {
                             Have a question?
                         </h2>
                         <p className="text-gray-500 text-sm md:text-base max-w-sm mb-8">
-                            Ask Mergex Intelligence — trained on our methods, services, and insights.
+                            Ask Mergex Intelligence - trained on our methods, services, and insights.
                             Get clarity on systems, AI, and growth architecture instantly.
                         </p>
 

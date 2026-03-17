@@ -68,7 +68,7 @@ export default function ProductsPage() {
                             We solve operational challenges for our clients. Sometimes, those solutions deserve to become products.
                         </p>
                         <p className="text-lg text-gray-500 max-w-2xl">
-                            Our products aren't built in a vacuum—they're refined through real-world use before we launch them.
+                            Our products aren't built in a vacuum-they're refined through real-world use before we launch them.
                         </p>
                     </motion.div>
                 </div>
@@ -135,7 +135,7 @@ export default function ProductsPage() {
                         <div className="space-y-4 text-gray-600">
                             <p className="text-lg">
                                 Every product in our pipeline was born from a real client need. We build systems for businesses,
-                                and when we spot patterns—problems that multiple clients face—we ask: "Should this be a product?"
+                                and when we spot patterns-problems that multiple clients face-we ask: "Should this be a product?"
                             </p>
                             <p className="text-lg">
                                 <strong className="text-gray-900">We don't rush.</strong> Our products go through real-world
@@ -143,7 +143,7 @@ export default function ProductsPage() {
                             </p>
                             <p className="text-lg">
                                 Right now, our focus is on <strong className="text-gray-900">service delivery</strong>. Products
-                                are our long-term play—signals of where we're heading, not where we are today.
+                                are our long-term play-signals of where we're heading, not where we are today.
                             </p>
                         </div>
                     </motion.div>

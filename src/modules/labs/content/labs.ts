@@ -155,7 +155,7 @@ export const WHY_LABS_EXISTS = {
     cards: [
         {
             title: 'Because Creative Can’t Wait.',
-            description: "Modern brands move in real time. Traditional production cycles slow growth. Labs exists to compress creative timelines — turning ideas into deployable assets in days, not months.",
+            description: "Modern brands move in real time. Traditional production cycles slow growth. Labs exists to compress creative timelines - turning ideas into deployable assets in days, not months.",
             subtext: 'Velocity without compromise.',
             gradient: 'from-[#E5E5E5] to-[#D4D4D4]',
             textColor: 'text-black',
@@ -163,7 +163,7 @@ export const WHY_LABS_EXISTS = {
         },
         {
             title: 'Because Volume Wins.',
-            description: 'Scaling requires creative output at scale — variations, formats, iterations. Labs builds AI-driven systems that generate high-volume content without losing strategic direction.',
+            description: 'Scaling requires creative output at scale - variations, formats, iterations. Labs builds AI-driven systems that generate high-volume content without losing strategic direction.',
             subtext: 'Structured creativity at scale.',
             gradient: 'from-[#8B5CF6] to-[#6D28D9]',
             textColor: 'text-white',

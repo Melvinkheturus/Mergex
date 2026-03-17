@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useVCard } from "../hooks/useVCard";
 
 /**
- * SaveContactPopup — mobile bottom-sheet popup that auto-appears
+ * SaveContactPopup - mobile bottom-sheet popup that auto-appears
  * once per session, prompting users to save Mergex as a contact.
  */
 export default function SaveContactPopup() {
@@ -44,7 +44,7 @@ export default function SaveContactPopup() {
                 <div className="connect-popup-handle" />
                 <p className="connect-popup-title">Save Mergex to Contacts</p>
                 <p className="connect-popup-subtitle">
-                    One tap — always have our details handy.
+                    One tap - always have our details handy.
                 </p>
                 <button className="connect-popup-save-btn" onClick={handleSave}>
                     <svg

@@ -59,9 +59,9 @@ function SocialIcon({ icon }: { icon: string }) {
 }
 
 /**
- * ConnectCard — Premium digital visiting card for Mergex.
+ * ConnectCard - Premium digital visiting card for Mergex.
  * Served at /connect and via connect.mergex.in subdomain.
- * No Navbar or Footer — owns its full viewport.
+ * No Navbar or Footer - owns its full viewport.
  */
 export default function ConnectCard() {
     const { downloadVCard } = useVCard();
@@ -92,10 +92,10 @@ export default function ConnectCard() {
                 <p className="connect-description connect-animate-in">
                     We design structured business systems that eliminate scattered workflows and
                     accelerate growth. From AI-driven creative to automation and scalable
-                    infrastructure — built under one architecture.
+                    infrastructure - built under one architecture.
                 </p>
 
-                {/* ---- Website Link — curiosity + authority copy ---- */}
+                {/* ---- Website Link - curiosity + authority copy ---- */}
                 <a
                     href="https://mergex.in"
                     target="_blank"

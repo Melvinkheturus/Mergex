@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // and can trigger a quality penalty. Add pages here only when ready.
 
   return [
-    // ── TIER 1 — Core pages (highest priority) ──
+    // ── TIER 1 - Core pages (highest priority) ──
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
-    // ── TIER 2 — Commercial pages ──
+    // ── TIER 2 - Commercial pages ──
     {
       url: `${baseUrl}/pricing`,
       lastModified: new Date(),
@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
 
-    // ── TIER 3 — Brand pages ──
+    // ── TIER 3 - Brand pages ──
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
 
-    // ── TIER 4 — Content pages (live, activate now) ──
+    // ── TIER 4 - Content pages (live, activate now) ──
     {
       url: `${baseUrl}/case-studies`,
       lastModified: new Date(),
@@ -71,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
 
-    // ── TIER 5 — Add when live ──
+    // ── TIER 5 - Add when live ──
     // {
     //   url: `${baseUrl}/software`,
     //   lastModified: new Date(),

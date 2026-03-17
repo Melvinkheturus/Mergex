@@ -20,18 +20,18 @@ import SystemsScrollRegistrar from '@/modules/systems/components/SystemsScrollRe
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Mergex Systems — Build. Automate. Scale.'
+        absolute: 'Mergex Systems - Build. Automate. Scale.'
     },
     description: 'Building and automating systems that help businesses scale. MVPs in weeks, not months. Custom software, AI automation, design, and marketing solutions.',
     keywords: ['custom software development', 'MVP development', 'AI automation', 'solution partner', 'web app development', 'mobile app development', 'business automation'],
     openGraph: {
-        title: 'Mergex Systems — Build. Automate. Scale.',
+        title: 'Mergex Systems - Build. Automate. Scale.',
         description: 'MVPs in weeks, not months. Building systems that scale.',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mergex Systems — Build. Automate. Scale.',
+        title: 'Mergex Systems - Build. Automate. Scale.',
         description: 'Building and automating systems that help businesses scale',
     },
 };
@@ -44,38 +44,38 @@ export default function SystemsPage() {
             <SystemsScrollRegistrar />
             <SystemsPageShell>
                 <main className="bg-white text-gray-900">
-                    {/* 1. Systems Hero — Relief */}
+                    {/* 1. Systems Hero - Relief */}
                     <div id="systems-hero" className="systems-section">
                         <SystemsHero />
                     </div>
 
-                    {/* 2. What We Solve — Problem Alignment */}
+                    {/* 2. What We Solve - Problem Alignment */}
                     <div id="pain-points" className="systems-section">
                         <WhatWeSolve />
                     </div>
 
-                    {/* 3. Our System Types — NOT Services */}
+                    {/* 3. Our System Types - NOT Services */}
                     <div id="solutions" className="systems-section">
                         <OurSolutions />
                     </div>
 
-                    {/* 4. How We Work — Risk Reduction */}
+                    {/* 4. How We Work - Risk Reduction */}
                     <div id="process" className="systems-section">
                         <HowWeWorkSystems />
                     </div>
 
-                    {/* 5. Case Studies — Proof */}
+                    {/* 5. Case Studies - Proof */}
                     <div id="case-overview" className="systems-section">
                         <CaseStudySection />
                     </div>
 
-                    {/* 6. Impact — Measurable Results */}
+                    {/* 6. Impact - Measurable Results */}
                     <div id="impact" className="systems-section">
                         <ImpactSection />
                     </div>
 
 
-                    {/* 9. FAQs — Objection Handling */}
+                    {/* 9. FAQs - Objection Handling */}
                     <div id="faq" className="systems-section">
                         <FAQSection variant="systems" showAI={true} />
                     </div>

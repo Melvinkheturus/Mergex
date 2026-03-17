@@ -2,56 +2,56 @@
 // Strategic pricing focused on pre-qualification and trust-building
 
 export const PRICING_HERO = {
-    headline: 'Pricing That Adapts to Your Scope, Speed, and Scale',
-    subheadline: 'Every business problem is different. Our pricing reflects the complexity, urgency, and level of collaboration required—not a fixed checklist of services.',
+    headline: 'Pricing Framework: Rules Over Numbers',
+    subheadline: 'We don\'t use fixed price lists. We use a structured but flexible system that adapts to your impact, complexity, and scale.',
 } as const;
 
 export const ENGAGEMENT_TIERS = {
     headline: 'Choose Your Engagement Model',
-    subheadline: 'Whether you\'re launching an MVP or scaling operations, we have a model that fits.',
+    subheadline: 'Transparent models designed for different stages of growth and ambition.',
     tiers: [
         {
-            name: 'Launch / MVP',
-            tagline: 'Fast validation and first launch',
-            bestFor: 'Early-stage ideas, validation, fast builds',
+            name: 'Project Model',
+            tagline: 'Defined scope, strategic delivery',
+            bestFor: 'Launching MVPs, specific system builds, or one-time strategic upgrades.',
             includes: [
-                'MVP development (2-4 week delivery)',
-                'Core automation setup',
-                'Core design systems & brand foundations',
-                'Fast turnaround with weekly demos',
-                'Launch-ready product',
+                'Scoped deliverables & milestones',
+                'End-to-end implementation',
+                'Clear handoff & documentation',
+                'Focused 2-8 week delivery cycles',
+                'Business-impact focused architecture',
             ],
-            priceFraming: 'Typical engagements start in the low five-figure range, depending on scope and complexity.',
+            priceFraming: 'Pricing depends on scope, features, and business impact. Fixed-scope delivery for high-impact projects.',
             icon: 'rocket',
             recommended: false,
         },
         {
-            name: 'Growth Systems',
-            tagline: 'Scale your operations and team',
-            bestFor: 'Scaling teams, operational complexity, custom solutions',
+            name: 'Retainer Model',
+            tagline: 'Execution intensity on demand',
+            bestFor: 'Scaling teams that need consistent momentum and reliable execution.',
             includes: [
-                'Custom software & integrations',
-                'AI automation workflows',
-                'Branding & digital systems',
-                'Iterative delivery with continuous refinement',
-                'Dedicated project management',
+                'Monthly engagement based on scope',
+                'Continuous development & iteration',
+                'Priority execution bandwidth',
+                'Active project management',
+                'Strategic systems refinement',
             ],
-            priceFraming: 'Most engagements fall in the mid five-figure range.',
+            priceFraming: 'Monthly engagement based on scope and execution intensity. We adjust based on your workload requirements.',
             icon: 'trending-up',
             recommended: true,
         },
         {
-            name: 'Ongoing Partnership',
-            tagline: 'Long-term execution partner',
-            bestFor: 'Continuous development, evolution, and optimization',
+            name: 'Growth Partnership',
+            tagline: 'Aligned growth and contribution',
+            bestFor: 'Deep integration where our success is tied directly to your impact.',
             includes: [
-                'Continuous development & feature releases',
-                'AI & automation optimization',
-                'Content, marketing & systems alignment',
-                'Dedicated collaboration & strategic planning',
-                'Priority support and rapid iteration',
+                'Aligned growth objectives',
+                'Deep system & team integration',
+                'Revenue & impact-driven contribution',
+                'Continuous strategic evolution',
+                'Base support + impact-based scaling',
             ],
-            priceFraming: 'Structured as monthly or phased engagements, based on your ongoing needs.',
+            priceFraming: 'Aligned growth partnership based on contribution and impact. Aligned incentives for long-term scale.',
             icon: 'users',
             recommended: false,
         },
@@ -59,53 +59,45 @@ export const ENGAGEMENT_TIERS = {
 } as const;
 
 export const PRICING_FACTORS = {
-    headline: 'What Affects Pricing',
-    subheadline: 'Transparent factors that shape every engagement',
+    headline: 'Our Pricing Variables',
+    subheadline: 'We define every quote using three core variables to ensure fairness and consistency.',
     factors: [
         {
-            title: 'Scope & Complexity',
-            description: 'The number of features, integrations, and technical requirements directly impacts timeline and resources.',
+            title: 'Value (Impact)',
+            description: 'Does this generate revenue, improve your brand equity, or save significant operational costs?',
         },
         {
-            title: 'Speed of Delivery',
-            description: 'Need it in 2 weeks vs. 8 weeks? Faster timelines require focused sprints and prioritization.',
+            title: 'Complexity (Depth)',
+            description: 'From simple web systems to advanced AI automation and full-scale architectural infrastructure.',
         },
         {
-            title: 'Level of Automation & AI',
-            description: 'Advanced AI integrations, custom models, and intelligent workflows require specialized expertise.',
-        },
-        {
-            title: 'Depth of Involvement',
-            description: 'Are we building, iterating, and managing long-term? Or delivering a defined scope and handing off?',
-        },
-        {
-            title: 'Ongoing vs. One-Time',
-            description: 'Monthly partnerships are structured differently than project-based engagements.',
+            title: 'Involvement (Team)',
+            description: 'The team required and the duration of commitment-from single architects to full execution teams.',
         },
     ],
-    closingStatement: 'We\'ll always recommend the most efficient approach—not the most expensive one.',
-    labsClarification: 'Labs engagements (AI content, visuals, experiments) are scoped separately based on creative depth and exploration goals.',
+    closingStatement: 'Pricing = Value × Complexity × Involvement. This framework ensures you pay for impact, not just hours.',
+    labsClarification: 'Mergex Labs experiments are scoped separately based on the depth of research and creative exploration required.',
 } as const;
 
 export const WHAT_YOU_DONT_PAY_FOR = {
     headline: 'What You Don\'t Pay For',
-    subheadline: 'No hidden fees. No bloat. Just what you need.',
+    subheadline: 'Premium results without the traditional agency bloat.',
     items: [
         {
-            title: 'No Unnecessary Tools',
-            description: 'We don\'t pad budgets with expensive tools you don\'t need. Modern, efficient stacks only.',
+            title: 'No Fixed Menu Bias',
+            description: 'You aren\'t forced into a package that doesn\'t fit. Every project is designed for its specific context.',
         },
         {
             title: 'No Bloated Retainers',
-            description: 'You pay for work delivered, not arbitrary monthly minimums that don\'t match your pace.',
+            description: 'We don\'t believe in "billable hours" for the sake of it. You pay for execution and impact.',
         },
         {
-            title: 'No Handoff Confusion',
-            description: 'Clean documentation, training, and support are included—not separate "knowledge transfer" fees.',
+            title: 'No Hidden Complexity Fees',
+            description: 'Transparency is our default. We scope the difficulty upfront, so there are no "surprise" variations.',
         },
         {
-            title: 'No Paying for Things You Don\'t Need',
-            description: 'We scope honestly. If a feature won\'t move the needle, we\'ll tell you before building it.',
+            title: 'No Paying for Waste',
+            description: 'If a feature doesn\'t move your needle, we\'ll tell you. We optimize for your results, not our output.',
         },
     ],
 } as const;
@@ -114,39 +106,39 @@ export const PRICING_FAQ = {
     headline: 'Pricing Questions',
     questions: [
         {
-            question: 'How does Mergex price its projects?',
-            answer: 'Pricing depends on the complexity and scope of the system being built. Every engagement is scoped honestly — Mergex recommends the most efficient approach, not the most expensive one. After a strategy conversation, you receive a transparent quote that breaks down exactly where your investment is going.',
-            chatPrompt: "What's the scope of your project? I'll help you understand the pricing factors."
+            question: 'Why doesn\'t Mergex have fixed price menus?',
+            answer: 'We aren\'t a restaurant; we\'re architects. Fixed numbers hurt both the client and the builder because scope, maturity, and value vary wildly. We use a Pricing Framework that ensures you pay fairly for the specific impact and complexity of your project.',
+            chatPrompt: "Want to understand the logic behind your specific project? Let's talk about the variables."
         },
         {
-            question: 'What factors affect the cost of a system build?',
-            answer: 'The main factors are technical complexity — what is actually being built — and velocity — how fast it needs to be delivered. Other variables include the number of integrations, AI and automation components, and whether the engagement is a one-time build or an ongoing partnership. Mergex will always tell you what is worth building and what is not.',
-            chatPrompt: "Is your project a one-time build or an ongoing partnership? Let's discuss what impacts the cost."
+            question: 'How do you calculate a quote?',
+            answer: 'We look at three variables: Value (revenue/brand impact), Complexity (technical depth), and Involvement (team and time). By focusing on rules rather than random numbers, we provide quotes that are consistent, fair, and aligned with your goals.',
+            chatPrompt: "Curious about which variable impacts your budget the most? We can break it down."
         },
         {
-            question: 'Do you offer fixed pricing or flexible engagement models?',
-            answer: 'Both. Launch and MVP projects are structured as fixed builds with defined scope and milestones. Growth and infrastructure engagements are scoped iteratively. Ongoing partnerships are structured as monthly or phased engagements based on what the business actually needs. Mergex recommends the model that best fits the project — not the one that maximizes revenue.',
-            chatPrompt: "Are you looking for a fixed MVP build or an iterative growth partnership? I'll explain the best model for you."
+            question: 'Which engagement model is right for me?',
+            answer: 'It depends on your goal. Projects are for defined builds (MVPs, migrations). Retainers are for companies needing consistent execution bandwidth. Partnerships are for deep, long-term alignment where we share the responsibility for growth.',
+            chatPrompt: "Tell me about your current scale, and I'll recommend the most efficient model."
         },
         {
             question: 'Is the ₹299 priority access credited toward the project?',
-            answer: 'Yes. The ₹299 priority access fee is a project credit. If you move forward with a Mergex engagement, the full amount is deducted from the first project payment. It exists to ensure focused, genuine conversations — not to generate revenue.',
+            answer: 'Yes. The ₹299 priority access fee is a project credit. If you move forward with a Mergex engagement, the full amount is deducted from the first project payment. It exists to ensure focused, genuine conversations - not to generate revenue.',
             chatPrompt: "Ready to book your priority access? I can clarify how the credit works toward your first payment."
         },
         {
-            question: 'What happens after the system is built?',
-            answer: 'After launch, businesses can continue working with Mergex to expand and optimize their systems. This may include new automation workflows, AI integrations, system upgrades, and infrastructure improvements as the business grows. The initial build is the foundation — the partnership is ongoing.',
-            chatPrompt: "What is your long-term goal for this system? I'll share how we support growth after launch."
+            question: 'Do you offer revenue-share or equity models?',
+            answer: 'Yes, through our Partnership Model. This is reserved for projects where we have significant influence over the revenue outcome and deep integration with the core team. It involves a base support level plus an impact-based contribution.',
+            chatPrompt: "Interested in a partnership model? Let's discuss how we can align our incentives."
         },
     ],
 } as const;
 
 
 export const PRICING_CTA = {
-    headline: 'Let\'s Define the Right Scope Before We Define the Price',
-    subheadline: 'Most calls end with clear next steps—not pressure.',
+    headline: 'Let\'s Define the Framework Before the Quote',
+    subheadline: 'Pricing is the last step. Understanding the impact is the first.',
     primaryCTA: 'Book a Strategy Call',
     secondaryCTA: 'Email Us',
     reassurance: 'No sales pitch. Just an honest conversation about what you\'re building and how we can help.',
-    finalReassurance: 'We\'ll always recommend the simplest, most effective approach — even if that means building less.',
+    finalReassurance: 'We\'ll always recommend the most efficient model for your current stage.',
 } as const;

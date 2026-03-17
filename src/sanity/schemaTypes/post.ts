@@ -108,7 +108,7 @@ export const postType = defineType({
             name: 'insightFormat',
             title: 'Insight Format',
             type: 'string',
-            description: 'The type of insight — determines display category on the Insights page',
+            description: 'The type of insight - determines display category on the Insights page',
             options: {
                 list: [
                     { title: 'Framework', value: 'framework' },
@@ -138,7 +138,7 @@ export const postType = defineType({
             title: 'Key Concepts',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'Structured concept tags — helps LLMs understand this content',
+            description: 'Structured concept tags - helps LLMs understand this content',
         }),
         defineField({
             name: 'relatedTopics',

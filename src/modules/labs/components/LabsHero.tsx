@@ -51,7 +51,7 @@ export function LabsHero() {
     // Masking shape effect (comes up from bottom)
     const maskY = useTransform(scrollYProgress, [0.7, 1], ['100%', '0%']);
 
-    // Set canvas dimensions only on mount and resize — never per-frame
+    // Set canvas dimensions only on mount and resize - never per-frame
     const syncCanvasSize = useCallback(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -104,7 +104,7 @@ export function LabsHero() {
         ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     }, []);
 
-    // RAF-batched draw — prevents multiple draws in the same frame
+    // RAF-batched draw - prevents multiple draws in the same frame
     const requestDraw = useCallback((index: number) => {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = requestAnimationFrame(() => drawFrame(index));
@@ -128,14 +128,14 @@ export function LabsHero() {
         imagesRef.current = images;        // 1. Load the First Frame with high priority
         const firstImg = images[0];
         firstImg.fetchPriority = 'high';
-        
+
         const onFirstFrameLoad = () => {
             syncCanvasSize();
             // Ensure canvas is ready for the first draw
             requestAnimationFrame(() => {
                 drawFrame(1);
                 setIsLoaded(true);
-                
+
                 // Redundant draw after short delay to catch any race conditions with mounting/layout
                 setTimeout(() => drawFrame(1), 50);
             });
@@ -163,9 +163,9 @@ export function LabsHero() {
 
         // Trigger first frame load with Cloudinary primary + local fallback
         const localFirst = `/background/labs/frames_webp/frame_0001.webp`;
-        firstImg.onerror = () => { 
+        firstImg.onerror = () => {
             if (firstImg.src !== localFirst) {
-                firstImg.src = localFirst; 
+                firstImg.src = localFirst;
             }
         };
         firstImg.src = CLOUDINARY_ASSETS.labsFrame('0001');
@@ -235,18 +235,18 @@ export function LabsHero() {
                 <div className="absolute inset-0 z-0">
 
                     {/* 
-                      Ambient Background — always rendered, pure CSS.
+                      Ambient Background - always rendered, pure CSS.
                       Looks like an intentional dark cinematic atmosphere.
                       Once the canvas loads it covers this completely.
                     */}
                     <div className="absolute inset-0 bg-white">
                         {/* 
-                          Static Fallback Image — Frame 1 (local)
+                          Static Fallback Image - Frame 1 (local)
                           Provides immediate visual feedback even before JS runs or Cloudinary responds.
                         */}
-                        <div 
+                        <div
                             className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen transition-opacity duration-1000"
-                            style={{ 
+                            style={{
                                 backgroundImage: 'url("/background/labs/frames_webp/frame_0001.webp")',
                                 opacity: isLoaded ? 0 : 0.4
                             }}
@@ -255,7 +255,7 @@ export function LabsHero() {
                         {/* Centered radial glow - switched to a light variant */}
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(255,255,255,0.8)_0%,rgba(255,255,255,1)_70%)]" />
 
-                        {/* Soft ambient orb — CSS animation, no JS */}
+                        {/* Soft ambient orb - CSS animation, no JS */}
                         <div
                             className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full will-change-transform"
                             style={{
@@ -264,7 +264,7 @@ export function LabsHero() {
                             }}
                         />
 
-                        {/* Subtle shimmer sweep — pure CSS, zero JS cost */}
+                        {/* Subtle shimmer sweep - pure CSS, zero JS cost */}
                         <div
                             className="absolute inset-0 pointer-events-none will-change-transform"
                             style={{
@@ -274,7 +274,7 @@ export function LabsHero() {
                         />
                     </div>
 
-                    {/* Canvas — fades in smoothly over the ambient background */}
+                    {/* Canvas - fades in smoothly over the ambient background */}
                     <canvas
                         ref={canvasRef}
                         className="absolute inset-0 w-full h-full transition-opacity duration-700 ease-out will-change-[opacity]"
@@ -303,10 +303,10 @@ export function LabsHero() {
                 {/* ── MAIN LAYOUT: pinned full-screen ── */}
                 <div className="relative z-10 w-full h-full flex flex-col pointer-events-none">
 
-                    {/* TOP ROW — empty padding */}
+                    {/* TOP ROW - empty padding */}
                     <div className="pt-10 md:pt-16"></div>
 
-                    {/* CENTRE — large serif headline and eyebrows */}
+                    {/* CENTRE - large serif headline and eyebrows */}
                     <div className="flex-1 flex flex-col justify-center items-center px-8 md:px-16 pb-32 md:pb-40 text-center relative z-20">
                         {/* ── Background Shadow Glow ── */}
                         {/* ── Background Shadow Glow Removed ── */}
@@ -358,7 +358,7 @@ export function LabsHero() {
                         </div>
                     </div>
 
-                    {/* BOTTOM ROW — tagline bottom-left, keywords + CTAs bottom-right */}
+                    {/* BOTTOM ROW - tagline bottom-left, keywords + CTAs bottom-right */}
                     <div className="px-8 md:px-16 pb-14 md:pb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-8 md:gap-8">
 
                         {/* BOTTOM-LEFT: supporting tagline */}
@@ -396,7 +396,7 @@ export function LabsHero() {
                                 </TextReveal>
                             </div>
 
-                            {/* CTA Buttons — square with rounded corners, side by side */}
+                            {/* CTA Buttons - square with rounded corners, side by side */}
                             <TextReveal delay={1}>
                                 <div className="flex flex-row justify-center md:justify-end gap-2 md:gap-3 pointer-events-auto w-full">
                                     <a

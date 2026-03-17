@@ -19,7 +19,7 @@ const galleryImages = [
 ];
 
 /**
- * WorkGallery — Scroll-driven image marquee gallery
+ * WorkGallery - Scroll-driven image marquee gallery
  *
  * The section has its own dark radial-gradient background (self-contained
  * dark island). The LabsPageWrapper transitions the page background to dark

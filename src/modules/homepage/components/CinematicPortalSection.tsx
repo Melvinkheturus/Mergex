@@ -11,10 +11,10 @@ import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * CinematicPortalSection — GSAP ScrollTrigger powered
+ * CinematicPortalSection - GSAP ScrollTrigger powered
  *
  * Scroll sequence (section is PINNED throughout):
- * 1. Card 1 (Systems) fills the viewport — full-screen, no border-radius.
+ * 1. Card 1 (Systems) fills the viewport - full-screen, no border-radius.
  * 2. Card 1 scales down + gains rounded corners + slides left.
  * 3. Card 2 (Labs) enters from the right, scales UP to full-screen.
  * 4. Card 2 stays full-screen briefly.

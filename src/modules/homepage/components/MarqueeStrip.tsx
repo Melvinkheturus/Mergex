@@ -4,17 +4,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * MarqueeStrip — Overlay marquee that floats on top of the
+ * MarqueeStrip - Overlay marquee that floats on top of the
  * boundary between ArchitectureSection and ProblemFragmentation.
  *
- * No separate background — uses a frosted glass overlay so the
+ * No separate background - uses a frosted glass overlay so the
  * two sections underneath bleed through subtly.
  *
  * Specs:
  * - Height: 36px
  * - Background: transparent with backdrop-blur
  * - Font: mono / semi-mono, semibold
- * - Scroll: Left to Right (even slower — 70s)
+ * - Scroll: Left to Right (even slower - 70s)
  * - Slant: -1deg rotation
  */
 export function MarqueeStrip() {

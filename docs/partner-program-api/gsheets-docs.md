@@ -34,7 +34,7 @@ This is a **Google Apps Script Web App URL**, for example:
 https://script.google.com/macros/s/{SCRIPT_ID}/exec
 ```
 
-> Environment-specific. No versioning yet — treat changes as breaking.
+> Environment-specific. No versioning yet - treat changes as breaking.
 
 ---
 
@@ -306,7 +306,7 @@ This is a **full row snapshot**, not a diff.
 
 * Status column must be named **exactly** `Status`
 * Any manual edit triggers the webhook
-* No debounce — rapid edits will emit multiple events
+* No debounce - rapid edits will emit multiple events
 
 ---
 

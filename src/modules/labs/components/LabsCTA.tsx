@@ -10,7 +10,7 @@ import { BlurVignette } from '@/components/ui/BlurVignette';
 import GlassSurface from '@/components/ui/GlassSurface';
 
 /**
- * LabsCTA — Cinematic & Refined
+ * LabsCTA - Cinematic & Refined
  * Parallax background, text reveal animations, and elegant serif headline.
  */
 export function LabsCTA() {
@@ -35,7 +35,7 @@ export function LabsCTA() {
             <div className="w-full max-w-6xl relative z-10">
                 {/* 3D Glass Card Container */}
                 <motion.div
-                    style={{ 
+                    style={{
                         scale: cardScale,
                         opacity: cardOpacity,
                         boxShadow: `
@@ -52,7 +52,7 @@ export function LabsCTA() {
                     <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
                         <motion.div
                             className="hidden md:block absolute inset-0 bg-cover bg-center transition-transform duration-700"
-                            style={{ 
+                            style={{
                                 backgroundImage: `url(${CLOUDINARY_ASSETS.labsCta}), url(/background/labs/Cta.jpeg)`,
                                 y: imageY,
                                 scale: 1.1
@@ -60,7 +60,7 @@ export function LabsCTA() {
                         />
                         <motion.div
                             className="block md:hidden absolute inset-0 bg-cover bg-center transition-transform duration-700"
-                            style={{ 
+                            style={{
                                 backgroundImage: `url(${CLOUDINARY_ASSETS.labsCta}), url(/background/labs/Cta.jpeg)`,
                                 y: imageY,
                                 scale: 1.1
@@ -69,16 +69,16 @@ export function LabsCTA() {
                     </div>
 
                     {/* Integrated Edge Blur softening */}
-                    <BlurVignette 
-                        radius="40px" 
-                        inset="0px" 
-                        transitionLength="150px" 
-                        blur="32px" 
+                    <BlurVignette
+                        radius="40px"
+                        inset="0px"
+                        transitionLength="150px"
+                        blur="32px"
                         className="absolute inset-0 z-10 pointer-events-none"
                     />
 
                     {/* The Crystal Clear 3D Glass Overlay */}
-                    <div 
+                    <div
                         className="absolute inset-0 z-10 border border-white/40 pointer-events-none"
                         style={{
                             background: `radial-gradient(
@@ -89,7 +89,7 @@ export function LabsCTA() {
                             borderBottomColor: 'rgba(255, 255, 255, 0.1)'
                         }}
                     />
-                    
+
                     {/* Additional Tints */}
                     <div className="absolute inset-0 z-10 bg-black/20" />
                     <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -107,7 +107,7 @@ export function LabsCTA() {
                         {/* Centered Transformation Narrative */}
                         <div className="max-w-3xl">
                             <TextReveal delay={0.4} duration={1}>
-                                <h2 
+                                <h2
                                     className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
                                     style={{ fontFamily: 'Playfair Display, serif' }}
                                 >

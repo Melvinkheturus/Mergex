@@ -32,7 +32,7 @@ export function SystemsCTA() {
                 {/* Two-card layout */}
                 <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-                    {/* Card 1 — Free Call */}
+                    {/* Card 1 - Free Call */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +63,7 @@ export function SystemsCTA() {
                         </a>
                     </motion.div>
 
-                    {/* Card 2 — Priority Access */}
+                    {/* Card 2 - Priority Access */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export function SystemsCTA() {
 
                         <ul className="flex flex-col gap-2 text-sm text-gray-500 mb-4 flex-1 relative z-10">
                             <li className="flex items-start gap-2"><span className="text-violet-500 font-bold mt-0.5">·</span>Immediate attention from our architects</li>
-                            <li className="flex items-start gap-2"><span className="text-violet-500 font-bold mt-0.5">·</span>Skip the queue — no waiting</li>
+                            <li className="flex items-start gap-2"><span className="text-violet-500 font-bold mt-0.5">·</span>Skip the queue - no waiting</li>
                             <li className="flex items-start gap-2"><span className="text-violet-500 font-bold mt-0.5">·</span>Direct expert review of your project</li>
                         </ul>
 

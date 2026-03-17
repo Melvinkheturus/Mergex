@@ -15,17 +15,17 @@ const PARTNER_FAQ_DATA = {
     questions: [
         {
             question: "What does it mean to partner with Mergex?",
-            answer: "Partnering with Mergex means having a single team responsible for building and evolving your business systems over time. Instead of coordinating multiple vendors, you work with Mergex as a unified technology and growth partner — one system, one team, aligned to your long-term goals.",
+            answer: "Partnering with Mergex means having a single team responsible for building and evolving your business systems over time. Instead of coordinating multiple vendors, you work with Mergex as a unified technology and growth partner - one system, one team, aligned to your long-term goals.",
             chatPrompt: "Are you looking for a technology partner or a growth partner? Let's discuss how we can align."
         },
         {
             question: "Who is the partnership model designed for?",
-            answer: "The partnership model is designed for businesses that need continuous system development and infrastructure support — not a one-time build. This includes startups scaling their first real system, companies replacing fragmented vendor ecosystems, and established businesses that want to automate and grow with structure.",
+            answer: "The partnership model is designed for businesses that need continuous system development and infrastructure support - not a one-time build. This includes startups scaling their first real system, companies replacing fragmented vendor ecosystems, and established businesses that want to automate and grow with structure.",
             chatPrompt: "What is the biggest technical challenge currently blocking your growth?"
         },
         {
             question: "How does the venture partnership model work?",
-            answer: "In select cases, Mergex works as a long-term venture partner — helping build and operate the digital infrastructure of a business while staying aligned with the company's growth trajectory. The exact structure depends on the business model, stage, and goals. These partnerships are scoped through a dedicated conversation.",
+            answer: "In select cases, Mergex works as a long-term venture partner - helping build and operate the digital infrastructure of a business while staying aligned with the company's growth trajectory. The exact structure depends on the business model, stage, and goals. These partnerships are scoped through a dedicated conversation.",
             chatPrompt: "Tell me about your business model. I'll explain how our venture partnership structure works."
         },
         {
@@ -68,12 +68,12 @@ export function PartnerFAQ() {
 
                 <div className="max-w-4xl mx-auto space-y-4 mb-24">
                     {PARTNER_FAQ_DATA.questions.map((faq, index) => (
-                        <div 
-                            key={index} 
+                        <div
+                            key={index}
                             className={cn(
                                 "group rounded-2xl border transition-all duration-300",
-                                openIndex === index 
-                                    ? "bg-gray-50 border-violet-100 shadow-sm" 
+                                openIndex === index
+                                    ? "bg-gray-50 border-violet-100 shadow-sm"
                                     : "border-gray-100 hover:border-gray-200"
                             )}
                         >
@@ -100,12 +100,12 @@ export function PartnerFAQ() {
                                 <div className="p-6 pt-0 text-gray-600 leading-relaxed font-light text-lg">
                                     {faq.answer}
                                     <div className="mt-4 flex">
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 const event = new CustomEvent('mergex-open-chat', {
-                                                    detail: { 
+                                                    detail: {
                                                         question: faq.question,
-                                                        chatPrompt: faq.chatPrompt 
+                                                        chatPrompt: faq.chatPrompt
                                                     }
                                                 });
 

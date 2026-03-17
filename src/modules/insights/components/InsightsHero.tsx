@@ -11,7 +11,7 @@ interface InsightsHeroProps {
 export function InsightsHero({ activeCategory, onCategoryChange }: InsightsHeroProps) {
     return (
         <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-            {/* Purple top gradient — user requested */}
+            {/* Purple top gradient - user requested */}
             <div
                 className="pointer-events-none absolute inset-x-0 top-0 h-[520px] z-0"
                 style={{
@@ -93,8 +93,8 @@ export function InsightsHero({ activeCategory, onCategoryChange }: InsightsHeroP
                                 key={cat}
                                 onClick={() => onCategoryChange(cat)}
                                 className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 cursor-pointer ${isActive
-                                        ? 'bg-gray-950 text-white border-gray-950 shadow-md'
-                                        : 'bg-white/70 text-gray-600 border-gray-200 hover:border-violet-300 hover:text-violet-700 hover:bg-violet-50'
+                                    ? 'bg-gray-950 text-white border-gray-950 shadow-md'
+                                    : 'bg-white/70 text-gray-600 border-gray-200 hover:border-violet-300 hover:text-violet-700 hover:bg-violet-50'
                                     }`}
                             >
                                 {cat}

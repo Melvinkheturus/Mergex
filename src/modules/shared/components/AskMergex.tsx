@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { TypingAnimation } from "@/components/ui/typing-animation";
 
 // ─── MergexOrb ────────────────────────────────────────────────────────────────
-// Rotating mesh-gradient orb — the Mergex Intelligence visual identity.
+// Rotating mesh-gradient orb - the Mergex Intelligence visual identity.
 // The outer shell is a static circle clip; two inner oversized layers rotate
 // in opposite directions to create the oil-paint / marble mesh gradient effect.
 export function MergexOrb({ size = 24, className }: { size?: number; className?: string }) {
@@ -32,15 +32,15 @@ export function MergexOrb({ size = 24, className }: { size?: number; className?:
             const deltaY = event.clientY - orbCenterY;
 
             // Maximum distance the eyes can move from center (pupil range)
-            const maxRange = size * 0.12; 
-            
+            const maxRange = size * 0.12;
+
             // Calculate vector length and angle
             const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             const angle = Math.atan2(deltaY, deltaX);
-            
+
             // Move eyes more as cursor gets further (within reason), but capped
             const moveDist = Math.min(distance / 12, maxRange);
-            
+
             mouseX.set(Math.cos(angle) * moveDist);
             mouseY.set(Math.sin(angle) * moveDist);
         };
@@ -52,14 +52,14 @@ export function MergexOrb({ size = 24, className }: { size?: number; className?:
 
         window.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseleave', handleMouseLeave);
-        
+
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseleave', handleMouseLeave);
         };
     }, [size, mouseX, mouseY]);
 
-    // Inner rotating div is 150% of size — corners stay hidden during spin
+    // Inner rotating div is 150% of size - corners stay hidden during spin
     const inner = Math.round(size * 1.5);
     const blur = (f: number) => `${Math.max(0.5, size * f).toFixed(1)}px`;
 
@@ -67,8 +67,8 @@ export function MergexOrb({ size = 24, className }: { size?: number; className?:
         <div
             ref={containerRef}
             className={cn('relative flex-shrink-0 rounded-full overflow-hidden bg-transparent', className)}
-            style={{ 
-                width: size, 
+            style={{
+                width: size,
                 height: size,
                 isolation: 'isolate',
                 transform: 'translateZ(0)',
@@ -121,7 +121,7 @@ export function MergexOrb({ size = 24, className }: { size?: number; className?:
                 transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
             />
 
-            {/* ── Edge vignette — gives the 3-D sphere rim ──────────────────── */}
+            {/* ── Edge vignette - gives the 3-D sphere rim ──────────────────── */}
             <div
                 style={{
                     position: 'absolute',
@@ -246,7 +246,7 @@ interface AskMergexProps {
     placeholder?: string;
     className?: string;
     variant?: 'full' | 'minimal';
-    /** Full variant only — auto-sends this message once on mount */
+    /** Full variant only - auto-sends this message once on mount */
     initialMessage?: string;
 }
 
@@ -292,7 +292,7 @@ export function AskMergex({
                 } catch { /* ignore */ }
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMinimal]);
 
     useEffect(() => {
@@ -318,7 +318,7 @@ export function AskMergex({
         // Small delay so the UI mounts first
         const timer = setTimeout(() => handleSendMessage(initialMessage), 400);
         return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMinimal, initialMessage]);
 
     // ── API call ──────────────────────────────────────────────────────────────
@@ -366,7 +366,7 @@ export function AskMergex({
     const handleMinimalSubmit = (textOverride?: string) => {
         const text = textOverride || value;
         if (!text.trim()) return;
-        
+
         // Dispatch custom event to open AskMergexWidget
         const event = new CustomEvent('mergex-open-chat', {
             detail: { message: text.trim() }
@@ -380,7 +380,7 @@ export function AskMergex({
     };
 
     // ─────────────────────────────────────────────────────────────────────────
-    // MINIMAL VARIANT — clean entry point, redirects to /ask-mergex
+    // MINIMAL VARIANT - clean entry point, redirects to /ask-mergex
     // ─────────────────────────────────────────────────────────────────────────
     if (isMinimal) {
         return (
@@ -394,7 +394,7 @@ export function AskMergex({
                     </div>
                 </div>
 
-                {/* Command bar — redirects on submit */}
+                {/* Command bar - redirects on submit */}
                 <div className="relative group mt-4">
                     {/* 3D Purple Glow Underneath (Hover/Focus only) */}
                     <div className={cn(
@@ -421,16 +421,16 @@ export function AskMergex({
                             />
                             {!value && (
                                 <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none z-0">
-                                   <TypingAnimation
-                                      words={ROTATING_PLACEHOLDERS}
-                                      blinkCursor={true}
-                                      pauseDelay={2000}
-                                      loop
-                                      className="text-sm text-gray-400 font-normal"
-                                      duration={50}
-                                      delay={100}
-                                      deleteSpeed={30}
-                                   />
+                                    <TypingAnimation
+                                        words={ROTATING_PLACEHOLDERS}
+                                        blinkCursor={true}
+                                        pauseDelay={2000}
+                                        loop
+                                        className="text-sm text-gray-400 font-normal"
+                                        duration={50}
+                                        delay={100}
+                                        deleteSpeed={30}
+                                    />
                                 </div>
                             )}
                         </AnimatePresence>
@@ -454,7 +454,7 @@ export function AskMergex({
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    // FULL VARIANT — dedicated AI conversation interface
+    // FULL VARIANT - dedicated AI conversation interface
     // ─────────────────────────────────────────────────────────────────────────
     return (
         <div className={cn(
@@ -551,7 +551,7 @@ export function AskMergex({
                                 <div ref={messagesEndRef} className="h-2" />
                             </div>
                         </div>
-                        
+
                         {/* Bottom Gradient Overlay for text visibility */}
                         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[11]" />
                     </div>
@@ -561,7 +561,7 @@ export function AskMergex({
                 <motion.div
                     layout
                     className={cn(
-                        'w-full transition-all duration-500', 
+                        'w-full transition-all duration-500',
                         !hasStarted ? 'relative mx-auto mb-10' : 'absolute bottom-8 left-0 right-0 px-4 md:px-8 z-[12]'
                     )}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -594,7 +594,7 @@ export function AskMergex({
                             'absolute -inset-1.5 bg-gradient-to-r from-violet-500 via-fuchsia-400 to-indigo-500 rounded-2xl blur-xl transition-all duration-500 z-0',
                             inputFocused ? 'opacity-60 scale-100' : 'opacity-0 scale-90 group-hover:opacity-30 group-hover:scale-95'
                         )} />
-                        
+
                         {/* Elevated Glossy Input Container (Less rounded) */}
                         <div className={cn(
                             'relative z-10 bg-white/95 backdrop-blur-md rounded-lg shadow-[0_6px_24px_rgba(0,0,0,0.05)] p-2 transition-all duration-300 border border-gray-200/80',
@@ -614,13 +614,13 @@ export function AskMergex({
                                 {!value && (
                                     <div className="absolute top-3 left-4 pointer-events-none z-0">
                                         <TypingAnimation
-                                           words={[placeholder ?? 'Ask about systems, Mergex insights, or AI...']}
-                                           blinkCursor={true}
-                                           pauseDelay={2000}
-                                           loop
-                                           className="text-base text-gray-400 font-normal"
-                                           duration={50}
-                                           delay={100}
+                                            words={[placeholder ?? 'Ask about systems, Mergex insights, or AI...']}
+                                            blinkCursor={true}
+                                            pauseDelay={2000}
+                                            loop
+                                            className="text-base text-gray-400 font-normal"
+                                            duration={50}
+                                            delay={100}
                                         />
                                     </div>
                                 )}

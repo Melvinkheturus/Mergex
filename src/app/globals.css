@@ -132,7 +132,7 @@
   }}
 
 html {
-  /* clip instead of hidden — hidden creates a scroll container that breaks position: sticky */
+  /* clip instead of hidden - hidden creates a scroll container that breaks position: sticky */
   overflow-x: clip;
 }
 
@@ -140,7 +140,7 @@ body {
   /* Base background provided by html or transparent to show gradients */
   background-color: transparent;
   font-family: var(--font-manrope), var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  /* clip instead of hidden — hidden creates a scroll container that breaks position: sticky */
+  /* clip instead of hidden - hidden creates a scroll container that breaks position: sticky */
   overflow-x: clip;
   position: relative;
   min-height: 100vh;

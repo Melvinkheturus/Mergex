@@ -174,7 +174,7 @@ export const BRAND_VOICE = {
             name: 'Mergex Labs',
             tagline: 'Explore Innovation',
             description: 'AI content studio & experimentation',
-            longDescription: 'Turn imagination into visuals—ads, products, content—all powered by AI.',
+            longDescription: 'Turn imagination into visuals-ads, products, content-all powered by AI.',
         },
         systems: {
             name: 'Mergex Systems',

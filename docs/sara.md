@@ -96,7 +96,7 @@ seriousness:
 ● Bio Line: "Digital model & AI influencer. Campaigns • Fashion • Advertising. Created by
 Mergex Labs."
 ● Call to Action: Instead of "DM for collab," the profile uses "Brands exploring AI-led
-campaigns—reach out."
+campaigns-reach out."
 Operational Guardrails
 Brand Safety and Ethics
 To protect her long-term value and the reputation of Mergex Labs, Sara Vega has strict

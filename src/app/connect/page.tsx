@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import ConnectCard from "@/modules/connect/components/ConnectCard";
 
 export const metadata: Metadata = {
-    title: "Connect — Mergex",
+    title: "Connect - Mergex",
     description:
         "Mergex digital visiting card. One system. Zero friction. Structured business systems that eliminate scattered workflows and accelerate growth.",
     openGraph: {
-        title: "Connect — Mergex",
+        title: "Connect - Mergex",
         description:
             "One system. Zero friction. Structured business systems that eliminate scattered workflows and accelerate growth.",
         url: "https://connect.mergex.in",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary",
-        title: "Connect — Mergex",
+        title: "Connect - Mergex",
         description:
             "One system. Zero friction. Structured business systems built under one architecture.",
     },

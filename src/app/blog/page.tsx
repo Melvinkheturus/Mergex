@@ -13,7 +13,7 @@ import InsightsPageClient from '@/app/blog/InsightsPageClient';
 export const metadata: Metadata = {
     title: 'Insights & Intelligence | Mergex',
     description:
-        'Short explorations on systems, AI, automation, and growth architecture. A knowledge interface for builders — structured for humans and LLMs alike.',
+        'Short explorations on systems, AI, automation, and growth architecture. A knowledge interface for builders - structured for humans and LLMs alike.',
     keywords: [
         'business systems',
         'AI workflows',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         'Mergex insights',
     ],
     openGraph: {
-        title: 'Mergex Intelligence — Ideas Behind Engineered Scale',
+        title: 'Mergex Intelligence - Ideas Behind Engineered Scale',
         description:
             'Frameworks, case insights, experiments, and strategic notes from the Mergex team.',
         type: 'website',

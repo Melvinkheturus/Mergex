@@ -39,19 +39,19 @@ Full-width screenshot montage showing:
 
 The client needed more than an online presence.
 
-They needed a system that could handle real customers, real orders, and real operational constraints — without becoming fragile as they grew.
+They needed a system that could handle real customers, real orders, and real operational constraints - without becoming fragile as they grew.
 
 Manual order processing through phone calls and emails was creating bottlenecks. Inventory tracking lived in disconnected spreadsheets across multiple warehouses. Sales reps spent hours checking stock levels manually. There was no way for B2B customers to place orders online, no automated pricing for bulk discounts, and no integration with their existing accounting software.
 
 Previous attempts involved hiring separate vendors for website design, database setup, and payment processing. The coordination overhead killed momentum. The tech stack didn't talk to each other.
 
-The real problem wasn't "we need a website" — it was "we need a system that our non-technical team can operate, that integrates with what we already have, and that won't break when we 10x order volume."
+The real problem wasn't "we need a website" - it was "we need a system that our non-technical team can operate, that integrates with what we already have, and that won't break when we 10x order volume."
 
 ---
 
 ## Section 4: The Constraints
 
-The challenge wasn't just building fast — it was building something that wouldn't need to be rebuilt six months later.
+The challenge wasn't just building fast - it was building something that wouldn't need to be rebuilt six months later.
 
 **Critical constraints we had to navigate:**
 
@@ -123,7 +123,7 @@ Every feature was evaluated with one question: **Does this reduce manual work th
 
 ## Section 6: Execution & Speed
 
-The system was designed, built, and deployed in **structured phases** — allowing early validation without sacrificing long-term stability.
+The system was designed, built, and deployed in **structured phases** - allowing early validation without sacrificing long-term stability.
 
 **Week 1:** Core architecture and database design. We mapped existing workflows to identify automation opportunities and integration points.
 
@@ -185,7 +185,7 @@ Stack choices prioritized **speed of iteration** and **operational simplicity** 
 
 ## Section 8: The Outcome
 
-The result was a system the team could **actually use** — and **grow with** — instead of constantly working around.
+The result was a system the team could **actually use** - and **grow with** - instead of constantly working around.
 
 ### What Changed
 
@@ -228,21 +228,21 @@ We didn't inflate metrics. These are real, observable changes in how the busines
 ### What We Learned
 
 **Integration over replacement was the right call.**
-Keeping their existing CRM and accounting software reduced risk and training overhead. In retrospect, this is our default approach now — understand what works before replacing it.
+Keeping their existing CRM and accounting software reduced risk and training overhead. In retrospect, this is our default approach now - understand what works before replacing it.
 
 **Phased rollout prevented disasters.**
 Testing with 10% of the product catalog first caught inventory sync edge cases we didn't anticipate. If we'd gone all-in on day one, it would have been messy.
 
 **Non-technical team design matters more than we expected.**
-We spent extra time on admin UI clarity and bulk operations. That investment paid off — the team became self-sufficient faster than usual.
+We spent extra time on admin UI clarity and bulk operations. That investment paid off - the team became self-sufficient faster than usual.
 
 ### What We'd Do Differently
 
-**Push automation even earlier in the workflow** — specifically around automated reorder points for inventory. We built this in Phase 2, but it could have been Phase 1.
+**Push automation even earlier in the workflow** - specifically around automated reorder points for inventory. We built this in Phase 2, but it could have been Phase 1.
 
 **More aggressive caching strategy from day one.** We optimized after launch, but building the caching layer upfront would have simplified scaling.
 
-This reflection isn't second-guessing — it's pattern recognition we now apply to similar systems by default.
+This reflection isn't second-guessing - it's pattern recognition we now apply to similar systems by default.
 
 ---
 
@@ -250,7 +250,7 @@ This reflection isn't second-guessing — it's pattern recognition we now apply 
 
 ### Interested in a Similar System?
 
-Whether you're in industrial distribution, B2B services, or any business with complex inventory and pricing — the same principles apply.
+Whether you're in industrial distribution, B2B services, or any business with complex inventory and pricing - the same principles apply.
 
 We help businesses build commerce systems that **scale without breaking** and that **teams can actually operate**.
 

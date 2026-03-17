@@ -110,7 +110,7 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                 </p>
                             </div>
 
-                            {/* Decision Assistant — appears below microcopy */}
+                            {/* Decision Assistant - appears below microcopy */}
                             {showAI && (
                                 <div className="mt-8 pt-8 border-t border-gray-200/30">
                                     <AskMergex
@@ -184,12 +184,12 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                                         {faq.answer}
                                                     </p>
                                                     <div className="mt-5 flex">
-                                                        <button 
+                                                        <button
                                                             onClick={() => {
                                                                 const event = new CustomEvent('mergex-open-chat', {
-                                                                    detail: { 
+                                                                    detail: {
                                                                         question: faq.question,
-                                                                        chatPrompt: (faq as any).chatPrompt 
+                                                                        chatPrompt: (faq as any).chatPrompt
                                                                     }
                                                                 });
                                                                 window.dispatchEvent(event);

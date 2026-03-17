@@ -171,7 +171,7 @@ const Skiper17 = () => {
 export { Skiper17, StickyCard002 };
 
 /**
- * Skiper 17 StickyCard_002 — React + Gsap + scrollTrigger
+ * Skiper 17 StickyCard_002 - React + Gsap + scrollTrigger
  * We respect the original creators. This is an inspired rebuild with our own taste and does not claim any ownership.
  *
  * License & Usage:

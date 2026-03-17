@@ -19,7 +19,7 @@ export function HowLabsWorks() {
   const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.95, 1, 1, 0.95]);
   const y = useTransform(scrollYProgress, [0, 0.1], [40, 0]);
 
-  // Dynamic Headline Content — Reflecting the Creative Transformation
+  // Dynamic Headline Content - Reflecting the Creative Transformation
   const headlinePart = useTransform(
     scrollYProgress,
     [0.1, 0.35, 0.6, 0.85],
@@ -42,7 +42,7 @@ export function HowLabsWorks() {
   return (
     <ReactLenis root>
       <main ref={containerRef} className='bg-white'>
-        <motion.section 
+        <motion.section
           style={{ scale, y }}
           className='text-black w-full bg-white pb-32 pt-24'
         >
@@ -54,7 +54,7 @@ export function HowLabsWorks() {
             transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
             className="text-center mb-6 px-6"
           >
-            <h2 
+            <h2
               className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-neutral-900"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
@@ -64,28 +64,28 @@ export function HowLabsWorks() {
           </motion.div>
 
           <div className='flex flex-col lg:flex-row justify-between px-6 md:px-16 gap-12 lg:gap-0 mt-8'>
-            <motion.div 
+            <motion.div
               style={{ y: titleExitY, opacity: titleOpacity }}
               className='sticky top-0 h-screen grid place-content-center flex-1 lg:order-2'
             >
               <div className='max-w-md translate-y-8 md:translate-y-12'>
                 <span className='text-xs font-mono text-black/40 uppercase tracking-[0.3em] mb-4 block text-center lg:text-left'>THE LAB PROCESS</span>
-                <h2 
+                <h2
                   className='text-5xl md:text-6xl font-bold text-black leading-tight font-serif text-center lg:text-left'
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  The <DecryptedText 
+                  The <DecryptedText
                     key={currentHeadline}
-                    text={currentHeadline} 
+                    text={currentHeadline}
                     animateOn="view"
                     revealDirection="center"
                     speed={40}
                   /> <br /> to Reality.
                 </h2>
                 <p className='hidden md:block mt-8 text-xl text-gray-500 font-light leading-relaxed text-center lg:text-left'>
-                  In the Lab, ideas aren’t just explored they evolve. 
-                  Through rapid experimentation and creative intelligence, 
-                  concepts transform into visuals, systems, and experiences 
+                  In the Lab, ideas aren’t just explored they evolve.
+                  Through rapid experimentation and creative intelligence,
+                  concepts transform into visuals, systems, and experiences
                   ready for the real world.
                 </p>
               </div>
@@ -110,7 +110,7 @@ export function HowLabsWorks() {
                     II. Generation
                   </h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
-                    Using AI and creative systems, 
+                    Using AI and creative systems,
                     ideas quickly become visuals, motion, and prototypes.
                   </p>
                   <div className='w-fit border border-black/10 px-6 py-2 rounded-full text-sm font-medium'>
@@ -122,7 +122,7 @@ export function HowLabsWorks() {
                 <article className='bg-[#e9ecef] border border-black/5 h-80 w-full max-w-lg rounded-2xl -rotate-3 p-8 shadow-xl flex flex-col justify-center gap-6 translate-y-12'>
                   <h1 className='text-3xl font-bold text-black'>III. Evolution</h1>
                   <p className='text-gray-600 text-lg leading-relaxed'>
-                    The strongest concepts are refined, 
+                    The strongest concepts are refined,
                     shaped into something precise and production-ready.
                   </p>
                   <div className='w-fit border border-black/10 px-6 py-2 rounded-full text-sm font-medium'>

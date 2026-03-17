@@ -236,7 +236,7 @@ export const PROBLEM_FRAGMENTATION = {
         },
         {
             title: 'AI Hype Without Systems',
-            description: 'Access to ChatGPT doesn\'t make you automated. You need engineering, integration, and strategy—not just subscriptions.',
+            description: 'Access to ChatGPT doesn\'t make you automated. You need engineering, integration, and strategy-not just subscriptions.',
             icon: 'brain',
         },
     ],
@@ -252,7 +252,7 @@ export const HOW_WE_WORK = {
         {
             number: '01',
             title: 'Discover',
-            description: 'We begin by understanding your goals, users, and constraints. No assumptions—just clarity.',
+            description: 'We begin by understanding your goals, users, and constraints. No assumptions-just clarity.',
             icon: 'search',
         },
         {
@@ -276,7 +276,7 @@ export const HOW_WE_WORK = {
     ],
     keyMessages: [
         'MVPs in 2-4 weeks, not months',
-        'One partner—no coordination overhead',
+        'One partner-no coordination overhead',
         'Ship fast, learn faster, improve continuously',
     ],
 } as const;
@@ -358,14 +358,14 @@ export const PARENT_TESTIMONIALS = [
         name: 'Arjun Mehta',
         role: 'Founder',
         company: 'Kova Studio',
-        quote: 'The video card hero targets emotional trust — a face and a voice do more than any written quote.',
+        quote: 'The video card hero targets emotional trust - a face and a voice do more than any written quote.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop',
     },
     {
         name: 'Siddharth Rao',
         role: 'CEO',
         company: 'Stackfront',
-        quote: 'What surprised me wasn\'t the speed — it was how well they understood the business before touching a single line of code. That doesn\'t happen with agencies.',
+        quote: 'What surprised me wasn\'t the speed - it was how well they understood the business before touching a single line of code. That doesn\'t happen with agencies.',
         avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1000&auto=format&fit=crop',
     },
     {

@@ -14,7 +14,7 @@ import type { Testimonial } from '../types/testimonial';
 const TESTIMONIALS: Testimonial[] = [
     {
         id: '1',
-        quote: 'Mergex helped us think more clearly about what we were building — not just how to build it.',
+        quote: 'Mergex helped us think more clearly about what we were building - not just how to build it.',
         author: {
             name: 'Sarah K.',
             role: 'Product Lead',
@@ -54,7 +54,7 @@ const TESTIMONIALS: Testimonial[] = [
     },
     {
         id: '6',
-        quote: 'We knew they\'d follow through — not just on deliverables, but on understanding our goals.',
+        quote: 'We knew they\'d follow through - not just on deliverables, but on understanding our goals.',
         author: {
             name: 'Lisa M.',
             role: 'CEO',
@@ -131,10 +131,10 @@ export function TestimonialsSection() {
 
     return (
         <section ref={containerRef} className="relative h-screen bg-white flex flex-col justify-center overflow-hidden">
-            
+
             {/* Background Ghost Word */}
             <motion.div
-                style={{ 
+                style={{
                     y: yTransform,
                     fontFamily: outfit.style.fontFamily,
 
