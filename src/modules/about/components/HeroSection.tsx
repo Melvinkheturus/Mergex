@@ -27,7 +27,7 @@ export function HeroSection() {
     const opacityTransform = useTransform(scrollYProgress, [0, 0.5], [0.03, 0]);
 
     return (
-        <section className="relative sticky top-0 h-screen overflow-hidden z-0">
+        <section className="sticky top-0 h-screen overflow-hidden z-0 bg-white">
             <NeonOrbs className="flex flex-col items-center justify-center py-20 px-4 md:px-10 lg:px-16 h-full">
             <div ref={containerRef} className="absolute inset-0 pointer-events-none" />
             
@@ -52,11 +52,11 @@ export function HeroSection() {
                     {/* Eyebrow badge */}
                     <TextReveal delay={0.2}>
                         <div className="mb-8 flex items-center justify-center gap-2">
-                            <span className="h-[1px] w-6 bg-violet-600/30"></span>
-                            <span className="bg-gradient-to-b from-violet-400 to-violet-800 bg-clip-text text-transparent font-semibold tracking-[0.2em] text-[10px] md:text-xs uppercase inline-block">
-                                One system. Zero friction.
+                            <span className="h-px w-6 bg-violet-600/30"></span>
+                            <span className="bg-linear-to-b from-violet-400 to-violet-800 bg-clip-text text-transparent font-semibold tracking-[0.2em] text-[10px] md:text-xs uppercase inline-block">
+                                ONE SYSTEM. ZERO FRICTION.
                             </span>
-                            <span className="h-[1px] w-6 bg-violet-600/30"></span>
+                            <span className="h-px w-6 bg-violet-600/30"></span>
                         </div>
                     </TextReveal>
 
@@ -64,12 +64,12 @@ export function HeroSection() {
                     <div className="mb-10 max-w-3xl">
                         <TextReveal delay={0.3} duration={1.6}>
                             <h1 className="font-sans font-semibold text-[clamp(1.5rem,4.5vw,2.75rem)] text-gray-900 leading-[1.2] mb-2">
-                                Architecting Modern Businesses
+                                We exist so ambitious businesses
                             </h1>
                         </TextReveal>
                         <TextReveal delay={0.5} duration={1.6}>
-                            <span className="block font-sans font-medium text-[clamp(1.25rem,4vw,2.5rem)] bg-gradient-to-b from-violet-400 to-violet-800 bg-clip-text text-transparent italic leading-[1.2]" style={{ fontFamily: 'var(--font-playfair)' }}>
-                                for the AI Era
+                            <span className="block font-sans font-medium text-[clamp(1.25rem,4vw,2.5rem)] bg-linear-to-b from-violet-400 to-violet-800 bg-clip-text text-transparent italic leading-[1.2]" style={{ fontFamily: 'var(--font-playfair)' }}>
+                                never outgrow their execution.
                             </span>
                         </TextReveal>
                     </div>
@@ -78,13 +78,13 @@ export function HeroSection() {
                     <div className="max-w-3xl space-y-8">
                         <TextReveal delay={0.7} duration={1.2}>
                             <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed font-normal max-w-4xl mx-auto">
-                                Mergex is a Business Architecture company. We design the scalable systems and infrastructure that allow modern organizations to evolve at the speed of AI.
+                                Mergex builds the systems behind modern businesses - integrating software, automation, AI, and growth infrastructure into one unified foundation so founders stop managing vendors and start building what matters.
                             </p>
                         </TextReveal>
 
                         <TextReveal delay={0.8} duration={1.2}>
                             <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl mx-auto">
-                                We translate strategy into operational infrastructure combining <strong className="text-gray-900 font-semibold">systems design, automation, and AI workflows</strong> into one unified engine of growth.
+                                We work across development, AI, branding, and growth - not as separate services, but as one aligned system with one accountable team behind it.
                             </p>
                         </TextReveal>
                     </div>

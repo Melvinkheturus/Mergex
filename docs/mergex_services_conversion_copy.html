@@ -1,0 +1,759 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .w {
+    padding: 1.5rem 1rem;
+    font-family: var(--font-sans);
+  }
+  .nb {
+    background: var(--color-background-secondary);
+    border-left: 2px solid #7c3aed;
+    border-radius: 0 6px 6px 0;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+  .div {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 1.5rem 0;
+  }
+
+  /* ENTRY FRAMING */
+  .entry-block {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    background: var(--color-background-secondary);
+  }
+  .entry-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 0.5rem;
+  }
+  .entry-headline {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+  }
+  .entry-sub {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+  .entry-closer {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+  }
+  .entry-why {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+
+  /* CARDS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 0.5px solid var(--color-border-tertiary);
+    background: transparent;
+    color: var(--color-text-secondary);
+    transition: all 0.15s;
+  }
+  .tab.on {
+    background: var(--color-text-primary);
+    color: var(--color-background-primary);
+    border-color: transparent;
+  }
+  .sec {
+    display: none;
+  }
+  .sec.on {
+    display: block;
+  }
+  .div-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .sys-label {
+    background: #e1f5ee;
+    color: #085041;
+  }
+  .labs-label {
+    background: #eeedfe;
+    color: #3c3489;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .card {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 12px;
+    padding: 1.1rem;
+    background: var(--color-background-primary);
+  }
+  .card.sys {
+    border-top: 2px solid #1d9e75;
+  }
+  .card.labs {
+    border-top: 2px solid #7c3aed;
+  }
+  .card.scale-card {
+    border: 1.5px solid #1d9e75;
+    background: #f0faf6;
+    grid-column: span 2;
+  }
+  .card.persona-card {
+    border: 1.5px solid #7c3aed;
+    background: #f5f0ff;
+    grid-column: span 2;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .card-num {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.06em;
+  }
+  .premium-tag {
+    font-size: 9px;
+    font-weight: 600;
+    color: #085041;
+    background: #e1f5ee;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .future-tag {
+    font-size: 9px;
+    font-weight: 600;
+    color: #3c3489;
+    background: #eeedfe;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .card-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.3rem;
+  }
+  .pain-hook {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.45;
+    margin-bottom: 0.4rem;
+    font-style: italic;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+  .caps {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+  }
+  .caps li {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    padding: 2.5px 0;
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+  .sys-tick {
+    color: #1d9e75;
+    font-size: 10px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .labs-tick {
+    color: #7c3aed;
+    font-size: 10px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .card-why {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    line-height: 1.45;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+  .caps-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1rem;
+  }
+</style>
+
+<div class="w">
+  <!-- ENTRY FRAMING -->
+  <div class="entry-block">
+    <div class="entry-label">
+      Entry framing - appears above all service groups
+    </div>
+    <div class="entry-headline">
+      Most businesses need all of this.<br />Most are paying five vendors to get
+      it.
+    </div>
+    <div class="entry-sub">
+      Development agency for the website. Marketing agency for growth. AI
+      consultant for automation. Branding studio for identity. Content agency
+      for social. Each one talks to you separately. None of them talk to each
+      other.
+    </div>
+    <div class="entry-closer">
+      Mergex does all of it - as one system, with one team, accountable for one
+      outcome: yours.
+    </div>
+    <div class="entry-why">
+      Psychology: This framing validates the visitor's frustration before
+      presenting any solution. They nod at every sentence. By the time they
+      reach "Mergex does all of it" they already believe it. The groups below
+      then feel like proof, not a pitch.
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="st('systems')">Systems copy</button>
+    <button class="tab" onclick="st('labs')">Labs copy</button>
+    <button class="tab" onclick="st('why')">Why it converts</button>
+  </div>
+
+  <!-- SYSTEMS -->
+  <div id="systems" class="sec on">
+    <span class="div-label sys-label">Mergex Systems - 5 groups</span>
+
+    <div class="grid">
+      <div class="card sys">
+        <div class="card-meta"><span class="card-num">SYSTEMS · 01</span></div>
+        <div class="card-name">Build</div>
+        <div class="pain-hook">
+          "We keep rebuilding the same thing because the first version wasn't
+          built to last."
+        </div>
+        <div class="card-desc">
+          We build software, platforms, and applications designed for where your
+          business is going - not just where it is today. Production-ready.
+          Scalable from day one.
+        </div>
+        <ul class="caps">
+          <li><span class="sys-tick">✓</span>Websites & landing pages</li>
+          <li><span class="sys-tick">✓</span>Web & mobile applications</li>
+          <li><span class="sys-tick">✓</span>SaaS product development</li>
+          <li><span class="sys-tick">✓</span>Custom software solutions</li>
+          <li><span class="sys-tick">✓</span>API integrations</li>
+          <li><span class="sys-tick">✓</span>MVPs in 2–4 weeks</li>
+        </ul>
+        <div class="card-why">
+          Pain: "built to last" - addresses the founder who has already paid
+          once and is frustrated. Hook opens with their exact internal
+          complaint. Converts founders mid-stage more than first-timers.
+        </div>
+      </div>
+
+      <div class="card sys">
+        <div class="card-meta"><span class="card-num">SYSTEMS · 02</span></div>
+        <div class="card-name">Automate</div>
+        <div class="pain-hook">
+          "Our team is spending half their time on work a system should handle."
+        </div>
+        <div class="card-desc">
+          We build AI and automation systems that eliminate the repetitive work
+          stealing your team's time - so they focus on what actually grows the
+          business.
+        </div>
+        <ul class="caps">
+          <li><span class="sys-tick">✓</span>Business process automation</li>
+          <li><span class="sys-tick">✓</span>AI chatbots & assistants</li>
+          <li><span class="sys-tick">✓</span>Workflow & tool integrations</li>
+          <li><span class="sys-tick">✓</span>AI system development</li>
+          <li><span class="sys-tick">✓</span>Data pipelines</li>
+          <li><span class="sys-tick">✓</span>Internal team tools</li>
+        </ul>
+        <div class="card-why">
+          Pain: "work a system should handle" - every founder has felt this. The
+          hook makes the visitor feel understood before we've explained
+          anything. High conversion trigger.
+        </div>
+      </div>
+
+      <div class="card sys">
+        <div class="card-meta"><span class="card-num">SYSTEMS · 03</span></div>
+        <div class="card-name">Brand</div>
+        <div class="pain-hook">
+          "We look like every other company in our space and nobody remembers
+          us."
+        </div>
+        <div class="card-desc">
+          We design brand identities and visual systems that make your business
+          impossible to confuse with anyone else - built for consistency across
+          every surface, not just a logo.
+        </div>
+        <ul class="caps">
+          <li><span class="sys-tick">✓</span>Logo & visual identity</li>
+          <li><span class="sys-tick">✓</span>UI/UX design</li>
+          <li><span class="sys-tick">✓</span>Design systems & style guides</li>
+          <li><span class="sys-tick">✓</span>Founder & personal branding</li>
+          <li><span class="sys-tick">✓</span>Corporate brand systems</li>
+          <li><span class="sys-tick">✓</span>Brand strategy & positioning</li>
+        </ul>
+        <div class="card-why">
+          Pain: "nobody remembers us" - identity pain is emotional and
+          immediate. "Impossible to confuse" is a strong outcome promise that
+          sets Mergex apart from logo-only design shops.
+        </div>
+      </div>
+
+      <div class="card sys">
+        <div class="card-meta"><span class="card-num">SYSTEMS · 04</span></div>
+        <div class="card-name">Grow</div>
+        <div class="pain-hook">
+          "We're getting traffic. We're not getting customers."
+        </div>
+        <div class="card-desc">
+          We build the systems that convert attention into revenue - funnels,
+          campaigns, lead generation, and marketing infrastructure that runs
+          consistently, not just when someone's actively managing it.
+        </div>
+        <ul class="caps">
+          <li>
+            <span class="sys-tick">✓</span>Digital marketing & advertising
+          </li>
+          <li><span class="sys-tick">✓</span>Sales funnel systems</li>
+          <li><span class="sys-tick">✓</span>Lead generation systems</li>
+          <li><span class="sys-tick">✓</span>Performance campaigns</li>
+          <li><span class="sys-tick">✓</span>Conversion optimisation</li>
+          <li><span class="sys-tick">✓</span>Go-to-market execution</li>
+        </ul>
+        <div class="card-why">
+          Pain: the traffic-without-conversion problem is universal and
+          frustrating. Short, specific, immediately recognisable. "Runs
+          consistently" differentiates from agencies that only perform when
+          actively managed.
+        </div>
+      </div>
+
+      <div class="card sys scale-card">
+        <div class="card-meta">
+          <span class="card-num">SYSTEMS · 05</span>
+          <span class="premium-tag">Full business architecture</span>
+        </div>
+        <div class="card-name">Scale</div>
+        <div class="pain-hook">
+          "We've outgrown what we built. Everything needs to be redesigned but
+          we don't know where to start."
+        </div>
+        <div class="card-desc">
+          This is where most agencies stop and where Mergex starts. We audit
+          your entire business, identify the structural gaps holding you back,
+          and design the integrated system - strategy, technology, brand, and
+          growth - that takes you from where you are to where you're going.
+        </div>
+        <ul class="caps caps-2col">
+          <li><span class="sys-tick">✓</span>Business audit & analysis</li>
+          <li><span class="sys-tick">✓</span>Growth strategy design</li>
+          <li><span class="sys-tick">✓</span>Revenue system engineering</li>
+          <li><span class="sys-tick">✓</span>Full business system design</li>
+          <li>
+            <span class="sys-tick">✓</span>Strategy + tech + brand integration
+          </li>
+          <li>
+            <span class="sys-tick">✓</span>0→1 and 1→10 scale architecture
+          </li>
+        </ul>
+        <div class="card-why">
+          Psychology: The elevated card treatment signals this is the premium
+          tier before the visitor reads a word. The pain hook targets the
+          scaling founder - the highest-value client. "This is where most
+          agencies stop" directly attacks the competition and positions Mergex
+          as categorically different. Most powerful card on the page.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LABS -->
+  <div id="labs" class="sec">
+    <span class="div-label labs-label">Mergex Labs - 5 groups</span>
+
+    <div class="grid">
+      <div class="card labs">
+        <div class="card-meta"><span class="card-num">LABS · 01</span></div>
+        <div class="card-name">Ads</div>
+        <div class="pain-hook">
+          "Our creative takes weeks to produce and costs a fortune. By then the
+          moment has passed."
+        </div>
+        <div class="card-desc">
+          We produce AI-powered ad creatives - images, videos, and campaign
+          assets - at a pace and volume no traditional studio can match. Built
+          to convert, not just to look good.
+        </div>
+        <ul class="caps">
+          <li><span class="labs-tick">✓</span>AI image & video ad creatives</li>
+          <li><span class="labs-tick">✓</span>Product visuals & mockups</li>
+          <li><span class="labs-tick">✓</span>Campaign creative assets</li>
+          <li><span class="labs-tick">✓</span>AI marketing asset generation</li>
+          <li>
+            <span class="labs-tick">✓</span>E-commerce visual optimisation
+          </li>
+          <li>
+            <span class="labs-tick">✓</span>A/B creative variants at scale
+          </li>
+        </ul>
+        <div class="card-why">
+          Pain: slow creative production is the single most common complaint
+          from D2C and e-commerce brands. "By then the moment has passed" is
+          emotionally accurate. "Built to convert, not just look good" separates
+          from design-first studios.
+        </div>
+      </div>
+
+      <div class="card labs">
+        <div class="card-meta"><span class="card-num">LABS · 02</span></div>
+        <div class="card-name">Content</div>
+        <div class="pain-hook">
+          "We know we need to post consistently. We never do because we run out
+          of ideas and time."
+        </div>
+        <div class="card-desc">
+          We build content systems that produce, schedule, and publish
+          consistently - social media posts, reels, copy, and strategies that
+          keep your brand visible without burning your team out.
+        </div>
+        <ul class="caps">
+          <li><span class="labs-tick">✓</span>Social media posts & graphics</li>
+          <li><span class="labs-tick">✓</span>Reels & short-form video</li>
+          <li><span class="labs-tick">✓</span>AI UGC-style content</li>
+          <li><span class="labs-tick">✓</span>Copywriting & brand voice</li>
+          <li><span class="labs-tick">✓</span>Content strategy & planning</li>
+          <li><span class="labs-tick">✓</span>Content automation systems</li>
+        </ul>
+        <div class="card-why">
+          Pain: the "we know we should but we don't" guilt is universal for
+          small and scaling teams. Naming it directly creates instant
+          recognition. "Without burning your team out" is the relief that closes
+          the hook.
+        </div>
+      </div>
+
+      <div class="card labs">
+        <div class="card-meta"><span class="card-num">LABS · 03</span></div>
+        <div class="card-name">Video</div>
+        <div class="pain-hook">
+          "Our videos look like they were made on a budget - because they were."
+        </div>
+        <div class="card-desc">
+          We produce brand films, campaign videos, reels, and explainers that
+          look and feel premium - using AI-enhanced production that delivers
+          studio-quality output without studio-level cost.
+        </div>
+        <ul class="caps">
+          <li><span class="labs-tick">✓</span>Video production & direction</li>
+          <li>
+            <span class="labs-tick">✓</span>Video editing & post-production
+          </li>
+          <li><span class="labs-tick">✓</span>Motion graphics & animation</li>
+          <li>
+            <span class="labs-tick">✓</span>AI motion & storytelling systems
+          </li>
+          <li><span class="labs-tick">✓</span>Brand & campaign films</li>
+          <li>
+            <span class="labs-tick">✓</span>Product demo & explainer videos
+          </li>
+        </ul>
+        <div class="card-why">
+          Pain: "look like they were made on a budget" is a self-aware
+          observation most founders have had. It's slightly uncomfortable -
+          which is exactly why it lands. The resolution ("studio-quality without
+          studio-level cost") is the specific relief.
+        </div>
+      </div>
+
+      <div class="card labs">
+        <div class="card-meta"><span class="card-num">LABS · 04</span></div>
+        <div class="card-name">Identity</div>
+        <div class="pain-hook">
+          "Our brand looks different everywhere. Nothing feels consistent."
+        </div>
+        <div class="card-desc">
+          We build and maintain the ongoing visual presence of your brand -
+          across social media, campaigns, and every customer touchpoint - so
+          your brand feels the same everywhere people encounter it.
+        </div>
+        <ul class="caps">
+          <li><span class="labs-tick">✓</span>Social media brand presence</li>
+          <li><span class="labs-tick">✓</span>Campaign storytelling</li>
+          <li><span class="labs-tick">✓</span>Founder & CEO personal brand</li>
+          <li><span class="labs-tick">✓</span>Corporate brand media</li>
+          <li><span class="labs-tick">✓</span>Brand photography direction</li>
+          <li>
+            <span class="labs-tick">✓</span>Visual brand consistency systems
+          </li>
+        </ul>
+        <div class="card-why">
+          Pain: brand inconsistency is a growth-stage problem every scaling
+          business faces. "Feels the same everywhere" is a simple promise that
+          captures a complex solution. Note: this is ongoing output - distinct
+          from Brand in Systems which is foundational identity.
+        </div>
+      </div>
+
+      <div class="card labs persona-card">
+        <div class="card-meta">
+          <span class="card-num">LABS · 05</span>
+          <span class="future-tag">Future-forward capability</span>
+        </div>
+        <div class="card-name">Persona</div>
+        <div class="pain-hook">
+          "We want a brand presence that scales beyond what any one person can
+          create or maintain."
+        </div>
+        <div class="card-desc">
+          AI avatars, digital personas, and cinematic brand characters - built
+          for brands that want a scalable human presence. This is the
+          future-facing capability of Mergex Labs, where AI becomes the face,
+          voice, and creative extension of your brand at infinite scale.
+        </div>
+        <ul class="caps caps-2col">
+          <li><span class="labs-tick">✓</span>AI avatars & digital personas</li>
+          <li>
+            <span class="labs-tick">✓</span>Cinematic AI character development
+          </li>
+          <li><span class="labs-tick">✓</span>AI motion & narrative systems</li>
+          <li><span class="labs-tick">✓</span>Brand voice & persona design</li>
+        </ul>
+        <div class="card-why">
+          Psychology: "Future-forward capability" tag signals this is premium
+          and ahead of the market - creates desire through exclusivity. Pain
+          hook targets ambitious brands thinking long-term, not just current
+          needs. This card makes Labs feel like a lab, not a studio.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY IT CONVERTS -->
+  <div id="why" class="sec">
+    <div class="nb">
+      The conversion psychology behind every copy decision - share this with
+      your team so future copy stays consistent.
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 0.65rem">
+      <div
+        style="
+          border: 0.5px solid var(--color-border-tertiary);
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.3rem;
+          "
+        >
+          Rule 1 - Pain before solution
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+          "
+        >
+          Every card opens with the client's pain in italics - not a description
+          of what Mergex does. Humans decide emotionally before they decide
+          rationally. The pain hook earns the right to explain the solution.
+          Without it, the card is just a service list.
+        </div>
+      </div>
+
+      <div
+        style="
+          border: 0.5px solid var(--color-border-tertiary);
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.3rem;
+          "
+        >
+          Rule 2 - Quote format for pain hooks
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+          "
+        >
+          The pain hooks are written as if the client is speaking - in quotation
+          marks, first person. This is deliberate. When a visitor reads their
+          own internal monologue reflected back at them, they feel understood.
+          That feeling is the conversion trigger - not the feature list below
+          it.
+        </div>
+      </div>
+
+      <div
+        style="
+          border: 0.5px solid var(--color-border-tertiary);
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.3rem;
+          "
+        >
+          Rule 3 - Scale and Persona are elevated
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+          "
+        >
+          Scale (Systems) and Persona (Labs) span the full width with premium
+          card styling. This tells the eye they matter before the brain reads a
+          word. Elevated visual hierarchy creates perceived value - visitors
+          assume the highlighted card is the most important offering, which
+          positions both correctly.
+        </div>
+      </div>
+
+      <div
+        style="
+          border: 0.5px solid var(--color-border-tertiary);
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.3rem;
+          "
+        >
+          Rule 4 - Entry framing changes everything
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+          "
+        >
+          The entry framing ("Most businesses need all of this. Most are paying
+          five vendors to get it.") is placed before the visitor sees any group.
+          This single paragraph changes how they read every card below - from
+          "interesting service" to "I need this and I've been doing it wrong."
+          Without it, the groups are a menu. With it, they're a revelation.
+        </div>
+      </div>
+
+      <div
+        style="
+          border: 0.5px solid var(--color-border-tertiary);
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 0.3rem;
+          "
+        >
+          Rule 5 - "This is where most agencies stop"
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+          "
+        >
+          The Scale card description includes: "This is where most agencies stop
+          and where Mergex starts." This is a direct competitive positioning
+          statement that doesn't name any competitor. It works because every
+          visitor already knows agencies stop at delivery - Manikandan's insight
+          about the gap between strategy and execution is now embedded in the
+          service copy itself.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function st(id) {
+    document.querySelectorAll(".sec").forEach((s) => s.classList.remove("on"));
+    document.querySelectorAll(".tab").forEach((t) => t.classList.remove("on"));
+    document.getElementById(id).classList.add("on");
+    event.target.classList.add("on");
+  }
+</script>

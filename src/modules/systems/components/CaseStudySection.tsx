@@ -220,7 +220,7 @@ export function CaseStudySection() {
                 {/* Custom Cursor - "View Case Study" label */}
                 <div
                     ref={cursorRef}
-                    className="pointer-events-none fixed z-[9999] flex items-center gap-2 transition-opacity duration-200"
+                    className="pointer-events-none fixed z-9999 flex items-center gap-2 transition-opacity duration-200"
                     style={{
                         opacity: cursorVisible ? 1 : 0,
                         transform: 'translate(-50%, -50%)',
@@ -243,7 +243,7 @@ export function CaseStudySection() {
                             strokeWidth="2.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="text-violet-600 mr-2 flex-shrink-0"
+                            className="text-violet-600 mr-2 shrink-0"
                         >
                             <path d="M7 17L17 7" />
                             <path d="M7 7h10v10" />

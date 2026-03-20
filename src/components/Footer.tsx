@@ -129,7 +129,7 @@ export default function Footer() {
                 </div>
 
 
-                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
+                <div className="max-w-7xl xl:max-w-360 2xl:max-w-400 mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                     {/* Top Section */}
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 mb-4 lg:mb-6 mt-[10vh] lg:mt-16">
                         {/* Brand Column */}
@@ -229,7 +229,7 @@ export default function Footer() {
                                     variants={menuStaggerContainer}
                                     className="order-1"
                                 >
-                                    <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Solutions</h4>
+                                    <h4 className="font-(family-name:--font-playfair) font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Solutions</h4>
                                     <ul className="space-y-4 text-sm font-body">
                                         {FOOTER_LINKS.solutions.map((link) => (
                                             <li key={link.label}>
@@ -244,7 +244,7 @@ export default function Footer() {
                                     variants={menuStaggerContainer}
                                     className="order-3 md:order-2"
                                 >
-                                    <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Insights</h4>
+                                    <h4 className="font-(family-name:--font-playfair) font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Insights</h4>
                                     <ul className="space-y-4 text-sm font-body">
                                         {FOOTER_LINKS.insights.map((link) => (
                                             <li key={link.label}>
@@ -260,7 +260,7 @@ export default function Footer() {
                                 variants={menuStaggerContainer}
                                 className="order-2"
                             >
-                                <h4 className="font-[family-name:var(--font-playfair)] font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Company</h4>
+                                <h4 className="font-(family-name:--font-playfair) font-semibold mb-4 text-white text-lg tracking-wide" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.4)' }}>Company</h4>
                                 <ul className="space-y-4 text-sm font-body">
                                     {FOOTER_LINKS.company.map((link) => (
                                         <li key={link.label}>
@@ -276,7 +276,7 @@ export default function Footer() {
                 </div>
 
                 <div className="w-full mt-20 lg:mt-6 mb-0 relative z-10 overflow-hidden">
-                    <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
+                    <div className="max-w-7xl xl:max-w-360 2xl:max-w-400 mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
                         <div className={`flex flex-col md:flex-row items-center ${isLabsOrSystems ? 'justify-center' : 'md:items-end justify-between'} gap-8 md:gap-12 pb-4 md:pb-8`}>
                             <div className={`relative ${isLabsOrSystems ? 'text-center' : 'text-left'}`}>
                                 {/* Gradient wrapper: bg-clip-text breaks GSAP SplitText spans, so we use a CSS mask-image gradient on a wrapper div instead */}
@@ -290,7 +290,7 @@ export default function Footer() {
                                         <SplitText
                                             text="Mergex"
                                             tag="h1"
-                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] pb-2 md:pb-10"
+                                            className="text-[14vw] md:text-[13vw] leading-none font-medium text-white tracking-[0.01em] select-none font-(family-name:--font-playfair) pb-2 md:pb-10"
                                             splitType="chars"
                                             delay={80}
                                             duration={1.2}
@@ -322,7 +322,7 @@ export default function Footer() {
                                                 <SplitText
                                                     text={pathname === '/labs' ? 'abs' : 'ystems'}
                                                     tag="span"
-                                                    className="text-[10vw] md:text-[9vw] leading-none font-medium text-white tracking-[0.01em] select-none font-[family-name:var(--font-playfair)] ml-[-0.05em] pb-10"
+                                                    className="text-[10vw] md:text-[9vw] leading-none font-medium text-white tracking-[0.01em] select-none font-(family-name:--font-playfair) ml-[-0.05em] pb-10"
                                                     splitType="chars"
                                                     delay={300}
                                                     duration={1.2}
@@ -382,7 +382,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="max-w-7xl xl:max-w-[90rem] 2xl:max-w-[100rem] mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
+                <div className="max-w-7xl xl:max-w-360 2xl:max-w-400 mx-auto px-4 md:px-10 lg:px-16 xl:px-20 relative z-20">
 
                     <motion.div
                         className="pt-2 md:pt-15 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-400 font-body relative z-10"
@@ -397,12 +397,12 @@ export default function Footer() {
                             <p className={`hidden md:block opacity-100 font-medium text-gray-300 text-center ${isLabsOrSystems ? 'md:text-center' : 'md:text-left'}`}>We believe good systems outlast trends.</p>
                         </div>
                         <div className="flex gap-6">
-                            <a className="hover:text-white transition-colors" href="#">
+                            <Link className="hover:text-white transition-colors" href="/legal">
                                 Privacy Policy
-                            </a>
-                            <a className="hover:text-white transition-colors" href="#">
-                                Terms & Conditions
-                            </a>
+                            </Link>
+                            <Link className="hover:text-white transition-colors" href="/legal">
+                                Terms & Use
+                            </Link>
                             <button
                                 onClick={() => scrollTo(0)}
                                 className="ml-2 w-8 h-8 rounded-full bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white group"

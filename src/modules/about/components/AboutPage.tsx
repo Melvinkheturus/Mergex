@@ -1,37 +1,43 @@
 'use client';
 
 import { HeroSection } from './HeroSection';
-import { ProblemSection } from './ProblemSection';
-import { WhatIsSection } from './WhatIsSection';
-import { ModelSection } from './ModelSection';
+import { ProblemSection as WhyMergexSection } from './whymergex';
+import { FoundersInsight } from './FoundersInsight';
+import { TheProblem } from './TheProblem';
+import { WhatWeBuild } from './WhatWeBuild';
+import { WhatWeBelieve } from './WhatWeBelieve';
+import { RealOutcomes } from './RealOutcomes';
 import { TeamSection } from './TeamSection';
-import { PhilosophySection } from './PhilosophySection';
+import { VisionMission } from './VisionMission';
 import { CTASection } from './CTASection';
-import { TestimonialsSection } from '@/modules/shared';
 
 /**
  * AboutPage - Strategic Positioning Page
  * 
  * Structure:
- * 1. Orientation (Hero)
- * 2. Problem (Chaos)
- * 3. What Mergex Is (The Fix)
- * 4. The Model (How it works)
- * 5. Philosophy (Why it works)
- * 6. Team (The Architects)
- * 7. Trust Building (Testimonials)
- * 8. Directional Check (CTASection)
+ * 1. About Mergex (Hero)
+ * 2. Why Mergex
+ * 3. The founder's insight
+ * 4. The problem we solve
+ * 5. What we build
+ * 6. What we believe
+ * 7. Real outcomes
+ * 8. team
+ * 9. Where we're going (vission and mission)
+ * 10. cta
  */
 export function AboutPage() {
     return (
         <div className="bg-white">
             <HeroSection />
-            <ProblemSection />
-            <WhatIsSection />
-            <ModelSection />
-            <PhilosophySection />
+            <WhyMergexSection />
+            <FoundersInsight />
+            <TheProblem />
+            <WhatWeBuild />
+            <WhatWeBelieve />
+            <RealOutcomes />
             <TeamSection />
-            {/* <TestimonialsSection /> */}
+            <VisionMission />
             <CTASection />
         </div>
     );

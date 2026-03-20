@@ -20,7 +20,7 @@ export function Navbar() {
 
     // Determine if the current page has a light background (requires dark navbar text)
     // Systems page is explicitly light.
-    const isLightPage = pathname?.startsWith('/systems') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
+    const isLightPage = pathname?.startsWith('/systems') || pathname?.startsWith('/legal') || pathname?.startsWith('/partner') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
     const textColorClass = (activeMenu || isLightPage) ? 'text-neutral-900' : 'text-white';
     const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/80 hover:text-violet-600' : 'text-white/90 hover:text-white';
 
@@ -104,7 +104,7 @@ export function Navbar() {
                         href="/contact"
                         className="
                             group relative px-6 py-2.5 rounded-xl overflow-hidden 
-                            bg-gradient-to-b from-violet-400 to-violet-900
+                            bg-linear-to-b from-violet-400 to-violet-900
                             text-white font-medium text-sm
                             shadow-lg shadow-violet-900/30
                             transition-all duration-200 ease-out
@@ -157,7 +157,7 @@ export function Navbar() {
                     rounded-xl px-5 h-14 flex items-center justify-between border relative
                 `}>
                     {/* Left: Logo Icon */}
-                    <Link href="/" className="flex-shrink-0 z-10">
+                    <Link href="/" className="shrink-0 z-10">
                         <Image
                             src="/logo/mergex-logo.png"
                             alt="Mergex Logo"
@@ -276,10 +276,10 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
                 }}
             >
-                <h3 className="uppercase tracking-wider font-bold text-xs bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-2">
+                <h3 className="uppercase tracking-wider font-bold text-xs bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-2">
                     SYSTEMS
                 </h3>
-                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-[1.1]! max-w-[300px]" style={{ fontFamily: 'Playfair Display, serif' }}>
                     Build systems that actually scale.
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed mt-8 pt-4">
@@ -354,7 +354,7 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
 
             {/* Right Column - CTA (Col-Span-3) */}
             <motion.div
-                className="col-span-3 bg-gradient-to-b from-white via-orange-50 to-orange-200/90 rounded-2xl p-6 flex flex-col h-full border border-gray-100 relative overflow-hidden text-center md:text-left group"
+                className="col-span-3 bg-linear-to-b from-white via-orange-50 to-orange-200/90 rounded-2xl p-6 flex flex-col h-full border border-gray-100 relative overflow-hidden text-center md:text-left group"
                 variants={{
                     hidden: { opacity: 0, x: 20 },
                     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
@@ -377,7 +377,7 @@ function ServicesMenu({ closeMenu }: { closeMenu: () => void }) {
                 </div>
 
                 {/* Image at bottom only */}
-                <div className="absolute bottom-0 -left-8 -right-8 h-[90%] z-[5] opacity-100 transition-all duration-700 pointer-events-none">
+                <div className="absolute bottom-0 -left-8 -right-8 h-[90%] z-5 opacity-100 transition-all duration-700 pointer-events-none">
                     <Image
                         src="/background/parent/cedarwbg.png"
                         alt="Background"
@@ -419,11 +419,11 @@ function LabsMenu({ closeMenu }: { closeMenu: () => void }) {
             {/* Left Side - Positioning & Invitation */}
             <div className="col-span-12 md:col-span-4 flex flex-col justify-between">
                 <div>
-                    <h3 className="uppercase tracking-wider font-bold text-xs bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-3">
+                    <h3 className="uppercase tracking-wider font-bold text-xs bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent mb-3">
                         MERGEX LABS
                     </h3>
                     <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-tight mb-4">
-                        Where creativity meets <span className="bg-gradient-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">intelligence</span>.
+                        Where creativity meets <span className="bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">intelligence</span>.
                     </h2>
                     <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
                         An AI-native content studio exploring visuals, motion, and storytelling with intent.
@@ -505,7 +505,7 @@ function LabsCard({ title, hook, href, color, image, video, closeMenu, lightMedi
                         )}
                     </div>
                     {/* Gradient Overlay for text readability - Bottom Up */}
-                    {!lightMedia && <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />}
+                    {!lightMedia && <div className="absolute inset-0 z-10 bg-linear-to-t from-black/60 via-black/20 to-transparent" />}
                 </>
             )}
 
@@ -534,7 +534,7 @@ function PricingMenu({ closeMenu }: { closeMenu: () => void }) {
             {/* Left Side - Positioning + Reassurance */}
             <div className="col-span-3 flex flex-col">
                 <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">PRICING</h3>
-                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px] mb-3">
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-[1.1]! max-w-[300px] mb-3">
                     Transparent pricing. Scoped to your needs.
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
@@ -598,7 +598,7 @@ function EngagementSnapshot({ title, subtitle, description, highlighted, href, c
             href={href}
             onClick={closeMenu}
             className={`group block rounded-2xl p-6 transition-all duration-300 relative ${highlighted
-                ? 'bg-gradient-to-br from-purple-50 to-blue-50 border-2 border-purple-200'
+                ? 'bg-linear-to-br from-purple-50 to-blue-50 border-2 border-purple-200'
                 : 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
                 }`}
         >
@@ -627,7 +627,7 @@ function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
             {/* Left Side - Positioning */}
             <div className="col-span-3 flex flex-col">
                 <h3 className="uppercase tracking-wider font-bold text-xs text-primary mb-2">EXPLORE</h3>
-                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 !leading-[1.1] max-w-[300px] mb-3">
+                <h2 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-[1.1]! max-w-[300px] mb-3">
                     How we think, build, and refine systems.
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed">

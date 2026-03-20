@@ -1,0 +1,295 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.w{padding:1.5rem 1rem;font-family:var(--font-sans)}
+.nb{background:var(--color-background-secondary);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:.5rem .75rem;margin-bottom:1rem;font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.div{border:none;border-top:.5px solid var(--color-border-tertiary);margin:1.5rem 0}
+.div-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.div-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.div-pill{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.sys-pill{background:#E1F5EE;color:#085041}
+.labs-pill{background:#EEEDFE;color:#3C3489}
+.div-hook{font-size:12px;color:var(--color-text-secondary);margin-bottom:1.25rem;line-height:1.6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.card{border:.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem;background:var(--color-background-primary);position:relative;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-secondary)}
+.card.sys-card{border-top:2px solid #1D9E75}
+.card.labs-card{border-top:2px solid #7c3aed}
+.card-num{font-size:9px;font-weight:600;color:var(--color-text-tertiary);letter-spacing:.06em;margin-bottom:.5rem}
+.card-name{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:.2rem;line-height:1.2}
+.card-hook{font-size:11px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:.65rem;font-style:italic}
+.caps{list-style:none;padding:0}
+.caps li{font-size:11px;color:var(--color-text-secondary);padding:2.5px 0;display:flex;gap:5px;align-items:flex-start;line-height:1.4}
+.sys-tick{color:#1D9E75;font-size:10px;margin-top:1px;flex-shrink:0}
+.labs-tick{color:#7c3aed;font-size:10px;margin-top:1px;flex-shrink:0}
+.seo-tag{font-size:9px;font-weight:500;color:#085041;background:#E1F5EE;padding:1px 6px;border-radius:8px;display:inline-block;margin-top:.5rem}
+.labs-seo-tag{font-size:9px;font-weight:500;color:#3C3489;background:#EEEDFE;padding:1px 6px;border-radius:8px;display:inline-block;margin-top:.5rem}
+.tabs{display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);transition:all .15s}
+.tab.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:transparent}
+.sec{display:none}.sec.on{display:block}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table th{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-tertiary);padding:.4rem .6rem;text-align:left;border-bottom:.5px solid var(--color-border-tertiary)}
+.summary-table td{font-size:12px;color:var(--color-text-secondary);padding:.5rem .6rem;border-bottom:.5px solid var(--color-border-tertiary);line-height:1.4}
+.summary-table td:first-child{font-weight:500;color:var(--color-text-primary)}
+.geo-box{border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:.65rem .9rem;margin-bottom:.6rem}
+.geo-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.geo-query{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.25rem}
+.geo-signal{font-size:11px;color:var(--color-text-secondary);line-height:1.55}
+.geo-pill{font-size:9px;font-weight:500;color:#3C3489;background:#EEEDFE;padding:2px 7px;border-radius:10px;display:inline-block;margin-top:.3rem}
+</style>
+<div class="w">
+
+<div class="tabs">
+  <button class="tab on" onclick="st('both')">Systems + Labs</button>
+  <button class="tab" onclick="st('systems')">Systems only</button>
+  <button class="tab" onclick="st('labs')">Labs only</button>
+  <button class="tab" onclick="st('summary')">At a glance</button>
+  <button class="tab" onclick="st('geo')">SEO + GEO</button>
+</div>
+
+<!-- BOTH VIEW -->
+<div id="both" class="sec on">
+<div class="nb">5 groups each. Names are one or two plain words. Every group reflects a business outcome - not a delivery method. Systems = runs the business. Labs = grows and represents it.</div>
+
+<!-- SYSTEMS -->
+<div class="div-header">
+  <div class="div-title">Mergex Systems</div>
+  <span class="div-pill sys-pill">Runs the business</span>
+</div>
+<div class="div-hook">Software, automation, brand foundations, and growth systems - everything that powers and scales your operations.</div>
+<div class="grid" style="margin-bottom:1.5rem">
+
+  <div class="card sys-card">
+    <div class="card-num">SYSTEMS · 01</div>
+    <div class="card-name">Build</div>
+    <div class="card-hook">The digital products your business runs on.</div>
+    <ul class="caps">
+      <li><span class="sys-tick">✓</span>Websites & landing pages</li>
+      <li><span class="sys-tick">✓</span>Web & mobile applications</li>
+      <li><span class="sys-tick">✓</span>SaaS product development</li>
+      <li><span class="sys-tick">✓</span>Custom software solutions</li>
+      <li><span class="sys-tick">✓</span>API integrations</li>
+      <li><span class="sys-tick">✓</span>MVPs in 2–4 weeks</li>
+    </ul>
+    <span class="seo-tag">software development · MVP · web app</span>
+  </div>
+
+  <div class="card sys-card">
+    <div class="card-num">SYSTEMS · 02</div>
+    <div class="card-name">Automate</div>
+    <div class="card-hook">Less manual work. More business momentum.</div>
+    <ul class="caps">
+      <li><span class="sys-tick">✓</span>Business process automation</li>
+      <li><span class="sys-tick">✓</span>AI chatbots & assistants</li>
+      <li><span class="sys-tick">✓</span>Workflow & tool integrations</li>
+      <li><span class="sys-tick">✓</span>AI system development</li>
+      <li><span class="sys-tick">✓</span>Data pipelines</li>
+      <li><span class="sys-tick">✓</span>Internal team tools</li>
+    </ul>
+    <span class="seo-tag">AI automation · workflow automation · chatbot</span>
+  </div>
+
+  <div class="card sys-card">
+    <div class="card-num">SYSTEMS · 03</div>
+    <div class="card-name">Brand</div>
+    <div class="card-hook">The identity that makes you instantly recognisable and trusted.</div>
+    <ul class="caps">
+      <li><span class="sys-tick">✓</span>Logo & visual identity</li>
+      <li><span class="sys-tick">✓</span>UI/UX design</li>
+      <li><span class="sys-tick">✓</span>Design systems & style guides</li>
+      <li><span class="sys-tick">✓</span>Founder & personal branding</li>
+      <li><span class="sys-tick">✓</span>Corporate brand systems</li>
+      <li><span class="sys-tick">✓</span>Brand strategy & positioning</li>
+    </ul>
+    <span class="seo-tag">branding · brand identity · UI UX design</span>
+  </div>
+
+  <div class="card sys-card">
+    <div class="card-num">SYSTEMS · 04</div>
+    <div class="card-name">Grow</div>
+    <div class="card-hook">The systems that turn traffic into revenue, reliably.</div>
+    <ul class="caps">
+      <li><span class="sys-tick">✓</span>Digital marketing & advertising</li>
+      <li><span class="sys-tick">✓</span>Sales funnel systems</li>
+      <li><span class="sys-tick">✓</span>Lead generation systems</li>
+      <li><span class="sys-tick">✓</span>Performance campaigns</li>
+      <li><span class="sys-tick">✓</span>Conversion optimisation</li>
+      <li><span class="sys-tick">✓</span>Go-to-market execution</li>
+    </ul>
+    <span class="seo-tag">digital marketing · lead generation · growth</span>
+  </div>
+
+  <div class="card sys-card" style="grid-column:span 2">
+    <div class="card-num">SYSTEMS · 05</div>
+    <div class="card-name">Scale</div>
+    <div class="card-hook">This is where Mergex becomes a business architect - not just a vendor. We audit, design, and engineer the full system behind your business growth.</div>
+    <ul class="caps" style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem">
+      <li><span class="sys-tick">✓</span>Business audit & analysis</li>
+      <li><span class="sys-tick">✓</span>Growth strategy design</li>
+      <li><span class="sys-tick">✓</span>Revenue system engineering</li>
+      <li><span class="sys-tick">✓</span>Full business system design</li>
+      <li><span class="sys-tick">✓</span>Strategy + tech + brand integration</li>
+      <li><span class="sys-tick">✓</span>0→1 and 1→10 scale architecture</li>
+    </ul>
+    <span class="seo-tag">business growth strategy · scale business · revenue system</span>
+  </div>
+
+</div>
+
+<div class="div"></div>
+
+<!-- LABS -->
+<div class="div-header">
+  <div class="div-title">Mergex Labs</div>
+  <span class="div-pill labs-pill">Represents the business</span>
+</div>
+<div class="div-hook">AI-powered creative production - the content, media, and visual output that makes your brand visible, memorable, and compelling.</div>
+<div class="grid">
+
+  <div class="card labs-card">
+    <div class="card-num">LABS · 01</div>
+    <div class="card-name">Ads</div>
+    <div class="card-hook">AI-generated ad creatives that convert - faster than any traditional studio.</div>
+    <ul class="caps">
+      <li><span class="labs-tick">✓</span>AI image & video ad creatives</li>
+      <li><span class="labs-tick">✓</span>Product visuals & mockups</li>
+      <li><span class="labs-tick">✓</span>Campaign creative assets</li>
+      <li><span class="labs-tick">✓</span>AI marketing asset generation</li>
+      <li><span class="labs-tick">✓</span>E-commerce visual optimisation</li>
+      <li><span class="labs-tick">✓</span>A/B creative variants at scale</li>
+    </ul>
+    <span class="labs-seo-tag">AI ad creatives · marketing visuals · product mockups</span>
+  </div>
+
+  <div class="card labs-card">
+    <div class="card-num">LABS · 02</div>
+    <div class="card-name">Content</div>
+    <div class="card-hook">A consistent content engine - without the agency fees or the waiting time.</div>
+    <ul class="caps">
+      <li><span class="labs-tick">✓</span>Social media posts & graphics</li>
+      <li><span class="labs-tick">✓</span>Reels & short-form video</li>
+      <li><span class="labs-tick">✓</span>AI UGC-style content</li>
+      <li><span class="labs-tick">✓</span>Copywriting & brand voice</li>
+      <li><span class="labs-tick">✓</span>Content strategy & planning</li>
+      <li><span class="labs-tick">✓</span>Content automation systems</li>
+    </ul>
+    <span class="labs-seo-tag">social media content · AI content · reels</span>
+  </div>
+
+  <div class="card labs-card">
+    <div class="card-num">LABS · 03</div>
+    <div class="card-name">Video</div>
+    <div class="card-hook">From brand films to product explainers - storytelling that moves people and drives action.</div>
+    <ul class="caps">
+      <li><span class="labs-tick">✓</span>Video production & direction</li>
+      <li><span class="labs-tick">✓</span>Video editing & post-production</li>
+      <li><span class="labs-tick">✓</span>Motion graphics & animation</li>
+      <li><span class="labs-tick">✓</span>AI motion & storytelling systems</li>
+      <li><span class="labs-tick">✓</span>Brand & campaign films</li>
+      <li><span class="labs-tick">✓</span>Product demo & explainer videos</li>
+    </ul>
+    <span class="labs-seo-tag">video production · motion graphics · brand film</span>
+  </div>
+
+  <div class="card labs-card">
+    <div class="card-num">LABS · 04</div>
+    <div class="card-name">Identity</div>
+    <div class="card-hook">The ongoing visual presence of your brand - consistent, compelling, and built to be remembered.</div>
+    <ul class="caps">
+      <li><span class="labs-tick">✓</span>Social media brand presence</li>
+      <li><span class="labs-tick">✓</span>Campaign storytelling</li>
+      <li><span class="labs-tick">✓</span>Founder & CEO personal brand</li>
+      <li><span class="labs-tick">✓</span>Corporate brand media</li>
+      <li><span class="labs-tick">✓</span>Brand photography direction</li>
+      <li><span class="labs-tick">✓</span>Visual brand consistency systems</span></li>
+    </ul>
+    <span class="labs-seo-tag">personal branding · social media branding · brand media</span>
+  </div>
+
+  <div class="card labs-card" style="grid-column:span 2">
+    <div class="card-num">LABS · 05</div>
+    <div class="card-name">Persona</div>
+    <div class="card-hook">The future-facing capability of Labs - AI avatars, digital personas, and cinematic characters that give brands a scalable human presence. This is where innovation lives.</div>
+    <ul class="caps" style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem">
+      <li><span class="labs-tick">✓</span>AI avatars & digital personas</li>
+      <li><span class="labs-tick">✓</span>Cinematic AI character development</li>
+      <li><span class="labs-tick">✓</span>AI motion narrative systems</li>
+      <li><span class="labs-tick">✓</span>Brand voice & persona design</li>
+    </ul>
+    <span class="labs-seo-tag">AI avatar · digital persona · AI character</span>
+  </div>
+
+</div>
+</div>
+
+<!-- SYSTEMS ONLY -->
+<div id="systems" class="sec">
+<div class="div-header">
+  <div class="div-title">Mergex Systems - 5 groups</div>
+  <span class="div-pill sys-pill">Runs the business</span>
+</div>
+<div class="grid">
+  <div class="card sys-card"><div class="card-num">01</div><div class="card-name">Build</div><div class="card-hook">The digital products your business runs on.</div><ul class="caps"><li><span class="sys-tick">✓</span>Websites & landing pages</li><li><span class="sys-tick">✓</span>Web & mobile applications</li><li><span class="sys-tick">✓</span>SaaS product development</li><li><span class="sys-tick">✓</span>Custom software solutions</li><li><span class="sys-tick">✓</span>API integrations</li><li><span class="sys-tick">✓</span>MVPs in 2–4 weeks</li></ul></div>
+  <div class="card sys-card"><div class="card-num">02</div><div class="card-name">Automate</div><div class="card-hook">Less manual work. More business momentum.</div><ul class="caps"><li><span class="sys-tick">✓</span>Business process automation</li><li><span class="sys-tick">✓</span>AI chatbots & assistants</li><li><span class="sys-tick">✓</span>Workflow & tool integrations</li><li><span class="sys-tick">✓</span>AI system development</li><li><span class="sys-tick">✓</span>Data pipelines</li><li><span class="sys-tick">✓</span>Internal team tools</li></ul></div>
+  <div class="card sys-card"><div class="card-num">03</div><div class="card-name">Brand</div><div class="card-hook">The identity that makes you instantly recognisable.</div><ul class="caps"><li><span class="sys-tick">✓</span>Logo & visual identity</li><li><span class="sys-tick">✓</span>UI/UX design</li><li><span class="sys-tick">✓</span>Design systems & style guides</li><li><span class="sys-tick">✓</span>Founder & personal branding</li><li><span class="sys-tick">✓</span>Corporate brand systems</li><li><span class="sys-tick">✓</span>Brand strategy & positioning</li></ul></div>
+  <div class="card sys-card"><div class="card-num">04</div><div class="card-name">Grow</div><div class="card-hook">The systems that turn traffic into revenue.</div><ul class="caps"><li><span class="sys-tick">✓</span>Digital marketing & advertising</li><li><span class="sys-tick">✓</span>Sales funnel systems</li><li><span class="sys-tick">✓</span>Lead generation systems</li><li><span class="sys-tick">✓</span>Performance campaigns</li><li><span class="sys-tick">✓</span>Conversion optimisation</li><li><span class="sys-tick">✓</span>Go-to-market execution</li></ul></div>
+  <div class="card sys-card" style="grid-column:span 2"><div class="card-num">05</div><div class="card-name">Scale</div><div class="card-hook">Business architecture - not just services. We audit, design, and engineer the full system behind your growth.</div><ul class="caps" style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem"><li><span class="sys-tick">✓</span>Business audit & analysis</li><li><span class="sys-tick">✓</span>Growth strategy design</li><li><span class="sys-tick">✓</span>Revenue system engineering</li><li><span class="sys-tick">✓</span>Full business system design</li><li><span class="sys-tick">✓</span>Strategy + tech + brand integration</li><li><span class="sys-tick">✓</span>0→1 and 1→10 scale architecture</li></ul></div>
+</div>
+</div>
+
+<!-- LABS ONLY -->
+<div id="labs" class="sec">
+<div class="div-header">
+  <div class="div-title">Mergex Labs - 5 groups</div>
+  <span class="div-pill labs-pill">Represents the business</span>
+</div>
+<div class="grid">
+  <div class="card labs-card"><div class="card-num">01</div><div class="card-name">Ads</div><div class="card-hook">AI-generated creatives that convert - faster than any studio.</div><ul class="caps"><li><span class="labs-tick">✓</span>AI image & video ad creatives</li><li><span class="labs-tick">✓</span>Product visuals & mockups</li><li><span class="labs-tick">✓</span>Campaign creative assets</li><li><span class="labs-tick">✓</span>AI marketing asset generation</li><li><span class="labs-tick">✓</span>E-commerce visual optimisation</li><li><span class="labs-tick">✓</span>A/B creative variants at scale</li></ul></div>
+  <div class="card labs-card"><div class="card-num">02</div><div class="card-name">Content</div><div class="card-hook">A consistent content engine without the agency fees.</div><ul class="caps"><li><span class="labs-tick">✓</span>Social media posts & graphics</li><li><span class="labs-tick">✓</span>Reels & short-form video</li><li><span class="labs-tick">✓</span>AI UGC-style content</li><li><span class="labs-tick">✓</span>Copywriting & brand voice</li><li><span class="labs-tick">✓</span>Content strategy & planning</li><li><span class="labs-tick">✓</span>Content automation systems</li></ul></div>
+  <div class="card labs-card"><div class="card-num">03</div><div class="card-name">Video</div><div class="card-hook">Storytelling that moves people and drives action.</div><ul class="caps"><li><span class="labs-tick">✓</span>Video production & direction</li><li><span class="labs-tick">✓</span>Video editing & post-production</li><li><span class="labs-tick">✓</span>Motion graphics & animation</li><li><span class="labs-tick">✓</span>AI motion & storytelling systems</li><li><span class="labs-tick">✓</span>Brand & campaign films</li><li><span class="labs-tick">✓</span>Product demo & explainer videos</li></ul></div>
+  <div class="card labs-card"><div class="card-num">04</div><div class="card-name">Identity</div><div class="card-hook">Consistent visual presence - built to be remembered.</div><ul class="caps"><li><span class="labs-tick">✓</span>Social media brand presence</li><li><span class="labs-tick">✓</span>Campaign storytelling</li><li><span class="labs-tick">✓</span>Founder & CEO personal brand</li><li><span class="labs-tick">✓</span>Corporate brand media</li><li><span class="labs-tick">✓</span>Brand photography direction</li><li><span class="labs-tick">✓</span>Visual brand consistency systems</li></ul></div>
+  <div class="card labs-card" style="grid-column:span 2"><div class="card-num">05</div><div class="card-name">Persona</div><div class="card-hook">AI avatars, digital personas, and cinematic characters - scalable human presence for the brands of tomorrow.</div><ul class="caps" style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem"><li><span class="labs-tick">✓</span>AI avatars & digital personas</li><li><span class="labs-tick">✓</span>Cinematic AI character development</li><li><span class="labs-tick">✓</span>AI motion narrative systems</li><li><span class="labs-tick">✓</span>Brand voice & persona design</li></ul></div>
+</div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="sec">
+<div class="nb">10 groups total. Every name is one word. Every hook is one sentence. No jargon anywhere.</div>
+<table class="summary-table">
+  <tr><th>Division</th><th>Group</th><th>One-line hook</th></tr>
+  <tr><td>Systems · 01</td><td>Build</td><td>The digital products your business runs on.</td></tr>
+  <tr><td>Systems · 02</td><td>Automate</td><td>Less manual work. More business momentum.</td></tr>
+  <tr><td>Systems · 03</td><td>Brand</td><td>The identity that makes you instantly recognisable.</td></tr>
+  <tr><td>Systems · 04</td><td>Grow</td><td>The systems that turn traffic into revenue.</td></tr>
+  <tr><td>Systems · 05</td><td>Scale</td><td>Business architecture - not just services.</td></tr>
+  <tr><td>Labs · 01</td><td>Ads</td><td>AI-generated creatives that convert.</td></tr>
+  <tr><td>Labs · 02</td><td>Content</td><td>A consistent content engine without the agency fees.</td></tr>
+  <tr><td>Labs · 03</td><td>Video</td><td>Storytelling that moves people and drives action.</td></tr>
+  <tr><td>Labs · 04</td><td>Identity</td><td>Consistent visual presence - built to be remembered.</td></tr>
+  <tr><td>Labs · 05</td><td>Persona</td><td>AI avatars and digital personas - scalable human presence.</td></tr>
+</table>
+</div>
+
+<!-- SEO + GEO -->
+<div id="geo" class="sec">
+<div class="nb">Each group name is a high-intent search word. Capabilities underneath contain the long-tail keywords LLMs and Google use for citation and ranking.</div>
+
+<div class="geo-box"><div class="geo-label">Systems · Build</div><div class="geo-query">Target queries: "MVP development India" · "web app development" · "SaaS product development"</div><div class="geo-signal">Capabilities contain: "websites", "web & mobile applications", "SaaS product development", "custom software", "MVPs in 2–4 weeks" - five separate keyword anchors in one group.</div><span class="geo-pill">High commercial intent</span></div>
+
+<div class="geo-box"><div class="geo-label">Systems · Automate</div><div class="geo-query">Target queries: "AI automation for business" · "business process automation" · "AI chatbot development"</div><div class="geo-signal">"Business process automation" + "AI chatbots" + "AI system development" = the three highest-volume automation queries combined in one group. LLMs cite this cluster when answering automation-related queries about Mergex.</div><span class="geo-pill">High LLM citability</span></div>
+
+<div class="geo-box"><div class="geo-label">Systems · Scale</div><div class="geo-query">Target queries: "business growth strategy" · "scale startup India" · "business audit service"</div><div class="geo-signal">This group is the most important GEO signal on the entire site. "0→1 and 1→10 scale architecture" is a phrase no standard dev agency uses - when an LLM sees this alongside software and automation, it categorises Mergex as a business architect, not an agency. This is the positioning signal.</div><span class="geo-pill">Brand positioning signal</span></div>
+
+<div class="geo-box"><div class="geo-label">Labs · Ads</div><div class="geo-query">Target queries: "AI ad creatives" · "AI marketing assets" · "product mockup AI"</div><div class="geo-signal">"AI image & video ad creatives" + "e-commerce visual optimisation" = two fast-growing search categories. Labs is positioned ahead of traditional creative agencies on both.</div><span class="geo-pill">Emerging high-intent</span></div>
+
+<div class="geo-box"><div class="geo-label">Labs · Persona</div><div class="geo-query">Target queries: "AI avatar for brand" · "digital persona AI" · "AI brand character"</div><div class="geo-signal">This group has almost no competition in search yet - it's an early-mover GEO opportunity. Being the first company to consistently appear in AI answers for "AI avatar for brand" will create a dominant position as the query volume grows.</div><span class="geo-pill">Early-mover advantage</span></div>
+
+<div class="geo-box"><div class="geo-label">Overall GEO entity signal</div><div class="geo-query">When an LLM is asked "what services does Mergex offer?" it will now answer:</div><div class="geo-signal">"Mergex offers Build, Automate, Brand, Grow, and Scale through Mergex Systems - covering software development, AI automation, brand identity, digital marketing, and business architecture. Through Mergex Labs, it offers Ads, Content, Video, Identity, and Persona - covering AI creatives, social content, video production, personal branding, and AI avatars."</div><span class="geo-pill">Complete entity citation</span></div>
+
+</div>
+
+</div>
+<script>
+function st(id){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.getElementById(id).classList.add('on');event.target.classList.add('on')}
+</script>

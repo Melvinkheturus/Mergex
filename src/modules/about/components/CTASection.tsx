@@ -24,7 +24,7 @@ export function CTASection() {
     return (
         <section 
             ref={containerRef} 
-            className="relative h-screen min-h-[850px] bg-gradient-to-t from-transparent via-white via-20% to-white flex items-center justify-center overflow-hidden z-30 px-6 py-20 pb-0"
+            className="relative h-screen min-h-[850px] bg-white flex items-center justify-center overflow-hidden z-30 px-6 py-20 pb-0"
         >
             <div className="w-full max-w-7xl relative z-10">
                 {/* 3D Glass Card Container - Increased size & impact */}
@@ -40,7 +40,7 @@ export function CTASection() {
                             inset -4px 0px 12px rgba(0,0,0,0.3)
                         `
                     }}
-                    className="relative aspect-[3/4] md:aspect-[21/10] w-full bg-neutral-900 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden group origin-bottom"
+                    className="relative aspect-3/4 md:aspect-21/10 w-full bg-neutral-900 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden group origin-bottom"
                 >
                     {/* Integrated Background within Card - Enhanced Parallax */}
                     <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
@@ -78,7 +78,7 @@ export function CTASection() {
                     
                     {/* Additional Tints - Darker for strategic feel */}
                     <div className="absolute inset-0 z-10 bg-black/50" />
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 z-10 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
 
                     {/* Card Content */}
                     <div className="relative z-20 h-full flex flex-col items-center justify-center p-8 md:p-12 text-center">

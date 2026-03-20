@@ -210,9 +210,13 @@ export default function ContactPageContent() {
                         </div>
 
                         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 xl:px-24">
-                            <div className="flex justify-end items-center">
-                                <div className="w-full md:w-1/2 lg:w-[45%] py-20 md:py-32">
+                            <div className="flex justify-end items-start md:pt-4">
+                                <div className="w-full md:w-1/2 lg:w-[45%] pt-8 md:pt-14 pb-24 md:pb-40 -mt-2">
                                     <div className="mb-10 text-left">
+                                        <div className="flex items-center gap-2 text-[10px] font-bold text-amber-600/80 uppercase tracking-widest mb-4">
+                                            <Clock className="w-3 h-3" />
+                                            Limited project spots monthly &bull; Available now
+                                        </div>
                                         <h2 className="text-2xl md:text-4xl font-display font-medium text-foreground tracking-tight mb-3">
                                             {selectedPath === 'priority'
                                                 ? "Start priority access, we'll reach out today."
@@ -227,7 +231,7 @@ export default function ContactPageContent() {
 
                                     <form onSubmit={handleSubmit} className="space-y-8">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="space-y-2">
+                                            <div className="space-y-3">
                                                 <label htmlFor="name" className="text-[13px] font-medium text-foreground/80">
                                                     Your name
                                                 </label>
@@ -238,10 +242,10 @@ export default function ContactPageContent() {
                                                     value={name}
                                                     onChange={(e) => setName(e.target.value)}
                                                     placeholder="Arjun Mehta"
-                                                    className="w-full h-12 bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-xl px-5 text-sm text-foreground transition-all duration-300"
+                                                    className="w-full h-12 bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-lg px-5 text-sm text-foreground transition-all duration-300"
                                                 />
                                             </div>
-                                            <div className="space-y-2">
+                                            <div className="space-y-3">
                                                 <label htmlFor="email" className="text-[13px] font-medium text-foreground/80">
                                                     Email address
                                                 </label>
@@ -252,11 +256,11 @@ export default function ContactPageContent() {
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     placeholder="arjun@studio.com"
-                                                    className="w-full h-12 bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-xl px-5 text-sm text-foreground transition-all duration-300"
+                                                    className="w-full h-12 bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-lg px-5 text-sm text-foreground transition-all duration-300"
                                                 />
                                             </div>
                                         </div>
-                                        <div className="space-y-2">
+                                        <div className="space-y-3">
                                             <label htmlFor="message" className="text-[13px] font-medium text-foreground/80">
                                                 What are you building - and what&apos;s in the way?
                                             </label>
@@ -267,41 +271,43 @@ export default function ContactPageContent() {
                                                 value={message}
                                                 onChange={(e) => setMessage(e.target.value)}
                                                 placeholder="Tell us about your project, the challenge you're facing, or the system you want to build. No need to have it all figured out."
-                                                className="w-full bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-xl p-5 text-sm text-foreground leading-relaxed transition-all duration-300 resize-none"
+                                                className="w-full bg-white/40 border border-gray-200 focus:bg-white focus:border-foreground/20 focus:ring-0 rounded-lg p-5 text-sm text-foreground leading-relaxed transition-all duration-300 resize-y min-h-[120px]"
                                             />
                                         </div>
 
-                                        <div className="flex flex-col items-end gap-5 pt-2">
+                                        <div className="flex flex-col items-start gap-4 -mt-4">
                                             <button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="group relative w-full md:w-auto min-w-[240px] h-14 bg-foreground text-background font-bold text-base rounded-xl overflow-hidden active:scale-[0.98] transition-all disabled:opacity-50"
+                                                className="group relative w-full md:w-auto min-w-[240px] h-14 bg-gradient-to-b from-violet-400 to-violet-900 text-white font-bold text-base rounded-xl overflow-hidden shadow-lg shadow-violet-900/30 transition-all hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                                             >
+                                                {!isSubmitting && (
+                                                    <lord-icon
+                                                        src="https://cdn.lordicon.com/fpvaxfly.json"
+                                                        trigger="loop-on-hover"
+                                                        state="morph-phone-ring"
+                                                        colors="primary:#ffffff"
+                                                        style={{ width: '24px', height: '24px' }}
+                                                    />
+                                                )}
                                                 <span className="relative z-10">
-                                                    {isSubmitting ? "Sending..." : "Send - we read every message"}
+                                                    {isSubmitting ? "Sending..." : "Start Conversation"}
                                                 </span>
                                             </button>
 
-                                            <div className="flex flex-col items-end gap-3">
-                                                {/* Trust Strip */}
-                                                <div className="flex flex-wrap justify-end gap-5 text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-1 h-1 rounded-full bg-primary" />
+                                            <div className="flex flex-col items-start gap-1">
+                                                <p className="text-xs text-muted-foreground font-medium">
+                                                    We read every message. Expect a human reply within 24 hours.
+                                                </p>
+                                                <div className="flex items-center gap-3 mt-1 text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest">
+                                                    <span className="flex items-center gap-1.5">
+                                                        <Check className="w-2.5 h-2.5 text-emerald-500" />
                                                         No automated replies
-                                                    </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-1 h-1 rounded-full bg-primary" />
-                                                        Response within 24 hours
-                                                    </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-1 h-1 rounded-full bg-primary" />
-                                                        Limited spots monthly
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center gap-2 text-[10px] font-bold text-rose-500 uppercase tracking-tighter">
-                                                    <div className="w-1 h-1 rounded-full bg-current animate-pulse" />
-                                                    Spots for this month are filling.
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5">
+                                                        <Check className="w-2.5 h-2.5 text-emerald-500" />
+                                                        Direct access
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

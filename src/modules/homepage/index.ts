@@ -2,7 +2,7 @@ import { HeroSection } from './components/HeroSection';
 import { ProductPortalGallery } from './components/ProductPortalGallery';
 // import { WhatWeBuildSection } from './components/WhatWeBuildSection';
 import ClaritySection from './components/ClaritySection';
-import ProductSpotlight from './components/ProductSpotlight';
+import { ProductsGlimpseSection } from './components/ProductsGlimpseSection';
 import SolutionsComparison from './components/SolutionsComparison';
 import EcosystemSnapshot from './components/EcosystemSnapshot';
 import CinematicPortalSection from './components/CinematicPortalSection';
@@ -25,7 +25,7 @@ export {
     ProductPortalGallery,
     // WhatWeBuildSection,
     ClaritySection,
-    ProductSpotlight,
+    ProductsGlimpseSection,
     SolutionsComparison,
     EcosystemSnapshot,
     CinematicPortalSection,

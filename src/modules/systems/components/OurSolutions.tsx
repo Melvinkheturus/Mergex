@@ -14,11 +14,11 @@ if (typeof window !== 'undefined') {
 
 /* Images mapped to each pillar (index-matched) */
 const PILLAR_IMAGES = [
-    '/assets/systems/development.png',   // Software & App Development
-    '/assets/systems/automation.png',     // AI Automation & Integrations
-    '/assets/systems/branding.png',       // Brand Identity & Strategy
-    '/assets/systems/ui-ux.png',          // UI/UX Design & Product
-    '/assets/systems/marketing.png',      // Digital Marketing Systems
+    '/mockups/systems/service/Build.jpeg',
+    '/mockups/systems/service/Automation.jpeg',
+    '/mockups/systems/service/branding.png',
+    '/mockups/systems/service/digitalmarketing.jpeg',
+    '/mockups/systems/service/Business architect.png',
 ];
 
 /**
@@ -35,7 +35,7 @@ export function OurSolutions() {
     useGSAP(
         () => {
             OUR_SOLUTIONS.pillars.forEach((_, index) => {
-                const ids = ['architecture', 'infrastructure', 'automation', 'growth'];
+                const ids = ['build', 'automate', 'brand', 'grow', 'scale'];
                 const id = ids[index] || `solution-item-${index}`;
                 const card = document.getElementById(id);
                 if (!card) return;
@@ -93,7 +93,7 @@ export function OurSolutions() {
 
     // Scroll via Lenis so smooth-scroll stays consistent
     const scrollToItem = (index: number) => {
-        const ids = ['architecture', 'infrastructure', 'automation', 'growth'];
+        const ids = ['build', 'automate', 'brand', 'grow', 'scale'];
         const id = ids[index] || `solution-item-${index}`;
         const target = document.getElementById(id);
         if (!target) return;
@@ -151,7 +151,7 @@ export function OurSolutions() {
                     {OUR_SOLUTIONS.pillars.map((pillar, index) => (
                         <div
                             key={index}
-                            id={index === 0 ? 'architecture' : index === 1 ? 'infrastructure' : index === 2 ? 'automation' : index === 3 ? 'growth' : `solution-item-${index}`}
+                            id={['build', 'automate', 'brand', 'grow', 'scale'][index] || `solution-item-${index}`}
                             className="relative min-h-screen flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 border-b border-gray-100 last:border-b-0"
                         >
                             {/* ── IMAGE LAYER (z-0) ── */}
@@ -163,15 +163,15 @@ export function OurSolutions() {
                                     className="parallax-img object-cover scale-110"
                                 />
                                 {/* Bottom gradient so overlapping text stays readable */}
-                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-black/70 to-transparent" />
                             </div>
 
                             {/* ── TEXT LAYER (z-10) - slides UP over the image on scroll ── */}
                             <div className="text-overlap relative z-10 w-full bg-white pt-10 -mt-4">
                                 <div className="border-t border-gray-200 pt-10">
-                                    <div className="grid md:grid-cols-12 gap-8 lg:gap-16">
-                                        {/* Left Side: Info */}
-                                        <div className="md:col-span-7 lg:col-span-8">
+                                    <div className="flex flex-col gap-12">
+                                        {/* Top: Info */}
+                                        <div className="w-full">
                                             <div className="flex items-center gap-4 mb-8">
                                                 <span className="text-sm font-mono text-gray-400">
                                                     [{String(index + 1).padStart(2, '0')}]
@@ -180,21 +180,21 @@ export function OurSolutions() {
                                                     {pillar.title}
                                                 </h3>
                                             </div>
-                                            <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-xl">
+                                            <p className="text-sm md:text-base text-gray-500 leading-relaxed w-full">
                                                 {pillar.description}
                                             </p>
                                         </div>
 
-                                        {/* Right Side: Categories */}
-                                        <div className="md:col-span-5 lg:col-span-4">
+                                        {/* Bottom: Categories */}
+                                        <div className="w-full">
                                             <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
-                                                Categories
+                                                Capabilities
                                             </p>
-                                            <div className="grid grid-cols-2 gap-2">
+                                            <div className="flex flex-wrap gap-2">
                                                 {pillar.capabilities.map((cap, i) => (
                                                     <span
                                                         key={i}
-                                                        className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-3 py-2 rounded-sm bg-white text-center"
+                                                        className="flex items-center justify-center border border-gray-200 text-gray-700 text-[10px] md:text-xs font-medium px-4 py-2 rounded-sm bg-white text-center"
                                                     >
                                                         {cap}
                                                     </span>

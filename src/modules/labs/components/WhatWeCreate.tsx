@@ -110,7 +110,7 @@ export function WhatWeCreate() {
                                                             }}
                                                             className="text-lg md:text-xl leading-relaxed opacity-60 flex items-start gap-4"
                                                         >
-                                                            <span className="w-2 h-2 min-w-[8px] rounded-full bg-current opacity-40 mt-2.5 flex-shrink-0" />
+                                                            <span className="w-2 h-2 min-w-[8px] rounded-full bg-current opacity-40 mt-2.5 shrink-0" />
                                                             <span>{capability}</span>
                                                         </motion.li>
                                                     ))}
