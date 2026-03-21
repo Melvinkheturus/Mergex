@@ -51,7 +51,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
+                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-60"
                         onClick={onClose}
                     />
 
@@ -61,7 +61,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         animate={{ clipPath: "inset(0 0 0% 0)" }}
                         exit={{ clipPath: "inset(0 0 100% 0)" }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed top-0 left-0 right-0 z-[61] p-2 flex flex-col pointer-events-none"
+                        className="fixed top-0 left-0 right-0 z-61 p-2 flex flex-col pointer-events-none"
                     >
                         <div className="w-full h-auto max-h-[85vh] bg-white rounded-xl overflow-hidden flex flex-col pointer-events-auto shadow-2xl relative">
                             {/* Background Image Layer - Applied to full megamenu card */}
@@ -81,15 +81,15 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                             className="object-cover opacity-20"
                                             priority
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-white/20" />
+                                        <div className="absolute inset-0 bg-linear-to-b from-white via-white/60 to-white/20" />
                                     </motion.div>
                                 )}
                             </AnimatePresence>
 
                             {/* Unified Header Row */}
-                            <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 flex-shrink-0 relative z-10">
+                            <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 shrink-0 relative z-10">
                                 {/* Left: Logo Icon */}
-                                <Link href="/" onClick={onClose} className="flex-shrink-0">
+                                <Link href="/" onClick={onClose} className="shrink-0">
                                     <Image
                                         src="/logo/mergex-logo.png"
                                         alt="Mergex Logo"
@@ -101,7 +101,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
                                 {/* Center: MERGEX Typo Logo */}
                                 <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                                    <span className={`font-clash font-bold text-xl tracking-wide text-neutral-900`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                                    <span className={`font-clash font-bold text-xl tracking-wide text-black`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                                         MERGEX
                                     </span>
                                 </div>

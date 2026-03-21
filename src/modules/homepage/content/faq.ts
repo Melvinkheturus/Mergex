@@ -48,9 +48,9 @@ export const PARENT_FAQ_DATA = {
 
 // Systems FAQ - Objection-Handling (Practical, Decision-oriented, Risk-reducing)
 export const SYSTEMS_FAQ_DATA = {
-    headline: "Questions Teams Usually Ask",
+    headline: "Common Questions",
     subheadline: "Before Choosing a",
-    subheadlineItalic: "Solution Partner",
+    subheadlineItalic: "Partner",
     description: "Practical answers about how we work, what to expect, and how to move forward with confidence.",
     ctaText: "Still have questions?",
     ctaSubtext: "Book a discovery call and let's talk specifics.",

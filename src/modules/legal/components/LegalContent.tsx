@@ -149,7 +149,7 @@ export const LegalContent: React.FC = () => {
                                             <h4 className="font-semibold text-gray-900">Have questions?</h4>
                                             <p className="text-sm text-gray-500 mt-1">Our legal team is here to help clarify our policies.</p>
                                         </div>
-                                        <a href="mailto:legal@mergex.app" className="px-8 py-3 bg-white border border-gray-200 rounded-xl font-medium text-sm hover:border-violet-500 hover:text-violet-600 transition-all duration-300 shadow-sm">
+                                        <a href="mailto:contact@mergex.in" className="px-8 py-3 bg-white border border-gray-200 rounded-xl font-medium text-sm hover:border-violet-500 hover:text-violet-600 transition-all duration-300 shadow-sm">
                                             Contact Legal Dept
                                         </a>
                                     </div>

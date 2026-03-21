@@ -69,7 +69,7 @@ export function SystemsCTA() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-80px' }}
                         transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative flex flex-col rounded-2xl border border-violet-200 bg-gradient-to-b from-violet-50 to-white p-7 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                        className="relative flex flex-col rounded-2xl border border-violet-200 bg-linear-to-b from-violet-50 to-white p-7 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
                     >
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_5%,rgba(167,139,250,0.1)_0%,transparent_65%)] pointer-events-none" />
 

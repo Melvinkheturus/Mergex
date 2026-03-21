@@ -126,14 +126,26 @@
   0%, 49% {
     opacity: 1;
     }
-  50%, 100% {
-    opacity: 0;
+    50%, 100% {
+      opacity: 0;
     }
-  }}
+  }
 
-html {
-  /* clip instead of hidden - hidden creates a scroll container that breaks position: sticky */
-  overflow-x: clip;
+  --animate-ripple: ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite;
+  @keyframes ripple {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+  }
+
+  --animate-text-gradient: text-gradient 6s linear infinite;
+  @keyframes text-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
 }
 
 body {

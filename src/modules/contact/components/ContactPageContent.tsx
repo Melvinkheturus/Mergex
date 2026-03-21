@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Mail, Phone, MapPin, ArrowRight, Zap, Check, Clock, Calendar, MessageSquare, BriefcaseBusiness } from "lucide-react";
 import { Playfair_Display } from "next/font/google";
+import { Ripple } from "@/components/ui/ripple";
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -58,15 +59,15 @@ export default function ContactPageContent() {
                         />
                         {/* Blending Gradients - Kept separate as requested */}
                         {/* LEFT Overlay - Widened to overlap right-aligned image */}
-                        <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+                        <div className="absolute inset-y-0 left-0 w-3/4 bg-linear-to-r from-background to-transparent pointer-events-none" />
 
                         {/* BOTTOM Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+                        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-background to-transparent pointer-events-none" />
                     </div>
                 </motion.div>
 
                 <div className="relative z-10 max-w-4xl">
-                    <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-b from-violet-400 to-violet-600 shadow-sm shadow-violet-500/20 text-white text-[10px] font-bold uppercase tracking-widest mb-6">
+                    <div className="inline-block px-3 py-1 rounded-full bg-linear-to-b from-violet-400 to-violet-600 shadow-sm shadow-violet-500/20 text-white text-[10px] font-bold uppercase tracking-widest mb-6">
                         Get in touch
                     </div>
                     <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-display font-medium text-foreground tracking-tight leading-[1.05] mb-8">
@@ -99,20 +100,16 @@ export default function ContactPageContent() {
                         {/* Free Card */}
                         <div
                             onClick={() => setSelectedPath('free')}
-                            className={`relative cursor-pointer transition-all duration-300 p-8 rounded-2xl border-2 flex flex-col gap-6 group ${selectedPath === 'free'
-                                ? 'border-primary bg-primary/[0.02] shadow-xl shadow-primary/5'
-                                : 'border-border bg-background hover:border-primary/30'
+                            className={`relative cursor-pointer transition-all duration-500 p-8 rounded-3xl border flex flex-col gap-6 group hover:-translate-y-2 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] ${selectedPath === 'free'
+                                ? 'border-primary bg-primary/4'
+                                : 'border-neutral-100 bg-white hover:border-primary/30'
                                 }`}
                         >
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(139,92,246,0.02)]" />
                             <div className="flex justify-between items-start">
                                 <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
                                     <MessageSquare className="w-5 h-5 text-foreground" />
                                 </div>
-                                {selectedPath === 'free' && (
-                                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white">
-                                        <Check className="w-4 h-4" />
-                                    </div>
-                                )}
                             </div>
                             <div>
                                 <div className="flex items-center gap-2 mb-1">
@@ -139,11 +136,12 @@ export default function ContactPageContent() {
                         {/* Priority Card */}
                         <div
                             onClick={() => setSelectedPath('priority')}
-                            className={`relative cursor-pointer transition-all duration-300 p-8 rounded-2xl border-2 flex flex-col gap-6 group overflow-hidden ${selectedPath === 'priority'
-                                ? 'border-violet-500 bg-violet-50/30 shadow-xl shadow-violet-500/10'
-                                : 'border-border bg-background hover:border-violet-400/30'
+                            className={`relative cursor-pointer transition-all duration-500 p-8 rounded-3xl border flex flex-col gap-6 group overflow-hidden hover:-translate-y-2 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] ${selectedPath === 'priority'
+                                ? 'border-violet-500 bg-violet-50/50'
+                                : 'border-neutral-100 bg-white hover:border-violet-400/30'
                                 }`}
                         >
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(139,92,246,0.02)]" />
                             {/* Fastest Badge */}
                             <div className="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-violet-600 text-[10px] font-bold text-white uppercase tracking-tighter">
                                 Fastest
@@ -153,11 +151,6 @@ export default function ContactPageContent() {
                                 <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center">
                                     <Zap className="w-5 h-5 text-violet-600 fill-violet-600" />
                                 </div>
-                                {selectedPath === 'priority' && (
-                                    <div className="w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center text-white">
-                                        <Check className="w-4 h-4" />
-                                    </div>
-                                )}
                             </div>
                             <div>
                                 <div className="flex items-center gap-2 mb-1">
@@ -204,9 +197,9 @@ export default function ContactPageContent() {
                                 className="w-full h-full object-cover object-left pointer-events-none"
                             />
                             {/* Top Fade Overlay */}
-                            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+                            <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-background to-transparent pointer-events-none" />
                             {/* Bottom Fade Overlay */}
-                            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+                            <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-background to-transparent pointer-events-none" />
                         </div>
 
                         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 xl:px-24">
@@ -279,7 +272,7 @@ export default function ContactPageContent() {
                                             <button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="group relative w-full md:w-auto min-w-[240px] h-14 bg-gradient-to-b from-violet-400 to-violet-900 text-white font-bold text-base rounded-xl overflow-hidden shadow-lg shadow-violet-900/30 transition-all hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                                                className="group relative w-full md:w-auto min-w-[240px] h-14 bg-linear-to-b from-violet-400 to-violet-900 text-white font-bold text-base rounded-xl overflow-hidden shadow-lg shadow-violet-900/30 transition-all hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                                             >
                                                 {!isSubmitting && (
                                                     <lord-icon
@@ -365,33 +358,43 @@ export default function ContactPageContent() {
                         Other ways to reach us
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="p-8 rounded-2xl bg-gray-50 hover:bg-white transition-colors border border-transparent hover:border-border group">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 block">Email</span>
-                            <a href="mailto:hello@mergex.in" className="text-lg font-medium text-foreground block mb-1 group-hover:text-primary transition-colors">hello@mergex.in</a>
+                        <a href="mailto:hello@mergex.in" className="process-card p-8 rounded-3xl bg-linear-to-br from-violet-50/50 to-white transition-all duration-500 hover:-translate-y-2 border border-neutral-200 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] group relative block">
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(139,92,246,0.02)]" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest mb-4 block bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">Email</span>
+                            <span className="text-lg font-medium text-foreground block mb-1 group-hover:text-primary transition-colors">hello@mergex.in</span>
                             <p className="text-xs text-muted-foreground">For all enquiries</p>
-                        </div>
-                        <div className="p-8 rounded-2xl bg-gray-50 hover:bg-white transition-colors border border-transparent hover:border-border group">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 block">WhatsApp</span>
-                            <a href="https://wa.me/919042172025" target="_blank" rel="noopener noreferrer" className="text-lg font-medium text-foreground block mb-1 group-hover:text-primary transition-colors">+91 90421 72025</a>
+                        </a>
+                        <a href="https://wa.me/919042172025" target="_blank" rel="noopener noreferrer" className="process-card p-8 rounded-3xl bg-linear-to-br from-violet-50/50 to-white transition-all duration-500 hover:-translate-y-2 border border-neutral-200 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] group relative block">
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2_rgba(139,92,246,0.02)]" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest mb-4 block bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">WhatsApp</span>
+                            <span className="text-lg font-medium text-foreground block mb-1 group-hover:text-primary transition-colors">+91 90421 72025</span>
                             <p className="text-xs text-muted-foreground">Mon–Sat, 10am–7pm IST</p>
-                        </div>
-                        <div className="p-8 rounded-2xl bg-gray-50 hover:bg-white transition-colors border border-transparent hover:border-border">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 block">Location</span>
+                        </a>
+                        <a href="https://www.google.com/maps/search/Chennai,+India" target="_blank" rel="noopener noreferrer" className="process-card p-8 rounded-3xl bg-linear-to-br from-violet-50/50 to-white transition-all duration-500 hover:-translate-y-2 border border-neutral-200 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] relative block">
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2_rgba(139,92,246,0.02)]" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest mb-4 block bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">Location</span>
                             <span className="text-lg font-medium text-foreground block mb-1">Chennai, India</span>
                             <p className="text-xs text-muted-foreground">Working globally</p>
-                        </div>
-                        <div className="p-8 rounded-2xl bg-gray-50 hover:bg-white transition-colors border border-transparent hover:border-border">
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 block">Response time</span>
+                        </a>
+                        <a href="#contact-form" className="process-card p-8 rounded-3xl bg-linear-to-br from-violet-50/50 to-white transition-all duration-500 hover:-translate-y-2 border border-neutral-200 shadow-[20px_20px_60px_rgba(139,92,246,0.08)] hover:shadow-[30px_30px_80px_rgba(139,92,246,0.15)] relative block">
+                            <div className="absolute inset-0 rounded-3xl pointer-events-none shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2_rgba(139,92,246,0.02)]" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest mb-4 block bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">Response time</span>
                             <span className="text-lg font-medium text-foreground block mb-1">Within 24 hours</span>
                             <p className="text-xs text-muted-foreground">On all channels</p>
-                        </div>
+                        </a>
                     </div>
                 </section>
 
                 {/* Section 6: Partnership Callout */}
                 <section className="max-w-4xl mx-auto">
-                    <div className="p-8 md:p-12 rounded-[2rem] border border-border/80 bg-white flex flex-col md:flex-row items-center gap-8 justify-between">
-                        <div className="max-w-xl text-center md:text-left">
+                    <div className="p-8 md:p-12 rounded-[2rem] border border-border/80 bg-white flex flex-col md:flex-row items-center gap-8 justify-between relative overflow-hidden">
+                        <Ripple 
+                            mainCircleSize={240}
+                            numCircles={8}
+                            className="absolute inset-0 translate-x-[33%] translate-y-[10%] opacity-90 select-none z-0"
+                            circleClassName="border-violet-500/30 bg-violet-500/10"
+                        />
+                        <div className="max-w-xl text-center md:text-left relative z-10">
                             <h3 className="text-xl font-bold text-foreground mb-4">Looking to build together long-term?</h3>
                             <p className="text-muted-foreground text-sm leading-relaxed">
                                 Mergex partners with founders, operators, and agencies who want to build
@@ -400,7 +403,7 @@ export default function ContactPageContent() {
                         </div>
                         <a
                             href="/partner-with-us"
-                            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-4 rounded-xl border border-border hover:border-primary hover:text-primary font-bold text-sm transition-all"
+                            className="shrink-0 inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-linear-to-b from-violet-400 to-violet-600 text-white font-bold text-sm shadow-lg shadow-violet-500/20 transition-all hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] relative z-20"
                         >
                             Explore partnerships <ArrowRight className="w-4 h-4" />
                         </a>

@@ -2,8 +2,8 @@
 // Signal page to attract builders, not job hunters
 
 export const CAREERS_HERO = {
-    headline: 'Build Systems. Learn Fast. Grow With Intent.',
-    subheadline: 'Mergex is a solution partner helping businesses build and scale through technology, AI, and systems. We\'re building a team that values clarity, ownership, and curiosity.',
+    headline: 'Don’t Just Work. Build.',
+    subheadline: 'Join Mergex and building real infrastructure for growing companies.',
     primaryCTA: 'View Opportunities',
     secondaryCTA: 'Explore Internships',
 } as const;

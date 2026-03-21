@@ -5,16 +5,17 @@ import {
     PartnershipHero,
     WhyPartner,
     PartnershipTypes,
+    ServicePartners,
     ReferralExplainer,
     TrustSection,
-    PartnerCTA,
     PartnerFAQ,
+    OurPartners,
 } from '@/modules/partnership';
 
 export function PartnerPageView() {
-    const [selectedType, setSelectedType] = useState<'strategic' | 'referral' | null>(null);
+    const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const handlePartnershipTypeClick = (typeId: 'strategic' | 'referral') => {
+    const handlePartnershipTypeClick = (typeId: string) => {
         setSelectedType(typeId);
         // Scroll to CTA section
         setTimeout(() => {
@@ -24,14 +25,15 @@ export function PartnerPageView() {
     };
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-[#fafafa]">
             <PartnershipHero />
-            <WhyPartner />
             <PartnershipTypes onApplyClick={handlePartnershipTypeClick} />
+            <ServicePartners />
             <ReferralExplainer />
+            <WhyPartner />
+            <OurPartners />
             <TrustSection />
             <PartnerFAQ />
-            <PartnerCTA />
         </main>
     );
 }

@@ -20,9 +20,9 @@ export function Navbar() {
 
     // Determine if the current page has a light background (requires dark navbar text)
     // Systems page is explicitly light.
-    const isLightPage = pathname?.startsWith('/systems') || pathname?.startsWith('/legal') || pathname?.startsWith('/partner') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/';
-    const textColorClass = (activeMenu || isLightPage) ? 'text-neutral-900' : 'text-white';
-    const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/80 hover:text-violet-600' : 'text-white/90 hover:text-white';
+    const isLightPage = pathname?.startsWith('/blog') || pathname?.startsWith('/systems') || pathname?.startsWith('/legal') || pathname?.startsWith('/partner') || pathname === '/pricing' || pathname === '/contact' || pathname === '/about' || pathname === '/careers' || pathname === '/';
+    const textColorClass = (activeMenu || isLightPage) ? 'text-black' : 'text-white';
+    const navItemColorClass = (activeMenu || isLightPage) ? 'text-black/90 hover:text-violet-600' : 'text-white/90 hover:text-white';
 
     // Listen for custom event to hide/show navbar from other components (e.g. ScrollZoomShowcase)
     useEffect(() => {
@@ -169,7 +169,7 @@ export function Navbar() {
 
                     {/* Center: MERGEX Typo Logo */}
                     <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <span className={`font-clash font-bold text-xl tracking-wide ${(isMobileMenuOpen || isLightPage) ? 'text-neutral-900' : 'text-white'}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                        <span className={`font-clash font-bold text-xl tracking-wide ${(isMobileMenuOpen || isLightPage) ? 'text-black' : 'text-white'}`} style={{ fontFamily: "'Clash Display', sans-serif" }}>
                             MERGEX
                         </span>
                     </div>
@@ -177,7 +177,7 @@ export function Navbar() {
                     {/* Right: Hamburger Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className={`p-2 -mr-2 focus:outline-none z-10 ${(isMobileMenuOpen || isLightPage) ? 'text-foreground/80' : 'text-white'}`}
+                        className={`p-2 -mr-2 focus:outline-none z-10 ${(isMobileMenuOpen || isLightPage) ? 'text-black' : 'text-white'}`}
                         aria-label="Toggle menu"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ export function Navbar() {
 }
 
 function NavButton({ label, active, onEnter, onLeave, hasDropdown = true, anyActive, isLightPage }: { label: string; active: boolean; onEnter: () => void; onLeave: () => void; hasDropdown?: boolean; anyActive: boolean; isLightPage: boolean }) {
-    const itemActiveColor = (active || isLightPage || anyActive) ? 'text-neutral-900' : 'text-white/90 hover:text-white';
+    const itemActiveColor = (active || isLightPage || anyActive) ? 'text-black' : 'text-white/90 hover:text-white';
 
     return (
         <button

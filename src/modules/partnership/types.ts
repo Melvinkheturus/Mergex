@@ -1,5 +1,5 @@
 // Partnership Type Definitions
-export type PartnershipTypeId = 'strategic' | 'referral';
+export type PartnershipTypeId = 'strategic' | 'referral' | 'collaborator';
 
 export interface PartnershipType {
     id: PartnershipTypeId;

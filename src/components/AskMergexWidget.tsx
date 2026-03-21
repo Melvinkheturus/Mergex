@@ -366,17 +366,45 @@ Type **"priority"** and I'll send the access link.
     };
 
     // Listen for custom event to open chat
+    const isAutoTypingRef = useRef(false);
     useEffect(() => {
-        const handleOpenChat = (e: any) => {
-            const message = (e as CustomEvent).detail?.message;
+        const handleOpenChat = async (e: any) => {
+            if (isAutoTypingRef.current) return;
+
+            const detail = (e as CustomEvent).detail;
+            const textToType = detail?.chatPrompt || detail?.question || detail?.message;
+
             setOpen(true);
-            if (message) {
-                handleSend(message);
+
+            if (textToType) {
+                isAutoTypingRef.current = true;
+                // Wait for the drawer/widget to open animation to complete
+                await new Promise(resolve => setTimeout(resolve, 600));
+
+                // Simulate typing
+                let currentText = "";
+                for (let i = 0; i <= textToType.length; i++) {
+                    currentText = textToType.slice(0, i);
+                    setInput(currentText);
+                    // Force adjust height as we type
+                    if (textareaRef.current) {
+                        textareaRef.current.style.height = '48px';
+                        const newHeight = Math.max(48, Math.min(textareaRef.current.scrollHeight, 160));
+                        textareaRef.current.style.height = `${newHeight}px`;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 15 + Math.random() * 5));
+                }
+
+                // Brief pause before auto-sending
+                await new Promise(resolve => setTimeout(resolve, 300));
+                handleSend(textToType);
+                isAutoTypingRef.current = false;
             }
         };
+
         window.addEventListener('mergex-open-chat', handleOpenChat as EventListener);
         return () => window.removeEventListener('mergex-open-chat', handleOpenChat as EventListener);
-    }, [handleSend]);
+    }, [handleSend, textareaRef]);
 
     // ─── Conversation controls ────────────────────────────────────────────────
     const handleNewConversation = () => {
@@ -467,7 +495,7 @@ Type **"priority"** and I'll send the access link.
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setOpen(false)}
-                        className="fixed inset-0 z-[118] bg-black/10 backdrop-blur-[6px]"
+                        className="fixed inset-0 z-118 bg-black/10 backdrop-blur-[6px]"
                     />
                 )}
             </AnimatePresence>
@@ -478,7 +506,7 @@ Type **"priority"** and I'll send the access link.
                 onClick={() => setOpen(v => !v)}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[120] overflow-hidden flex items-center bg-gradient-to-b from-violet-300 to-violet-800 text-white text-[11px] md:text-[12px] font-medium select-none shadow-lg shadow-violet-900/30 rounded-[10px]"
+                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-120 overflow-hidden flex items-center bg-linear-to-b from-violet-300 to-violet-800 text-white text-[11px] md:text-[12px] font-medium select-none shadow-lg shadow-violet-900/30 rounded-[10px]"
                 initial={false}
                 animate={{
                     paddingLeft: isExpanded ? 14 : 10,
@@ -541,7 +569,7 @@ Type **"priority"** and I'll send the access link.
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.96 }}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        className="fixed bottom-[64px] right-4 md:bottom-[76px] md:right-6 z-[119] flex flex-col pointer-events-auto"
+                        className="fixed bottom-[64px] right-4 md:bottom-[76px] md:right-6 z-119 flex flex-col pointer-events-auto"
                         style={{
                             width: 'min(420px, calc(100vw - 32px))',
                             height: 'min(600px, calc(100dvh - 100px))',
@@ -553,7 +581,7 @@ Type **"priority"** and I'll send the access link.
                         }}
                     >
                         {/* ── Header ── */}
-                        <div className="flex items-center justify-between px-3 md:px-4 py-3 border-b border-gray-100 bg-white flex-shrink-0">
+                        <div className="flex items-center justify-between px-3 md:px-4 py-3 border-b border-gray-100 bg-white shrink-0">
                             <div className="flex items-center gap-2 md:gap-2.5">
                                 <MergexOrb size={24} className="md:w-[28px] md:h-[28px]" />
                                 <div>
@@ -810,13 +838,13 @@ Type **"priority"** and I'll send the access link.
                                                         >
                                                             {msg.role === 'user' ? (
                                                                 <div className="flex justify-end">
-                                                                    <div className="max-w-[80%] bg-gradient-to-b from-violet-300 to-violet-800 text-white rounded-2xl rounded-br-md px-4 py-2.5 text-[13px] leading-relaxed shadow-lg shadow-violet-500/10">
+                                                                    <div className="max-w-[80%] bg-linear-to-b from-violet-300 to-violet-800 text-white rounded-2xl rounded-br-md px-4 py-2.5 text-[13px] leading-relaxed shadow-lg shadow-violet-500/10">
                                                                         {msg.content}
                                                                     </div>
                                                                 </div>
                                                             ) : (
                                                                 <div className="flex gap-2.5">
-                                                                    <div className="flex-shrink-0 mt-0.5">
+                                                                    <div className="shrink-0 mt-0.5">
                                                                         <MergexOrb size={22} />
                                                                     </div>
                                                                     <div className="flex-1 min-w-0">
@@ -916,17 +944,17 @@ Type **"priority"** and I'll send the access link.
                                         </div>
 
                                         {/* Bottom Gradient Fade */}
-                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-[15]" />
+                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white via-white/90 to-transparent pointer-events-none z-15" />
                                     </div>
 
                                     {/* ── Input area ── */}
-                                    <div className="absolute bottom-0 left-0 right-0 px-3 py-6 z-[20] pointer-events-none">
+                                    <div className="absolute bottom-0 left-0 right-0 px-3 py-6 z-20 pointer-events-none">
                                         <div className="pointer-events-auto">
 
                                             <div className="relative group z-10">
                                                 {/* Intense Glow on focus */}
                                                 <div className={cn(
-                                                    'absolute -inset-1 bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 rounded-xl blur-xl transition-all duration-500 z-0',
+                                                    'absolute -inset-1 bg-linear-to-r from-violet-400 via-fuchsia-300 to-indigo-400 rounded-xl blur-xl transition-all duration-500 z-0',
                                                     inputFocused ? 'opacity-30 scale-100' : 'opacity-0 scale-90 group-hover:opacity-10'
                                                 )} />
 
@@ -972,7 +1000,7 @@ Type **"priority"** and I'll send the access link.
                                                             className={cn(
                                                                 'absolute right-2 bottom-2 w-7 h-7 rounded-lg flex items-center justify-center transition-all',
                                                                 input.trim() && !isTyping
-                                                                    ? 'bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-md'
+                                                                    ? 'bg-linear-to-br from-violet-600 to-purple-700 text-white shadow-md'
                                                                     : 'bg-gray-100 text-gray-300 cursor-not-allowed'
                                                             )}
                                                         >

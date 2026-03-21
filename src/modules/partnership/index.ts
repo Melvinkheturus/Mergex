@@ -2,10 +2,11 @@
 export { PartnershipHero } from './components/PartnershipHero';
 export { WhyPartner } from './components/WhyPartner';
 export { PartnershipTypes } from './components/PartnershipTypes';
+export { ServicePartners } from './components/ServicePartners';
 export { ReferralExplainer } from './components/ReferralExplainer';
 export { TrustSection } from './components/TrustSection';
-export { PartnerCTA } from './components/PartnerCTA';
 export { PartnerFAQ } from './components/PartnerFAQ';
+export { OurPartners } from './components/OurPartners';
 
 // Type exports
 export type {

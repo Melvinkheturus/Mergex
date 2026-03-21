@@ -64,7 +64,7 @@ export function SystemsFAQ() {
                                     <span className="text-[#1A1A1A] font-medium pr-4">
                                         {faq.question}
                                     </span>
-                                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-purple-600 to-purple-400 rounded-md flex items-center justify-center">
+                                    <div className="shrink-0 w-8 h-8 bg-linear-to-br from-purple-600 to-purple-400 rounded-md flex items-center justify-center">
                                         {openIndex === index ? (
                                             <Minus size={16} className="text-white" />
                                         ) : (

@@ -66,7 +66,7 @@ export function MergexOrb({ size = 24, className }: { size?: number; className?:
     return (
         <div
             ref={containerRef}
-            className={cn('relative flex-shrink-0 rounded-full overflow-hidden bg-transparent', className)}
+            className={cn('relative shrink-0 rounded-full overflow-hidden bg-transparent', className)}
             style={{
                 width: size,
                 height: size,
@@ -398,7 +398,7 @@ export function AskMergex({
                 <div className="relative group mt-4">
                     {/* 3D Purple Glow Underneath (Hover/Focus only) */}
                     <div className={cn(
-                        'absolute -inset-1 bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 rounded-lg blur-xl transition-all duration-500 z-0',
+                        'absolute -inset-1 bg-linear-to-r from-violet-400 via-fuchsia-300 to-indigo-400 rounded-lg blur-xl transition-all duration-500 z-0',
                         inputFocused ? 'opacity-40 scale-100' : 'opacity-0 scale-90 group-hover:opacity-20 group-hover:scale-95'
                     )} />
 
@@ -441,8 +441,8 @@ export function AskMergex({
                             className={cn(
                                 'absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300',
                                 value.trim()
-                                    ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-md scale-100'
-                                    : 'bg-gradient-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed scale-95'
+                                    ? 'bg-linear-to-r from-violet-600 to-purple-600 text-white shadow-md scale-100'
+                                    : 'bg-linear-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed scale-95'
                             )}
                         >
                             <ArrowRight className="w-4 h-4" />
@@ -471,7 +471,7 @@ export function AskMergex({
             {/* Mouse-tracking glow (when input is focused on intro screen) */}
             {inputFocused && !hasStarted && (
                 <motion.div
-                    className="pointer-events-none fixed z-0 h-[50rem] w-[50rem] rounded-full bg-gradient-to-r from-violet-200 via-violet-100 to-fuchsia-100 opacity-20 blur-[100px]"
+                    className="pointer-events-none fixed z-0 h-200 w-200 rounded-full bg-linear-to-r from-violet-200 via-violet-100 to-fuchsia-100 opacity-20 blur-[100px]"
                     animate={{ x: mousePosition.x - 400, y: mousePosition.y - 400 }}
                     transition={{ type: 'spring', damping: 25, stiffness: 150, mass: 0.5 }}
                 />
@@ -493,7 +493,7 @@ export function AskMergex({
                                 </div>
                                 <h1 className="pb-2 text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">{introTitle}</h1>
                                 <motion.div
-                                    className="h-px bg-gradient-to-r from-transparent via-violet-200 to-transparent mx-auto"
+                                    className="h-px bg-linear-to-r from-transparent via-violet-200 to-transparent mx-auto"
                                     initial={{ width: 0, opacity: 0 }} animate={{ width: '80%', opacity: 1 }}
                                     transition={{ delay: 0.3, duration: 0.8 }}
                                 />
@@ -553,7 +553,7 @@ export function AskMergex({
                         </div>
 
                         {/* Bottom Gradient Overlay for text visibility */}
-                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[11]" />
+                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white via-white/80 to-transparent pointer-events-none z-11" />
                     </div>
                 )}
 
@@ -562,7 +562,7 @@ export function AskMergex({
                     layout
                     className={cn(
                         'w-full transition-all duration-500',
-                        !hasStarted ? 'relative mx-auto mb-10' : 'absolute bottom-8 left-0 right-0 px-4 md:px-8 z-[12]'
+                        !hasStarted ? 'relative mx-auto mb-10' : 'absolute bottom-8 left-0 right-0 px-4 md:px-8 z-12'
                     )}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 >
@@ -591,7 +591,7 @@ export function AskMergex({
                     <div className="relative group mx-2 mb-2 md:mx-0 md:mb-0">
                         {/* 3D Purple Glow Underneath (Hover/Focus only) */}
                         <div className={cn(
-                            'absolute -inset-1.5 bg-gradient-to-r from-violet-500 via-fuchsia-400 to-indigo-500 rounded-2xl blur-xl transition-all duration-500 z-0',
+                            'absolute -inset-1.5 bg-linear-to-r from-violet-500 via-fuchsia-400 to-indigo-500 rounded-2xl blur-xl transition-all duration-500 z-0',
                             inputFocused ? 'opacity-60 scale-100' : 'opacity-0 scale-90 group-hover:opacity-30 group-hover:scale-95'
                         )} />
 
@@ -634,8 +634,8 @@ export function AskMergex({
                                     className={cn(
                                         'rounded-lg flex items-center justify-center w-8 h-8 transition-all duration-200',
                                         value.trim() && !isTyping
-                                            ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-sm'
-                                            : 'bg-gradient-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed'
+                                            ? 'bg-linear-to-r from-violet-600 to-purple-600 text-white shadow-sm'
+                                            : 'bg-linear-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed'
                                     )}
                                 >
                                     {isTyping

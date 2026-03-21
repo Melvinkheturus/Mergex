@@ -43,8 +43,8 @@ export function cloudinaryRaw(publicId: string): string {
 /** Footer backgrounds */
 export const CLOUDINARY_ASSETS = {
     // Footer
-    footerDesktop: cloudinaryImage('footer_gham8e', 'f_auto,q_auto,w_2560'),
-    footerMobile: cloudinaryImage('footermobile_jaj1fx', 'f_auto,q_auto,w_1080'),
+    footerDesktop: cloudinaryImage('footer_wqtnvo', 'f_auto,q_auto,w_2560'),
+    footerMobile: cloudinaryImage('footer_mobile_sdpjfc', 'f_auto,q_auto,w_1080'),
 
     // Labs
     labsCta: cloudinaryImage('background/labs/Cta', 'f_auto,q_auto,w_2560'),
@@ -58,6 +58,10 @@ export const CLOUDINARY_ASSETS = {
 
     // Systems
     systemsHero: cloudinaryImage('system_hero_osseww', 'f_auto,q_auto,w_2560'),
+
+    // Careers
+    careerHero: cloudinaryImage('career_hero_c5q4l3', 'f_auto,q_auto,w_2560'),
+    careerFooter: cloudinaryImage('footer_ho3q8c', 'f_auto,q_auto,w_2560'),
 
     // Ecosystem (divition) videos
     ecosystemLabsVideo: cloudinaryVideo('background/parent/divition/Flamingo_Labs', 'f_auto,q_auto'),

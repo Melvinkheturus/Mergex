@@ -11,14 +11,14 @@ export function PartnershipHero() {
     };
 
     return (
-        <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-b from-white via-purple-50/30 to-white px-6 pt-32 pb-20">
+        <section className="relative min-h-[70vh] flex items-center justify-center bg-[#fafafa] px-6 pt-32 pb-20">
             <div className="max-w-5xl mx-auto text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] font-bold text-gray-900 mb-6 leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-(family-name:--font-playfair) font-bold text-gray-900 mb-6 leading-tight">
                         {HERO_CONTENT.headline}
                     </h1>
                     <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
@@ -29,7 +29,7 @@ export function PartnershipHero() {
                         onClick={scrollToTypes}
                         className="
                             group relative px-8 py-4 rounded-full overflow-hidden
-                            bg-gradient-to-b from-violet-400 to-violet-900
+                            bg-linear-to-b from-violet-400 to-violet-900
                             text-white font-medium text-lg
                             shadow-lg shadow-violet-900/30
                             transition-all duration-200 ease-out

@@ -87,7 +87,7 @@ export function ImpactSection() {
                     >
                         {/* Background Image Placeholder or Abstract Gradient */}
                         <div className="absolute inset-0 opacity-60">
-                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-black/80 z-10" />
+                            <div className="absolute inset-0 bg-linear-to-br from-emerald-900/40 to-black/80 z-10" />
                             {/* Ideally we would put an actual image here, using a gradient for now matching the reference */}
                             <div className="absolute inset-0 bg-[url('/assets/background/noise.png')] opacity-20" />
                             <div className="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl" />

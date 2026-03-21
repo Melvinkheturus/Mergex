@@ -38,15 +38,15 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                     <div className="lg:col-span-5">
                         <div className="-ml-4 md:-ml-8">
                             <TextReveal>
-                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-(family-name:--font-manrope) font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
                                     {FAQ_DATA.headline}
                                 </h2>
                             </TextReveal>
                             {(FAQ_DATA.subheadline || FAQ_DATA.subheadlineItalic) && (
                                 <TextReveal delay={0.1}>
-                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-manrope)] font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-(family-name:--font-manrope) font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
                                         {FAQ_DATA.subheadline}{' '}
-                                        <span className="italic font-serif font-light block mt-1 pb-1 bg-gradient-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
+                                        <span className="italic font-serif font-light block mt-1 pb-1 bg-linear-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
                                             {FAQ_DATA.subheadlineItalic}
                                         </span>
                                     </h3>
@@ -70,19 +70,19 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-4">
+                                <div className="flex flex-row flex-wrap gap-4">
                                     <Link
                                         href="/contact"
                                         className="
                                             group relative px-6 py-3 rounded-full overflow-hidden 
-                                            bg-gradient-to-b from-violet-400 to-violet-900
+                                            bg-linear-to-b from-violet-400 to-violet-900
                                             text-white font-medium
                                             shadow-lg shadow-violet-900/30
                                             transition-all duration-200 ease-out
                                             hover:brightness-110 hover:-translate-y-0.5
                                             active:scale-95
                                             flex items-center gap-2
-                                            inline-flex
+                                            text-sm sm:text-base
                                         "
                                     >
                                         <lord-icon
@@ -90,14 +90,14 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                             trigger="loop-on-hover"
                                             state="morph-phone-ring"
                                             colors="primary:#ffffff"
-                                            style={{ width: '24px', height: '24px' }}
+                                            style={{ width: '20px', height: '20px' }}
                                         />
                                         <span>{FAQ_DATA.buttonText}</span>
                                     </Link>
 
                                     <a
                                         href={`mailto:${FAQ_DATA.email}`}
-                                        className="inline-flex items-center gap-2 px-6 py-3 border border-current rounded-full hover:opacity-80 transition-opacity"
+                                        className="inline-flex items-center gap-2 px-6 py-3 border border-current rounded-full hover:opacity-80 transition-opacity text-sm sm:text-base"
                                         style={{ borderColor: 'inherit', color: 'inherit' }}
                                     >
                                         <Mail size={18} />
@@ -140,10 +140,10 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                         onClick={() => toggleQuestion(index)}
                                         className="w-full flex items-center justify-between gap-6 py-8 text-left group transition-all"
                                     >
-                                        <span className="text-xl font-[family-name:var(--font-manrope)] font-medium transition-all pr-8 leading-snug group-hover:bg-gradient-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:!text-transparent" style={{ color: 'inherit' }}>
+                                        <span className="text-xl font-(family-name:--font-manrope) font-medium transition-all pr-8 leading-snug group-hover:bg-linear-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent!" style={{ color: 'inherit' }}>
                                             {faq.question}
                                         </span>
-                                        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center transition-colors" style={{ color: 'inherit' }}>
+                                        <span className="shrink-0 w-8 h-8 flex items-center justify-center transition-colors" style={{ color: 'inherit' }}>
                                             <AnimatePresence mode='wait' initial={false}>
                                                 {openIndex === index ? (
                                                     <motion.div
@@ -180,7 +180,7 @@ export function FAQSection({ variant = 'parent', showAI = true }: FAQSectionProp
                                                 className="overflow-hidden"
                                             >
                                                 <div className="pr-12">
-                                                    <p className="text-lg leading-relaxed font-light font-[family-name:var(--font-manrope)] opacity-80" style={{ color: 'inherit' }}>
+                                                    <p className="text-lg leading-relaxed font-light font-(family-name:--font-manrope) opacity-80" style={{ color: 'inherit' }}>
                                                         {faq.answer}
                                                     </p>
                                                     <div className="mt-5 flex">

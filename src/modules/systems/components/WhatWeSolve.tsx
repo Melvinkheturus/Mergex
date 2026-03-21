@@ -104,7 +104,7 @@ export function WhatWeSolve() {
                         >
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-b from-violet-400 to-violet-900 text-white rounded-xl font-medium shadow-lg shadow-violet-900/20 hover:shadow-violet-900/30 transition-all w-fit"
+                                className="inline-flex items-center justify-center px-8 py-3 bg-linear-to-b from-violet-400 to-violet-900 text-white rounded-xl font-medium shadow-lg shadow-violet-900/20 hover:shadow-violet-900/30 transition-all w-fit"
                             >
                                 {WHAT_WE_SOLVE.primaryCTA}
                             </Link>

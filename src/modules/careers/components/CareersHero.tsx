@@ -1,44 +1,50 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { Playfair_Display } from 'next/font/google';
+import Image from 'next/image';
+import { CLOUDINARY_ASSETS } from '@/lib/cloudinary';
 import { CAREERS_HERO } from '../content/careers';
+
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    style: ['italic'],
+    weight: ['400', '500', '600']
+});
 
 export function CareersHero() {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-white py-24">
-            <div className="container mx-auto max-w-5xl px-6 text-center">
+        <section className="relative overflow-hidden min-h-screen flex items-start pt-32 md:pt-40">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src={CLOUDINARY_ASSETS.careerHero}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </div>
+
+            <div
+                className="absolute bottom-0 left-0 right-0 h-[300px] z-2 pointer-events-none"
+                style={{ background: 'linear-gradient(to bottom, transparent 0%, white 100%)' }}
+            />
+
+            <div className="container relative z-10 mx-auto max-w-5xl px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
                     {/* Headline */}
-                    <h1 className="mb-6 text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
-                        {CAREERS_HERO.headline}
+                    <h1 className="mb-6 text-3xl font-bold leading-tight text-gray-900 md:text-5xl">
+                        Don’t Just Work. <span className={`${playfair.className} italic font-normal bg-clip-text text-transparent bg-linear-to-b from-purple-400 to-purple-800`}>Build.</span>
                     </h1>
 
                     {/* Subheadline */}
-                    <p className="mb-10 text-lg leading-relaxed text-gray-600 md:text-xl">
+                    <p className="mx-auto max-w-2xl text-[15px] leading-relaxed text-gray-600 md:text-lg">
                         {CAREERS_HERO.subheadline}
                     </p>
-
-                    {/* CTAs */}
-                    <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                        <a
-                            href="#apply"
-                            className="group inline-flex items-center justify-center gap-2 rounded-lg bg-purple-600 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-purple-700"
-                        >
-                            {CAREERS_HERO.primaryCTA}
-                            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </a>
-                        <a
-                            href="#internships"
-                            className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-purple-600 bg-white px-8 py-4 font-semibold text-purple-600 transition-all hover:bg-purple-50"
-                        >
-                            {CAREERS_HERO.secondaryCTA}
-                        </a>
-                    </div>
                 </motion.div>
             </div>
         </section>

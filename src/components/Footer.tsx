@@ -108,23 +108,21 @@ export default function Footer() {
             {/* Footer */}
             <footer className="bg-black pt-[60vh] lg:pt-16 pb-4 lg:pb-10 relative overflow-hidden">
                 {/* Desktop Background Image */}
-                <div className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden lg:block">
+                <div className="absolute inset-0 z-0 opacity-70 pointer-events-none hidden lg:block">
                     <Image
                         src={CLOUDINARY_ASSETS.footerDesktop}
                         alt=""
                         fill
                         className="object-cover"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                 </div>
                 {/* Mobile Background Image */}
-                <div className="absolute inset-0 z-0 opacity-40 pointer-events-none lg:hidden">
+                <div className="absolute inset-0 z-0 opacity-70 pointer-events-none lg:hidden">
                     <Image
                         src={CLOUDINARY_ASSETS.footerMobile}
                         alt=""
                         fill
                         className="object-cover"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                 </div>
 

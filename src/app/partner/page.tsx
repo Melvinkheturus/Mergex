@@ -5,17 +5,17 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Mergex - Build Together. Grow Together.'
     },
-    description: 'Strategic partnerships and referral programs designed for growth. Build together, grow together with Mergex.',
-    keywords: ['partnerships', 'referral program', 'strategic partnership', 'business growth', 'Mergex partner'],
+    description: 'Whether you’re an agency, consultant, or creator, Mergex is built for collaboration. Explore our partnership models: Service Partners, Referral Partners, and Brand Collaborators.',
+    keywords: ['partnerships', 'referral program', 'strategic partnership', 'brand collaborators', 'Mergex partner'],
     openGraph: {
         title: 'Mergex - Build Together. Grow Together.',
-        description: 'Strategic partnerships and referral programs designed for growth.',
+        description: 'Whether you’re an agency, consultant, or creator, Mergex is built for collaboration.',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Mergex - Build Together. Grow Together.',
-        description: 'Strategic partnerships and referral programs designed for growth.',
+        description: 'Whether you’re an agency, consultant, or creator, Mergex is built for collaboration.',
     },
 };
 

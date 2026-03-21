@@ -1,145 +1,207 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Minus, Mail } from 'lucide-react';
 import { AskMergex } from '@/modules/shared/components/AskMergex';
-import { Plus, Minus, MessageCircle } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { TextReveal } from '@/modules/shared/components/TextReveal';
+import { PARTNER_FAQ_DATA } from '../constants';
 
-const PARTNER_FAQ_DATA = {
-    headline: "Partnering With Mergex",
-    subheadline: "Common Questions About",
-    subheadlineItalic: "Our Ecosystem",
-    description: "Everything you need to know about working together as strategic or referral partners.",
-    questions: [
-        {
-            question: "What does it mean to partner with Mergex?",
-            answer: "Partnering with Mergex means having a single team responsible for building and evolving your business systems over time. Instead of coordinating multiple vendors, you work with Mergex as a unified technology and growth partner - one system, one team, aligned to your long-term goals.",
-            chatPrompt: "Are you looking for a technology partner or a growth partner? Let's discuss how we can align."
-        },
-        {
-            question: "Who is the partnership model designed for?",
-            answer: "The partnership model is designed for businesses that need continuous system development and infrastructure support - not a one-time build. This includes startups scaling their first real system, companies replacing fragmented vendor ecosystems, and established businesses that want to automate and grow with structure.",
-            chatPrompt: "What is the biggest technical challenge currently blocking your growth?"
-        },
-        {
-            question: "How does the venture partnership model work?",
-            answer: "In select cases, Mergex works as a long-term venture partner - helping build and operate the digital infrastructure of a business while staying aligned with the company's growth trajectory. The exact structure depends on the business model, stage, and goals. These partnerships are scoped through a dedicated conversation.",
-            chatPrompt: "Tell me about your business model. I'll explain how our venture partnership structure works."
-        },
-        {
-            question: "How do we start a partnership conversation with Mergex?",
-            answer: "Start by reaching out through the website or emailing hello@mergex.in. The first step is a focused conversation where Mergex learns about your business, your current systems, and where growth is being blocked. From there, the team recommends the clearest way forward. No pitch. Just clarity.",
-            chatPrompt: "Ready to simplify your systems? What's the best way for us to learn about your current setup?"
-        }
-    ],
 
-    aiSuggestions: [
-        "What are the referral commission rates?",
-        "Do you provide marketing materials for partners?",
-        "How do you handle client conflict between partners?",
-        "Can we do a co-branded event?"
-    ]
-};
 
 export function PartnerFAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    const FAQ_DATA = PARTNER_FAQ_DATA;
+
+    const toggleQuestion = (index: number) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
 
     return (
-        <section className="py-24 bg-white relative overflow-hidden">
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-4xl mx-auto mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-4">FAQ</h2>
-                        <h3 className="text-4xl md:text-5xl font-[family-name:var(--font-manrope)] font-bold mb-6 tracking-tight">
-                            {PARTNER_FAQ_DATA.headline}
-                        </h3>
-                        <p className="text-xl text-gray-600 max-w-2xl font-light leading-relaxed">
-                            {PARTNER_FAQ_DATA.description}
-                        </p>
-                    </motion.div>
-                </div>
-
-                <div className="max-w-4xl mx-auto space-y-4 mb-24">
-                    {PARTNER_FAQ_DATA.questions.map((faq, index) => (
-                        <div
-                            key={index}
-                            className={cn(
-                                "group rounded-2xl border transition-all duration-300",
-                                openIndex === index
-                                    ? "bg-gray-50 border-violet-100 shadow-sm"
-                                    : "border-gray-100 hover:border-gray-200"
+        <section
+            ref={sectionRef}
+            className="relative overflow-hidden bg-[#fafafa] pt-24 md:pt-32 pb-24 md:pb-32"
+        >
+            <div
+                className="container mx-auto px-6 md:px-12 relative z-10 text-gray-900"
+            >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    {/* Left Column - Hero Content */}
+                    <div className="lg:col-span-5">
+                        <div className="-ml-4 md:-ml-8">
+                            <TextReveal>
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-(family-name:--font-manrope) font-semibold mb-2 leading-tight" style={{ color: 'inherit' }}>
+                                    {FAQ_DATA.headline}
+                                </h2>
+                            </TextReveal>
+                            {(FAQ_DATA.subheadline || FAQ_DATA.subheadlineItalic) && (
+                                <TextReveal delay={0.1}>
+                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-(family-name:--font-manrope) font-semibold mb-6 leading-tight" style={{ color: 'inherit' }}>
+                                        {FAQ_DATA.subheadline}{' '}
+                                        <span className="italic font-serif font-light block mt-1 pb-1 bg-linear-to-b from-violet-300 to-purple-600 bg-clip-text text-transparent">
+                                            {FAQ_DATA.subheadlineItalic}
+                                        </span>
+                                    </h3>
+                                </TextReveal>
                             )}
-                        >
-                            <button
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full flex items-center justify-between p-6 text-left"
-                            >
-                                <span className={cn(
-                                    "text-lg font-semibold transition-colors",
-                                    openIndex === index ? "text-violet-700" : "text-gray-900"
-                                )}>
-                                    {faq.question}
-                                </span>
-                                {openIndex === index ? (
-                                    <Minus className="w-5 h-5 text-violet-500" />
-                                ) : (
-                                    <Plus className="w-5 h-5 text-gray-400 group-hover:text-gray-600" />
-                                )}
-                            </button>
-                            <div className={cn(
-                                "overflow-hidden transition-all duration-300",
-                                openIndex === index ? "max-h-96" : "max-h-0"
-                            )}>
-                                <div className="p-6 pt-0 text-gray-600 leading-relaxed font-light text-lg">
-                                    {faq.answer}
-                                    <div className="mt-4 flex">
-                                        <button
-                                            onClick={() => {
-                                                const event = new CustomEvent('mergex-open-chat', {
-                                                    detail: {
-                                                        question: faq.question,
-                                                        chatPrompt: faq.chatPrompt
-                                                    }
-                                                });
 
-                                                window.dispatchEvent(event);
-                                            }}
-                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 border border-violet-100 hover:bg-violet-100 hover:text-violet-800 transition-all text-xs font-semibold"
-                                        >
-                                            <MessageCircle className="w-3.5 h-3.5" />
-                                            Ask Mergex about this
-                                        </button>
-                                    </div>
+                            <TextReveal delay={0.2} className="mb-12">
+                                <p className="text-base md:text-lg leading-relaxed opacity-80" style={{ color: 'inherit' }}>
+                                    {FAQ_DATA.description}
+                                </p>
+                            </TextReveal>
+
+                            {/* CTA Area */}
+                            <div className="space-y-6">
+                                <div>
+                                    <p className="font-semibold text-lg mb-2" style={{ color: 'inherit' }}>
+                                        {FAQ_DATA.ctaText}
+                                    </p>
+                                    <p className="text-sm opacity-70" style={{ color: 'inherit' }}>
+                                        {FAQ_DATA.ctaSubtext}
+                                    </p>
                                 </div>
 
+                                <div className="flex flex-row flex-wrap gap-4">
+                                    <Link
+                                        href="/contact"
+                                        className="
+                                            group relative px-6 py-3 rounded-full overflow-hidden 
+                                            bg-linear-to-b from-violet-400 to-violet-900
+                                            text-white font-medium
+                                            shadow-lg shadow-violet-900/30
+                                            transition-all duration-200 ease-out
+                                            hover:brightness-110 hover:-translate-y-0.5
+                                            active:scale-95
+                                            flex items-center gap-2
+                                            text-sm sm:text-base
+                                        "
+                                    >
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/fpvaxfly.json"
+                                            trigger="loop-on-hover"
+                                            state="morph-phone-ring"
+                                            colors="primary:#ffffff"
+                                            style={{ width: '20px', height: '20px' }}
+                                        />
+                                        <span>{FAQ_DATA.buttonText}</span>
+                                    </Link>
+
+                                    <a
+                                        href={`mailto:${FAQ_DATA.email}`}
+                                        className="inline-flex items-center gap-2 px-6 py-3 border border-current rounded-full hover:opacity-80 transition-opacity text-sm sm:text-base"
+                                        style={{ borderColor: 'inherit', color: 'inherit' }}
+                                    >
+                                        <Mail size={18} />
+                                        {FAQ_DATA.email}
+                                    </a>
+                                </div>
+
+                                <p className="text-sm italic opacity-70">
+                                    {FAQ_DATA.microcopy}
+                                </p>
+                            </div>
+
+                            {/* Decision Assistant - appears below microcopy */}
+                            <div className="mt-8 pt-8 border-t border-gray-200/30">
+                                <AskMergex
+                                    variant="minimal"
+                                    suggestions={FAQ_DATA.aiSuggestions}
+                                />
                             </div>
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Right Column - FAQ Accordion */}
+                    <div className="lg:col-span-7 mt-8 lg:mt-0">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="space-y-0"
+                        >
+                            {FAQ_DATA.questions.map((faq, index) => (
+                                <div
+                                    key={index}
+                                    className="border-b border-gray-200/20 last:border-0"
+                                >
+                                    <button
+                                        onClick={() => toggleQuestion(index)}
+                                        className="w-full flex items-center justify-between gap-6 py-8 text-left group transition-all"
+                                    >
+                                        <span className="text-xl font-(family-name:--font-manrope) font-medium transition-all pr-8 leading-snug group-hover:bg-linear-to-b group-hover:from-violet-300 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent!" style={{ color: 'inherit' }}>
+                                            {faq.question}
+                                        </span>
+                                        <span className="shrink-0 w-8 h-8 flex items-center justify-center transition-colors" style={{ color: 'inherit' }}>
+                                            <AnimatePresence mode='wait' initial={false}>
+                                                {openIndex === index ? (
+                                                    <motion.div
+                                                        key="minus"
+                                                        initial={{ opacity: 0, rotate: -90 }}
+                                                        animate={{ opacity: 1, rotate: 0 }}
+                                                        exit={{ opacity: 0, rotate: 90 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Minus size={24} strokeWidth={1.5} />
+                                                    </motion.div>
+                                                ) : (
+                                                    <motion.div
+                                                        key="plus"
+                                                        initial={{ opacity: 0, rotate: 90 }}
+                                                        animate={{ opacity: 1, rotate: 0 }}
+                                                        exit={{ opacity: 0, rotate: -90 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Plus size={24} strokeWidth={1.5} />
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </span>
+                                    </button>
+
+                                    <AnimatePresence>
+                                        {openIndex === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+                                                animate={{ height: 'auto', opacity: 1, marginBottom: 32 }}
+                                                exit={{ height: 0, opacity: 0, marginBottom: 0 }}
+                                                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                                className="overflow-hidden"
+                                            >
+                                                <div className="pr-12">
+                                                    <p className="text-lg leading-relaxed font-light font-(family-name:--font-manrope) opacity-80" style={{ color: 'inherit' }}>
+                                                        {faq.answer}
+                                                    </p>
+                                                    <div className="mt-5 flex">
+                                                        <button
+                                                            onClick={() => {
+                                                                const event = new CustomEvent('mergex-open-chat', {
+                                                                    detail: {
+                                                                        question: faq.question,
+                                                                        chatPrompt: (faq as any).chatPrompt
+                                                                    }
+                                                                });
+                                                                window.dispatchEvent(event);
+                                                            }}
+                                                            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-violet-100/80 text-violet-700 hover:bg-violet-200 hover:text-violet-800 transition-colors text-sm font-medium"
+                                                        >
+                                                            Ask Mergex about this
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className="mt-20 border-t border-gray-100 pt-20">
-                    <div className="text-center mb-12">
-                        <h3 className="text-2xl font-[family-name:var(--font-manrope)] font-bold mb-4">
-                            Still curious about partnerships?
-                        </h3>
-                        <p className="text-gray-600 max-w-xl mx-auto">
-                            Ask our AI assistant about specifics, or book a call to discuss a formal collaboration.
-                        </p>
-                    </div>
-                    <AskMergex
-                        variant="minimal"
-                        suggestions={PARTNER_FAQ_DATA.aiSuggestions}
-                        introTitle="Ask about Partnership"
-                        introDescription="Curious about referral rates, strategic alignment, or white-label options? Ask away."
-                    />
-                </div>
             </div>
         </section>
     );

@@ -36,7 +36,7 @@ export function ProblemContext() {
                     </TextReveal>
 
                     <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-                        <TextReveal delay={0.1} className="lg:w-1/2 flex-shrink-0">
+                        <TextReveal delay={0.1} className="lg:w-1/2 shrink-0">
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 leading-[1.1]">
                                 {PROBLEM_CONTEXT.headline}
                             </h2>
@@ -60,7 +60,7 @@ export function ProblemContext() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="lg:col-span-6 bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between min-h-[550px] relative overflow-hidden group shadow-xl shadow-purple-900/20"
+                            className="lg:col-span-6 bg-linear-to-b from-violet-400 to-violet-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between min-h-[550px] relative overflow-hidden group shadow-xl shadow-purple-900/20"
                         >
                             {/* Animated Gradient Blobs */}
                             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -75,7 +75,7 @@ export function ProblemContext() {
                                         repeat: Infinity,
                                         ease: "easeInOut"
                                     }}
-                                    className="absolute -top-[20%] -right-[20%] w-[400px] h-[400px] bg-purple-400/30 blur-[80px] rounded-full"
+                                    className="absolute -top-[20%] -right-[20%] w-[400px] h-[400px] bg-purple-400/30 blur-3xl rounded-full"
                                 />
                                 <motion.div
                                     animate={{
@@ -88,7 +88,7 @@ export function ProblemContext() {
                                         repeat: Infinity,
                                         ease: "easeInOut"
                                     }}
-                                    className="absolute -bottom-[10%] -left-[10%] w-[300px] h-[300px] bg-indigo-400/30 blur-[60px] rounded-full"
+                                    className="absolute -bottom-[10%] -left-[10%] w-[300px] h-[300px] bg-indigo-400/30 blur-2xl rounded-full"
                                 />
                             </div>
 
@@ -138,7 +138,7 @@ export function ProblemContext() {
                             </motion.div>
 
                             {/* Bottom: 2 Small Cards (Problem 2 & 3) */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 grow">
                                 {/* Small Card 1 (Problem 2) */}
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -200,10 +200,11 @@ export function ProblemContext() {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="bg-gradient-to-b from-violet-400 to-violet-900 rounded-[2rem] p-8 flex flex-col justify-between min-h-[450px] w-[90vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center flex-shrink-0"
+                                className="bg-linear-to-b from-violet-400 to-violet-900 rounded-[2rem] p-8 flex flex-col justify-between min-h-[450px] w-[90vw] relative overflow-hidden shadow-xl shadow-purple-900/20 snap-center shrink-0"
                             >
                                 {/* Animated Gradient Blobs */}
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                                    <div className="absolute inset-0 bg-purple-400 opacity-20 blur-2xl animate-pulse" />
                                     <motion.div
                                         animate={{
                                             scale: [1, 1.2, 1],
@@ -215,7 +216,7 @@ export function ProblemContext() {
                                             repeat: Infinity,
                                             ease: "easeInOut"
                                         }}
-                                        className="absolute -top-[20%] -right-[20%] w-[300px] h-[300px] bg-purple-400/30 blur-[60px] rounded-full"
+                                        className="absolute -top-[20%] -right-[20%] w-[300px] h-[300px] bg-purple-400/30 blur-2xl rounded-full"
                                     />
                                     <motion.div
                                         animate={{
@@ -228,7 +229,7 @@ export function ProblemContext() {
                                             repeat: Infinity,
                                             ease: "easeInOut"
                                         }}
-                                        className="absolute -bottom-[10%] -left-[10%] w-[200px] h-[200px] bg-indigo-400/30 blur-[40px] rounded-full"
+                                        className="absolute -bottom-[10%] -left-[10%] w-[200px] h-[200px] bg-indigo-400/30 blur-xl rounded-full"
                                     />
                                 </div>
 
@@ -255,7 +256,7 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col gap-4 w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col gap-4 w-[80vw] snap-center shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
@@ -280,7 +281,7 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',
@@ -305,7 +306,7 @@ export function ProblemContext() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.3 }}
-                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center flex-shrink-0 shadow-lg shadow-purple-50/50"
+                                className="rounded-[1.5rem] p-6 flex flex-col justify-between w-[80vw] snap-center shrink-0 shadow-lg shadow-purple-50/50"
                                 style={{
                                     background: 'linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #a78bfa, #4c1d95) border-box',
                                     border: '2px solid transparent',

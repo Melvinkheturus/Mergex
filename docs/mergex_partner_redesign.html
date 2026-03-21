@@ -1,0 +1,308 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.w{padding:1.5rem 1rem}
+.nb{background:var(--color-background-secondary);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:.5rem .75rem;margin-bottom:1rem;font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.div{border:none;border-top:.5px solid var(--color-border-tertiary);margin:1.5rem 0}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
+.tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);transition:all .15s}
+.tab.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:transparent}
+.sec{display:none}.sec.on{display:block}
+
+/* AUDIT */
+.issue{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:.65rem}
+.ih{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:var(--color-background-secondary);cursor:pointer}
+.badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px;flex-shrink:0}
+.fail{background:#FCEBEB;color:#A32D2D}
+.warn{background:#FAEEDA;color:#854F0B}
+.pass{background:#E1F5EE;color:#0F6E56}
+.it{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1}
+.ic{margin-left:auto;font-size:11px;color:var(--color-text-tertiary);transition:transform .15s}
+.ic.open{transform:rotate(180deg)}
+.ib{padding:.75rem 1rem;border-top:.5px solid var(--color-border-tertiary);font-size:13px;color:var(--color-text-secondary);line-height:1.65;display:none}
+.ib.open{display:block}
+.rec{display:flex;gap:.5rem;margin-top:.5rem}
+.ra{flex-shrink:0;color:var(--color-text-tertiary);font-size:12px;margin-top:1px}
+
+/* PARTNER TYPES */
+.ptype{border:.5px solid var(--color-border-tertiary);border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.pt-head{padding:1.1rem 1.25rem;border-bottom:.5px solid var(--color-border-tertiary)}
+.pt-num{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:.3rem}
+.pt-name{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:.2rem}
+.pt-tagline{font-size:12px;color:var(--color-text-secondary);font-style:italic}
+.pt-body{padding:1rem 1.25rem}
+.pt-who{font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
+.pt-who-list{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.75rem}
+.pt-how{font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
+.pt-how-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.75rem}
+.pt-earn{font-size:11px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
+.pt-earn-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.85rem}
+.pt-cta{display:inline-block;padding:.55rem 1.1rem;border-radius:8px;font-size:12px;font-weight:500;border:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);cursor:pointer}
+.pill{font-size:9px;font-weight:600;padding:2px 8px;border-radius:10px;display:inline-block;margin-left:.5rem}
+.p1-pill{background:#E1F5EE;color:#085041}
+.p2-pill{background:#EEEDFE;color:#3C3489}
+.p3-pill{background:#FAEEDA;color:#854F0B}
+
+/* REFERRAL DETAIL */
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.75rem}
+.ref-card{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:.75rem .9rem}
+.ref-label{font-size:10px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem}
+.ref-val{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.2rem}
+.ref-sub{font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+.ref-table{width:100%;border-collapse:collapse;margin-bottom:.75rem}
+.ref-table th{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-tertiary);padding:.4rem .6rem;text-align:left;border-bottom:.5px solid var(--color-border-tertiary)}
+.ref-table td{font-size:12px;color:var(--color-text-secondary);padding:.5rem .6rem;border-bottom:.5px solid var(--color-border-tertiary);line-height:1.4}
+.ref-table td:first-child{font-weight:500;color:var(--color-text-primary)}
+
+/* COPY SECTION */
+.copy-block{border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:.75rem 1rem;margin-bottom:.75rem}
+.copy-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-tertiary);margin-bottom:.3rem}
+.copy-old{font-size:12px;color:#A32D2D;background:#FCEBEB;padding:3px 6px;border-radius:4px;text-decoration:line-through;display:block;margin-bottom:.3rem}
+.copy-new{font-size:12px;color:#0F6E56;background:#E1F5EE;padding:3px 6px;border-radius:4px;display:block;margin-bottom:.25rem}
+.copy-why{font-size:11px;color:var(--color-text-tertiary);line-height:1.5}
+
+/* PAGE FLOW */
+.flow{display:flex;flex-direction:column;gap:.75rem}
+.fstep{display:flex;gap:.75rem;align-items:flex-start}
+.fn{width:26px;height:26px;border-radius:50%;border:.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-primary);flex-shrink:0;margin-top:1px}
+.fc{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.fc strong{color:var(--color-text-primary);font-weight:500}
+.fconn{width:1px;height:14px;background:var(--color-border-tertiary);margin-left:12px;margin-bottom:.25rem}
+</style>
+
+<div class="w">
+<div class="tabs">
+  <button class="tab on" onclick="st('audit')">Audit</button>
+  <button class="tab" onclick="st('structure')">3 Partner types</button>
+  <button class="tab" onclick="st('referral')">Referral detail</button>
+  <button class="tab" onclick="st('copy')">Copy rewrites</button>
+  <button class="tab" onclick="st('flow')">Page flow</button>
+</div>
+
+<!-- AUDIT -->
+<div id="audit" class="sec on">
+<div class="nb">Current page score: 44/100. Good intention, weak execution. The two-model structure is too simple, the referral mechanics are vague, and the copy mixes three different audiences into one unclear pitch.</div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge fail">Critical</span><span class="it">Three partner types are collapsed into two — creating confusion</span><span class="ic">▼</span></div>
+<div class="ib"><p>Currently the page shows "Strategic Partners" and "Referral Partners." But you actually have three distinct partner types with different motivations, different commitments, and different rewards. Collapsing brand partners and collaborators into Strategic Partners forces very different audiences to read copy that doesn't speak to them. An influencer and a development agency are not the same kind of partner.</p>
+<div class="rec"><span class="ra">→</span><span>Separate into three named types: Service Partners (B2B outsource), Referral Partners (affiliate), and Brand Collaborators (influencers, brands, creators). Each gets its own section with its own copy and CTA.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge fail">Critical</span><span class="it">Referral commission rate is hidden — the most important conversion fact</span><span class="ic">▼</span></div>
+<div class="ib"><p>"Commissions are structured fairly based on project scope and engagement type. Details are shared once a referral is qualified." This is evasive language. The 5% finder's fee is not a secret — it's a selling point. Hiding it makes the program feel like a scam or MLM, which is exactly what you want to avoid. Transparency is what separates a legitimate referral program from a dubious one.</p>
+<div class="rec"><span class="ra">→</span><span>State the 5% clearly on the page. "You earn 5% of the confirmed project value as a finder's fee — paid once the project is delivered and payment is received." This is honest, specific, and trustworthy.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge fail">Critical</span><span class="it">Permanent vs temporary referral distinction is completely missing</span><span class="ic">▼</span></div>
+<div class="ib"><p>You have two referral tiers — registered affiliates (permanent) and one-off referrers (temporary) — but the current page treats them as identical. This means registered partners don't understand the benefit of registering, and casual referrers don't understand that there's an easier path available to them.</p>
+<div class="rec"><span class="ra">→</span><span>Add a clear two-tier referral section: Official Affiliate (register once, get a partner ID, streamlined process every time) vs One-Time Referral (no registration, longer process each time). Let visitors self-select.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge warn">Warn</span><span class="it">Hero headline "Let's Build Together, Not Compete" is weak</span><span class="ic">▼</span></div>
+<div class="ib"><p>"Not Compete" implies there's a competitive relationship that needs to be overcome — which immediately puts the visitor in a defensive frame. For a partner page, the visitor is already open to collaboration. The headline should inspire, not reassure.</p>
+<div class="rec"><span class="ra">→</span><span>Replace with: "Grow more. Build less. Partner with Mergex." — this speaks to the partner's core motivation: expanding their own value without expanding their overhead.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge warn">Warn</span><span class="it">No social proof anywhere on the page</span><span class="ic">▼</span></div>
+<div class="ib"><p>The page asks visitors to trust Mergex with their clients (B2B partners) or their reputation (referrers) — but offers zero evidence that Mergex delivers. No partner quotes, no case references, no partnership outcomes. For a page asking for trust, this is a significant gap.</p>
+<div class="rec"><span class="ra">→</span><span>Add one trust signal per partner type: a real outcome for a B2B partner, a real commission example for a referrer, a real collaboration result for a brand partner.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge warn">Warn</span><span class="it">FAQ answers are misaligned — describe client engagement, not partnerships</span><span class="ic">▼</span></div>
+<div class="ib"><p>"Partnering with Mergex means having a single team responsible for building and evolving your business systems over time" — this is the client FAQ answer, not the partner FAQ answer. A potential partner reading this will be confused about whether they're becoming a client or a partner.</p>
+<div class="rec"><span class="ra">→</span><span>Rewrite all four FAQ answers specifically for partnership context. Each answer should speak to the partner's perspective, not the client's.</span></div></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge pass">Pass</span><span class="it">Three-step referral process (Refer → We Deliver → You Earn) is clear and well-structured</span><span class="ic">▼</span></div>
+<div class="ib"><p>The three-step visual flow is the strongest section on the current page. Clean, logical, reassuring. Keep the structure — just update the copy to include the 5% figure and the permanent/temporary distinction.</p></div></div>
+
+<div class="issue"><div class="ih" onclick="tog(this)"><span class="badge pass">Pass</span><span class="it">"How We Protect Quality & Relationships" section is trustworthy</span><span class="ic">▼</span></div>
+<div class="ib"><p>"We never spam clients or burn relationships" — this is exactly the kind of trust signal that separates a legitimate referral program from an MLM. Keep this section, move it closer to the referral commission disclosure so it addresses the concern immediately after the 5% is revealed.</p></div></div>
+
+</div>
+
+<!-- STRUCTURE -->
+<div id="structure" class="sec">
+<div class="nb">Three partner types. Each has its own name, motivation, mechanics, and CTA. No mixing.</div>
+
+<div class="ptype">
+  <div class="pt-head">
+    <div class="pt-num">Partner Type 01</div>
+    <div class="pt-name">Service Partners <span class="pill p1-pill">B2B · Agency</span></div>
+    <div class="pt-tagline">"Expand what you offer. Keep the client you already have."</div>
+  </div>
+  <div class="pt-body">
+    <div class="pt-who">Who this is for</div>
+    <div class="pt-who-list">Marketing agencies, branding studios, consulting firms, PR companies, and any business that serves clients who sometimes need capabilities outside their core. You have the client relationship — we have the capability you're missing.</div>
+    <div class="pt-how">How it works</div>
+    <div class="pt-how-desc">When your client needs development, AI systems, automation, or technical work you don't offer — you bring us in. We deliver under your brief, you maintain the client relationship. White-label or co-branded depending on what works best. One conversation to align, then we execute.</div>
+    <div class="pt-earn">What you get</div>
+    <div class="pt-earn-desc">You keep your client instead of referring them elsewhere. We extend your service offering without you hiring a single developer. Mutually agreed revenue share per engagement. Long-term partnership priority on future client work.</div>
+    <span class="pt-cta">Become a Service Partner →</span>
+  </div>
+</div>
+
+<div class="ptype">
+  <div class="pt-head">
+    <div class="pt-num">Partner Type 02</div>
+    <div class="pt-name">Referral Partners <span class="pill p2-pill">Affiliate · Commission</span></div>
+    <div class="pt-tagline">"Know someone who needs Mergex? Introduce us. Earn when they start."</div>
+  </div>
+  <div class="pt-body">
+    <div class="pt-who">Who this is for</div>
+    <div class="pt-who-list">Students, freelancers, working professionals, consultants, creators — anyone who comes across businesses that need software, AI, automation, branding, or digital growth and wants to earn for making the right introduction.</div>
+    <div class="pt-how">How it works</div>
+    <div class="pt-how-desc">You refer a business to Mergex. We handle the conversation, scoping, and delivery. Once the project is confirmed and payment is received, you earn 5% of the project value as a finder's fee. No client management. No follow-up pressure. Just the introduction.</div>
+    <div class="pt-earn">Two ways to refer</div>
+    <div class="pt-earn-desc">Registered Affiliate: Apply once, get your official partner ID, and every future referral is tracked automatically — faster, simpler, and priority access to partnership updates. One-time Referral: No registration needed, but each referral goes through a manual verification process. Works for occasional introductions.</div>
+    <span class="pt-cta">Register as Affiliate →</span>
+    <span class="pt-cta" style="margin-left:.5rem">Refer Once →</span>
+  </div>
+</div>
+
+<div class="ptype">
+  <div class="pt-head">
+    <div class="pt-num">Partner Type 03</div>
+    <div class="pt-name">Brand Collaborators <span class="pill p3-pill">Influencer · Creator · Brand</span></div>
+    <div class="pt-tagline">"Shared audience. Shared credibility. Shared growth."</div>
+  </div>
+  <div class="pt-body">
+    <div class="pt-who">Who this is for</div>
+    <div class="pt-who-list">Content creators, industry influencers, aligned brands, and community builders whose audience overlaps with the businesses Mergex serves. This is about mutual credibility — your audience trusts you, you trust Mergex, and that trust compounds for both.</div>
+    <div class="pt-how">How it works</div>
+    <div class="pt-how-desc">We collaborate on content, campaigns, or co-created experiences that serve both our audiences. No scripted pitches. No forced endorsements. Just genuine alignment between what you build and what we build — expressed in a way that creates real value for the people following both of us.</div>
+    <div class="pt-earn">What it looks like</div>
+    <div class="pt-earn-desc">Co-created content around AI, technology, and business growth. Joint campaigns or featured collaborations. Mutual amplification across channels. Long-term brand affiliation for creators and companies whose values match Mergex's — systems over shortcuts, quality over volume.</div>
+    <span class="pt-cta">Explore Collaboration →</span>
+  </div>
+</div>
+</div>
+
+<!-- REFERRAL DETAIL -->
+<div id="referral" class="sec">
+<div class="nb">The referral program needs complete transparency to avoid feeling like MLM. State the 5% clearly. Explain both tiers. Show the process. Show the protections.</div>
+
+<div class="ref-grid">
+  <div class="ref-card">
+    <div class="ref-label">Commission rate</div>
+    <div class="ref-val">5% of project value</div>
+    <div class="ref-sub">Paid once project is confirmed and payment received from client.</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-label">When you get paid</div>
+    <div class="ref-val">After delivery</div>
+    <div class="ref-sub">Not on booking — on confirmed payment. Protects everyone.</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-label">Who qualifies</div>
+    <div class="ref-val">Anyone</div>
+    <div class="ref-sub">Students, professionals, freelancers, consultants — no restrictions.</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-label">Client management</div>
+    <div class="ref-val">None required</div>
+    <div class="ref-sub">Mergex handles all communication, delivery, and follow-up.</div>
+  </div>
+</div>
+
+<table class="ref-table">
+  <tr><th>Feature</th><th>Registered Affiliate</th><th>One-Time Referral</th></tr>
+  <tr><td>Registration required</td><td>Yes — apply once</td><td>No</td></tr>
+  <tr><td>Partner ID</td><td>Yes — official affiliate ID</td><td>No</td></tr>
+  <tr><td>Referral tracking</td><td>Automatic via partner ID</td><td>Manual per referral</td></tr>
+  <tr><td>Process per referral</td><td>Simple — ID does the work</td><td>Full process each time</td></tr>
+  <tr><td>Commission rate</td><td>5% — same rate</td><td>5% — same rate</td></tr>
+  <tr><td>Priority updates</td><td>Yes</td><td>No</td></tr>
+  <tr><td>Best for</td><td>Regular referrers</td><td>Occasional introducers</td></tr>
+</table>
+
+<div style="border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:.75rem 1rem;margin-bottom:.75rem">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem">Why this is NOT an MLM</div>
+  <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.65">There are no levels. No recruitment. No commission on other affiliates' earnings. No required purchases. You refer one business, one time. If it converts to a paid project, you earn 5% of that project value. That's the entire structure — identical to standard affiliate programs used by thousands of legitimate companies globally.</div>
+</div>
+
+<div style="border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:.75rem 1rem">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem">How we protect your reputation</div>
+  <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.65">We qualify every referral before engaging. We never cold-contact anyone you introduce. We never oversell or make promises we can't keep. The business you refer will leave the conversation with clarity — not pressure. Your credibility is part of the deal. We protect it.</div>
+</div>
+</div>
+
+<!-- COPY REWRITES -->
+<div id="copy" class="sec">
+
+<div class="copy-block">
+  <div class="copy-label">Page headline</div>
+  <span class="copy-old">Let's Build Together, Not Compete</span>
+  <span class="copy-new">Grow more. Build less. Partner with Mergex.</span>
+  <div class="copy-why">The original implies a competitive tension that doesn't exist. The new version speaks directly to the partner's motivation — expanding their value without expanding their cost.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Page sub-copy</div>
+  <span class="copy-old">We partner with teams, agencies, and individuals who want to deliver more value without building everything themselves.</span>
+  <span class="copy-new">Three ways to partner with Mergex — whether you want to extend your services, earn for great introductions, or build something together with shared audiences.</span>
+  <div class="copy-why">The new version immediately previews the three types, reducing the cognitive work required to figure out which model applies to the visitor.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Service Partner name (currently "Strategic Partners")</div>
+  <span class="copy-old">Strategic Partners</span>
+  <span class="copy-new">Service Partners</span>
+  <div class="copy-why">"Strategic" is vague and overused. "Service Partners" immediately tells a marketing agency or design studio what the relationship actually is — you provide a service, we extend it.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Service Partner tagline</div>
+  <span class="copy-old">"Expand your service offering without expanding your team"</span>
+  <span class="copy-new">Your client needs something you don't offer. Don't lose them. We step in.</span>
+  <div class="copy-why">Pain-first. The original is a benefit statement. The new version opens with the exact situation the agency is already in — a client with a need they can't fill. That resonates before explaining anything.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Referral commission disclosure (currently hidden)</div>
+  <span class="copy-old">Commissions are structured fairly based on project scope and engagement type. Details are shared once a referral is qualified.</span>
+  <span class="copy-new">You earn 5% of the confirmed project value as a finder's fee — paid once the project is delivered and payment is received from the client.</span>
+  <div class="copy-why">Transparency is the single most important trust signal for a referral program. The 5% is not a secret — it's a feature. Hiding it creates the exact MLM suspicion you want to avoid.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Brand Collaborators tagline (new section)</div>
+  <span class="copy-old">N/A — section doesn't exist</span>
+  <span class="copy-new">Shared audience. Shared credibility. Shared growth.</span>
+  <div class="copy-why">Three parallel phrases that speak to what every influencer and brand collaborator actually wants — reach, trust, and results. Not a pitch — an alignment statement.</div>
+</div>
+
+<div class="copy-block">
+  <div class="copy-label">Final CTA headline</div>
+  <span class="copy-old">Ready to Partner?</span>
+  <span class="copy-new">Find your way in. Choose the partnership that fits.</span>
+  <div class="copy-why">The original is generic. The new version acknowledges that there are multiple paths and invites the visitor to self-select — which reduces friction and increases the right applications.</div>
+</div>
+
+</div>
+
+<!-- PAGE FLOW -->
+<div id="flow" class="sec">
+<div class="nb">Redesigned page flow — each section earns the next one. The visitor self-selects their type within the first two screens.</div>
+
+<div class="flow">
+  <div class="fstep"><div class="fn">1</div><div class="fc"><strong>Hero — motivation-first, not description-first</strong><br>Headline: "Grow more. Build less. Partner with Mergex." Sub-copy previews all three types in one sentence. Visitor immediately knows this page has something for them. CTA: "Find your partnership" scrolls to the three-type selector.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">2</div><div class="fc"><strong>Three-type selector — self-selection in 5 seconds</strong><br>Three cards side by side: Service Partners / Referral Partners / Brand Collaborators. One sentence each. Clicking scrolls to that type's full section. Visitor gets to their relevant content without reading everything.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">3</div><div class="fc"><strong>Service Partners section — B2B outsource</strong><br>Who it's for → How it works → What you get → CTA: "Become a Service Partner." No jargon. No corporate language. One clear outcome for the agency reading this: keep your client, extend your capability.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">4</div><div class="fc"><strong>Referral Partners section — full transparency</strong><br>The 5% stated clearly at the top. Two-tier table (Registered vs One-Time). Three-step process. "Why this is not MLM" paragraph. Trust protections. Two CTAs: Register as Affiliate / Refer Once. Transparency does the conversion work here.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">5</div><div class="fc"><strong>Brand Collaborators section — values alignment</strong><br>Keep this section aspirational, not transactional. No commission figures. No process steps. Just: who we want to collaborate with, what it looks like, and an open invitation. CTA: "Explore Collaboration" → leads to a simple contact form with a "collaboration" tag.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">6</div><div class="fc"><strong>Why partner with Mergex — 4 reasons</strong><br>Move the "Why Partner" section here instead of the top. Visitors need to know which type they are before they care about the reasons. After self-selecting, the reasons become confirmation, not introduction.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">7</div><div class="fc"><strong>Trust section — quality and relationship protection</strong><br>Keep "How We Protect Quality & Relationships" — it's the strongest existing section. Place it here after all three types so it serves as a final reassurance before the CTA.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">8</div><div class="fc"><strong>FAQ — partner-specific questions only</strong><br>Rewrite all four FAQs from a partner's perspective. Remove the client-facing answers that currently exist. Add: "What happens if the business I referred doesn't convert?" — the most common referral anxiety question.</div></div>
+  <div class="fconn"></div>
+  <div class="fstep"><div class="fn">9</div><div class="fc"><strong>Final CTA — three paths, one page</strong><br>"Find your way in. Choose the partnership that fits." Three buttons: Become a Service Partner / Register as Affiliate / Explore Collaboration. Scarcity note only for Service Partners — "We take on a limited number of service partnerships." Not for referral or brand — those have no natural limit.</div></div>
+</div>
+</div>
+
+</div>
+<script>
+function st(id){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.getElementById(id).classList.add('on');event.target.classList.add('on')}
+function tog(h){const b=h.nextElementSibling;const c=h.querySelector('.ic');b.classList.toggle('open');c.classList.toggle('open')}
+</script>

@@ -69,7 +69,7 @@ export function EngagementModel() {
                                     </p>
 
                                     {/* Description */}
-                                    <p className="text-base text-gray-600 leading-relaxed mb-8 flex-grow"
+                                    <p className="text-base text-gray-600 leading-relaxed mb-8 grow"
                                         style={{ fontFamily: "var(--font-manrope)" }}>
                                         {model.description}
                                     </p>
@@ -78,7 +78,7 @@ export function EngagementModel() {
                                     <div className="space-y-4 mb-8">
                                         {model.features.map((feature, idx) => (
                                             <div key={idx} className="flex items-start gap-3">
-                                                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-400"
+                                                <svg className="w-5 h-5 mt-0.5 shrink-0 text-gray-400"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                 </svg>
