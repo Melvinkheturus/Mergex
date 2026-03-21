@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { MergexIntelligence } from "@/modules/blog/components/MergexIntelligence";
 import { BlogGrid } from "@/modules/blog/components/BlogGrid";
 import { BlogSearchBar } from "@/modules/blog/components/BlogSearchBar";
 import { type Article } from "@/modules/blog/types";
 
-export default function BlogSearchPage() {
+function BlogSearchContent() {
     const searchParams = useSearchParams();
     const query = searchParams.get("q") || "";
     
@@ -86,5 +86,18 @@ export default function BlogSearchPage() {
                 )}
             </main>
         </div>
+    );
+}
+
+export default function BlogSearchPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-white flex flex-col items-center justify-center">
+                <div className="size-14 border-4 border-purple-100 border-t-purple-600 rounded-full animate-spin" />
+                <p className="text-gray-500 mt-6 font-medium animate-pulse tracking-wide">Synthesizing Mergex Intelligence...</p>
+            </div>
+        }>
+            <BlogSearchContent />
+        </Suspense>
     );
 }

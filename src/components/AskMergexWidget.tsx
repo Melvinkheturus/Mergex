@@ -1000,7 +1000,7 @@ Type **"priority"** and I'll send the access link.
                                                             className={cn(
                                                                 'absolute right-2 bottom-2 w-7 h-7 rounded-lg flex items-center justify-center transition-all',
                                                                 input.trim() && !isTyping
-                                                                    ? 'bg-linear-to-br from-violet-600 to-purple-700 text-white shadow-md'
+                                                                    ? 'bg-black hover:bg-gray-900 cursor-pointer text-white shadow-md'
                                                                     : 'bg-gray-100 text-gray-300 cursor-not-allowed'
                                                             )}
                                                         >

@@ -441,8 +441,8 @@ export function AskMergex({
                             className={cn(
                                 'absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300',
                                 value.trim()
-                                    ? 'bg-linear-to-r from-violet-600 to-purple-600 text-white shadow-md scale-100'
-                                    : 'bg-linear-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed scale-95'
+                                    ? 'bg-black hover:bg-gray-900 cursor-pointer text-white shadow-md scale-100'
+                                    : 'bg-black opacity-40 text-white cursor-not-allowed scale-95'
                             )}
                         >
                             <ArrowRight className="w-4 h-4" />
@@ -634,8 +634,8 @@ export function AskMergex({
                                     className={cn(
                                         'rounded-lg flex items-center justify-center w-8 h-8 transition-all duration-200',
                                         value.trim() && !isTyping
-                                            ? 'bg-linear-to-r from-violet-600 to-purple-600 text-white shadow-sm'
-                                            : 'bg-linear-to-r from-violet-600 to-purple-600 opacity-40 text-white cursor-not-allowed'
+                                            ? 'bg-black hover:bg-gray-900 cursor-pointer text-white shadow-sm'
+                                            : 'bg-black opacity-40 text-white cursor-not-allowed'
                                     )}
                                 >
                                     {isTyping
