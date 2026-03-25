@@ -286,8 +286,8 @@ function MobileExploreContent({ onClose }: { onClose: () => void }) {
             <div className="space-y-4 px-2">
                 <Link href="/explore/case-studies" onClick={onClose} className="block text-lg font-medium text-gray-900">Case Studies</Link>
                 <Link href="/about" onClick={onClose} className="block text-lg font-medium text-gray-900">About Mergex</Link>
-                <Link href="/partners" onClick={onClose} className="block text-lg font-medium text-gray-900">Partner With Us</Link>
-                <Link href="/explore/blog" onClick={onClose} className="block text-lg font-medium text-gray-900">Blog</Link>
+                <Link href="/partner" onClick={onClose} className="block text-lg font-medium text-gray-900">Partner With Us</Link>
+                <Link href="/blog" onClick={onClose} className="block text-lg font-medium text-gray-900">Blog</Link>
                 <Link href="/careers" onClick={onClose} className="block text-lg font-medium text-gray-900">Careers</Link>
             </div>
 

@@ -652,7 +652,7 @@ function ExploreMenu({ closeMenu }: { closeMenu: () => void }) {
                 <ExploreCard
                     title="Case Studies"
                     description="Real problems. Real systems. Real outcomes."
-                    href="/case-studies"
+                    href="/explore/case-studies"
                     closeMenu={closeMenu}
                 />
                 <ExploreCard
