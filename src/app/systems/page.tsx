@@ -70,9 +70,9 @@ export default function SystemsPage() {
                     </div>
 
                     {/* 6. Impact - Measurable Results */}
-                    <div id="impact" className="systems-section">
+                    {/* <div id="impact" className="systems-section">
                         <ImpactSection />
-                    </div>
+                    </div> */}
 
 
                     {/* 9. FAQs - Objection Handling */}
