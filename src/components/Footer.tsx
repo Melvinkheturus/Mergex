@@ -49,7 +49,7 @@ const FOOTER_LINKS = {
 };
 
 const SOCIAL_LINKS = [
-    { icon: 'linkedin', href: 'https://linkedin.com/mergex.co', label: 'LinkedIn' },
+    { icon: 'linkedin', href: 'https://www.linkedin.com/company/mergexco/', label: 'LinkedIn' },
     { icon: 'x', href: 'https://x.com/mergexco', label: 'X' },
     { icon: 'instagram', href: 'https://www.instagram.com/mergexco', label: 'Instagram' },
     { icon: 'threads', href: 'https://threads.com/mergex.co', label: 'Threads' },
